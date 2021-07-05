@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+/*--- variables ---*/
+
+/* Colors ---*/
+
+$base-color: #f04564;
+$base-hover-color:#D6425D;
+$base-active-color:#BD3A51;
+
+
+/* Colors  End---*/
+
+
+/* Font Family ---*/
+
+$baseFont :'Manrope', sans-serif;
+$seconderyFont:'Questrial', sans-serif;
+
+/* Font Family  End---*/
+
+/*--- variables End ---*/
+
+body {
+	font-family: $baseFont ;
+	font-size: 0.875rem;
+}
+a {
+	color:$base-color;
+	cursor: pointer;
+}
+.nav-item-active {
+	border-bottom: 3px solid $base-color;
+}
+i.material-icons {
+	vertical-align: bottom;
+	color: $base-color;
+	font-size: 1.5rem;
+}
+.input-group-text {
+	i.material-icons {
+		color: #343a40;
+		font-size: 1.25rem;
+	}
+}
+input {
+	font-size: 0.875rem !important;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: $seconderyFont;
+}
+
+.btn-bf {
+	color: #FFF;
+	background-color:$base-color;
+	border-color: $base-color;
+	&:hover {
+		color: #FFF;
+		background-color:$base-hover-color;
+		border-color:$base-hover-color;
+	}
+	&:active {
+		color: #FFF;
+		background-color: $base-active-color;
+		border-color: $base-active-color;
+	}
+}
+.custom-control-input {
+	&:checked~.custom-control-label {
+		&::before {
+			color: #FFF;
+			background-color: #f04564;
+			border-color: #f04564;
+		}
+	}
+}
+.form-control {
+	&:focus {
+		border-color: rgba(240,69,100,.50);
+		box-shadow: inset 0 0 0 .2rem rgba(240,69,100,.25);
+	}
+}
+
+
+/* ----  Login Page CSS ---*/
+
+.login-box {
+	max-width: 100%;
+	background-color: #fff;
+	img {
+		max-width: 100% !important;
+		height: auto;
+	}
+}
+.header-wrapper {
+	background-color: #fff;
+}
+.nav-pills {
+	.nav-link {
+		border-radius: 0;
+		&.active {
+			background-color: transparent;
+			color: #000;
+			border-bottom: 0.2rem solid #f04564;
+		}
+	}
+}
+.form-control {
+	height: 2.5rem !important;
+}
+.field-error {
+	color: #f04564;
+}
+img {
+	&.fingerprint-icon-svg {
+		height: 100px;
+	}
+}
+.btn {
+	.spinner-border {
+		vertical-align: middle;
+	}
+}
+.monochrome-logo {
+	height: 1.75rem;
+	width: 1.75rem;
+}
+.footer-copyright-text {
+	line-height: 1.95rem;
+}
+.plan-name-wrapper {
+	background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
+}
