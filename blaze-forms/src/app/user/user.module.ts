@@ -6,6 +6,8 @@ import { UserComponent } from './user.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     UserComponent,
     RegisterComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

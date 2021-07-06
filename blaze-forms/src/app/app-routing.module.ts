@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { 
+    path: '',
+    redirectTo: 'user',
+    pathMatch: 'full'
+  },
   {
     path: 'ux',
     loadChildren: () => import('./ux/ux.module').then(m => m.UxModule)

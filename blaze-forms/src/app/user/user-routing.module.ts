@@ -7,17 +7,29 @@ import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
-    path: 'register',
-    component: RegisterComponent
+    path: '',
+    component: UserComponent,
+    children: [
+      { 
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+      }
+    ]
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent
-  }
+  
 ];
 
 @NgModule({
