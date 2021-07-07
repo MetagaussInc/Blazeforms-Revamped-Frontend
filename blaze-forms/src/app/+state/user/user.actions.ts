@@ -1,15 +1,21 @@
 import { createAction, props } from '@ngrx/store';
 
-export const uSERUsers = createAction(
-  '[User] USER Users'
+
+export const userLogin = createAction(
+  '[User] Login',
+  props<{ props: any }>()
 );
 
-export const uSERUsersSuccess = createAction(
-  '[User] USER Users Success',
-  props<{ data: any }>()
+export const userLogout = createAction(
+  '[User] Logout'
 );
 
-export const uSERUsersFailure = createAction(
-  '[User] USER Users Failure',
-  props<{ error: any }>()
+export const userLoginSuccess = createAction(
+  '[User] Login Success',
+  props<{ props: any }>()
+);
+
+export const userLoginError = createAction(
+  '[User] Login Error',
+  props<{ props: any }>()
 );

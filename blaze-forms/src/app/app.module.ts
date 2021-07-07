@@ -30,10 +30,13 @@ import { UserEffects } from './+state/user/user.effects';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UserEffects]),
     // NgbModule
   ],
-  providers: [],
+  providers: [
+    HttpClientModule
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

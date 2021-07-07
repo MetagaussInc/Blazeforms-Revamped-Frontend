@@ -4,27 +4,37 @@ import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 
 import * as UserActions from './user.actions';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 
 
 
 @Injectable()
 export class UserEffects {
 
-  // loadUsers$ = createEffect(() => {
-  //   return this.actions$.pipe( 
+  loadUsers$ = createEffect(() => {
+    return this.actions$.pipe(
 
-  //     ofType(UserActions.loadUsers),
-  //     concatMap(() =>
-  //       /** An EMPTY observable only emits completion. Replace with your own observable API request */
-  //       EMPTY.pipe(
-  //         map(data => UserActions.loadUsersSuccess({ data })),
-  //         catchError(error => of(UserActions.loadUsersFailure({ error }))))
-  //     )
-  //   );
-  // });
+      ofType(UserActions.userLogin),
+      concatMap((action: any) => {
+        console.log(action)
+        /** An EMPTY observable only emits completion. Replace with your own observable API request */
+        return this.http.call(action.props.mappingKey, 'POST', action.props.payload).pipe(
+          map(data => {
+            console.log(data)
+            if (data.success) {
+              const props = {...data};
+              return UserActions.userLoginSuccess({ props })
+            } else {
+              const props = {...data};
+              return UserActions.userLoginError({ props })
+            }
+          }))
+      })
+    );
+  });
 
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private http: HttpService) { }
 
 }
