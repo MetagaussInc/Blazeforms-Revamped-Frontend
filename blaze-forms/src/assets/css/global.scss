@@ -126,3 +126,32 @@ img {
 .plan-name-wrapper {
 	background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
 }
+
+
+/*-- Form CSS -- */
+
+.form-badges-wrapper {
+	visibility: hidden;
+  }
+  
+  .form-list-item {
+	&:hover .form-badges-wrapper {
+	  visibility: visible;
+	}
+  
+	i {
+	  font-size: 1.3rem;
+	}
+  }
+  
+  .border-2 {
+	border-width: 2px !important;
+  }
+  
+  .border-5 {
+	border-width: 5px !important;
+  }
+
+  .bg-bf-light {
+	  background-color: $base-color-light;
+  }
