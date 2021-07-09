@@ -5,30 +5,16 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
-/*--- variables ---*/
+/*--- Import variables ---*/
 
-/* Colors ---*/
+@import "core/variables";
 
-$base-color: #f04564;
-$base-hover-color:#D6425D;
-$base-active-color:#BD3A51;
-
-
-/* Colors  End---*/
-
-
-/* Font Family ---*/
-
-$baseFont :'Manrope', sans-serif;
-$seconderyFont:'Questrial', sans-serif;
-
-/* Font Family  End---*/
-
-/*--- variables End ---*/
+html{height: 100%;}
 
 body {
 	font-family: $baseFont ;
 	font-size: 0.875rem;
+	height: 100%;
 }
 a {
 	color:$base-color;
@@ -44,7 +30,7 @@ i.material-icons {
 }
 .input-group-text {
 	i.material-icons {
-		color: #343a40;
+		color: $input-icon-color;
 		font-size: 1.25rem;
 	}
 }
@@ -56,16 +42,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-bf {
-	color: #FFF;
+	color: $btn-text-color;
 	background-color:$base-color;
 	border-color: $base-color;
 	&:hover {
-		color: #FFF;
+		color:$btn-text-color;
 		background-color:$base-hover-color;
 		border-color:$base-hover-color;
 	}
 	&:active {
-		color: #FFF;
+		color:$btn-text-color;
 		background-color: $base-active-color;
 		border-color: $base-active-color;
 	}
@@ -81,13 +67,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 .form-control {
 	&:focus {
-		border-color: rgba(240,69,100,.50);
-		box-shadow: inset 0 0 0 .2rem rgba(240,69,100,.25);
+		border-color:rgba($base-color,0.50); 
+		box-shadow: inset 0 0 0 .2rem rgba($base-color,.25); 
 	}
 }
 
 
 /* ----  Login Page CSS ---*/
+
+.login-area-container {
+	height: calc(100% - 80px);
+}
 
 .login-box {
 	max-width: 100%;
