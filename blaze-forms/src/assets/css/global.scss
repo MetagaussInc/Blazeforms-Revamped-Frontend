@@ -23,11 +23,22 @@ a {
 .nav-item-active {
 	border-bottom: 3px solid $base-color;
 }
-i.material-icons {
-	vertical-align: bottom;
-	color: $base-color;
-	font-size: 1.5rem;
+
+i.material-icons,
+i.material-icons-round,
+i.material-icons-outlined {
+    vertical-align: bottom;
+    color: $base-color;
+    font-size: 1.5rem;
 }
+
+
+.form-check-input:checked {
+    background-color: $base-color;
+    border-color: $base-color;
+}
+
+
 .input-group-text {
 	i.material-icons {
 		color: $input-icon-color;
@@ -155,3 +166,12 @@ img {
   .bg-bf-light {
 	  background-color: $base-color-light;
   }
+
+  .text-bf {
+    color:$base-color;
+}
+
+.form-control,
+.form-select {
+    font-size: 0.875rem;
+}
