@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticateComponent } from './component/authenticate/authenticate.component';
 import { ModuleAuthGuardComponent } from './config/gaurds/module-auth.gaurd';
 
 const routes: Routes = [
@@ -7,6 +8,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'user',
     pathMatch: 'full'
+  },
+  { 
+    path: 'authenticate',
+    component: AuthenticateComponent
   },
   {
     path: 'ux',
