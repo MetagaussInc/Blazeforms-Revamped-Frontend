@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       if (res.apiCompleted) {
         this.isFormSubmitted = false;
         if (res.user) {
-          this.router.navigate(['/home'])
+          this.router.navigate(['/forms'])
 
         }
       }
