@@ -10,6 +10,7 @@ import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 import * as fromUser from './+state/user/user.reducer';
 import { UserEffects } from './+state/user/user.effects';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { UserEffects } from './+state/user/user.effects';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
     EffectsModule.forRoot([UserEffects]),
+    NgbModule,
     // NgbModule
   ],
   providers: [

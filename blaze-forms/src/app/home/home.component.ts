@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { userLogout } from '../+state/user/user.actions';
 
@@ -9,12 +10,14 @@ import { userLogout } from '../+state/user/user.actions';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.store.dispatch(userLogout()) 
+    this.router.navigate(['/uxer/login'])
+
   }
 }
