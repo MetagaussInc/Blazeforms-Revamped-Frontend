@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,17 +16,34 @@ export class ForgotPasswordComponent implements OnInit {
   email = new FormControl('', [
     Validators.required,
     Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-  ]);
-  constructor(private store: Store, private router: Router) {
+  ],
+  this.checkEmailExist.bind(this));
+  
+  constructor(private router: Router, private http: HttpService) {  }
 
+  checkEmailExist({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    return this.http.call('checkEmail', 'POST', { Email: value })
+      .pipe(debounceTime(500),
+        map((response: any) => {
+          if (!response.data) {
+            return {
+              emailNotExists: true
+            };
+          }
+          return null;
+        }))
   }
 
   ngOnInit(): void {
   }
 
   submit() {
-    console.log(this.email.value);
+    console.log(JSON.stringify(this.email.value));
     this.isFormSubmitted = true;
+    let model = { 'Email': this.email.value };
+    this.http.call('SendResetPasswordLinq', 'POST', model).subscribe(res => {
+      console.log(res);
+    })
     this.router.navigate(['/home'])
   }
 }
