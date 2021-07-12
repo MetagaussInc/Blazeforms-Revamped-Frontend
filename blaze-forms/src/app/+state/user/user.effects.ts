@@ -11,16 +11,12 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 @Injectable()
 export class UserEffects {
 
-  loadUsers$ = createEffect(() => {
+  userLogin$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(UserActions.userLogin),
       concatMap((action: any) => {
-        console.log(action)
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
         return this.http.call(action.props.mappingKey, 'POST', action.props.payload).pipe(
           map(data => {
-            console.log(data)
             if (data.success) {
               const props = {...data};
               return UserActions.userLoginSuccess({ props })
@@ -33,7 +29,23 @@ export class UserEffects {
     );
   });
 
-
+  // userRegister$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(UserActions.userRegister),
+  //     concatMap((action: any) => {
+  //       return this.http.call(action.props.mappingKey, 'POST', action.props.payload).pipe(
+  //         map(data => {
+  //           if (data.success) {
+  //             const props = {...data};
+  //             return UserActions.userRegisterSuccess({ props })
+  //           } else {
+  //             const props = {...data};
+  //             return UserActions.userRegisterError({ props })
+  //           }
+  //         }))
+  //     })
+  //   );
+  // });
 
   constructor(private actions$: Actions, private http: HttpService) { }
 

@@ -8,6 +8,8 @@ import {
   CanLoad,
   Route
 } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUserInfo, selectUserState } from 'src/app/+state/user/user.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,15 @@ import {
 
 export class ModuleAuthGuardComponent implements CanLoad {
   constructor(
-    private router: Router) { }
+    private router: Router, private store: Store) { }
 
   /*************** Layout Routing guard *************/
  
   canLoad(route: Route): boolean {
-    if (localStorage.getItem('bforms')) return true;
-    this.router.navigate(['/user/login']); //, { queryParams: { returnUrl: state.url } }
+    let userInfo = null;
+    this.store.select(selectUserState).subscribe(res => userInfo = res.user)
+    if (userInfo) return true;
+    this.router.navigate(['authenticate'], {queryParams: { path: route.path}}); //, { queryParams: { returnUrl: state.url } }
     return true;
   }
 }
