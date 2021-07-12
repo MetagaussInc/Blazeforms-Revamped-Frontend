@@ -175,3 +175,21 @@ img {
 .form-select {
     font-size: 0.875rem;
 }
+
+.form-list-item .form-checkbox-wrapper label .form-checkbox-wrap .form-checkbox-active {
+	display: none;
+
+} 
+
+.form-list-item .form-checkbox-wrapper input[type="checkbox"] {
+	display: none;
+
+}
+
+.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked + .form-checkbox-wrap .form-checkbox-active  {
+	display: block;
+} 
+
+.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked + .form-checkbox-wrap .form-checkbox-deactive{
+	display: none;
+} 
