@@ -19,6 +19,8 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     this.userStateSubscription$ = this.store.select(selectUserState).subscribe(res => {
       if (res.user) {
         this.router.navigate(['/'+ queryParam.path])
+      } else {
+        this.router.navigate(['/user/login'])
       }
     })
   }

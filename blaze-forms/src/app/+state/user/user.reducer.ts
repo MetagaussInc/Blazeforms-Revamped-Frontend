@@ -20,8 +20,8 @@ export const reducer = createReducer(
   on(UserActions.loadUser, state => {
     const bForms: any = localStorage.getItem('bforms');
     return {
-      user: JSON.parse(bForms).user,
-      access_token: JSON.parse(bForms).access_token
+      user: JSON.parse(bForms)?.user,
+      access_token: JSON.parse(bForms)?.access_token
     };
   }),
   on(UserActions.userLoginSuccess, (state, action) => {

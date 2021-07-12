@@ -25,95 +25,98 @@
             <i class="material-icons">filter_alt</i>
         </div>
     </div>
-    <div class="forms-folder-wrapper row mb-5">
-        <div class="folder-header col-md-12 mb-2">
-            <span class="folder-icon me-2">
-                <i class="material-icons-outlined">folder</i>
-            </span>
-            <span class="folder-name">
-                \Root
-            </span>
+    <ng-container *ngFor="let list of ['formsList']">
+        <div class="forms-folder-wrapper row mb-5">
+            <div class="folder-header col-md-12 mb-2">
+                <span class="folder-icon me-2">
+                    <i class="material-icons-outlined">folder</i>
+                </span>
+                <span class="folder-name">
+                    \Root
+                </span>
+            </div>
+            <div class="forms-list col-md-12 border rounded">
+                <div class="form-list-item row p-3 border-bottom">
+                    <div class="form-checkbox-wrapper col-md-1">
+                        <i class="form-checkbox material-icons-round me-2 text-dark">check_box_outline_blank</i>
+                        <i class="material-icons-round">star_outline</i>
+                    </div>
+                    <div class="form-title-wrapper col-md-4">
+                        <span clss="form-name">Form Name</span>
+                    </div>
+                    <div class="form-badges-wrapper col-md-4">
+                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
+                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
+                        <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
+                            <span class="pl-2 pr-1">Entries</span>
+                            <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
+                        </span>
+                        <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
+                    </div>
+                    <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                        <i class="material-icons-round mr-3 text-dark">people</i>
+                        <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
+                        <i class="material-icons-round mr-3 text-dark">archive</i>
+                        <i class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
+                            data-bs-target="#edit-form-modal">edit</i>
+                        <i class="material-icons-round text-dark">delete</i>
+                    </div>
+                </div>
+                <div class="form-list-item row p-3 border-bottom bg-bf-light">
+                    <div class="form-checkbox-wrapper col-md-1">
+                        <i class="form-checkbox material-icons-round mr-1">check_box</i>
+                        <i class="material-icons-round">star_outline</i>
+                    </div>
+                    <div class="form-title-wrapper col-md-4">
+                        <span clss="form-name">Form Name</span>
+                    </div>
+                    <div class="form-badges-wrapper col-md-4">
+                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
+                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
+                        <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
+                            <span class="pl-2 pr-1">Entries</span>
+                            <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
+                        </span>
+                        <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
+                    </div>
+                    <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                        <i class="material-icons-round mr-3 text-dark">people</i>
+                        <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
+                        <i class="material-icons-round mr-3 text-dark">archive</i>
+                        <i class="material-icons-round mr-3 text-dark">edit</i>
+                        <i class="material-icons-round text-dark">delete</i>
+                    </div>
+                </div>
+                <div class="form-list-item row p-3">
+                    <div class="form-checkbox-wrapper col-md-1">
+                        <i class="form-checkbox material-icons-round me-2 text-dark">check_box_outline_blank</i>
+                        <i class="material-icons-round">star_outline</i>
+                    </div>
+                    <div class="form-title-wrapper col-md-4">
+                        <span clss="form-name">Form Name</span>
+                    </div>
+                    <div class="form-badges-wrapper col-md-4">
+                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
+                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
+                        <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
+                            <span class="pl-2 pr-1">Entries</span>
+                            <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
+                        </span>
+                        <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
+                    </div>
+                    <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                        <i class="material-icons-round mr-3 text-dark">people</i>
+                        <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
+                        <i class="material-icons-round mr-3 text-dark">archive</i>
+                        <i class="material-icons-round mr-3 text-dark">edit</i>
+                        <i class="material-icons-round text-dark">delete</i>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="forms-list col-md-12 border rounded">
-            <div class="form-list-item row p-3 border-bottom">
-                <div class="form-checkbox-wrapper col-md-1">
-                    <i class="form-checkbox material-icons-round me-2 text-dark">check_box_outline_blank</i>
-                    <i class="material-icons-round">star_outline</i>
-                </div>
-                <div class="form-title-wrapper col-md-4">
-                    <span clss="form-name">Form Name</span>
-                </div>
-                <div class="form-badges-wrapper col-md-4">
-                    <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
-                    <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
-                    <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
-                        <span class="pl-2 pr-1">Entries</span>
-                        <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
-                    </span>
-                    <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
-                </div>
-                <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <i class="material-icons-round mr-3 text-dark">people</i>
-                    <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
-                    <i class="material-icons-round mr-3 text-dark">archive</i>
-                    <i class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
-                        data-bs-target="#edit-form-modal">edit</i>
-                    <i class="material-icons-round text-dark">delete</i>
-                </div>
-            </div>
-            <div class="form-list-item row p-3 border-bottom bg-bf-light">
-                <div class="form-checkbox-wrapper col-md-1">
-                    <i class="form-checkbox material-icons-round mr-1">check_box</i>
-                    <i class="material-icons-round">star_outline</i>
-                </div>
-                <div class="form-title-wrapper col-md-4">
-                    <span clss="form-name">Form Name</span>
-                </div>
-                <div class="form-badges-wrapper col-md-4">
-                    <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
-                    <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
-                    <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
-                        <span class="pl-2 pr-1">Entries</span>
-                        <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
-                    </span>
-                    <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
-                </div>
-                <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <i class="material-icons-round mr-3 text-dark">people</i>
-                    <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
-                    <i class="material-icons-round mr-3 text-dark">archive</i>
-                    <i class="material-icons-round mr-3 text-dark">edit</i>
-                    <i class="material-icons-round text-dark">delete</i>
-                </div>
-            </div>
-            <div class="form-list-item row p-3">
-                <div class="form-checkbox-wrapper col-md-1">
-                    <i class="form-checkbox material-icons-round me-2 text-dark">check_box_outline_blank</i>
-                    <i class="material-icons-round">star_outline</i>
-                </div>
-                <div class="form-title-wrapper col-md-4">
-                    <span clss="form-name">Form Name</span>
-                </div>
-                <div class="form-badges-wrapper col-md-4">
-                    <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
-                    <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
-                    <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
-                        <span class="pl-2 pr-1">Entries</span>
-                        <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
-                    </span>
-                    <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
-                </div>
-                <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <i class="material-icons-round mr-3 text-dark">people</i>
-                    <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
-                    <i class="material-icons-round mr-3 text-dark">archive</i>
-                    <i class="material-icons-round mr-3 text-dark">edit</i>
-                    <i class="material-icons-round text-dark">delete</i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="forms-folder-wrapper row mb-5">
+    </ng-container>
+    
+    <!-- <div class="forms-folder-wrapper row mb-5">
         <div class="folder-header col-md-12 mb-3">
             <span class="folder-icon me-2">
                 <i class="material-icons-outlined">folder</i>
@@ -288,7 +291,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <app-forms-footer></app-forms-footer>

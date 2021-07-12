@@ -25,11 +25,16 @@ export class JwtInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${token}`,
           // 'X-Api-Version': '1',
           // 'Accept-language': this.user.language
+          // origin: "https://staging.blazeforms.com",
+          // referer: "https://staging.blazeforms.com"
         })
       });
     } else {
       request = request.clone({
         headers: new HttpHeaders({
+          
+          // origin: "https://staging.blazeforms.com",
+          // referer: "https://staging.blazeforms.com"
           // 'X-Api-Version': '1',
           // 'Accept-language': this.user.language
         })

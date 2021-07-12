@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -14,11 +14,14 @@ export class FormsComponent implements OnInit {
     pageNumber: 1,
     pageSize: 14
   }
+
+  private userInfoSubscription$: any;
+
   private searchedFormKeyword: string = '';
   private FilterAttribute: string = 'null';
   public formsList: any;
   constructor(private http: HttpService, private store: Store) {
-    this.store.select(selectUserInfo).subscribe(userInfo => {
+    this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.getFormsList(userInfo);
     })
     
@@ -33,11 +36,18 @@ export class FormsComponent implements OnInit {
       ...this.pageDetail,
     }
     this.http.call('getFormsList', 'POST', obj).subscribe(res => {
-      this.formsList = res.res;
+      this.formsList = _.groupBy(res.res, 'folderName');
+      console.log(this.formsList)
+    })
+    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
+      console.log(res);
     })
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    this.userInfoSubscription$.unsubscribe();
+  }
 }
