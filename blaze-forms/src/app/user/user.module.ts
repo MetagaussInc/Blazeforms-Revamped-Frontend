@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'angular-google-recaptcha';
 
 @NgModule({
@@ -22,6 +22,7 @@ import { RecaptchaModule } from 'angular-google-recaptcha';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     UserRoutingModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot({

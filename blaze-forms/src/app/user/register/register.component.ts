@@ -10,7 +10,6 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  myRecaptcha = new FormControl(false);
 
   signupForm = new FormGroup({
     FirstName: new FormControl('', [Validators.required]),
@@ -28,6 +27,9 @@ export class RegisterComponent implements OnInit {
     ]),
     confirmPassword: new FormControl('', [
       Validators.required,
+    ]),
+     myRecaptcha: new FormControl(false, [
+      this.checkforAgreements.bind(this)
     ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
@@ -67,13 +69,45 @@ export class RegisterComponent implements OnInit {
 
 
   submit() {
-    console.log(this.signupForm.value, this.myRecaptcha.value)
+    console.log(this.signupForm.value, )
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
       IsSuperAdmin: false,
-      PlanId: "TZW3ou4hevmgAh6EEJ9-dw=="
+      PlanId: "TZW3ou4hevmgAh6EEJ9-dw==",
+      planDetails: {
+concretePlanId: null,
+createdBy: null,
+createdDate: "0001-01-01T00:00:00",
+description: "100% Free Plan",
+id: "TZW3ou4hevmgAh6EEJ9-dw==",
+isActive: false,
+isDefault: true,
+isDeleted: false,
+isExpired: false,
+isRecommended: false,
+modifiedBy: null,
+modifiedDate: "0001-01-01T00:00:00",
+name: "The Starter Plan",
+noOfEntries: 50,
+noOfForms: 10,
+noOfUsers: 1,
+paymentPercentage: null,
+planType: null,
+plandetails: null,
+price: 0,
+returnPlanList: null,
+returnStatus: false,
+showOnHome: false,
+storageSize: "2097152",
+storageUnit: null,
+stripePlanId: null,
+type: null,
+workSpaceId: null,
     }
+    
+  
+      }  ;
     delete obj.confirmPassword;
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
