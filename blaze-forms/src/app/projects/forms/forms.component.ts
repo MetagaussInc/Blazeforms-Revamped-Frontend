@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import * as _ from 'lodash';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -20,7 +22,7 @@ export class FormsComponent implements OnInit {
   private searchedFormKeyword: string = '';
   private FilterAttribute: string = 'null';
   public formsList: any;
-  constructor(private http: HttpService, private store: Store) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.getFormsList(userInfo);
     })
@@ -47,6 +49,14 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  open() {
+    this.modalService.open(AddFormModalComponent).result.then((result) => {
+      console.log(`Closed with: ${result}`);
+    }, (reason) => {
+      console.log(`Dismissed `);
+    });
+  }
+  
   ngOnDestroy() {
     this.userInfoSubscription$.unsubscribe();
   }
