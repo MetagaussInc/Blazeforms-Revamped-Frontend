@@ -8,4 +8,5 @@ export const api: any = {
     getFormsList: `${FORMS}/FilterWorkSpaceforms`,
     GetFoldersListWithForms: 'Folders/GetFoldersListWithForms',
     SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
+    GetMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
 }

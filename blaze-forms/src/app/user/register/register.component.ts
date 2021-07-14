@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
     LastName: new FormControl('', [Validators.required]),
     PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
     WorkSpaceName: new FormControl('', [Validators.required],
-    this.validateNameViaServer.bind(this)),
+      this.validateNameViaServer.bind(this)),
     Email: new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
@@ -31,12 +31,37 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       this.matchPassword.bind(this)
     ]),
-     myRecaptcha: new FormControl(false, [
+    myRecaptcha: new FormControl(false, [
       this.checkforAgreements.bind(this)
     ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
-  },
-  );
+  });
+
+  planDetails = {
+    id: 1,
+    name: 'The Starter Plan',
+    description: 'The Starter Plan',
+    noOfForms: 10,
+    noOfUsers: 1,
+    noOfEntries: 50,
+    paymentPercentage: 0,
+    storageSize: <any>'2 GB',
+    IsActive: 1,
+    IsDeleted: 0,
+    createdBy: '',
+    modifiedBy: '',
+    CreatedDate: '',
+    price: '0',
+    userId: '',
+    isDefault: 1,
+    isRecommended: 1,
+    ShowOnHome: 1,
+    StorageUnit: '',
+    WorkspaceId: '',
+    concretePlanId: '',
+    ModifiedBy: '',
+    StripePlanId: ''
+  };
   constructor(private http: HttpService) { }
 
   checkforAgreements({ value }: AbstractControl): any {
@@ -74,10 +99,14 @@ export class RegisterComponent implements OnInit {
   }
 
   matchPassword({ value }: AbstractControl): any {
-    console.log(this.Password?.value , value)
-      return this.Password?.value === value ? null : {passwordNotMatched : true};
+    console.log(this.Password?.value, value)
+    return this.Password?.value === value ? null : { passwordNotMatched: true };
   }
   ngOnInit(): void {
+    this.http.call('GetMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
+      this.planDetails = res;
+      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
+    })
   }
 
 
@@ -91,47 +120,47 @@ export class RegisterComponent implements OnInit {
 
 
   submit() {
-    console.log(this.signupForm, )
+    console.log(this.signupForm,)
     return;
-    console.log(this.signupForm.value, )
+    console.log(this.signupForm.value,)
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
       IsSuperAdmin: false,
       PlanId: "TZW3ou4hevmgAh6EEJ9-dw==",
       planDetails: {
-concretePlanId: null,
-createdBy: null,
-createdDate: "0001-01-01T00:00:00",
-description: "100% Free Plan",
-id: "TZW3ou4hevmgAh6EEJ9-dw==",
-isActive: false,
-isDefault: true,
-isDeleted: false,
-isExpired: false,
-isRecommended: false,
-modifiedBy: null,
-modifiedDate: "0001-01-01T00:00:00",
-name: "The Starter Plan",
-noOfEntries: 50,
-noOfForms: 10,
-noOfUsers: 1,
-paymentPercentage: null,
-planType: null,
-plandetails: null,
-price: 0,
-returnPlanList: null,
-returnStatus: false,
-showOnHome: false,
-storageSize: "2097152",
-storageUnit: null,
-stripePlanId: null,
-type: null,
-workSpaceId: null,
-    }
-    
-  
-      }  ;
+        concretePlanId: null,
+        createdBy: null,
+        createdDate: "0001-01-01T00:00:00",
+        description: "100% Free Plan",
+        id: "TZW3ou4hevmgAh6EEJ9-dw==",
+        isActive: false,
+        isDefault: true,
+        isDeleted: false,
+        isExpired: false,
+        isRecommended: false,
+        modifiedBy: null,
+        modifiedDate: "0001-01-01T00:00:00",
+        name: "The Starter Plan",
+        noOfEntries: 50,
+        noOfForms: 10,
+        noOfUsers: 1,
+        paymentPercentage: null,
+        planType: null,
+        plandetails: null,
+        price: 0,
+        returnPlanList: null,
+        returnStatus: false,
+        showOnHome: false,
+        storageSize: "2097152",
+        storageUnit: null,
+        stripePlanId: null,
+        type: null,
+        workSpaceId: null,
+      }
+
+
+    };
     delete obj.confirmPassword;
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
