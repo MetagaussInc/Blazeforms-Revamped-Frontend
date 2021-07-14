@@ -31,6 +31,32 @@ export class RegisterComponent implements OnInit {
     ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
+
+  planDetails = {
+    id: 1,
+    name: 'The Starter Plan',
+    description: 'The Starter Plan',
+    noOfForms: 10,
+    noOfUsers: 1,
+    noOfEntries: 50,
+    paymentPercentage: 0,
+    storageSize: <any> '2 GB',
+    IsActive: 1,
+    IsDeleted: 0,
+    createdBy: '',
+    modifiedBy: '',
+    CreatedDate: '',
+    price: '0',
+    userId: '',
+    isDefault: 1,
+    isRecommended: 1,
+    ShowOnHome: 1,
+    StorageUnit: '',
+    WorkspaceId: '',
+    concretePlanId: '',
+    ModifiedBy: '',
+    StripePlanId: ''
+  };
   constructor(private http: HttpService) { }
 
   checkforAgreements({ value }: AbstractControl): any {
@@ -54,6 +80,10 @@ export class RegisterComponent implements OnInit {
         }))
   }
   ngOnInit(): void {
+    this.http.call('GetMasterPlanDetailById', 'POST', {'ID': ''}).subscribe(res => {
+      this.planDetails = res;
+      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
+    })
   }
 
 

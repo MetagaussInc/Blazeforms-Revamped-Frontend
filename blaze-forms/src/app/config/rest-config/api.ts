@@ -7,4 +7,5 @@ export const api: any = {
     checkEmail: 'User/CheckExisting',
     getFormsList: `${FORMS}/FilterWorkSpaceforms`,
     SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
+    GetMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
 }
