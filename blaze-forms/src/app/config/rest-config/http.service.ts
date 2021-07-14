@@ -12,7 +12,9 @@ export class HttpService {
     baseURL: string = 'https://staging.blazeforms.com:8094/api/';
     constructor(
         private http: HttpClient
-    ) { }
+    ) {
+        console.log('HttpService')
+    }
 
     call(mappingKey: string, httpType: string, payload: any): Observable<any> {
         console.log('call  :', mappingKey, httpType, payload)

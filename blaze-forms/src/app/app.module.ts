@@ -13,6 +13,7 @@ import { UserEffects } from './+state/user/user.effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticateComponent } from './component/authenticate/authenticate.component';
 import { JwtInterceptor } from './config/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './config/interceptors/error.interceptor';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { JwtInterceptor } from './config/interceptors/jwt.interceptor';
   ],
   providers: [
     HttpClientModule,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
   ],

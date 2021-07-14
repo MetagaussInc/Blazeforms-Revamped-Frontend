@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { accessToken, selectUserState } from 'src/app/+state/user/user.selectors';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter, map, tap } from 'rxjs/operators';
 import { userLogout } from 'src/app/+state/user/user.actions';
 import { Router } from '@angular/router';
 
@@ -41,17 +41,17 @@ export class JwtInterceptor implements HttpInterceptor {
       });
     }
 
-    const req = next.handle(request);
-    // Code for error interceptor
-    req.subscribe(
-      res => { },
-      catchError => {
-        console.log(catchError)
-        if (catchError.status === 401) {
-          this.store.dispatch(userLogout());
-          this.router.navigate(['/user/login']);
-        }
-      });
-    return req;
+    // const req = next.handle(request);
+    // // Code for error interceptor
+    // req.subscribe(
+    //   res => { },
+    //   catchError => {
+    //     console.log(catchError)
+    //     if (catchError.status === 401) {
+    //       this.store.dispatch(userLogout());
+    //       this.router.navigate(['/user/login']);
+    //     }
+    //   });
+    return next.handle(request);
   }
 }
