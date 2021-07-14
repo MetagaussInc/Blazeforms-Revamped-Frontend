@@ -196,14 +196,22 @@
                                 </ng-container>
                             </div>
                         </div>
+
+
                         <div class="register-fields-wrapper row mb-3">
+                            <div class="signup-recaptcha-wrapper col-md-12 mb-3 text-center">
                             <recaptcha [formControl]="myRecaptcha" (scriptLoad)="onScriptLoad()"
                                 (scriptError)="onScriptError()"></recaptcha>
-                            <div class="terms-conditions-wrapper col-md-12 mb-3 text-center">
-                                <button [disabled]="signupForm.invalid && !myRecaptcha" (click)="submit()" type="button"
-                                    class="btn btn-bf">Sign Up Now</button>
-                            </div>
+                           </div>
                         </div>
+                        <div class="register-fields-wrapper row mb-3">
+                            <div class="signup-button-wrapper col-md-12 mb-3 text-center">
+                                <button [disabled]="signupForm.invalid && !myRecaptcha" (click)="submit()" type="button"
+                                class="btn btn-bf">Sign Up Now</button>
+                            </div>
+
+                        </div>
+
                     </form>
                 </div>
 
