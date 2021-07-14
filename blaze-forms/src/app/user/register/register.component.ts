@@ -10,7 +10,6 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  myRecaptcha = new FormControl(false);
 
   signupForm = new FormGroup({
     FirstName: new FormControl('', [Validators.required]),
@@ -28,6 +27,9 @@ export class RegisterComponent implements OnInit {
     ]),
     confirmPassword: new FormControl('', [
       Validators.required,
+    ]),
+     myRecaptcha: new FormControl(false, [
+      this.checkforAgreements.bind(this)
     ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
@@ -67,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
 
   submit() {
-    console.log(this.signupForm.value, this.myRecaptcha.value)
+    console.log(this.signupForm.value, )
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
