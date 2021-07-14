@@ -15,24 +15,28 @@ export class RegisterComponent implements OnInit {
     FirstName: new FormControl('', [Validators.required]),
     LastName: new FormControl('', [Validators.required]),
     PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    WorkSpaceName: new FormControl('', [Validators.required]),
+    WorkSpaceName: new FormControl('', [Validators.required],
+    this.validateNameViaServer.bind(this)),
     Email: new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
-      this.validateNameViaServer.bind(this)
+      this.validateEmailViaServer.bind(this)
     ),
     Password: new FormControl('', [
       Validators.required,
-      Validators.minLength(8)
+      Validators.minLength(8),
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
     ]),
     confirmPassword: new FormControl('', [
       Validators.required,
+      this.matchPassword.bind(this)
     ]),
      myRecaptcha: new FormControl(false, [
       this.checkforAgreements.bind(this)
     ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
-  });
+  },
+  );
   constructor(private http: HttpService) { }
 
   checkforAgreements({ value }: AbstractControl): any {
@@ -44,8 +48,8 @@ export class RegisterComponent implements OnInit {
     return null
   }
   validateNameViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
-    return this.http.call('checkEmail', 'POST', { Email: value })
-      .pipe(debounceTime(500),
+    return this.http.call('checkEmail', 'POST', { WorkSpaceName: value })
+      .pipe(debounceTime(1000),
         map((response: any) => {
           if (response.data) {
             return {
@@ -54,6 +58,24 @@ export class RegisterComponent implements OnInit {
           }
           return null;;
         }))
+  }
+
+  validateEmailViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    return this.http.call('checkEmail', 'POST', { Email: value })
+      .pipe(debounceTime(1000),
+        map((response: any) => {
+          if (response.data) {
+            return {
+              isExists: true
+            };
+          }
+          return null;;
+        }))
+  }
+
+  matchPassword({ value }: AbstractControl): any {
+    console.log(this.Password?.value , value)
+      return this.Password?.value === value ? null : {passwordNotMatched : true};
   }
   ngOnInit(): void {
   }
@@ -69,6 +91,8 @@ export class RegisterComponent implements OnInit {
 
 
   submit() {
+    console.log(this.signupForm, )
+    return;
     console.log(this.signupForm.value, )
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
@@ -119,8 +143,8 @@ workSpaceId: null,
   get PhoneNumber() { return this.signupForm.get('PhoneNumber'); }
   get WorkSpaceName() { return this.signupForm.get('WorkSpaceName'); }
   get Email() { return this.signupForm.get('Email'); }
-  get Password() { return this.signupForm.get('Password'); }
-  get confirmPassword() { return this.signupForm.get('confirmPassword'); }
+  get Password() { return this.signupForm?.get('Password'); }
+  get confirmPassword() { return this.signupForm?.get('confirmPassword'); }
   get f() { return this.signupForm.controls; }
 
 }

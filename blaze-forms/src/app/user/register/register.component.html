@@ -118,9 +118,11 @@
                                 </div>
                                 <ng-container
                                     *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
-                                    <div *ngIf="f.PhoneNumber.errors?.required || f.PhoneNumber.errors?.pattern"
+                                    <div *ngIf="f.PhoneNumber.errors?.required"
                                         class="field-error text-right mt-1 pr-2 small">Phone Number is
                                         required</div>
+                                        <div *ngIf="f.PhoneNumber.hasError('minlength')"
+                                        class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div>
                                 </ng-container>
                             </div>
                         </div>
@@ -137,9 +139,11 @@
 
                                 </div>
                                 <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
-                                    <div *ngIf="f.Password.errors?.required || f.Password.errors?.pattern"
+                                    <div *ngIf="f.Password.errors?.required"
                                         class="field-error text-right mt-1 pr-2 small">Password is
                                         required</div>
+                                        <div *ngIf="f.Password.errors?.pattern"
+                                        class="field-error text-right mt-1 pr-2 small">Enter a valid password</div>
                                 </ng-container>
                             </div>
                             <div class="field-wrapper col-md-6">
@@ -156,8 +160,12 @@
                                 <ng-container
                                     *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
                                     <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Email is
+                                        class="field-error text-right mt-1 pr-2 small">Confirm Password is
                                         required</div>
+                                        <div  class="field-error text-right mt-1 pr-2 small"
+                                         *ngIf="f.confirmPassword.errors?.passwordNotMatched">
+                                            Confirm Password is not matched
+                                        </div>
                                 </ng-container>
                             </div>
                         </div>
@@ -178,6 +186,9 @@
                                         class="field-error text-right mt-1 pr-2 small">Work Space Name is
                                         required</div>
                                 </ng-container>
+                                <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                                    Work Space Name is
+                                    already exist</div>
                             </div>
                         </div>
                         <div class="register-fields-wrapper row mb-3">
