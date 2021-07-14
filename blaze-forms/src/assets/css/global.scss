@@ -202,3 +202,25 @@ img {
 .form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked + .form-checkbox-wrap .form-checkbox-deactive{
 	display: none;
 } 
+
+
+input[type=checkbox] {
+	display: none; 
+  
+	&:checked + label::before {
+	  content: '\e834'; 
+	  color: $base-color;
+	  font-size: 1.5rem;
+	}
+	& + label {
+	  cursor: pointer;
+  
+	  &::before {
+		font-family: $fontIcon;
+		display: inline-block;
+		letter-spacing: 0.2rem; 
+		content: '\e835';
+		font-size: 1.5rem;
+	  }
+	}
+  }
