@@ -50,7 +50,7 @@ export class FormsComponent implements OnInit {
   }
 
   open() {
-    this.modalService.open(AddFormModalComponent).result.then((result) => {
+    this.modalService.open(AddFormModalComponent,{ size: 'lg' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
       console.log(`Dismissed `);
