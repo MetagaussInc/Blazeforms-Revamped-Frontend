@@ -6,5 +6,6 @@ export const api: any = {
     signup: `${ACCOUNT}/Signup`,
     checkEmail: 'User/CheckExisting',
     getFormsList: `${FORMS}/FilterWorkSpaceforms`,
-    GetFoldersListWithForms: 'Folders/GetFoldersListWithForms'
+    GetFoldersListWithForms: 'Folders/GetFoldersListWithForms',
+    SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
 }
