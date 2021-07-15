@@ -1,0 +1,226 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+/*--- Import variables ---*/
+
+@import "core/variables";
+
+html{height: 100%;}
+
+body {
+	font-family: $baseFont ;
+	font-size: 0.875rem;
+	height: 100%;
+}
+a {
+	color:$base-color;
+	cursor: pointer;
+}
+.nav-item-active {
+	border-bottom: 3px solid $base-color;
+}
+
+i.material-icons,
+i.material-icons-round,
+i.material-icons-outlined {
+    vertical-align: bottom;
+    color: $base-color;
+    font-size: 1.5rem;
+}
+
+
+.form-check-input:checked {
+    background-color: $base-color;
+    border-color: $base-color;
+}
+
+
+.input-group-text {
+	i.material-icons {
+		color: $input-icon-color;
+		font-size: 1.25rem;
+	}
+}
+input {
+	font-size: 0.875rem !important;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: $seconderyFont;
+}
+
+.btn-bf {
+	color: $btn-text-color;
+	background-color:$base-color;
+	border-color: $base-color;
+	&:hover {
+		color:$btn-text-color;
+		background-color:$base-hover-color;
+		border-color:$base-hover-color;
+	}
+	&:active {
+		color:$btn-text-color;
+		background-color: $base-active-color;
+		border-color: $base-active-color;
+	}
+}
+.custom-control-input {
+	&:checked~.custom-control-label {
+		&::before {
+			color: #FFF;
+			background-color: #f04564;
+			border-color: #f04564;
+		}
+	}
+}
+.form-control {
+	&:focus {
+		border-color:rgba($base-color,0.50); 
+		box-shadow: inset 0 0 0 .2rem rgba($base-color,.25); 
+	}
+}
+
+
+/* ----  Login Page CSS ---*/
+
+.login-area-container {
+	height: calc(100% - 80px);
+}
+
+.login-box {
+	max-width: 100%;
+	background-color: #fff;
+	img {
+		max-width: 100% !important;
+		height: auto;
+	}
+}
+.header-wrapper {
+	background-color: #fff;
+}
+.nav-pills {
+	.nav-link {
+		border-radius: 0;
+		&.active {
+			background-color: transparent;
+			color: #000;
+			border-bottom: 0.2rem solid #f04564;
+		}
+	}
+}
+.form-control {
+	height: 2.5rem !important;
+}
+.field-error {
+	color: #f04564;
+}
+img {
+	&.fingerprint-icon-svg {
+		height: 100px;
+	}
+}
+.btn {
+	.spinner-border {
+		vertical-align: middle;
+	}
+}
+.monochrome-logo {
+	height: 1.75rem;
+	width: 1.75rem;
+}
+.footer-copyright-text {
+	line-height: 1.95rem;
+}
+.plan-name-wrapper {
+	background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
+}
+
+
+
+/*--- SignUp Form ---*/
+
+.signup-recaptcha-wrapper .angular-google-recaptcha-container {
+	display: inline-block;
+}
+
+
+
+/*-- Form CSS -- */
+
+.form-badges-wrapper {
+	visibility: hidden;
+  }
+  
+  .form-list-item {
+	&:hover .form-badges-wrapper {
+	  visibility: visible;
+	}
+  
+	i {
+	  font-size: 1.3rem;
+	}
+  }
+  
+  .border-2 {
+	border-width: 2px !important;
+  }
+  
+  .border-5 {
+	border-width: 5px !important;
+  }
+
+  .bg-bf-light {
+	  background-color: $base-color-light;
+  }
+
+  .text-bf {
+    color:$base-color;
+}
+
+.form-control,
+.form-select {
+    font-size: 0.875rem;
+}
+
+.form-list-item .form-checkbox-wrapper label .form-checkbox-wrap .form-checkbox-active {
+	display: none;
+
+} 
+
+.form-list-item .form-checkbox-wrapper input[type="checkbox"] {
+	display: none;
+
+}
+
+.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked + .form-checkbox-wrap .form-checkbox-active  {
+	display: block;
+} 
+
+.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked + .form-checkbox-wrap .form-checkbox-deactive{
+	display: none;
+} 
+
+
+input[type=checkbox] {
+	display: none; 
+  
+	&:checked + label::before {
+	  content: '\e834'; 
+	  color: $base-color;
+	  font-size: 1.5rem;
+	}
+	& + label {
+	  cursor: pointer;
+  
+	  &::before {
+		font-family: $fontIcon;
+		display: inline-block;
+		letter-spacing: 0.2rem; 
+		content: '\e835';
+		font-size: 1.5rem;
+	  }
+	}
+  }
