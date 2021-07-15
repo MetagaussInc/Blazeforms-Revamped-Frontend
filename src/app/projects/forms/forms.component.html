@@ -59,12 +59,12 @@
                         <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
                     </div>
                     <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                        <i class="material-icons-round mr-3 text-dark">people</i>
-                        <i class="material-icons-round mr-3 text-dark">drive_file_move</i>
-                        <i class="material-icons-round mr-3 text-dark">archive</i>
-                        <i (click)="openEdit('form  ')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
+                        <i class="material-icons-round mr-3 text-dark" (click)="openPermissions(form)">people</i>
+                        <i class="material-icons-round mr-3 text-dark" (click)="move(form)">drive_file_move</i>
+                        <i class="material-icons-round mr-3 text-dark" (click)="archive(form)">archive</i>
+                        <i (click)="openEdit('form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
                             data-bs-target="#edit-form-modal">edit</i>
-                        <i class="material-icons-round text-dark">delete</i>
+                        <i (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                     </div>
                 </div>
             </div>
