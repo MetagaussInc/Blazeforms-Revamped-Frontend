@@ -17,6 +17,8 @@ export class EditFormModalComponent implements OnInit {
   //   PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
   //     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   // });
+
+  
   constructor() { }
 
   ngOnInit(): void {
