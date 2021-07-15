@@ -121,7 +121,7 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     console.log(this.signupForm,)
-    return;
+    // return;
     console.log(this.signupForm.value,)
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),

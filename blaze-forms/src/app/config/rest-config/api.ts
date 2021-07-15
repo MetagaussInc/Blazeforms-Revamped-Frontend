@@ -9,4 +9,7 @@ export const api: any = {
     GetFoldersListWithForms: 'Folders/GetFoldersListWithForms',
     SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
     GetMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
+    getAllActiveForms: 'Forms/GetActiveFormswithoutPagination',
+    getFolders: 'Folders/GetFolderswithoutPagination',
+    validateFormName: 'Forms/ValidateFormName'
 }
