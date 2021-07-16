@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class UserComponent implements OnInit, OnDestroy {
 
   constructor() {
-    document.body.className = 'page-background';
+    document.body.className = 'bg-light';
   }
 
   ngOnInit(): void {
