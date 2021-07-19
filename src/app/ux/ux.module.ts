@@ -14,7 +14,9 @@ import { Page8Component } from './page8/page8.component';
 import { Page9Component } from './page9/page9.component';
 import { Page10Component } from './page10/page10.component';
 import { Page11Component } from './page11/page11.component';
-
+import { TSelectComponent } from './t-select/t-select.component';
+import {MatTreeModule } from '@angular/material/tree';
+import {MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,14 @@ import { Page11Component } from './page11/page11.component';
     Page8Component,
     Page9Component,
     Page10Component,
-    Page11Component
+    Page11Component,
+    TSelectComponent
   ],
   imports: [
     CommonModule,
-    UxRoutingModule
+    UxRoutingModule,
+    MatTreeModule,
+    MatIconModule
   ]
 })
 export class UxModule { }
