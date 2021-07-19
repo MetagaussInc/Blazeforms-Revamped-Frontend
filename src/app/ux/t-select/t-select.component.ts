@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 const TREE_DATA: FoodNode[] = [
   {
@@ -13,18 +13,18 @@ const TREE_DATA: FoodNode[] = [
           {
             name: 'Meta 1',
             children: [
-              {name: 'Broccoli 1'},
-              {name: 'Brussels sprouts 1'},
+              { name: 'Broccoli 1' },
+              { name: 'Brussels sprouts 1' },
             ]
           },
-          {name: 'Meta 2'},
+          { name: 'Meta 2' },
         ]
-      }, 
+      },
       {
         name: 'Test',
         children: [
-          {name: 'Test 1'},
-          {name: 'Test 2'},
+          { name: 'Test 1' },
+          { name: 'Test 2' },
         ]
       },
     ]
@@ -35,9 +35,9 @@ const TREE_DATA: FoodNode[] = [
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
-  level: number; 
+  level: number;
   // fullFolderPath?: any[], 
-  fullFolderPath?: string[], 
+  fullFolderPath?: string[],
 }
 
 interface FoodNode {
@@ -52,7 +52,7 @@ interface FoodNode {
   templateUrl: './t-select.component.html',
   styleUrls: ['./t-select.component.scss']
 })
-export class TSelectComponent implements OnInit { 
+export class TSelectComponent implements OnInit {
   selected = 'Root';
   searchedString = '';
   private _transformer = (node: FoodNode, level: number) => {
@@ -64,15 +64,21 @@ export class TSelectComponent implements OnInit {
     };
   }
   search($event: any) {
+    if ($event?.target?.value.length > 0) {
+      this.treeControl.expandAll();
+    } else {
+      this.treeControl.collapseAll();
+    }
+
     // console.log($event.target.value)
     // this.dataSource.data = TREE_DATA
   }
 
   treeControl = new FlatTreeControl<any>(
-      node => node.level, node => node.expandable);
+    node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(
-      this._transformer, node => node.level, node => node.expandable, node => node.children );
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -80,19 +86,19 @@ export class TSelectComponent implements OnInit {
 
 
 
-  
+
   constructor() {
 
-    const o =  TREE_DATA.forEach(element => {
+    const o = TREE_DATA.forEach(element => {
       // element.fullFolderPath = [];
       // element.fullFolderPath.push(element.name);
       element.fullFolderPath = '';
-      element.fullFolderPath += '/'+ element.name.toLowerCase();
+      element.fullFolderPath += '/' + element.name.toLowerCase();
       const parentData = [];
       parentData.push(element);
       if (element.children) {
         this.ExtractChild(parentData, element.children)
-        
+
       }
 
     })
@@ -109,27 +115,28 @@ export class TSelectComponent implements OnInit {
       child.fullFolderPath += '/' + child.name.toLowerCase();
       parentElements.forEach((element: any) => {
         element.fullFolderPath += '/' + child.name.toLowerCase();
-       
+
       });
       const parent = []
       parent.push(...parentElements);
       parent.push(child);
       if (child.children) {
         this.ExtractChild(parent, child.children)
-        
+
       }
     });
   }
   select(node: any): void {
-    console.log(node)
+    // console.log(node)
     this.selected = node.name;
     this.treeControl.collapseAll();
-    console.log(this.treeControl)
+    // console.log(this.treeControl)
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => {
-    console.log(_)
-    return node.expandable};
+    // console.log(_)
+    return node.expandable
+  };
   ngOnInit(): void {
   }
 

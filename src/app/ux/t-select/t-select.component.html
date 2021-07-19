@@ -1,4 +1,4 @@
-<input [(ngModel)]="searchedString">
+<input [(ngModel)]="searchedString" (keyup)="search($event)">
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none' : 'block'"
