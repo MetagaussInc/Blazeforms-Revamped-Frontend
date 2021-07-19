@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticateComponent } from './component/authenticate/authenticate.component';
 import { JwtInterceptor } from './config/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './config/interceptors/error.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ErrorInterceptor } from './config/interceptors/error.interceptor';
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
     EffectsModule.forRoot([UserEffects]),
     NgbModule,
+    BrowserAnimationsModule,
     // NgbModule
   ],
   providers: [

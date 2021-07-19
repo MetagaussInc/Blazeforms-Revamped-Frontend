@@ -8,6 +8,9 @@ import { FormsFooterComponent } from './forms-footer/forms-footer.component';
 import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
+import { TreeSelectComponent } from './tree-select/tree-select.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsHeaderComponent,
     FormsFooterComponent,
     AddFormModalComponent,
-    EditFormModalComponent
+    EditFormModalComponent,
+    ConfirmModalComponent,
+    RestrictFormEntriesComponent,
+    TreeSelectComponent
   ],
   imports: [
     CommonModule,

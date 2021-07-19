@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -26,8 +28,10 @@ export class FormsComponent implements OnInit {
   public formsList: any;
   public allForms :any;
   public folderList: any;
+  userInfo: any;
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
       this.getFormsList(userInfo);
     })
     
@@ -104,6 +108,58 @@ export class FormsComponent implements OnInit {
     
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  openPermissions(form: any) {
+    console.log('openPermissions', form)
+    const modalRef: any = this.modalService.open(RestrictFormEntriesComponent,{ size: 'lg' })
+    modalRef.componentInstance.form = form;      
+    // modalRef.componentInstance.modalName = 'Archive'; 
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: ''}).subscribe(res => {
+          
+        // })
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  move(form: any) {
+
+  }
+
+  archive(form: any) {
+    console.log('archive', form)
+    const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.message = `Are you sure you want to archive ${form.text} forms`;      
+    modalRef.componentInstance.modalName = 'Archive'; 
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
+          console.log(res)
+        })
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  deleteForm(form: any) {
+    console.log('delete', form)
+    const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.message = `Are you sure you want to delete ${form.text} forms`;      
+    modalRef.componentInstance.modalName = 'Delete'; 
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        this.http.call('archive', 'POST', {Action: 'Delete', FormIds: form.value }).subscribe(res => {
+          this.getFormsList(this.userInfo);
+        })
+      }
     }, (reason: any) => {
       console.log(`Dismissed `);
     });

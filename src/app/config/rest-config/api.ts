@@ -11,5 +11,11 @@ export const api: any = {
     GetMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
     getAllActiveForms: 'Forms/GetActiveFormswithoutPagination',
     getFolders: 'Folders/GetFolderswithoutPagination',
-    validateFormName: 'Forms/ValidateFormName'
+    validateFormName: 'Forms/ValidateFormName',
+    archive: 'Forms/BulkAction',
+    deleteForm: 'Forms/BulkAction',
+    getRoleUsers: 'Forms/GetFormUserRoleWorkSpace',
+    saveRolePermission: 'Forms/SaveRolePermission',
+    getRolePermissions: 'Forms/GetRolePermission',
+    activateUser: "Account/ActivateUser",
 }

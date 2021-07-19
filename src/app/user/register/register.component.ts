@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -62,7 +63,7 @@ export class RegisterComponent implements OnInit {
     ModifiedBy: '',
     StripePlanId: ''
   };
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   checkforAgreements({ value }: AbstractControl): any {
     if (!value) {
@@ -99,7 +100,6 @@ export class RegisterComponent implements OnInit {
   }
 
   matchPassword({ value }: AbstractControl): any {
-    console.log(this.Password?.value, value)
     return this.Password?.value === value ? null : { passwordNotMatched: true };
   }
   ngOnInit(): void {
@@ -164,9 +164,10 @@ export class RegisterComponent implements OnInit {
     delete obj.confirmPassword;
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
-      console.log(res);
+      this.router.navigate(['user/register-confirm'])
     })
   }
+
   get FirstName() { return this.signupForm.get('FirstName'); }
   get LastName() { return this.signupForm.get('LastName'); }
   get PhoneNumber() { return this.signupForm.get('PhoneNumber'); }
