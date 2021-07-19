@@ -16,5 +16,6 @@ export const api: any = {
     deleteForm: 'Forms/BulkAction',
     getRoleUsers: 'Forms/GetFormUserRoleWorkSpace',
     saveRolePermission: 'Forms/SaveRolePermission',
-    getRolePermissions: 'Forms/GetRolePermission'
+    getRolePermissions: 'Forms/GetRolePermission',
+    activateUser: "Account/ActivateUser",
 }

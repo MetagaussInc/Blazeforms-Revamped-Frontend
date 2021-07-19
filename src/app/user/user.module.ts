@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'angular-google-recaptcha';
+import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
+import { RegisterSuccessComponent } from './register-success/register-success.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RecaptchaModule } from 'angular-google-recaptcha';
     LoginComponent,
     ForgotPasswordComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterConfirmComponent,
+    RegisterSuccessComponent
   ],
   imports: [
     CommonModule,
