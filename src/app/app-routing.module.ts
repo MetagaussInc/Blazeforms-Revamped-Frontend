@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'forms',
-    loadChildren: () => import('./projects/forms/forms.module').then(m => m.FormsModule),
+    loadChildren: () => import('./projects/forms/forms.module').then(m => m.FormModule),
     canLoad: [ModuleAuthGuardComponent]
   }
 ];

@@ -11,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 import { TreeSelectComponent } from './tree-select/tree-select.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { TreeSelectComponent } from './tree-select/tree-select.component';
   imports: [
     CommonModule,
     FormsRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ]
 })
-export class FormsModule { }
+export class FormModule { }
