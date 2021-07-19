@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'angular-google-recaptcha';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
+import { RegisterFailedComponent } from './register-failed/register-failed.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RegisterSuccessComponent } from './register-success/register-success.co
     HeaderComponent,
     FooterComponent,
     RegisterConfirmComponent,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    RegisterFailedComponent
   ],
   imports: [
     CommonModule,

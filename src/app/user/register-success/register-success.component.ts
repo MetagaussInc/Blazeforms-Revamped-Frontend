@@ -44,7 +44,7 @@ export class RegisterSuccessComponent implements OnInit {
           }
           
         } else {
-          this.router.navigate(['/confirmation-error']);
+          this.router.navigate(['user/register-error']);
         }
       },
       error => {
