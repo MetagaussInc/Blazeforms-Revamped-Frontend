@@ -1,7 +1,70 @@
-button {
-    background-color: white;
-    border: 0px;
+.mat-tree {
+    background: #fff;
 }
-.mat-tree.mat-trree-node {
-    border: 2px solid grey;
+
+.mat-tree-node {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.mat-tree-node {
+    min-height: 48px;
+}
+
+.mat-nested-tree-node, .mat-tree-node {
+    color: rgba(0,0,0,.87);
+}
+
+.mat-nested-tree-node, .mat-tree-node {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+
+
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    overflow: visible;
+}
+
+.mat-button, .mat-icon-button, .mat-stroked-button {
+    color: inherit;
+    background: transparent;
+}
+
+.mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+
+.mat-tree .mat-tree-node:first-child  {
+    border: 1px solid #ccc;
+}
+
+
+.mat-tree .mat-tree-node:first-child button .tree-folder-icon{
+    display: none;
 }

@@ -19,6 +19,7 @@ import {MatTreeModule } from '@angular/material/tree';
 import {MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     UxComponent,
@@ -33,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     Page9Component,
     Page10Component,
     Page11Component,
-    TSelectComponent
+    TSelectComponent,
   ],
   imports: [
     CommonModule,
