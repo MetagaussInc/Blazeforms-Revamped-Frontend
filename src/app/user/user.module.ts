@@ -32,8 +32,11 @@ import { RegisterFailedComponent } from './register-failed/register-failed.compo
     UserRoutingModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot({
-      siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
-      // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
+      
+      /**github */ siteKey: '6LdR_KkbAAAAAPgIpLDII97yNaE05-Ayu35OGblf'
+      /**github */ // secretKey: '6LdR_KkbAAAAAEZkStGEFDPeqYEPjw-uwnKGGuVP'
+    //  /**Localhost */ siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
+      /**Localhost */ // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
   }),
   ]
 })
