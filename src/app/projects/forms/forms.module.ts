@@ -12,6 +12,10 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 import { TreeSelectComponent } from './tree-select/tree-select.component';
 import { FormsModule } from '@angular/forms';
+import { MoveModalComponent } from './move-modal/move-modal.component';
+import { TSelectComponent } from 'src/app/ux/t-select/t-select.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,18 @@ import { FormsModule } from '@angular/forms';
     EditFormModalComponent,
     ConfirmModalComponent,
     RestrictFormEntriesComponent,
-    TreeSelectComponent
+    TreeSelectComponent,
+    MoveModalComponent,
+    TSelectComponent,
+
   ],
   imports: [
     CommonModule,
     FormsRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatTreeModule,
+    MatIconModule,
   ]
 })
 export class FormModule { }

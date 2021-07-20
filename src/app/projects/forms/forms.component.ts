@@ -8,6 +8,7 @@ import { AddFormModalComponent } from './components/add-form-modal/add-form-moda
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
+import { MoveModalComponent } from './move-modal/move-modal.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -137,7 +138,18 @@ export class FormsComponent implements OnInit {
   }
 
   move(form: any) {
-
+    console.log('move', form,  this.folderList)
+    const modalRef: any = this.modalService.open(MoveModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.folderList =  this.folderList; 
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
+        //   console.log(res)
+        // })
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
   }
 
   archive(form: any) {
