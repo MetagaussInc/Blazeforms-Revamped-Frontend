@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'angular-google-recaptcha';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
+import { RegisterFailedComponent } from './register-failed/register-failed.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RegisterSuccessComponent } from './register-success/register-success.co
     HeaderComponent,
     FooterComponent,
     RegisterConfirmComponent,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    RegisterFailedComponent
   ],
   imports: [
     CommonModule,
@@ -30,8 +32,11 @@ import { RegisterSuccessComponent } from './register-success/register-success.co
     UserRoutingModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot({
-      siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
-      // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
+      
+      /**github */ siteKey: '6LdR_KkbAAAAAPgIpLDII97yNaE05-Ayu35OGblf'
+      /**github */ // secretKey: '6LdR_KkbAAAAAEZkStGEFDPeqYEPjw-uwnKGGuVP'
+    //  /**Localhost */ siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
+      /**Localhost */ // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
   }),
   ]
 })

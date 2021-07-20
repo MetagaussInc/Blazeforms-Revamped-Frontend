@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   logout() {
     this.store.dispatch(userLogout()) 
-    this.router.navigate(['/uxer/login'])
+    this.router.navigate(['/user/login'])
 
   }
 }

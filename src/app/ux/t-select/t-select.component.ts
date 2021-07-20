@@ -55,6 +55,7 @@ interface FoodNode {
 export class TSelectComponent implements OnInit {
   selected = 'Root';
   searchedString = '';
+  public viewDropDown = false;
   private _transformer = (node: FoodNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,

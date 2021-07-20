@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
+import { RegisterFailedComponent } from './register-failed/register-failed.component';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'register-success',
         component: RegisterSuccessComponent
+      },
+      {
+        path: 'register-error',
+        component: RegisterFailedComponent
       }
     ]
   },

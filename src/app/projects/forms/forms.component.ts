@@ -15,6 +15,7 @@ import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-f
 })
 export class FormsComponent implements OnInit {
 
+  searchedString = '';
   pageDetail = {
     pageNumber: 1,
     pageSize: 14
@@ -54,6 +55,7 @@ export class FormsComponent implements OnInit {
       console.log(res)
       this.getfolderNameWithForms(res, arr);
       this.formsList = arr;
+      console.log(this.formsList)
     })
 
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
@@ -73,7 +75,12 @@ export class FormsComponent implements OnInit {
         arr.push({
           folderPath: obj.folderPath,
           text: obj.text,
-          forms: obj.childrenForms
+          forms: obj.childrenForms,
+          childNameList: function(){
+            let list = obj.text;
+            obj?.childrenForms.forEach((x: any) => { list += '/'+ x.text} );
+            return list;
+          }()
         })
       }
       if (obj?.childrenFolders) {
