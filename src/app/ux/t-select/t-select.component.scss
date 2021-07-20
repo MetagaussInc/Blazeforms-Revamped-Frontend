@@ -1,6 +1,3 @@
-.mat-tree {
-    background: #fff;
-}
 
 .mat-tree-node {
     display: flex;
@@ -10,18 +7,12 @@
 }
 
 .mat-tree-node {
-    min-height: 48px;
+    min-height: 20px;
 }
 
-.mat-nested-tree-node, .mat-tree-node {
-    color: rgba(0,0,0,.87);
+.folder-tree-wrap > .folder-tree-node {
+    max-height: 130px;
 }
-
-.mat-nested-tree-node, .mat-tree-node {
-    font-weight: 400;
-    font-size: 14px;
-}
-
 
 
 .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
@@ -57,14 +48,4 @@
     position: absolute;
     pointer-events: none;
     border-radius: inherit;
-}
-
-
-.mat-tree .mat-tree-node:first-child  {
-    border: 1px solid #ccc;
-}
-
-
-.mat-tree .mat-tree-node:first-child button .tree-folder-icon{
-    display: none;
 }
