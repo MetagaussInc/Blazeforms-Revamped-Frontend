@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
@@ -56,9 +56,12 @@ interface FoodNode {
 })
 export class TSelectComponent implements OnInit {
   @Input() public data: any;
+  @Input() public currentFormId: any;
+  @Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
   selected = 'Root';
   searchedString = '';
   public viewDropDown = false;
+  selectedFormId: string = '';
   private _transformer = (node: FoodNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -87,15 +90,7 @@ export class TSelectComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-
-
-
-
-
   constructor() {
-
-
-
   }
 
   ExtractChild(parentElements: any, childElements: any) {
@@ -111,6 +106,9 @@ export class TSelectComponent implements OnInit {
       const parent = []
       parent.push(...parentElements);
       parent.push(child);
+      if (this.currentFormId === child?.value) {
+        this.selected = child.text;
+      }
       if (child.children) {
         this.ExtractChild(parent, child.children)
 
@@ -119,9 +117,11 @@ export class TSelectComponent implements OnInit {
   }
   select(node: any): void {
     console.log(node)
+    this.selectedFormId = node.value;
     this.selected = node.text;
     this.treeControl.collapseAll();
     this.viewDropDown = false;
+    this.selectFolderEvent.emit(node.value);
     // console.log(this.treeControl)
   }
 
@@ -140,6 +140,9 @@ export class TSelectComponent implements OnInit {
       // element.fullFolderPath = [];
       // element.fullFolderPath.push(element.text);
       element.fullFolderPath = '';
+      if (this.currentFormId === element?.value) {
+        this.selected = element.text;
+      }
       element.fullFolderPath += '/' + element?.text?.toLowerCase();
       const parentData = [];
       parentData.push(element);

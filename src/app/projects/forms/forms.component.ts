@@ -76,7 +76,10 @@ export class FormsComponent implements OnInit {
         arr.push({
           folderPath: obj.folderPath,
           text: obj.text,
-          forms: obj.childrenForms,
+          forms: obj.childrenForms.map((x: any) => {
+            x.folderId = obj.value;
+            return x;
+          } ),
           childNameList: function(){
             let list = obj.text;
             obj?.childrenForms.forEach((x: any) => { list += '/'+ x.text} );
@@ -141,6 +144,7 @@ export class FormsComponent implements OnInit {
     console.log('move', form,  this.folderList)
     const modalRef: any = this.modalService.open(MoveModalComponent,{ size: 'lg' })
     modalRef.componentInstance.folderList =  this.folderList; 
+    modalRef.componentInstance.form =  form; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
