@@ -1,0 +1,44 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Restrict Form Entries</h5>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="row p-3">
+      <div class="col-md-12 text-right mt-4 mb-3">
+        <button (click)="openAddUserPermissionModal()" type="button" data-dismiss="modal" data-toggle="modal" data-target="#user-provide-form-permissions-modal" class="btn btn-bf btn-sm">
+          Add User
+        </button>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-borderless text-center border">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-left">User</th>                                            
+              <th>View</th>                                            
+              <th>Edit</th>                                            
+              <th>Delete</th>                                            
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="userLists.length < 1">
+              <td colspan="5">No user data found</td>
+            </tr>
+            <tr *ngFor="let userList of userLists">
+              <td *ngIf="userList" class="text-left">{{ userList.userEmail }}</td>
+              <td *ngIf="userList"><input type="checkbox" id="user-form-view" [checked]="userList.permissions.indexOf(3) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-view"></label></td>
+              <td *ngIf="userList"><input type="checkbox" id="user-form-edit" [checked]="userList.permissions.indexOf(1) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-edit"></label></td>
+              <td *ngIf="userList"><input type="checkbox" id="user-form-delete" [checked]="userList.permissions.indexOf(2) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-delete"></label></td>
+              <td *ngIf="userList">
+                <span *ngIf="!isEditMode" (click)="editFormUser(userList)"><i class="material-icons text-dark mr-2">edit</i></span>
+                <span *ngIf="isEditMode" (click)="updateFormUser(userList)"><i class="material-icons text-dark mr-2">update</i></span>
+                <span (click)="deleteFormUser(userList)"><i class="material-icons text-dark">delete</i></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,9 @@ import { FormsFooterComponent } from './forms-footer/forms-footer.component';
 import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
+import { AddUserPermissionModalComponent } from './components/add-user-permission-modal/add-user-permission-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +19,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsHeaderComponent,
     FormsFooterComponent,
     AddFormModalComponent,
-    EditFormModalComponent
+    EditFormModalComponent,
+    UserPermissionModalComponent,
+    AddUserPermissionModalComponent
   ],
   imports: [
     CommonModule,
     FormsRoutingModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ]
 })
 export class FormsModule { }

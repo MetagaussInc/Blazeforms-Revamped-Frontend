@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
+import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -26,8 +27,10 @@ export class FormsComponent implements OnInit {
   public formsList: any;
   public allForms :any;
   public folderList: any;
+  public userInfoData: any;
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfoData = userInfo;
       this.getFormsList(userInfo);
     })
     
@@ -105,6 +108,16 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
     }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  openModal(formId: any) {
+    const modalRef: any = this.modalService.open(UserPermissionModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.formId = formId;      
+    modalRef.componentInstance.modalType = 'permission';
+    modalRef.componentInstance.workSpaceId = this.userInfoData.WorkspaceDetail.Id;
+    modalRef.result.then((result: any) => { }, (reason: any) => {
       console.log(`Dismissed `);
     });
   }
