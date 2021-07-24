@@ -9,6 +9,7 @@ import { EditFormModalComponent } from './components/edit-form-modal/edit-form-m
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 import { MoveModalComponent } from './move-modal/move-modal.component';
+import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -188,6 +189,15 @@ export class FormsComponent implements OnInit {
     });
   }
   
+  openModal(formId: any) {
+    const modalRef: any = this.modalService.open(UserPermissionModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.formId = formId;      
+    modalRef.componentInstance.modalType = 'permission';
+    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.result.then((result: any) => { }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
   ngOnDestroy() {
     this.userInfoSubscription$.unsubscribe();
   }

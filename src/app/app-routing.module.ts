@@ -30,7 +30,8 @@ const routes: Routes = [
     path: 'forms',
     loadChildren: () => import('./projects/forms/forms.module').then(m => m.FormModule),
     canLoad: [ModuleAuthGuardComponent]
-  }
+  },
+  { path: 'form-builder', loadChildren: () => import('./projects/form-builder/form-builder.module').then(m => m.FormBuilderModule) }
 ];
 
 @NgModule({

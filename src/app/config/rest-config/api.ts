@@ -18,5 +18,8 @@ export const api: any = {
     saveRolePermission: 'Forms/SaveRolePermission',
     getRolePermissions: 'Forms/GetRolePermission',
     activateUser: "Account/ActivateUser",
+    getRolePermission: 'Forms/GetRolePermission',
+    getFormUserRoleWorkSpaces: 'Forms/GetFormUserRoleWorkSpaces',
+    deleteRolePermission: 'Forms/DeleteRolePermission',
     moveFolder: "Forms/MoveForm"
-}
+}   
