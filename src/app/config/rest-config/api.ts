@@ -19,4 +19,4 @@ export const api: any = {
     getRolePermissions: 'Forms/GetRolePermission',
     activateUser: "Account/ActivateUser",
     moveFolder: "Forms/MoveForm"
-}
+}   
