@@ -71,7 +71,11 @@ const conditionalRendring = {
   styleUrls: ['./form-builder.component.scss']
 })
 export class FormBuilderComponent {
+  model: any = {
+    name: ''
+  };
   selectedIndex: any;
+  viewExportedView = false;
   selectedDependency: any;
   count = 0;
   sourceBuilderTools = [
@@ -89,6 +93,26 @@ export class FormBuilderComponent {
       value: '', inputType: 'string', 
       icon: 'fas fa-language', 
       class: 'full', placeholder: ''
+    },
+    {
+      name: 'First Name', 
+      textValue: '',
+      minCharacter: 0,
+      maxCharacter: 100, 
+      value: '', inputType: 'string', 
+      icon: 'fas fa-language', 
+      class: 'full', placeholder: '',
+      isRequired: true,
+    },
+    {
+      name: 'Last Name', 
+      textValue: '',
+      minCharacter: 0,
+      maxCharacter: 100, 
+      value: '', inputType: 'string', 
+      icon: 'fas fa-language', 
+      class: 'full', placeholder: ''
+      
     },
     {
       name: 'Number', 
@@ -145,24 +169,44 @@ export class FormBuilderComponent {
 
   addDependency(event: any) {
     console.log(event.target.value);
-    this.targetBuilderTools[this.selectedIndex].dependUpon = {
-        elementId: event.target.value
-  }
+    this.targetBuilderTools[this.selectedIndex].dependUpon = event.target.value ? {elementId: event.target.value} :  null;
   }
 
   addDependencyProperty($event: any) {
     const val = $event.target.value;
-    const condition = (val === 'isFilledOut' || val === 'isFilledOut');
+    const condition = (val === 'isFilledOut' || val === 'isFilledNotOut');
+    const ref = this.targetBuilderTools[this.selectedIndex].dependUpon.elementId;
     this.targetBuilderTools[this.selectedIndex].dependUpon = {
+      elementId: ref,
       [val]: condition ? true : '',
       type: condition ? 'boolean' : 'text'
     }
+      // this.targetBuilderTools[this.selectedIndex].dependUpon[val] = condition ? true : '';
+      // this.targetBuilderTools[this.selectedIndex].dependUpon['type'] = condition ? 'boolean' : 'text'
+  }
+
+  checkForDependency(model: any): boolean {
+    const dependUpon = model?.dependUpon;
+
+    // if there is no dependency the show element always
+    if (!dependUpon) {
+      return true;
+    }
+    const dependencyElementIndex = this.targetBuilderTools.findIndex((x: any) => x.uiIndexId == dependUpon.elementId );
+    const data = this.targetBuilderTools[dependencyElementIndex].value;
+    if (dependUpon.type === 'boolean') {
+        if (dependUpon.isFilledOut) {
+          return (typeof data === 'number') ? data > -1 : data.length > 0;
+        }
+        if (dependUpon.isNotFilledOut) {
+          return data === 0 || data.length === 0;
+        }
+    }
+    return false;
   }
   changeDependency($event: any , dependElementKey: any) {
     // console.log($event.target.id, $event.target.value, dependElementKey)
-    this.targetBuilderTools[this.selectedIndex].dependUpon ={
-      [dependElementKey.key]: $event.target.value
-}
+    this.targetBuilderTools[this.selectedIndex].dependUpon[dependElementKey.key] = $event.target.value
   }
   droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
 
