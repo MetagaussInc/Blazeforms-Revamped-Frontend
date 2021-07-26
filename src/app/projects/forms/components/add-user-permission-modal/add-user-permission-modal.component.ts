@@ -29,7 +29,7 @@ export class AddUserPermissionModalComponent implements OnInit {
   constructor(private http: HttpService, private fb: FormBuilder, private modalService: NgbModal, public activeModal: NgbActiveModal) {
     this.addPermissionForm = this.fb.group({
       email: ['', Validators.required],
-      permission: this.fb.array([])      
+      permission: this.fb.array([])
     })
   }
 

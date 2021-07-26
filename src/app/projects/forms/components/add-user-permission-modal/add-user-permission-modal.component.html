@@ -1,10 +1,10 @@
 <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">User Provide Form Permission's</h5>
-        <button (click)="closeAddModal()" type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="modal-body">
-        <form [formGroup]="addPermissionForm">
+    <form [formGroup]="addPermissionForm">
+        <div class="modal-header">
+            <h5 class="modal-title">User Provide Form Permission's</h5>
+            <button (click)="closeAddModal()" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
             <div class="row my-4 px-4 form-group">
                 <div class="col-md-3">
                     <label for="form-name">User Name</label>
@@ -30,10 +30,10 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer border-0">
-        <button (click)="closeAddModal()" type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">Cancel</button>
-        <button (click)="submit()" type="button" class="btn btn-bf btn-sm">Save</button>
-    </div>
+        </div>
+        <div class="modal-footer border-0">
+            <button (click)="closeAddModal()" [disabled]="addPermissionForm.invalid" type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">Cancel</button>
+            <button (click)="submit()" type="button" class="btn btn-bf btn-sm">Save</button>
+        </div>
+    </form>
 </div>

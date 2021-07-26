@@ -14,22 +14,27 @@
         <table class="table table-borderless text-center border">
           <thead class="thead-light">
             <tr>
-              <th class="text-left">User</th>                                            
-              <th>View</th>                                            
-              <th>Edit</th>                                            
-              <th>Delete</th>                                            
+              <th class="text-left">User</th>
+              <th>View</th>
+              <th>Edit</th>
+              <th>Delete</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="userLists.length < 1">
+            <tr *ngIf="!userLists">
               <td colspan="5">No user data found</td>
             </tr>
             <tr *ngFor="let userList of userLists">
               <td *ngIf="userList" class="text-left">{{ userList.userEmail }}</td>
-              <td *ngIf="userList"><input type="checkbox" id="user-form-view" [checked]="userList.permissions.indexOf(3) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-view"></label></td>
-              <td *ngIf="userList"><input type="checkbox" id="user-form-edit" [checked]="userList.permissions.indexOf(1) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-edit"></label></td>
-              <td *ngIf="userList"><input type="checkbox" id="user-form-delete" [checked]="userList.permissions.indexOf(2) > -1 ? true : null" [disabled]="!isEditMode"> <label for="user-form-delete"></label></td>
+              <td *ngFor="let permissions of userPermissions">
+                <input type="checkbox" id="user-form-{{ permissions.short }}" 
+                [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
+                [disabled]="!isEditMode"
+                (change)="onCheckboxChange($event, userList)"
+                value="{{ permissions.value }}"> 
+                <label for="user-form-{{ permissions.short }}"></label>
+              </td>
               <td *ngIf="userList">
                 <span *ngIf="!isEditMode" (click)="editFormUser(userList)"><i class="material-icons text-dark mr-2">edit</i></span>
                 <span *ngIf="isEditMode" (click)="updateFormUser(userList)"><i class="material-icons text-dark mr-2">update</i></span>

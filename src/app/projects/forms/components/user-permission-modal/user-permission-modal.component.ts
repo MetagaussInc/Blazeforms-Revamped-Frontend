@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddUserPermissionModalComponent } from '../add-user-permission-modal/add-user-permission-modal.component';
+import { analyze } from 'eslint-scope';
 
 @Component({
   selector: 'app-user-permission-modal',
@@ -16,13 +17,27 @@ export class UserPermissionModalComponent implements OnInit {
 
   public userLists: any;
   public isEditMode: boolean = false;
+  public assignedUserPermission = [] as  any;
+  public assignedPer = [] as any;
+  public assignedidx: any;
 
-  constructor(private http: HttpService, private modalService: NgbModal, public activeModal: NgbActiveModal) {}
+  userPermissions: Array<any> = [
+    { name: 'View', value: 3, short: 'view'},
+    { name: 'Edit', value: 1, short: 'edit'},
+    { name: 'Delete', value: 2, short: 'delete'}
+  ];
+
+  constructor(private http: HttpService, private modalService: NgbModal, public activeModal: NgbActiveModal) {
+  }
   
   ngOnInit(): void {
     this.http.call('getRolePermission', 'POST', {FormId: this.formId}).subscribe(res => {
       console.log(res);
       this.userLists = res;
+      res.forEach((item: any) => {
+        let itemPer = {id: item.id, permissions: item.permissions};
+        this.assignedUserPermission.push(itemPer);
+      });
     });
   }
 
@@ -32,7 +47,6 @@ export class UserPermissionModalComponent implements OnInit {
     modalRef.componentInstance.modalType = 'add_permission';
     modalRef.componentInstance.formId = this.formId;      
     modalRef.componentInstance.workSpaceId = this.workSpaceId;
-    
     modalRef.result.then((result: any) => { }, (reason: any) => {
       console.log(`Dismissed `);
     });
@@ -53,7 +67,6 @@ export class UserPermissionModalComponent implements OnInit {
           }
         });
       });
-      
     }
   }
 
@@ -62,10 +75,17 @@ export class UserPermissionModalComponent implements OnInit {
   }
 
   updateFormUser(userList: any){
+    console.log(this.assignedUserPermission);
+    let selectedUserPermission;
+    this.assignedUserPermission.forEach((element:any) => {
+      if(element.id == userList.id){
+        selectedUserPermission = element.permissions;
+      }
+    });
     const userData = {
       'FormId': userList.formId,
       'Id': userList.id,
-      'Permissions': userList.permissions,
+      'Permissions': selectedUserPermission,
       'UserId': userList.userId,
       'UserEmail': userList.userEmail,
       'UserName': userList.userName
@@ -74,9 +94,37 @@ export class UserPermissionModalComponent implements OnInit {
       this.userLists.forEach((item:any, index:number) => {
         if(item.id === res.id){
           this.userLists[index] = res;
+          this.isEditMode = false;
         }
       });
     });
+  }
+
+  onCheckboxChange(e: any, userData: any) {
+    this.assignedidx;
+    this.assignedPer = [];
+    this.assignedUserPermission.forEach((item:any, index:number) => {
+      if(item.id == userData.id){
+        this.assignedidx = index;
+        let splitPer = item.permissions.split(',');
+        this.assignedPer = splitPer;
+      }
+    });
+    if (e.target.checked) {
+      let perValue: any = e.target.value;
+      this.assignedPer.push(perValue);
+    }
+    else{
+      let i: number = 0;
+      this.assignedPer.forEach((item: any) => {
+        if (item == e.target.value) {
+          this.assignedPer.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.assignedUserPermission[this.assignedidx].permissions = this.assignedPer.join(',');
   }
 
 }
