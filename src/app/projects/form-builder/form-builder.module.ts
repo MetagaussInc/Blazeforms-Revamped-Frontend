@@ -6,12 +6,14 @@ import { FormBuilderComponent } from './form-builder.component';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FormsModule } from '@angular/forms';
 import { UiInputComponent } from './components/ui-input/ui-input.component';
+import { ExportedViewComponent } from './components/exported-view/exported-view.component';
 
 
 @NgModule({
   declarations: [
     FormBuilderComponent,
-    UiInputComponent
+    UiInputComponent,
+    ExportedViewComponent
   ],
   imports: [
     CommonModule,

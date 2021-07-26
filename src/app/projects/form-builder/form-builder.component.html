@@ -19,9 +19,12 @@
   
     </div>
     <div class="builder-target">
-      <h4>Target</h4>
+      <h4>Target</h4><button (click)="viewExportedView = !viewExportedView">{{!viewExportedView ? 'Prod View' : 'Edit view'}}</button>
+      <form #builder="ngForm">
+        <div>{{builder.form.valid}}</div>
   
       <ngx-dnd-container
+      
         class="root-container"
         [model]="targetBuilderTools"
         dropZone="builder-target"
@@ -34,42 +37,70 @@
         (out)="log($event)" 
         (remove)="log($event)"-->
   
-        
-        <ng-template let-model="model"  let-i="index" let-template="template"  >
-          <div [ngSwitch]="model.inputType">
-            <div *ngSwitchCase="'section'" (click)="clicked($event, model, template)">
-              <div class="shadow">
-                {{model.name}}
-                <ngx-dnd-container
-                  dropZone="builder-target"
-                  [model]="model.children"
-                  [removeOnSpill]="true"
-                  [template]="template"
-                  [droppableItemClass]="droppableItemClass"
-                  (drag)="log($event)"
-                  (drop)="log($event)"
-                  (over)="log($event)"
-                  (out)="log($event)"
-                  (remove)="log($event)"
-                  (cancel)="log($event)"
-                  direction="mixed">
-                </ngx-dnd-container>
+          <ng-template let-model="model"  let-i="index" let-template="template"  >
+            <div [ngSwitch]="model.inputType">
+              <div *ngSwitchCase="'section'" (click)="clicked($event, model, template)">
+                <div class="shadow">
+                  {{model.name}}
+                  <ngx-dnd-container
+                  *ngIf="!viewExportedView"
+                    dropZone="builder-target"
+                    [model]="model.children"
+                    [removeOnSpill]="true"
+                    [template]="template"
+                    [droppableItemClass]="droppableItemClass"
+                    (drag)="log($event)"
+                    (drop)="log($event)"
+                    (over)="log($event)"
+                    (out)="log($event)"
+                    (remove)="log($event)"
+                    (cancel)="log($event)"
+                    direction="mixed">
+                  </ngx-dnd-container>
+                </div>
+              </div>
+              <div *ngSwitchDefault (click)="clicked($event, model, template)">
+                <label>{{model.name}}</label>
+                <app-ui-input [model]="model" 
+                *ngIf="!model?.dependUpon || checkForDependency(model) "></app-ui-input>
+                <!-- <input [attr.type]="model.inputType" [(ngModel)]="model.data"> 
+                <div *ngIf="model.inputType === 'number' && model.data < 999999999">
+                  {{model?.validations?.config?.minLength.errorMessage}}
+                </div>-->
               </div>
             </div>
-            <div *ngSwitchDefault (click)="clicked($event, model, template)">
-              <label>{{model.name}}</label>
-              <app-ui-input [model]="model"></app-ui-input>
-              <!-- <input [attr.type]="model.inputType" [(ngModel)]="model.data"> 
-              <div *ngIf="model.inputType === 'number' && model.data < 999999999">
-                {{model?.validations?.config?.minLength.errorMessage}}
-              </div>-->
-            </div>
-          </div>
-        </ng-template>
+          </ng-template>
+        
       </ngx-dnd-container>
-    </div>
+        </form>
+      </div>
   </div>
-  <div *ngIf="targetBuilderTools.length > 0 && selectedIndex">
+  <!-- <div>
+    test
+    <form #heroForm="ngForm">
+      <div class="">
+        <label for="name">Name</label>
+        <br />valid {{name.valid}}
+        <br />pristine {{name.pristine}}
+        <br />touched {{name.touched}}
+        <br />untouched {{name.untouched}}
+        <br />dirty {{name.dirty}}
+        <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="model.name" name="name"
+               #name="ngModel">
+              
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+    </form>
+  </div> -->
+  <div *ngIf="selectedIndex > -1">
     <h3>Label</h3>
     <input [(ngModel)]="targetBuilderTools[selectedIndex].name">
     <h3>Place Holder</h3>
@@ -79,28 +110,40 @@
     <h3>Range</h3>
     <input  type="number" [(ngModel)]="targetBuilderTools[selectedIndex].minCharacter">
     <input  type="number" [(ngModel)]="targetBuilderTools[selectedIndex].maxCharacter">
-    <h3>Show</h3> (current: {{targetBuilderTools[selectedIndex].uiIndexId}})
-    <select (change)="addDependency($event)">
-      <option 
-      *ngFor="let item of targetBuilderTools" 
-      [ngClass]="{'d-none': item.uiIndexId === targetBuilderTools[selectedIndex].uiIndexId}" 
-      value={{item.uiIndexId}} >{{item.name}} | {{item.uiIndexId}}</option>
-    </select>
-    <select *ngIf="targetBuilderTools[selectedIndex].dependUpon" (change)="addDependencyProperty($event)">
-      <option >Select Dependency Type</option>
-      <option value="isFilledOut" >is filled out</option>
-      <option value="isNotFilledOut" >is not filled out</option>
-      <option value="is" >is</option>
-      <option value="isNot" >is not</option>
-      <option value="contains" >contains</option>
-      <option value="doesNotContains" >doesnot contains</option>
-      <option value="endWith" >ends with</option>
-      <option value="doesNotEndWith" >does not ends with</option>
-      <option value="startWith" >starts with</option>
-      <option value="doesNotStartWith" >does not starts with</option>
-    </select>
-    <div *ngIf="targetBuilderTools[selectedIndex].dependUpon">
-        <input  type="text"  [(ngModel)]="targetBuilderTools[selectedIndex].dependUpon.value">
+    <br />
+    <br />
+    <h3>Conditional Rendering</h3> (current: {{targetBuilderTools[selectedIndex].uiIndexId}})
+    <div style="display: flex;">
+      <select (change)="addDependency($event)">
+        <option value="{{null}}">Select Input</option>
+        <option 
+        *ngFor="let item of targetBuilderTools" 
+        [ngClass]="{'d-none': item.uiIndexId === targetBuilderTools[selectedIndex].uiIndexId}" 
+        value={{item.uiIndexId}} >{{item.name}} | {{item.uiIndexId}}</option>
+      </select>
+      <select *ngIf="targetBuilderTools[selectedIndex].dependUpon" (change)="addDependencyProperty($event)">
+        <option >Select Dependency Type</option>
+        <option value="isFilledOut" >is filled out</option>
+        <option value="isNotFilledOut" >is not filled out</option>
+        <option value="is" >is</option>
+        <option value="isNot" >is not</option>
+        <option value="contains" >contains</option>
+        <option value="doesNotContains" >doesnot contains</option>
+        <option value="endWith" >ends with</option>
+        <option value="doesNotEndWith" >does not ends with</option>
+        <option value="startWith" >starts with</option>
+        <option value="doesNotStartWith" >does not starts with</option>
+      </select>
+      <div *ngIf="targetBuilderTools[selectedIndex].dependUpon?.type === 'text'">
+          <input  type="text"  [(ngModel)]="targetBuilderTools[selectedIndex].dependUpon.value">
+      </div>
     </div>
+
+    
+    <div>
+      <h6>Form</h6>
+      <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+    </div>
+    
     <pre><code>{{targetBuilderTools | json}}</code></pre>
   </div>

@@ -1,0 +1,43 @@
+<!-- <div class="offset-4">
+  <form  #builder="ngForm">
+    <div>{{builder.form.valid}}</div>
+
+    <input type="text" class="form-control" id="name1"
+               required
+               [(ngModel)]="model.name" name="name1"
+               #name1="ngModel">
+
+    <ng-container *ngFor="let model of elements">
+          <div [ngSwitch]="model.inputType">
+            <div *ngSwitchCase="'section'" >
+              <div class="shadow">
+                {{model.name}}
+                
+              </div>
+            </div>
+            <div *ngSwitchDefault>
+              <label>{{model.name}}</label>
+              <app-ui-input [model]="model"></app-ui-input>
+              
+            </div>
+          </div>
+  </ng-container>
+  </form>
+ 
+</div> -->
+
+<div>
+  <form #parentForm="ngForm" (submit)="submitParentForm(parentForm)">
+    {{parentForm.valid}}
+    <ng-template ngFor let-form [ngForOf]="elements" let-index="index" let-isLast="last">
+     <div> <input
+      type="form.inputType" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+        placeholder="{{form.placeholder}}"  [required]="form.isRequired"
+        />
+      </div>
+      <div *ngIf="parentForm.submitted && !form.value && form.isRequired">Form field 1 is required</div>
+
+    </ng-template>
+    <button type="submit">Submit</button>
+  </form>
+</div>
