@@ -1,51 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Root',
-    main: true,
-    children: [
-      {
-        name: 'Meta',
-        children: [
-          {
-            name: 'Meta 1',
-            children: [
-              { name: 'Broccoli 1' },
-              { name: 'Brussels sprouts 1' },
-            ]
-          },
-          { name: 'Meta 2' },
-        ]
-      },
-      {
-        name: 'Test',
-        children: [
-          { name: 'Test 1' },
-          { name: 'Test 2' },
-        ]
-      },
-    ]
-  },
-];
+// const TREE_DATA: FoodNode[] = [
+//   {
+//     text: 'Root',
+//     main: true,
+//     children: [
+//       {
+//         text: 'Meta',
+//         children: [
+//           {
+//             text: 'Meta 1',
+//             children: [
+//               { text: 'Broccoli 1' },
+//               { text: 'Brussels sprouts 1' },
+//             ]
+//           },
+//           { text: 'Meta 2' },
+//         ]
+//       },
+//       {
+//         text: 'Test',
+//         children: [
+//           { text: 'Test 1' },
+//           { text: 'Test 2' },
+//         ]
+//       },
+//     ]
+//   },
+// ];
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
-  name: string;
+  text: string;
   level: number;
   // fullFolderPath?: any[], 
   fullFolderPath?: string[],
+  value?: string;
 }
 
 interface FoodNode {
-  name: string;
+  text: string;
   main?: boolean;
   children?: FoodNode[];
   fullFolderPath?: string;
   // fullFolderPath?: any[];
+  value?: string;
 }
 @Component({
   selector: 'app-t-select',
@@ -53,15 +55,20 @@ interface FoodNode {
   styleUrls: ['./t-select.component.scss']
 })
 export class TSelectComponent implements OnInit {
+  @Input() public data: any;
+  @Input() public currentFormId: any;
+  @Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
   selected = 'Root';
   searchedString = '';
   public viewDropDown = false;
+  selectedFormId: string = '';
   private _transformer = (node: FoodNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
-      name: node.name,
+      text: node.text,
       level: level,
-      fullFolderPath: node.fullFolderPath
+      fullFolderPath: node.fullFolderPath,
+      value: node.value
     };
   }
   search($event: any) {
@@ -83,44 +90,25 @@ export class TSelectComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-
-
-
-
-
   constructor() {
-
-    const o = TREE_DATA.forEach(element => {
-      // element.fullFolderPath = [];
-      // element.fullFolderPath.push(element.name);
-      element.fullFolderPath = '';
-      element.fullFolderPath += '/' + element.name.toLowerCase();
-      const parentData = [];
-      parentData.push(element);
-      if (element.children) {
-        this.ExtractChild(parentData, element.children)
-
-      }
-
-    })
-    console.log(TREE_DATA)
-    this.dataSource.data = TREE_DATA;
-
   }
 
   ExtractChild(parentElements: any, childElements: any) {
     childElements.forEach((child: any) => {
       // child.fullFolderPath = [];
-      // child.fullFolderPath.push(child.name);
+      // child.fullFolderPath.push(child.text);
       child.fullFolderPath = '';
-      child.fullFolderPath += '/' + child.name.toLowerCase();
+      child.fullFolderPath += '/' + child.text.toLowerCase();
       parentElements.forEach((element: any) => {
-        element.fullFolderPath += '/' + child.name.toLowerCase();
+        element.fullFolderPath += '/' + child.text.toLowerCase();
 
       });
       const parent = []
       parent.push(...parentElements);
       parent.push(child);
+      if (this.currentFormId === child?.value) {
+        this.selected = child.text;
+      }
       if (child.children) {
         this.ExtractChild(parent, child.children)
 
@@ -128,9 +116,12 @@ export class TSelectComponent implements OnInit {
     });
   }
   select(node: any): void {
-    // console.log(node)
-    this.selected = node.name;
+    console.log(node)
+    this.selectedFormId = node.value;
+    this.selected = node.text;
     this.treeControl.collapseAll();
+    this.viewDropDown = false;
+    this.selectFolderEvent.emit(node.value);
     // console.log(this.treeControl)
   }
 
@@ -139,6 +130,30 @@ export class TSelectComponent implements OnInit {
     return node.expandable
   };
   ngOnInit(): void {
+    const newData: any = [{
+      text: 'Root',
+      main: true,
+      children: this.data
+    }];
+
+    const o = newData?.forEach((element: any) => {
+      // element.fullFolderPath = [];
+      // element.fullFolderPath.push(element.text);
+      element.fullFolderPath = '';
+      if (this.currentFormId === element?.value) {
+        this.selected = element.text;
+      }
+      element.fullFolderPath += '/' + element?.text?.toLowerCase();
+      const parentData = [];
+      parentData.push(element);
+      if (element.children) {
+        this.ExtractChild(parentData, element.children)
+
+      }
+
+    })
+    console.log(newData)
+    this.dataSource.data = newData;
   }
 
 }

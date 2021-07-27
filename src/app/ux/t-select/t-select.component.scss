@@ -35,6 +35,11 @@
     overflow: visible;
 }
 
+mat-tree-node:hover {
+    color: #f04564;
+}
+
+
 .mat-button, .mat-icon-button, .mat-stroked-button {
     color: inherit;
     background: transparent;

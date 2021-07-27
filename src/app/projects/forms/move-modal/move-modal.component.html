@@ -1,0 +1,28 @@
+<!--Move form Modal-->
+<div tabindex="-1" id="copy-form-workflow-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Move </h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-name">User Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <app-t-select [data]="folderList" [currentFormId]="form?.folderId" (selectFolderEvent)="selectFolderEventHandler($event)"></app-t-select>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal" (click)="close()">Cancel</button>
+                <button type="button" class="btn btn-bf btn-sm" (click)="save()">Save</button>
+            </div>
+
+        </div>
+</div>
+<!-- Move form Modal form End--->

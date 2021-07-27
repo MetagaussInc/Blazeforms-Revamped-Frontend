@@ -1,0 +1,39 @@
+<div class="modal-content">
+    <form [formGroup]="addPermissionForm">
+        <div class="modal-header">
+            <h5 class="modal-title">User Provide Form Permission's</h5>
+            <button (click)="closeAddModal()" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="row my-4 px-4 form-group">
+                <div class="col-md-3">
+                    <label for="form-name">User Name</label>
+                </div>
+                <div class="col-md-7">
+                    <input list="emails" name="email" id="email" formControlName="email" autocomplete="off">
+                    <datalist id="emails">
+                        <option *ngFor="let c of userListData" [value]="c.name" >
+                    </datalist>
+                </div>
+            </div>
+            <div class="row my-4 px-4 form-group">
+                <div class="col-md-3">
+                    <label for="form-name">Permissions</label>
+                </div>
+                <div class="col-md-7">
+                    <div class="permissions-container d-flex">
+                        <div class="d-flex align-items-center mr-5" *ngFor="let permissions of userPermissions">
+                            <label for="user-permission-{{ permissions.short }}">{{ permissions.name }}</label>
+                            <input type="checkbox" value="{{ permissions.value }}" id="user-permission-{{ permissions.short }}" (change)="onCheckboxChange($event)"> 
+                            <label for="user-permission-{{ permissions.short }}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer border-0">
+            <button (click)="closeAddModal()" [disabled]="addPermissionForm.invalid" type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">Cancel</button>
+            <button (click)="submit()" type="button" class="btn btn-bf btn-sm">Save</button>
+        </div>
+    </form>
+</div>

@@ -36,6 +36,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/@swimlane/ngx-dnd/release/index.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/global.scss",
               "src/styles.scss"
@@ -108,6 +109,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@swimlane/ngx-dnd/release/index.css",
               "src/assets/css/global.scss",
               "src/styles.scss"
             ],

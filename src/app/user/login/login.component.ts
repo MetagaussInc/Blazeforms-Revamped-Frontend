@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { selectUserState } from 'src/app/+state/user/user.selectors';
 export class LoginComponent implements OnInit {
 
   isFormSubmitted: boolean = false;
+  showHidePass = false;
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -53,4 +54,11 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(userLogin({props}))
   }
 
+  showHidePassword(){
+    this.showHidePass = !this.showHidePass;
+  }
+
+  @HostListener('paste', ['$event']) blockPaste(e: KeyboardEvent) {
+    e.preventDefault();
+  }
 }

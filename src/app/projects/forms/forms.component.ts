@@ -8,6 +8,8 @@ import { AddFormModalComponent } from './components/add-form-modal/add-form-moda
 import { EditFormModalComponent } from './components/edit-form-modal/edit-form-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
+import { MoveModalComponent } from './move-modal/move-modal.component';
+import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -75,7 +77,10 @@ export class FormsComponent implements OnInit {
         arr.push({
           folderPath: obj.folderPath,
           text: obj.text,
-          forms: obj.childrenForms,
+          forms: obj.childrenForms.map((x: any) => {
+            x.folderId = obj.value;
+            return x;
+          } ),
           childNameList: function(){
             let list = obj.text;
             obj?.childrenForms.forEach((x: any) => { list += '/'+ x.text} );
@@ -137,7 +142,19 @@ export class FormsComponent implements OnInit {
   }
 
   move(form: any) {
-
+    console.log('move', form,  this.folderList)
+    const modalRef: any = this.modalService.open(MoveModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.folderList =  this.folderList; 
+    modalRef.componentInstance.form =  form; 
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
+        //   console.log(res)
+        // })
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
   }
 
   archive(form: any) {
@@ -172,6 +189,15 @@ export class FormsComponent implements OnInit {
     });
   }
   
+  openModal(formId: any) {
+    const modalRef: any = this.modalService.open(UserPermissionModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.formId = formId;      
+    modalRef.componentInstance.modalType = 'permission';
+    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.result.then((result: any) => { }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
   ngOnDestroy() {
     this.userInfoSubscription$.unsubscribe();
   }

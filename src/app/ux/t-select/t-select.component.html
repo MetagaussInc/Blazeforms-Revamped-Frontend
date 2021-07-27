@@ -4,26 +4,25 @@
   <div class="p-3"><input class="form-control" id="folder-search" [(ngModel)]="searchedString" (keyup)="search($event)"></div>
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="folder-tree-node overflow-auto py-2" >
       <!-- This is the tree node template for leaf nodes -->
-      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none' : 'block'"
+      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'"
          *matTreeNodeDef="let node" matTreeNodePadding (click)="select(node)" class="cdk-tree-node  d-flex mat-tree-node ng-star-inserted ">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled class="mat-focus-indicator mat-icon-button mat-button-base mat-button-disabled"></button>
-        {{node.name}}
+        <span class="material-icons-outlined">folder</span><span style="cursor: pointer;">{{node.text}}</span>
       </mat-tree-node>
       <!-- This is the tree node template for expandable nodes -->
-      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none' : 'block'"
+      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'"
         *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding
-        (click)="((node.level === 0 && treeControl.isExpanded(node) ) ||
-        (node.level !== 0 )) && select(node)" class="d-flex">
+        (click)="select(node)" class="d-flex">
         <button class="mat-focus-indicator mat-icon-button mat-button-base " mat-icon-button matTreeNodeToggle
-                [attr.aria-label]="'Toggle ' + node.name">
+                [attr.aria-label]="'Toggle ' + node.text">
           <mat-icon class="mat-icon-rtl-mirror">
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
           <span class="material-icons-outlined">folder</span>
         </button>
-        <!-- {{(node.level === 0 && !treeControl.isExpanded(node)) ? selected : node.name}} -->
-        <div class="folder-name">{{node.name}}</div>
+        <!-- {{(node.level === 0 && !treeControl.isExpanded(node)) ? selected : node.text}} -->
+        <div class="folder-name"><span style="cursor: pointer;">{{node.text}}</span></div>
       </mat-tree-node>
     </mat-tree>
 </div>

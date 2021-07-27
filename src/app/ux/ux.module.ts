@@ -34,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     Page9Component,
     Page10Component,
     Page11Component,
-    TSelectComponent,
+    // TSelectComponent,
   ],
   imports: [
     CommonModule,
