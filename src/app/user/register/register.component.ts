@@ -20,7 +20,9 @@ export class RegisterComponent implements OnInit {
       this.validateNameViaServer.bind(this)),
     Email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
+      this.doubleDotValidator.bind(this)
+    ],
       this.validateEmailViaServer.bind(this)
     ),
     Password: new FormControl('', [
@@ -101,6 +103,18 @@ export class RegisterComponent implements OnInit {
 
   matchPassword({ value }: AbstractControl): any {
     return this.Password?.value === value ? null : { passwordNotMatched: true };
+  }
+
+  doubleDotValidator({ value }: AbstractControl): any {
+    if (value?.includes('@')) {
+      if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
+        return { specialCharInDomain: true };
+      }
+      if (value.split('@')[1]?.includes('..')) {
+        return {doubleDotInDomain: true};
+      }
+    }
+    return null;
   }
   ngOnInit(): void {
     this.http.call('GetMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {

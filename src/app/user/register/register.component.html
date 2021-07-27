@@ -97,9 +97,15 @@
 
                                 </div>
                                 <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                    <div *ngIf="f.Email.errors?.required || f.Email.errors?.pattern"
+                                    <div *ngIf="f.Email.errors?.required"
                                         class="field-error text-right mt-1 pr-2 small">Email is
                                         required</div>
+                                        <div *ngIf="f.Email.errors?.pattern"
+                                        class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                                        <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
+                                        class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
+                                        <div *ngIf="f.Email.errors?.doubleDotInDomain"
+                                        class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
                                 </ng-container>
                                 <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
                                     Email is
@@ -143,7 +149,7 @@
                                         class="field-error text-right mt-1 pr-2 small">Password is
                                         required</div>
                                         <div *ngIf="f.Password.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Enter a valid password</div>
+                                        class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
                                 </ng-container>
                             </div>
                             <div class="field-wrapper col-md-6">
