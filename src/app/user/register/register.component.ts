@@ -101,6 +101,18 @@ export class RegisterComponent implements OnInit {
         }))
   }
 
+
+  matchPass(): boolean {
+
+    if ((this.confirmPassword?.dirty || this.confirmPassword?.touched)) {
+      if (this.confirmPassword?.value !== this.Password?.value) {
+        return true;
+
+      }
+    }
+    
+    return false
+  }
   matchPassword({ value }: AbstractControl): any {
     return this.Password?.value === value ? null : { passwordNotMatched: true };
   }
