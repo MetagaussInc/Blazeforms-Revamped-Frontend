@@ -14,10 +14,12 @@ import { Page8Component } from './page8/page8.component';
 import { Page9Component } from './page9/page9.component';
 import { Page10Component } from './page10/page10.component';
 import { Page11Component } from './page11/page11.component';
+import { Page12Component } from './page12/page12.component';
 import { TSelectComponent } from './t-select/t-select.component';
 import {MatTreeModule } from '@angular/material/tree';
 import {MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     Page9Component,
     Page10Component,
     Page11Component,
+    Page12Component,
     // TSelectComponent,
   ],
   imports: [
@@ -41,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     UxRoutingModule,
     MatTreeModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ]
 })
 export class UxModule { }
