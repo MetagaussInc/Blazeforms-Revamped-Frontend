@@ -13,6 +13,7 @@ import { RecaptchaModule } from 'angular-google-recaptcha';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
 import { RegisterFailedComponent } from './register-failed/register-failed.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegisterFailedComponent } from './register-failed/register-failed.compo
     FooterComponent,
     RegisterConfirmComponent,
     RegisterSuccessComponent,
-    RegisterFailedComponent
+    RegisterFailedComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

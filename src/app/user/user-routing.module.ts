@@ -6,6 +6,7 @@ import { RegisterConfirmComponent } from './register-confirm/register-confirm.co
 import { RegisterFailedComponent } from './register-failed/register-failed.component';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'register-error',
         component: RegisterFailedComponent
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent
       }
     ]
   },

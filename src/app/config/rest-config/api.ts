@@ -21,5 +21,8 @@ export const api: any = {
     getRolePermission: 'Forms/GetRolePermission',
     getFormUserRoleWorkSpaces: 'Forms/GetFormUserRoleWorkSpaces',
     deleteRolePermission: 'Forms/DeleteRolePermission',
-    moveFolder: "Forms/MoveForm"
+    moveFolder: "Forms/MoveForm",
+    resetPassword: 'Account/ResetPassword',
+    activateResetPasswordLink: 'Account/ActivateResetPasswordLink',
+    deactivateResetPasswordLink: 'Account/DeactivateResetPasswordLink'
 }   
