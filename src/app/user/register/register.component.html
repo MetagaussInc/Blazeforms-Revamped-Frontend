@@ -57,13 +57,11 @@
                                             <i class="material-icons">person</i>
                                         </span>
                                     </div>
-                                    <input type="text" formControlName="FirstName" class="form-control"
-                                        placeholder="First Name">
+                                    <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
                                 </div>
                                 <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
-                                    <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">First Name is
-                                        required</div>
+                                    <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
+                                    </div>
                                 </ng-container>
                             </div>
                             <div class="field-wrapper col-md-6">
@@ -73,14 +71,12 @@
                                             <i class="material-icons">person</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="LastName"
-                                        placeholder="Last Name">
+                                    <input type="text" class="form-control" formControlName="LastName" placeholder="Last Name">
 
                                 </div>
                                 <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
-                                    <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Last Name is
-                                        required</div>
+                                    <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
+                                    </div>
                                 </ng-container>
                             </div>
                         </div>
@@ -92,24 +88,19 @@
                                             <i class="material-icons">email</i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" formControlName="Email"
-                                        placeholder="Your Email">
+                                    <input type="email" class="form-control" formControlName="Email" placeholder="Your Email">
 
                                 </div>
                                 <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                    <div *ngIf="f.Email.errors?.required"
-                                        class="field-error text-right mt-1 pr-2 small">Email is
-                                        required</div>
-                                        <div *ngIf="f.Email.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
-                                        <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
+                                    <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                                    </div>
+                                    <div *ngIf="f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                                    <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
                                         class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
-                                        <div *ngIf="f.Email.errors?.doubleDotInDomain"
-                                        class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                                    <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
                                 </ng-container>
                                 <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
-                                    Email is
-                                    already exist</div>
+                                    Email is already exist</div>
                             </div>
                             <div class="field-wrapper col-md-6">
                                 <div class="input-group">
@@ -118,17 +109,13 @@
                                             <i class="material-icons">smartphone</i>
                                         </span>
                                     </div>
-                                    <input type="tel" class="form-control" formControlName="PhoneNumber"
-                                        placeholder="Your Phone">
+                                    <input type="tel" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
 
                                 </div>
-                                <ng-container
-                                    *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
-                                    <div *ngIf="f.PhoneNumber.errors?.required"
-                                        class="field-error text-right mt-1 pr-2 small">Phone Number is
-                                        required</div>
-                                        <div *ngIf="f.PhoneNumber.hasError('minlength')"
-                                        class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div>
+                                <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
+                                    <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
+                                    </div>
+                                    <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div>
                                 </ng-container>
                             </div>
                         </div>
@@ -140,16 +127,13 @@
                                             <i class="material-icons">password</i>
                                         </span>
                                     </div>
-                                    <input type="password" class="form-control" formControlName="Password"
-                                        placeholder="Choose Password">
+                                    <input type="password" class="form-control" formControlName="Password" placeholder="Choose Password">
 
                                 </div>
                                 <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
-                                    <div *ngIf="f.Password.errors?.required"
-                                        class="field-error text-right mt-1 pr-2 small">Password is
-                                        required</div>
-                                        <div *ngIf="f.Password.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
+                                    <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
+                                    </div>
+                                    <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
                                 </ng-container>
                             </div>
                             <div class="field-wrapper col-md-6">
@@ -159,19 +143,15 @@
                                             <i class="material-icons">password</i>
                                         </span>
                                     </div>
-                                    <input type="password" class="form-control" formControlName="confirmPassword"
-                                        placeholder="Confirm Password">
+                                    <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
 
                                 </div>
-                                <ng-container
-                                    *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                    <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Confirm Password is
-                                        required</div>
-                                        <div  class="field-error text-right mt-1 pr-2 small"
-                                         *ngIf="f.confirmPassword.errors?.passwordNotMatched">
-                                            Confirm Password is not matched
-                                        </div>
+                                <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                    <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
+                                    </div>
+                                    <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched">
+                                        Confirm Password is not matched
+                                    </div>
                                 </ng-container>
                             </div>
                         </div>
@@ -183,33 +163,26 @@
                                             <i class="material-icons">apartment</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="WorkSpaceName"
-                                        placeholder="Your Organization Name">
+                                    <input type="text" class="form-control" formControlName="WorkSpaceName" placeholder="Your Organization Name">
                                 </div>
-                                <ng-container
-                                    *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
-                                    <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern"
-                                        class="field-error text-right mt-1 pr-2 small">Work Space Name is
-                                        required</div>
+                                <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
+                                    <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                                    </div>
                                 </ng-container>
                                 <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
-                                    Work Space Name is
-                                    already exist</div>
+                                    Work Space Name is already exist</div>
                             </div>
                         </div>
                         <div class="register-fields-wrapper row mb-3">
                             <div class="terms-conditions-wrapper col-md-12 my-3 text-center">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" formControlName="acceptAgreement"
-                                        class="custom-control-input" id="customCheck" name="example1">
+                                    <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="customCheck" name="example1">
                                     <label class="custom-control-label" for="customCheck">I have read and accepted <a
                                             href="#">Terms &#38; Conditions</a>
                                         {{f.acceptAgreement.errors?.isRefused}}</label>
                                 </div>
-                                <ng-container
-                                    *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
-                                    <div *ngIf="f.acceptAgreement.errors?.isRefused"
-                                        class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
+                                <ng-container *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
+                                    <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
                                 </ng-container>
                             </div>
                         </div>
@@ -217,14 +190,12 @@
 
                         <div class="register-fields-wrapper row mb-3">
                             <div class="signup-recaptcha-wrapper col-md-12 mb-3 text-center">
-                            <recaptcha formControlName="myRecaptcha" (scriptLoad)="onScriptLoad()"
-                                (scriptError)="onScriptError()"></recaptcha>
-                           </div>
+                                <recaptcha formControlName="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
+                            </div>
                         </div>
                         <div class="register-fields-wrapper row mb-3">
                             <div class="signup-button-wrapper col-md-12 mb-3 text-center">
-                                <button [disabled]="signupForm.invalid" (click)="submit()" type="button"
-                                class="btn btn-bf">Sign Up Now </button>
+                                <button [disabled]="signupForm.invalid" (click)="submit()" type="button" class="btn btn-bf">Sign Up Now </button>
                             </div>
 
                         </div>
