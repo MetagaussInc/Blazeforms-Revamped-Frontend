@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Page1Component } from './page1/page1.component';
 import { Page10Component } from './page10/page10.component';
 import { Page11Component } from './page11/page11.component';
+import { Page12Component} from './page12/page12.component';
 import { Page2Component } from './page2/page2.component';
 import { Page3Component } from './page3/page3.component';
 import { Page4Component } from './page4/page4.component';
@@ -61,6 +62,10 @@ const routes: Routes = [
   { 
     path: 'page11', 
     component: Page11Component 
+  },
+  { 
+    path: 'page12', 
+    component: Page12Component 
   }
 ];
 
