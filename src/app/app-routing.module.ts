@@ -31,7 +31,9 @@ const routes: Routes = [
     loadChildren: () => import('./projects/forms/forms.module').then(m => m.FormModule),
     canLoad: [ModuleAuthGuardComponent]
   },
-  { path: 'form-builder', loadChildren: () => import('./projects/form-builder/form-builder.module').then(m => m.FormBuilderModule) }
+  { path: 'form-builder', loadChildren: () => import('./projects/form-builder/form-builder.module').then(m => m.FormBuilderModule) },
+  { path: 'work-spaces', loadChildren: () => import('./projects/work-spaces/work-spaces.module').then(m => m.WorkSpacesModule) },
+  { path: 'manage-work-spaces', loadChildren: () => import('./projects/manage-work-spaces/manage-work-spaces.module').then(m => m.ManageWorkSpacesModule) }
 ];
 
 @NgModule({
