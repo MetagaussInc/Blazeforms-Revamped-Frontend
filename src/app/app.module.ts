@@ -33,13 +33,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         strictActionImmutability: true
       }
     }),
+    // ngrx 32 kb only
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
     EffectsModule.forRoot([UserEffects]),
-    NgbModule,
-    BrowserAnimationsModule,
-    // NgbModule
+    NgbModule, // 67 kb
+    BrowserAnimationsModule, // 70 kb
   ],
   providers: [
     HttpClientModule,
