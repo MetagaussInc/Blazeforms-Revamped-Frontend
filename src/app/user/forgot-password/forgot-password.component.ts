@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  isFormSubmitted: boolean = false;
+  isFormSubmitted: any;
   email = new FormControl('', [
     Validators.required,
     Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
@@ -38,12 +38,12 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   submit() {
-    console.log(JSON.stringify(this.email.value));
-    this.isFormSubmitted = true;
+    // console.log(JSON.stringify(this.email.value));
     let model = { 'Email': this.email.value };
     this.http.call('SendResetPasswordLinq', 'POST', model).subscribe(res => {
-      console.log(res);
+    this.isFormSubmitted = true;
     })
-    this.router.navigate(['/home'])
+    // this.router.navigate(['/home'])
   }
 }
+ 
