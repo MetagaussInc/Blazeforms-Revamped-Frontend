@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   signupForm = new FormGroup({
     FirstName: new FormControl('', [Validators.required]),
     LastName: new FormControl('', [Validators.required]),
-    PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10),
+    Validators.pattern('^[+0-9]{10,14}$')]),
     WorkSpaceName: new FormControl('', [Validators.required],
       this.validateNameViaServer.bind(this)),
     Email: new FormControl('', [

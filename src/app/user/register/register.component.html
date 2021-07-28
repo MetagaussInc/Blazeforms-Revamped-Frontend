@@ -109,13 +109,15 @@
                                             <i class="material-icons">smartphone</i>
                                         </span>
                                     </div>
-                                    <input type="tel" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
+                                    <input type="tel"  maxlength="14" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
 
                                 </div>
                                 <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
                                     <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
                                     </div>
-                                    <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div>
+                                    <div *ngIf="f.PhoneNumber.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add valid mobile number.
+                                    </div>
+                                    <!-- <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div> -->
                                 </ng-container>
                             </div>
                         </div>
