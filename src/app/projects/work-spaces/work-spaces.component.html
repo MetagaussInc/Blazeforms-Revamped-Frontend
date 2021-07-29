@@ -1,1 +1,43 @@
-<p>work-spaces works!</p>
+<app-work-spaces-header></app-work-spaces-header>
+<div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
+    <div class="container py-4">
+        <h2>Organizations</h2>
+    </div>
+</div>
+<div class="organizations-container container">
+    <div class="search-wrapper">
+        <div class="form-group has-search mb-5">
+            <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString">
+        </div>
+    </div>
+    <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
+        <div class="add-organization-wrapper">
+            <a href="/#/manage-work-spaces"> 
+                <button type="button" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal">Add Organization</button>
+            </a>
+        </div>
+    </div>
+    <div class="organization-wrapper row mb-5">
+        <div class="organization-list col-md-12 border rounded">
+            <ng-container *ngFor="let organization of organizationLists">
+                <div [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'">
+                    <div class="organization-list-item row p-3 border-bottom">
+                        <div class="organization-img-wrapper col-md-1">
+                            <img src="assets/images/pepsi.png" class="workspace-img" alt="" title="" width="30" height="30">
+                        </div>
+                        <div class="organization-title-wrapper col-md-8">
+                            <span clss="organization-name">{{ organization.name }}</span>
+                        </div>
+                        <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                            <i class="material-icons-round mr-3 text-dark"> open_in_browser </i>
+                            <a href="manage-organization.html"> <i class="material-icons-round mr-3 text-dark">edit</i></a>
+                            <i class="material-icons-round text-dark" (click)="deleteUserOrganization(organization)" data-toggle="modal" data-target="#delete-organization-modal">delete</i>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+</div>
+<app-work-spaces-footer></app-work-spaces-footer>

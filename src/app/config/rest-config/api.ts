@@ -24,5 +24,8 @@ export const api: any = {
     moveFolder: "Forms/MoveForm",
     resetPassword: 'Account/ResetPassword',
     activateResetPasswordLink: 'Account/ActivateResetPasswordLink',
-    deactivateResetPasswordLink: 'Account/DeactivateResetPasswordLink'
+    deactivateResetPasswordLink: 'Account/DeactivateResetPasswordLink',
+    getUserWorkSpacesWithoutPagination: 'WorkSpace/GetUserWorkSpacesWithoutPagination',
+    getUserWorkSpacesForSuperMaster: 'User/GetUserWorkSpacesForSuperMaster',
+    deleteWorkSpace: 'WorkSpace/DeleteWorkSpace'
 }   
