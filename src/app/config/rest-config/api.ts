@@ -26,5 +26,6 @@ export const api: any = {
     activateResetPasswordLink: 'Account/ActivateResetPasswordLink',
     deactivateResetPasswordLink: 'Account/DeactivateResetPasswordLink',
     getUserWorkSpacesWithoutPagination: 'WorkSpace/GetUserWorkSpacesWithoutPagination',
-    getUserWorkSpacesForSuperMaster: 'User/GetUserWorkSpacesForSuperMaster'
+    getUserWorkSpacesForSuperMaster: 'User/GetUserWorkSpacesForSuperMaster',
+    deleteWorkSpace: 'WorkSpace/DeleteWorkSpace'
 }   
