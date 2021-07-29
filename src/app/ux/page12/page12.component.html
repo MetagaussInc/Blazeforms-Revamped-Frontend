@@ -41,36 +41,88 @@
     </div>
 </div>
 
-<div class="container-fluid" id="main">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar" id="sidebar">
-            <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start nav-justified">
-                <li ng-container ngbNavItem>
-                    <a ngbNavLink>Controls</a>
-                    <ng-template ngbNavContent>
-                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                            synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink>Properties</a>
-                    <ng-template ngbNavContent>
-                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                    </ng-template>
-                </li>
-            </ul>
-            <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
-        </div>
-        <div class="col-md-9 col-lg-10 main">
-            Right Side
-        </div>
+<div class="form-builder-header container-fluid">
+    <div class="form-builder-wrap" id="form-builder">
+
+
+
+        <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center" id="form-builder-topbar">
+            <li ng-container ngbNavItem>
+                <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
+                <ng-template ngbNavContent>
+
+                    <div class="container-fluid" id="main">
+                        <div class="row row-offcanvas row-offcanvas-left">
+                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar" id="form-builder-sidebar">
+                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start nav-justified">
+                                    <li ng-container ngbNavItem>
+                                        <a ngbNavLink>Controls</a>
+                                        <ng-template ngbNavContent>
+                                            <h4 class="text-center">Basic Controls</h4>
+                                            <div>
+                                                <ul class="list-unstyled row">
+                                                    <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-1">text_fields</i><span>TextBox</span></a></li>
+                                                    <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
+                                                    <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
+                                                    <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
+                                                </ul>
+
+
+                                            </div>
+
+
+                                        </ng-template>
+                                    </li>
+                                    <li ngbNavItem>
+                                        <a ngbNavLink>Properties</a>
+                                        <ng-template ngbNavContent>
+                                            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+                                                ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum
+                                                wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+                            </div>
+                            <div class="col-md-9 col-lg-10 main">
+                                Right Side
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </ng-template>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink><span class="material-icons"> publish </span>Publish</a>
+                <ng-template ngbNavContent>
+                    <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+                        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard
+                        ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                </ng-template>
+            </li>
+
+            <li ngbNavItem>
+                <a ngbNavLink> <span class="material-icons"> list </span>Entries</a>
+                <ng-template ngbNavContent>
+                    <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+                        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard
+                        ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                </ng-template>
+            </li>
+        </ul>
+
     </div>
 
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
 </div>
+
+
 
 
 
