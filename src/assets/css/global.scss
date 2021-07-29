@@ -313,6 +313,38 @@ app-form-builder {
                     max-height: 100%;
                     padding: 0 5px 5px 5px;
                 }
+                &.small {
+                    flex: 1 1 48%;
+                    box-sizing: border-box;
+                    -webkit-box-flex: 1;
+                    max-width: 25%;
+                    max-height: 100%;
+                    padding: 0 5px 5px 5px;
+                }
+                &.medium {
+                    flex: 1 1 48%;
+                    box-sizing: border-box;
+                    -webkit-box-flex: 1;
+                    max-width: 50%;
+                    max-height: 100%;
+                    padding: 0 5px 5px 5px;
+                }
+                &.large {
+                    flex: 1 1 48%;
+                    box-sizing: border-box;
+                    -webkit-box-flex: 1;
+                    max-width: 75%;
+                    max-height: 100%;
+                    padding: 0 5px 5px 5px;
+                }
+                &.extra-large {
+                    flex: 1 1 48%;
+                    box-sizing: border-box;
+                    -webkit-box-flex: 1;
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding: 0 5px 5px 5px;
+                }
                 label {
                     font-size: 0.6em;
                     margin-left: 0.2em;
