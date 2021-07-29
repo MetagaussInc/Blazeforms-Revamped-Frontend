@@ -1,0 +1,29 @@
+.form-builder-sidebar .nav-tabs .nav-item .nav-link.active {
+    color: #f04564;
+    border-color: #fff #fff #f04564 #fff;
+}
+
+.form-builder-sidebar .nav-tabs .nav-item .nav-link:focus,
+.form-builder-sidebar .nav-tabs .nav-item .nav-link:hover {
+    border-color: #fff #fff #f04564 #fff;
+}
+
+.form-builder-sidebar.nav-tabs .nav-item .nav-link {
+    border-width: 2px;
+    color: #495057;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link.active {
+    color: #f04564;
+    border-color: #fff #fff #f04564 #fff;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link:focus,
+#form-builder-topbar.nav-tabs .nav-item .nav-link:hover {
+    border-color: #fff #fff #f04564 #fff;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link {
+    border-width: 2px;
+    color: #495057;
+}
