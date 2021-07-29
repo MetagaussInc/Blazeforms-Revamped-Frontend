@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { config } from './input.config';
 var global = window;
 
 /** required inputs
@@ -78,93 +79,94 @@ export class FormBuilderComponent {
   viewExportedView = false;
   selectedDependency: any;
   count = 0;
-  sourceBuilderTools = [
-    { 
-      name: 'Section', 
-      value: '', children: [] as any[], 
-      inputType: 'section', 
-      icon: 'far fa-square', 
-      class: 'wide' },
-    {
-      name: 'Text', 
-      textValue: '',
-      minCharacter: 0,
-      maxCharacter: 100, 
-      value: '', inputType: 'string', 
-      icon: 'fas fa-language', 
-      class: 'full', placeholder: ''
-    },
-    {
-      name: 'First Name', 
-      textValue: '',
-      minCharacter: 0,
-      maxCharacter: 100, 
-      value: '', inputType: 'string', 
-      icon: 'fas fa-language', 
-      class: 'full', placeholder: '',
-      isRequired: true,
-    },
-    {
-      name: 'Last Name', 
-      textValue: '',
-      minCharacter: 0,
-      maxCharacter: 100, 
-      value: '', inputType: 'string', 
-      icon: 'fas fa-language', 
-      class: 'full', placeholder: ''
+  // sourceBuilderTools = [
+  //   { 
+  //     name: 'Section', 
+  //     value: '', children: [] as any[], 
+  //     inputType: 'section', 
+  //     icon: 'far fa-square', 
+  //     class: 'wide' },
+  //   {
+  //     name: 'Text', 
+  //     textValue: '',
+  //     minCharacter: 0,
+  //     maxCharacter: 100, 
+  //     value: '', inputType: 'string', 
+  //     icon: 'fas fa-language', 
+  //     class: 'full', placeholder: ''
+  //   },
+  //   {
+  //     name: 'First Name', 
+  //     textValue: '',
+  //     minCharacter: 0,
+  //     maxCharacter: 100, 
+  //     value: '', inputType: 'string', 
+  //     icon: 'fas fa-language', 
+  //     class: 'full', placeholder: '',
+  //     isRequired: true,
+  //   },
+  //   {
+  //     name: 'Last Name', 
+  //     textValue: '',
+  //     minCharacter: 0,
+  //     maxCharacter: 100, 
+  //     value: '', inputType: 'string', 
+  //     icon: 'fas fa-language', 
+  //     class: 'full', placeholder: ''
       
-    },
-    {
-      name: 'Number', 
-      inputType: 'number', 
-      icon: 'fas fa-hashtag', 
-      class: 'half',
-      placeholder: '',
-      numericValue: 0,
-      value: undefined,
-      minCharacter: 0,
-      maxCharacter: 100,
-      validations: {
-        config: {
-          minLength: {
-            enabled: true,
-            value: 10,
-            errorMessage: "Min length should be 10"
-          }
-        },
-        props: {
-          minLenth: {
-            value: 10
-          }
-        }
-      },
-    },
-    {
-      name: 'Phone Number', 
-      inputType: 'number', 
-      icon: 'fas fa-hashtag', 
-      class: 'half',
-      placeholder: '',
-      numericValue: 0,
-      value: undefined,
-      minCharacter: 9,
-      maxCharacter: 11,
-      validations: {
-        config: {
-          minLength: {
-            enabled: true,
-            value: 10,
-            errorMessage: "Min length should be 10"
-          }
-        },
-        props: {
-          minLenth: {
-            value: 10
-          }
-        },
-      },
-    }
-  ];
+  //   },
+  //   {
+  //     name: 'Number', 
+  //     inputType: 'number', 
+  //     icon: 'fas fa-hashtag', 
+  //     class: 'half',
+  //     placeholder: '',
+  //     numericValue: 0,
+  //     value: undefined,
+  //     minCharacter: 0,
+  //     maxCharacter: 100,
+  //     validations: {
+  //       config: {
+  //         minLength: {
+  //           enabled: true,
+  //           value: 10,
+  //           errorMessage: "Min length should be 10"
+  //         }
+  //       },
+  //       props: {
+  //         minLenth: {
+  //           value: 10
+  //         }
+  //       }
+  //     },
+  //   },
+  //   {
+  //     name: 'Phone Number', 
+  //     inputType: 'number', 
+  //     icon: 'fas fa-hashtag', 
+  //     class: 'half',
+  //     placeholder: '',
+  //     numericValue: 0,
+  //     value: undefined,
+  //     minCharacter: 9,
+  //     maxCharacter: 11,
+  //     validations: {
+  //       config: {
+  //         minLength: {
+  //           enabled: true,
+  //           value: 10,
+  //           errorMessage: "Min length should be 10"
+  //         }
+  //       },
+  //       props: {
+  //         minLenth: {
+  //           value: 10
+  //         }
+  //       },
+  //     },
+  //   }
+  // ];
+  sourceBuilderTools = config;
   targetBuilderTools: any = [];
 
   addDependency(event: any) {
@@ -208,7 +210,7 @@ export class FormBuilderComponent {
     // console.log($event.target.id, $event.target.value, dependElementKey)
     this.targetBuilderTools[this.selectedIndex].dependUpon[dependElementKey.key] = $event.target.value
   }
-  droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
+  droppableItemClass = (item: any) => `${item.class} ${item.size} ${item.inputType}`;
 
   builderDrag(e: any) {
     const item = e.value;

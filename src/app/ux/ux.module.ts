@@ -19,7 +19,7 @@ import { TSelectComponent } from './t-select/t-select.component';
 import {MatTreeModule } from '@angular/material/tree';
 import {MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatTreeModule,
     MatIconModule,
     FormsModule,
-    NgbModule
+    NgbModule,
   ]
 })
 export class UxModule { }

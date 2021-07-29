@@ -6,14 +6,27 @@ export const config = [
         inputType: 'section',
         icon: 'far fa-square',
         class: 'wide',
-        size: 'Small',
+        size: 'small',
         validations: {
             size: {
+                dataRefKey: 'size',
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ]
             }
         }
@@ -27,7 +40,7 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -41,10 +54,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -77,7 +102,7 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -90,10 +115,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -119,7 +156,7 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -132,10 +169,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -159,7 +208,7 @@ export const config = [
         placeholder: '',
         numericValue: 0,
         value: undefined,
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -172,10 +221,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -201,7 +262,7 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -216,10 +277,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -251,7 +324,7 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'Small',
+        size: 'small',
         minDate: 0,
         maxDate: 50,
         helpText: '',
@@ -263,10 +336,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -291,7 +376,7 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -304,10 +389,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
@@ -335,7 +432,7 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'Small',
+        size: 'small',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -348,10 +445,22 @@ export const config = [
             },
             size: {
                 options: [
-                    'Small',
-                    'Medium',
-                    'Large',
-                    'Extra Large'
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
                 ],
                 dataRefKey: 'size'
             },
