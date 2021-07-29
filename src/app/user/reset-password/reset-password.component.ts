@@ -37,19 +37,19 @@ export class ResetPasswordComponent implements OnInit {
       data => {
         if (data.data) {
           this.linkActivated = true;
+          this.http.call('deactivateResetPasswordLink', 'POST', {ResetPasswordKey: key}).subscribe(
+            data => {
+              if (data) {
+                this.email = data.email;
+              }
+            })
         } else {
           this.router.navigate(['user/register-error']);
         }
       });
-       this.http.call('deactivateResetPasswordLink', 'POST', {ResetPasswordKey: key}).subscribe(
-        data => {
-          if (data) {
-            this.email = data.email;
-          }
-        })
+       
   }
   matchPassword({ value }: AbstractControl): any {
-    console.log(this.password, this.password.value, value);
     return this.password?.value === value ? null : { passwordNotMatched: true };
   }
 
@@ -57,11 +57,11 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit() {
-    this.isFormSubmitted = true;
     let model = { Email: this.email, 'Password': this.password.value };
     this.http.call('resetPassword', 'POST', model).subscribe(res => {
+    this.isFormSubmitted = true;
      
-        this.router.navigate(['/login'])
+        this.router.navigate(['user/login'])
     })
   }
 }
