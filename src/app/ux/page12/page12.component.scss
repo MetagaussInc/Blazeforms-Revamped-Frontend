@@ -1,3 +1,8 @@
+/*--- Import variables ---*/
+
+
+/*--- Import variables ---*/
+
 .form-builder-sidebar .nav-tabs .nav-item .nav-link.active {
     color: #f04564;
     border-color: #fff #fff #f04564 #fff;
@@ -26,4 +31,18 @@
 #form-builder-topbar.nav-tabs .nav-item .nav-link {
     border-width: 2px;
     color: #495057;
+}
+
+.form-basic-control ul li i {
+    font-size: 1.2rem;
+}
+
+.form-basic-control ul li a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #212529;
+}
+
+#form-builder-sidebar {
+    background-color: #fff;
 }
