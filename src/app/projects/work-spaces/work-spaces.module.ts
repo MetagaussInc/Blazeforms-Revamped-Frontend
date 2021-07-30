@@ -8,6 +8,7 @@ import { WorkSpacesFooterComponent } from './work-spaces-footer/work-spaces-foot
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spaces.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spac
     CommonModule,
     WorkSpacesRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    InfiniteScrollModule
   ]
 })
 export class WorkSpacesModule { }
