@@ -7,18 +7,22 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FormsModule } from '@angular/forms';
 import { UiInputComponent } from './components/ui-input/ui-input.component';
 import { ExportedViewComponent } from './components/exported-view/exported-view.component';
+import { BuildComponent } from './components/build/build.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [
     FormBuilderComponent,
     UiInputComponent,
-    ExportedViewComponent
+    ExportedViewComponent,
+    BuildComponent
   ],
   imports: [
     CommonModule,
     FormBuilderRoutingModule,
     FormsModule,
+    NgbModule,
     NgxDnDModule.forRoot()
   ]
 })
