@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
   ])
   confirmPassword = new FormControl('', [
     Validators.required,
-    this.matchPassword.bind(this)
+    // this.matchPassword.bind(this)
 
   ])
   queryParamsSubscription$: any;

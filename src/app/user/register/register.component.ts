@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     ]),
     confirmPassword: new FormControl('', [
       Validators.required,
-      this.matchPassword.bind(this)
+      // this.matchPassword.bind(this)
     ]),
     myRecaptcha: new FormControl(false, [
       this.checkforAgreements.bind(this)
