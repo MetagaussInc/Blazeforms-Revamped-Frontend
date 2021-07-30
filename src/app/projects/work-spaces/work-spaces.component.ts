@@ -14,32 +14,42 @@ import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spac
 export class WorkSpacesComponent implements OnInit {
 
   searchedString = '';
+  totalNum = 0;
   pageDetail = {
     pageNumber: 1,
     pageSize: 14
   };
   private userInfoSubscription$: any;
   public userInfo: any;
-  public organizationLists: any;
+  public organizationLists: any[] = [];
+  public totalOrgCount = 0;
+  public scrollCheck: boolean = false;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
-      this.getUserOrganizationsList(userInfo);
+      this.getUserOrganizationsList();
     })
     
   }
 
   ngOnInit(): void {}
 
-  getUserOrganizationsList(userInfo: any){
+  getUserOrganizationsList(){
     const workspacedata = {
       Id: this.userInfo.Id,
-      SearchKeyword: "",
+      SearchKeyword: this.searchedString,
       ...this.pageDetail
     }
-    this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(res => {
-      this.organizationLists = res.res;
+    this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(response => {
+      this.totalOrgCount = response.total;
+
+      for (let i = 0; i < this.pageDetail.pageSize; ++i) {
+        this.organizationLists.push(response.res[i]);
+      }
+      if(this.organizationLists.length >= this.totalOrgCount){
+        this.scrollCheck = true;
+      }
     });
   }
 
@@ -57,7 +67,7 @@ export class WorkSpacesComponent implements OnInit {
         }
         this.http.call('deleteWorkSpace', 'POST', workdata).subscribe(res => {
           if(res == true){
-            this.getUserOrganizationsList(this.userInfo);
+            this.getUserOrganizationsList();
           }
         })
       }
@@ -66,4 +76,15 @@ export class WorkSpacesComponent implements OnInit {
     });
   }
 
+  searchWorkSpace(searchedString: any){
+    this.searchedString = searchedString;
+    console.log(this.searchedString);
+    this.getUserOrganizationsList();
+  }
+
+  onScroll(){
+    console.log('scrolled');
+    this.pageDetail.pageNumber++;
+    this.getUserOrganizationsList();
+  }
 }

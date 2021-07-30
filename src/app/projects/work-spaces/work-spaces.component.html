@@ -7,7 +7,7 @@
 <div class="organizations-container container">
     <div class="search-wrapper">
         <div class="form-group has-search mb-5">
-            <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString">
+            <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString" (ngModelChange)="searchWorkSpace($event)">
         </div>
     </div>
     <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
@@ -18,7 +18,12 @@
         </div>
     </div>
     <div class="organization-wrapper row mb-5">
-        <div class="organization-list col-md-12 border rounded">
+        <div class="organization-list col-md-12 border rounded"
+        infiniteScroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="50"
+        [infiniteScrollDisabled]="scrollCheck"
+        (scrolled)="onScroll()">
             <ng-container *ngFor="let organization of organizationLists">
                 <div [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'">
                     <div class="organization-list-item row p-3 border-bottom">
