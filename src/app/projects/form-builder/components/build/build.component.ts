@@ -11,6 +11,7 @@ export class BuildComponent {
     name: ''
   };
   selectedIndex: any;
+  selectedElement: any;
   viewExportedView = false;
   selectedDependency: any;
   count = 0;
@@ -172,9 +173,22 @@ export class BuildComponent {
   }
 
   clicked($event: any, model: any, i: any) {
-    this.selectedIndex = model.index;
-    this.selectedDependency = null;
-    console.log($event, model, i)
+    this.selectedElement = model;
+    // this.selectedIndex = model.index;
+    // this.selectedDependency = null;
+    console.log( model, i)
+    $event.preventDefault();
+    $event.stopPropagation()
+  }
+
+  sectionClicked($event: any, model: any, i: any) {
+    this.selectedElement = model;
+    // this.selectedIndex = model.index;
+    // this.selectedDependency = null;
+    console.log( model, i)
+    $event.preventDefault();
+    $event.stopPropagation()
+
   }
 
   canMove(e: any): boolean {

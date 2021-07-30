@@ -110,58 +110,58 @@
                                     <li ngbNavItem>
                                         <a ngbNavLink>Properties</a>
                                         <ng-template ngbNavContent>
-                                            <div *ngIf="selectedIndex > -1">
+                                            <div *ngIf="selectedElement">
                                                 <h1>controls</h1>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.label">
+                                                <ng-container *ngIf="selectedElement.validations?.label">
                                                   <h3>Label</h3>
-                                                  <input [(ngModel)]="targetBuilderTools[selectedIndex].name">
+                                                  <input [(ngModel)]="selectedElement.name">
                                                 </ng-container>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.placeholder">
+                                                <ng-container *ngIf="selectedElement.validations?.placeholder">
                                                   <h3>Place Holder</h3>
-                                                  <input [(ngModel)]="targetBuilderTools[selectedIndex].placeholder">
+                                                  <input [(ngModel)]="selectedElement.placeholder">
                                                 </ng-container>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.size || true">
+                                                <ng-container *ngIf="selectedElement.validations?.size || true">
                                                   
-                                                  <div  *ngFor="let key of targetBuilderTools[selectedIndex].validations?.size.options">
+                                                  <div  *ngFor="let key of selectedElement.validations?.size.options">
                                                     <label>
-                                                           <input type="radio" (click)="targetBuilderTools[selectedIndex].size = key.value" name="keys_on_hand" [value]="key.value" [checked]="targetBuilderTools[selectedIndex].size === key.value">
+                                                           <input type="radio" (click)="selectedElement.size = key.value" name="keys_on_hand" [value]="key.value" [checked]="selectedElement.size === key.value">
                                                              {{key.label}}
                                                     </label>
                                               </div>
-                                                  <!-- <input type="radio" *ngFor="let option of targetBuilderTools[selectedIndex].validations?.size.options" 
+                                                  <!-- <input type="radio" *ngFor="let option of selectedElement.validations?.size.options" 
                                                   name="option" [value]="option">{{option}} -->
                                                   <!-- <input type="radio" name="option" value="Medium">Medium
                                                   <input type="radio" name="option" value="Large">Large
                                                   <input type="radio" name="option" value="Extra Large">Extra Large -->
                                               
                                                 </ng-container>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.defaultValue">
+                                                <ng-container *ngIf="selectedElement.validations?.defaultValue">
                                                   <h3>Default Value</h3>
-                                                  <input [attr.type]="targetBuilderTools[selectedIndex].inputType"
-                                                    [(ngModel)]="targetBuilderTools[selectedIndex].value">
+                                                  <input [attr.type]="selectedElement.inputType"
+                                                    [(ngModel)]="selectedElement.value">
                                               
                                                 </ng-container>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.range">
+                                                <ng-container *ngIf="selectedElement.validations?.range">
                                                   <h3>Range</h3>
-                                                  <input type="number" [(ngModel)]="targetBuilderTools[selectedIndex].minCharacter">
-                                                  <input type="number" [(ngModel)]="targetBuilderTools[selectedIndex].maxCharacter">
+                                                  <input type="number" [(ngModel)]="selectedElement.minCharacter">
+                                                  <input type="number" [(ngModel)]="selectedElement.maxCharacter">
                                                 </ng-container>
-                                                <ng-container *ngIf="targetBuilderTools[selectedIndex].validations?.help">
+                                                <ng-container *ngIf="selectedElement.validations?.help">
                                                   <h3>Help</h3>
-                                                  <input type="number" [(ngModel)]="targetBuilderTools[selectedIndex].helpText">
+                                                  <input type="number" [(ngModel)]="selectedElement.helpText">
                                                 </ng-container>
-                                                <!-- <ng-container *ngIf="targetBuilderTools[selectedIndex].validations.isRequired"></ng-container> -->
+                                                <!-- <ng-container *ngIf="selectedElement.validations.isRequired"></ng-container> -->
                                               
                                               
-                                                <h3>Conditional Rendering</h3> (current: {{targetBuilderTools[selectedIndex].uiIndexId}})
+                                                <h3>Conditional Rendering</h3> (current: {{selectedElement.uiIndexId}})
                                                 <div style="display: flex;">
                                                   <select (change)="addDependency($event)">
                                                     <option value="{{null}}">Select Input</option>
                                                     <option *ngFor="let item of targetBuilderTools"
-                                                      [ngClass]="{'d-none': item.uiIndexId === targetBuilderTools[selectedIndex].uiIndexId}" value={{item.uiIndexId}}>
+                                                      [ngClass]="{'d-none': item.uiIndexId === selectedElement.uiIndexId}" value={{item.uiIndexId}}>
                                                       {{item.name}} | {{item.uiIndexId}}</option>
                                                   </select>
-                                                  <select *ngIf="targetBuilderTools[selectedIndex].dependUpon" (change)="addDependencyProperty($event)">
+                                                  <select *ngIf="selectedElement.dependUpon" (change)="addDependencyProperty($event)">
                                                     <option>Select Dependency Type</option>
                                                     <option value="isFilledOut">is filled out</option>
                                                     <option value="isNotFilledOut">is not filled out</option>
@@ -174,8 +174,8 @@
                                                     <option value="startWith">starts with</option>
                                                     <option value="doesNotStartWith">does not starts with</option>
                                                   </select>
-                                                  <div *ngIf="targetBuilderTools[selectedIndex].dependUpon?.type === 'text'">
-                                                    <input type="text" [(ngModel)]="targetBuilderTools[selectedIndex].dependUpon.value">
+                                                  <div *ngIf="selectedElement.dependUpon?.type === 'text'">
+                                                    <input type="text" [(ngModel)]="selectedElement.dependUpon.value">
                                                   </div>
                                                 </div>
                                               
@@ -205,12 +205,12 @@
                             
                                     <ng-template let-model="model" let-i="index" let-template="template">
                                       <div [ngSwitch]="model.inputType">
-                                        <div *ngSwitchCase="'section'" (click)="clicked($event, model, template)">
+                                        <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)">
                                           <div class="shadow">
                                             {{model.name}}
                                             <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children"
                                               [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass"
-                                              (drag)="log($event)" (drop)="log($event)" (over)="log($event)" (out)="log($event)"
+                                              (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
                                               (remove)="log($event)" (cancel)="log($event)" direction="mixed">
                                             </ngx-dnd-container>
                                           </div>
@@ -218,10 +218,7 @@
                                         <div *ngSwitchDefault (click)="clicked($event, model, template)">
                                           <label>{{model.name}}</label>
                                           <app-ui-input [model]="model" *ngIf="!model?.dependUpon || checkForDependency(model) "></app-ui-input>
-                                          <!-- <input [attr.type]="model.inputType" [(ngModel)]="model.data"> 
-                                            <div *ngIf="model.inputType === 'number' && model.data < 999999999">
-                                              {{model?.validations?.config?.minLength.errorMessage}}
-                                            </div>-->
+                                          
                                         </div>
                                       </div>
                                     </ng-template>
