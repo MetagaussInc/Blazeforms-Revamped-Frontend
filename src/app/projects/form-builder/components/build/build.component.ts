@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../input.config';
+import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 
 @Component({
   selector: 'app-build',
@@ -105,6 +107,9 @@ export class BuildComponent {
   sourceBuilderTools = config;
   targetBuilderTools: any = [];
 
+  constructor(private modalService: NgbModal) {
+
+  }
   addDependency(event: any) {
     console.log(event.target.value);
     this.targetBuilderTools[this.selectedIndex].dependUpon = event.target.value ? {elementId: event.target.value} :  null;
@@ -139,6 +144,31 @@ export class BuildComponent {
         if (dependUpon.isNotFilledOut) {
           return data === 0 || data.length === 0;
         }
+    } else {
+      if (dependUpon.is) {
+        return data === dependUpon.value;
+      }
+      if (dependUpon.isNot) {
+        return data !== dependUpon.value;
+      }
+      if (dependUpon.contains) {
+        return data?.toLowerCase().includes(dependUpon.value);
+      }
+      if (dependUpon.doesNotContains) {
+        return !data?.toLowerCase().includes(dependUpon.value);
+      }
+      if (dependUpon.endWith) {
+        return data.endsWith(dependUpon.value);
+      }
+      if (dependUpon.doesNotEndWith) {
+        return data.endsWith(dependUpon.value);
+      } 
+      if (dependUpon.startWith) {
+        return data.startsWith(dependUpon.value);
+      }
+      if (dependUpon.doesNotStartWith) {
+        return !data.startsWith(dependUpon.value);
+      }
     }
     return false;
   }
@@ -147,6 +177,22 @@ export class BuildComponent {
     this.targetBuilderTools[this.selectedIndex].dependUpon[dependElementKey.key] = $event.target.value
   }
   droppableItemClass = (item: any) => `${item.class} ${item.size} ${item.inputType}`;
+
+  checkBox($event: any, model: any, option: any) {
+    if (model.value.includes(option)) {
+      model.value = model.value.filter((x: any) => x !== option);
+    } else {
+      model.value.push(option);
+    }
+  }
+
+change($event: any, val: any) {
+  this.selectedElement.options[val] = $event.target.value;
+}
+
+remove(i: number) {
+  this.selectedElement.options.splice(i, 1);
+}
 
   builderDrag(e: any) {
     const item = e.value;
@@ -189,6 +235,34 @@ export class BuildComponent {
     $event.preventDefault();
     $event.stopPropagation()
 
+  }
+
+  setConditionalDependency() {
+
+  }
+
+  openModal(selectedElement: any, value: string, type: string) {
+
+    if ( value === 'always') {
+      selectedElement[type] = null;
+      return;
+    }
+    if ( value === 'never') {
+      selectedElement[type] = {};
+      return;
+    }
+    const modalRef: any = this.modalService.open(ConditionalRendereringModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.config = {
+      headerName: '',
+      selectedElement,
+      targetBuilderTools: this.targetBuilderTools,
+      type: type
+    }
+    modalRef.result.then((result: any) => {
+      console.log(`Closed with: ${result}`);
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
   }
 
   canMove(e: any): boolean {

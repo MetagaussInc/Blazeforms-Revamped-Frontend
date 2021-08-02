@@ -110,7 +110,151 @@
                                     <li ngbNavItem>
                                         <a ngbNavLink>Properties</a>
                                         <ng-template ngbNavContent>
-                                            <div *ngIf="selectedElement">
+                                                <div *ngIf="selectedElement?.validations?.label" class="form-group">
+                                                    <label for="text">Label</label>
+                                                    <input id="text" name="text" [(ngModel)]="selectedElement.name" placeholder="Untitled" type="text" class="form-control">
+                                                </div>
+                                                <div *ngIf="selectedElement?.validations?.placeholder" class="form-group">
+                                                    <label for="text1">Placeholder Text</label>
+                                                    <input id="text1" [(ngModel)]="selectedElement.placeholder" name="text1" type="text" class="form-control">
+                                                </div>
+                                                <div *ngIf="selectedElement?.validations?.size" class="form-group">
+                                                    <label>Size</label>
+                                                    <div>
+                                                        <div *ngFor="let key of selectedElement.validations?.size.options" class="custom-controls-stacked">
+                                                            <div  (click)="selectedElement.size = key.value" class="custom-control custom-radio">
+                                                                <input name="radio" 
+                                                                [value]="key.value"
+                                                                [checked]="selectedElement.size === key.value"
+                                                                id="radio_0{{key.label}}"
+                                                                type="radio"
+                                                                class="custom-control-input" >
+                                                                <label for="radio_0" class="custom-control-label">{{key.label}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="custom-controls-stacked">
+                                                            <div class="custom-control custom-radio">
+                                                                <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="Multiple Line">
+                                                                <label for="radio_1" class="custom-control-label">Multiple Line</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-controls-stacked">
+                                                            <div class="custom-control custom-radio">
+                                                                <input name="radio" id="radio_2" type="radio" class="custom-control-input" value="Password">
+                                                                <label for="radio_2" class="custom-control-label">Password</label>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="selectedElement?.formValidation" class="form-group">
+                                                    <label for="form-validation">Form Validation</label>
+                                                    <div>
+                                                        <select id="form-validation" name="form-validation" class="custom-select">
+                                                    <option value="Select">Select</option>
+                                                    <option value="Alphabetic">Alphabetic</option>
+                                                    <option value="Numeric">Numeric</option>
+                                                    <option value="Alphanumeric">Alphanumeric</option>
+                                                    <option value="SSN">SSN</option>
+                                                    <option value="Zip Code">Zip Code</option>
+                                                    <option value="IP Address">IP Address</option>
+                                                    <option value="MAC Address">MAC Address</option>
+                                                  </select>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="selectedElement?.validations?.defaultValue" class="form-group">
+                                                    <label for="Default Value">Default Value</label>
+                                                    <input id="Default Value" name="Default Value"
+                                                    placeholder="Default Value"
+                                                    [attr.type]="selectedElement.inputType"
+                                                    [(ngModel)]="selectedElement.value" class="form-control">
+                                                </div>
+                                                <div *ngIf="selectedElement?.validations?.options" class="form-group">
+                                                    <label for="Default Value">Options</label>
+                                                    <div *ngFor="let val of selectedElement?.options; let i =index">    
+                                                    
+                                                        <input type="text" [value]="val" (change)="change($event, i)">
+                                                        <button (click)="remove(i)">X</button>
+                                                    </div>
+                                                    <button (click)="selectedElement.options.push('')">Add</button>
+                                                </div>
+                                                <div class="form-group" *ngIf="selectedElement?.validations?.range">
+                                                        <label>Range</label>
+                                                        <div style="display: flex;">
+                                                            <div>
+                                                                <label for="min">Min</label>
+                                                                 <input name="min" id="min" type="number" [(ngModel)]="selectedElement.minVal">
+                                                            </div>
+                                                            <div>
+                                                                <label for="max">Max</label>
+                                                                <input id="max" name="max" type="number" [(ngModel)]="selectedElement.maxVal">
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group" *ngIf="selectedElement?.validations?.dateRange">
+                                                    <label>Range</label>
+                                                    <div style="display: flex;">
+                                                        <div class="input-group">
+                                                            <label for="min">Min</label>
+                                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                   name="dp" [(ngModel)]="selectedElement.minVal" ngbDatepicker #d1="ngbDatepicker">
+                                                            <div class="input-group-append">
+                                                              <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"></button>
+                                                            </div>
+                                                          </div>
+                                                          <div class="input-group">
+                                                            <label for="min">Max</label>
+                                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                   name="dp" [(ngModel)]="selectedElement.maxVal" ngbDatepicker #d="ngbDatepicker">
+                                                            <div class="input-group-append">
+                                                              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                                            </div>
+                                                          </div>
+                                                    </div>
+                                            </div>
+                                                <div *ngIf="selectedElement?.validations?.help" class="form-group">
+                                                    <label for="Help Text">Help Text</label>
+                                                    <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
+                                                </div>
+                                                <div class="conditional-properties pb-5">
+                                                    <h4 class="text-center">Conditional Properties</h4>
+                                                    <div *ngIf="selectedElement?.validations?.view" class="form-group">
+
+                                                        <div class="field-visibility">
+                                                            <label class=" col-form-label">Show This Field</label>
+                                                            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
+                                                                <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
+                                                                    <label ngbButtonLabel class="btn-primary">
+                                                                        <input ngbButton (click)="openModal(selectedElement, tab.value, 'dependUpon')" type="radio" [value]="tab.value"> {{tab.label}} 
+                                                                    </label>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <!-- <pre>{{model}}</pre> -->
+                                                    </div>
+
+
+                                                    <div *ngIf="selectedElement?.validations?.required" class="form-group">
+
+                                                        <div class="field-visibility">
+                                                            <label class=" col-form-label">Require This Field</label>
+                                                            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
+                                                                <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
+                                                                    <label ngbButtonLabel class="btn-primary">
+                                                                        <input ngbButton (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"  type="radio" [value]="tab.value"> {{tab.label}} 
+                                                                    </label>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <!-- <pre>{{model}}</pre> -->
+                                                    </div>
+                                                <pre><code>{{targetBuilderTools | json}}</code></pre>
+
+                                                </div>
+
+
+                                            <div *ngIf="false">
                                                 <h1>controls</h1>
                                                 <ng-container *ngIf="selectedElement.validations?.label">
                                                   <h3>Label</h3>
@@ -148,37 +292,41 @@
                                                 </ng-container>
                                                 <ng-container *ngIf="selectedElement.validations?.help">
                                                   <h3>Help</h3>
-                                                  <input type="number" [(ngModel)]="selectedElement.helpText">
+                                                  <input type="text" [(ngModel)]="selectedElement.helpText">
                                                 </ng-container>
                                                 <!-- <ng-container *ngIf="selectedElement.validations.isRequired"></ng-container> -->
                                               
                                               
-                                                <h3>Conditional Rendering</h3> (current: {{selectedElement.uiIndexId}})
-                                                <div style="display: flex;">
-                                                  <select (change)="addDependency($event)">
-                                                    <option value="{{null}}">Select Input</option>
-                                                    <option *ngFor="let item of targetBuilderTools"
-                                                      [ngClass]="{'d-none': item.uiIndexId === selectedElement.uiIndexId}" value={{item.uiIndexId}}>
-                                                      {{item.name}} | {{item.uiIndexId}}</option>
-                                                  </select>
-                                                  <select *ngIf="selectedElement.dependUpon" (change)="addDependencyProperty($event)">
-                                                    <option>Select Dependency Type</option>
-                                                    <option value="isFilledOut">is filled out</option>
-                                                    <option value="isNotFilledOut">is not filled out</option>
-                                                    <option value="is">is</option>
-                                                    <option value="isNot">is not</option>
-                                                    <option value="contains">contains</option>
-                                                    <option value="doesNotContains">doesnot contains</option>
-                                                    <option value="endWith">ends with</option>
-                                                    <option value="doesNotEndWith">does not ends with</option>
-                                                    <option value="startWith">starts with</option>
-                                                    <option value="doesNotStartWith">does not starts with</option>
-                                                  </select>
-                                                  <div *ngIf="selectedElement.dependUpon?.type === 'text'">
-                                                    <input type="text" [(ngModel)]="selectedElement.dependUpon.value">
-                                                  </div>
+                                                <div style="height: 2px;margin-top: 20px; background-color: lightgray;">
                                                 </div>
-                                              
+
+                                                    <h3>Conditional Rendering</h3> (current: {{selectedElement.uiIndexId}})
+                                                    <div style="display: flex;">
+                                                      <select (change)="addDependency($event)">
+                                                        <option value="{{null}}">Select Input</option>
+                                                        <option *ngFor="let item of targetBuilderTools"
+                                                          [ngClass]="{'d-none': item.uiIndexId === selectedElement.uiIndexId}" value={{item.uiIndexId}}>
+                                                          {{item.name}} | {{item.uiIndexId}}</option>
+                                                      </select>
+                                                      <select *ngIf="selectedElement.dependUpon" (change)="addDependencyProperty($event)">
+                                                        <option>Select Dependency Type</option>
+                                                        <option value="isFilledOut">is filled out</option>
+                                                        <option value="isNotFilledOut">is not filled out</option>
+                                                        <option value="is">is</option>
+                                                        <option value="isNot">is not</option>
+                                                        <option value="contains">contains</option>
+                                                        <option value="doesNotContains">doesnot contains</option>
+                                                        <option value="endWith">ends with</option>
+                                                        <option value="doesNotEndWith">does not ends with</option>
+                                                        <option value="startWith">starts with</option>
+                                                        <option value="doesNotStartWith">does not starts with</option>
+                                                      </select>
+                                                      <div *ngIf="selectedElement.dependUpon?.type === 'text'">
+                                                        <input type="text" [(ngModel)]="selectedElement.dependUpon.value">
+                                                      </div>
+                                                    </div>
+                                                  
+                                               
                                               
                                                 <!-- <div>
                                                   <h6>Form</h6>
@@ -215,9 +363,45 @@
                                             </ngx-dnd-container>
                                           </div>
                                         </div>
+                                        <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
+                                            <label>{{model.name}}</label>
+                                            <div class="input-group">
+                                                <input class="form-control"
+                                                [minDate]="model.minVal"
+                                                [maxDate]="model.maxVal"
+                                                placeholder="yyyy-mm-dd"
+                                                name="dp" [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)">
+                                            <label>{{model.name}}</label>
+                                            <div *ngFor="let option of model.options" class="custom-controls-stacked">
+                                                <div  (click)="model.value = option" class="custom-control custom-radio">
+                                                    <input name="radio" 
+                                                    [value]="model.value"
+                                                    [checked]="model.value === option"
+                                                    id="radio_0{{option}}"
+                                                    type="radio"
+                                                    class="custom-control-input" >
+                                                    <label for="radio_0" class="custom-control-label">{{option}}</label>
+                                                </div>
+                                            </div>
+
+                                          </div>
+                                          <div *ngSwitchCase="'checkbox'" (click)="clicked($event, model, template)">
+                                            <label>{{model.name}}</label>
+                                            <div (click)="checkBox($event, model, option)" *ngFor="let option of model.options">
+                                                <input type="checkbox" id="rememberMe{{option}}" name="rememberMe{{option}}"
+                                                [checked]="model.value.includes(option)" [value]="option">{{option}}
+                                            </div>
+                                            
+                                          </div>
                                         <div *ngSwitchDefault (click)="clicked($event, model, template)">
                                           <label>{{model.name}}</label>
-                                          <app-ui-input [model]="model" *ngIf="!model?.dependUpon || checkForDependency(model) "></app-ui-input>
+                                          <app-ui-input [model]="model" [targetBuilderTools]="targetBuilderTools" *ngIf="!model?.dependUpon || checkForDependency(model) "></app-ui-input>
                                           
                                         </div>
                                       </div>
@@ -238,14 +422,8 @@
             <li ngbNavItem>
                 <a ngbNavLink><span class="material-icons"> publish </span>Publish</a>
                 <ng-template ngbNavContent>
-                    <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four
-                        loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk
-                        aliquip jean shorts ullamco ad vinyl cillum
-                        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica
-                        VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
-                        anderson 8-bit, sustainable jean shorts beard
-                        ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher
-                        vero sint qui sapiente accusamus tattooed echo park.</p>
+                    <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+                    
                 </ng-template>
             </li>
 

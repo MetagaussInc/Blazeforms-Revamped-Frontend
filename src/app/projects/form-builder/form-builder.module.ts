@@ -9,6 +9,7 @@ import { UiInputComponent } from './components/ui-input/ui-input.component';
 import { ExportedViewComponent } from './components/exported-view/exported-view.component';
 import { BuildComponent } from './components/build/build.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConditionalRendereringModalComponent } from './components/conditional-renderering-modal/conditional-renderering-modal.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormBuilderComponent,
     UiInputComponent,
     ExportedViewComponent,
-    BuildComponent
+    BuildComponent,
+    ConditionalRendereringModalComponent
   ],
   imports: [
     CommonModule,

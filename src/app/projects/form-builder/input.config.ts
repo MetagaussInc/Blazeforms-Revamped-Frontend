@@ -6,7 +6,12 @@ export const config = [
         inputType: 'section',
         icon: 'far fa-square',
         class: 'wide',
-        size: 'small',
+        size: 'medium',
+        view: 'always',
+        get show() {
+
+            return true;
+        },
         validations: {
             size: {
                 dataRefKey: 'size',
@@ -28,6 +33,40 @@ export const config = [
                         value: 'extra-large'
                     }
                 ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -40,11 +79,12 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
-        isRequired: true,
+        isRequired: 'always',
         validations: {
             label: {
                 dataRefKey: 'name'
@@ -83,12 +123,39 @@ export const config = [
             help: {
                 dataRefKey: 'helpText'
             },
-            isRequired: {
-                label: 'Require this field',
-                options: {
-                    Always: '',
-                    When: '',
-                }
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -102,7 +169,8 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -143,6 +211,40 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -156,7 +258,8 @@ export const config = [
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -197,6 +300,40 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -208,7 +345,8 @@ export const config = [
         placeholder: '',
         numericValue: 0,
         value: undefined,
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
@@ -249,6 +387,40 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -262,11 +434,12 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
-        isRequired: true,
+        isRequired: 'always',
         missing: ['Type for us and international'],
         validations: {
             label: {
@@ -306,12 +479,39 @@ export const config = [
             help: {
                 dataRefKey: 'helpText'
             },
-            isRequired: {
-                label: 'Require this field',
-                options: {
-                    Always: '',
-                    When: '',
-                }
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -324,11 +524,12 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minDate: 0,
         maxDate: 50,
         helpText: '',
-        isRequired: true,
+        isRequired: 'always',
         missing: ['Type for Date and time'],
         validations: {
             label: {
@@ -364,6 +565,40 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -376,11 +611,12 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
-        isRequired: true,
+        isRequired: 'always',
         collectPayment: false,
         missing: ['Type for Date and time'],
         validations: {
@@ -420,6 +656,40 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
         }
     },
@@ -432,11 +702,12 @@ export const config = [
         value: undefined,
         minCharacter: 9,
         maxCharacter: 11,
-        size: 'small',
+        size: 'medium',
+        view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
-        isRequired: true,
+        isRequired: 'always',
         collectPayment: false,
         missing: ['Type for Date and time'],
         validations: {
@@ -473,7 +744,299 @@ export const config = [
             },
             help: {
                 dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
             }
+        }
+    },    
+    {
+        name: 'Date',
+        inputType: 'date',
+        icon: 'fas fa-hashtag',
+        class: 'half',
+        numericValue: 0,
+        value: undefined,
+        minCharacter: 9,
+        maxCharacter: 11,
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        collectPayment: false,
+        missing: ['Type for Date and time'],
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            dateRange: {
+                minDataRefKey: 'minVal',
+                maxDataRefKey: 'maxVal'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Radio',
+        inputType: 'radio',
+        icon: 'fas fa-hashtag',
+        class: 'half',
+        numericValue: 0,
+        value: 'Option 1',
+        minCharacter: 9,
+        maxCharacter: 11,
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        collectPayment: false,
+        options: [
+            'Option 1',
+            'Option 2',
+            'Option 3'
+        ],
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            options: true
+        }
+    },
+    {
+        name: 'Checkbox',
+        inputType: 'checkbox',
+        icon: 'fas fa-hashtag',
+        class: 'half',
+        numericValue: 0,
+        value: ['Option 1'],
+        minCharacter: 9,
+        maxCharacter: 11,
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        collectPayment: false,
+        missing: ['Type for Date and time'],
+        options: [
+            'Option 1',
+            'Option 2',
+            'Option 3'
+        ],
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            options: true
         }
     }
 ]
