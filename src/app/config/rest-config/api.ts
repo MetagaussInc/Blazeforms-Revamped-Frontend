@@ -8,7 +8,7 @@ export const api: any = {
     getFormsList: `${FORMS}/FilterWorkSpaceforms`,
     GetFoldersListWithForms: 'Folders/GetFoldersListWithForms',
     SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
-    GetMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
+    getMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
     getAllActiveForms: 'Forms/GetActiveFormswithoutPagination',
     getFolders: 'Folders/GetFolderswithoutPagination',
     validateFormName: 'Forms/ValidateFormName',
@@ -27,5 +27,5 @@ export const api: any = {
     deactivateResetPasswordLink: 'Account/DeactivateResetPasswordLink',
     getUserWorkSpacesWithoutPagination: 'WorkSpace/GetUserWorkSpacesWithoutPagination',
     getUserWorkSpacesForSuperMaster: 'User/GetUserWorkSpacesForSuperMaster',
-    deleteWorkSpace: 'WorkSpace/DeleteWorkSpace'
+    deleteWorkSpace: 'WorkSpace/DeleteWorkSpace',
 }   
