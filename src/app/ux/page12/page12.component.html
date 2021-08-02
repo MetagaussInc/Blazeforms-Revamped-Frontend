@@ -35,90 +35,206 @@
 <!-- Header End-->
 
 
-<div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
-    <div class="container py-4">
-        <h2>Forms</h2>
-    </div>
-</div>
 
 
-<div class="form-builder-header container-fluid">
-    <div class="form-builder-wrap" id="form-builder">
+<div class="form-builder-header container-fluid ">
 
 
+    <div class="form-builder-wrap py-2 row" id="form-builder">
+        <div class="col-md-2 text-center">
+            <div ngbDropdown class="d-inline-block btn-group dropdown-split-warning">
+                <button class="btn border" id="selected-form-info" ngbDropdownToggle>Form Name goes here</button>
+                <div ngbDropdownMenu aria-labelledby="selected-form-info">
+                    <a ngbDropdownItem>Action - 1</a>
+                    <a ngbDropdownItem>Another Action</a>
+                    <a ngbDropdownItem>Something else is here</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ">
+            <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center" id="form-builder-topbar">
+                <li ng-container ngbNavItem>
+                    <a ngbNavLink><i class="material-icons"> construction </i><span>Build</span></a>
+                    <ng-template ngbNavContent>
 
-        <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center" id="form-builder-topbar">
-            <li ng-container ngbNavItem>
-                <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
-                <ng-template ngbNavContent>
-
-                    <div class="container-fluid" id="main">
-                        <div class="row row-offcanvas row-offcanvas-left">
-                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar" id="form-builder-sidebar">
-                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start nav-justified">
-                                    <li ng-container ngbNavItem>
-                                        <a ngbNavLink>Controls</a>
-                                        <ng-template ngbNavContent>
-                                            <h4 class="text-center">Basic Controls</h4>
-                                            <div>
-                                                <ul class="list-unstyled row">
-                                                    <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-1">text_fields</i><span>TextBox</span></a></li>
-                                                    <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
-                                                    <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
-                                                    <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined">text_fields</i><span>TextBox</span></a></li>
-                                                </ul>
+                        <div class="container-fluid" id="main">
+                            <div class="row row-offcanvas row-offcanvas-left">
+                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar" id="form-builder-sidebar">
+                                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start nav-justified">
+                                        <li ng-container ngbNavItem>
+                                            <a ngbNavLink>Controls</a>
+                                            <ng-template ngbNavContent>
+                                                <h4 class="text-center">Basic Controls</h4>
+                                                <div class="form-basic-control">
+                                                    <ul class="list-unstyled row">
+                                                        <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-2">text_fields</i><span>TextBox</span></a></li>
+                                                        <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-2">text_fields</i><span>TextBox</span></a></li>
+                                                        <li class="col-sm-6 pr-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-2">text_fields</i><span>TextBox</span></a></li>
+                                                        <li class="col-sm-6 pl-1 my-1"><a href="#" class="badge badge-pill w-100 border d-flex align-items-center"><i class="material-icons-outlined m-2">text_fields</i><span>TextBox</span></a></li>
+                                                    </ul>
 
 
-                                            </div>
+                                                </div>
 
 
-                                        </ng-template>
-                                    </li>
-                                    <li ngbNavItem>
-                                        <a ngbNavLink>Properties</a>
-                                        <ng-template ngbNavContent>
-                                            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-                                                ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum
-                                                wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                                        </ng-template>
-                                    </li>
-                                </ul>
-                                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                                            </ng-template>
+                                        </li>
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>Properties</a>
+                                            <ng-template ngbNavContent>
+                                                <h4 class="text-center">Basic Properties</h4>
+                                                <div class="basic-properties">
 
+                                                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                                                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="Untitled">Label</label>
+                                                            <input id="Untitled" name="Untitled" placeholder="Untitled" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="text1">Placeholder Text</label>
+                                                            <input id="text1" name="text1" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Type</label>
+                                                            <div>
+                                                                <div class="custom-controls-stacked">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input name="radio" id="radio_0" type="radio" class="custom-control-input" value="Single Line">
+                                                                        <label for="radio_0" class="custom-control-label">Single Line</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="custom-controls-stacked">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="Multiple Line">
+                                                                        <label for="radio_1" class="custom-control-label">Multiple Line</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="custom-controls-stacked">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input name="radio" id="radio_2" type="radio" class="custom-control-input" value="Password">
+                                                                        <label for="radio_2" class="custom-control-label">Password</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="form-validation">Form Validation</label>
+                                                            <div>
+                                                                <select id="form-validation" name="form-validation" class="custom-select">
+                                                            <option value="Select">Select</option>
+                                                            <option value="Alphabetic">Alphabetic</option>
+                                                            <option value="Numeric">Numeric</option>
+                                                            <option value="Alphanumeric">Alphanumeric</option>
+                                                            <option value="SSN">SSN</option>
+                                                            <option value="Zip Code">Zip Code</option>
+                                                            <option value="IP Address">IP Address</option>
+                                                            <option value="MAC Address">MAC Address</option>
+                                                          </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Default Value">Default Value</label>
+                                                            <input id="Default Value" name="Default Value" placeholder="Default Value" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Help Text">Help Text</label>
+                                                            <textarea id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="conditional-properties pb-5">
+                                                            <h4 class="text-center">Conditional Properties</h4>
+                                                            <div class="form-group">
+
+                                                                <div class="field-visibility">
+                                                                    <label class=" col-form-label">Show This Field</label>
+                                                                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" [value]="1"> Always 
+                                                                </label>
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" value="2"> When
+                                                                </label>
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" [value]="3"> Never
+                                                                </label>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <pre>{{model}}</pre>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+
+                                                                <div class="field-visibility">
+                                                                    <label class=" col-form-label">Require This Field</label>
+                                                                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" [value]="1"> Always 
+                                                                </label>
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" value="2"> When
+                                                                </label>
+                                                                        <label ngbButtonLabel class="btn-primary">
+                                                                  <input ngbButton type="radio" [value]="3"> Never
+                                                                </label>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <pre>{{model}}</pre>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+                                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+                                </div>
+                                <div class="col-md-9 col-lg-10 main">
+                                    Right Side
+                                </div>
                             </div>
-                            <div class="col-md-9 col-lg-10 main">
-                                Right Side
-                            </div>
+
+
                         </div>
 
 
-                    </div>
+                    </ng-template>
+                </li>
+                <li ngbNavItem>
+                    <a ngbNavLink><i class="material-icons"> publish </i><span>Publish</span></a>
+                    <ng-template ngbNavContent>
+                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                    </ng-template>
+                </li>
 
-
-                </ng-template>
-            </li>
-            <li ngbNavItem>
-                <a ngbNavLink><span class="material-icons"> publish </span>Publish</a>
-                <ng-template ngbNavContent>
-                    <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-                        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard
-                        ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                </ng-template>
-            </li>
-
-            <li ngbNavItem>
-                <a ngbNavLink> <span class="material-icons"> list </span>Entries</a>
-                <ng-template ngbNavContent>
-                    <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-                        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard
-                        ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                </ng-template>
-            </li>
-        </ul>
-
+                <li ngbNavItem>
+                    <a ngbNavLink> <i class="material-icons"> list </i><span>Entries</span></a>
+                    <ng-template ngbNavContent>
+                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                    </ng-template>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-2">com3</div>
     </div>
 
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+    <div [ngbNavOutlet]="nav" class="mt-0 bg-light"></div>
+
+
+
+
 
 </div>
 

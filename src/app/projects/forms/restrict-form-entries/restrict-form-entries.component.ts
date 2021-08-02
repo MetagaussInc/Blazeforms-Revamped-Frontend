@@ -22,6 +22,7 @@ export class RestrictFormEntriesComponent implements OnInit {
   }
 
   close(message: any) {
+    console.log('12')
     this.activeModal.close(message);
   }
 

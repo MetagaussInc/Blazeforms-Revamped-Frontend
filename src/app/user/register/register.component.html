@@ -48,7 +48,7 @@
                     </span>
                 </div>
                 <div class="=register-form col-md-12 mb-3">
-                    <form [formGroup]="signupForm">
+                    <form [formGroup]="signupForm" (keyup.enter)="!signupForm.invalid && !matchPass()">
                         <div class="register-fields-wrapper row mb-3">
                             <div class="field-wrapper col-md-6">
                                 <div class="input-group">

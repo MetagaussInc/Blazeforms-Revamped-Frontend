@@ -41,24 +41,13 @@ export class FormsComponent implements OnInit {
   }
 
   getFormsList(userInfo: any) {
-    const obj = {
-      FilterAttribute: this.FilterAttribute,
-      SearchKeyword: this.searchedFormKeyword,
-      UserId: userInfo.Id,
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,
-      ...this.pageDetail,
-    }
+    
     // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
     //   this.formsList = _.groupBy(res.res, 'folderName');
     //   console.log(this.formsList)
     // })
-    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
-      const arr: any = [];
-      console.log(res)
-      this.getfolderNameWithForms(res, arr);
-      this.formsList = arr;
-      console.log(this.formsList)
-    })
+   
+    this.getFoldersWithList(userInfo)
 
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
       WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
@@ -68,6 +57,23 @@ export class FormsComponent implements OnInit {
     this.http.call('getFolders', 'POST', {
       WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
       this.folderList = res;
+    })
+  }
+
+  getFoldersWithList(userInfo: any) {
+    const obj = {
+      FilterAttribute: this.FilterAttribute,
+      SearchKeyword: this.searchedFormKeyword,
+      UserId: userInfo.Id,
+      WorkSpaceId: userInfo.WorkspaceDetail.Id,
+      ...this.pageDetail,
+    }
+    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
+      const arr: any = [];
+      console.log(res)
+      this.getfolderNameWithForms(res, arr);
+      this.formsList = arr;
+      console.log(this.formsList)
     })
   }
 
@@ -148,6 +154,7 @@ export class FormsComponent implements OnInit {
     modalRef.componentInstance.form =  form; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
+        this.getFoldersWithList(this.userInfo)
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
         //   console.log(res)
         // })

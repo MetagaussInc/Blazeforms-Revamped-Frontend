@@ -6,12 +6,16 @@ id="name"
  [(ngModel)]="model.value"
  name="name" 
  #name = "ngModel"
+ [attr.maxlength]="model.maxVal"
+ [attr.minlength]="model.minVal"
  [attr.placeholder]="model.placeholder"
- [required]="model.isRequired"
+ [required]="checkForDependency(model)"
  autocomplete="off">
- {{name.valid ? '[valid]' : '[Not Valid]'}}
+ <!-- {{name.valid ? '[valid]' : '[Not Valid]'}}
  {{name.touched ? '[Touched]' : '[Not Touched]'}}
- {{name.dirty ? '[Edited]' : '[Not Edited]'}}
+ {{name.dirty ? '[Edited]' : '[Not Edited]'}} -->
+
+ 
 <!-- <input 
 type="text"
 class="form-control"

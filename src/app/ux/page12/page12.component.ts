@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Page12Component implements OnInit {
 
+  model = 1;
+
   constructor() { }
 
   ngOnInit(): void {
