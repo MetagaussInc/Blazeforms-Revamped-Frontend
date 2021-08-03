@@ -344,8 +344,10 @@
                             </div>
                                 <div class="col-md-9 col-lg-10 main">
                             <div class="builder-target">
-                                <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target"
-                                    [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed">
+                                <ngx-dnd-container class="root-container"
+                                [model]="targetBuilderTools" dropZone="builder-target"
+                                    [removeOnSpill]="true" [droppableItemClass]="droppableItemClass"
+                                    (drop)="drop($event)" direction="mixed">
                                     <!-- (drag)="log($event)"
                                     (over)="log($event)"
                                     (out)="log($event)" 
@@ -374,6 +376,15 @@
                                                 <div class="input-group-append">
                                                   <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                                                 </div>
+                                              </div>
+                                          </div>
+                                          <div *ngSwitchCase="'DND'" (click)="clicked($event, model, template)">
+                                            <div class="shadow">
+                                                {{model.name}}
+                                                <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children"
+                                                  [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass"
+                                                  (drop)="replaceDnd($event)" direction="mixed">
+                                                Drag and Drop Here</ngx-dnd-container>
                                               </div>
                                           </div>
                                           <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)">
