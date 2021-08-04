@@ -332,30 +332,36 @@
                                         <p class="text-center text-muted"> Registration Form Description goes here</p>
 
                                     </div> -->
-                                    <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed">
+                                    <ngx-dnd-container class="root-container" 
+                                    [model]="targetBuilderTools" dropZone="builder-target"
+                                    [removeOnSpill]="true" [droppableItemClass]="droppableItemClass"
+                                    (drop)="drop($event)" direction="mixed"
+                                    >
                                         <!-- (drag)="log($event)"
                                     (over)="log($event)"
                                     (out)="log($event)" 
                                     (remove)="log($event)"-->
 
-                                        <ng-template let-model="model" let-i="index" let-template="template">
+                                        <ng-template let-model="model" let-index="index" let-template="template">
                                             <div [ngSwitch]="model.inputType">
                                                 <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)">
                                                     <div class="shadow">
                                                         {{model.name}}
-                                                        <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                                                        <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
                                                             (remove)="log($event)" (cancel)="log($event)" direction="mixed">
                                                         </ngx-dnd-container>
                                                     </div>
                                                 </div>
                                                 <div *ngSwitchCase="'DND'" (click)="clicked($event, model, template)">
-                                                    <div class="shadow">
-                                                        {{model.name}}
+                                                    <!-- <div class="shadow">
                                                         <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children"
                                                           [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass"
-                                                          (drop)="replaceDnd($event)" direction="mixed">
+                                                          (drop)="replaceDnd($event, model)" direction="mixed">
                                                         Drag and Drop Here</ngx-dnd-container>
-                                                      </div>
+                                                      </div> -->
+                                                      <ngx-dnd-container class="dummy-c"
+                                                      [model]="dummyContainer" dropZone="builder-target1" (drop)="replaceDnd($event, model)" direction="mixed">
+                                                        Drag and Drop Here</ngx-dnd-container>
                                                   </div>
                                                 <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
                                                     <label>{{model.name}}</label>
@@ -390,8 +396,15 @@
                                                 </div>
                                             </div>
                                         </ng-template>
-
+                                        
                                     </ngx-dnd-container>
+                                    <div>
+                                        <div class="shadow">
+                                                     
+                                            <ngx-dnd-container class="dummy-c" [model]="dummyContainer" dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
+                                            Drag and Drop Here</ngx-dnd-container>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
