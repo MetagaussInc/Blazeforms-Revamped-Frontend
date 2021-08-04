@@ -327,11 +327,11 @@
                             <div class="col-md-9 col-lg-10 main">
                                 <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
-                                    <div class="form-build-head">
+                                    <!-- <div class="form-build-head">
                                         <h3 class="text-center form-heading"> Registration Form</h3>
                                         <p class="text-center text-muted"> Registration Form Description goes here</p>
 
-                                    </div>
+                                    </div> -->
                                     <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed">
                                         <!-- (drag)="log($event)"
                                     (over)="log($event)"
@@ -348,6 +348,15 @@
                                                         </ngx-dnd-container>
                                                     </div>
                                                 </div>
+                                                <div *ngSwitchCase="'DND'" (click)="clicked($event, model, template)">
+                                                    <div class="shadow">
+                                                        {{model.name}}
+                                                        <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children"
+                                                          [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass"
+                                                          (drop)="replaceDnd($event)" direction="mixed">
+                                                        Drag and Drop Here</ngx-dnd-container>
+                                                      </div>
+                                                  </div>
                                                 <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
                                                     <label>{{model.name}}</label>
                                                     <div class="input-group">

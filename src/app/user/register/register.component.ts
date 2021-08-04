@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
     return null;
   }
   ngOnInit(): void {
-    this.http.call('GetMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
+    this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
       this.planDetails = res;
       this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })

@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spaces.component';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-spaces',
@@ -43,12 +44,10 @@ export class WorkSpacesComponent implements OnInit {
     }
     this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(response => {
       this.totalOrgCount = response.total;
-
       for (let i = 0; i < this.pageDetail.pageSize; ++i) {
-        this.organizationLists.push(response.res[i]);
-      }
-      if(this.organizationLists.length >= this.totalOrgCount){
-        this.scrollCheck = true;
+        if(response.res[i]){
+          this.organizationLists.push(response.res[i]);
+        }
       }
     });
   }
@@ -76,15 +75,30 @@ export class WorkSpacesComponent implements OnInit {
     });
   }
 
-  searchWorkSpace(searchedString: any){
+  searchWorkSpace(searchedString: any){    
     this.searchedString = searchedString;
-    console.log(this.searchedString);
-    this.getUserOrganizationsList();
+    const workspacedata = {
+      Id: this.userInfo.Id,
+      SearchKeyword: this.searchedString,
+      ...this.pageDetail
+    }
+    this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata)
+    .pipe(debounceTime(500),
+      map((response: any) => {
+      this.totalOrgCount = response.total;
+      for (let i = 0; i < this.pageDetail.pageSize; ++i) {
+        if(response.res[i]){
+          this.organizationLists.push(response.res[i]);
+        }
+      }
+    }));
   }
 
   onScroll(){
-    console.log('scrolled');
     this.pageDetail.pageNumber++;
     this.getUserOrganizationsList();
+    if(this.organizationLists.length >= this.totalOrgCount){
+      this.scrollCheck = true;
+    }
   }
 }
