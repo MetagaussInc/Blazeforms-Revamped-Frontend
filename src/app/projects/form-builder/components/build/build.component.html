@@ -206,7 +206,7 @@
                                                             <label class=" col-form-label">Show This Field</label>
                                                             <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
                                                                 <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
-                                                                    <label ngbButtonLabel class="btn-primary">
+                                                                    <label ngbButtonLabel class="btn-primary btn-bf">
                                                                         <input ngbButton (click)="openModal(selectedElement, tab.value, 'dependUpon')" type="radio" [value]="tab.value"> {{tab.label}} 
                                                                     </label>
                                                                 </ng-container>
@@ -223,7 +223,7 @@
                                                             <label class=" col-form-label">Require This Field</label>
                                                             <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
                                                                 <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
-                                                                    <label ngbButtonLabel class="btn-primary">
+                                                                    <label ngbButtonLabel class="btn-primary btn-bf">
                                                                         <input ngbButton (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"  type="radio" [value]="tab.value"> {{tab.label}} 
                                                                     </label>
                                                                 </ng-container>
