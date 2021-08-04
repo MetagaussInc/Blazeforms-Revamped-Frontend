@@ -95,6 +95,18 @@ h6 {
 }
 
 
+/*--- Common CSS--*/
+
+.height-fix {
+    overflow-x: hidden;
+    max-height: 500px;
+}
+
+.organization-list {
+    max-width: 99%;
+}
+
+
 /* ----  Login Page CSS ---*/
 
 .login-area-container {
@@ -500,6 +512,7 @@ app-build {
         }
     }
 }
+
 
 /*-- user Module Common CSS--*/
 
