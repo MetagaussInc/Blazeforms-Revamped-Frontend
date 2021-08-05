@@ -17,6 +17,7 @@ export class BuildComponent {
   viewExportedView = false;
   selectedDependency: any;
   count = 0;
+  dummyContainer: any = [];
   // sourceBuilderTools = [
   //   { 
   //     name: 'Section', 
@@ -206,8 +207,129 @@ remove(i: number) {
     }
     console.log(e.type, e);
     this.updateIndex();
+    this.updateDnd();
+    this.dummyContainer = [];
   }
 
+  abc($event: any): boolean {
+    console.log($event)
+    return true;
+  }
+  drop2(e: any) {
+    this.count = this.count + 1;
+    if (!e.value.uiIndexId) {
+      e.value.uiIndexId = this.count;
+    }
+    this.targetBuilderTools.push(e.value);
+    this.updateIndex();
+    this.updateDnd();
+    this.dummyContainer = [];
+  }
+
+  updateDnd() {
+    const obj1 = {
+      name: 'Dnd',
+      value: '',
+      children: [] as any[],
+      inputType: 'DND',
+      icon: 'far fa-square',
+      uiIndexId: this.count + 1,
+      class: 'wide',
+      size: 'medium',
+      view: 'always',
+      get show() {
+
+          return true;
+      },
+      validations: {
+          size: {
+              dataRefKey: 'size',
+              options: [
+                  {
+                      label: 'Small',
+                      value: 'small'
+                  },
+                  {
+                      label: 'Medium',
+                      value: 'medium'
+                  },
+                  {
+                      label: 'Large',
+                      value: 'large'
+                  },
+                  {
+                      label: 'Extra Large',
+                      value: 'extra-large'
+                  }
+              ]
+          },
+          view: {
+              options: [
+                  {
+                      label: 'Always',
+                      value: 'always'
+                  },
+                  {
+                      label: 'When',
+                      value: 'when'
+                  },
+                  {
+                      label: 'Never',
+                      value: 'never'
+                  }
+              ],
+              dataRefKey: 'view'
+          },
+          required: {
+              options: [
+                  {
+                      label: 'Always',
+                      value: 'always'
+                  },
+                  {
+                      label: 'When',
+                      value: 'when'
+                  },
+                  {
+                      label: 'Never',
+                      value: 'never'
+                  }
+              ],
+              dataRefKey: 'isRequired'
+          }
+      }
+  };
+    const obj: any = {
+      'small': 1,
+      'medium': 2,
+      'large': 3,
+      'extra-large': 4
+    }
+    const max = 4;
+    this.targetBuilderTools.push(obj1);
+    this.count = this.count + 1;
+    // if (this.targetBuilderTools.length < 2) {
+    //   this.targetBuilderTools.push(obj1);
+    // } else {
+
+    //   const arr = this.targetBuilderTools;
+    //   let count = 0;
+    //   arr.forEach((element: any) => {
+    //     count  = count + obj[element.size]
+    //   });
+    // }
+    
+
+
+  }
+
+  replaceDnd($event: any, i: any) {
+    console.log($event, i);
+    const element = $event.value;
+    element.uiIndexId = i.uiIndexId;
+    const index = this.targetBuilderTools.findIndex((x: any) => x.uiIndexId === i.uiIndexId)
+    this.targetBuilderTools.splice(index, 1, element)
+  }
   updateIndex() {
     this.targetBuilderTools.forEach((element: any, i: any) => {
       element.index = i;

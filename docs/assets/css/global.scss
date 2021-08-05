@@ -95,6 +95,18 @@ h6 {
 }
 
 
+/*--- Common CSS--*/
+
+.height-fix {
+    overflow-x: hidden;
+    max-height: 500px;
+}
+
+.organization-list {
+    max-width: 99%;
+}
+
+
 /* ----  Login Page CSS ---*/
 
 .login-area-container {
@@ -434,7 +446,7 @@ app-build {
                 background-color: white;
                 margin: 5px 1%;
                 border: 1px solid transparent;
-                flex: 1 1 100%;
+                // flex: 1 1 100%;
                 box-sizing: border-box;
                 -webkit-box-flex: 1;
                 max-width: 100%;
@@ -447,7 +459,7 @@ app-build {
                     padding: 0 5px 5px 5px;
                 }
                 &.small {
-                    flex: 1 1 48%;
+                    flex: 1 1 23%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
                     max-width: 23%;
@@ -455,7 +467,7 @@ app-build {
                     padding: 0 5px 5px 5px;
                 }
                 &.medium {
-                    flex: 1 1 48%;
+                    flex: 1 1 46%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
                     max-width: 46%;
@@ -463,7 +475,7 @@ app-build {
                     padding: 0 5px 5px 5px;
                 }
                 &.large {
-                    flex: 1 1 48%;
+                    flex: 1 1 69%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
                     max-width: 69%;
@@ -471,7 +483,7 @@ app-build {
                     padding: 0 5px 5px 5px;
                 }
                 &.extra-large {
-                    flex: 1 1 48%;
+                    flex: 1 1 92%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
                     max-width: 92%;
@@ -483,23 +495,18 @@ app-build {
                     margin-left: 0.2em;
                 }
                 input {
-                    width: 100%;
-                    padding: .5em .6em;
-                    display: inline-block;
-                    border: 1px solid #ccc;
-                    box-shadow: inset 0 1px 3px #ddd;
-                    border-radius: 4px;
-                    vertical-align: middle;
                     box-sizing: border-box;
                 }
             }
             .ngx-dnd-item.gu-transit,
             .ngx-dnd-item:hover {
-                border: 1px solid #1786e9
+                border: 1px dashed $base-color;
+                background-color: $bf-input-bg;
             }
         }
     }
 }
+
 
 /*-- user Module Common CSS--*/
 

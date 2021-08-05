@@ -12,18 +12,13 @@
     </div>
     <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
         <div class="add-organization-wrapper">
-            <a (click)="goToManageWorkSpaces('add', '')"> 
+            <a (click)="goToManageWorkSpaces('add', '')">
                 <button type="button" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal">Add Organization</button>
             </a>
         </div>
     </div>
-    <div class="organization-wrapper row mb-5">
-        <div class="organization-list col-md-12 border rounded"
-        infiniteScroll
-        [infiniteScrollDistance]="1"
-        [infiniteScrollThrottle]="50"
-        [infiniteScrollDisabled]="scrollCheck"
-        (scrolled)="onScroll()">
+    <div class="organization-wrapper row mb-5 overflow-auto height-fix">
+        <div class="organization-list col-md-12 border rounded" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="scrollCheck" (scrolled)="onScroll()">
             <ng-container *ngFor="let organization of organizationLists">
                 <div [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'">
                     <div class="organization-list-item row p-3 border-bottom">
@@ -43,6 +38,5 @@
             </ng-container>
         </div>
     </div>
-
 </div>
 <app-work-spaces-footer></app-work-spaces-footer>

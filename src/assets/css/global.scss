@@ -95,6 +95,18 @@ h6 {
 }
 
 
+/*--- Common CSS--*/
+
+.height-fix {
+    overflow-x: hidden;
+    max-height: 500px;
+}
+
+.organization-list {
+    max-width: 99%;
+}
+
+
 /* ----  Login Page CSS ---*/
 
 .login-area-container {
@@ -483,23 +495,18 @@ app-build {
                     margin-left: 0.2em;
                 }
                 input {
-                    width: 100%;
-                    padding: .5em .6em;
-                    display: inline-block;
-                    border: 1px solid #ccc;
-                    box-shadow: inset 0 1px 3px #ddd;
-                    border-radius: 4px;
-                    vertical-align: middle;
                     box-sizing: border-box;
                 }
             }
             .ngx-dnd-item.gu-transit,
             .ngx-dnd-item:hover {
-                border: 1px solid #1786e9
+                border: 1px dashed $base-color;
+                background-color: $bf-input-bg;
             }
         }
     }
 }
+
 
 /*-- user Module Common CSS--*/
 
