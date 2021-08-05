@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spaces.component';
 import { debounceTime, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-work-spaces',
@@ -26,8 +27,9 @@ export class WorkSpacesComponent implements OnInit {
   public totalOrgCount = 0;
   public scrollCheck: boolean = false;
 
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      console.log(userInfo);
       this.userInfo = userInfo;
       this.getUserOrganizationsList();
     })
@@ -66,6 +68,8 @@ export class WorkSpacesComponent implements OnInit {
         }
         this.http.call('deleteWorkSpace', 'POST', workdata).subscribe(res => {
           if(res == true){
+            this.organizationLists = [];
+            this.pageDetail.pageNumber = 1;
             this.getUserOrganizationsList();
           }
         })
@@ -100,5 +104,22 @@ export class WorkSpacesComponent implements OnInit {
     if(this.organizationLists.length >= this.totalOrgCount){
       this.scrollCheck = true;
     }
+  }
+
+  goToManageWorkSpaces(action: any, orgId: string){
+    if(action == 'add'){
+      this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'add'}});
+    }
+    else{
+      let orgUserId: any;
+      let orgName: any;
+      this.organizationLists.forEach((item) => {
+        if(item.id == orgId){
+          orgUserId = item.userId;
+          orgName = item.name;
+        }
+      });
+      this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
+    }    
   }
 }

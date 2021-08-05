@@ -1,0 +1,36 @@
+<div class="my-5 px-5 branding-organization-wrap">
+    <div class="organization-branding row">
+
+        <div class="col-md-6">
+
+            <div class="mb-3 mt-3">
+
+                <h2 class="mb-3" style="font-weight: 300">Upload </h2>
+
+                <div class="form-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file_input" id="file_input" oninput="input_filename();">
+                        <label id="file_input_label" class="custom-file-label" for="image">Select file</label>
+                    </div>
+                </div>
+
+                <button id="upload_btn" class="btn btn-primary btn-bf">Upload</button>
+
+                <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Uploading...
+                </button>
+
+                <button type="button" id="cancel_btn" class="btn btn-secondary d-none">Cancel upload</button>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="preview-brandig text-center "><img src="images/logo.png" class="col d-flex align-items-center justify-content-center"></div>
+
+        </div>
+    </div>
+</div>

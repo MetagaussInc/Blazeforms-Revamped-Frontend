@@ -28,4 +28,17 @@ export const api: any = {
     getUserWorkSpacesWithoutPagination: 'WorkSpace/GetUserWorkSpacesWithoutPagination',
     getUserWorkSpacesForSuperMaster: 'User/GetUserWorkSpacesForSuperMaster',
     deleteWorkSpace: 'WorkSpace/DeleteWorkSpace',
+    setCurrentWorkSpaceForAdmin: 'WorkSpace/SetCurrentWorkSpaceForAdmin',
+    saveWorkSpace: 'WorkSpace/SaveWorkSpace',
+    getAccountsOfWorkspace: 'Payment/GetAccountsOfWorkspace',
+    saveWorkspaceAccountSettings: 'Payment/SaveWorkspaceAccountSettings',
+    updateWorkspaceAccountSettings: 'Payment/UpdateWorkspaceAccountSettings',
+    deleteWorkspaceAccountSettings: 'Payment/DeleteWorkspaceAccountSettings',
+    getUsersOfWorkspace: 'WorkSpace/GetUsersOfWorkspace',
+    getActiveRoles: 'Role/GetActiveRoles',
+    inviteUser: 'User/InviteUser',
+    deleteUserFromWorkspace: 'WorkSpace/DeleteUserFromWorkspace',
+    updateInvitedUser: 'User/UpdateInvitedUser',
+    getRoles: 'Role/GetRoles',
+    deleteRole: 'Role/DeleteRole'
 }   

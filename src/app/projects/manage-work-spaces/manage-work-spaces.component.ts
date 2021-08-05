@@ -3,7 +3,8 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-manage-work-spaces',
@@ -41,15 +42,25 @@ export class ManageWorkSpacesComponent implements OnInit {
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
 
-  constructor(private http: HttpService, private router: Router) {
-    this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
-      this.planDetails = res;
-      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
-    })
+  public isOrganizationAdd: boolean = false;
+  public isOrganizationEdit: boolean = false;
+  public organizationName: any;
+
+  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute) {
+    const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
+      if(params.get('action') == 'add'){
+        this.isOrganizationAdd = true;
+        this.getMasterPlan();
+      }
+      else{
+        this.isOrganizationEdit = true;
+        let orgName: any = params.get('orgName');
+        this.organizationName = decodeURIComponent(orgName);
+      }
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   checkforAgreements({ value }: AbstractControl): any {
     if (!value) {
@@ -128,6 +139,13 @@ export class ManageWorkSpacesComponent implements OnInit {
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
       this.router.navigate(['user/register-confirm'])
+    })
+  }
+
+  getMasterPlan(){
+    this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
+      this.planDetails = res;
+      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })
   }
 

@@ -12,7 +12,7 @@
     </div>
     <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
         <div class="add-organization-wrapper">
-            <a href="/#/manage-work-spaces"> 
+            <a (click)="goToManageWorkSpaces('add', '')"> 
                 <button type="button" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal">Add Organization</button>
             </a>
         </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
                             <i class="material-icons-round mr-3 text-dark"> open_in_browser </i>
-                            <a href="manage-organization.html"> <i class="material-icons-round mr-3 text-dark">edit</i></a>
+                            <a (click)="goToManageWorkSpaces('edit', organization.id)"> <i class="material-icons-round mr-3 text-dark">edit</i></a>
                             <i class="material-icons-round text-dark" (click)="deleteUserOrganization(organization)" data-toggle="modal" data-target="#delete-organization-modal">delete</i>
                         </div>
                     </div>
