@@ -40,5 +40,7 @@ export const api: any = {
     deleteUserFromWorkspace: 'WorkSpace/DeleteUserFromWorkspace',
     updateInvitedUser: 'User/UpdateInvitedUser',
     getRoles: 'Role/GetRoles',
-    deleteRole: 'Role/DeleteRole'
+    deleteRole: 'Role/DeleteRole',
+    getUserPlanDetailByWorkspace: 'Forms/GetUserPlanDetailByWorkspace',
+    getWorkspacePlanHistory: 'Plan/GetWorkspacePlanHistory'
 }   
