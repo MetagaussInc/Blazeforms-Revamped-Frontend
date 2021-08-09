@@ -42,5 +42,10 @@ export const api: any = {
     getRoles: 'Role/GetRoles',
     deleteRole: 'Role/DeleteRole',
     getUserPlanDetailByWorkspace: 'Forms/GetUserPlanDetailByWorkspace',
-    getWorkspacePlanHistory: 'Plan/GetWorkspacePlanHistory'
+    getWorkspacePlanHistory: 'Plan/GetWorkspacePlanHistory',
+    sendRefferalLinkByEmail: 'WorkSpace/SendRefferalLinkByEmail',
+    getRoleDetails: 'Role/GetRoleDetails',
+    validateRoleName: 'Role/ValidateRoleName',
+    saveRole: 'Role/SaveRole',
+    getMasterPlansWithoutPagination: 'Plan/GetMasterPlansWithoutPagination'
 }   

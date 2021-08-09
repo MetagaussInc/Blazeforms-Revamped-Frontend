@@ -27,6 +27,8 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
   public organizationId: any;
   public organizationUserId: any;
   public SuperWorkSpaceId: any;
+  public action: any;
+  public organizationName: any;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -37,8 +39,11 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
         let orgUserId: any = params.get('orgUserId');
+        let orgName: any = params.get('orgName');
+        this.action = params.get('action');
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
+        this.organizationName = decodeURIComponent(orgName);
       }
     });
 
@@ -91,11 +96,11 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
   }
 
   addRole(){
-
+    this.router.navigate(['/manage-roles'], {queryParams: {action: this.action, id: this.organizationId, orgUserId: this.organizationUserId, orgName: this.organizationName}});
   }
 
   manageRoleData(role: any){
-
+    this.router.navigate(['/manage-roles'], {queryParams: {action: this.action, id: this.organizationId, orgUserId: this.organizationUserId, orgName: this.organizationName, roleId: encodeURIComponent(role.id)}});
   }
 
 }

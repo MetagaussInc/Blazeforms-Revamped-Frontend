@@ -10,6 +10,7 @@ export class DeleteRoleModalComponent implements OnInit {
 
   @Input() public message: string | undefined;
   @Input() public modalName: string | undefined;
+  
   constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {

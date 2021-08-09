@@ -19,6 +19,8 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   public userPlanData: any;
   public planDetail: any;
   public paymentHistory: any;
+  public showPlanPage: boolean = false;
+  public masterPlans: any[] = [];
 
   constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -60,6 +62,19 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
 
   download(paymentData: any,index: number) {
 
+  }
+
+  planChange(){
+    this.showPlanPage = true;
+    this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
+      this.masterPlans = res;
+    })
+  }
+
+  updateSelectedPlan(plan: any){
+    this.showPlanPage = false;
+    this.planDetail = plan;
+    this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
   }
 
 }

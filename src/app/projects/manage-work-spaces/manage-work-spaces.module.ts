@@ -19,7 +19,8 @@ import { DeleteAccountsModalComponent } from './manage-work-spaces-account-setti
 import { InviteUserModalComponent } from './manage-work-spaces-users/invite-user-modal/invite-user-modal.component';
 import { DeleteUserModalComponent } from './manage-work-spaces-users/delete-user-modal/delete-user-modal.component';
 import { DeleteRoleModalComponent } from './manage-work-spaces-roles/delete-role-modal/delete-role-modal.component';
-import { ManageUserRolesComponent } from './manage-work-spaces-roles/manage-user-roles/manage-user-roles.component';
+import { AddReferralLinkModalComponent } from './manage-work-spaces-referral-program/add-referral-link-modal/add-referral-link-modal.component';
+import { ReferFriendModalComponent } from './manage-work-spaces-referral-program/refer-friend-modal/refer-friend-modal.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ManageUserRolesComponent } from './manage-work-spaces-roles/manage-user
     InviteUserModalComponent,
     DeleteUserModalComponent,
     DeleteRoleModalComponent,
-    ManageUserRolesComponent
+    AddReferralLinkModalComponent,
+    ReferFriendModalComponent
   ],
   imports: [
     CommonModule,

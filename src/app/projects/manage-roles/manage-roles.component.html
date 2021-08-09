@@ -1,0 +1,79 @@
+<app-manage-roles-header></app-manage-roles-header>
+<div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
+    <div class="container py-4">
+        <h2>Roles</h2>
+    </div>
+</div>
+<div class="manage-organization-container container">
+    <div class="organization-wrapper row mb-5">
+        <div class="col-sm-12">
+            <div class="my-5 px-5 manage-organization-wrap">
+                <h4>General Details</h4>
+                <form [formGroup]="roleAddForm" class="organization-setting">
+                    <div class="row my-4  form-group">
+                        <div class="col-md-3">
+                            <label for="role-name">Name</label><span class="text-danger"> *</span>
+                        </div>
+                        <div class="col-md-9">
+                            <input formControlName="Name" type="text" class="form-control" id="role-name">
+                        </div>
+                        <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                            <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role Name is required
+                            </div>
+                        </ng-container>
+                        <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Role Name is already exist</div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="role-description">Description</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea formControlName="Description" class="form-control" rows="5" maxlength="200" cols="5" id="role-description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row my-4 form-group ">
+                        <div class="col-md-3 ">
+                            <label for="currency-select ">Active</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="custom-control custom-switch ">
+                                <input formControlName="IsActive" type="checkbox" class="custom-control-input" id="bf_active_role">
+                                <label class="custom-control-label" for="bf_active_role"></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="my-5">
+                    <h4>Permissions under this role for modules</h4>
+                    <table class="table mt-3 table-borderless text-center border" *ngIf="rolePermissionData">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-left">Module</th>
+                                <th *ngFor="let permission of rolePermissionData.rolePermissionList">{{ permission.permissionName }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let module of rolePermissionData.roleModuleList">
+                                <td class="text-left">{{ module.moduleName }}</td>
+                                <td *ngFor="let modulepermission of module.modulePermissionList">
+                                    <div *ngIf="modulepermission.isAvailable">
+                                        <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive"> 
+                                        <label for="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group mt-5 row role-btn-container">
+                        <button type="button" class="btn btn-link btn-md text-bf">Back</button>
+                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3 ">
+                            Save
+                            <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-manage-roles-footer></app-manage-roles-footer>
