@@ -21,7 +21,7 @@ import { DeleteUserModalComponent } from './manage-work-spaces-users/delete-user
 import { DeleteRoleModalComponent } from './manage-work-spaces-roles/delete-role-modal/delete-role-modal.component';
 import { AddReferralLinkModalComponent } from './manage-work-spaces-referral-program/add-referral-link-modal/add-referral-link-modal.component';
 import { ReferFriendModalComponent } from './manage-work-spaces-referral-program/refer-friend-modal/refer-friend-modal.component';
-
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { ReferFriendModalComponent } from './manage-work-spaces-referral-program
     ManageWorkSpacesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    SwiperModule
   ]
 })
 export class ManageWorkSpacesModule { }

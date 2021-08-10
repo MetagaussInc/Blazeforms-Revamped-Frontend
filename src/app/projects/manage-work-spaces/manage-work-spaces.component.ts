@@ -4,7 +4,10 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbSlideEvent, NgbSlideEventSource, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import SwiperCore, { Pagination, Autoplay } from "swiper/core";
+
+SwiperCore.use([Pagination, Autoplay]);
 
 @Component({
   selector: 'app-manage-work-spaces',
@@ -48,12 +51,8 @@ export class ManageWorkSpacesComponent implements OnInit {
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
 
-  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, config: NgbCarouselConfig) {
-    config.pauseOnHover = false;
-    config.wrap = true;
-
+  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
-      console.log(params);
       if(!params.has('action')){
         this.router.navigate(['/work-spaces']);
       }
@@ -101,7 +100,7 @@ export class ManageWorkSpacesComponent implements OnInit {
         return true;
 
       }
-    }    
+    }
     return false
   }
 
