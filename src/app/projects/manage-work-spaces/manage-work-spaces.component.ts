@@ -5,9 +5,9 @@ import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import SwiperCore, { Pagination, Autoplay } from "swiper/core";
+import SwiperCore, { Navigation, Autoplay } from "swiper/core";
 
-SwiperCore.use([Pagination, Autoplay]);
+SwiperCore.use([Navigation, Autoplay]);
 
 @Component({
   selector: 'app-manage-work-spaces',

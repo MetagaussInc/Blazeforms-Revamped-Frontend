@@ -218,9 +218,8 @@
                                                     <div class="p-3 m-n3 overflow-hidden">                                                        
                                                         <swiper 
                                                         [slidesPerView]="3" 
-                                                        [spaceBetween]="30" 
-                                                        [pagination]="{ clickable: true }" 
-                                                        [autoplay]=true
+                                                        [spaceBetween]="30"
+                                                        [navigation]="true"
                                                         class="mySwiper">
                                                             <ng-container *ngFor="let plan of masterPlans; let i = index;">
                                                                 <ng-template swiperSlide>
