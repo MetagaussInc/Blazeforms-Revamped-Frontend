@@ -532,6 +532,13 @@
                                                     </select>
 
                                                 </div>
+                                                <div *ngSwitchCase="'sign'"
+                                                    (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <app-signature-field [model]="model"></app-signature-field>
+
+
+                                                </div>
                                                 <div *ngSwitchDefault (click)="clicked($event, model, template)">
                                                     <label>{{model.name}}</label>
                                                     <app-ui-input [model]="model"
@@ -540,6 +547,7 @@
                                                     </app-ui-input>
 
                                                 </div>
+                                                
                                             </div>
                                         </ng-template>
 
@@ -552,6 +560,8 @@
                                                 Drag and Drop Here</ngx-dnd-container>
                                         </div>
                                     </div>
+                                    <!-- <div>
+                                    </div> -->
                                 </div>
                             </div>
 

@@ -1420,4 +1420,67 @@ export const config = [
             }
         }
     },
+    {
+        name: 'Signature',
+        value: '',
+        inputType: 'sign',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    // {  
+                    // {
+                    //     label: 'Large',
+                    //     value: 'large'
+                    // },
+                    // {
+                    //     label: 'Extra Large',
+                    //     value: 'extra-large'
+                    // }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
 ]

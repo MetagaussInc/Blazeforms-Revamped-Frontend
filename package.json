@@ -29,6 +29,7 @@
     "@types/dragula": "^3.7.1",
     "angular-google-recaptcha": "^1.0.3",
     "angular-signature-pad": "0.0.14",
+    "angular2-signaturepad": "^3.0.4",
     "bootstrap": "^4.5.0",
     "ng2-select": "^2.0.0",
     "ngx-infinite-scroll": "^10.0.1",
