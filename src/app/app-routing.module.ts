@@ -33,8 +33,20 @@ const routes: Routes = [
   },
   { path: 'form-builder', loadChildren: () => import('./projects/form-builder/form-builder.module').then(m => m.FormBuilderModule) },
     
-    { path: 'work-spaces', loadChildren: () => import('./projects/work-spaces/work-spaces.module').then(m => m.WorkSpacesModule), canLoad: [ModuleAuthGuardComponent] },
-  { path: 'manage-work-spaces', loadChildren: () => import('./projects/manage-work-spaces/manage-work-spaces.module').then(m => m.ManageWorkSpacesModule) }
+  { path: 'work-spaces', 
+    loadChildren: () => import('./projects/work-spaces/work-spaces.module').then(m => m.WorkSpacesModule), 
+    canLoad: [ModuleAuthGuardComponent] 
+  },
+  { 
+    path: 'manage-work-spaces', 
+    loadChildren: () => import('./projects/manage-work-spaces/manage-work-spaces.module').then(m => m.ManageWorkSpacesModule), 
+    canLoad: [ModuleAuthGuardComponent] 
+  },
+  { 
+    path: 'manage-roles', 
+    loadChildren: () => import('./projects/manage-roles/manage-roles.module').then(m => m.ManageRolesModule), 
+    canLoad: [ModuleAuthGuardComponent] 
+  }
 ];
 
 @NgModule({

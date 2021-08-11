@@ -2,213 +2,314 @@
 <div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
     <div class="container py-4">
         <h2>Organizations</h2>
+        <span>{{ organizationName }}</span>
     </div>
 </div>
 <div class="manage-organization-container container">
     <div class="organization-wrapper row mb-5">
         <div class="col-sm-12">
-            <ul class="nav nav-tabs justify-content-start " id="myTab" role="tablist">
+            <!-- <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start " id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link p-3 px-4 active" id="add-organization-tab" data-toggle="tab" href="#add-organization" role="tab" aria-controls="home" aria-selected="true">General</a>
+                    <a class="nav-link p-3 px-4" id="add-organization-tab" data-toggle="tab" href="#add-organization" role="tab" aria-controls="home" aria-selected="true">General</a>
                 </li>
-            </ul>
-            <div class="tab-content px-4" id="add-organization-tabs">
-                <div class="tab-pane fade show active" id="add-organization" role="tabpanel" aria-labelledby="add-organization-tab">
-                    <div class="my-5 add-organization-wrap">
-                        <div class="login-area-container container d-flex align-items-center justify-content-center">
-                            <div class="login-box row border rounded-lg">
-                                <!--Login Area left Column-->
-                                <div class="left-column col-md-8">
-                                    <div class="left-column-top row px-3 pt-3">
-                                        <div class="register-heading-wrapper col-md-12 py-3 text-left">
-                                            <h4 class="register-heading">Add Orgnization</h4>
-                                        </div>
-                                        <div class="register-form col-md-12 mb-3">
-                                            <form [formGroup]="organizationSignupForm" autocomplete="off">
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">person</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
+            </ul> -->
+
+            <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink>General</a>
+                    <ng-template ngbNavContent>
+                        <ng-container *ngIf="isOrganizationAdd">
+                            <div class="tab-content px-4" id="add-organization-tabs">
+                                <div class="tab-pane fade show active" id="add-organization" role="tabpanel" aria-labelledby="add-organization-tab">
+                                    <div class="my-5 add-organization-wrap">
+                                        <div class="login-area-container container d-flex align-items-center justify-content-center">
+                                            <div class="login-box row border rounded-lg" *ngIf="!showPlanPage">
+                                                <!--Login Area left Column-->
+                                                <div class="left-column col-md-8">
+                                                    <div class="left-column-top row px-3 pt-3">
+                                                        <div class="register-heading-wrapper col-md-12 py-3 text-left">
+                                                            <h4 class="register-heading">Add Orgnization</h4>
                                                         </div>
-                                                        <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
-                                                            <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
-                                                            </div>
-                                                        </ng-container>
-                                                    </div>
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">person</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="text" formControlName="LastName" class="form-control" placeholder="Last Name">
+                                                        <div class="register-form col-md-12 mb-3">
+                                                            <form [formGroup]="organizationSignupForm" autocomplete="off">
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">person</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
+                                                                            <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">person</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="text" formControlName="LastName" class="form-control" placeholder="Last Name">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
+                                                                            <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">email</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="email" formControlName="Email" class="form-control" placeholder="Your Email">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
+                                                                            <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                                                                            </div>
+                                                                            <div *ngIf="f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                                                                            <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
+                                                                                class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
+                                                                            <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                                                                        </ng-container>
+                                                                        <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                                                                            Email is already exist</div>
+                                                                    </div>
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">smartphone</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="tel" formControlName="PhoneNumber" class="form-control" placeholder="Your Phone">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
+                                                                            <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
+                                                                            </div>
+                                                                            <div *ngIf="f.PhoneNumber.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add valid mobile number.
+                                                                            </div>
+                                                                            <!-- <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div> -->
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">password</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="password" formControlName="Password" class="form-control" placeholder="Choose Password">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
+                                                                            <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
+                                                                            </div>
+                                                                            <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                    <div class="field-wrapper col-md-6">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">password</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                                                            <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
+                                                                            </div>
+                                                                        </ng-container>
+                                                                        <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched || matchPass()">
+                                                                            Confirm Password is not matched
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="field-wrapper col-md-12">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="material-icons">apartment</i>
+                                                                                </span>
+                                                                            </div>
+                                                                            <input type="text" formControlName="WorkSpaceName" class="form-control" placeholder="Your Organization Name">
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
+                                                                            <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                                                                            </div>
+                                                                        </ng-container>
+                                                                        <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="terms-conditions-wrapper col-md-12 my-3 text-center">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="customCheck" name="example1">
+                                                                            <label class="custom-control-label" for="customCheck">
+                                                                                I have read and accepted 
+                                                                                <a href="#">Terms &#38; Conditions</a>
+                                                                                {{f.acceptAgreement.errors?.isRefused}}
+                                                                            </label>
+                                                                        </div>
+                                                                        <ng-container *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
+                                                                            <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="register-fields-wrapper row mb-3">
+                                                                    <div class="terms-conditions-wrapper col-md-12 mb-3 text-center">
+                                                                        <button [disabled]="organizationSignupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">Add Organization</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                        <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
-                                                            <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
-                                                            </div>
-                                                        </ng-container>
                                                     </div>
                                                 </div>
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">email</i>
-                                                                </span>
+                                                <!--Login Area right Column-->
+                                                <div class="right-column col-md-4 p-5 border-left d-flex justify-content-center flex-wrap align-content-center">
+                                                    <div class="selected-plan-wrapper shadow-sm row rounded border text-center">
+                                                        <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
+                                                            <div class="plan-name">
+                                                                <h4 class="mb-n2"><strong>{{ planDetails.name }}</strong></h4>
                                                             </div>
-                                                            <input type="email" formControlName="Email" class="form-control" placeholder="Your Email">
                                                         </div>
-                                                        <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                                            <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                                                        <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
+                                                            <div class="plan-price">
+                                                                <h4><strong>US$</strong> {{ planDetails.price }}</h4>
                                                             </div>
-                                                            <div *ngIf="f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
-                                                            <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
-                                                                class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
-                                                            <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
-                                                        </ng-container>
-                                                        <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
-                                                            Email is already exist</div>
-                                                    </div>
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">smartphone</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="tel" formControlName="PhoneNumber" class="form-control" placeholder="Your Phone">
+                                                            <div class="plan-period mt-n2 text-secondary">amount / month</div>
                                                         </div>
-                                                        <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
-                                                            <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
+                                                        <div class="col-md-12 p-2">
+                                                            <div class="plan-attributes-wrapper row px-2 py-4">
+                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                    <span>{{ planDetails.noOfUsers }}</span><span class="text-secondary"> Users</span>
+                                                                </div>
+                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                    <span>{{ planDetails.noOfForms }}</span><span class="text-secondary"> Forms</span>
+                                                                </div>
+                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                    <span>{{ planDetails.noOfEntries }}</span><span class="text-secondary"> Entries</span>
+                                                                </div>
+                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                    <span>{{ planDetails.storageSize }} GB</span><span class="text-secondary"> Storage</span>
+                                                                </div>
+                                                                <div class="plan-price-button col-md-12 mt-3">
+                                                                    <button type="button" (click)="planChange()" class="btn btn-bf btn-sm">Change Plan</button>
+                                                                </div>
                                                             </div>
-                                                            <div *ngIf="f.PhoneNumber.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add valid mobile number.
-                                                            </div>
-                                                            <!-- <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div> -->
-                                                        </ng-container>
-                                                    </div>
-                                                </div>
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">password</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="password" formControlName="Password" class="form-control" placeholder="Choose Password">
-                                                        </div>
-                                                        <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
-                                                            <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
-                                                            </div>
-                                                            <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
-                                                        </ng-container>
-                                                    </div>
-                                                    <div class="field-wrapper col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">password</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
-                                                        </div>
-                                                        <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                                            <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
-                                                            </div>
-                                                        </ng-container>
-                                                        <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched || matchPass()">
-                                                            Confirm Password is not matched
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="field-wrapper col-md-12">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i class="material-icons">apartment</i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="text" formControlName="WorkSpaceName" class="form-control" placeholder="Your Organization Name">
-                                                        </div>
-                                                        <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
-                                                            <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
-                                                            </div>
-                                                        </ng-container>
-                                                        <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
-                                                    </div>
-                                                </div>
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="terms-conditions-wrapper col-md-12 my-3 text-center">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="customCheck" name="example1">
-                                                            <label class="custom-control-label" for="customCheck">
-                                                                I have read and accepted 
-                                                                <a href="#">Terms &#38; Conditions</a>
-                                                                {{f.acceptAgreement.errors?.isRefused}}
-                                                            </label>
-                                                        </div>
-                                                        <ng-container *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
-                                                            <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
-                                                        </ng-container>
-                                                    </div>
-                                                </div>
-                                                <div class="register-fields-wrapper row mb-3">
-                                                    <div class="terms-conditions-wrapper col-md-12 mb-3 text-center">
-                                                        <button [disabled]="organizationSignupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">Add Organization</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Login Area right Column-->
-                                <div class="right-column col-md-4 p-5 border-left d-flex justify-content-center flex-wrap align-content-center">
-                                    <div class="selected-plan-wrapper shadow-sm row rounded border text-center">
-                                        <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
-                                            <div class="plan-name">
-                                                <h4 class="mb-n2"><strong>{{ planDetails.name }}</strong></h4>
                                             </div>
-                                        </div>
-                                        <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
-                                            <div class="plan-price">
-                                                <h4><strong>US$</strong> {{ planDetails.price }}</h4>
-                                            </div>
-                                            <div class="plan-period mt-n2 text-secondary">amount / month</div>
-                                        </div>
-                                        <div class="col-md-12 p-2">
-                                            <div class="plan-attributes-wrapper row px-2 py-4">
-                                                <div class="plan-attribute col-md-12 py-1">
-                                                    <span>{{ planDetails.noOfUsers }}</span><span class="text-secondary"> Users</span>
-                                                </div>
-                                                <div class="plan-attribute col-md-12 py-1">
-                                                    <span>{{ planDetails.noOfForms }}</span><span class="text-secondary"> Forms</span>
-                                                </div>
-                                                <div class="plan-attribute col-md-12 py-1">
-                                                    <span>{{ planDetails.noOfEntries }}</span><span class="text-secondary"> Entries</span>
-                                                </div>
-                                                <div class="plan-attribute col-md-12 py-1">
-                                                    <span>{{ planDetails.storageSize }} GB</span><span class="text-secondary"> Storage</span>
-                                                </div>
-                                                <div class="plan-price-button col-md-12 mt-3">
-                                                    <button type="button" class="btn btn-bf btn-sm">Change Plan</button>
+
+                                            <div class="login-box border rounded-lg" *ngIf="showPlanPage">
+                                                <div class="container py-3">
+                                                    <div class="p-3 m-n3 overflow-hidden">                                                        
+                                                        <swiper 
+                                                        [slidesPerView]="3" 
+                                                        [spaceBetween]="30"
+                                                        [navigation]="true"
+                                                        class="mySwiper">
+                                                            <ng-container *ngFor="let plan of masterPlans; let i = index;">
+                                                                <ng-template swiperSlide>
+                                                                    <div class="selected-plan-wrapper shadow-sm row no-gutters rounded border text-center">
+                                                                        <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
+                                                                            <div class="plan-name">
+                                                                                <h4 class="mb-n2"><strong>{{ plan.name }}</strong></h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
+                                                                            <div class="plan-price">
+                                                                                <h4><strong>US$</strong> {{ plan.price }}</h4>
+                                                                            </div>
+                                                                            <div class="plan-period mt-n2 text-secondary">amount / month</div>
+                                                                        </div>
+                                                                        <div class="col-md-12 p-2">
+                                                                            <div class="plan-attributes-wrapper row px-2 py-4">
+                                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                                    <span>{{ plan.noOfUsers }}</span><span class="text-secondary"> Users</span>
+                                                                                </div>
+                                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                                    <span>{{ plan.noOfForms }}</span><span class="text-secondary"> Forms</span>
+                                                                                </div>
+                                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                                    <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
+                                                                                </div>
+                                                                                <div class="plan-attribute col-md-12 py-1">
+                                                                                    <span>{{ plan.storageSize }} {{ plan.storageUnit }}</span><span class="text-secondary"> Storage</span>
+                                                                                </div>
+                                                                                <div class="plan-price-button col-md-12 mt-3">
+                                                                                    <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </ng-template>
+                                                            </ng-container>
+                                                        </swiper>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </ng-container>
+                        <ng-container *ngIf="isOrganizationEdit">
+                            <app-manage-work-spaces-general></app-manage-work-spaces-general>
+                        </ng-container>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Account Settings</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-account-settings></app-manage-work-spaces-account-settings>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Branding</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-branding></app-manage-work-spaces-branding>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="4" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Users</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-users></app-manage-work-spaces-users>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="5" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Roles</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-roles></app-manage-work-spaces-roles>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="6" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Subscription</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-subscription></app-manage-work-spaces-subscription>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="7" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Referral Program</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-referral-program></app-manage-work-spaces-referral-program>
+                    </ng-template>
+                </li>
+            </ul>
+              
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
         </div>
     </div>
 </div>

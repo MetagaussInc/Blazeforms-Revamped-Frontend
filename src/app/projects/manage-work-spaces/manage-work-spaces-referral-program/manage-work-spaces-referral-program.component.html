@@ -1,0 +1,23 @@
+<div class="row container d-flex justify-content-center">
+    <div class="referral-social px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <p class="lead">Recommend Blaze Forms to your friends and colleagues, and they'll receive a free month of advanced form building.</p>
+        <p class="lead text-muted">Get your referral link and share it.</p>
+    </div>
+    <div class="col-md-6 text-center">
+        <div class="social-icon-wrap">
+            <button type="button" (click)="openReferralModal()" class="btn btn-social-icon"><span class="material-icons-outlined"> link </span></button>
+            <button type="button" (click)="openReferFriendModal()" class="btn btn-social-icon "><span class="material-icons-outlined"> email </span></button>
+            <a href="https://facebook.com/sharer/sharer.php?u={{ referralLink }}"
+              onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+              class="c-referral-fbShare"
+              >
+              <button type="button" class="btn btn-social-icon "><span class="material-icons-outlined"> facebook </span></button>
+            </a>
+            <a href="http://twitter.com/share?url={{ twitterGoogleFormURL }}"
+              onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+              class="c-referral-twShare">
+                <button type="button" class="btn btn-social-icon "><span class="material-icons-outlined"> facebook </span></button>
+            </a>
+        </div>
+    </div>
+</div>

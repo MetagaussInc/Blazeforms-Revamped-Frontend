@@ -1,0 +1,94 @@
+<div class="my-5 px-5 manage-organization-wrap">
+    <form class="organization-setting" [formGroup]="organizationGeneralForm" autocomplete="off">
+        <div class="row my-4  form-group">
+            <div class="col-md-3">
+                <label for="organization-name">Organization Name</label><span class="text-danger"> *</span>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="organization-name" formControlName="Name">
+            </div>
+            <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                </div>
+            </ng-container>
+            <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="organization-email">Default Reply Email</label><span class="text-danger"> *</span>
+            </div>
+            <div class="col-md-9">
+                <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Enter Email">
+            </div>
+            <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
+                <div *ngIf="f.DefaultReplyEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                </div>
+                <div *ngIf="f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                <!-- <div *ngIf="f.DefaultReplyEmail.errors?.specialCharInDomain"
+                    class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
+                <div *ngIf="f.DefaultReplyEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+            </ng-container>
+            <div *ngIf="f.DefaultReplyEmail.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                Email is already exist</div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="country-select">Country</label>
+            </div>
+            <div class="col-9">
+                <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control">
+                    <option [ngValue]="null" disabled>Select Country</option>
+                    <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="time-zone-select">Time Zone</label>
+            </div>
+            <div class="col-9">
+                <select formControlName="Timezone" id="time-zone-select" name="Timezone" class="zone-selector form-control">
+                    <option [ngValue]="null" disabled>Select Timezone</option>
+                    <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="language-select">Language</label>
+            </div>
+            <div class="col-9">
+                <select formControlName="Language" id="language-select" name="Language" class="language-selector form-control">
+                    <option [ngValue]="null" disabled>Select Language</option>
+                    <option *ngFor="let language of languageList" [ngValue]="language.value">{{language.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="currency-select">Currency</label>
+            </div>
+            <div class="col-9">
+                <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control">
+                    <option [ngValue]="null" disabled>Select Currency</option>
+                    <option *ngFor="let currency of currencyList" [ngValue]="currency.value">{{currency.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4 form-group">
+            <div class="col-md-3">
+                <label for="currency-select">Active</label>
+            </div>
+            <div class="col-md-9">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" formControlName="isActive" class="custom-control-input" id="bf_active_organization">
+                    <label class="custom-control-label" for="bf_active_organization"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row manage-btn-container mt-5">
+            <button type="button" class="btn btn-link btn-md text-bf">Back</button>
+            <button [disabled]="organizationGeneralForm.invalid" (click)="submit()" type="button" class="btn btn-bf btn-md ml-3">Save</button>
+        </div>
+    </form>
+</div>

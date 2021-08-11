@@ -1,0 +1,24 @@
+<div class="" tabindex="-1" id="edit-account-setting-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modalTitle }}</h5>
+                <button type="button" (click)="closePopup()" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-12">
+                        <label for="account-name">Your organization's unique referral link is below. Copy it and share it!</label>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" [(ngModel)]="referralLink" name="referralLink" placeholder="Referral Link">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal">Back</button>
+                <button type="button" (click)="copyLink(referralLink)" class="btn btn-bf btn-sm">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="my-5 px-5 ">
+    <div class="search-wrapper">
+        <div class="form-group has-search mb-5">
+            <input type="text" class="form-control" placeholder="Search users" [(ngModel)]="searchedString" (ngModelChange)="searchUsers($event)">
+        </div>
+    </div>
+    <div class="add-account-wrapper d-flex flex-wrap justify-content-between mb-5">
+        <button type="button" (click)="inviteUser()" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal" data-target="#user-invite-modal">Invite</button>
+    </div>
+    <div class="organization-list col-md-12 border rounded">
+        <ng-container *ngIf="accountUsersLists.length == 0">
+            <div class="organization-list-item row p-3 border-bottom">No Record Found</div>
+        </ng-container>
+        <ng-container *ngFor="let user of accountUsersLists">
+            <div [style.display]="searchedString.length === 0 ? 'flex' : !user.email?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
+                <div class="organization-title-wrapper col-md-6">
+                    <div clss="organization-name">{{ user.email }}</div>
+                    <span class="text-muted"><i>{{ user.userName }} ( {{ user.roleName }} )</i></span>
+                </div>
+                <div class="organization-title-wrapper col-md-3">
+                    <span class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
+                </div>
+                <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                    <i class="material-icons-round mr-3 text-dark" (click)="editUser(user)" data-toggle="modal" data-target="#user-invite-modal">edit</i>
+                    <i class="material-icons-round text-dark" (click)="deleteUser(user)" data-toggle="modal" data-target="#delete-user-modal">delete</i>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
