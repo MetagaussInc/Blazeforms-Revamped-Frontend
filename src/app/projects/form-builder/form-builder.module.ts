@@ -25,7 +25,7 @@ import { ConditionalRendereringModalComponent } from './components/conditional-r
     FormBuilderRoutingModule,
     FormsModule,
     NgbModule,
-    NgxDnDModule.forRoot()
-  ]
+    NgxDnDModule.forRoot(),
+  ] 
 })
 export class FormBuilderModule { }

@@ -499,6 +499,7 @@ app-build {
                 }
             }
             .ngx-dnd-item.gu-transit,
+            .ngx-dnd-item.current-active,
             .ngx-dnd-item:hover {
                 border: 1px dashed $base-color;
                 background-color: $bf-input-bg;
