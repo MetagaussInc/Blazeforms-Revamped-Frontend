@@ -37,6 +37,8 @@ export class BuildComponent {
   showSubTotal: true,
   showLineItems: true,
   mapBillingFields: true,
+  stripeAccount: '',
+  stripeAccounts: [],
   extraBill: [
     {
        value: null,

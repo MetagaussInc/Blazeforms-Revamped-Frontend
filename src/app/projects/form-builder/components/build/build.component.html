@@ -275,6 +275,12 @@
                                                         <div>
                                                             <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
                                                         </div>
+                                                        <div>
+                                                            Accounts
+                                                            <select [(ngModel)]="selectedElement.stripeAccount">
+                                                                <option *ngFor="let account of selectedElement?.stripeAccounts" [value]="account.name">{{account.name}}</option>
+                                                            </select>
+                                                        </div>
                                                 </div>
                                                 <div class="conditional-properties pb-5">
                                                     <h4 class="text-center">Conditional Properties</h4>
