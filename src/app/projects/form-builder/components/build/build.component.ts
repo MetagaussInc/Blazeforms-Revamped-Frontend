@@ -18,6 +18,36 @@ export class BuildComponent {
   selectedDependency: any;
   count = 0;
   dummyContainer: any = [];
+  PaymentModel = {
+    name: 'Calculations',
+  textValue: '',
+  minCharacter: 0,
+  maxCharacter: 100,
+  value: '',
+  inputType: 'calculations',
+  icon: 'fas fa-language',
+  class: 'full',
+  placeholder: '',
+  size: 'medium',
+  view: 'always',
+  minVal: 0,
+  maxVal: 50,
+  helpText: '',
+  isRequired: 'always',
+  showSubTotal: true,
+  showLineItems: true,
+  mapBillingFields: true,
+  extraBill: [
+    {
+       value: null,
+       type: 'dollar',
+       name: 'Additional'
+    }
+  ],
+  validations: {
+      billing: true
+  }
+}
   // sourceBuilderTools = [
   //   { 
   //     name: 'Section', 
@@ -197,7 +227,9 @@ export class BuildComponent {
 
   updateObj(key: any, selectedElement: any, props: any) {
   }
-
+  showPaymentFields(): boolean{
+    return this.targetBuilderTools.some((x: any) => x.inputType === 'payment');
+  }
   removeObj(key: any, selectedElement: any, props: any) {
     delete selectedElement[props][key];
   }
@@ -220,8 +252,7 @@ export class BuildComponent {
     this.removeLastTwoDropDowns()
   }
 
-  abc($event: any): boolean {
-    // console.log($event)
+  abc($event: any, source: any, handle: any, sibling: any): boolean {
     return ($event.name === 'Dnd') ? false : true;
   }
   drop2(e: any) {
@@ -343,6 +374,10 @@ export class BuildComponent {
     console.log(model, i)
     $event.preventDefault();
     $event.stopPropagation()
+  }
+
+  selectPayment() {
+    this.selectedElement = this.PaymentModel
   }
 
   sectionClicked($event: any, model: any, i: any) {

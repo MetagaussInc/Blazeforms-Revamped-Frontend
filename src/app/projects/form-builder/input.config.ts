@@ -1483,4 +1483,170 @@ export const config = [
             }
         }
     },
+    {
+        name: 'Payment',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '',
+        inputType: 'payment',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Calculations',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '',
+        inputType: 'calculations',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
 ]

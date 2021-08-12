@@ -254,6 +254,28 @@
                                                         name="Help Text" cols="40" rows="5"
                                                         class="form-control"></textarea>
                                                 </div>
+                                                <div *ngIf="selectedElement?.extraBill">
+                                                    <label>Payment Setting</label>
+                                                    <div style="display: flex;" *ngFor="let item of selectedElement?.extraBill; let i = index">
+                                                        <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].name"> 
+                                                        <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
+                                                        <select style="width: 70px;" [(ngModel)]="selectedElement?.extraBill[i].type">
+                                                            <option [value]="'dollar'">Amount</option>
+                                                            <option [value]="'perentage'">Percentage</option>
+                                                        </select> 
+                                                        <button (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
+                                                        <button (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
+                                                    </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
+                                                        </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showLineItems">Shop Line Items
+                                                        </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
+                                                        </div>
+                                                </div>
                                                 <div class="conditional-properties pb-5">
                                                     <h4 class="text-center">Conditional Properties</h4>
                                                     <div *ngIf="selectedElement?.validations?.view" class="form-group">
@@ -560,6 +582,14 @@
                                                 Drag and Drop Here</ngx-dnd-container>
                                         </div>
                                     </div>
+                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
+
+                                            <div>
+                                                <span >Line Items</span>
+                                                <span >Sub Total</span>
+                                                <span >Amount Due</span>
+                                            </div>
+                                        </div>
                                     <!-- <div>
                                     </div> -->
                                 </div>
