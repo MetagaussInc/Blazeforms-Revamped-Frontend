@@ -4,9 +4,11 @@
             margin: 0;
         }
     }
+    
     >*>.ngx-dnd-container {
         min-height: 400px;
     }
+    
     .ngx-dnd-container {
         background-color: white;
         // justify-content: space-between;
@@ -15,7 +17,6 @@
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         box-sizing: border-box;
-        border: 1px dashed lightgrey;
         background-color: white;
         padding: 0;
         min-height: 60px;
@@ -78,13 +79,6 @@
             }
             input {
                 width: 100%;
-                padding: .5em .6em;
-                display: inline-block;
-                border: 1px solid #ccc;
-                box-shadow: inset 0 1px 3px #ddd;
-                border-radius: 4px;
-                vertical-align: middle;
-                box-sizing: border-box;
             }
         }
         .ngx-dnd-item.gu-transit,
@@ -92,7 +86,7 @@
             border: 1px solid #1786e9
         }
     }
-
+    
     .small {
         flex: 1 1 23%;
         box-sizing: border-box;
@@ -101,6 +95,7 @@
         max-height: 100%;
         padding: 0 5px 5px 5px;
     }
+    
     .medium {
         flex: 1 1 46%;
         box-sizing: border-box;
@@ -109,6 +104,7 @@
         max-height: 100%;
         padding: 0 5px 5px 5px;
     }
+    
     .large {
         flex: 1 1 69%;
         box-sizing: border-box;
@@ -117,6 +113,7 @@
         max-height: 100%;
         padding: 0 5px 5px 5px;
     }
+    
     .extra-large {
         flex: 1 1 92%;
         box-sizing: border-box;
@@ -125,6 +122,41 @@
         max-height: 100%;
         padding: 0 5px 5px 5px;
     }
+    
     input {
         width: 100%;
+    }
+    
+    #form-publish-sidebar {
+        background-color: #fff;
+    }
+    
+    .form-builder-sidebar .nav-tabs .nav-item .nav-link.active {
+        color: #f04564;
+        border-color: #fff #fff #f04564 #fff;
+    }
+    
+    .form-builder-sidebar .nav-tabs .nav-item .nav-link:focus,
+    .form-builder-sidebar .nav-tabs .nav-item .nav-link:hover {
+        border-color: #fff #fff #f04564 #fff;
+    }
+    
+    .form-builder-sidebar.nav-tabs .nav-item .nav-link {
+        border-width: 2px;
+        color: #495057;
+    }
+    
+    #form-publish-sidebar.nav-tabs .nav-item .nav-link.active {
+        color: #f04564;
+        border-color: #fff #fff #f04564 #fff;
+    }
+    
+    #form-publish-sidebar.nav-tabs .nav-item .nav-link:focus,
+    #form-publish-sidebar.nav-tabs .nav-item .nav-link:hover {
+        border-color: #fff #fff #f04564 #fff;
+    }
+    
+    #form-publish-sidebar.nav-tabs .nav-item .nav-link {
+        border-width: 2px;
+        color: #495057;
     }
