@@ -206,7 +206,7 @@ remove(i: number) {
     }
     console.log(e.type, e);
     this.updateIndex();
-    // this.updateDnd();
+    this.updateDnd();
   }
 
   updateDnd() {
@@ -292,6 +292,7 @@ remove(i: number) {
     if (this.targetBuilderTools.length < 2) {
       this.targetBuilderTools.push(obj1);
     } else {
+      return;
       const arr = this.targetBuilderTools;
       let count = 0;
       arr.forEach((element: any) => {

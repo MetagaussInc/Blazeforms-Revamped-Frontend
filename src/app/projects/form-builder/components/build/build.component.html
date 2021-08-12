@@ -349,14 +349,19 @@
                                                     </div>
                                                 </div>
                                                 <div *ngSwitchCase="'DND'" (click)="clicked($event, model, template)">
-                                                    <div class="shadow">
+                                                    <!--      <div class="shadow">
                                                         {{model.name}}
                                                         <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children"
                                                           [removeOnSpill]="true" [template]="template" [droppableItemClass]="droppableItemClass"
                                                           (drop)="replaceDnd($event)" direction="mixed">
                                                         Drag and Drop Here</ngx-dnd-container>
-                                                      </div>
-                                                  </div>
+                                                      </div> -->
+
+                                                    <div class="bf-drop-zone-wrap bg-light text-center py-3">
+                                                        <i class="material-icons"> add </i>
+                                                        <div>Drop your control here</div>
+                                                    </div>
+                                                </div>
                                                 <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
                                                     <label>{{model.name}}</label>
                                                     <div class="input-group">
