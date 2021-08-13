@@ -10,7 +10,8 @@ import { ExportedViewComponent } from './components/exported-view/exported-view.
 import { BuildComponent } from './components/build/build.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConditionalRendereringModalComponent } from './components/conditional-renderering-modal/conditional-renderering-modal.component';
-
+import { SignatureFieldComponent } from './components/signature-field/signature-field.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
   declarations: [
@@ -18,14 +19,16 @@ import { ConditionalRendereringModalComponent } from './components/conditional-r
     UiInputComponent,
     ExportedViewComponent,
     BuildComponent,
-    ConditionalRendereringModalComponent
+    ConditionalRendereringModalComponent,
+    SignatureFieldComponent
   ],
   imports: [
     CommonModule,
     FormBuilderRoutingModule,
     FormsModule,
     NgbModule,
-    NgxDnDModule.forRoot()
-  ]
+    NgxDnDModule.forRoot(),
+    SignaturePadModule
+  ] 
 })
 export class FormBuilderModule { }

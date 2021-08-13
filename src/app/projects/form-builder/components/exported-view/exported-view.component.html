@@ -26,18 +26,70 @@
  
 </div> -->
 
-  <form #parentForm="ngForm" (submit)="submitParentForm(parentForm)">
+<form #parentForm="ngForm" (submit)="submitParentForm(parentForm)">
     {{parentForm.valid}}
-<div class="row">
+    <div class="row row-offcanvas row-offcanvas-left bg-light">
 
-    <ng-template ngFor let-form [ngForOf]="elements" let-index="index" let-isLast="last">
-      <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-        <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
-          placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" />
-      </div>
-      <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar" id="form-publish-sidebar">
+            <div class="overflow-auto h-100">
+                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-start nav-justified">
 
-    </ng-template>
-    <button type="submit">Submit</button>
-</div>
+                    <li ng-container ngbNavItem>
+                        <a ngbNavLink>Publish Code</a>
+                        <ng-template ngbNavContent>
+                            <div class="publish-code-container col-md-12 mt-2 text-center">
+                                <div class="form-embeded-wrap mt-2">
+                                    <h4>Embed In Your Site
+                                    </h4>
+                                    <p class="text-muted">Simply copy & paste the code below into your html!
+                                    </p>
+
+                                    <div class="form-publish-link mt-2">
+                                        <textarea class="form-control"><iframe src="https://staging.blazeforms.com/#/BlazeForms/Hunny_Mailinator/test" height="100%" width="100%" scrolling="auto"></iframe></textarea>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-embeded-wrap mt-2">
+                                    <h4>Share Form Url
+                                    </h4>
+                                    <p class="text-muted">Use This URL To Create A Hyperlink To Your Form.!
+                                    </p>
+
+                                    <div class="form-publish-link mt-2">
+                                        <input type="text" class="form-control">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Style Editor</a>
+                    </li>
+
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-lg-10 main">
+            <div class="bg-white m-3 p-3 border-top border-5 border-bf">
+                <div class="publish-container ngx-dnd-container">
+
+                    <ng-template ngFor let-form [ngForOf]="elements" let-index="index" let-isLast="last">
+                        <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                            <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                        </div>
+                        <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+                    </ng-template>
+                </div>
+                <button type="submit" class="btn btn-bf btn-md">Submit</button>
+            </div>
+        </div>
+    </div>
 </form>

@@ -48,3 +48,13 @@
     position: relative;
     top: 40px;
   }
+
+  .dummy-c .ngx-dnd-container {
+    display: grid;
+  }
+
+  .dummy-c {
+    .ngx-dnd-container {
+        display: grid;
+        }
+}
