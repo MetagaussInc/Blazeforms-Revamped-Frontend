@@ -47,5 +47,10 @@ export const api: any = {
     getRoleDetails: 'Role/GetRoleDetails',
     validateRoleName: 'Role/ValidateRoleName',
     saveRole: 'Role/SaveRole',
-    getMasterPlansWithoutPagination: 'Plan/GetMasterPlansWithoutPagination'
+    getMasterPlansWithoutPagination: 'Plan/GetMasterPlansWithoutPagination',
+    getUserWorkSpaces: 'User/GetUserWorkSpaces',
+    unSubscriptionPlan: "Account/UnSubscriptionPlan",
+    resendEmailToInvitedUser: 'User/ResendEmailToInvitedUser',
+    setCurrentWorkSpace: 'WorkSpace/SetCurrentWorkSpace',
+    uploadFiles: "WorkSpace/UploadFiles",
 }   

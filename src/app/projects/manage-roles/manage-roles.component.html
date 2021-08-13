@@ -4,7 +4,7 @@
         <h2>Roles</h2>
     </div>
 </div>
-<div class="manage-organization-container container">
+<div class="manage-organization-container container" *ngIf="rolePermissions.canEdit">
     <div class="organization-wrapper row mb-5">
         <div class="col-sm-12">
             <div class="my-5 px-5 manage-organization-wrap">
@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                     <div class="form-group mt-5 row role-btn-container">
-                        <button type="button" class="btn btn-link btn-md text-bf">Back</button>
+                        <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
                         <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3 ">
                             Save
                             <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>

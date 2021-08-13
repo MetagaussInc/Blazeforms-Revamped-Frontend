@@ -6,6 +6,8 @@ import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { FormControl, FormGroup, ValidationErrors, Validators, AbstractControl } from '@angular/forms';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
+import { DataSharingService } from '../../shared/data-sharing.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manage-roles',
@@ -24,6 +26,7 @@ export class ManageRolesComponent implements OnInit {
   public rolePermissionData: any;
   public roleDetails: any[] = [];
   public isFormSubmitted: boolean = false;
+  public rolePermissions: any;
 
   roleAddForm = new FormGroup({
     Name: new FormControl('', [Validators.required],
@@ -33,11 +36,14 @@ export class ManageRolesComponent implements OnInit {
     IsActive: new FormControl(''),
   });
 
-  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private location: Location) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.SuperUserId = userInfo.Id;
-    })
+    });
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
+      if(!params.has('action') || !params.has('id') || !params.has('orgUserId') || !params.has('orgName')){
+        this.router.navigate(['/work-spaces']);
+      }
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
         let orgUserId: any = params.get('orgUserId');
@@ -50,6 +56,7 @@ export class ManageRolesComponent implements OnInit {
         this.getRoleDetail();
       }
     });
+    this.rolePermissions = this.dataSharingService.GetPermissions("Role");
   }
 
   ngOnInit(): void {
@@ -62,6 +69,13 @@ export class ManageRolesComponent implements OnInit {
     }
     this.http.call('getRoleDetails', 'POST', obj).subscribe(response => {
       this.rolePermissionData = response;
+      if(this.roledataId){
+        this.roleAddForm.patchValue({
+          Name: this.rolePermissionData.name,
+          Description: this.rolePermissionData.description,
+          IsActive: this.rolePermissionData.isActive,
+        });
+      }
     });
   }
 
@@ -115,6 +129,10 @@ export class ManageRolesComponent implements OnInit {
       }
     });
 
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   get Name() { return this.roleAddForm.get('Name'); }

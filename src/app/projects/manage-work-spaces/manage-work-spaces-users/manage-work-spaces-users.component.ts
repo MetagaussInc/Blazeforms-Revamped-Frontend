@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { InviteUserModalComponent } from './invite-user-modal/invite-user-modal.component';
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
+import { DataSharingService } from '../../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-manage-work-spaces-users',
@@ -23,8 +26,14 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
   public scrollCheck: boolean = false;
   public organizationId: any;
   public organizationUserId: any;
+  private userInfoSubscription$: any;
+  public userInfo: any;
+  public userPermissions: any;
 
-  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private store: Store, private dataSharingService: DataSharingService) {
+    this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
+    });
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -34,6 +43,7 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
         this.getAccountUsersData();
       }
     });
+    this.userPermissions = this.dataSharingService.GetPermissions("User");
   }
 
   ngOnInit(): void {
@@ -119,6 +129,19 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
 
   searchUsers(searchedString: any){
     this.searchedString = searchedString;
+  }
+
+  resendEmail(user: any){
+    const userData = {
+      CreatedBy: this.userInfo.Id,
+      Email: user.email,
+      SessionUser: this.organizationUserId,
+      UserType: "Invited",
+      WorkspaceId: this.organizationId
+    }
+    this.http.call('resendEmailToInvitedUser', 'POST', userData).subscribe(response => {
+      console.log(response);
+    });
   }
 
 }

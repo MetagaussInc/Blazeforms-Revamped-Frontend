@@ -1,0 +1,142 @@
+<div class="login-box row border rounded-lg" *ngIf="!showPlanPage">
+    <!--Login Area left Column-->
+    <div class="col-md-12">
+        <div class="left-column-top row px-3 pt-3">
+            <div class="register-heading-wrapper col-md-12 py-3 text-left">
+                <h4 class="register-heading">Add Organization</h4>
+            </div>
+            <div class="register-form col-md-12 mb-3">
+                <form [formGroup]="organizationSaveForm" autocomplete="off">
+                    <div class="row my-4  form-group">
+                        <div class="col-md-3">
+                            <label for="organization-name">Organization Name</label><span class="text-danger"> *</span>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="organization-name" formControlName="Name">
+                        </div>
+                        <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                            <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                            </div>
+                        </ng-container>
+                        <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="organization-email">Default Reply Email</label><span class="text-danger"> *</span>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Enter Email">
+                        </div>
+                        <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
+                            <div *ngIf="f.DefaultReplyEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                            </div>
+                            <div *ngIf="f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                            <!-- <div *ngIf="f.DefaultReplyEmail.errors?.specialCharInDomain"
+                                class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
+                            <div *ngIf="f.DefaultReplyEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                        </ng-container>
+                        <div *ngIf="f.DefaultReplyEmail.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                            Email is already exist</div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="country-select">Country</label>
+                        </div>
+                        <div class="col-9">
+                            <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control">
+                                <option [ngValue]="null" disabled>Select Country</option>
+                                <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="time-zone-select">Time Zone</label>
+                        </div>
+                        <div class="col-9">
+                            <select formControlName="Timezone" id="time-zone-select" name="Timezone" class="zone-selector form-control">
+                                <option [ngValue]="null" disabled>Select Timezone</option>
+                                <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="language-select">Language</label>
+                        </div>
+                        <div class="col-9">
+                            <select formControlName="Language" id="language-select" name="Language" class="language-selector form-control">
+                                <option [ngValue]="null" disabled>Select Language</option>
+                                <option *ngFor="let language of languageList" [ngValue]="language.value">{{language.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row my-4 form-group">
+                        <div class="col-md-3">
+                            <label for="currency-select">Currency</label>
+                        </div>
+                        <div class="col-9">
+                            <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control">
+                                <option [ngValue]="null" disabled>Select Currency</option>
+                                <option *ngFor="let currency of currencyList" [ngValue]="currency.value">{{currency.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row manage-btn-container mt-5">
+                        <button type="button" class="btn btn-link btn-md text-bf">Back</button>
+                        <button [disabled]="organizationSaveForm.invalid" (click)="submit()" type="button" class="btn btn-bf btn-md ml-3">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="login-box border rounded-lg" *ngIf="showPlanPage">
+    <div class="container py-3">
+        <div class="p-3 m-n3 overflow-hidden">                                                        
+            <swiper 
+            [slidesPerView]="3" 
+            [spaceBetween]="30"
+            [navigation]="true"
+            class="mySwiper">
+                <ng-container *ngFor="let plan of masterPlans; let i = index;">
+                    <ng-template swiperSlide>
+                        <div class="selected-plan-wrapper shadow-sm row no-gutters rounded border text-center">
+                            <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
+                                <div class="plan-name">
+                                    <h4 class="mb-n2"><strong>{{ plan.name }}</strong></h4>
+                                </div>
+                            </div>
+                            <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
+                                <div class="plan-price">
+                                    <h4><strong>US$</strong> {{ plan.price }}</h4>
+                                </div>
+                                <div class="plan-period mt-n2 text-secondary">amount / month</div>
+                            </div>
+                            <div class="col-md-12 p-2">
+                                <div class="plan-attributes-wrapper row px-2 py-4">
+                                    <div class="plan-attribute col-md-12 py-1">
+                                        <span>{{ plan.noOfUsers }}</span><span class="text-secondary"> Users</span>
+                                    </div>
+                                    <div class="plan-attribute col-md-12 py-1">
+                                        <span>{{ plan.noOfForms }}</span><span class="text-secondary"> Forms</span>
+                                    </div>
+                                    <div class="plan-attribute col-md-12 py-1">
+                                        <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
+                                    </div>
+                                    <div class="plan-attribute col-md-12 py-1">
+                                        <span>{{ plan.storageSize }} {{ plan.storageUnit }}</span><span class="text-secondary"> Storage</span>
+                                    </div>
+                                    <div class="plan-price-button col-md-12 mt-3">
+                                        <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </swiper>
+        </div>
+    </div>
+</div>

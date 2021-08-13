@@ -15,14 +15,14 @@
             </ul> -->
 
             <ul ngbNav #nav="ngbNav" class="nav-tabs">
-                <li [ngbNavItem]="1">
+                <li [ngbNavItem]="1" *ngIf="workspacePermissions.canView">
                     <a ngbNavLink>General</a>
                     <ng-template ngbNavContent>
                         <ng-container *ngIf="isOrganizationAdd">
                             <div class="tab-content px-4" id="add-organization-tabs">
                                 <div class="tab-pane fade show active" id="add-organization" role="tabpanel" aria-labelledby="add-organization-tab">
                                     <div class="my-5 add-organization-wrap">
-                                        <div class="login-area-container container d-flex align-items-center justify-content-center">
+                                        <div class="login-area-container container d-flex align-items-center justify-content-center" *ngIf="isSuperAdmin">
                                             <div class="login-box row border rounded-lg" *ngIf="!showPlanPage">
                                                 <!--Login Area left Column-->
                                                 <div class="left-column col-md-8">
@@ -262,6 +262,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="login-area-container container align-items-center justify-content-center" *ngIf="!isSuperAdmin">
+                                            <app-add-organization-without-super-admin></app-add-organization-without-super-admin>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -271,31 +274,31 @@
                         </ng-container>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="2" *ngIf="isOrganizationEdit">
+                <li [ngbNavItem]="2" *ngIf="isOrganizationEdit && workspacePermissions.canView">
                     <a ngbNavLink>Account Settings</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-account-settings></app-manage-work-spaces-account-settings>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="3" *ngIf="isOrganizationEdit">
+                <li [ngbNavItem]="3" *ngIf="isOrganizationEdit && workspacePermissions.canView">
                     <a ngbNavLink>Branding</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-branding></app-manage-work-spaces-branding>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="4" *ngIf="isOrganizationEdit">
+                <li [ngbNavItem]="4" *ngIf="isOrganizationEdit && userPermissions.canView">
                     <a ngbNavLink>Users</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-users></app-manage-work-spaces-users>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="5" *ngIf="isOrganizationEdit">
+                <li [ngbNavItem]="5" *ngIf="isOrganizationEdit && rolePermissions.canView">
                     <a ngbNavLink>Roles</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-roles></app-manage-work-spaces-roles>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="6" *ngIf="isOrganizationEdit">
+                <li [ngbNavItem]="6" *ngIf="isOrganizationEdit && planPermissions.canView">
                     <a ngbNavLink>Subscription</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-subscription></app-manage-work-spaces-subscription>

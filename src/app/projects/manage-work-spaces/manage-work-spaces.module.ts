@@ -22,6 +22,7 @@ import { DeleteRoleModalComponent } from './manage-work-spaces-roles/delete-role
 import { AddReferralLinkModalComponent } from './manage-work-spaces-referral-program/add-referral-link-modal/add-referral-link-modal.component';
 import { ReferFriendModalComponent } from './manage-work-spaces-referral-program/refer-friend-modal/refer-friend-modal.component';
 import { SwiperModule } from 'swiper/angular';
+import { AddOrganizationWithoutSuperAdminComponent } from './add-organization-without-super-admin/add-organization-without-super-admin.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SwiperModule } from 'swiper/angular';
     DeleteUserModalComponent,
     DeleteRoleModalComponent,
     AddReferralLinkModalComponent,
-    ReferFriendModalComponent
+    ReferFriendModalComponent,
+    AddOrganizationWithoutSuperAdminComponent
   ],
   imports: [
     CommonModule,
