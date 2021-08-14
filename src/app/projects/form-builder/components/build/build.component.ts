@@ -10,7 +10,7 @@ import { ConditionalRendereringModalComponent } from '../conditional-renderering
 })
 export class BuildComponent {
   model: any = {
-    name: ''
+    name: '',
   };
   selectedIndex: any;
   selectedElement: any;

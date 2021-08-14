@@ -419,6 +419,7 @@ app-build {
             background-color: white;
             margin: 0;
             border: 0;
+            outline: 0px;
             li {
                 padding: 0 !important;
                 margin: 0 !important;
@@ -443,7 +444,7 @@ app-build {
             -webkit-box-orient: horizontal;
             -webkit-box-direction: normal;
             box-sizing: border-box;
-            border: 1px dashed lightgrey;
+            border: 2px dashed rgb(206, 206, 206);
             background-color: white;
             padding: 0;
             min-height: 60px;
