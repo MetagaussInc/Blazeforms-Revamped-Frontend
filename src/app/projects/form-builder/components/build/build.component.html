@@ -54,7 +54,7 @@
                     <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
                     <ng-template ngbNavContent>
                         <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar p-0" id="form-builder-sidebar">
+                            <div class="col-md-3 sidebar-offcanvas form-builder-sidebar p-0" id="form-builder-sidebar">
                                 <div class="overflow-auto h-100" id="myIdentifier">
                                     <ul ngbNav #nav="ngbNav" class="nav nav-tabs bg-white justify-content-start nav-justified">
                                         <li ng-container ngbNavItem>
@@ -421,7 +421,7 @@
                                     <div [ngbNavOutlet]="nav" class="mt-2"></div>
                                 </div>
                             </div>
-                            <div class="col-md-9 col-lg-10 main">
+                            <div class="col-md-9 main">
                                 <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
                                     <div class="form-build-head">
@@ -560,6 +560,7 @@
                 <li ngbNavItem>
                     <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
                     <ng-template ngbNavContent>
+
                         <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
 
                     </ng-template>

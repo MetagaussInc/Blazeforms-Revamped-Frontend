@@ -664,3 +664,17 @@ app-build {
         visibility: visible;
     }
 }
+
+
+/*---- Form Publish----*/
+
+.formtabs-wrap ul.nav-tabs li.nav-item a {
+    background-color: $tabs-bg;
+    color: $tab-color;
+    border: 0px;
+}
+
+.formtabs-wrap ul.nav-tabs li.nav-item a.active {
+    background-color: $base-color;
+    color: $btn-text-color;
+}

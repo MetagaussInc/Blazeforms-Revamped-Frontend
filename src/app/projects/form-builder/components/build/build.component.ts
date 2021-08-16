@@ -8,7 +8,7 @@ import { ConditionalRendereringModalComponent } from '../conditional-renderering
   templateUrl: './build.component.html',
   styleUrls: ['./build.component.scss']
 })
-export class BuildComponent {
+export class BuildComponent  {
   model: any = {
     name: '',
   };
