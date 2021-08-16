@@ -3,6 +3,8 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 import { SharedData } from '../sharedData';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { DataSharingService } from '../../../shared/data-sharing.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manage-work-spaces-general',
@@ -35,8 +37,9 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public currencyList: any;
   public organizationId: any;
   public organizationUserId: any;
+  public isSuperAdmin: boolean = false;
 
-  constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService) {
+  constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -46,6 +49,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
         this.getCurrentWorkspaceData(this.organizationId, this.organizationUserId);
       }
     });
+    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
   }
 
   ngOnInit(): void {
@@ -62,13 +66,36 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
       IsOrganizationSettings: true,
       UserId: userId
     }
-    this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
-      let data = res.result.data;
-      this.organizationGeneralForm.patchValue({
-        Name: data.workSpaceName,
-        DefaultReplyEmail: data.email
-     });
-    })
+    if(this.isSuperAdmin){
+      this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
+        let data = res.result.data;
+        this.organizationGeneralForm.patchValue({
+          Name: data.workSpaceName,
+          DefaultReplyEmail: data.email,
+          Country: data.workspaceDetail.country,
+          Timezone: data.workspaceDetail.timeZoneId,
+          Language: data.workspaceDetail.language,
+          Currency: data.workspaceDetail.currency,
+          isActive: data.workspaceDetail.isActive,
+        });
+      });
+      console.log(this.organizationGeneralForm.value);
+    }
+    else{
+      this.http.call('setCurrentWorkSpace', 'POST', obj).subscribe(res => {
+        let data = res.result.data;
+        this.organizationGeneralForm.patchValue({
+          Name: data.workSpaceName,
+          DefaultReplyEmail: data.email,
+          Country: data.workspaceDetail.country,
+          Timezone: data.workspaceDetail.timeZoneId,
+          Language: data.workspaceDetail.language,
+          Currency: data.workspaceDetail.currency,
+          isActive: data.workspaceDetail.isActive,
+        });
+      });
+      console.log(this.organizationGeneralForm.value);
+    }
   }
 
   submit(){
@@ -83,8 +110,12 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
     })
   }
 
-  get WorkSpaceName() { return this.organizationGeneralForm.get('WorkSpaceName'); }
-  get Email() { return this.organizationGeneralForm.get('Email'); }
+  goBack() {
+    this.location.back();
+  }
+
+  get Name() { return this.organizationGeneralForm.get('Name'); }
+  get DefaultReplyEmail() { return this.organizationGeneralForm.get('DefaultReplyEmail'); }
   get Country() { return this.organizationGeneralForm.get('Country'); }
   get Timezone() { return this.organizationGeneralForm.get('Timezone'); }
   get Language() { return this.organizationGeneralForm.get('Language'); }

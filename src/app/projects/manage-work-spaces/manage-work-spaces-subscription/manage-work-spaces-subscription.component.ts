@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DataSharingService } from '../../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-manage-work-spaces-subscription',
@@ -21,8 +22,9 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   public paymentHistory: any;
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
+  public planPermissions: any;
 
-  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.SuperWorkSpaceId = userInfo.Id;
     });
@@ -36,6 +38,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
         this.getUserPlanHistoryData();
       }
     });
+    this.planPermissions = this.dataSharingService.GetPermissions("Plan");
   }
 
   ngOnInit(): void {

@@ -71,7 +71,7 @@
             <div class="col-9">
                 <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control">
                     <option [ngValue]="null" disabled>Select Currency</option>
-                    <option *ngFor="let currency of currencyList" [ngValue]="currency.value">{{currency.label}}</option>
+                    <option *ngFor="let currency of currencyList" [ngValue]="currency.label">{{currency.label}}</option>
                 </select>
             </div>
         </div>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="form-group row manage-btn-container mt-5">
-            <button type="button" class="btn btn-link btn-md text-bf">Back</button>
+            <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
             <button [disabled]="organizationGeneralForm.invalid" (click)="submit()" type="button" class="btn btn-bf btn-md ml-3">Save</button>
         </div>
     </form>

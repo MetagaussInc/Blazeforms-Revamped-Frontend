@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeleteRoleModalComponent } from './delete-role-modal/delete-role-modal.component';
+import { DataSharingService } from '../../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-manage-work-spaces-roles',
@@ -26,13 +27,14 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
   public scrollCheck: boolean = false;
   public organizationId: any;
   public organizationUserId: any;
-  public SuperWorkSpaceId: any;
+  public SuperUserId: any;
   public action: any;
   public organizationName: any;
+  public rolePermissions: any;
 
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
-      this.SuperWorkSpaceId = userInfo.Id;
+      this.SuperUserId = userInfo.Id;
     })
     
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
@@ -46,7 +48,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
         this.organizationName = decodeURIComponent(orgName);
       }
     });
-
+    this.rolePermissions = this.dataSharingService.GetPermissions("Role");
     this.getAccountRolesData();
   }
 
@@ -55,7 +57,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
 
   getAccountRolesData(){
     const accountRoleData = {
-      WorkSpaceId: this.SuperWorkSpaceId,
+      WorkSpaceId: this.organizationId,
       SearchKeyword: this.searchedString,
       ...this.pageDetail
     }
@@ -77,7 +79,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
       if (result === 'deleteRole') {
         const workdata = {
           Id: role.id,
-          ModifiedBy: this.SuperWorkSpaceId,
+          ModifiedBy: this.SuperUserId,
         }
         this.http.call('deleteRole', 'POST', workdata).subscribe(res => {
           if(res){

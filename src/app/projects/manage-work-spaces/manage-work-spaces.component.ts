@@ -6,6 +6,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+import { DataSharingService } from '../../shared/data-sharing.service';
 
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -50,8 +51,15 @@ export class ManageWorkSpacesComponent implements OnInit {
   public organizationName: any;
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
+  public workspacePermissions: any;
+  public planPermissions: any;
+  public userPermissions: any;
+  public rolePermissions: any;
+  public formPermissions: any;
+  public isSuperAdmin: boolean = false;
+  public userId: any;
 
-  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(!params.has('action')){
         this.router.navigate(['/work-spaces']);
@@ -69,6 +77,12 @@ export class ManageWorkSpacesComponent implements OnInit {
         this.organizationName = decodeURIComponent(orgName);
       }
     });
+    this.workspacePermissions = this.dataSharingService.GetPermissions("Organizations");
+    this.userPermissions = this.dataSharingService.GetPermissions("User");
+    this.rolePermissions = this.dataSharingService.GetPermissions("Role");
+    this.planPermissions = this.dataSharingService.GetPermissions("Plan");
+    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
+    this.userId = this.dataSharingService.GetUserId();
   }
 
   ngOnInit(): void {}
@@ -139,18 +153,30 @@ export class ManageWorkSpacesComponent implements OnInit {
   }
 
   submit(){
-    const obj = {
-      ...JSON.parse(JSON.stringify(this.organizationSignupForm.value)),
-      IsLinkActivated: false,
-      IsSuperAdmin: true,
-      PlanId: this.planDetails.id,
-      planDetails: this.planDetails
-    };
-    delete obj.confirmPassword;
-    delete obj.acceptAgreement;
-    this.http.call('signup', 'POST', obj).subscribe(res => {
-      this.router.navigate(['user/register-confirm'])
-    })
+    if(this.isSuperAdmin){
+      const obj = {
+        ...JSON.parse(JSON.stringify(this.organizationSignupForm.value)),
+        IsLinkActivated: false,
+        IsSuperAdmin: true,
+        PlanId: this.planDetails.id,
+        planDetails: this.planDetails
+      };
+      delete obj.confirmPassword;
+      delete obj.acceptAgreement;
+      this.http.call('signup', 'POST', obj).subscribe(res => {
+        this.router.navigate(['user/register-confirm'])
+      });
+    }
+    else{
+      const obj = {
+        ...JSON.parse(JSON.stringify(this.organizationSignupForm.value)),
+        UserId: this.userId
+      };
+      this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
+        //this.router.navigate(['user/register-confirm'])
+        this.planChange();
+      });
+    }
   }
 
   getMasterPlan(){

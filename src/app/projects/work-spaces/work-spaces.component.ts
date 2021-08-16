@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spaces.component';
 import { debounceTime, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DataSharingService } from '../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-work-spaces',
@@ -26,14 +27,18 @@ export class WorkSpacesComponent implements OnInit {
   public organizationLists: any[] = [];
   public totalOrgCount = 0;
   public scrollCheck: boolean = false;
+  public IsSuperAdmin: boolean = false;
+  public permissions: any;
 
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
-      console.log(userInfo);
       this.userInfo = userInfo;
+      if(this.userInfo.IsSuperAdmin){
+        this.IsSuperAdmin = true;
+      }
       this.getUserOrganizationsList();
     })
-    
+    this.permissions = this.dataSharingService.GetPermissions("Organizations");
   }
 
   ngOnInit(): void {}
@@ -44,14 +49,26 @@ export class WorkSpacesComponent implements OnInit {
       SearchKeyword: this.searchedString,
       ...this.pageDetail
     }
-    this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(response => {
-      this.totalOrgCount = response.total;
-      for (let i = 0; i < this.pageDetail.pageSize; ++i) {
-        if(response.res[i]){
-          this.organizationLists.push(response.res[i]);
+    if(this.IsSuperAdmin){
+      this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(response => {
+        this.totalOrgCount = response.total;
+        for (let i = 0; i < this.pageDetail.pageSize; ++i) {
+          if(response.res[i]){
+            this.organizationLists.push(response.res[i]);
+          }
         }
-      }
-    });
+      });
+    }
+    else{
+      this.http.call('getUserWorkSpaces', 'POST', workspacedata).subscribe(response => {
+        this.totalOrgCount = response.total;
+        for (let i = 0; i < this.pageDetail.pageSize; ++i) {
+          if(response.res[i]){
+            this.organizationLists.push(response.res[i]);
+          }
+        }
+      });
+    }
   }
 
   deleteUserOrganization(organization: any){
@@ -121,5 +138,13 @@ export class WorkSpacesComponent implements OnInit {
       });
       this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
     }    
+  }
+
+  UnSubscribePlan(stripeSubscriptionId: any){
+    if(stripeSubscriptionId){
+      this.http.call('unSubscriptionPlan', 'DELETE', {SubscriptionId: stripeSubscriptionId}).subscribe(response => {
+        console.log(response);
+      });
+    }
   }
 }
