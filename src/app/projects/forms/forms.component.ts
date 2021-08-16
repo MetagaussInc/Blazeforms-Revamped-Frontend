@@ -10,6 +10,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 import { MoveModalComponent } from './move-modal/move-modal.component';
 import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -32,7 +33,7 @@ export class FormsComponent implements OnInit {
   public allForms :any;
   public folderList: any;
   userInfo: any;
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.getFormsList(userInfo);
@@ -122,13 +123,23 @@ export class FormsComponent implements OnInit {
     const modalRef: any = this.modalService.open(EditFormModalComponent,{ size: 'lg' })
     modalRef.componentInstance.folderList = this.folderList;      
     modalRef.componentInstance.type = type;      
-    modalRef.componentInstance.modalType = 'add';      
+    modalRef.componentInstance.modalType = 'Add';      
+    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.UserId = this.userInfo.Id;
     
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
+      if (result?.message === 'added') {
+        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id}})
+      }
     }, (reason: any) => {
       console.log(`Dismissed `);
     });
+  }
+
+  openbuilder(form: any) {
+    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value}})
+
   }
 
   openPermissions(form: any) {
