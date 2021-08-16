@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~swiper/swiper-bundle';
 
 /* Importing Bootstrap SCSS file. */
 
@@ -80,9 +81,37 @@ h6 {
 .custom-control-input {
     &:checked~.custom-control-label {
         &::before {
-            color: #FFF;
-            background-color: #f04564;
-            border-color: #f04564;
+            color: #f04564;
+            background-color: transparent;
+            background-image: none;
+        }
+    }
+}
+
+.custom-control.custom-checkbox input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox] {
+    // display: none;
+    &:checked+label::before {
+        content: '\e834';
+        color: $base-color;
+        font-size: 1.5rem;
+    }
+    &:checked+label::after {
+        display: none;
+    }
+    &+label {
+        cursor: pointer;
+        &::before {
+            font-family: $fontIcon;
+            display: inline-block;
+            letter-spacing: 0.2rem;
+            content: '\e835';
+            font-size: 1.5rem;
+            border: 0px;
+            background: transparent;
         }
     }
 }
@@ -242,25 +271,6 @@ img {
     display: none;
 }
 
-input[type=checkbox] {
-    display: none;
-    &:checked+label::before {
-        content: '\e834';
-        color: $base-color;
-        font-size: 1.5rem;
-    }
-    &+label {
-        cursor: pointer;
-        &::before {
-            font-family: $fontIcon;
-            display: inline-block;
-            letter-spacing: 0.2rem;
-            content: '\e835';
-            font-size: 1.5rem;
-        }
-    }
-}
-
 app-form-builder {
     .builder-container {
         display: flex;
@@ -358,8 +368,8 @@ app-form-builder {
                     padding: 0 5px 5px 5px;
                 }
                 label {
-                    font-size: 0.6em;
-                    margin-left: 0.2em;
+                    // font-size: 0.6em;
+                    // margin-left: 0.2em;
                 }
                 input {
                     width: 100%;
@@ -409,6 +419,7 @@ app-build {
             background-color: white;
             margin: 0;
             border: 0;
+            outline: 0px;
             li {
                 padding: 0 !important;
                 margin: 0 !important;
@@ -433,7 +444,7 @@ app-build {
             -webkit-box-orient: horizontal;
             -webkit-box-direction: normal;
             box-sizing: border-box;
-            border: 1px dashed lightgrey;
+            border: 2px dashed rgb(206, 206, 206);
             background-color: white;
             padding: 0;
             min-height: 60px;
@@ -490,15 +501,13 @@ app-build {
                     max-height: 100%;
                     padding: 0 5px 5px 5px;
                 }
-                label {
-                    font-size: 0.6em;
-                    margin-left: 0.2em;
-                }
+                label {}
                 input {
                     box-sizing: border-box;
                 }
             }
             .ngx-dnd-item.gu-transit,
+            .ngx-dnd-item.current-active,
             .ngx-dnd-item:hover {
                 border: 1px dashed $base-color;
                 background-color: $bf-input-bg;
@@ -512,4 +521,146 @@ app-build {
 
 .email-sent-image-wrap img {
     width: 130px;
+}
+
+
+/* Slider */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Show 4th slide on md  if col-md-4*/
+    .carousel-inner .active.col-md-4.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+        position: absolute;
+        top: 0;
+        right: -33.3333%;
+        /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    /* Show 3rd slide on sm  if col-sm-6*/
+    .carousel-inner .active.col-sm-6.carousel-item+.carousel-item+.carousel-item {
+        position: absolute;
+        top: 0;
+        right: -50%;
+        /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+}
+
+@media (min-width: 576px) {
+    .carousel-item {
+        margin-right: 0;
+    }
+    /* show 2 items */
+    .carousel-inner .active+.carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item {
+        transition: none;
+    }
+    .carousel-inner .carousel-item-next {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+    /* left or forward direction */
+    .active.carousel-item-left+.carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left+.carousel-item,
+    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* farthest right hidden item must be abso position for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+    /* right or prev direction */
+    .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right+.carousel-item,
+    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+
+
+/*MD*/
+
+@media (min-width: 768px) {
+    /* show 3rd of 3 item slide */
+    .carousel-inner .active+.carousel-item+.carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item {
+        transition: none;
+    }
+    .carousel-inner .carousel-item-next {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* right or prev direction */
+    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+
+
+/*LG */
+
+@media (min-width: 991px) {
+    /* show 4th item */
+    .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item+.carousel-item {
+        transition: none;
+    }
+    /* Show 5th slide on lg if col-lg-3 */
+    .carousel-inner .active.col-lg-3.carousel-item+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+        position: absolute;
+        top: 0;
+        right: -25%;
+        /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* right or prev direction //t - previous slide direction last item animation fix */
+    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
 }
