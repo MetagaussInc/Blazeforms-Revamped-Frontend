@@ -28,33 +28,32 @@
     color: #495057;
 }
 
-.form-basic-control a i {
+.form-field-control a i {
     font-size: 1.2rem;
 }
 
-.form-basic-control a {
+.form-field-control a {
     font-size: 0.8rem;
     font-weight: 400;
     color: #212529;
 }
 
-#form-builder-sidebar {
-    background-color: #fff;
-}
+#form-builder-sidebar {}
+
 .dummy-c:before {
     text-align: center;
     content: "Drag and Drop Here";
     margin: 39%;
     position: relative;
     top: 40px;
-  }
+}
 
-  .dummy-c .ngx-dnd-container {
+.dummy-c .ngx-dnd-container {
     display: grid;
-  }
+}
 
-  .dummy-c {
+.dummy-c {
     .ngx-dnd-container {
         display: grid;
-        }
+    }
 }

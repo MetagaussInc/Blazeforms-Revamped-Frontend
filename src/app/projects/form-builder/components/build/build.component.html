@@ -48,41 +48,122 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0" id="form-builder-topbar">
-                    <li ng-container ngbNavItem>
-                        <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
-                        <ng-template ngbNavContent>
-                            <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar"
-                                    id="form-builder-sidebar">
-                                    <div class="overflow-auto h-100">
-                                        <ul ngbNav #nav="ngbNav"
-                                            class="nav nav-tabs justify-content-start nav-justified">
-                                            <li ng-container ngbNavItem>
-                                                <a ngbNavLink>Controls</a>
-                                                <ng-template ngbNavContent>
-                                                    <h4 class="text-center">Basic Controls</h4>
-                                                    <div class="form-basic-control">
-                                                        <ngx-dnd-container class="root-container"
-                                                            [model]="sourceBuilderTools"
-                                                            [dropZones]="['builder-target']" [copy]="true"
-                                                            [droppableItemClass]="'col-6'" direction="mixed">
-                                                            <ng-template let-item="model">
-                                                                <a href="#"
-                                                                    class="badge badge-pill w-100 border d-flex align-items-center">
-                                                                    <i
-                                                                        class="material-icons-outlined m-1">text_fields</i>
-                                                                    <span>{{item.name}}</span>
-                                                                </a>
-                                                            </ng-template>
-                                                        </ngx-dnd-container>
+        </div>
+        <div class="col-md-8">
+            <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white"
+                id="form-builder-topbar">
+                <li ng-container ngbNavItem>
+                    <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
+                    <ng-template ngbNavContent>
+                        <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
+                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar p-0"
+                                id="form-builder-sidebar">
+                                <div class="overflow-auto h-100" id="myIdentifier">
+                                    <ul ngbNav #nav="ngbNav"
+                                        class="nav nav-tabs bg-white justify-content-start nav-justified">
+                                        <li ng-container ngbNavItem>
+                                            <a ngbNavLink>Controls</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Basic Controls</h4>
+
+                                                    <ngx-dnd-container class="root-container"
+                                                        [model]="sourceBuilderTools" [dropZones]="['builder-target']"
+                                                        [copy]="true" [droppableItemClass]="'col-6 pr-2 py-2 pl-0'"
+                                                        direction="mixed">
+                                                        <!-- <ul class="list-unstyled row"> -->
+
+                                                        <ng-template let-item="model">
+                                                            <!-- <li class="col-sm-6 pr-1 my-1"> -->
+
+                                                            <a href="#"
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                                <i class="material-icons-outlined m-1">text_fields</i>
+                                                                <span>{{item.name}}</span>
+                                                            </a>
+
+                                                            <!-- </li> -->
+                                                        </ng-template>
+
+                                                        <!-- </ul> -->
+
+                                                    </ngx-dnd-container>
+
+                                                    <!-- <ul class="list-unstyled row">
+                                                    <li class="col-sm-6 pr-1 my-1"><a href="#"
+                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i><span>TextBox</span></a>
+                                                    </li>
+                                                    <li class="col-sm-6 pl-1 my-1"><a href="#"
+                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
+                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
+                                                    </li>
+                                                    <li class="col-sm-6 pr-1 my-1"><a href="#"
+                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
+                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
+                                                    </li>
+                                                    <li class="col-sm-6 pl-1 my-1"><a href="#"
+                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
+                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
+                                                    </li>
+                                                </ul> -->
+
+
+                                                </div>
+
+                                                <div class="form-field-control form-layout-controls bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Layout Controls</h4>
+                                                    <div class="row">
+                                                        <div class="col-6"><a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        </div>
                                                     </div>
-                                                </ng-template>
-                                            </li>
-                                            <li ngbNavItem>
-                                                <a ngbNavLink>Properties</a>
-                                                <ng-template ngbNavContent>
+                                                </div>
+
+                                                <div class="form-field-control form-advanced-controls bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
+                                                    <div class="row">
+                                                        <div class="col-6"><a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        </div>
+                                                        <div class="col-6"> <a
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                    class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </ng-template>
+                                        </li>
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>Properties</a>
+                                            <ng-template ngbNavContent>
+
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
+
                                                     <div *ngIf="selectedElement?.validations?.label" class="form-group">
                                                         <label for="text">Label</label>
                                                         <input id="text" name="text" [(ngModel)]="selectedElement.name"
@@ -109,6 +190,18 @@
                                                                         class="custom-control-label">{{key.label}}</label>
                                                                 </div>
                                                             </div>
+                                                            <!-- <div class="custom-controls-stacked">
+                                                            <div class="custom-control custom-radio">
+                                                                <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="Multiple Line">
+                                                                <label for="radio_1" class="custom-control-label">Multiple Line</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-controls-stacked">
+                                                            <div class="custom-control custom-radio">
+                                                                <input name="radio" id="radio_2" type="radio" class="custom-control-input" value="Password">
+                                                                <label for="radio_2" class="custom-control-label">Password</label>
+                                                            </div>
+                                                        </div> -->
                                                         </div>
                                                     </div>
                                                     <div *ngIf="selectedElement?.formValidation" class="form-group">
@@ -146,6 +239,7 @@
                                                         </div>
                                                         <button (click)="selectedElement.options.push('')">Add</button>
                                                     </div>
+
                                                     <div *ngIf="selectedElement?.validations?.ratingOptions"
                                                         class="form-group">
                                                         <label for="Default Value">Rating</label>
@@ -178,7 +272,23 @@
                                                                 (click)="selectedElement.ratingOptions.push('')">Add</button>
                                                         </div>
                                                     </div>
-                                                    <div *ngIf="selectedElement?.validations?.range" class="form-group">
+
+                                                    <select [(ngModel)]="selectedElement.selectedRatingScale">
+                                                        <option
+                                                            *ngFor="let key of selectedElement?.ratingScale | keyvalue"
+                                                            [value]="key.key">{{key.key}}</option>
+                                                    </select>
+
+                                                    <ng-container
+                                                        *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                        <div
+                                                            *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                            <input type="text"
+                                                                [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+
+                                                        </div>
+                                                    </ng-container>
+                                                    <div class="form-group" *ngIf="selectedElement?.validations?.range">
                                                         <label>Range</label>
                                                         <div style="display: flex;">
                                                             <div>
@@ -193,8 +303,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div *ngIf="selectedElement?.validations?.dateRange"
-                                                        class="form-group">
+                                                    <div class="form-group"
+                                                        *ngIf="selectedElement?.validations?.dateRange">
                                                         <label>Range</label>
                                                         <div style="display: flex;">
                                                             <div class="input-group">
@@ -322,44 +432,60 @@
                                                             <!-- <pre>{{model}}</pre> -->
                                                         </div>
                                                         <pre><code>{{targetBuilderTools | json}}</code></pre>
-
                                                     </div>
-                                                    <div *ngIf="selectedIndex === -1" style="height: 500px;"></div>
-                                                </ng-template>
-                                            </li>
-                                        </ul>
-                                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+                                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
                                 </div>
-                                <div class="col-md-9 col-lg-10 main">
-                                    <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
+                            </div>
+                            <div class="col-md-9 col-lg-10 main">
+                                <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
-                                        <!-- <div class="form-build-head">
-                                            <h3 class="text-center form-heading"> Registration Form</h3>
-                                            <p class="text-center text-muted"> Registration Form Description goes here</p>
-    
-                                        </div> -->
-                                        <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
-                                            dropZone="builder-target" [removeOnSpill]="true"
-                                            [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
-                                            direction="mixed" [moves]="abc" (over)="log1($event)">
+                                    <div class="form-build-head">
+                                        <h2 class="text-center form-heading mb-1"> Registration Form</h2>
+                                        <p class="text-center text-muted"> Registration Form Description goes here</p>
 
-                                            <ng-template let-model="model" let-index="index" let-template="template">
-                                                <div [ngSwitch]="model.inputType">
-                                                    <div *ngSwitchCase="'section'"
-                                                        (click)="sectionClicked($event, model, template)">
-                                                        <div class="shadow">
-                                                            {{model.name}}
+                                    </div>
+                                    <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
+                                        dropZone="builder-target" [removeOnSpill]="true"
+                                        [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
+                                        direction="mixed" [moves]="abc" (over)="log1($event)">
+
+                                        <ng-template let-model="model" let-index="index" let-template="template">
+                                            <div [ngSwitch]="model.inputType">
+                                                <div *ngSwitchCase="'section'"
+                                                    (click)="sectionClicked($event, model, template)">
+                                                    <div class="shadow">
+                                                        {{model.name}}
+                                                        <ngx-dnd-container *ngIf="!viewExportedView"
+                                                            dropZone="builder-target" [model]="model.children"
+                                                            [removeOnSpill]="false" [template]="template"
+                                                            [droppableItemClass]="droppableItemClass"
+                                                            (drag)="log($event)" (drop)="drop($event)"
+                                                            (over)="log($event)" (out)="log($event)"
+                                                            (remove)="log($event)" (cancel)="log($event)"
+                                                            direction="mixed">
+                                                        </ngx-dnd-container>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchCase="'repeatSection'"
+                                                    (click)="sectionClicked($event, model, template)">
+                                                    <div class="shadow">
+                                                        {{model.name}}
+                                                        <div
+                                                            (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
+                                                            Add</div>
+                                                        <div *ngFor="let rSection of model.childSection">
                                                             <ngx-dnd-container *ngIf="!viewExportedView"
-                                                                dropZone="builder-target" [model]="model.children"
+                                                                dropZone="builder-target" [model]="rSection.children"
                                                                 [removeOnSpill]="false" [template]="template"
                                                                 [droppableItemClass]="droppableItemClass"
-                                                                (drag)="log($event)" (drop)="drop($event)"
-                                                                (over)="log($event)" (out)="log($event)"
-                                                                (remove)="log($event)" (cancel)="log($event)"
                                                                 direction="mixed">
                                                             </ngx-dnd-container>
                                                         </div>
+
                                                     </div>
                                                     <div *ngSwitchCase="'repeatSection'"
                                                         (click)="sectionClicked($event, model, template)">
@@ -387,13 +513,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'DND'">
 
-                                                        <div class="bf-drop-zone-wrap bg-light text-center py-3">
-                                                            <i class="material-icons"> add </i>
-                                                            <div>Drop your control here</div>
-                                                        </div>
-                                                    </div>
                                                     <div *ngSwitchCase="'date'"
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
@@ -409,10 +529,10 @@
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'radio'"
-                                                        (click)="clicked($event, model, template)">
+                                                        (click)="clicked($event, model, template)" class="form-group">
                                                         <label>{{model.name}}</label>
                                                         <div *ngFor="let option of model.options"
-                                                            class="custom-controls-stacked">
+                                                            class="custom-control custom-radio">
                                                             <div (click)="model.value = option"
                                                                 class="custom-control custom-radio">
                                                                 <input name="radio" [value]="model.value"
@@ -423,7 +543,6 @@
                                                                     class="custom-control-label">{{option}}</label>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     <div *ngSwitchCase="'rating'"
                                                         (click)="clicked($event, model, template)">
@@ -439,24 +558,25 @@
                                                                     class="custom-control-input">
                                                             </div>
                                                         </div>
-
                                                     </div>
-                                                    <div *ngSwitchCase="'checkbox'"
+                                                    <div *ngSwitchCase="'checkbox'" class="form-group"
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
                                                         <div (click)="checkBox($event, model, option)"
-                                                            *ngFor="let option of model.options">
+                                                            *ngFor="let option of model.options"
+                                                            class="custom-control custom-checkbox">
                                                             <input type="checkbox" id="rememberMe{{option}}"
                                                                 name="rememberMe{{option}}"
                                                                 [checked]="model.value.includes(option)"
-                                                                [value]="option">{{option}}
+                                                                [value]="option" class="custom-control-input">
+                                                            <label class="custom-control-label"
+                                                                for="rememberMe{{option}}">{{option}}</label>
                                                         </div>
-
                                                     </div>
                                                     <div *ngSwitchCase="'dropdown'"
-                                                        (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <select [(ngModel)]="model.value">
+                                                        (click)="clicked($event, model, template)" class="form-group">
+                                                        <label class="col-form-label">{{model.name}}</label>
+                                                        <select [(ngModel)]="model.value" class="custom-select">
                                                             <option *ngFor="let option of model.options"
                                                                 [value]="option">
                                                                 {{option}}</option>
@@ -468,75 +588,79 @@
                                                         <label>{{model.name}}</label>
                                                         <app-signature-field [model]="model"></app-signature-field>
 
-
-                                                    </div>
-                                                    <div *ngSwitchDefault (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <app-ui-input [model]="model"
-                                                            [targetBuilderTools]="targetBuilderTools"
-                                                            *ngIf="!model?.dependUpon || checkForDependency(model) ">
-                                                        </app-ui-input>
-
                                                     </div>
                                                 </div>
-                                            </ng-template>
-                                        </ngx-dnd-container>
-                                        <div>
-                                            <div class="shadow">
+                                                <div *ngSwitchDefault (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <app-ui-input [model]="model"
+                                                        [targetBuilderTools]="targetBuilderTools"
+                                                        *ngIf="!model?.dependUpon || checkForDependency(model) ">
+                                                    </app-ui-input>
 
-                                                <ngx-dnd-container class="dummy-c" [model]="dummyContainer"
-                                                    dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
-                                                    Drag and Drop Here</ngx-dnd-container>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
+                                        </ng-template>
+                                    </ngx-dnd-container>
+                                    <div>
+                                        <div class="shadow">
 
-                                            <div>
-                                                <span>Line Items</span>
-                                                <span>Sub Total</span>
-                                                <span>Amount Due</span>
-                                            </div>
+                                            <ngx-dnd-container class="dummy-c" [model]="dummyContainer"
+                                                dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
+                                                Drag and Drop Here</ngx-dnd-container>
                                         </div>
                                     </div>
+                                    <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
+
+                                        <div>
+                                            <span>Line Items</span>
+                                            <span>Sub Total</span>
+                                            <span>Amount Due</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div>
+                                    </div> -->
                                 </div>
                             </div>
-                        </ng-template>
-                    </li>
-                    <li ngbNavItem>
-                        <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
-                        <ng-template ngbNavContent>
-                            <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+                        </div>
+                    </ng-template>
+                </li>
+                <li ngbNavItem>
+                    <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
+                    <ng-template ngbNavContent>
+                        <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
 
-                        </ng-template>
-                    </li>
+                    </ng-template>
+                </li>
 
-                    <li ngbNavItem>
-                        <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
-                        <ng-template ngbNavContent>
-                            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                                four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                beer mlkshk aliquip jean shorts ullamco ad vinyl
-                                cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-                                Keytar
-                                helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                                odio
-                                cillum wes anderson 8-bit, sustainable jean
-                                shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                                stumptown,
-                                tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                        </ng-template>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                right
-            </div>
-
+                <li ngbNavItem>
+                    <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
+                    <ng-template ngbNavContent>
+                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
+                            four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
+                            beer mlkshk aliquip jean shorts ullamco ad vinyl
+                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
+                            Keytar
+                            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
+                            odio
+                            cillum wes anderson 8-bit, sustainable jean
+                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                            stumptown,
+                            tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                    </ng-template>
+                </li>
+            </ul>
         </div>
-
-        <div [ngbNavOutlet]="nav" class="mt-0 tab-content"></div>
-
+        <div class="col-md-2">
+            right
+        </div>
+       
     </div>
+    <div class="col-md-2">
+        right
+    </div>
+
+    <div [ngbNavOutlet]="nav" class="mt-0 tab-content"></div>
+
 
 </ng-container>
 <ng-template #loading>
