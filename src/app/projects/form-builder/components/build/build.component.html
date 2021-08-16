@@ -487,109 +487,103 @@
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'repeatSection'"
-                                                        (click)="sectionClicked($event, model, template)">
-                                                        <div class="shadow">
-                                                            {{model.name}}
-                                                            <div
-                                                                (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
-                                                                Add</div>
-                                                            <div *ngFor="let rSection of model.childSection">
-                                                                <ngx-dnd-container *ngIf="!viewExportedView"
-                                                                    dropZone="builder-target"
-                                                                    [model]="rSection.children" [removeOnSpill]="false"
-                                                                    [template]="template"
-                                                                    [droppableItemClass]="droppableItemClass"
-                                                                    direction="mixed">
-                                                                </ngx-dnd-container>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div *ngSwitchCase="'fileupload'">
-                                                        <div class="">
-                                                            <label>File Upload</label>
-                                                            <input type="file">
-                                                        </div>
-
+                                                </div>
+                                                <div *ngSwitchCase="'fileupload'">
+                                                    <div class="">
+                                                        <label>File Upload</label>
+                                                        <input type="file">
                                                     </div>
 
-                                                    <div *ngSwitchCase="'date'"
-                                                        (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <div class="input-group">
-                                                            <input class="form-control" [minDate]="model.minVal"
-                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd"
-                                                                name="dp" [(ngModel)]="model.value" ngbDatepicker
-                                                                #d="ngbDatepicker">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-outline-secondary calendar"
-                                                                    (click)="d.toggle()" type="button"></button>
-                                                            </div>
+                                                </div>
+                                                <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" [minDate]="model.minVal"
+                                                            [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp"
+                                                            [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary calendar"
+                                                                (click)="d.toggle()" type="button"></button>
                                                         </div>
-                                                    </div>
-                                                    <div *ngSwitchCase="'radio'"
-                                                        (click)="clicked($event, model, template)" class="form-group">
-                                                        <label>{{model.name}}</label>
-                                                        <div *ngFor="let option of model.options"
-                                                            class="custom-control custom-radio">
-                                                            <div (click)="model.value = option"
-                                                                class="custom-control custom-radio">
-                                                                <input name="radio" [value]="model.value"
-                                                                    [checked]="model.value === option"
-                                                                    id="radio_0{{option}}" type="radio"
-                                                                    class="custom-control-input">
-                                                                <label for="radio_0"
-                                                                    class="custom-control-label">{{option}}</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div *ngSwitchCase="'rating'"
-                                                        (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <div class="row"
-                                                            *ngFor="let item of model.ratingOptions | keyvalue">
-                                                            <div class="col-2">{{item.key}}</div>
-                                                            <div class="col-2"
-                                                                *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
-                                                                <input name="radio" [value]="item.value"
-                                                                    [checked]="item.value === option"
-                                                                    id="radio_0{{option}}" type="radio"
-                                                                    class="custom-control-input">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div *ngSwitchCase="'checkbox'" class="form-group"
-                                                        (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <div (click)="checkBox($event, model, option)"
-                                                            *ngFor="let option of model.options"
-                                                            class="custom-control custom-checkbox">
-                                                            <input type="checkbox" id="rememberMe{{option}}"
-                                                                name="rememberMe{{option}}"
-                                                                [checked]="model.value.includes(option)"
-                                                                [value]="option" class="custom-control-input">
-                                                            <label class="custom-control-label"
-                                                                for="rememberMe{{option}}">{{option}}</label>
-                                                        </div>
-                                                    </div>
-                                                    <div *ngSwitchCase="'dropdown'"
-                                                        (click)="clicked($event, model, template)" class="form-group">
-                                                        <label class="col-form-label">{{model.name}}</label>
-                                                        <select [(ngModel)]="model.value" class="custom-select">
-                                                            <option *ngFor="let option of model.options"
-                                                                [value]="option">
-                                                                {{option}}</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div *ngSwitchCase="'sign'"
-                                                        (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
-                                                        <app-signature-field [model]="model"></app-signature-field>
-
                                                     </div>
                                                 </div>
+                                                <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)"
+                                                    class="form-group">
+                                                    <label>{{model.name}}</label>
+                                                    <div *ngFor="let option of model.options"
+                                                        class="custom-control custom-radio">
+                                                        <div (click)="model.value = option"
+                                                            class="custom-control custom-radio">
+                                                            <input name="radio" [value]="model.value"
+                                                                [checked]="model.value === option"
+                                                                id="radio_0{{option}}" type="radio"
+                                                                class="custom-control-input">
+                                                            <label for="radio_0"
+                                                                class="custom-control-label">{{option}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchCase="'rating'"
+                                                    (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <div class="row"
+                                                        *ngFor="let item of model.ratingOptions | keyvalue">
+                                                        <div class="col-2">{{item.key}}</div>
+                                                        <div class="col-2"
+                                                            *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
+                                                            <input name="radio" [value]="item.value"
+                                                                [checked]="item.value === option" id="radio_0{{option}}"
+                                                                type="radio" class="custom-control-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchCase="'checkbox'" class="form-group"
+                                                    (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <div (click)="checkBox($event, model, option)"
+                                                        *ngFor="let option of model.options"
+                                                        class="custom-control custom-checkbox">
+                                                        <input type="checkbox" id="rememberMe{{option}}"
+                                                            name="rememberMe{{option}}"
+                                                            [checked]="model.value.includes(option)" [value]="option"
+                                                            class="custom-control-input">
+                                                        <label class="custom-control-label"
+                                                            for="rememberMe{{option}}">{{option}}</label>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchCase="'dropdown'"
+                                                    (click)="clicked($event, model, template)" class="form-group">
+                                                    <label class="col-form-label">{{model.name}}</label>
+                                                    <select [(ngModel)]="model.value" class="custom-select">
+                                                        <option *ngFor="let option of model.options" [value]="option">
+                                                            {{option}}</option>
+                                                    </select>
+
+                                                </div>
+                                                <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <app-signature-field [model]="model"></app-signature-field>
+
+                                                </div>
+                                                <!-- <div *ngSwitchCase="'repeatSection'"
+                                                    (click)="sectionClicked($event, model, template)">
+                                                    <div class="shadow">
+                                                        {{model.name}}
+                                                        <div
+                                                            (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
+                                                            Add</div>
+                                                        <div *ngFor="let rSection of model.childSection">
+                                                            <ngx-dnd-container *ngIf="!viewExportedView"
+                                                                dropZone="builder-target" [model]="rSection.children"
+                                                                [removeOnSpill]="false" [template]="template"
+                                                                [droppableItemClass]="droppableItemClass"
+                                                                direction="mixed">
+                                                            </ngx-dnd-container>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div> -->
                                                 <div *ngSwitchDefault (click)="clicked($event, model, template)">
                                                     <label>{{model.name}}</label>
                                                     <app-ui-input [model]="model"
@@ -653,7 +647,7 @@
         <div class="col-md-2">
             right
         </div>
-       
+
     </div>
     <div class="col-md-2">
         right

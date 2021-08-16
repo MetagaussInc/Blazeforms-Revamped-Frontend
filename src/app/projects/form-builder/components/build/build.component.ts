@@ -248,7 +248,7 @@ userInfo: any;
       e.value.uiIndexId = this.count;
     }
     this.targetBuilderTools.push(e.value);
-    this.updateDnd();
+    // this.updateDnd();
     this.updateIndex(); // add rowId to all elements
     this.dummyContainer = [];
   }
