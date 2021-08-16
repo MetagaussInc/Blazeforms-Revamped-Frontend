@@ -8,6 +8,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { DataSharingService } from '../../shared/data-sharing.service';
 import { Location } from '@angular/common';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-manage-roles',
@@ -36,7 +37,7 @@ export class ManageRolesComponent implements OnInit {
     IsActive: new FormControl(''),
   });
 
-  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private location: Location) {
+  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.SuperUserId = userInfo.Id;
     });
@@ -63,9 +64,14 @@ export class ManageRolesComponent implements OnInit {
   }
 
   getRoleDetail(){
-    const obj = {
-      Id: this.roledataId,
+    let obj = {
       UserId: this.SuperUserId
+    }
+    if(this.roledataId){
+      let obj = {
+        Id: this.roledataId,
+        UserId: this.SuperUserId
+      }
     }
     this.http.call('getRoleDetails', 'POST', obj).subscribe(response => {
       this.rolePermissionData = response;
@@ -105,26 +111,49 @@ export class ManageRolesComponent implements OnInit {
             'PermissionId': item.permissionId, 'IsSelected': item.isActive
           });
         }
-        this.roleDetails.push({
-          'RoleId': this.roledataId, 'ModuleId': data.moduleId, 'Permissions': permissions, 'CreatedBy': this.SuperUserId, 'ModifiedBy': this.SuperUserId
-        });
+        
+        if(this.roledataId !== null){
+          console.log(this.roledataId);
+          this.roleDetails.push({
+            'ModuleId': data.moduleId, 'Permissions': permissions, 'CreatedBy': this.SuperUserId, 'ModifiedBy': this.SuperUserId
+          });
+        }
+        else{
+          this.roleDetails.push({
+            'RoleId': this.roledataId, 'ModuleId': data.moduleId, 'Permissions': permissions, 'CreatedBy': this.SuperUserId, 'ModifiedBy': this.SuperUserId
+          });
+        }
       }
     }
 
-    const obj = {
+    let obj = {
       ...JSON.parse(JSON.stringify(this.roleAddForm.value)),
       CreatedBy: this.SuperUserId,
       IsDeleted: false,
-      WorkSpaceId: "TXYu0NjodAYzBODQlLqdmg==",
+      WorkSpaceId: this.organizationId,
       isEditable: true,
       modulePermission: this.roleDetails
     }
-    if(this.roledataId){
-      obj.Id = this.roledataId;
-      obj.isActiveAssignedUser = true;
+    if(this.roledataId && this.roledataId !== null){
+      let obj = {
+        ...JSON.parse(JSON.stringify(this.roleAddForm.value)),
+        CreatedBy: this.SuperUserId,
+        IsDeleted: false,
+        WorkSpaceId: this.organizationId,
+        isEditable: true,
+        modulePermission: this.roleDetails,
+        Id: this.roledataId,
+        isActiveAssignedUser: true
+      }
     }
     this.http.call('saveRole', 'POST', obj).subscribe(response => {
       if(response.id){
+        if(this.roledataId){
+          this.toastService.showSuccess('Updated Successfully!');
+        }
+        else{
+          this.toastService.showSuccess('Saved Successfully!');
+        }
         this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: this.organizationId, orgUserId: this.organizationUserId, orgName: this.organizationName}});
       }
     });

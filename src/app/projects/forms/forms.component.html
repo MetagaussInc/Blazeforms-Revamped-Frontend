@@ -1,4 +1,3 @@
-<app-forms-header></app-forms-header>
 <div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
     <div class="container py-4">
         <h2>Forms</h2>
@@ -11,7 +10,7 @@
         </div>
 
     </div>
-    <div class="forms-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
+    <div class="forms-controls-wrapper d-flex flex-wrap justify-content-between mb-5" *ngIf="formPermissions.canView">
         <div class="add-form-wrapper">
             <button type="button" (click)="open()" id="add-form" class="btn btn-bf btn-sm" >
                 Add Form
@@ -25,7 +24,7 @@
         </div>
     </div>
     <ng-container *ngFor="let folder of formsList">
-        <div 
+        <div *ngIf="formPermissions.canView"
         [style.display]=" searchedString.length === 0 ? 'block' : !folder.childNameList?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'"
         class="forms-folder-wrapper row mb-5">
             <div class="folder-header col-md-12 mb-2">
@@ -37,8 +36,7 @@
                 </span>
             </div>
             <div class="forms-list col-md-12 border rounded">
-               
-                <ng-container *ngFor="let form of folder?.forms" >
+                <ng-container *ngFor="let form of folder?.forms">
                     <div 
                     *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.toLowerCase())"
                      class="form-list-item row p-3 border-bottom">
@@ -68,9 +66,9 @@
                         <i class="material-icons-round mr-3 text-dark" (click)="openModal(form.value)">people</i>
                         <i class="material-icons-round mr-3 text-dark" (click)="move(form)">drive_file_move</i>
                         <i class="material-icons-round mr-3 text-dark" (click)="archive(form)">archive</i>
-                        <i (click)="openEdit('form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
+                        <i *ngIf="formPermissions.canEdit" (click)="openEdit('form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
                             data-bs-target="#edit-form-modal">edit</i>
-                        <i (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
+                        <i *ngIf="formPermissions.canDelete" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                     </div>
                 </div>
             </ng-container>    
@@ -256,5 +254,3 @@
         </div>
     </div> -->
 </div>
-
-<app-forms-footer></app-forms-footer>

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../../shared/toast.service';
 
 @Component({
   selector: 'app-add-accounts-modal',
@@ -22,7 +23,7 @@ export class AddAccountsModalComponent implements OnInit {
     secretKey: new FormControl('', [Validators.required]),
   });
 
-  constructor(private http: HttpService, private router: Router, public activeModal: NgbActiveModal) { }
+  constructor(private http: HttpService, private router: Router, public activeModal: NgbActiveModal, private toastService: ToastService) { }
 
   ngOnInit(): void {
     if(this.data){
@@ -53,11 +54,13 @@ export class AddAccountsModalComponent implements OnInit {
       obj.id = this.data.id;
       obj.modifiedBy = this.workSpaceUserId;      
       this.http.call('updateWorkspaceAccountSettings', 'POST', obj).subscribe(res => {
+        this.toastService.showSuccess('Updated Successfully!');
         this.activeModal.close('getAccountsData');
       });
     }
     else{
       this.http.call('saveWorkspaceAccountSettings', 'POST', obj).subscribe(res => {
+        this.toastService.showSuccess('Saved Successfully!');
         this.activeModal.close('getAccountsData');
       });
     }

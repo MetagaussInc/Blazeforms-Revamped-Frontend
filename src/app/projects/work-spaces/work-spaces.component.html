@@ -1,4 +1,4 @@
-<app-work-spaces-header></app-work-spaces-header>
+<!-- <app-work-spaces-header></app-work-spaces-header> -->
 <div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
     <div class="container py-4">
         <h2>Organizations</h2>
@@ -17,7 +17,10 @@
             </a>
         </div>
     </div>
-    <div class="organization-wrapper row mb-5 overflow-auto height-fix">
+    <div class="spinner-grow text-bf text-center" role="status" *ngIf="isLoading">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="organization-wrapper row mb-5 overflow-auto height-fix" *ngIf="!isLoading">
         <div class="organization-list col-md-12 border rounded" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="scrollCheck" (scrolled)="onScroll()">
             <ng-container *ngFor="let organization of organizationLists">
                 <div *ngIf="permissions.canView" [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'">
@@ -45,7 +48,10 @@
                     </div>
                 </div>
             </ng-container>
+            <div class="spinner-grow text-bf text-center" role="status" *ngIf="isPaginationLoading">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
 </div>
-<app-work-spaces-footer></app-work-spaces-footer>
+<!-- <app-work-spaces-footer></app-work-spaces-footer> -->
