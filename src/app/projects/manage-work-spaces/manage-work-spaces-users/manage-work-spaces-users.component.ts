@@ -7,6 +7,7 @@ import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { InviteUserModalComponent } from './invite-user-modal/invite-user-modal.component';
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
 import { DataSharingService } from '../../../shared/data-sharing.service';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-manage-work-spaces-users',
@@ -30,7 +31,7 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
   public userInfo: any;
   public userPermissions: any;
 
-  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private store: Store, private dataSharingService: DataSharingService) {
+  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private store: Store, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
     });
@@ -117,6 +118,7 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
         }
         this.http.call('deleteUserFromWorkspace', 'POST', workdata).subscribe(res => {
           if(res == true){
+            this.toastService.showSuccess('Deleted Successfully!');
             this.accountUsersLists = [];
             this.getAccountUsersData();
           }
@@ -140,7 +142,7 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
       WorkspaceId: this.organizationId
     }
     this.http.call('resendEmailToInvitedUser', 'POST', userData).subscribe(response => {
-      console.log(response);
+      this.toastService.showSuccess('Email Sent Successfully!');
     });
   }
 

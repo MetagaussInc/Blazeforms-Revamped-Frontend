@@ -10,6 +10,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { RestrictFormEntriesComponent } from './restrict-form-entries/restrict-form-entries.component';
 import { MoveModalComponent } from './move-modal/move-modal.component';
 import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
+import { DataSharingService } from '../../shared/data-sharing.service';
+
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -32,12 +34,13 @@ export class FormsComponent implements OnInit {
   public allForms :any;
   public folderList: any;
   userInfo: any;
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal) {
+  public formPermissions: any;
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.getFormsList(userInfo);
     })
-    
+    this.formPermissions = this.dataSharingService.GetPermissions("Forms");
   }
 
   getFormsList(userInfo: any) {
@@ -70,10 +73,8 @@ export class FormsComponent implements OnInit {
     }
     this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
       const arr: any = [];
-      console.log(res)
       this.getfolderNameWithForms(res, arr);
       this.formsList = arr;
-      console.log(this.formsList)
     })
   }
 
@@ -165,7 +166,6 @@ export class FormsComponent implements OnInit {
   }
 
   archive(form: any) {
-    console.log('archive', form)
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
     modalRef.componentInstance.message = `Are you sure you want to archive ${form.text} forms`;      
     modalRef.componentInstance.modalName = 'Archive'; 
@@ -181,7 +181,6 @@ export class FormsComponent implements OnInit {
   }
 
   deleteForm(form: any) {
-    console.log('delete', form)
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
     modalRef.componentInstance.message = `Are you sure you want to delete ${form.text} forms`;      
     modalRef.componentInstance.modalName = 'Delete'; 

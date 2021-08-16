@@ -15,12 +15,18 @@ import { AuthenticateComponent } from './component/authenticate/authenticate.com
 import { JwtInterceptor } from './config/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './config/interceptors/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastComponent } from './toast/toast.component';
+import { FormsHeaderComponent } from './projects/forms/forms-header/forms-header.component';
+import { FormsFooterComponent } from './projects/forms/forms-footer/forms-footer.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    ToastComponent,
+    FormsHeaderComponent,
+    FormsFooterComponent
   ],
   imports: [
     BrowserModule,

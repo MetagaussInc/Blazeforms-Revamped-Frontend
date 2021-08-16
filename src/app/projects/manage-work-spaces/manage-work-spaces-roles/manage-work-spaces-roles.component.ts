@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeleteRoleModalComponent } from './delete-role-modal/delete-role-modal.component';
 import { DataSharingService } from '../../../shared/data-sharing.service';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-manage-work-spaces-roles',
@@ -32,8 +33,9 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
   public organizationName: any;
   public rolePermissions: any;
 
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
       this.SuperUserId = userInfo.Id;
     })
     
@@ -57,7 +59,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
 
   getAccountRolesData(){
     const accountRoleData = {
-      WorkSpaceId: this.organizationId,
+      WorkSpaceId: this.userInfo.WorkspaceId,
       SearchKeyword: this.searchedString,
       ...this.pageDetail
     }
@@ -83,6 +85,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
         }
         this.http.call('deleteRole', 'POST', workdata).subscribe(res => {
           if(res){
+            this.toastService.showSuccess('Deleted Successfully!');
             this.accountRolesLists = [];
             this.getAccountRolesData();
           }

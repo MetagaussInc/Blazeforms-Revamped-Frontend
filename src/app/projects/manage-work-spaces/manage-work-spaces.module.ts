@@ -5,8 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ManageWorkSpacesRoutingModule } from './manage-work-spaces-routing.module';
 import { ManageWorkSpacesComponent } from './manage-work-spaces.component';
-import { ManageWorkSpacesHeaderComponent } from './manage-work-spaces-header/manage-work-spaces-header.component';
-import { ManageWorkSpacesFooterComponent } from './manage-work-spaces-footer/manage-work-spaces-footer.component';
+//import { ManageWorkSpacesHeaderComponent } from './manage-work-spaces-header/manage-work-spaces-header.component';
+//import { ManageWorkSpacesFooterComponent } from './manage-work-spaces-footer/manage-work-spaces-footer.component';
 import { ManageWorkSpacesGeneralComponent } from './manage-work-spaces-general/manage-work-spaces-general.component';
 import { ManageWorkSpacesAccountSettingsComponent } from './manage-work-spaces-account-settings/manage-work-spaces-account-settings.component';
 import { ManageWorkSpacesBrandingComponent } from './manage-work-spaces-branding/manage-work-spaces-branding.component';
@@ -27,8 +27,8 @@ import { AddOrganizationWithoutSuperAdminComponent } from './add-organization-wi
 @NgModule({
   declarations: [
     ManageWorkSpacesComponent,
-    ManageWorkSpacesHeaderComponent,
-    ManageWorkSpacesFooterComponent,
+    //ManageWorkSpacesHeaderComponent,
+    //ManageWorkSpacesFooterComponent,
     ManageWorkSpacesGeneralComponent,
     ManageWorkSpacesAccountSettingsComponent,
     ManageWorkSpacesBrandingComponent,

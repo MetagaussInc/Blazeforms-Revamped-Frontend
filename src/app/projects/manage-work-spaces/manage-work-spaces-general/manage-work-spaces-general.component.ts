@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { DataSharingService } from '../../../shared/data-sharing.service';
 import { Location } from '@angular/common';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-manage-work-spaces-general',
@@ -38,8 +39,9 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public organizationId: any;
   public organizationUserId: any;
   public isSuperAdmin: boolean = false;
+  public logo: any;
 
-  constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location) {
+  constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -66,46 +68,53 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
       IsOrganizationSettings: true,
       UserId: userId
     }
+    let dataRes: any;
     if(this.isSuperAdmin){
       this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
-        let data = res.result.data;
+        dataRes = res.result.data;
+        let timezoneData;
+        if(dataRes.workspaceDetail.timeZoneId){
+          timezoneData = dataRes.workspaceDetail.timeZoneId.toString();
+        }
         this.organizationGeneralForm.patchValue({
-          Name: data.workSpaceName,
-          DefaultReplyEmail: data.email,
-          Country: data.workspaceDetail.country,
-          Timezone: data.workspaceDetail.timeZoneId,
-          Language: data.workspaceDetail.language,
-          Currency: data.workspaceDetail.currency,
-          isActive: data.workspaceDetail.isActive,
+          Name: dataRes.workSpaceName,
+          DefaultReplyEmail: dataRes.email,
+          Country: dataRes.workspaceDetail.country,
+          Timezone: timezoneData,
+          Language: dataRes.workspaceDetail.language,
+          Currency: dataRes.workspaceDetail.currency,
+          isActive: dataRes.workspaceDetail.isActive,
         });
       });
-      console.log(this.organizationGeneralForm.value);
     }
     else{
       this.http.call('setCurrentWorkSpace', 'POST', obj).subscribe(res => {
-        let data = res.result.data;
+        dataRes = res.result.data;
+        let timezoneData;
+        if(dataRes.workspaceDetail.timeZoneId){
+          timezoneData = dataRes.workspaceDetail.timeZoneId.toString();
+        }
         this.organizationGeneralForm.patchValue({
-          Name: data.workSpaceName,
-          DefaultReplyEmail: data.email,
-          Country: data.workspaceDetail.country,
-          Timezone: data.workspaceDetail.timeZoneId,
-          Language: data.workspaceDetail.language,
-          Currency: data.workspaceDetail.currency,
-          isActive: data.workspaceDetail.isActive,
+          Name: dataRes.workSpaceName,
+          DefaultReplyEmail: dataRes.email,
+          Country: dataRes.workspaceDetail.country,
+          Timezone: timezoneData,
+          Language: dataRes.workspaceDetail.language,
+          Currency: dataRes.workspaceDetail.currency,
+          isActive: dataRes.workspaceDetail.isActive,
         });
       });
-      console.log(this.organizationGeneralForm.value);
     }
   }
 
   submit(){
-    console.log(this.organizationGeneralForm.value);
     const obj = {
       ...JSON.parse(JSON.stringify(this.organizationGeneralForm.value)),
       Id: this.organizationId,
       UserId: this.organizationUserId
     };
     this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
+      this.toastService.showSuccess('Saved Successfully!');
       this.router.navigate(['/work-spaces']);
     })
   }

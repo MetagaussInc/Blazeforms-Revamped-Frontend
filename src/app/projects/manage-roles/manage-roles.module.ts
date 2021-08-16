@@ -5,15 +5,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ManageRolesRoutingModule } from './manage-roles-routing.module';
 import { ManageRolesComponent } from './manage-roles.component';
-import { ManageRolesHeaderComponent } from './manage-roles-header/manage-roles-header.component';
-import { ManageRolesFooterComponent } from './manage-roles-footer/manage-roles-footer.component';
+//import { ManageRolesHeaderComponent } from './manage-roles-header/manage-roles-header.component';
+//import { ManageRolesFooterComponent } from './manage-roles-footer/manage-roles-footer.component';
 
 
 @NgModule({
   declarations: [
     ManageRolesComponent,
-    ManageRolesHeaderComponent,
-    ManageRolesFooterComponent,
+    //ManageRolesHeaderComponent,
+    //ManageRolesFooterComponent,
   ],
   imports: [
     CommonModule,

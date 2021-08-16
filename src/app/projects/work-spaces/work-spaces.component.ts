@@ -29,6 +29,8 @@ export class WorkSpacesComponent implements OnInit {
   public scrollCheck: boolean = false;
   public IsSuperAdmin: boolean = false;
   public permissions: any;
+  public isPaginationLoading: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -57,6 +59,7 @@ export class WorkSpacesComponent implements OnInit {
             this.organizationLists.push(response.res[i]);
           }
         }
+        this.isPaginationLoading = false;
       });
     }
     else{
@@ -67,6 +70,7 @@ export class WorkSpacesComponent implements OnInit {
             this.organizationLists.push(response.res[i]);
           }
         }
+        this.isPaginationLoading = false;
       });
     }
   }
@@ -116,6 +120,7 @@ export class WorkSpacesComponent implements OnInit {
   }
 
   onScroll(){
+    this.isPaginationLoading = true;
     this.pageDetail.pageNumber++;
     this.getUserOrganizationsList();
     if(this.organizationLists.length >= this.totalOrgCount){

@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../../shared/toast.service';
 
 @Component({
   selector: 'app-invite-user-modal',
@@ -26,7 +27,7 @@ export class InviteUserModalComponent implements OnInit {
     RoleId: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private http: HttpService, private router: Router, public activeModal: NgbActiveModal) {}
+  constructor(private http: HttpService, private router: Router, public activeModal: NgbActiveModal, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.http.call('getActiveRoles', 'POST', {WorkSpaceId: this.workSpaceId}).subscribe(response => {
@@ -63,6 +64,7 @@ export class InviteUserModalComponent implements OnInit {
       obj.Id = this.data.id;
       obj.WorkspaceId = this.workSpaceId;
       this.http.call('updateInvitedUser', 'POST', obj).subscribe(res => {
+        this.toastService.showSuccess('Invited Successfully!');
         this.activeModal.close('getAccountUsersData');
       });
     }
@@ -73,6 +75,7 @@ export class InviteUserModalComponent implements OnInit {
           this.planError = true;
         }
         else{
+          this.toastService.showSuccess('Invited Successfully!');
           this.activeModal.close('getAccountUsersData');
         }
       });

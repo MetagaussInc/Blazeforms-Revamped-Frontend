@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddAccountsModalComponent } from './add-accounts-modal/add-accounts-modal.component';
 import { DeleteAccountsModalComponent } from './delete-accounts-modal/delete-accounts-modal.component';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-manage-work-spaces-account-settings',
@@ -25,7 +26,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
   public organizationId: any;
   public organizationUserId: any;
 
-  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute) {
+  constructor(private http: HttpService, private modalService: NgbModal, private router: Router, private Activatedroute: ActivatedRoute, private toastService: ToastService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -101,6 +102,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
         }
         this.http.call('deleteWorkspaceAccountSettings', 'POST', workdata).subscribe(res => {
           if(res == true){
+            this.toastService.showSuccess('Deleted Successfully!');
             this.accountsLists = [];
             this.getAccountsData();
           }

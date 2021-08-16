@@ -6,13 +6,13 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </div>
-        <div class="nav-area col d-flex flex-nowrap align-items-center justify-content-end">
+        <div class="nav-area col d-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
             <div class="nav mr-5">
-                <div class="nav-item active p-4">
-                    Forms
+                <div class="nav-item active p-4" [hidden]="formPermission.canView">
+                    <a [routerLink]="['/forms']">Forms</a>
                 </div>
-                <div class="nav-item p-4">
-                    Organizations
+                <div class="nav-item p-4" [hidden]="organizationPermission.canView">
+                    <a [routerLink]="['/work-spaces']">Organizations</a>
                 </div>
             </div>
             <div class="org-switch-wrapper mx-4 bg-light">
