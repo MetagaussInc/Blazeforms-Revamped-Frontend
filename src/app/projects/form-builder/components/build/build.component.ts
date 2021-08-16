@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { selectUserInfo } from 'src/app/+state/user/user.selectors';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 import { config } from '../../input.config';
+import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 
 @Component({
@@ -18,6 +23,7 @@ export class BuildComponent {
   selectedDependency: any;
   count = 0;
   dummyContainer: any = [];
+  formLoaded = false;
   PaymentModel = {
     name: 'Calculations',
   textValue: '',
@@ -37,8 +43,14 @@ export class BuildComponent {
   showSubTotal: true,
   showLineItems: true,
   mapBillingFields: true,
-  stripeAccount: '',
-  stripeAccounts: [],
+  stripeAccount: 'Dummy',
+  stripeAccounts: [
+    {
+      name: 'Dummy',
+      secretKey: '',
+      sKey: ''
+    }
+  ],
   extraBill: [
     {
        value: null,
@@ -50,99 +62,69 @@ export class BuildComponent {
       billing: true
   }
 }
-  // sourceBuilderTools = [
-  //   { 
-  //     name: 'Section', 
-  //     value: '', children: [] as any[], 
-  //     inputType: 'section', 
-  //     icon: 'far fa-square', 
-  //     class: 'wide' },
-  //   {
-  //     name: 'Text', 
-  //     textValue: '',
-  //     minCharacter: 0,
-  //     maxCharacter: 100, 
-  //     value: '', inputType: 'string', 
-  //     icon: 'fas fa-language', 
-  //     class: 'full', placeholder: ''
-  //   },
-  //   {
-  //     name: 'First Name', 
-  //     textValue: '',
-  //     minCharacter: 0,
-  //     maxCharacter: 100, 
-  //     value: '', inputType: 'string', 
-  //     icon: 'fas fa-language', 
-  //     class: 'full', placeholder: '',
-  //     isRequired: true,
-  //   },
-  //   {
-  //     name: 'Last Name', 
-  //     textValue: '',
-  //     minCharacter: 0,
-  //     maxCharacter: 100, 
-  //     value: '', inputType: 'string', 
-  //     icon: 'fas fa-language', 
-  //     class: 'full', placeholder: ''
-
-  //   },
-  //   {
-  //     name: 'Number', 
-  //     inputType: 'number', 
-  //     icon: 'fas fa-hashtag', 
-  //     class: 'half',
-  //     placeholder: '',
-  //     numericValue: 0,
-  //     value: undefined,
-  //     minCharacter: 0,
-  //     maxCharacter: 100,
-  //     validations: {
-  //       config: {
-  //         minLength: {
-  //           enabled: true,
-  //           value: 10,
-  //           errorMessage: "Min length should be 10"
-  //         }
-  //       },
-  //       props: {
-  //         minLenth: {
-  //           value: 10
-  //         }
-  //       }
-  //     },
-  //   },
-  //   {
-  //     name: 'Phone Number', 
-  //     inputType: 'number', 
-  //     icon: 'fas fa-hashtag', 
-  //     class: 'half',
-  //     placeholder: '',
-  //     numericValue: 0,
-  //     value: undefined,
-  //     minCharacter: 9,
-  //     maxCharacter: 11,
-  //     validations: {
-  //       config: {
-  //         minLength: {
-  //           enabled: true,
-  //           value: 10,
-  //           errorMessage: "Min length should be 10"
-  //         }
-  //       },
-  //       props: {
-  //         minLenth: {
-  //           value: 10
-  //         }
-  //       },
-  //     },
-  //   }
-  // ];
+userInfoSubscription$: any;
+userInfo: any;
   sourceBuilderTools = config;
   targetBuilderTools: any = [];
 
-  constructor(private modalService: NgbModal) {
-
+  builderObj: any = {
+    MiscellaneousJSON:''
+  };
+  stripeAccounts: any;
+  constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store) {
+    this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
+      if (userInfo) {
+        this.route.queryParams.subscribe(res => {
+          this.getForm(res?.ID )
+        })
+      }
+    })
   }
+
+  getForm(ID: any) {
+    const payload = {
+      FormEntriesId: null, // to do
+      Id: '3YQ87BkPnd70p3GoSnSm4g==',
+      Name: null, // to do
+      WorkSpaceName: null, // to do
+      userID: this.userInfo.Id
+    }
+    this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
+      this.builderObj =  Object.assign(this.builderObj, res);
+      console.log(this.builderObj)
+      this.formLoaded = true;
+      this.targetBuilderTools = JSON.parse(this.builderObj.miscellaneousJSON)
+      this.getWorkSpaceAccounts();
+    })
+  }
+
+  saveForm() {
+    const payload = {
+      CreatedBy: this.builderObj.createdBy,
+      DependenciesJSON: "", //to do
+      Description: "", // to do
+      FormChanges: true, // to do
+      FormNewJSON: "", // to do
+      FormSettings: "", // to do
+      FormStyleJson: "", // to do
+      Id: this.builderObj.id,
+      LabelsDifference: false, // to do
+      Name: this.builderObj.name,
+      SubmissionButtonName: "", //to do
+      SubmissionDependenciesJSON: "[]",
+      SubmissionSettings: "",
+      URL: "",
+      WorkFlowLevels: null,
+      WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
+      formLabels: "",
+      MiscellaneousJSON: JSON.stringify(this.targetBuilderTools)
+    }
+    this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
+      console.log(res)
+    })
+  }
+
   addDependency(event: any) {
     console.log(event.target.value);
     this.targetBuilderTools[this.selectedIndex].dependUpon = event.target.value ? { elementId: event.target.value } : null;
@@ -252,6 +234,9 @@ export class BuildComponent {
     this.updateIndex();
     this.dummyContainer = [];
     this.removeLastTwoDropDowns()
+    setTimeout(() => {
+      this.saveForm()
+    }, 100);
   }
 
   abc($event: any, source: any, handle: any, sibling: any): boolean {
@@ -431,5 +416,27 @@ export class BuildComponent {
       $event.value.class = 'd-none'
 
     }
+  }
+
+  addNewStripeAccount() {
+    const modalRef: any = this.modalService.open(AddStripeAccountComponent, { size: 'lg' })
+    modalRef.componentInstance.config = {
+      ...this.builderObj
+    }
+    modalRef.result.then((result: any) => {
+      console.log(`Closed with: ${result}`);
+      if (result === 'added') {
+        this.getWorkSpaceAccounts()
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  getWorkSpaceAccounts() {
+    this.http.call('GetWorkspaceAccountSettingsByWorkspaceId', 'POST', {WorkspaceId: this.userInfo.WorkspaceDetail.Id}).subscribe(res => {
+      this.stripeAccounts = res;
+      console.log(res)
+    })
   }
 }

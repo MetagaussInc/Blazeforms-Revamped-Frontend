@@ -1,0 +1,56 @@
+<!--Edit form Modal-->
+<div class="" tabindex="-1" id="edit-form-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add Account</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form [formGroup]="stripeForm" (keyup.enter)="!stripeForm.invalid">
+            <div class="modal-body">
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-name">Account Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" formControlName="accountName" class="form-control" placeholder="Account Name">
+                        <ng-container *ngIf="f.accountName.invalid && (f.accountName.dirty || f.accountName.touched)">
+                            <div *ngIf="f.accountName.errors?.required || f.accountName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Account Name is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-desc">Publishable Key</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" formControlName="publishableKey" placeholder="Publishable Key">
+                        <ng-container *ngIf="f.publishableKey.invalid && (f.publishableKey.dirty || f.publishableKey.touched)">
+                            <div *ngIf="f.publishableKey.errors?.required" class="field-error text-right mt-1 pr-2 small">Publishable Key is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-desc">Secret Key</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" formControlName="secretKey" placeholder="Secret Key">
+                        <ng-container *ngIf="f.secretKey.invalid && (f.secretKey.dirty || f.secretKey.touched)">
+                            <div *ngIf="f.secretKey.errors?.required" class="field-error text-right mt-1 pr-2 small">Secret Key is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <div class="modal-footer border-0">
+            <button type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-bf btn-sm" [disabled]="stripeForm.invalid" (click)="saveAccount()">Save</button>
+        </div>
+    </div>
+</div>
