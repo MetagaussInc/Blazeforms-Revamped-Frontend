@@ -215,7 +215,7 @@
                                                         </select>
 
                                                         <ng-container
-                                                            *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                            *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
                                                             <div
                                                                 *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
                                                                 <input type="text"
@@ -235,16 +235,17 @@
                                                             <button
                                                                 (click)="selectedElement.ratingOptions.push('')">Add</button>
                                                         </div>
+                                                        <select [(ngModel)]="selectedElement.selectedRatingScale">
+                                                            <option
+                                                                *ngFor="let key of selectedElement?.ratingScale | keyvalue"
+                                                                [value]="key.key">{{key.key}}</option>
+                                                        </select>
                                                     </div>
 
-                                                    <select [(ngModel)]="selectedElement.selectedRatingScale">
-                                                        <option
-                                                            *ngFor="let key of selectedElement?.ratingScale | keyvalue"
-                                                            [value]="key.key">{{key.key}}</option>
-                                                    </select>
+                                                    
 
                                                     <ng-container
-                                                        *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                        *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
                                                         <div
                                                             *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
                                                             <input type="text"
