@@ -1,0 +1,102 @@
+<form #parentForm="ngForm" (submit)="submitParentForm(parentForm)">
+    {{parentForm.valid}}
+
+    <ng-template ngFor let-form [ngForOf]="elements" let-index="index" let-isLast="last">
+        <ng-container *ngIf="form.inputType === 'string'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'section'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <app-exported-view [elements]="form.childSection"></app-exported-view>
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'repeatSection'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <div (click)="form.childSection.push(form.childSection[form.childSection.length - 1])">
+                    Add</div>
+                <app-exported-view [elements]="form.childSection"></app-exported-view>
+
+
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'fileupload'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <input type="file" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <!-- <ng-container *ngIf="form.inputType === 'date'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container> -->
+        <ng-container *ngIf="form.inputType === 'radio'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label>{{form.name}}</label>
+                <div *ngFor="let option of form.options" class="custom-control custom-radio">
+                    <div (click)="form.value = option" class="custom-control custom-radio">
+                        <input name="radio" [value]="form.value" [checked]="form.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                        <label for="radio_0" class="custom-control-label">{{option}}</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'rating'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label>{{form.name}}</label>
+                <div class="row" *ngFor="let item of form.ratingOptions | keyvalue">
+                    <div class="col-2">{{item.key}}</div>
+                    <div class="col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                        <input name="radio" name="formFirld1_{{ form.uiIndexId }}{{option}}" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'checkbox'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label>{{model.name}}</label>
+                <div *ngFor="let option of form.options" class="custom-control custom-checkbox">
+                    <input type="checkbox" id="rememberMe{{option}}" name="formFirld1_{{ form.uiIndexId }}{{option}}" [checked]="form.value.includes(option)" [value]="option" class="custom-control-input form-control">
+                    <label class="custom-control-label" for="rememberMe{{option}}">{{option}}</label>
+                </div>
+                <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'dropdown'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label class="col-form-label">{{form.name}}</label>
+                <select name="formFirld1_{{ form.uiIndexId }}" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
+                    <option *ngFor="let option of form.options" [value]="option">
+                        {{option}}</option>
+                </select>
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+
+        </ng-container>
+        <ng-container *ngIf="form.inputType === 'sign'">
+            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label>{{form.name}}</label>
+                <app-signature-field [model]="form"></app-signature-field>
+            </div>
+            <div *ngIf="parentForm.submitted && !form.value && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+        </ng-container>
+    </ng-template>
+
+</form>

@@ -12,127 +12,104 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8">
-            <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white"
-                id="form-builder-topbar">
-                <li ng-container ngbNavItem>
-                    <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
-                    <ng-template ngbNavContent>
-                        <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0"
-                                id="form-builder-sidebar">
 
-                                <ul ngbNav #nav="ngbNav"
-                                    class="nav nav-tabs bg-white justify-content-start nav-justified">
-                                    <li ng-container ngbNavItem>
-                                        <a ngbNavLink>Controls</a>
-                                        <ng-template ngbNavContent>
-                                            <div class="form-field-control form-basic-control bg-white mb-2">
-                                                <h4 class="text-center py-2 mb-2">Basic Controls</h4>
+            <div class="col-md-8">
+                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
+                    <li ng-container ngbNavItem>
+                        <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
+                        <ng-template ngbNavContent>
+                            <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
+                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0" id="form-builder-sidebar">
 
-                                                <ngx-dnd-container class="root-container" [model]="sourceBuilderTools"
-                                                    [dropZones]="['builder-target']" [copy]="true"
-                                                    [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
-                                                    <!-- <ul class="list-unstyled row"> -->
+                                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs bg-white justify-content-start nav-justified">
+                                        <li ng-container ngbNavItem>
+                                            <a ngbNavLink>Controls</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Basic Controls</h4>
 
-                                                    <ng-template let-item="model">
-                                                        <!-- <li class="col-sm-6 pr-1 my-1"> -->
+                                                    <ngx-dnd-container class="root-container" [model]="sourceBuilderTools" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                        <!-- <ul class="list-unstyled row"> -->
 
-                                                        <a href="#"
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center">
-                                                            <i class="material-icons-outlined m-1">text_fields</i>
-                                                            <span>{{item.name}}</span>
-                                                        </a>
+                                                        <ng-template let-item="model">
+                                                            <!-- <li class="col-sm-6 pr-1 my-1"> -->
 
-                                                        <!-- </li> -->
-                                                    </ng-template>
+                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                                <i class="material-icons-outlined m-1">text_fields</i>
+                                                                <span>{{item.name}}</span>
+                                                            </a>
 
-                                                    <!-- </ul> -->
+                                                            <!-- </li> -->
+                                                        </ng-template>
 
-                                                </ngx-dnd-container>
-                                            </div>
+                                                        <!-- </ul> -->
 
-                                            <div class="form-field-control form-layout-controls bg-white mb-2">
-                                                <h4 class="text-center py-2 mb-2">Layout Controls</h4>
-                                                <div class="row">
-                                                    <div class="col-6"><a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                    </ngx-dnd-container>
+                                                </div>
+
+                                                <div class="form-field-control form-layout-controls bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Layout Controls</h4>
+                                                    <div class="row">
+                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
                                                                 class="material-icons-outlined m-1">text_fields</i>Section</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-field-control form-advanced-controls bg-white mb-2">
-                                                <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
-                                                <div class="row">
-                                                    <div class="col-6"><a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
-                                                    </div>
-                                                    <div class="col-6"> <a
-                                                            class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </ng-template>
-                                    </li>
-                                    <li ngbNavItem>
-                                        <a ngbNavLink>Properties</a>
-                                        <ng-template ngbNavContent>
-
-                                            <div class="form-field-control form-basic-control bg-white mb-2">
-
-                                                <div *ngIf="selectedElement?.validations?.label" class="form-group">
-                                                    <label for="text">Label</label>
-                                                    <input id="text" name="text" [(ngModel)]="selectedElement.name"
-                                                        placeholder="Untitled" type="text" class="form-control">
-                                                </div>
-                                                <div *ngIf="selectedElement?.validations?.placeholder"
-                                                    class="form-group">
-                                                    <label for="text1">Placeholder Text</label>
-                                                    <input id="text1" [(ngModel)]="selectedElement.placeholder"
-                                                        name="text1" type="text" class="form-control">
-                                                </div>
-                                                <div *ngIf="selectedElement?.validations?.size" class="form-group">
-                                                    <label>Size</label>
-                                                    <div>
-                                                        <div *ngFor="let key of selectedElement.validations?.size.options"
-                                                            class="custom-controls-stacked">
-                                                            <div (click)="selectedElement.size = key.value"
-                                                                class="custom-control custom-radio">
-                                                                <input name="radio" [value]="key.value"
-                                                                    [checked]="selectedElement.size === key.value"
-                                                                    id="radio_0{{key.label}}" type="radio"
-                                                                    class="custom-control-input">
-                                                                <label for="radio_0"
-                                                                    class="custom-control-label">{{key.label}}</label>
-                                                            </div>
                                                         </div>
-                                                        <!-- <div class="custom-controls-stacked">
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        </div>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-field-control form-advanced-controls bg-white mb-2">
+                                                    <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
+                                                    <div class="row">
+                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        </div>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        </div>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </ng-template>
+                                        </li>
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>Properties</a>
+                                            <ng-template ngbNavContent>
+
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
+
+                                                    <div *ngIf="selectedElement?.validations?.label" class="form-group">
+                                                        <label for="text">Label</label>
+                                                        <input id="text" name="text" [(ngModel)]="selectedElement.name" placeholder="Untitled" type="text" class="form-control">
+                                                    </div>
+                                                    <div *ngIf="selectedElement?.validations?.placeholder" class="form-group">
+                                                        <label for="text1">Placeholder Text</label>
+                                                        <input id="text1" [(ngModel)]="selectedElement.placeholder" name="text1" type="text" class="form-control">
+                                                    </div>
+                                                    <div *ngIf="selectedElement?.validations?.size" class="form-group">
+                                                        <label>Size</label>
+                                                        <div>
+                                                            <div *ngFor="let key of selectedElement.validations?.size.options" class="custom-controls-stacked">
+                                                                <div (click)="selectedElement.size = key.value" class="custom-control custom-radio">
+                                                                    <input name="radio" [value]="key.value" [checked]="selectedElement.size === key.value" id="radio_0{{key.label}}" type="radio" class="custom-control-input">
+                                                                    <label for="radio_0" class="custom-control-label">{{key.label}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="custom-controls-stacked">
                                                             <div class="custom-control custom-radio">
                                                                 <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="Multiple Line">
                                                                 <label for="radio_1" class="custom-control-label">Multiple Line</label>
@@ -144,13 +121,12 @@
                                                                 <label for="radio_2" class="custom-control-label">Password</label>
                                                             </div>
                                                         </div> -->
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div *ngIf="selectedElement?.formValidation" class="form-group">
-                                                    <label for="form-validation">Form Validation</label>
-                                                    <div>
-                                                        <select id="form-validation" name="form-validation"
-                                                            class="custom-select">
+                                                    <div *ngIf="selectedElement?.formValidation" class="form-group">
+                                                        <label for="form-validation">Form Validation</label>
+                                                        <div>
+                                                            <select id="form-validation" name="form-validation" class="custom-select">
                                                             <option value="Select">Select</option>
                                                             <option value="Alphabetic">Alphabetic</option>
                                                             <option value="Numeric">Numeric</option>
@@ -160,357 +136,277 @@
                                                             <option value="IP Address">IP Address</option>
                                                             <option value="MAC Address">MAC Address</option>
                                                         </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div *ngIf="selectedElement?.validations?.defaultValue"
-                                                    class="form-group">
-                                                    <label for="Default Value">Default Value</label>
-                                                    <input id="Default Value" name="Default Value"
-                                                        placeholder="Default Value"
-                                                        [attr.type]="selectedElement.inputType"
-                                                        [(ngModel)]="selectedElement.value" class="form-control">
-                                                </div>
-                                                <div *ngIf="selectedElement?.validations?.options" class="form-group">
-                                                    <label for="Default Value">Options</label>
-                                                    <div *ngFor="let val of selectedElement?.options; let i =index">
-
-                                                        <input type="text" [value]="val" (change)="change($event, i)">
-                                                        <button (click)="remove(i)">X</button>
+                                                    <div *ngIf="selectedElement?.validations?.defaultValue" class="form-group">
+                                                        <label for="Default Value">Default Value</label>
+                                                        <input id="Default Value" name="Default Value" placeholder="Default Value" [attr.type]="selectedElement.inputType" [(ngModel)]="selectedElement.value" class="form-control">
                                                     </div>
-                                                    <button (click)="selectedElement.options.push('')">Add</button>
-                                                </div>
+                                                    <div *ngIf="selectedElement?.validations?.options" class="form-group">
+                                                        <label for="Default Value">Options</label>
+                                                        <div *ngFor="let val of selectedElement?.options; let i =index">
 
-                                                <div *ngIf="selectedElement?.validations?.ratingOptions"
-                                                    class="form-group">
-                                                    <label for="Default Value">Rating</label>
+                                                            <input type="text" [value]="val" (change)="change($event, i)">
+                                                            <button (click)="remove(i)">X</button>
+                                                        </div>
+                                                        <button (click)="selectedElement.options.push('')">Add</button>
+                                                    </div>
 
-                                                    <select [(ngModel)]="selectedElement.selectedRatingScale">
+                                                    <div *ngIf="selectedElement?.validations?.ratingOptions" class="form-group">
+                                                        <label for="Default Value">Rating</label>
+
+                                                        <select [(ngModel)]="selectedElement.selectedRatingScale">
                                                         <option
                                                             *ngFor="let key of selectedElement?.ratingScale | keyvalue"
                                                             [value]="key.key">{{key.key}}</option>
                                                     </select>
 
-                                                    <ng-container
-                                                        *ngIf="selectedElement.selectedRatingScale === 'Custom'">
-                                                        <div
-                                                            *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                            <input type="text"
-                                                                [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                        <ng-container *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                            <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                                <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+
+                                                            </div>
+                                                        </ng-container>
+
+
+                                                        <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue">
+
+                                                            <input type="text" [value]="key.key" (change)="updateObj($event, selectedElement, 'ratingOptions')">
+                                                            <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')">X</button>
+                                                            <button (click)="selectedElement.ratingOptions.push('')">Add</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <ng-container *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
+                                                        <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                            <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
 
                                                         </div>
                                                     </ng-container>
 
-
-                                                    <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue">
-
-                                                        <input type="text" [value]="key.key"
-                                                            (change)="updateObj($event, selectedElement, 'ratingOptions')">
-                                                        <button
-                                                            (click)="removeObj(key.key, selectedElement, 'ratingOptions')">X</button>
-                                                        <button
-                                                            (click)="selectedElement.ratingOptions.push('')">Add</button>
-                                                    </div>
-                                                </div>
-
-                                                <ng-container *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
-                                                    <div
-                                                        *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                        <input type="text"
-                                                            [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
-
-                                                    </div>
-                                                </ng-container>
-
-                                                <div class="form-group" *ngIf="selectedElement?.validations?.range">
-                                                    <label>Range</label>
-                                                    <div style="display: flex;">
-                                                        <div>
-                                                            <label for="min">Min</label>
-                                                            <input name="min" id="min" type="number"
-                                                                [(ngModel)]="selectedElement.minVal">
-                                                        </div>
-                                                        <div>
-                                                            <label for="max">Max</label>
-                                                            <input id="max" name="max" type="number"
-                                                                [(ngModel)]="selectedElement.maxVal">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" *ngIf="selectedElement?.validations?.dateRange">
-                                                    <label>Range</label>
-                                                    <div style="display: flex;">
-                                                        <div class="input-group">
-                                                            <label for="min">Min</label>
-                                                            <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                name="dp" [(ngModel)]="selectedElement.minVal"
-                                                                ngbDatepicker #d1="ngbDatepicker">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-outline-secondary calendar"
-                                                                    (click)="d1.toggle()" type="button"><span
-                                                                        class="material-icons">date_range</span></button>
+                                                    <div class="form-group" *ngIf="selectedElement?.validations?.range">
+                                                        <label>Range</label>
+                                                        <div style="display: flex;">
+                                                            <div>
+                                                                <label for="min">Min</label>
+                                                                <input name="min" id="min" type="number" [(ngModel)]="selectedElement.minVal">
                                                             </div>
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <label for="min">Max</label>
-                                                            <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                name="dp" [(ngModel)]="selectedElement.maxVal"
-                                                                ngbDatepicker #d="ngbDatepicker">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-outline-secondary calendar"
-                                                                    (click)="d.toggle()" type="button"><span
-                                                                        class="material-icons">date_range</span></button>
+                                                            <div>
+                                                                <label for="max">Max</label>
+                                                                <input id="max" name="max" type="number" [(ngModel)]="selectedElement.maxVal">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <ng-container *ngIf="selectedElement?.validations?.pageBreakName">
-                                                    <div class="form-group">
-                                                        <label for="text">Page Name</label>
-                                                        <input id="text" name="text" [(ngModel)]="selectedElement.value"
-                                                            placeholder="Untitled" type="text" class="form-control">
+                                                    <div class="form-group" *ngIf="selectedElement?.validations?.dateRange">
+                                                        <label>Range</label>
+                                                        <div style="display: flex;">
+                                                            <div class="input-group">
+                                                                <label for="min">Min</label>
+                                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.minVal" ngbDatepicker #d1="ngbDatepicker">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><span
+                                                                        class="material-icons">date_range</span></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <label for="min">Max</label>
+                                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.maxVal" ngbDatepicker #d="ngbDatepicker">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><span
+                                                                        class="material-icons">date_range</span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </ng-container>
-                                                <div *ngIf="selectedElement?.validations?.help" class="form-group">
-                                                    <label for="Help Text">Help Text</label>
-                                                    <textarea [(ngModel)]="selectedElement.helpText" id="Help Text"
-                                                        name="Help Text" cols="40" rows="5"
-                                                        class="form-control"></textarea>
-                                                </div>
-                                                <div *ngIf="selectedElement?.extraBill">
-                                                    <label>Payment Setting</label>
-                                                    <div style="display: flex;"
-                                                        *ngFor="let item of selectedElement?.extraBill; let i = index">
-                                                        <input style="width: 70px;" type="text"
-                                                            [(ngModel)]="selectedElement?.extraBill[i].name">
-                                                        <input style="width: 70px;" type="text"
-                                                            [(ngModel)]="selectedElement?.extraBill[i].value">
-                                                        <select style="width: 70px;"
-                                                            [(ngModel)]="selectedElement?.extraBill[i].type">
+                                                    <ng-container *ngIf="selectedElement?.validations?.pageBreakName">
+                                                        <div class="form-group">
+                                                            <label for="text">Page Name</label>
+                                                            <input id="text" name="text" [(ngModel)]="selectedElement.value" placeholder="Untitled" type="text" class="form-control">
+                                                        </div>
+                                                    </ng-container>
+                                                    <div *ngIf="selectedElement?.validations?.help" class="form-group">
+                                                        <label for="Help Text">Help Text</label>
+                                                        <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
+                                                    </div>
+                                                    <div *ngIf="selectedElement?.extraBill">
+                                                        <label>Payment Setting</label>
+                                                        <div style="display: flex;" *ngFor="let item of selectedElement?.extraBill; let i = index">
+                                                            <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
+                                                            <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
+                                                            <select style="width: 70px;" [(ngModel)]="selectedElement?.extraBill[i].type">
                                                             <option [value]="'dollar'">Amount</option>
                                                             <option [value]="'perentage'">Percentage</option>
                                                         </select>
-                                                        <button
-                                                            (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
-                                                        <button
-                                                            (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox"
-                                                            [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox"
-                                                            [(ngModel)]="selectedElement.showLineItems">Shop Line Items
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox"
-                                                            [(ngModel)]="selectedElement.mapBillingFields">Map Billing
-                                                        fields
-                                                    </div>
-                                                    <div>
-                                                        Accounts
-                                                        <select [(ngModel)]="selectedElement.stripeAccount">
+                                                            <button (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
+                                                            <button (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
+                                                        </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
+                                                        </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showLineItems">Shop Line Items
+                                                        </div>
+                                                        <div>
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
+                                                        </div>
+                                                        <div>
+                                                            Accounts
+                                                            <select [(ngModel)]="selectedElement.stripeAccount">
                                                             <option
                                                                 *ngFor="let account of selectedElement?.stripeAccounts"
                                                                 [value]="account.name">{{account.name}}</option>
                                                         </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="conditional-properties pb-5">
-                                                    <h4 class="text-center">Conditional Properties</h4>
-                                                    <div *ngIf="selectedElement?.validations?.view" class="form-group">
+                                                    <div class="conditional-properties pb-5">
+                                                        <h4 class="text-center">Conditional Properties</h4>
+                                                        <div *ngIf="selectedElement?.validations?.view" class="form-group">
 
-                                                        <div class="field-visibility">
-                                                            <label class=" col-form-label">Show This Field</label>
-                                                            <div class="btn-group btn-group-toggle" ngbRadioGroup
-                                                                name="radioBasic" [(ngModel)]="selectedElement.view">
-                                                                <ng-container
-                                                                    *ngFor="let tab of selectedElement?.validations?.view.options">
-                                                                    <label ngbButtonLabel class="btn-primary btn-bf">
+                                                            <div class="field-visibility">
+                                                                <label class=" col-form-label">Show This Field</label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
+                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
+                                                                        <label ngbButtonLabel class="btn-primary btn-bf">
                                                                         <input ngbButton
                                                                             (click)="openModal(selectedElement, tab.value, 'dependUpon')"
                                                                             type="radio" [value]="tab.value">
                                                                         {{tab.label}}
                                                                     </label>
-                                                                </ng-container>
+                                                                    </ng-container>
+                                                                </div>
                                                             </div>
+                                                            <hr>
+                                                            <!-- <pre>{{model}}</pre> -->
                                                         </div>
-                                                        <hr>
-                                                        <!-- <pre>{{model}}</pre> -->
-                                                    </div>
 
 
-                                                    <div *ngIf="selectedElement?.validations?.required"
-                                                        class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.required" class="form-group">
 
-                                                        <div class="field-visibility">
-                                                            <label class=" col-form-label">Require This Field</label>
-                                                            <div class="btn-group btn-group-toggle" ngbRadioGroup
-                                                                name="radioBasic"
-                                                                [(ngModel)]="selectedElement.isRequired">
-                                                                <ng-container
-                                                                    *ngFor="let tab of selectedElement?.validations?.required.options">
-                                                                    <label ngbButtonLabel class="btn-primary btn-bf">
+                                                            <div class="field-visibility">
+                                                                <label class=" col-form-label">Require This Field</label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
+                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
+                                                                        <label ngbButtonLabel class="btn-primary btn-bf">
                                                                         <input ngbButton
                                                                             (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
                                                                             type="radio" [value]="tab.value">
                                                                         {{tab.label}}
                                                                     </label>
-                                                                </ng-container>
+                                                                    </ng-container>
+                                                                </div>
                                                             </div>
+                                                            <hr>
+                                                            <!-- <pre>{{model}}</pre> -->
                                                         </div>
-                                                        <hr>
-                                                        <!-- <pre>{{model}}</pre> -->
+                                                        <pre><code>{{targetBuilderTools | json}}</code></pre>
+
                                                     </div>
-                                                    <pre><code>{{targetBuilderTools | json}}</code></pre>
-
                                                 </div>
-                                            </div>
-                                        </ng-template>
-                                    </li>
-                                </ul>
-                                <div class="overflow-auto h-100">
-                                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-9 col-lg main">
-                                <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
-
-                                    <div class="form-build-head">
-                                        <h2 class="text-center form-heading mb-1"> Registration Form</h2>
-                                        <p class="text-center text-muted"> Registration Form Description goes here</p>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+                                    <div class="overflow-auto h-100">
+                                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
                                     </div>
-                                    <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
-                                        dropZone="builder-target" [removeOnSpill]="true"
-                                        [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
-                                        direction="mixed" [moves]="abc" (over)="log1($event)">
+                                </div>
+                                <div class="col-md-9 col-lg main">
+                                    <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
-                                        <ng-template let-model="model" let-index="index" let-template="template">
-                                            <div [ngSwitch]="model.inputType">
-                                                <div *ngSwitchCase="'section'"
-                                                    (click)="sectionClicked($event, model, template)">
-                                                    <div class="shadow">
-                                                        {{model.name}}
-                                                        <ngx-dnd-container *ngIf="!viewExportedView"
-                                                            dropZone="builder-target" [model]="model.children"
-                                                            [removeOnSpill]="false" [template]="template"
-                                                            [droppableItemClass]="droppableItemClass"
-                                                            (drag)="log($event)" (drop)="drop($event)"
-                                                            (over)="log($event)" (out)="log($event)"
-                                                            (remove)="log($event)" (cancel)="log($event)"
-                                                            direction="mixed">
-                                                        </ngx-dnd-container>
-                                                    </div>
-                                                </div>
-                                                <div *ngSwitchCase="'repeatSection'"
-                                                    (click)="sectionClicked($event, model, template)">
-                                                    <div class="shadow">
-                                                        {{model.name}}
-                                                        <div
-                                                            (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
-                                                            Add</div>
-                                                        <div *ngFor="let rSection of model.childSection">
-                                                            <ngx-dnd-container *ngIf="!viewExportedView"
-                                                                dropZone="builder-target" [model]="rSection.children"
-                                                                [removeOnSpill]="false" [template]="template"
-                                                                [droppableItemClass]="droppableItemClass"
-                                                                direction="mixed">
+                                        <div class="form-build-head">
+                                            <h2 class="text-center form-heading mb-1"> Registration Form</h2>
+                                            <p class="text-center text-muted"> Registration Form Description goes here</p>
+
+                                        </div>
+                                        <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
+
+                                            <ng-template let-model="model" let-index="index" let-template="template">
+                                                <div [ngSwitch]="model.inputType">
+                                                    <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)">
+                                                        <div class="shadow">
+                                                            {{model.name}}
+                                                            <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                                                                (remove)="log($event)" (cancel)="log($event)" direction="mixed">
                                                             </ngx-dnd-container>
                                                         </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'repeatSection'" (click)="sectionClicked($event, model, template)">
+                                                        <div class="shadow">
+                                                            {{model.name}}
+                                                            <div (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
+                                                                Add</div>
+                                                            <div *ngFor="let rSection of model.childSection">
+                                                                <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="rSection.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" direction="mixed">
+                                                                </ngx-dnd-container>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'fileupload'">
+                                                        <div class="">
+                                                            <label>File Upload</label>
+                                                            <input type="file">
+                                                        </div>
 
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'fileupload'">
-                                                    <div class="">
-                                                        <label>File Upload</label>
-                                                        <input type="file">
-                                                    </div>
+                                                    <div *ngSwitchCase="'break'">
+                                                        <div class="w-100" style="    text-align: center; padding: 15px;">
+                                                            {{model.value}}
+                                                        </div>
 
-                                                </div>
-                                                <div *ngSwitchCase="'break'">
-                                                    <div class="w-100" style="    text-align: center; padding: 15px;">
-                                                        {{model.value}}
                                                     </div>
-
-                                                </div>
-                                                <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div class="input-group">
-                                                        <input class="form-control" [minDate]="model.minVal"
-                                                            [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp"
-                                                            [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
-                                                        <div class="input-group-append">
-                                                            <button class="border calendar" (click)="d.toggle()"
-                                                                type="button"><i
+                                                    <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" [minDate]="model.minVal" [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
+                                                            <div class="input-group-append">
+                                                                <button class="border calendar" (click)="d.toggle()" type="button"><i
                                                                     class="material-icons">date_range</i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)"
-                                                    class="form-group">
-                                                    <label>{{model.name}}</label>
-                                                    <div *ngFor="let option of model.options"
-                                                        class="custom-control custom-radio">
-                                                        <div (click)="model.value = option"
-                                                            class="custom-control custom-radio">
-                                                            <input name="radio" [value]="model.value"
-                                                                [checked]="model.value === option"
-                                                                id="radio_0{{option}}" type="radio"
-                                                                class="custom-control-input">
-                                                            <label for="radio_0"
-                                                                class="custom-control-label">{{option}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div *ngSwitchCase="'rating'"
-                                                    (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div class="row"
-                                                        *ngFor="let item of model.ratingOptions | keyvalue">
-                                                        <div class="col-2">{{item.key}}</div>
-                                                        <div class="col-2"
-                                                            *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
-                                                            <div class="custom-control custom-radio">
-                                                                <input name="radio" [value]="item.value"
-                                                                    [checked]="item.value === option"
-                                                                    id="radio_0{{option}}" type="radio"
-                                                                    class="custom-control-input">
-                                                                <label class="custom-control-label"></label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'checkbox'" class="form-group"
-                                                    (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div (click)="checkBox($event, model, option)"
-                                                        *ngFor="let option of model.options"
-                                                        class="custom-control custom-checkbox">
-                                                        <input type="checkbox" id="rememberMe{{option}}"
-                                                            name="rememberMe{{option}}"
-                                                            [checked]="model.value.includes(option)" [value]="option"
-                                                            class="custom-control-input">
-                                                        <label class="custom-control-label"
-                                                            for="rememberMe{{option}}">{{option}}</label>
+                                                    <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group">
+                                                        <label>{{model.name}}</label>
+                                                        <div *ngFor="let option of model.options" class="custom-control custom-radio">
+                                                            <div (click)="model.value = option" class="custom-control custom-radio">
+                                                                <input name="radio" [value]="model.value" [checked]="model.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                <label for="radio_0" class="custom-control-label">{{option}}</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'dropdown'"
-                                                    (click)="clicked($event, model, template)" class="form-group">
-                                                    <label class="col-form-label">{{model.name}}</label>
-                                                    <select [(ngModel)]="model.value" class="custom-select">
+                                                    <div *ngSwitchCase="'rating'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div class="row" *ngFor="let item of model.ratingOptions | keyvalue">
+                                                            <div class="col-2">{{item.key}}</div>
+                                                            <div class="col-2" *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                    <label class="custom-control-label"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'checkbox'" class="form-group" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div (click)="checkBox($event, model, option)" *ngFor="let option of model.options" class="custom-control custom-checkbox">
+                                                            <input type="checkbox" id="rememberMe{{option}}" name="rememberMe{{option}}" [checked]="model.value.includes(option)" [value]="option" class="custom-control-input">
+                                                            <label class="custom-control-label" for="rememberMe{{option}}">{{option}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'dropdown'" (click)="clicked($event, model, template)" class="form-group">
+                                                        <label class="col-form-label">{{model.name}}</label>
+                                                        <select [(ngModel)]="model.value" class="custom-select">
                                                         <option *ngFor="let option of model.options" [value]="option">
                                                             {{option}}</option>
                                                     </select>
 
-                                                </div>
-                                                <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <app-signature-field [model]="model"></app-signature-field>
+                                                    </div>
+                                                    <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <app-signature-field [model]="model"></app-signature-field>
 
-                                                </div>
-                                                <!-- <div *ngSwitchCase="'repeatSection'"
+                                                    </div>
+                                                    <!-- <div *ngSwitchCase="'repeatSection'"
                                                     (click)="sectionClicked($event, model, template)">
                                                     <div class="shadow">
                                                         {{model.name}}
@@ -529,264 +425,240 @@
                                                     </div>
 
                                                 </div> -->
-                                                <div *ngSwitchDefault (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <app-ui-input [model]="model"
-                                                        [targetBuilderTools]="targetBuilderTools"
-                                                        *ngIf="!model?.dependUpon || checkForDependency(model) ">
-                                                    </app-ui-input>
+                                                    <div *ngSwitchDefault (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <app-ui-input [model]="model" [targetBuilderTools]="targetBuilderTools" *ngIf="!model?.dependUpon || checkForDependency(model) ">
+                                                        </app-ui-input>
 
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ngx-dnd-container>
+                                        <div>
+                                            <div class="shadow">
+
+                                                <ngx-dnd-container class="dummy-c droppableContainer" [model]="dummyContainer" dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
+                                                    <i class="material-icons"> add </i>Drag and Drop Here
+                                                </ngx-dnd-container>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
+
+                                            <div>
+                                                <span>Line Items</span>
+                                                <span>Sub Total</span>
+                                                <span>Amount Due</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div>
+                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
+                        <ng-template ngbNavContent>
+
+                            diubfjbfdjsbfndsfjdsbfjdsfdsfddfdfdsfds
+
+                            <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+
+                        </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                        <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
+                        <ng-template ngbNavContent>
+                            <div class="container-fluid">
+
+
+                                <div class="row fixed-table-toolbar mt-3" id="toolbar">
+                                    <div class="col-md-6">
+                                        <div class="bars">
+
+                                            <button type="button" class="btn btn-primary btn-bf mr-2"> Refresh </button>
+
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
                                                 </div>
                                             </div>
-                                        </ng-template>
-                                    </ngx-dnd-container>
-                                    <div>
-                                        <div class="shadow">
 
-                                            <ngx-dnd-container class="dummy-c droppableContainer"
-                                                [model]="dummyContainer" dropZone="builder-target"
-                                                (drop)="drop2($event)" direction="mixed">
-                                                <i class="material-icons"> add </i>Drag and Drop Here
-                                            </ngx-dnd-container>
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Actions</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">New Entry</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+
+
+
+
                                         </div>
                                     </div>
-                                    <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
 
-                                        <div>
-                                            <span>Line Items</span>
-                                            <span>Sub Total</span>
-                                            <span>Amount Due</span>
+                                    <div class="col-md-6">
+                                        <div class="tool-filter text-right">
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Columns</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- <div>
-                                    </div> -->
+
+
+
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-toolbar="#toolbar">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th data-field="state" data-checkbox="true"><input data-index="0" name="btnAllSelectItem" type="checkbox"></th>
+                                                    <th data-field="prenom" data-filter-control="input" data-sortable="true">ID</th>
+                                                    <th data-field="date" data-filter-control="select" data-sortable="true">
+                                                        Status</th>
+                                                    <th data-field="examen" data-filter-control="select" data-sortable="true">Submitted</th>
+                                                    <th data-field="note" data-sortable="true">Name</th>
+                                                    <th data-field="note" data-sortable="true">Price</th>
+                                                    <th data-field="note" data-sortable="true">Currency</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
-                    <ng-template ngbNavContent>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                right
+            </div>
 
-                        <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
-
-                    </ng-template>
-                </li>
-
-                <li ngbNavItem>
-                    <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
-                    <ng-template ngbNavContent>
-                        <div class="container-fluid">
-
-
-                            <div class="row fixed-table-toolbar mt-3" id="toolbar">
-                                <div class="col-md-6">
-                                    <div class="bars">
-
-                                        <button type="button" class="btn btn-primary btn-bf mr-2"> Refresh </button>
-
-
-                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual"
-                                                ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                <button ngbDropdownItem>Action - 1</button>
-                                                <button ngbDropdownItem>Another Action</button>
-                                                <button ngbDropdownItem>Something else is here</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual"
-                                                ngbDropdownAnchor (focus)="myDrop.open()">Actions</button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                <button ngbDropdownItem>Action - 1</button>
-                                                <button ngbDropdownItem>Another Action</button>
-                                                <button ngbDropdownItem>Something else is here</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual"
-                                                ngbDropdownAnchor (focus)="myDrop.open()">New Entry</button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                <button ngbDropdownItem>Action - 1</button>
-                                                <button ngbDropdownItem>Another Action</button>
-                                                <button ngbDropdownItem>Something else is here</button>
-                                            </div>
-                                        </div>
-
-
-
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="tool-filter text-right">
-
-                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual"
-                                                ngbDropdownAnchor (focus)="myDrop.open()">Columns</button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                <button ngbDropdownItem>Action - 1</button>
-                                                <button ngbDropdownItem>Another Action</button>
-                                                <button ngbDropdownItem>Something else is here</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
-                                        data-search="true" data-filter-control="true" data-show-export="true"
-                                        data-show-refresh="true" data-show-toggle="true" data-pagination="true"
-                                        data-toolbar="#toolbar">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th data-field="state" data-checkbox="true"><input data-index="0"
-                                                        name="btnAllSelectItem" type="checkbox"></th>
-                                                <th data-field="prenom" data-filter-control="input"
-                                                    data-sortable="true">ID</th>
-                                                <th data-field="date" data-filter-control="select" data-sortable="true">
-                                                    Status</th>
-                                                <th data-field="examen" data-filter-control="select"
-                                                    data-sortable="true">Submitted</th>
-                                                <th data-field="note" data-sortable="true">Name</th>
-                                                <th data-field="note" data-sortable="true">Price</th>
-                                                <th data-field="note" data-sortable="true">Currency</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem"
-                                                        type="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Submitted</td>
-                                                <td>2021-08-02 13:47:30</td>
-                                                <td>firstName:bhagayshri,lastName:mane</td>
-                                                <td>200.00</td>
-                                                <td>USD</td>
-                                            </tr>
-
-
-
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-                    </ng-template>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            right
         </div>
 
-        <!-- </div> -->
-        <div class="col-md-2">
-            right
-        </div>
 
         <div [ngbNavOutlet]="nav" class="mt-0 tab-content"></div>
 

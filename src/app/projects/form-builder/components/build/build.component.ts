@@ -17,6 +17,8 @@ export class BuildComponent  {
   model: any = {
     name: '',
   };
+  active = 1;
+
   selectedIndex: any;
   selectedElement: any;
   viewExportedView = false;
