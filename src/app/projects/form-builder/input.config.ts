@@ -1649,4 +1649,19 @@ export const config = [
             }
         }
     },
+    {
+        name: 'Page Break',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: 'Page',
+        inputType: 'break',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'extra-large',
+        validations: {
+            pageBreakName: true
+        }
+    }
 ]
