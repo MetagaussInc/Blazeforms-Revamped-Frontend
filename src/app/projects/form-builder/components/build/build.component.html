@@ -21,8 +21,7 @@
                     <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
                     <ng-template ngbNavContent>
                         <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar p-0"
-                                id="form-builder-sidebar">
+                            <div class="col-md-3 sidebar-offcanvas form-builder-sidebar p-0" id="form-builder-sidebar">
                                 <div class="overflow-auto h-100" id="myIdentifier">
                                     <ul ngbNav #nav="ngbNav"
                                         class="nav nav-tabs bg-white justify-content-start nav-justified">
@@ -405,7 +404,7 @@
                                     <div [ngbNavOutlet]="nav" class="mt-2"></div>
                                 </div>
                             </div>
-                            <div class="col-md-9 col-lg-10 main">
+                            <div class="col-md-9 main">
                                 <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
                                     <div class="form-build-head">
@@ -586,6 +585,7 @@
                 <li ngbNavItem>
                     <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
                     <ng-template ngbNavContent>
+
                         <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
 
                     </ng-template>
@@ -594,17 +594,183 @@
                 <li ngbNavItem>
                     <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
                     <ng-template ngbNavContent>
-                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                            four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
-                            beer mlkshk aliquip jean shorts ullamco ad vinyl
-                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-                            Keytar
-                            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                            odio
-                            cillum wes anderson 8-bit, sustainable jean
-                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                            stumptown,
-                            tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                        <div class="container-fluid">
+
+
+                            <div class="row fixed-table-toolbar mt-3" id="toolbar">
+                                <div class="col-md-6">
+                                    <div class="bars">
+
+                                        <button type="button" class="btn btn-primary btn-bf mr-2"> Refresh </button>
+
+
+                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                <button ngbDropdownItem>Action - 1</button>
+                                                <button ngbDropdownItem>Another Action</button>
+                                                <button ngbDropdownItem>Something else is here</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Actions</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                <button ngbDropdownItem>Action - 1</button>
+                                                <button ngbDropdownItem>Another Action</button>
+                                                <button ngbDropdownItem>Something else is here</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">New Entry</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                <button ngbDropdownItem>Action - 1</button>
+                                                <button ngbDropdownItem>Another Action</button>
+                                                <button ngbDropdownItem>Something else is here</button>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="tool-filter text-right">
+
+                                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Columns</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                <button ngbDropdownItem>Action - 1</button>
+                                                <button ngbDropdownItem>Another Action</button>
+                                                <button ngbDropdownItem>Something else is here</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table mt-3  text-center border" id="table-id" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-toolbar="#toolbar">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th data-field="state" data-checkbox="true"><input data-index="0" name="btnAllSelectItem" type="checkbox"></th>
+                                                <th data-field="prenom" data-filter-control="input" data-sortable="true">ID</th>
+                                                <th data-field="date" data-filter-control="select" data-sortable="true">Status</th>
+                                                <th data-field="examen" data-filter-control="select" data-sortable="true">Submitted</th>
+                                                <th data-field="note" data-sortable="true">Name</th>
+                                                <th data-field="note" data-sortable="true">Price</th>
+                                                <th data-field="note" data-sortable="true">Currency</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Submitted</td>
+                                                <td>2021-08-02 13:47:30</td>
+                                                <td>firstName:bhagayshri,lastName:mane</td>
+                                                <td>200.00</td>
+                                                <td>USD</td>
+                                            </tr>
+
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
                     </ng-template>
                 </li>
             </ul>
