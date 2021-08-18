@@ -6,6 +6,8 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { DataSharingService } from '../../../shared/data-sharing.service';
 import { Location } from '@angular/common';
 import { ToastService } from '../../../shared/toast.service';
+import { EMPTY, Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-work-spaces-general',
@@ -16,17 +18,17 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
 
   organizationGeneralForm = new FormGroup({
     Name: new FormControl('', [Validators.required],
-      //this.validateNameViaServer.bind(this)
+      this.validateNameViaServer.bind(this)
     ),
     DefaultReplyEmail: new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
-      //this.doubleDotValidator.bind(this)
+      this.doubleDotValidator.bind(this)
     ],
       //this.validateEmailViaServer.bind(this)
     ),
     Country: new FormControl(null),
-    Timezone: new FormControl(null),
+    TimeZoneId: new FormControl(null),
     Language: new FormControl(null),
     Currency: new FormControl(null),
     isActive: new FormControl(true)
@@ -40,6 +42,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public organizationUserId: any;
   public isSuperAdmin: boolean = false;
   public logo: any;
+  public currentOrgname: any;
 
   constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
@@ -76,11 +79,12 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
         if(dataRes.workspaceDetail.timeZoneId){
           timezoneData = dataRes.workspaceDetail.timeZoneId.toString();
         }
+        this.currentOrgname = dataRes.workSpaceName;
         this.organizationGeneralForm.patchValue({
           Name: dataRes.workSpaceName,
           DefaultReplyEmail: dataRes.email,
           Country: dataRes.workspaceDetail.country,
-          Timezone: timezoneData,
+          TimeZoneId: timezoneData,
           Language: dataRes.workspaceDetail.language,
           Currency: dataRes.workspaceDetail.currency,
           isActive: dataRes.workspaceDetail.isActive,
@@ -91,6 +95,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
       this.http.call('setCurrentWorkSpace', 'POST', obj).subscribe(res => {
         dataRes = res.result.data;
         let timezoneData;
+        this.currentOrgname = dataRes.workSpaceName;
         if(dataRes.workspaceDetail.timeZoneId){
           timezoneData = dataRes.workspaceDetail.timeZoneId.toString();
         }
@@ -98,13 +103,57 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
           Name: dataRes.workSpaceName,
           DefaultReplyEmail: dataRes.email,
           Country: dataRes.workspaceDetail.country,
-          Timezone: timezoneData,
+          TimeZoneId: timezoneData,
           Language: dataRes.workspaceDetail.language,
           Currency: dataRes.workspaceDetail.currency,
           isActive: dataRes.workspaceDetail.isActive,
         });
       });
     }
+  }
+
+  validateNameViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    return this.http.call('checkEmail', 'POST', { WorkSpaceName: value })
+      .pipe(debounceTime(1000),
+        map((response: any) => {
+          if(this.currentOrgname != value){
+            if (response.data) {
+              return {
+                isExists: true
+              };
+            }
+          }
+          return null;
+        }
+      )
+    )
+  }
+
+  doubleDotValidator({ value }: AbstractControl): any {
+    if (value?.includes('@')) {
+      if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
+        return { specialCharInDomain: true };
+      }
+      if (value.split('@')[1]?.includes('..')) {
+        return {doubleDotInDomain: true};
+      }
+    }
+    return null;
+  }
+
+  validateEmailViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    return this.http.call('checkEmail', 'POST', { Email: value })
+      .pipe(debounceTime(1000),
+        map((response: any) => {
+          if (response.data) {
+            return {
+              isExists: true
+            };
+          }
+          return null;
+        }
+      )
+    )
   }
 
   submit(){
@@ -126,7 +175,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   get Name() { return this.organizationGeneralForm.get('Name'); }
   get DefaultReplyEmail() { return this.organizationGeneralForm.get('DefaultReplyEmail'); }
   get Country() { return this.organizationGeneralForm.get('Country'); }
-  get Timezone() { return this.organizationGeneralForm.get('Timezone'); }
+  get TimeZoneId() { return this.organizationGeneralForm.get('TimeZoneId'); }
   get Language() { return this.organizationGeneralForm.get('Language'); }
   get Currency() { return this.organizationGeneralForm?.get('Currency'); }
   get f() { return this.organizationGeneralForm.controls; }

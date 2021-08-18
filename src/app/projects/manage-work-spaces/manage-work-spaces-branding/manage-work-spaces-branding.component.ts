@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl, SafeStyle } from '@angular/platform-browser';
+import { DataSharingService } from '../../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-manage-work-spaces-branding',
@@ -19,8 +20,9 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public fileSource: any;
   public logoExt: any;
   public logo: any;
+  public userId: any;
 
-  constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -29,6 +31,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
         this.organizationUserId = decodeURIComponent(orgUserId);
       }
     });
+    this.userId = this.dataSharingService.GetUserId();
     let obj = {
       Id: this.organizationId,
       IsOrganizationSettings: true,
@@ -59,7 +62,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   }
 
   submit(){
-    let model = {'UserId': this.organizationUserId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
+    let model = {'UserId': this.userId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
     this.http.call('uploadFiles', 'POST', model).subscribe(res => {
       console.log(res);
     });
