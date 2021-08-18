@@ -11,12 +11,39 @@ export class ExportedFormComponent implements OnInit {
   model = {
     name: ''
   }
-  
-  active = 1;
+  haveTabs: boolean = false;
+  active = 0;
+  allArr:any = [];
+  obj: any = {}
     constructor() { }
   
     ngOnInit(): void {
       console.log(this.elements)
+      let count = 0;
+      if (this.elements?.length > 0) {
+        for (const iterator of this.elements) {
+          if (iterator.inputType === 'break') {
+            this.haveTabs = true;
+            break;
+          }
+        }
+      }
+      let arr = [];
+      if (this.haveTabs) {
+        for (const iterator of this.elements) {
+          if (iterator.inputType === 'break') {
+            this.allArr.push(arr);
+            arr = [];
+            this.obj[count] = iterator.value;
+            count = count + 1;
+          } else {
+            arr.push(iterator);
+          }
+        }
+        this.allArr.push(arr);
+      }
+      console.log(this.allArr)
+      
     }
   
     checkForDependency(model: any, T: any): boolean {
