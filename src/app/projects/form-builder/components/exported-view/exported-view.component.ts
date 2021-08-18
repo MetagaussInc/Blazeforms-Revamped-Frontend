@@ -10,6 +10,8 @@ export class ExportedViewComponent implements OnInit {
 model = {
   name: ''
 }
+
+active = 1;
   constructor() { }
 
   ngOnInit(): void {

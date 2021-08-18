@@ -1,4 +1,3 @@
-
 <ng-container *ngIf="formLoaded; else loading">
     <div class="form-builder-header container-fluid">
         <div class="form-builder-wrap pt-2 row border-bottom" id="form-builder">
@@ -13,36 +12,29 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8">
-            <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white"
-                id="form-builder-topbar">
-                <li ng-container ngbNavItem>
-                    <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
-                    <ng-template ngbNavContent>
-                        <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                            <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar p-0"
-                                id="form-builder-sidebar">
-                                <div class="overflow-auto h-100" id="myIdentifier">
-                                    <ul ngbNav #nav="ngbNav"
-                                        class="nav nav-tabs bg-white justify-content-start nav-justified">
+
+            <div class="col-md-8">
+                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
+                    <li ng-container ngbNavItem>
+                        <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
+                        <ng-template ngbNavContent>
+                            <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
+                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0" id="form-builder-sidebar">
+
+                                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs bg-white justify-content-start nav-justified">
                                         <li ng-container ngbNavItem>
                                             <a ngbNavLink>Controls</a>
                                             <ng-template ngbNavContent>
                                                 <div class="form-field-control form-basic-control bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Basic Controls</h4>
 
-                                                    <ngx-dnd-container class="root-container"
-                                                        [model]="sourceBuilderTools" [dropZones]="['builder-target']"
-                                                        [copy]="true" [droppableItemClass]="'col-6 pr-2 py-2 pl-0'"
-                                                        direction="mixed">
+                                                    <ngx-dnd-container class="root-container" [model]="sourceBuilderTools" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
                                                         <!-- <ul class="list-unstyled row"> -->
 
                                                         <ng-template let-item="model">
                                                             <!-- <li class="col-sm-6 pr-1 my-1"> -->
 
-                                                            <a href="#"
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
                                                                 <i class="material-icons-outlined m-1">text_fields</i>
                                                                 <span>{{item.name}}</span>
                                                             </a>
@@ -53,47 +45,22 @@
                                                         <!-- </ul> -->
 
                                                     </ngx-dnd-container>
-
-                                                    <!-- <ul class="list-unstyled row">
-                                                    <li class="col-sm-6 pr-1 my-1"><a href="#"
-                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i><span>TextBox</span></a>
-                                                    </li>
-                                                    <li class="col-sm-6 pl-1 my-1"><a href="#"
-                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
-                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
-                                                    </li>
-                                                    <li class="col-sm-6 pr-1 my-1"><a href="#"
-                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
-                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
-                                                    </li>
-                                                    <li class="col-sm-6 pl-1 my-1"><a href="#"
-                                                            class="badge badge-pill w-100 border d-flex align-items-center"><i
-                                                                class="material-icons-outlined">text_fields</i><span>TextBox</span></a>
-                                                    </li>
-                                                </ul> -->
-
-
                                                 </div>
 
                                                 <div class="form-field-control form-layout-controls bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Layout Controls</h4>
                                                     <div class="row">
-                                                        <div class="col-6"><a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Section</a>
+                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,21 +68,17 @@
                                                 <div class="form-field-control form-advanced-controls bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
                                                     <div class="row">
-                                                        <div class="col-6"><a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Section</a>
+                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
                                                         </div>
-                                                        <div class="col-6"> <a
-                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                    class="material-icons-outlined m-1">text_fields</i>Content</a>
+                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
+                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -131,28 +94,19 @@
 
                                                     <div *ngIf="selectedElement?.validations?.label" class="form-group">
                                                         <label for="text">Label</label>
-                                                        <input id="text" name="text" [(ngModel)]="selectedElement.name"
-                                                            placeholder="Untitled" type="text" class="form-control">
+                                                        <input id="text" name="text" [(ngModel)]="selectedElement.name" placeholder="Untitled" type="text" class="form-control">
                                                     </div>
-                                                    <div *ngIf="selectedElement?.validations?.placeholder"
-                                                        class="form-group">
+                                                    <div *ngIf="selectedElement?.validations?.placeholder" class="form-group">
                                                         <label for="text1">Placeholder Text</label>
-                                                        <input id="text1" [(ngModel)]="selectedElement.placeholder"
-                                                            name="text1" type="text" class="form-control">
+                                                        <input id="text1" [(ngModel)]="selectedElement.placeholder" name="text1" type="text" class="form-control">
                                                     </div>
                                                     <div *ngIf="selectedElement?.validations?.size" class="form-group">
                                                         <label>Size</label>
                                                         <div>
-                                                            <div *ngFor="let key of selectedElement.validations?.size.options"
-                                                                class="custom-controls-stacked">
-                                                                <div (click)="selectedElement.size = key.value"
-                                                                    class="custom-control custom-radio">
-                                                                    <input name="radio" [value]="key.value"
-                                                                        [checked]="selectedElement.size === key.value"
-                                                                        id="radio_0{{key.label}}" type="radio"
-                                                                        class="custom-control-input">
-                                                                    <label for="radio_0"
-                                                                        class="custom-control-label">{{key.label}}</label>
+                                                            <div *ngFor="let key of selectedElement.validations?.size.options" class="custom-controls-stacked">
+                                                                <div (click)="selectedElement.size = key.value" class="custom-control custom-radio">
+                                                                    <input name="radio" [value]="key.value" [checked]="selectedElement.size === key.value" id="radio_0{{key.label}}" type="radio" class="custom-control-input">
+                                                                    <label for="radio_0" class="custom-control-label">{{key.label}}</label>
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="custom-controls-stacked">
@@ -172,198 +126,152 @@
                                                     <div *ngIf="selectedElement?.formValidation" class="form-group">
                                                         <label for="form-validation">Form Validation</label>
                                                         <div>
-                                                            <select id="form-validation" name="form-validation"
-                                                                class="custom-select">
-                                                                <option value="Select">Select</option>
-                                                                <option value="Alphabetic">Alphabetic</option>
-                                                                <option value="Numeric">Numeric</option>
-                                                                <option value="Alphanumeric">Alphanumeric</option>
-                                                                <option value="SSN">SSN</option>
-                                                                <option value="Zip Code">Zip Code</option>
-                                                                <option value="IP Address">IP Address</option>
-                                                                <option value="MAC Address">MAC Address</option>
-                                                            </select>
+                                                            <select id="form-validation" name="form-validation" class="custom-select">
+                                                            <option value="Select">Select</option>
+                                                            <option value="Alphabetic">Alphabetic</option>
+                                                            <option value="Numeric">Numeric</option>
+                                                            <option value="Alphanumeric">Alphanumeric</option>
+                                                            <option value="SSN">SSN</option>
+                                                            <option value="Zip Code">Zip Code</option>
+                                                            <option value="IP Address">IP Address</option>
+                                                            <option value="MAC Address">MAC Address</option>
+                                                        </select>
                                                         </div>
                                                     </div>
-                                                    <div *ngIf="selectedElement?.validations?.defaultValue"
-                                                        class="form-group">
+                                                    <div *ngIf="selectedElement?.validations?.defaultValue" class="form-group">
                                                         <label for="Default Value">Default Value</label>
-                                                        <input id="Default Value" name="Default Value"
-                                                            placeholder="Default Value"
-                                                            [attr.type]="selectedElement.inputType"
-                                                            [(ngModel)]="selectedElement.value" class="form-control">
+                                                        <input id="Default Value" name="Default Value" placeholder="Default Value" [attr.type]="selectedElement.inputType" [(ngModel)]="selectedElement.value" class="form-control">
                                                     </div>
-                                                    <div *ngIf="selectedElement?.validations?.options"
-                                                        class="form-group">
+                                                    <div *ngIf="selectedElement?.validations?.options" class="form-group">
                                                         <label for="Default Value">Options</label>
                                                         <div *ngFor="let val of selectedElement?.options; let i =index">
 
-                                                            <input type="text" [value]="val"
-                                                                (change)="change($event, i)">
+                                                            <input type="text" [value]="val" (change)="change($event, i)">
                                                             <button (click)="remove(i)">X</button>
                                                         </div>
                                                         <button (click)="selectedElement.options.push('')">Add</button>
                                                     </div>
 
-                                                    <div *ngIf="selectedElement?.validations?.ratingOptions"
-                                                        class="form-group">
+                                                    <div *ngIf="selectedElement?.validations?.ratingOptions" class="form-group">
                                                         <label for="Default Value">Rating</label>
 
                                                         <select [(ngModel)]="selectedElement.selectedRatingScale">
-                                                            <option
-                                                                *ngFor="let key of selectedElement?.ratingScale | keyvalue"
-                                                                [value]="key.key">{{key.key}}</option>
-                                                        </select>
-
-                                                        <ng-container
-                                                            *ngIf="selectedElement.selectedRatingScale === 'Custom'">
-                                                            <div
-                                                                *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                                <input type="text"
-                                                                    [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
-
-                                                            </div>
-                                                        </ng-container>
-
-
-                                                        <div
-                                                            *ngFor="let key of selectedElement?.ratingOptions | keyvalue">
-
-                                                            <input type="text" [value]="key.key"
-                                                                (change)="updateObj($event, selectedElement, 'ratingOptions')">
-                                                            <button
-                                                                (click)="removeObj(key.key, selectedElement, 'ratingOptions')">X</button>
-                                                            <button
-                                                                (click)="selectedElement.ratingOptions.push('')">Add</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <select [(ngModel)]="selectedElement.selectedRatingScale">
                                                         <option
                                                             *ngFor="let key of selectedElement?.ratingScale | keyvalue"
                                                             [value]="key.key">{{key.key}}</option>
                                                     </select>
 
-                                                    <ng-container
-                                                        *ngIf="selectedElement.selectedRatingScale === 'Custom'">
-                                                        <div
-                                                            *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                            <input type="text"
-                                                                [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                        <ng-container *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                            <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                                <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+
+                                                            </div>
+                                                        </ng-container>
+
+
+                                                        <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue">
+
+                                                            <input type="text" [value]="key.key" (change)="updateObj($event, selectedElement, 'ratingOptions')">
+                                                            <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')">X</button>
+                                                            <button (click)="selectedElement.ratingOptions.push('')">Add</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <ng-container *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
+                                                        <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                            <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
 
                                                         </div>
                                                     </ng-container>
+
                                                     <div class="form-group" *ngIf="selectedElement?.validations?.range">
                                                         <label>Range</label>
                                                         <div style="display: flex;">
                                                             <div>
                                                                 <label for="min">Min</label>
-                                                                <input name="min" id="min" type="number"
-                                                                    [(ngModel)]="selectedElement.minVal">
+                                                                <input name="min" id="min" type="number" [(ngModel)]="selectedElement.minVal">
                                                             </div>
                                                             <div>
                                                                 <label for="max">Max</label>
-                                                                <input id="max" name="max" type="number"
-                                                                    [(ngModel)]="selectedElement.maxVal">
+                                                                <input id="max" name="max" type="number" [(ngModel)]="selectedElement.maxVal">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group"
-                                                        *ngIf="selectedElement?.validations?.dateRange">
+                                                    <div class="form-group" *ngIf="selectedElement?.validations?.dateRange">
                                                         <label>Range</label>
                                                         <div style="display: flex;">
                                                             <div class="input-group">
                                                                 <label for="min">Min</label>
-                                                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                    name="dp" [(ngModel)]="selectedElement.minVal"
-                                                                    ngbDatepicker #d1="ngbDatepicker">
+                                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.minVal" ngbDatepicker #d1="ngbDatepicker">
                                                                 <div class="input-group-append">
-                                                                    <button class="btn btn-outline-secondary calendar"
-                                                                        (click)="d1.toggle()" type="button"></button>
+                                                                    <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><span
+                                                                        class="material-icons">date_range</span></button>
                                                                 </div>
                                                             </div>
                                                             <div class="input-group">
                                                                 <label for="min">Max</label>
-                                                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                    name="dp" [(ngModel)]="selectedElement.maxVal"
-                                                                    ngbDatepicker #d="ngbDatepicker">
+                                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.maxVal" ngbDatepicker #d="ngbDatepicker">
                                                                 <div class="input-group-append">
-                                                                    <button class="btn btn-outline-secondary calendar"
-                                                                        (click)="d.toggle()" type="button"></button>
+                                                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><span
+                                                                        class="material-icons">date_range</span></button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <ng-container *ngIf="selectedElement?.validations?.pageBreakName">
+                                                        <div class="form-group">
+                                                            <label for="text">Page Name</label>
+                                                            <input id="text" name="text" [(ngModel)]="selectedElement.value" placeholder="Untitled" type="text" class="form-control">
+                                                        </div>
+                                                    </ng-container>
                                                     <div *ngIf="selectedElement?.validations?.help" class="form-group">
                                                         <label for="Help Text">Help Text</label>
-                                                        <textarea [(ngModel)]="selectedElement.helpText" id="Help Text"
-                                                            name="Help Text" cols="40" rows="5"
-                                                            class="form-control"></textarea>
+                                                        <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
                                                     </div>
                                                     <div *ngIf="selectedElement?.extraBill">
                                                         <label>Payment Setting</label>
-                                                        <div style="display: flex;"
-                                                            *ngFor="let item of selectedElement?.extraBill; let i = index">
-                                                            <input style="width: 70px;" type="text"
-                                                                [(ngModel)]="selectedElement?.extraBill[i].name">
-                                                            <input style="width: 70px;" type="text"
-                                                                [(ngModel)]="selectedElement?.extraBill[i].value">
-                                                            <select style="width: 70px;"
-                                                                [(ngModel)]="selectedElement?.extraBill[i].type">
-                                                                <option [value]="'dollar'">Amount</option>
-                                                                <option [value]="'perentage'">Percentage</option>
-                                                            </select>
-                                                            <button
-                                                                (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
-                                                            <button
-                                                                (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
+                                                        <div style="display: flex;" *ngFor="let item of selectedElement?.extraBill; let i = index">
+                                                            <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
+                                                            <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
+                                                            <select style="width: 70px;" [(ngModel)]="selectedElement?.extraBill[i].type">
+                                                            <option [value]="'dollar'">Amount</option>
+                                                            <option [value]="'perentage'">Percentage</option>
+                                                        </select>
+                                                            <button (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
+                                                            <button (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox"
-                                                                [(ngModel)]="selectedElement.showSubTotal"> Show Sub
-                                                            Total
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox"
-                                                                [(ngModel)]="selectedElement.showLineItems">Shop Line
-                                                            Items
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.showLineItems">Shop Line Items
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox"
-                                                                [(ngModel)]="selectedElement.mapBillingFields">Map
-                                                            Billing fields
+                                                            <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
                                                         </div>
                                                         <div>
                                                             Accounts
                                                             <select [(ngModel)]="selectedElement.stripeAccount">
-                                                                <option>Select Account</option>
-                                                                <option *ngFor="let account of stripeAccounts"
-                                                                    [value]="account.accountName">
-                                                                    {{account.accountName}}</option>
-                                                            </select>
-                                                            <button (click)="addNewStripeAccount()">Add New
-                                                                Account</button>
+                                                            <option
+                                                                *ngFor="let account of selectedElement?.stripeAccounts"
+                                                                [value]="account.name">{{account.name}}</option>
+                                                        </select>
                                                         </div>
                                                     </div>
                                                     <div class="conditional-properties pb-5">
                                                         <h4 class="text-center">Conditional Properties</h4>
-                                                        <div *ngIf="selectedElement?.validations?.view"
-                                                            class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.view" class="form-group">
 
                                                             <div class="field-visibility">
                                                                 <label class=" col-form-label">Show This Field</label>
-                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup
-                                                                    name="radioBasic"
-                                                                    [(ngModel)]="selectedElement.view">
-                                                                    <ng-container
-                                                                        *ngFor="let tab of selectedElement?.validations?.view.options">
-                                                                        <label ngbButtonLabel
-                                                                            class="btn-primary btn-bf">
-                                                                            <input ngbButton
-                                                                                (click)="openModal(selectedElement, tab.value, 'dependUpon')"
-                                                                                type="radio" [value]="tab.value">
-                                                                            {{tab.label}}
-                                                                        </label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
+                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
+                                                                        <label ngbButtonLabel class="btn-primary btn-bf">
+                                                                        <input ngbButton
+                                                                            (click)="openModal(selectedElement, tab.value, 'dependUpon')"
+                                                                            type="radio" [value]="tab.value">
+                                                                        {{tab.label}}
+                                                                    </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -372,24 +280,18 @@
                                                         </div>
 
 
-                                                        <div *ngIf="selectedElement?.validations?.required"
-                                                            class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.required" class="form-group">
 
                                                             <div class="field-visibility">
-                                                                <label class=" col-form-label">Require This
-                                                                    Field</label>
-                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup
-                                                                    name="radioBasic"
-                                                                    [(ngModel)]="selectedElement.isRequired">
-                                                                    <ng-container
-                                                                        *ngFor="let tab of selectedElement?.validations?.required.options">
-                                                                        <label ngbButtonLabel
-                                                                            class="btn-primary btn-bf">
-                                                                            <input ngbButton
-                                                                                (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
-                                                                                type="radio" [value]="tab.value">
-                                                                            {{tab.label}}
-                                                                        </label>
+                                                                <label class=" col-form-label">Require This Field</label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
+                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
+                                                                        <label ngbButtonLabel class="btn-primary btn-bf">
+                                                                        <input ngbButton
+                                                                            (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
+                                                                            type="radio" [value]="tab.value">
+                                                                        {{tab.label}}
+                                                                    </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -397,140 +299,114 @@
                                                             <!-- <pre>{{model}}</pre> -->
                                                         </div>
                                                         <pre><code>{{targetBuilderTools | json}}</code></pre>
+
                                                     </div>
                                                 </div>
                                             </ng-template>
                                         </li>
                                     </ul>
-                                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-9 col-lg-10 main">
-                                <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
-
-                                    <div class="form-build-head">
-                                        <h2 class="text-center form-heading mb-1"> Registration Form</h2>
-                                        <p class="text-center text-muted"> Registration Form Description goes here</p>
+                                    <div class="overflow-auto h-100">
+                                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
                                     </div>
-                                    <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
-                                        dropZone="builder-target" [removeOnSpill]="true"
-                                        [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
-                                        direction="mixed" [moves]="abc" (over)="log1($event)">
+                                </div>
+                                <div class="col-md-9 col-lg main">
+                                    <div class="builder-target bg-white m-3 p-3 border-top border-5 border-bf">
 
-                                        <ng-template let-model="model" let-index="index" let-template="template">
-                                            <div [ngSwitch]="model.inputType">
-                                                <div *ngSwitchCase="'section'"
-                                                    (click)="sectionClicked($event, model, template)">
-                                                    <div class="shadow">
-                                                        {{model.name}}
-                                                        <ngx-dnd-container *ngIf="!viewExportedView"
-                                                            dropZone="builder-target" [model]="model.children"
-                                                            [removeOnSpill]="false" [template]="template"
-                                                            [droppableItemClass]="droppableItemClass"
-                                                            (drag)="log($event)" (drop)="drop($event)"
-                                                            (over)="log($event)" (out)="log($event)"
-                                                            (remove)="log($event)" (cancel)="log($event)"
-                                                            direction="mixed">
-                                                        </ngx-dnd-container>
-                                                    </div>
-                                                </div>
-                                                <div *ngSwitchCase="'repeatSection'"
-                                                    (click)="sectionClicked($event, model, template)">
-                                                    <div class="shadow">
-                                                        {{model.name}}
-                                                        <div
-                                                            (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
-                                                            Add</div>
-                                                        <div *ngFor="let rSection of model.childSection">
-                                                            <ngx-dnd-container *ngIf="!viewExportedView"
-                                                                dropZone="builder-target" [model]="rSection.children"
-                                                                [removeOnSpill]="false" [template]="template"
-                                                                [droppableItemClass]="droppableItemClass"
-                                                                direction="mixed">
+                                        <div class="form-build-head">
+                                            <h2 class="text-center form-heading mb-1"> Registration Form</h2>
+                                            <p class="text-center text-muted"> Registration Form Description goes here</p>
+
+                                        </div>
+                                        <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
+
+                                            <ng-template let-model="model" let-index="index" let-template="template">
+                                                <div [ngSwitch]="model.inputType">
+                                                    <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)">
+                                                        <div class="shadow">
+                                                            {{model.name}}
+                                                            <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                                                                (remove)="log($event)" (cancel)="log($event)" direction="mixed">
                                                             </ngx-dnd-container>
                                                         </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'repeatSection'" (click)="sectionClicked($event, model, template)">
+                                                        <div class="shadow">
+                                                            {{model.name}}
+                                                            <div (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
+                                                                Add</div>
+                                                            <div *ngFor="let rSection of model.childSection">
+                                                                <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="rSection.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" direction="mixed">
+                                                                </ngx-dnd-container>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'fileupload'">
+                                                        <div class="">
+                                                            <label>File Upload</label>
+                                                            <input type="file">
+                                                        </div>
 
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'fileupload'">
-                                                    <div class="">
-                                                        <label>File Upload</label>
-                                                        <input type="file">
-                                                    </div>
+                                                    <div *ngSwitchCase="'break'">
+                                                        <div class="w-100" style="    text-align: center; padding: 15px;">
+                                                            {{model.value}}
+                                                        </div>
 
-                                                </div>
-                                                <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div class="input-group">
-                                                        <input class="form-control" [minDate]="model.minVal"
-                                                            [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp"
-                                                            [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-outline-secondary calendar"
-                                                                (click)="d.toggle()" type="button"></button>
+                                                    </div>
+                                                    <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" [minDate]="model.minVal" [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
+                                                            <div class="input-group-append">
+                                                                <button class="border calendar" (click)="d.toggle()" type="button"><i
+                                                                    class="material-icons">date_range</i></button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)"
-                                                    class="form-group">
-                                                    <label>{{model.name}}</label>
-                                                    <div *ngFor="let option of model.options"
-                                                        class="custom-control custom-radio">
-                                                        <div (click)="model.value = option"
-                                                            class="custom-control custom-radio">
-                                                            <input name="radio" [value]="model.value"
-                                                                [checked]="model.value === option"
-                                                                id="radio_0{{option}}" type="radio"
-                                                                class="custom-control-input">
-                                                            <label for="radio_0"
-                                                                class="custom-control-label">{{option}}</label>
+                                                    <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group">
+                                                        <label>{{model.name}}</label>
+                                                        <div *ngFor="let option of model.options" class="custom-control custom-radio">
+                                                            <div (click)="model.value = option" class="custom-control custom-radio">
+                                                                <input name="radio" [value]="model.value" [checked]="model.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                <label for="radio_0" class="custom-control-label">{{option}}</label>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'rating'"
-                                                    (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div class="row"
-                                                        *ngFor="let item of model.ratingOptions | keyvalue">
-                                                        <div class="col-2">{{item.key}}</div>
-                                                        <div class="col-2"
-                                                            *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
-                                                            <input name="radio" [value]="item.value"
-                                                                [checked]="item.value === option" id="radio_0{{option}}"
-                                                                type="radio" class="custom-control-input">
+                                                    <div *ngSwitchCase="'rating'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div class="row" *ngFor="let item of model.ratingOptions | keyvalue">
+                                                            <div class="col-2">{{item.key}}</div>
+                                                            <div class="col-2" *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                    <label class="custom-control-label"></label>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'checkbox'" class="form-group"
-                                                    (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <div (click)="checkBox($event, model, option)"
-                                                        *ngFor="let option of model.options"
-                                                        class="custom-control custom-checkbox">
-                                                        <input type="checkbox" id="rememberMe{{option}}"
-                                                            name="rememberMe{{option}}"
-                                                            [checked]="model.value.includes(option)" [value]="option"
-                                                            class="custom-control-input">
-                                                        <label class="custom-control-label"
-                                                            for="rememberMe{{option}}">{{option}}</label>
+                                                    <div *ngSwitchCase="'checkbox'" class="form-group" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div (click)="checkBox($event, model, option)" *ngFor="let option of model.options" class="custom-control custom-checkbox">
+                                                            <input type="checkbox" id="rememberMe{{option}}" name="rememberMe{{option}}" [checked]="model.value.includes(option)" [value]="option" class="custom-control-input">
+                                                            <label class="custom-control-label" for="rememberMe{{option}}">{{option}}</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div *ngSwitchCase="'dropdown'"
-                                                    (click)="clicked($event, model, template)" class="form-group">
-                                                    <label class="col-form-label">{{model.name}}</label>
-                                                    <select [(ngModel)]="model.value" class="custom-select">
+                                                    <div *ngSwitchCase="'dropdown'" (click)="clicked($event, model, template)" class="form-group">
+                                                        <label class="col-form-label">{{model.name}}</label>
+                                                        <select [(ngModel)]="model.value" class="custom-select">
                                                         <option *ngFor="let option of model.options" [value]="option">
                                                             {{option}}</option>
                                                     </select>
 
-                                                </div>
-                                                <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <app-signature-field [model]="model"></app-signature-field>
+                                                    </div>
+                                                    <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <app-signature-field [model]="model"></app-signature-field>
 
-                                                </div>
-                                                <!-- <div *ngSwitchCase="'repeatSection'"
+                                                    </div>
+                                                    <!-- <div *ngSwitchCase="'repeatSection'"
                                                     (click)="sectionClicked($event, model, template)">
                                                     <div class="shadow">
                                                         {{model.name}}
@@ -549,77 +425,275 @@
                                                     </div>
 
                                                 </div> -->
-                                                <div *ngSwitchDefault (click)="clicked($event, model, template)">
-                                                    <label>{{model.name}}</label>
-                                                    <app-ui-input [model]="model"
-                                                        [targetBuilderTools]="targetBuilderTools"
-                                                        *ngIf="!model?.dependUpon || checkForDependency(model) ">
-                                                    </app-ui-input>
+                                                    <div *ngSwitchDefault (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <app-ui-input [model]="model" [targetBuilderTools]="targetBuilderTools" *ngIf="!model?.dependUpon || checkForDependency(model) ">
+                                                        </app-ui-input>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </ng-template>
-                                    </ngx-dnd-container>
-                                    <div>
-                                        <div class="shadow">
-
-                                            <ngx-dnd-container class="dummy-c" [model]="dummyContainer"
-                                                dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
-                                                Drag and Drop Here</ngx-dnd-container>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
-
+                                            </ng-template>
+                                        </ngx-dnd-container>
                                         <div>
-                                            <span>Line Items</span>
-                                            <span>Sub Total</span>
-                                            <span>Amount Due</span>
+                                            <div class="shadow">
+
+                                                <ngx-dnd-container class="dummy-c droppableContainer" [model]="dummyContainer" dropZone="builder-target" (drop)="drop2($event)" direction="mixed">
+                                                    <i class="material-icons"> add </i>Drag and Drop Here
+                                                </ngx-dnd-container>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- <div>
+                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="shadow">
+
+                                            <div>
+                                                <span>Line Items</span>
+                                                <span>Sub Total</span>
+                                                <span>Amount Due</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div>
                                     </div> -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
-                    <ng-template ngbNavContent>
-                        <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
+                        <ng-template ngbNavContent>
 
-                    </ng-template>
-                </li>
+                            <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
 
-                <li ngbNavItem>
-                    <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
-                    <ng-template ngbNavContent>
-                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                            four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
-                            beer mlkshk aliquip jean shorts ullamco ad vinyl
-                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-                            Keytar
-                            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                            odio
-                            cillum wes anderson 8-bit, sustainable jean
-                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                            stumptown,
-                            tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                    </ng-template>
-                </li>
-            </ul>
+                        </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                        <a ngbNavLink> <i class="material-icons"> list </i>Entries</a>
+                        <ng-template ngbNavContent>
+                            <div class="container-fluid">
+
+
+                                <div class="row fixed-table-toolbar mt-3" id="toolbar">
+                                    <div class="col-md-6">
+                                        <div class="bars">
+
+                                            <button type="button" class="btn btn-primary btn-bf mr-2"> Refresh </button>
+
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Actions</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">New Entry</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="tool-filter text-right">
+
+                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Columns</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                                    <button ngbDropdownItem>Action - 1</button>
+                                                    <button ngbDropdownItem>Another Action</button>
+                                                    <button ngbDropdownItem>Something else is here</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-toolbar="#toolbar">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th data-field="state" data-checkbox="true"><input data-index="0" name="btnAllSelectItem" type="checkbox"></th>
+                                                    <th data-field="prenom" data-filter-control="input" data-sortable="true">ID</th>
+                                                    <th data-field="date" data-filter-control="select" data-sortable="true">
+                                                        Status</th>
+                                                    <th data-field="examen" data-filter-control="select" data-sortable="true">Submitted</th>
+                                                    <th data-field="note" data-sortable="true">Name</th>
+                                                    <th data-field="note" data-sortable="true">Price</th>
+                                                    <th data-field="note" data-sortable="true">Currency</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                    <td>1</td>
+                                                    <td>Submitted</td>
+                                                    <td>2021-08-02 13:47:30</td>
+                                                    <td>firstName:bhagayshri,lastName:mane</td>
+                                                    <td>200.00</td>
+                                                    <td>USD</td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                right
+            </div>
+
         </div>
-        <div class="col-md-2">
-            right
-        </div>
+
+
+        <div [ngbNavOutlet]="nav" class="mt-0 tab-content"></div>
 
     </div>
-    <div class="col-md-2">
-        right
+
+
+
+
+
+    <!-- Footer Start-->
+    <div class="footer p-3 bg-dark border-top border-5 border-bf">
+        <div class="footer-copyright-wrapper text-center col">
+            <span class="monochrome-logo-wrapper mr-2">
+                <svg class="monochrome-logo" width="20px" height="100%" viewBox="0 0 152 185" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+                    xmlns:serif="http://www.serif.com/"
+                    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                    <g transform="matrix(0.429851,0,0,0.429851,-95.0387,-38.8813)">
+                        <g transform="matrix(8.79,0,0,8.79,-953.066,-846.569)">
+                            <path
+                                d="M146.699,151.251C146.666,151.275 146.631,151.296 146.596,151.315L140.138,155.27C140.112,155.286 140.084,155.303 140.057,155.316L140.036,155.327C139.884,155.399 139.712,155.431 139.534,155.409C139.405,155.395 139.287,155.354 139.183,155.293L139.169,155.285L139.164,155.281L139.126,155.257L139.113,155.249L139.108,155.245L139.096,155.235L139.078,155.223L139.072,155.218L139.061,155.208L139.044,155.194L139.038,155.188L139.028,155.179L139.021,155.174L139.005,155.159L138.995,155.148L138.989,155.142L138.98,155.134L138.951,155.101L138.943,155.091L138.937,155.085L138.928,155.073L138.922,155.066L138.914,155.056L138.91,155.05C138.878,155.009 138.851,154.964 138.827,154.917L138.818,154.9L138.817,154.896C138.745,154.745 138.712,154.571 138.734,154.394L139.631,146.847C139.634,146.811 139.638,146.773 139.644,146.739L140.997,135.363C141.014,135.222 141.063,135.092 141.134,134.979L141.133,134.978L142.637,132.632L144.365,129.935C144.637,129.508 145.204,129.383 145.63,129.655C146.057,129.928 146.181,130.495 145.909,130.921L144.181,133.618C143.903,134.052 143.827,134.559 143.929,135.028L143.931,135.027C144.033,135.496 144.313,135.926 144.745,136.204C145.178,136.48 145.686,136.556 146.154,136.456L146.154,136.454C146.622,136.351 147.05,136.072 147.326,135.644L147.328,135.642L147.33,135.639L149.058,132.941C149.331,132.515 149.897,132.39 150.324,132.663C150.75,132.935 150.875,133.502 150.601,133.928L148.9,136.583L148.899,136.586L148.897,136.588C148.883,136.614 148.868,136.638 148.851,136.662C148.592,137.086 148.523,137.58 148.622,138.034L148.624,138.034C148.724,138.49 148.992,138.91 149.404,139.188C149.428,139.202 149.451,139.217 149.474,139.232C149.899,139.492 150.392,139.56 150.847,139.462L150.846,139.46C151.309,139.358 151.733,139.085 152.01,138.664L152.021,138.649L152.022,138.646L153.751,135.947C154.023,135.521 154.589,135.397 155.016,135.669C155.442,135.941 155.567,136.508 155.294,136.934L153.593,139.59L153.592,139.592L153.59,139.595C153.576,139.62 153.56,139.645 153.544,139.668C153.285,140.095 153.215,140.588 153.315,141.044C153.415,141.498 153.683,141.917 154.096,142.194C154.122,142.208 154.144,142.224 154.167,142.239C154.592,142.499 155.084,142.566 155.54,142.467L155.588,142.458C156.037,142.348 156.447,142.072 156.715,141.652L156.715,141.653L158.445,138.954C158.716,138.528 159.283,138.403 159.709,138.676C160.135,138.948 160.26,139.515 159.989,139.941L158.266,142.629L158.26,142.639L156.756,144.986L156.754,144.985C156.682,145.099 156.583,145.198 156.46,145.272L146.699,151.251ZM154.552,144.296C154.066,144.22 153.586,144.043 153.148,143.763L153.144,143.761C152.288,143.211 151.732,142.359 151.529,141.43C151.511,141.35 151.496,141.269 151.484,141.188C151.403,141.21 151.323,141.231 151.241,141.249L151.241,141.247L151.238,141.248C150.312,141.45 149.309,141.302 148.454,140.756L148.451,140.753C147.593,140.204 147.038,139.354 146.834,138.428L146.837,138.427L146.836,138.424C146.819,138.343 146.803,138.262 146.791,138.18C146.71,138.204 146.629,138.224 146.547,138.242L146.547,138.24L146.544,138.241C145.618,138.443 144.614,138.295 143.759,137.747C143.317,137.464 142.956,137.103 142.682,136.691L141.521,146.438L146.181,149.424L154.552,144.296Z"
+                                style="fill:rgb(108,117,125);" />
+                            <path
+                                d="M156.693,112.159C160.838,108.452 163.61,112.814 166.131,108.134C161.973,110.229 158.391,105.077 156.693,112.159ZM160.574,135.919L147.338,127.44C147.338,127.44 146.828,122.337 148.677,119.181C150.527,116.023 152.395,115.614 152.395,115.614C152.395,115.614 151.437,117.042 151.367,118.169C151.295,119.295 151.644,120.04 151.644,120.04C151.644,120.04 152.5,115.247 158.257,113.987C163.25,112.893 170.175,113.301 169.965,106.601C173.638,114.49 171.597,126.759 164.808,130.204C166.163,129.998 168.181,129.844 168.991,127.593C168.517,131.784 165.42,135.667 160.574,135.919Z"
+                                style="fill:rgb(108,117,125);" />
+                        </g>
+                        <path
+                            d="M397.524,135.646C300.086,135.646 221.097,214.635 221.097,312.073C221.097,409.446 300.151,488.5 397.524,488.5C494.896,488.5 573.951,409.446 573.951,312.073C573.951,291.221 570.254,270.534 563.032,250.972L550.284,255.678C556.95,273.733 560.361,292.827 560.361,312.073C560.361,401.945 487.396,474.911 397.524,474.911C307.651,474.911 234.686,401.945 234.686,312.073C234.686,222.14 307.591,149.235 397.524,149.235L397.524,135.646Z"
+                            style="fill:rgb(108,117,125);" />
+                    </g>
+                </svg>
+            </span>
+            <span class="footer-copyright-text text-muted">
+                Blazeforms © 2021 Metagauss, Inc.
+            </span>
+        </div>
     </div>
-
-    <div [ngbNavOutlet]="nav" class="mt-0 tab-content"></div>
-
 
 </ng-container>
 <ng-template #loading>

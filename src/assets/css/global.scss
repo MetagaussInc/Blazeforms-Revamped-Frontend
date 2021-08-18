@@ -444,14 +444,14 @@ app-build {
             -webkit-box-orient: horizontal;
             -webkit-box-direction: normal;
             box-sizing: border-box;
-            border: 2px dashed rgb(206, 206, 206);
+            border: 2px dashed rgb(255, 255, 255);
             background-color: white;
             padding: 0;
             min-height: 60px;
             .gu-unselectable &,
             &.gu-over,
             &.gu-over .ngx-dnd-container {
-                border: 1px dashed orange;
+                border: 2px dashed rgb(206, 206, 206);
             }
             .ngx-dnd-item {
                 background-color: white;
@@ -514,6 +514,10 @@ app-build {
             }
         }
     }
+}
+
+app-build .builder-target .droppableContainer .ngx-dnd-container.gu-empty {
+    border: 2px dashed rgb(206, 206, 206);
 }
 
 
@@ -663,4 +667,24 @@ app-build {
         display: block;
         visibility: visible;
     }
+}
+
+
+/*---- Form Publish----*/
+
+.formtabs-wrap ul.nav-tabs li.nav-item a {
+    background-color: $tabs-bg;
+    color: $tab-color;
+    border: 0px;
+}
+
+.formtabs-wrap ul.nav-tabs li.nav-item a.active {
+    background-color: $base-color;
+    color: $btn-text-color;
+}
+
+// Form Builder
+.form-builder-sidebar {
+    min-width: 22rem;
+    height: 100vh;
 }

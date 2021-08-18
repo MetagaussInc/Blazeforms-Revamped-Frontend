@@ -13,10 +13,12 @@ import { ConditionalRendereringModalComponent } from '../conditional-renderering
   templateUrl: './build.component.html',
   styleUrls: ['./build.component.scss']
 })
-export class BuildComponent {
+export class BuildComponent  {
   model: any = {
     name: '',
   };
+  active = 1;
+
   selectedIndex: any;
   selectedElement: any;
   viewExportedView = false;
@@ -233,10 +235,25 @@ userInfo: any;
     // this.updateDnd();
     this.updateIndex();
     this.dummyContainer = [];
-    this.removeLastTwoDropDowns()
+    // this.removeLastTwoDropDowns()
+    if (e.value.inputType === 'break') {
+      if (this.isFirstPageBreak()) {
+      this.targetBuilderTools.unshift(e.value)
+    }
+    }
     setTimeout(() => {
       this.saveForm()
     }, 100);
+  }
+
+  isFirstPageBreak() {
+    let count = 0;
+    this.targetBuilderTools.forEach((element: any) => {
+      if (element.inputType === 'break') {
+        count = count + 1;
+      }
+    });
+    return count === 1;
   }
 
   abc($event: any, source: any, handle: any, sibling: any): boolean {
