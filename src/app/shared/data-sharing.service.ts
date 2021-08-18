@@ -82,4 +82,8 @@ export class DataSharingService {
     }
     return null;
   }
+
+  GetLoggedInUserData(){
+    return this.userInfo;
+  }
 }

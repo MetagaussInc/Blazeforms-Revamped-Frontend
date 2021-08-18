@@ -17,6 +17,8 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public organizationUserId: any;
   public imageSrc: string = '';
   public fileSource: any;
+  public logoExt: any;
+  public logo: any;
 
   constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
@@ -26,6 +28,18 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
       }
+    });
+    let obj = {
+      Id: this.organizationId,
+      IsOrganizationSettings: true,
+      UserId: this.organizationUserId
+    }
+    let dataRes: any;
+    this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
+      dataRes = res.result.data;
+      this.logo = atob(dataRes.workspaceDetail.logo);
+      this.logoExt = 'png';
+      this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
     });
   }
 
@@ -52,7 +66,9 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   }
 
   loadBase64Image(image: any){
-    return this.sanitizer.bypassSecurityTrustResourceUrl(image);
+    let encodedmage: any;
+    encodedmage = this.sanitizer.bypassSecurityTrustResourceUrl(image);
+    return encodedmage.changingThisBreaksApplicationSecurity;
   }
 
 }

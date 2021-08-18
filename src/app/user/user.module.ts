@@ -39,7 +39,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
       /**github */ // secretKey: '6LdR_KkbAAAAAEZkStGEFDPeqYEPjw-uwnKGGuVP'
     //  /**Localhost */ siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
       /**Localhost */ // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
-  }),
+    }),
   ]
 })
 export class UserModule { }

@@ -59,4 +59,9 @@ export const api: any = {
     resendEmailToInvitedUser: 'User/ResendEmailToInvitedUser',
     setCurrentWorkSpace: 'WorkSpace/SetCurrentWorkSpace',
     uploadFiles: "WorkSpace/UploadFiles",
+    getUserAllWorkSpacesWithPlan: "WorkSpace/GetUserAllWorkSpacesWithPlan",
+    uploadProfileImage: "User/UploadProfileImage",
+    updateUserProfile: "User/UpdateUserProfile",
+    checkUserByPassword: "Account/CheckUserByPassword",
+    changePassword: "Account/ChangePassword"
 }   

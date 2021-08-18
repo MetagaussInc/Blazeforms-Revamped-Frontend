@@ -147,9 +147,6 @@ export class RegisterComponent implements OnInit {
 
 
   submit() {
-    console.log(this.signupForm,)
-    // return;
-    console.log(this.signupForm.value,)
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
