@@ -31,12 +31,12 @@ export class ExportedFormComponent implements OnInit {
       let arr = [];
       if (this.haveTabs) {
         for (const iterator of this.elements) {
-          if (iterator.inputType === 'break') {
+          if (iterator.inputType === 'break' && arr.length > 0 ) {
             this.allArr.push(arr);
             arr = [];
             this.obj[count] = iterator.value;
             count = count + 1;
-          } else {
+          } else if (iterator.inputType !== 'break') {
             arr.push(iterator);
           }
         }
