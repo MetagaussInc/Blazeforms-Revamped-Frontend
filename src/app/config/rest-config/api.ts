@@ -22,6 +22,7 @@ export const api: any = {
     getFormUserRoleWorkSpaces: 'Forms/GetFormUserRoleWorkSpaces',
     deleteRolePermission: 'Forms/DeleteRolePermission',
     moveFolder: "Forms/MoveForm",
+    SaveFormEntry: "Forms/SaveFormEntry",
     SaveWorkspaceAccountSettings: "Payment/SaveWorkspaceAccountSettings",
     SaveFormAttributes: "Forms/SaveFormAttributes",
     GetFormDesign: "Forms/GetFormDesign",

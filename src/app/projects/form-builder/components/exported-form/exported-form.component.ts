@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Component({
   selector: 'app-exported-form',
@@ -14,8 +15,11 @@ export class ExportedFormComponent implements OnInit {
   haveTabs: boolean = false;
   active = 0;
   allArr:any = [];
-  obj: any = {}
-    constructor() { }
+  obj: any = {};
+  submitted: boolean = false;
+    constructor(private http: HttpService) {
+
+    }
   
     ngOnInit(): void {
       console.log(this.elements)
@@ -137,6 +141,21 @@ export class ExportedFormComponent implements OnInit {
     }
     submitParentForm(parentForm: any){
       console.log(parentForm)
+
+      console.log(this.allArr)
+      let data = '';
+      this.allArr.forEach((arr: any) => {
+        arr.forEach((element: any) => {
+          data = data + element.name + '=' + element.value + '||'
+        });
+      });
+
+      const payload = {
+        // Encrpte
+      }
+      this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
+        console.log(res)
+      })
     }
 
 }
