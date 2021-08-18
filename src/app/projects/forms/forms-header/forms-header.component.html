@@ -25,9 +25,15 @@
                 <i class="material-icons">language</i>
             </div>
             <div class="account-image-wrapper">
-                <div class="account-image">
-                    <img class="rounded-circle" src="assets/images/user.jpg" height="35">
-                </div>
+                <div ngbDropdown class="d-inline-block">
+                    <div class="account-image" id="dropdownBasic1" ngbDropdownToggle>
+                        <img class="rounded-circle" src="assets/images/user.jpg" height="35">
+                    </div>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <a [routerLink]="['/my-profile']" ngbDropdownItem>My Account</a>
+                        <a [routerLink]="['/user/logout']" ngbDropdownItem>Logout</a>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>

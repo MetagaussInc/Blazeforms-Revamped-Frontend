@@ -1,0 +1,52 @@
+<div class="row user-profile-row my-5" style="min-height: 500px;">
+    <div class="col-xl-4 ">
+        <!-- Profile picture card-->
+        <div class="card mb-4 mb-xl-0 ">
+            <div class="card-header ">Profile Picture</div>
+            <div class="card-body text-center ">
+                <!-- Profile picture image-->
+                <img class="img-account-profile rounded-circle mb-2" src="assets/images/profile.jpg" *ngIf="!imageSrc" alt=" ">
+                <img class="img-account-profile rounded-circle mb-2" [src]="imageSrc" *ngIf="imageSrc" alt=" " style="max-width: 200px; height: 200px;">
+                
+                <!-- Profile picture help block-->
+                <div class="small font-italic text-muted mb-4 ">JPG or PNG no larger than 5 MB</div>
+                <!-- Profile picture upload button-->
+                <span class="file-input-container">
+                    <label for="file-upload" class="file-upload-label "> </label>
+                    <input #fileupload type="file" name="fileUpload" (change)="fileChangeEvent($event)" accept="image/*" [hidden]="true" />
+                    <button (click)="fileupload.click();" class="btn btn-primary btn-bf" type="button">
+                        Upload new image
+                        <span *ngIf="isImageSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8 px-4" id="fingerprint-authentication" role="tabpanel" aria-labelledby="fingerprint-authentication-tab">
+        <!-- Fingerprint Authentication Card -->
+        <div class="card mb-4 ">
+            <div class="card-header ">Step 1</div>
+            <div class="card-body ">
+                <ul class="list-group border-0">
+                    <li class="list-group-item"><span class="li-numbers ">1</span><span class="li-text pl-3 ">Download the fingerprint scanner drivers from the link <a  href="assets/MSO Device Driver.rar ">download drivers.</a></span></li>
+                    <li class="list-group-item"><span class="li-numbers ">2</span><span class="li-text pl-3 ">Ensure the installed service is running following <a  target="_blank " href="http://localhost:4200/#/biometric ">steps.</a></span></li>
+                    <li class="list-group-item"><span class="li-numbers ">3</span><span class="li-text pl-3 ">Connect <b >Morpho 1310</b>  device with machine and move to step 2.</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card mb-4 ">
+            <div class="card-header ">Step 2</div>
+            <div class="card-body ">
+                <p>In order to login and form submission to work using fingerprint impression, you need to first save your impression with Blazeform. Please click on scan button below and verify your fingerprint twice. It will save your impression
+                    and you are good to login and authenticate all forms using Morpho scanner only.</p>
+                <div class="text-center my-3 ">
+                    <span class="material-icons " style="font-size: 58px;">fingerprint</span>
+                    <div class="fingure-remover-bt mt-3 ">
+                        <button class="btn btn-primary btn-bf " type="button ">Remove Fingerprint </button>
+                    </div>
+                    <div> <a class=" " href="http://localhost:4200/#/biometric ">Having trouble with the scanner?</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

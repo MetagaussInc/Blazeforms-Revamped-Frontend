@@ -43,9 +43,14 @@ const routes: Routes = [
     loadChildren: () => import('./projects/manage-work-spaces/manage-work-spaces.module').then(m => m.ManageWorkSpacesModule), 
     canLoad: [ModuleAuthGuardComponent] 
   },
-  { 
+  {  
     path: 'manage-roles', 
     loadChildren: () => import('./projects/manage-roles/manage-roles.module').then(m => m.ManageRolesModule), 
+    canLoad: [ModuleAuthGuardComponent] 
+  },
+  {  
+    path: 'my-profile', 
+    loadChildren: () => import('./projects/my-profile/my-profile.module').then(m => m.MyProfileModule), 
     canLoad: [ModuleAuthGuardComponent] 
   }
 ];

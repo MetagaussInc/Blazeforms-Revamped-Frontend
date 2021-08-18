@@ -1,0 +1,31 @@
+<div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
+    <div class="container py-4">
+        <h2>Profile</h2>
+    </div>
+</div>
+<div class="container-xl">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Profile</a>
+            <ng-template ngbNavContent>
+                <ng-container>
+                    <app-my-profile-general></app-my-profile-general>
+                </ng-container>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+            <a ngbNavLink>Change Password</a>
+            <ng-template ngbNavContent>
+                <app-my-profile-change-password></app-my-profile-change-password>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+            <a ngbNavLink>Fingerprint Authentication</a>
+            <ng-template ngbNavContent>
+                <app-my-profile-fingerprint></app-my-profile-fingerprint>
+            </ng-template>
+        </li>
+    </ul>
+      
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
