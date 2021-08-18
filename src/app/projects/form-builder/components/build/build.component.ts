@@ -229,7 +229,7 @@ userInfo: any;
     this.count = this.count + 1;
     if (!e.value.uiIndexId) {
       e.value.uiIndexId = this.count;
-    this.updateDnd();
+    //this.updateDnd();
   }
     console.log(e.type, e);
     // this.updateDnd();
@@ -257,7 +257,8 @@ userInfo: any;
   }
 
   abc($event: any, source: any, handle: any, sibling: any): boolean {
-    return ($event.name === 'Dnd') ? false : true;
+    //return ($event.name === 'Dnd') ? false : true; 
+    return true;
   }
   drop2(e: any) {
     this.count = this.count + 1;
