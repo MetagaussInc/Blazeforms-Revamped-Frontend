@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Component({
-  selector: 'app-exported-form',
-  templateUrl: './exported-form.component.html',
-  styleUrls: ['./exported-form.component.scss']
+  selector: 'app-blazeforms',
+  templateUrl: './blazeforms.component.html',
+  styleUrls: ['./blazeforms.component.scss']
 })
-export class ExportedFormComponent implements OnInit {
+export class BlazeformsComponent implements OnInit {
 
-  @Input() public elements: any;
+  public elements: any;
   model = {
     name: ''
   }
@@ -17,8 +18,30 @@ export class ExportedFormComponent implements OnInit {
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-    constructor(private http: HttpService) {
+  formDetail = {
+    Name: "",
+    WorkSpaceName: ""
+  }
+  
+    constructor(private http: HttpService, private routec: ActivatedRoute) {
+      this.routec.params.subscribe(res => {
+        this.formDetail.WorkSpaceName = res.workspaceName;
+        this.formDetail.Name = res.formName
+        this.getForm(res.workspaceName, res.formName)
+      })
+    }
 
+    getForm(workspaceName: string, formName: string) {
+      const payload = {
+        // FormEntriesId: null, // to do
+        Id: null,
+        Name: formName,
+        WorkSpaceName: workspaceName,
+        userID: null
+      }
+      this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
+        console.log(res);
+      })
     }
   
     ngOnInit(): void {
@@ -181,5 +204,4 @@ userID: "TXYu0NjodAYzBODQlLqdmg==",
         console.log(res)
       })
     }
-
-}
+  }

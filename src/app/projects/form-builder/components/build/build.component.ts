@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-import { config } from '../../input.config';
+import { advancedLayout, config, layoutInputs } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 
@@ -18,7 +18,7 @@ export class BuildComponent  {
     name: '',
   };
   active = 1;
-
+  viewProperties = 0; 
   selectedIndex: any;
   selectedElement: any;
   viewExportedView = false;
@@ -64,18 +64,22 @@ export class BuildComponent  {
       billing: true
   }
 }
+url = '';
 userInfoSubscription$: any;
 userInfo: any;
   sourceBuilderTools = config;
+  layout = layoutInputs;
+  advanced = advancedLayout
   targetBuilderTools: any = [];
-
+  formsList: any;
   builderObj: any = {
     MiscellaneousJSON:''
   };
   stripeAccounts: any;
-  constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store) {
+  constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
+      this.targetBuilderTools = [];
       if (userInfo) {
         this.route.queryParams.subscribe(res => {
           this.getForm(res?.ID )
@@ -85,9 +89,10 @@ userInfo: any;
   }
 
   getForm(ID: any) {
+    console.log(ID)
     const payload = {
       FormEntriesId: null, // to do
-      Id: '3YQ87BkPnd70p3GoSnSm4g==',
+      Id: ID,
       Name: null, // to do
       WorkSpaceName: null, // to do
       userID: this.userInfo.Id
@@ -96,11 +101,38 @@ userInfo: any;
       this.builderObj =  Object.assign(this.builderObj, res);
       console.log(this.builderObj)
       this.formLoaded = true;
-      this.targetBuilderTools = JSON.parse(this.builderObj.miscellaneousJSON)
+      this.url = res.url;
+      const resp = JSON.parse(this.builderObj.miscellaneousJSON)
+      console.log(resp)
+      this.targetBuilderTools = resp?.targetBuilderTools || [];
+      if (!this.targetBuilderTools?.length) {
+        this.targetBuilderTools = [];
+        this.targetBuilderTools.push(config[0])
+      }
+      this.count = resp?.count;
+      this.targetBuilderTools?.forEach((element: any) => {
+      if (element.uiIndexId >= this.count) {
+        this.count = element.uiIndexId + 1;
+      }
+      });
       this.getWorkSpaceAccounts();
+      this.getFoldersWithList(this.userInfo)
     })
   }
 
+  getFoldersWithList(userInfo: any) {
+    this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
+      WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
+      this.formsList = res;
+      console.log(this.formsList);
+    })
+  }
+
+  openForm(form: any) {
+    console.log(form)
+    this.getForm(form.id)
+
+  }
   saveForm() {
     const payload = {
       CreatedBy: this.builderObj.createdBy,
@@ -120,7 +152,10 @@ userInfo: any;
       WorkFlowLevels: null,
       WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       formLabels: "",
-      MiscellaneousJSON: JSON.stringify(this.targetBuilderTools)
+      MiscellaneousJSON: JSON.stringify({
+        targetBuilderTools: this.targetBuilderTools,
+        count: this.count
+      })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
       console.log(res)
@@ -214,7 +249,7 @@ userInfo: any;
   updateObj(key: any, selectedElement: any, props: any) {
   }
   showPaymentFields(): boolean{
-    return this.targetBuilderTools.some((x: any) => x.inputType === 'payment');
+    return this.targetBuilderTools?.some((x: any) => x.inputType === 'payment');
   }
   removeObj(key: any, selectedElement: any, props: any) {
     delete selectedElement[props][key];
@@ -226,21 +261,21 @@ userInfo: any;
   }
 
   drop(e: any) {
+    console.log(this.targetBuilderTools)
     this.count = this.count + 1;
     if (!e.value.uiIndexId) {
       e.value.uiIndexId = this.count;
-    //this.updateDnd();
   }
     console.log(e.type, e);
-    // this.updateDnd();
-    this.updateIndex();
+    // this.updateIndex();
     this.dummyContainer = [];
-    // this.removeLastTwoDropDowns()
     if (e.value.inputType === 'break') {
       if (this.isFirstPageBreak()) {
       this.targetBuilderTools.unshift(e.value)
     }
     }
+    this.viewProperties = 1; 
+
     setTimeout(() => {
       this.saveForm()
     }, 100);
@@ -357,7 +392,7 @@ userInfo: any;
     const max = 4;
     let count = 0;
     let row = 1;
-    this.targetBuilderTools.forEach((element: any, i: any) => {
+    this.targetBuilderTools?.forEach((element: any, i: any) => {
       // element.index = i;
       element.rowId = row;
       count = count + obj[element.size];
@@ -377,6 +412,8 @@ userInfo: any;
     // this.selectedIndex = model.index;
     // this.selectedDependency = null;
     console.log(model, i)
+    this.viewProperties = 1; 
+
     $event.preventDefault();
     $event.stopPropagation()
   }
@@ -389,6 +426,7 @@ userInfo: any;
     this.selectedElement = model;
     // this.selectedIndex = model.index;
     // this.selectedDependency = null;
+    this.viewProperties = 1; 
     console.log(model, i)
     $event.preventDefault();
     $event.stopPropagation()

@@ -6,87 +6,64 @@
                 <div ngbDropdown class="d-inline-block btn-group dropdown-split-warning">
                     <button class="btn border" id="selected-form-info" ngbDropdownToggle>Form Name goes here</button>
                     <div ngbDropdownMenu aria-labelledby="selected-form-info">
-                        <a ngbDropdownItem>Action - 1</a>
-                        <a ngbDropdownItem>Another Action</a>
-                        <a ngbDropdownItem>Something else is here</a>
+                        <a *ngFor="let form of formsList" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-8">
                 <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
-                    <li ng-container ngbNavItem>
+                    <li ng-container ngbNavItem >
                         <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
-                        <ng-template ngbNavContent>
+                        <ng-template ngbNavContent  >
                             <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
                                 <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0" id="form-builder-sidebar">
 
-                                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs bg-white justify-content-start nav-justified">
-                                        <li ng-container ngbNavItem>
+                                    <ul ngbNav #nav="ngbNav" [(activeId)]="viewProperties" class="nav nav-tabs bg-white justify-content-start nav-justified">
+                                        <li [ngbNavItem]="0">
                                             <a ngbNavLink>Controls</a>
                                             <ng-template ngbNavContent>
                                                 <div class="form-field-control form-basic-control bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Basic Controls</h4>
 
                                                     <ngx-dnd-container class="root-container" [model]="sourceBuilderTools" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
-                                                        <!-- <ul class="list-unstyled row"> -->
-
                                                         <ng-template let-item="model">
-                                                            <!-- <li class="col-sm-6 pr-1 my-1"> -->
-
                                                             <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
                                                                 <i class="material-icons-outlined m-1">text_fields</i>
                                                                 <span>{{item.name}}</span>
                                                             </a>
-
-                                                            <!-- </li> -->
                                                         </ng-template>
-
-                                                        <!-- </ul> -->
-
                                                     </ngx-dnd-container>
                                                 </div>
-
-                                                <div class="form-field-control form-layout-controls bg-white mb-2">
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Layout Controls</h4>
-                                                    <div class="row">
-                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="form-field-control form-advanced-controls bg-white mb-2">
+                                                    <ngx-dnd-container class="root-container" [model]="layout" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                        <ng-template let-item="model">
+                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                                <i class="material-icons-outlined m-1">text_fields</i>
+                                                                <span>{{item.name}}</span>
+                                                            </a>
+                                                        </ng-template>
+                                                    </ngx-dnd-container>
+                                                </div>
+                                                <div class="form-field-control form-basic-control bg-white mb-2">
                                                     <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
-                                                    <div class="row">
-                                                        <div class="col-6"><a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Section</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Repeating-Section</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Page-Break</a>
-                                                        </div>
-                                                        <div class="col-6"> <a class="badge badge-pill w-100 border p-2 d-flex align-items-center"><i
-                                                                class="material-icons-outlined m-1">text_fields</i>Content</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
+                                                    <ngx-dnd-container class="root-container" [model]="advanced" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                        <ng-template let-item="model">
+                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                                <i class="material-icons-outlined m-1">text_fields</i>
+                                                                <span>{{item.name}}</span>
+                                                            </a>
+                                                        </ng-template>
+                                                    </ngx-dnd-container>
+                                                </div>
+                                            
 
                                             </ng-template>
                                         </li>
-                                        <li ngbNavItem>
+                                        <li [ngbNavItem]="1">
                                             <a ngbNavLink>Properties</a>
                                             <ng-template ngbNavContent>
 
@@ -258,8 +235,8 @@
                                                                     Accounts
                                                                     <select [(ngModel)]="selectedElement.stripeAccount">
                                                             <option
-                                                                *ngFor="let account of selectedElement?.stripeAccounts"
-                                                                [value]="account.name">{{account.name}}</option>
+                                                                *ngFor="let account of stripeAccounts"
+                                                                [value]="account.name">{{account.accountName}}</option>
                                                         </select>
                                                                 </div>
                                                             </div>
@@ -437,8 +414,39 @@
                                                     </div>
 
                                                 </div> -->
+                                                <div *ngSwitchCase="'email'" class="page-break target-droppable" (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <input
+                                                    type="email"
+                                                    class="form-control"
+                                                    id="email"
+                                                     [(ngModel)]="model.value"
+                                                     name="email" 
+                                                     #name = "ngModel"
+                                                     [attr.maxlength]="model.maxVal"
+                                                     [attr.minlength]="model.minVal"
+                                                     [attr.placeholder]="model.placeholder"
+                                                     [required]="checkForDependency(model)"
+                                                     autocomplete="off">
+                                                </div>
+                                                <div *ngSwitchCase="'website'" class="page-break target-droppable" (click)="clicked($event, model, template)">
+                                                    <label>{{model.name}}</label>
+                                                    <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="website"
+                                                     [(ngModel)]="model.value"
+                                                     name="website" 
+                                                     #name = "ngModel"
+                                                     [attr.maxlength]="model.maxVal"
+                                                     [attr.minlength]="model.minVal"
+                                                     [attr.placeholder]="model.placeholder"
+                                                     [required]="checkForDependency(model)"
+                                                     autocomplete="off">
+
+                                                </div>
                                                     <div *ngSwitchDefault (click)="clicked($event, model, template)">
-                                                        <label>{{model.name}}</label>
+                                                        <label>{{model?.name}}</label>
                                                         <app-ui-input [model]="model" [targetBuilderTools]="targetBuilderTools" *ngIf="!model?.dependUpon || checkForDependency(model) ">
                                                         </app-ui-input>
 
@@ -486,7 +494,7 @@
                         <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 
-                            <app-exported-view [elements]="targetBuilderTools"></app-exported-view>
+                            <app-exported-view [url]="url" [elements]="targetBuilderTools"></app-exported-view>
 
                         </ng-template>
                     </li>

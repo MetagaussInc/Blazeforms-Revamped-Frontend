@@ -15,7 +15,7 @@
                                 </p>
 
                                 <div class="form-publish-link mt-2">
-                                    <textarea class="form-control"><iframe src="https://staging.blazeforms.com/#/BlazeForms/Hunny_Mailinator/test" height="100%" width="100%" scrolling="auto"></iframe></textarea>
+                                    <textarea class="form-control"><iframe src="{{url}}" height="100%" width="100%" scrolling="auto"></iframe></textarea>
                                 </div>
 
                             </div>
@@ -28,9 +28,9 @@
                                 </p>
 
                                 <div class="form-publish-link mt-2">
-                                    <input type="text" class="form-control">
+                                    <input type="text" [value]="url" class="form-control">
 
-                                    <a href="#">
+                                    <a href="{{url}}">
 
                                     </a>
 

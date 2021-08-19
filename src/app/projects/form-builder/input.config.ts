@@ -1,75 +1,5 @@
 export const config = [
-    {
-        name: 'Section',
-        value: '',
-        children: [] as any[],
-        inputType: 'section',
-        icon: 'far fa-square',
-        class: 'wide',
-        size: 'medium',
-        view: 'always',
-        get show() {
-
-            return true;
-        },
-        validations: {
-            size: {
-                dataRefKey: 'size',
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    {
-                        label: 'Medium',
-                        value: 'medium'
-                    },
-                    {
-                        label: 'Large',
-                        value: 'large'
-                    },
-                    {
-                        label: 'Extra Large',
-                        value: 'extra-large'
-                    }
-                ]
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },
+    
     {
         name: 'Text',
         textValue: '',
@@ -475,93 +405,6 @@ export const config = [
             range: {
                 minDataRefKey: 'minVal',
                 maxDataRefKey: 'maxVal'
-            },
-            help: {
-                dataRefKey: 'helpText'
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },
-    {
-        name: 'Date',
-        inputType: 'date',
-        icon: 'fas fa-hashtag',
-        class: 'half',
-        numericValue: 0,
-        value: undefined,
-        minCharacter: 9,
-        maxCharacter: 11,
-        size: 'medium',
-        view: 'always',
-        minDate: 0,
-        maxDate: 50,
-        helpText: '',
-        isRequired: 'always',
-        missing: ['Type for Date and time'],
-        validations: {
-            label: {
-                dataRefKey: 'name'
-            },
-            size: {
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    {
-                        label: 'Medium',
-                        value: 'medium'
-                    },
-                    {
-                        label: 'Large',
-                        value: 'large'
-                    },
-                    {
-                        label: 'Extra Large',
-                        value: 'extra-large'
-                    }
-                ],
-                dataRefKey: 'size'
-            },
-            defaultValue: {
-                dataRefKey: 'value'
-            },
-            dateRange: {
-                minDataRefKey: 'minDate',
-                maxDataRefKey: 'maxDate'
             },
             help: {
                 dataRefKey: 'helpText'
@@ -1218,272 +1061,6 @@ export const config = [
         }
     },
     {
-        name: 'Repeat Section',
-        value: '',
-        childSection: [{
-            name: 'Section',
-            value: '',
-            children: [] as any[],
-            inputType: 'section',
-            icon: 'far fa-square',
-            class: 'wide',
-            size: 'medium',
-            view: 'always',
-            get show() {
-    
-                return true;
-            },
-            validations: {
-                size: {
-                    dataRefKey: 'size',
-                    options: [
-                        {
-                            label: 'Small',
-                            value: 'small'
-                        },
-                        {
-                            label: 'Medium',
-                            value: 'medium'
-                        },
-                        {
-                            label: 'Large',
-                            value: 'large'
-                        },
-                        {
-                            label: 'Extra Large',
-                            value: 'extra-large'
-                        }
-                    ]
-                },
-                view: {
-                    options: [
-                        {
-                            label: 'Always',
-                            value: 'always'
-                        },
-                        {
-                            label: 'When',
-                            value: 'when'
-                        },
-                        {
-                            label: 'Never',
-                            value: 'never'
-                        }
-                    ],
-                    dataRefKey: 'view'
-                },
-                required: {
-                    options: [
-                        {
-                            label: 'Always',
-                            value: 'always'
-                        },
-                        {
-                            label: 'When',
-                            value: 'when'
-                        },
-                        {
-                            label: 'Never',
-                            value: 'never'
-                        }
-                    ],
-                    dataRefKey: 'isRequired'
-                }
-            }
-        }] as any[],
-        inputType: 'repeatSection',
-        icon: 'far fa-square',
-        class: 'wide',
-        size: 'medium',
-        view: 'always',
-        validations: {
-            size: {
-                dataRefKey: 'size',
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    {
-                        label: 'Medium',
-                        value: 'medium'
-                    },
-                    {
-                        label: 'Large',
-                        value: 'large'
-                    },
-                    {
-                        label: 'Extra Large',
-                        value: 'extra-large'
-                    }
-                ]
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },
-    {
-        name: 'File Upload',
-        value: '',
-        inputType: 'fileupload',
-        icon: 'far fa-square',
-        class: 'wide',
-        size: 'medium',
-        view: 'always',
-        validations: {
-            size: {
-                dataRefKey: 'size',
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    {
-                        label: 'Medium',
-                        value: 'medium'
-                    },
-                    {
-                        label: 'Large',
-                        value: 'large'
-                    },
-                    {
-                        label: 'Extra Large',
-                        value: 'extra-large'
-                    }
-                ]
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },
-    {
-        name: 'Signature',
-        value: '',
-        inputType: 'sign',
-        icon: 'far fa-square',
-        class: 'wide',
-        size: 'medium',
-        view: 'always',
-        validations: {
-            size: {
-                dataRefKey: 'size',
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    // {  
-                    // {
-                    //     label: 'Large',
-                    //     value: 'large'
-                    // },
-                    // {
-                    //     label: 'Extra Large',
-                    //     value: 'extra-large'
-                    // }
-                ]
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },
-    {
         name: 'Payment',
         textValue: '',
         minCharacter: 0,
@@ -1650,6 +1227,396 @@ export const config = [
         }
     },
     {
+        name: 'Website',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '', inputType: 'website',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            placeholder: {
+                dataRefKey: 'placeholder'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            range: {
+                minDataRefKey: 'minVal',
+                maxDataRefKey: 'maxVal'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Email',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '',
+        inputType: 'email',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            placeholder: {
+                dataRefKey: 'placeholder'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            range: {
+                minDataRefKey: 'minVal',
+                maxDataRefKey: 'maxVal'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    }
+]
+
+export const layoutInputs = [
+    {
+        name: 'Section',
+        value: '',
+        children: [] as any[],
+        inputType: 'section',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        get show() {
+
+            return true;
+        },
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Repeat Section',
+        value: '',
+        childSection: [{
+            name: 'Section',
+            value: '',
+            children: [] as any[],
+            inputType: 'section',
+            icon: 'far fa-square',
+            class: 'wide',
+            size: 'medium',
+            view: 'always',
+            get show() {
+    
+                return true;
+            },
+            validations: {
+                size: {
+                    dataRefKey: 'size',
+                    options: [
+                        {
+                            label: 'Small',
+                            value: 'small'
+                        },
+                        {
+                            label: 'Medium',
+                            value: 'medium'
+                        },
+                        {
+                            label: 'Large',
+                            value: 'large'
+                        },
+                        {
+                            label: 'Extra Large',
+                            value: 'extra-large'
+                        }
+                    ]
+                },
+                view: {
+                    options: [
+                        {
+                            label: 'Always',
+                            value: 'always'
+                        },
+                        {
+                            label: 'When',
+                            value: 'when'
+                        },
+                        {
+                            label: 'Never',
+                            value: 'never'
+                        }
+                    ],
+                    dataRefKey: 'view'
+                },
+                required: {
+                    options: [
+                        {
+                            label: 'Always',
+                            value: 'always'
+                        },
+                        {
+                            label: 'When',
+                            value: 'when'
+                        },
+                        {
+                            label: 'Never',
+                            value: 'never'
+                        }
+                    ],
+                    dataRefKey: 'isRequired'
+                }
+            }
+        }] as any[],
+        inputType: 'repeatSection',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
         name: 'Page Break',
         textValue: '',
         minCharacter: 0,
@@ -1664,4 +1631,136 @@ export const config = [
             pageBreakName: true
         }
     }
+]
+
+export const advancedLayout = [
+    {
+        name: 'File Upload',
+        value: '',
+        inputType: 'fileupload',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Signature',
+        value: '',
+        inputType: 'sign',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    // {  
+                    // {
+                    //     label: 'Large',
+                    //     value: 'large'
+                    // },
+                    // {
+                    //     label: 'Extra Large',
+                    //     value: 'extra-large'
+                    // }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
 ]

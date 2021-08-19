@@ -14,6 +14,7 @@ import { SignatureFieldComponent } from './components/signature-field/signature-
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { AddStripeAccountComponent } from './components/add-stripe-account/add-stripe-account.component';
 import { ExportedFormComponent } from './components/exported-form/exported-form.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,18 +23,19 @@ import { ExportedFormComponent } from './components/exported-form/exported-form.
     ExportedViewComponent,
     BuildComponent,
     ConditionalRendereringModalComponent,
-    SignatureFieldComponent,
+    // SignatureFieldComponent,
     AddStripeAccountComponent,
-    ExportedFormComponent
+    // ExportedFormComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     FormBuilderRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     NgxDnDModule.forRoot(),
-    SignaturePadModule
-  ] 
+    // SignaturePadModule
+  ] ,
 })
 export class FormBuilderModule { }

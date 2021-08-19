@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ExportedViewComponent implements OnInit {
 @Input() public elements: any;
+@Input() public url: any;
 model = {
   name: ''
 }
