@@ -188,7 +188,7 @@ userInfo: any;
       return true;
     }
     const dependencyElementIndex = this.targetBuilderTools.findIndex((x: any) => x.uiIndexId == dependUpon.elementId);
-    const data = this.targetBuilderTools[dependencyElementIndex].value;
+    const data = this.targetBuilderTools?.[dependencyElementIndex]?.value;
     if (dependUpon.type === 'boolean') {
       if (dependUpon.isFilledOut) {
         return (typeof data === 'number') ? data > -1 : data.length > 0;
