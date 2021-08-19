@@ -88,6 +88,16 @@ h6 {
     }
 }
 
+.custom-radio .custom-control-input {
+    &:checked~.custom-control-label {
+        &::before {
+            border-color: #f04564;
+            background-color: #f04564;
+            background-image: none;
+        }
+    }
+}
+
 .custom-control.custom-checkbox input[type=checkbox] {
     display: none;
 }
@@ -685,6 +695,29 @@ app-build .builder-target .droppableContainer .ngx-dnd-container.gu-empty {
 
 // Form Builder
 .form-builder-sidebar {
-    min-width: 22rem;
+    min-width: 24rem;
+    height: 100%;
+}
+
+.build-container {
+    //height: 600px;
+}
+
+.sidebar-container {
+    overflow-y: auto!important;
+    overflow-x: hidden;
     height: 100vh;
+}
+
+app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
+    border-top: 2px dashed #cecece;
+    padding: 0px;
+    margin: 20px 0px;
+}
+
+.target-droppable .page-break-head {
+    top: -14px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
