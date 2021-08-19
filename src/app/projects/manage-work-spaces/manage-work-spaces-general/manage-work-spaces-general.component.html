@@ -47,7 +47,7 @@
                 <label for="time-zone-select">Time Zone</label>
             </div>
             <div class="col-9">
-                <select formControlName="Timezone" id="time-zone-select" name="Timezone" class="zone-selector form-control">
+                <select formControlName="TimeZoneId" id="time-zone-select" name="TimeZoneId" class="zone-selector form-control">
                     <option [ngValue]="null" disabled>Select Timezone</option>
                     <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
                 </select>
