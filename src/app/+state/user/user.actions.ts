@@ -23,6 +23,16 @@ export const userLoginError = createAction(
   props<{ props: any }>()
 );
 
+export const userProfileUpdate = createAction(
+  '[User] Profile Update',
+  props<{ props: any }>()
+);
+
+export const userProfileImageUpdate = createAction(
+  '[User] Profile Image Update',
+  props<{ props: any }>()
+);
+
 
 // export const userRegister = createAction(
 //   '[User] Register',

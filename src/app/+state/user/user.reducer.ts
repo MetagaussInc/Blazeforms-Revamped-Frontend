@@ -49,5 +49,18 @@ export const reducer = createReducer(
 
     return state
   }),
+  on(UserActions.userProfileUpdate, (state, action) => {
+    const updatedState = JSON.parse(JSON.stringify(state));
+    updatedState.user.FirstName = action.props.payload.FirstName;
+    updatedState.user.LastName = action.props.payload.LastName;
+    localStorage.setItem('bforms', JSON.stringify(updatedState));
+    return updatedState;
+  }),
+  on(UserActions.userProfileImageUpdate, (state, action) => {
+    const updatedState = JSON.parse(JSON.stringify(state));
+    updatedState.user.ProfileImage = action.props.payload;
+    localStorage.setItem('bforms', JSON.stringify(updatedState));
+    return updatedState;
+  }),
 );
 

@@ -5,6 +5,8 @@ import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from '../../../shared/toast.service';
+import { Store } from '@ngrx/store';
+import { userProfileUpdate, userProfileImageUpdate } from 'src/app/+state/user/user.actions';
 
 @Component({
   selector: 'app-my-profile-general',
@@ -28,7 +30,7 @@ export class MyProfileGeneralComponent implements OnInit {
   public isFormSubmitted: boolean = false;
   public isImageSubmitted: boolean = false;
 
-  constructor(private dataSharingService: DataSharingService, private http: HttpService, private sanitizer: DomSanitizer, private toastService: ToastService) {
+  constructor(private dataSharingService: DataSharingService, private http: HttpService, private sanitizer: DomSanitizer, private toastService: ToastService, private store: Store) {
     this.userId = this.dataSharingService.GetUserId();
     this.userData = this.dataSharingService.GetLoggedInUserData();
     this.imageSrc = `data:image/JPEG;base64,${this.userData.ProfileImage}`;
@@ -89,6 +91,11 @@ export class MyProfileGeneralComponent implements OnInit {
       this.isImageSubmitted = false;
       if(res){
         this.imageSrc = `data:image/JPEG;base64,${res.profileImage}`;
+        const props = {
+          mappingKey: 'uploadProfileImage',
+          payload: res.profileImage
+        }
+        this.store.dispatch(userProfileImageUpdate({props}))
         this.toastService.showSuccess('Profile updated successfully!');
       }
       else{
@@ -113,9 +120,13 @@ export class MyProfileGeneralComponent implements OnInit {
     }
     this.http.call('updateUserProfile', 'POST', obj).subscribe(res => {
       this.isFormSubmitted = false;
+      const props = {
+        mappingKey: 'updateUserProfile',
+        payload: obj
+      }
+      this.store.dispatch(userProfileUpdate({props}));
       this.toastService.showSuccess('Profile updated successfully!');
-    });
-    
+    });    
   }
 
   get FirstName() { return this.updateProfileForm.get('FirstName'); }
