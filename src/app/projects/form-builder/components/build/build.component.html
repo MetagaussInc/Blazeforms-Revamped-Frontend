@@ -299,8 +299,8 @@
                                     <div class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf">
 
                                         <div class="form-build-head">
-                                            <h2 class="text-center form-heading mb-1"> Registration Form</h2>
-                                            <p class="text-center text-muted"> Registration Form Description goes here</p>
+                                            <h2 class="text-center form-heading mb-1">{{builderObj.name}}</h2>
+                                            <p class="text-center text-muted"> {{builderObj.description}}</p>
 
                                         </div>
                                         <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
@@ -491,7 +491,7 @@
                         </ng-template>
                     </li>
                     <li ngbNavItem>
-                        <a ngbNavLink><i class="material-icons"> publish </i>Publish</a>
+                        <a ngbNavLink (click)="saveForm()"><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 
                             <app-exported-view [url]="url" [elements]="targetBuilderTools"></app-exported-view>

@@ -76,6 +76,12 @@ userInfo: any;
     MiscellaneousJSON:''
   };
   stripeAccounts: any;
+
+  entries: any = {
+    columns: [],
+    rows: []
+  }
+
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -109,6 +115,7 @@ userInfo: any;
         this.targetBuilderTools = [];
         this.targetBuilderTools.push(config[0])
       }
+      this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
       if (element.uiIndexId >= this.count) {
@@ -118,6 +125,39 @@ userInfo: any;
       this.getWorkSpaceAccounts();
       this.getFoldersWithList(this.userInfo)
     })
+  }
+
+  createColums(Elements: any) {
+    const dummyData = {
+      "entry":"First Name=Rohit||Text=S||",
+      "status":"Submitted",
+      "SubmittedDate":"2021-08-19T06:26:26.181Z"
+    };
+
+    const data = dummyData.entry.split("||")
+    console.log('submitted Data',data)
+    const Columns = [
+      {
+        headerName: 'ID',
+        field: 'id'
+      },
+      {
+        headerName: 'Status',
+        field: 'status'
+      },
+      {
+        headerName: 'Submitted',
+        field: 'SubmittedDate'
+      }
+    ]
+    // Elements.forEach((element: any) => {
+    //   // Columns.push({
+    //   //   headerName: element.name,
+    //   //   field: value
+    //   // })
+    // });
+    console.log(Columns)
+    this.entries.columns = Columns;
   }
 
   getFoldersWithList(userInfo: any) {
