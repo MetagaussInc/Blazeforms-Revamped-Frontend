@@ -43,10 +43,147 @@
                 </li>
                 <li ngbNavItem>
                     <a ngbNavLink>Style Editor</a>
+                    <ng-template ngbNavContent>
+
+                        <div class="form-field-control form-basic-control bg-white mb-2 pb-2 px-2">
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">Labels</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <select id="label-font-selector" name="select" class="custom-select">
+                                            <option value="Montserra">Montserra</option>
+                                            <option value="Roboto">Roboto</option>
+                                            <option value="Raleway">Raleway</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="label-font-size-selector" name="select" class="custom-select">
+                                            <option value="11px">11px</option>
+                                            <option value="12px">12px</option>
+                                            <option value="13px">13px</option>
+                                          </select>
+
+                                    </div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2" id="label-color-selector" name="favcolor" value="#ff0000"></div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">Text</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <select id="text-font-selector" name="select" class="custom-select">
+                                            <option value="Montserra">Montserra</option>
+                                            <option value="Roboto">Roboto</option>
+                                            <option value="Raleway">Raleway</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="text-font-size-selector" name="select" class="custom-select">
+                                            <option value="11px">11px</option>
+                                            <option value="12px">12px</option>
+                                            <option value="13px">13px</option>
+                                          </select>
+
+                                    </div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2" id="text-color-selector" name="favcolor" value="#ff0000"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">PlaceHolders</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <select id="placeholders-font-selector" name="select" class="custom-select">
+                                            <option value="Montserra">Montserra</option>
+                                            <option value="Roboto">Roboto</option>
+                                            <option value="Raleway">Raleway</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="placeholders-font-size-selector" name="select" class="custom-select">
+                                            <option value="11px">11px</option>
+                                            <option value="12px">12px</option>
+                                            <option value="13px">13px</option>
+                                          </select>
+
+                                    </div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2" id="placeholders-color-selector" name="favcolor" value="#ff0000"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">Buttons</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <select id="buttons-font-selector" name="select" class="custom-select">
+                                            <option value="Montserra">Montserra</option>
+                                            <option value="Roboto">Roboto</option>
+                                            <option value="Raleway">Raleway</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select id="buttons-font-size-selector" name="select" class="custom-select">
+                                            <option value="11px">11px</option>
+                                            <option value="12px">12px</option>
+                                            <option value="13px">13px</option>
+                                          </select>
+
+                                    </div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2" id="buttons-color-selector" name="favcolor" value="#ff0000"></div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">Page Background</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12"><input type="color" class="mt-2" id="page-bg-color-selector" name="favcolor" value="#ff0000"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="font-editor">
+                                <div class="col-md-12">
+                                    <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">Page Background Image</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <div id="msg"></div>
+                                        <div class="custom-file mt-3 mb-3">
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label selected" for="customFile"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </ng-template>
                 </li>
 
             </ul>
-            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            <div class="overflow-auto vh-100">
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
         </div>
     </div>
 
@@ -54,7 +191,7 @@
         <div class="bg-white m-3 p-3 border-top border-5 border-bf">
             <div class="publish-container">
                 <!-- -----Tabs---- -->
-                
+
 
 
 
