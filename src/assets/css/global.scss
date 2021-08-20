@@ -373,7 +373,7 @@ app-form-builder {
                     flex: 1 1 48%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
-                    max-width: 92%;
+                    max-width: 100%;
                     max-height: 100%;
                     padding: 0 5px 5px 5px;
                 }
@@ -507,7 +507,7 @@ app-build {
                     flex: 1 1 92%;
                     box-sizing: border-box;
                     -webkit-box-flex: 1;
-                    max-width: 92%;
+                    max-width: 100%;
                     max-height: 100%;
                     padding: 0 5px 5px 5px;
                 }
@@ -720,4 +720,9 @@ app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
+}
+
+.form-conditional-properties .field-visibility-radio .btn-outline-secondary.active {
+    background-color: rgba($base-color, 1);
+    border-color: #bf314b;
 }
