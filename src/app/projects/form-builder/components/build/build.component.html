@@ -122,15 +122,24 @@
                                                             <label for="Default Value">Default Value</label>
                                                             <input id="Default Value" name="Default Value" placeholder="Default Value" [attr.type]="selectedElement.inputType" [(ngModel)]="selectedElement.value" class="form-control">
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.options" class="form-group">
-                                                            
-                                                            <label for="Default Value">Options</label>
-                                                            <div *ngFor="let val of selectedElement?.options; let i =index">
+                                                        <div *ngIf="selectedElement?.validations?.options" class="radio-opt">
 
-                                                                <input type="text" [value]="val" (change)="change($event, i)" class="form-control">
-                                                                <button (click)="remove(i)">X</button>
+                                                            <div class="col-12"><label for="Default Value">Options</label></div>
+                                                            <div *ngFor="let val of selectedElement?.options; let i =index" class="row">
+                                                                <div class="form-group col-md-8">
+                                                                    <input type="text" [value]="val" (change)="change($event, i)" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <button (click)="remove(i)" class="btn btn-outline-secondary btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
+                                                                    <button class="btn btn-outline-secondary btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i class="material-icons">add</i></button>
+                                                                </div>
+
                                                             </div>
-                                                            <button (click)="selectedElement.options.push('')">Add</button>
+                                                            <!--   <div class="row">
+                                                                <div class="col-sm">
+                                                                    <button class="btn btn-success" (click)="selectedElement.options.push('')">Add</button>
+                                                                </div>
+                                                            </div> -->
                                                         </div>
 
                                                         <div *ngIf="selectedElement?.validations?.ratingOptions" class="rating-properties-wrap">
@@ -325,7 +334,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-lg main">
-                                    <div class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf">
+                                    <div class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
 
                                         <div class="form-build-head">
                                             <h2 class="text-center form-heading mb-1">{{builderObj.name}}</h2>
@@ -334,7 +343,7 @@
                                         </div>
                                         <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
 
-                                            <ng-template let-model="model" let-index="index" let-template="template" class="youu">
+                                            <ng-template let-model="model" let-index="index" let-template="template" class="">
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
                                                     <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)" class="mjui">
                                                         <div class="shadow">
@@ -374,12 +383,11 @@
                                                         <div class="input-group">
                                                             <input class="form-control" [minDate]="model.minVal" [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i
-                                                                    class="material-icons">date_range</i></div>
+                                                                <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i class="material-icons">date_range</i></div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group">
+                                                    <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group-rating">
                                                         <label>{{model.name}}</label>
                                                         <div *ngFor="let option of model.options" class="form-group">
 
@@ -740,3 +748,15 @@
 <ng-template #loading>
     Form Loading
 </ng-template>
+
+<ng-template #popContent>
+    <div class="row my-2">
+        <div class="col-md-12"><i class="material-icons">content_copy</i>Duplicate</div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-12"><i class="material-icons">delete</i> Delete</div>
+    </div>
+</ng-template>
+<button type="button" class="btn btn-secondary" [ngbPopover]="popContent">
+popover!
+</button>
