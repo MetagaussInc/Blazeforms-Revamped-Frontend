@@ -243,28 +243,31 @@
                                                         </div>
                                                         <div *ngIf="selectedElement?.extraBill">
                                                             <label>Payment Setting</label>
-                                                            <div style="display: flex;" *ngFor="let item of selectedElement?.extraBill; let i = index">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
-                                                                <select style="width: 70px;" [(ngModel)]="selectedElement?.extraBill[i].type">
+                                                            <div class="d-flex form-group" *ngFor="let item of selectedElement?.extraBill; let i = index">
+                                                                <input class="form-control mr-1" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
+                                                                <input class="form-control mr-1" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
+                                                                <select class="form-control mr-2" [(ngModel)]="selectedElement?.extraBill[i].type">
                                                             <option [value]="'dollar'">Amount</option>
                                                             <option [value]="'perentage'">Percentage</option>
                                                         </select>
-                                                                <button (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
-                                                                <button (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
+                                                                <button class="btn btn-outline-secondary btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i class="material-icons">add</i></button>
+                                                                <button class="btn btn-outline-secondary btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.splice(i, 1)"><i  class="material-icons">remove</i></button>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.showSubTotal">
+                                                                <label class="custom-control-label">Sub Total</label>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.showLineItems">Shop Line Items
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.showLineItems">
+                                                                <label class="custom-control-label">Shop Line Items</label>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.mapBillingFields">
+                                                                <label class="custom-control-label"> Map Billing fields</label>
                                                             </div>
-                                                            <div>
-                                                                Accounts
-                                                                <select [(ngModel)]="selectedElement.stripeAccount">
+                                                            <div class="form-group">
+                                                                <label>Accounts</label>
+                                                                <select class="form-control" [(ngModel)]="selectedElement.stripeAccount">
                                                             <option
                                                                 *ngFor="let account of stripeAccounts"
                                                                 [value]="account.name">{{account.accountName}}</option>
@@ -389,9 +392,9 @@
                                                     </div>
                                                     <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group-rating">
                                                         <label>{{model.name}}</label>
-                                                        <div *ngFor="let option of model.options" class="form-group">
+                                                        <div class="form-group">
 
-                                                            <div (click)="model.value = option" class="custom-control custom-radio custom-control-inline">
+                                                            <div (click)="model.value = option" class="custom-control custom-radio" *ngFor="let option of model.options">
                                                                 <input name="radio" [value]="model.value" [checked]="model.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                                                                 <label for="radio_0{{option}}" class="custom-control-label">{{option}}</label>
                                                             </div>
@@ -486,17 +489,17 @@
                                                 <span>Amount Due</span>
                                             </div> -->
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Line Items</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+
+                                                <div class="col-12 text-right">Line Items <span class="pl-2">$ 46.98</span></div>
+
                                             </div>
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Sub Total</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+                                                <div class="col-12 text-right"> <strong>Sub Total</strong><span class="pl-2">$ 46.98</span> </div>
                                             </div>
                                             <hr class="mb-4">
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Amount Due</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+                                                <div class="col-12 text-right"><strong>Amount Due</strong> <span class="pl-2">$ 46.98</span></div>
+
                                             </div>
                                         </div>
                                         <!-- <div>
