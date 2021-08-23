@@ -5,10 +5,10 @@
         <div class="form-builder-wrap pt-2 row border-bottom" id="form-builder">
 
             <div class="col-md-2 text-center">
-                <div ngbDropdown class="d-inline-block btn-group dropdown-split-warning">
-                    <button class="btn border" id="selected-form-info" ngbDropdownToggle>Form Name goes here</button>
-                    <div ngbDropdownMenu aria-labelledby="selected-form-info">
-                        <a *ngFor="let form of formsList" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
+                <div ngbDropdown class="d-inline-block btn-group w-100 dropdown-split-warning">
+                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more </i></button>
+                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto py-2">
+                        <a *ngFor="let form of formsList" class="border-bottom" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
                     </div>
                 </div>
             </div>
@@ -130,8 +130,8 @@
                                                                     <input type="text" [value]="val" (change)="change($event, i)" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <button (click)="remove(i)" class="btn btn-outline-secondary btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                    <button class="btn btn-outline-secondary btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i class="material-icons">add</i></button>
+                                                                    <button (click)="remove(i)" class="btn option-btn border btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
+                                                                    <button class="btn option-btn border btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i class="material-icons">add</i></button>
                                                                 </div>
 
                                                             </div>
@@ -164,8 +164,8 @@
                                                                 <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue" class="row my-2">
                                                                     <div class="col-8"> <input type="text" [value]="key.key" (change)="updateObj($event, selectedElement, 'ratingOptions')" class="form-control cursor-pointer"></div>
                                                                     <div class="col-4">
-                                                                        <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')" class="btn btn-outline-secondary btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                        <button (click)="selectedElement.ratingOptions.push('')" class="btn btn-outline-secondary btn-sm rounded p-0"><i class="material-icons">add</i></button>
+                                                                        <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')" class="btn option-btn border btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
+                                                                        <button (click)="selectedElement.ratingOptions.push('')" class="btn option-btn border btn-sm rounded p-0"><i class="material-icons">add</i></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -250,8 +250,8 @@
                                                             <option [value]="'dollar'">Amount</option>
                                                             <option [value]="'perentage'">Percentage</option>
                                                         </select>
-                                                                <button class="btn btn-outline-secondary btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i class="material-icons">add</i></button>
-                                                                <button class="btn btn-outline-secondary btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.splice(i, 1)"><i  class="material-icons">remove</i></button>
+                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i class="material-icons">add</i></button>
+                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.splice(i, 1)"><i  class="material-icons">remove</i></button>
                                                             </div>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.showSubTotal">
@@ -289,7 +289,7 @@
                                                             <div class="field-visibility-radio">
                                                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
                                                                     <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
-                                                                        <label ngbButtonLabel class="btn btn-outline-secondary">
+                                                                        <label ngbButtonLabel class="btn border bf-radio-group-btn">
                                                                 <input ngbButton
                                                                     (click)="openModal(selectedElement, tab.value, 'dependUpon')"
                                                                     type="radio" [value]="tab.value">
@@ -308,7 +308,7 @@
                                                             <div class="field-visibility-radio">
                                                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
                                                                     <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
-                                                                        <label ngbButtonLabel class="btn btn-outline-secondary">
+                                                                        <label ngbButtonLabel class="btn border bf-radio-group-btn">
                                                                 <input ngbButton
                                                                     (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
                                                                     type="radio" [value]="tab.value">

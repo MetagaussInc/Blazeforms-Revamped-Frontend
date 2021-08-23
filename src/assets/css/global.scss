@@ -709,3 +709,18 @@
             background-color: rgba($base-color, 1);
             border-color: #bf314b;
         }
+        
+        .bf-radio-group-btn.active {
+            background-color: $base-color;
+            color: $btn-text-color;
+        }
+        
+        #forms-listing-selector {}
+        
+        #forms-listing-selector:after {
+            display: none;
+        }
+        
+        .forms-listing-dropdown {
+            max-height: 400px;
+        }
