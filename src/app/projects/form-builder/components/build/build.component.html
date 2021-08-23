@@ -241,33 +241,34 @@
                                                             <label for="Help Text">Help Text</label>
                                                             <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
                                                         </div>
-                                                        <div *ngIf="selectedElement?.extraBill">
+                                                        <div *ngIf="showPaymentFields() && selectedElement?.inputType === 'payment'">
                                                             <label>Payment Setting</label>
-                                                            <div style="display: flex;" *ngFor="let item of selectedElement?.extraBill; let i = index">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
-                                                                <select style="width: 70px;" [(ngModel)]="selectedElement?.extraBill[i].type">
+                                                            <button *ngIf="paymentSetting?.extraBill.length === 0" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">Add Extra bill</button>
+                                                            <div style="display: flex;" *ngFor="let item of paymentSetting?.extraBill; let i = index">
+                                                                <input style="width: 70px;" type="text" [(ngModel)]="paymentSetting?.extraBill[i].name">
+                                                                <input style="width: 70px;" type="text" [(ngModel)]="paymentSetting?.extraBill[i].value">
+                                                                <select style="width: 70px;" [(ngModel)]="paymentSetting?.extraBill[i].type">
                                                             <option [value]="'dollar'">Amount</option>
                                                             <option [value]="'perentage'">Percentage</option>
                                                         </select>
-                                                                <button (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
-                                                                <button (click)="selectedElement?.extraBill.splice(i, 1)">x</button>
+                                                                <button (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
+                                                                <button (click)="paymentSetting?.extraBill.splice(i, 1)">x</button>
                                                             </div>
                                                             <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.showSubTotal"> Show Sub Total
+                                                                <input type="checkbox" [(ngModel)]="paymentSetting.showSubTotal"> Show Sub Total
                                                             </div>
                                                             <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.showLineItems">Shop Line Items
+                                                                <input type="checkbox" [(ngModel)]="paymentSetting.showLineItems">Shop Line Items
                                                             </div>
                                                             <div>
-                                                                <input type="checkbox" [(ngModel)]="selectedElement.mapBillingFields">Map Billing fields
+                                                                <input type="checkbox" [(ngModel)]="paymentSetting.mapBillingFields">Map Billing fields
                                                             </div>
                                                             <div>
                                                                 Accounts
-                                                                <select [(ngModel)]="selectedElement.stripeAccount">
+                                                                <select [(ngModel)]="paymentSetting.stripeAccount" (change)="addStripeAccount($event)">
                                                             <option
                                                                 *ngFor="let account of stripeAccounts"
-                                                                [value]="account.name">{{account.accountName}}</option>
+                                                                [value]="account.accountName">{{account.accountName}}</option>
                                                         </select>
                                                             </div>
                                                         </div>

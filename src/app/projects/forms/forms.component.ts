@@ -127,7 +127,7 @@ export class FormsComponent implements OnInit {
     modalRef.componentInstance.type = type;      
     modalRef.componentInstance.modalType = 'Add';      
     modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
-    modalRef.componentInstance.UserId = this.userInfo.Id;
+    modalRef.componentInstance.userId = this.userInfo.Id;
     
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);

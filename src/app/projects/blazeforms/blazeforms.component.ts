@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 
@@ -9,42 +9,71 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 })
 export class BlazeformsComponent implements OnInit {
 
+  dataLoaded = false;
   public elements: any;
   model = {
     name: ''
   }
+
+  paymentDetails: any;
   haveTabs: boolean = false;
   active = 0;
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-  formDetail = {
-    Name: "",
-    WorkSpaceName: ""
+    workSpaceName = "";
+  formDetail: any = {}
+  payments: any = [];
+  globalListenFunc: any;
+  constructor(private http: HttpService, private routec: ActivatedRoute, private renderer: Renderer2) {
+    this.routec.params.subscribe(res => {
+      this.workSpaceName = res.workspaceName;
+      this.getForm(res.workspaceName, res.formName)
+    });
+    this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
+      this.payments = [];
+      this.extractAllLineItems(this.elements)
+    });
   }
-  
-    constructor(private http: HttpService, private routec: ActivatedRoute) {
-      this.routec.params.subscribe(res => {
-        this.formDetail.WorkSpaceName = res.workspaceName;
-        this.formDetail.Name = res.formName
-        this.getForm(res.workspaceName, res.formName)
+
+  getForm(workspaceName: string, formName: string) {
+      const payload = {
+        // FormEntriesId: null, // to do
+        Id: null, // no user credentials
+        Name: formName,
+        WorkSpaceName: workspaceName,
+        userID: null // no user credentials
+      }
+      this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
+        this.dataLoaded = true;
+        this.formDetail = {
+          ... res,
+          workspaceName: this.workSpaceName
+        };
+        this.elements = JSON.parse(res.miscellaneousJSON).targetBuilderTools;
+        this.paymentDetails = JSON.parse(res.miscellaneousJSON).paymentSetting;
+        this.extractAllLineItems(this.elements)
+        console.log(this.payments)
       })
     }
 
-    getForm(workspaceName: string, formName: string) {
-      const payload = {
-        // FormEntriesId: null, // to do
-        Id: null,
-        Name: formName,
-        WorkSpaceName: workspaceName,
-        userID: null
-      }
-      this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
-        console.log(res);
-      })
+    extractAllLineItems(elements: any) {
+      elements.forEach((element: any) => {
+        if ((element.inputType === 'payment' || element.inputType === 'currency') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
+          this.payments.push({name: element.name, value: element.value});
+        }
+        if (element.childSection) {
+          this.extractAllLineItems(element.childSection);
+        }
+        if (element.children) {
+          this.extractAllLineItems(element.children);
+        }
+      });
     }
   
+    
     ngOnInit(): void {
+      return;
       console.log(this.elements)
       let count = 0;
       if (this.elements?.length > 0) {

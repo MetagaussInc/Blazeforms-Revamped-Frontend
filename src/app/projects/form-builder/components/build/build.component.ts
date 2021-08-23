@@ -75,6 +75,13 @@ userInfo: any;
   builderObj: any = {
     MiscellaneousJSON:''
   };
+  paymentSetting: any = {
+    extraBill: [],
+    showSubTotal: true,
+    showLineItems: true,
+    mapBillingFields: true,
+    stripeAccount: "",
+  }
   stripeAccounts: any;
 
   entries: any = {
@@ -115,6 +122,7 @@ userInfo: any;
         this.targetBuilderTools = [];
         this.targetBuilderTools.push(config[0])
       }
+      this.paymentSetting = resp.paymentSetting || this.paymentSetting;
       this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -129,14 +137,11 @@ userInfo: any;
 
   createColums(Elements: any) {
     const dummyData = {
-      "entry":"First Name=Rohit||Text=S||",
+      "entry":["First Name=Rohit||Text=S||", "First Name=Rohit2||Text=S2||"],
       "status":"Submitted",
       "SubmittedDate":"2021-08-19T06:26:26.181Z"
     };
-
-    const data = dummyData.entry.split("||")
-    console.log('submitted Data',data)
-    const Columns = [
+    const Columns: any = [
       {
         headerName: 'ID',
         field: 'id'
@@ -150,14 +155,31 @@ userInfo: any;
         field: 'SubmittedDate'
       }
     ]
-    // Elements.forEach((element: any) => {
-    //   // Columns.push({
-    //   //   headerName: element.name,
-    //   //   field: value
-    //   // })
-    // });
-    console.log(Columns)
+    const dataArr = dummyData.entry;
+    const rows: any = [];
+    dataArr.forEach((entry: any, entryIndex) => {
+      const data = entry.split("||");
+      const rowObj: any = {};
+      data.forEach((elementWithValue: any, colIndex: any) => {
+        if (elementWithValue && elementWithValue?.length > 0) {
+          if (entryIndex === 0) {
+            Columns.push({
+                headerName: elementWithValue?.split("=")?.[0],
+                field: colIndex
+              })
+            }
+            rowObj[colIndex] = elementWithValue?.split("=")?.[1];
+        }
+        
+        });
+        
+      
+      rows.push(rowObj)
+    });
+    
+    console.log(Columns, rows)
     this.entries.columns = Columns;
+    this.entries.rows = rows;
   }
 
   getFoldersWithList(userInfo: any) {
@@ -177,7 +199,7 @@ userInfo: any;
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
-      Description: "", // to do
+      Description: this.builderObj.description, // to do
       FormChanges: true, // to do
       FormNewJSON: "", // to do
       FormSettings: "", // to do
@@ -188,13 +210,14 @@ userInfo: any;
       SubmissionButtonName: "", //to do
       SubmissionDependenciesJSON: "[]",
       SubmissionSettings: "",
-      URL: "",
+      URL: this.builderObj.url,
       WorkFlowLevels: null,
       WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       formLabels: "",
       MiscellaneousJSON: JSON.stringify({
         targetBuilderTools: this.targetBuilderTools,
-        count: this.count
+        count: this.count,
+        paymentSetting: (this.showPaymentFields() ? this.paymentSetting : null)
       })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
@@ -475,6 +498,13 @@ userInfo: any;
 
   setConditionalDependency() {
 
+  }
+  addStripeAccount($event: any, account?: any) {
+    this.stripeAccounts.forEach((account: any) => {
+      if (account.accountName === this.paymentSetting.stripeAccount) {
+        this.paymentSetting.accountDetail = account;
+      }
+    });
   }
 
   openModal(selectedElement: any, value: string, type: string) {
