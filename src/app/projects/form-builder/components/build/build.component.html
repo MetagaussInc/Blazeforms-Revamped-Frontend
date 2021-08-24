@@ -5,31 +5,42 @@
         <div class="form-builder-wrap pt-2 row border-bottom" id="form-builder">
 
             <div class="col-md-2 text-center">
-                <div ngbDropdown class="d-inline-block btn-group dropdown-split-warning">
-                    <button class="btn border" id="selected-form-info" ngbDropdownToggle>Form Name goes here</button>
-                    <div ngbDropdownMenu aria-labelledby="selected-form-info">
-                        <a *ngFor="let form of formsList" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
+                <div ngbDropdown class="d-inline-block btn-group w-100 dropdown-split-warning">
+                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector"
+                        ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more
+                        </i></button>
+                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector"
+                        class="forms-listing-dropdown overflow-auto py-2">
+                        <a *ngFor="let form of formsList" class="border-bottom" (click)="openForm(form)"
+                            ngbDropdownItem>{{form.name}}</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-8">
-                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
+                <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center border-0 bg-white"
+                    id="form-builder-topbar">
                     <li ng-container ngbNavItem>
                         <a ngbNavLink><i class="material-icons"> construction </i>Build</a>
                         <ng-template ngbNavContent>
                             <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
-                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0" id="form-builder-sidebar">
+                                <div class="col-md-3 col-lg-2 sidebar-offcanvas form-builder-sidebar pl-0"
+                                    id="form-builder-sidebar">
 
-                                    <ul ngbNav #nav="ngbNav" [(activeId)]="viewProperties" class="nav nav-tabs bg-white justify-content-start nav-justified">
+                                    <ul ngbNav #nav="ngbNav" [(activeId)]="viewProperties"
+                                        class="nav nav-tabs bg-white justify-content-start nav-justified">
                                         <li [ngbNavItem]="0">
                                             <a ngbNavLink class="py-3">Controls</a>
                                             <ng-template ngbNavContent>
                                                 <div class="form-field-control form-basic-control bg-white mb-2 pb-2">
                                                     <h4 class="text-center py-2 mb-2">Basic Controls</h4>
-                                                    <ngx-dnd-container class="root-container" [model]="sourceBuilderTools" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                    <ngx-dnd-container class="root-container"
+                                                        [model]="sourceBuilderTools" [dropZones]="['builder-target']"
+                                                        [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'"
+                                                        direction="mixed">
                                                         <ng-template let-item="model">
-                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                            <a href="#"
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center">
                                                                 <i class="material-icons-outlined m-1">text_fields</i>
                                                                 <span>{{item.name}}</span>
                                                             </a>
@@ -38,20 +49,27 @@
                                                 </div>
                                                 <div class="form-field-control form-layout-control bg-white mb-2 pb-2">
                                                     <h4 class="text-center py-2 mb-2">Layout Controls</h4>
-                                                    <ngx-dnd-container class="root-container" [model]="layout" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                    <ngx-dnd-container class="root-container" [model]="layout"
+                                                        [dropZones]="['builder-target']" [copy]="true"
+                                                        [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
                                                         <ng-template let-item="model">
-                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                            <a href="#"
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center">
                                                                 <i class="material-icons-outlined m-1">text_fields</i>
                                                                 <span>{{item.name}}</span>
                                                             </a>
                                                         </ng-template>
                                                     </ngx-dnd-container>
                                                 </div>
-                                                <div class="form-field-control form-advanced-control bg-white mb-2 pb-2">
+                                                <div
+                                                    class="form-field-control form-advanced-control bg-white mb-2 pb-2">
                                                     <h4 class="text-center py-2 mb-2">Advanced Controls</h4>
-                                                    <ngx-dnd-container class="root-container" [model]="advanced" [dropZones]="['builder-target']" [copy]="true" [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
+                                                    <ngx-dnd-container class="root-container" [model]="advanced"
+                                                        [dropZones]="['builder-target']" [copy]="true"
+                                                        [droppableItemClass]="'col-6 px-2 py-2'" direction="mixed">
                                                         <ng-template let-item="model">
-                                                            <a href="#" class="badge badge-pill w-100 border p-2 d-flex align-items-center">
+                                                            <a href="#"
+                                                                class="badge badge-pill w-100 border p-2 d-flex align-items-center">
                                                                 <i class="material-icons-outlined m-1">text_fields</i>
                                                                 <span>{{item.name}}</span>
                                                             </a>
@@ -67,26 +85,39 @@
                                             <ng-template ngbNavContent>
 
 
-                                                <div class="form-field-control form-basic-properties bg-white mb-2 pb-2">
+                                                <div
+                                                    class="form-field-control form-basic-properties bg-white mb-2 pb-2">
                                                     <div class="col-md-12">
 
                                                         <h4 class="text-center py-2 mb-2">Basic Properties</h4>
 
-                                                        <div *ngIf="selectedElement?.validations?.label" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.label"
+                                                            class="form-group">
                                                             <label for="text">Label</label>
-                                                            <input id="text" name="text" [(ngModel)]="selectedElement.name" placeholder="Untitled" type="text" class="form-control">
+                                                            <input id="text" name="text"
+                                                                [(ngModel)]="selectedElement.name"
+                                                                placeholder="Untitled" type="text" class="form-control">
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.placeholder" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.placeholder"
+                                                            class="form-group">
                                                             <label for="text1">Placeholder Text</label>
-                                                            <input id="text1" [(ngModel)]="selectedElement.placeholder" name="text1" type="text" class="form-control">
+                                                            <input id="text1" [(ngModel)]="selectedElement.placeholder"
+                                                                name="text1" type="text" class="form-control">
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.size" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.size"
+                                                            class="form-group">
                                                             <label>Size</label>
                                                             <div>
-                                                                <div *ngFor="let key of selectedElement.validations?.size.options" class="custom-controls-stacked">
-                                                                    <div (click)="selectedElement.size = key.value" class="custom-control custom-radio">
-                                                                        <input name="radio" [value]="key.value" [checked]="selectedElement.size === key.value" id="radio_0{{key.label}}" type="radio" class="custom-control-input">
-                                                                        <label for="radio_0" class="custom-control-label">{{key.label}}</label>
+                                                                <div *ngFor="let key of selectedElement.validations?.size.options"
+                                                                    class="custom-controls-stacked">
+                                                                    <div (click)="selectedElement.size = key.value"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="key.value"
+                                                                            [checked]="selectedElement.size === key.value"
+                                                                            id="radio_0{{key.label}}" type="radio"
+                                                                            class="custom-control-input">
+                                                                        <label for="radio_0"
+                                                                            class="custom-control-label">{{key.label}}</label>
                                                                     </div>
                                                                 </div>
                                                                 <!-- <div class="custom-controls-stacked">
@@ -106,32 +137,48 @@
                                                         <div *ngIf="selectedElement?.formValidation" class="form-group">
                                                             <label for="form-validation">Form Validation</label>
                                                             <div>
-                                                                <select id="form-validation" name="form-validation" class="custom-select">
-                                                            <option value="Select">Select</option>
-                                                            <option value="Alphabetic">Alphabetic</option>
-                                                            <option value="Numeric">Numeric</option>
-                                                            <option value="Alphanumeric">Alphanumeric</option>
-                                                            <option value="SSN">SSN</option>
-                                                            <option value="Zip Code">Zip Code</option>
-                                                            <option value="IP Address">IP Address</option>
-                                                            <option value="MAC Address">MAC Address</option>
-                                                        </select>
+                                                                <select id="form-validation" name="form-validation"
+                                                                    class="custom-select">
+                                                                    <option value="Select">Select</option>
+                                                                    <option value="Alphabetic">Alphabetic</option>
+                                                                    <option value="Numeric">Numeric</option>
+                                                                    <option value="Alphanumeric">Alphanumeric</option>
+                                                                    <option value="SSN">SSN</option>
+                                                                    <option value="Zip Code">Zip Code</option>
+                                                                    <option value="IP Address">IP Address</option>
+                                                                    <option value="MAC Address">MAC Address</option>
+                                                                </select>
                                                             </div>
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.defaultValue" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.defaultValue"
+                                                            class="form-group">
                                                             <label for="Default Value">Default Value</label>
-                                                            <input id="Default Value" name="Default Value" placeholder="Default Value" [attr.type]="selectedElement.inputType" [(ngModel)]="selectedElement.value" class="form-control">
+                                                            <input id="Default Value" name="Default Value"
+                                                                placeholder="Default Value"
+                                                                [attr.type]="selectedElement.inputType"
+                                                                [(ngModel)]="selectedElement.value"
+                                                                class="form-control">
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.options" class="radio-opt">
+                                                        <div *ngIf="selectedElement?.validations?.options"
+                                                            class="radio-opt">
 
-                                                            <div class="col-12"><label for="Default Value">Options</label></div>
-                                                            <div *ngFor="let val of selectedElement?.options; let i =index" class="row">
+                                                            <div class="col-12"><label
+                                                                    for="Default Value">Options</label></div>
+                                                            <div *ngFor="let val of selectedElement?.options; let i =index"
+                                                                class="row">
                                                                 <div class="form-group col-md-8">
-                                                                    <input type="text" [value]="val" (change)="change($event, i)" class="form-control">
+                                                                    <input type="text" [value]="val"
+                                                                        (change)="change($event, i)"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <button (click)="remove(i)" class="btn btn-outline-secondary btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                    <button class="btn btn-outline-secondary btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i class="material-icons">add</i></button>
+                                                                    <button (click)="remove(i)"
+                                                                        class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                            class="material-icons">remove</i></button>
+                                                                    <button
+                                                                        class="btn option-btn border btn-sm rounded p-0"
+                                                                        (click)="selectedElement.options.push('')"><i
+                                                                            class="material-icons">add</i></button>
                                                                 </div>
 
                                                             </div>
@@ -142,52 +189,76 @@
                                                             </div> -->
                                                         </div>
 
-                                                        <div *ngIf="selectedElement?.validations?.ratingOptions" class="rating-properties-wrap">
+                                                        <div *ngIf="selectedElement?.validations?.ratingOptions"
+                                                            class="rating-properties-wrap">
                                                             <div class="form-group">
                                                                 <label for="Default Value">Rating</label>
 
-                                                                <select [(ngModel)]="selectedElement.selectedRatingScale" class="form-control">
-                                                        <option
-                                                            *ngFor="let key of selectedElement?.ratingScale | keyvalue"
-                                                            [value]="key.key">{{key.key}}</option>
-                                                    </select>
+                                                                <select
+                                                                    [(ngModel)]="selectedElement.selectedRatingScale"
+                                                                    class="form-control">
+                                                                    <option
+                                                                        *ngFor="let key of selectedElement?.ratingScale | keyvalue"
+                                                                        [value]="key.key">{{key.key}}</option>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <ng-container *ngIf="selectedElement.selectedRatingScale === 'Custom'">
-                                                                    <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                                        <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                                <ng-container
+                                                                    *ngIf="selectedElement.selectedRatingScale === 'Custom'">
+                                                                    <div
+                                                                        *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                                        <input type="text"
+                                                                            [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
 
                                                                     </div>
                                                                 </ng-container>
                                                             </div>
                                                             <div class="form-group">
-                                                                <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue" class="row my-2">
-                                                                    <div class="col-8"> <input type="text" [value]="key.key" (change)="updateObj($event, selectedElement, 'ratingOptions')" class="form-control cursor-pointer"></div>
+                                                                <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue"
+                                                                    class="row my-2">
+                                                                    <div class="col-8"> <input type="text"
+                                                                            [value]="key.key"
+                                                                            (change)="updateObj($event, selectedElement, 'ratingOptions')"
+                                                                            class="form-control cursor-pointer"></div>
                                                                     <div class="col-4">
-                                                                        <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')" class="btn btn-outline-secondary btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                        <button (click)="selectedElement.ratingOptions.push('')" class="btn btn-outline-secondary btn-sm rounded p-0"><i class="material-icons">add</i></button>
+                                                                        <button
+                                                                            (click)="removeObj(key.key, selectedElement, 'ratingOptions')"
+                                                                            class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                                class="material-icons">remove</i></button>
+                                                                        <button
+                                                                            (click)="selectedElement.ratingOptions.push('')"
+                                                                            class="btn option-btn border btn-sm rounded p-0"><i
+                                                                                class="material-icons">add</i></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <ng-container *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
-                                                            <div *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                                <input type="text" [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                        <ng-container
+                                                            *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
+                                                            <div
+                                                                *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
+                                                                <input type="text"
+                                                                    [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
 
                                                             </div>
                                                         </ng-container>
 
-                                                        <div class="form-group" *ngIf="selectedElement?.validations?.range">
+                                                        <div class="form-group"
+                                                            *ngIf="selectedElement?.validations?.range">
                                                             <label>Range</label>
                                                             <div class="row">
                                                                 <div class="form-group col">
                                                                     <label for="min">Min</label>
-                                                                    <input name="min" id="min" type="number" [(ngModel)]="selectedElement.minVal" class="form-control">
+                                                                    <input name="min" id="min" type="number"
+                                                                        [(ngModel)]="selectedElement.minVal"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="form-group col">
                                                                     <label for="max">Max</label>
-                                                                    <input id="max" name="max" type="number" [(ngModel)]="selectedElement.maxVal" class="form-control">
+                                                                    <input id="max" name="max" type="number"
+                                                                        [(ngModel)]="selectedElement.maxVal"
+                                                                        class="form-control">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -207,70 +278,112 @@
 
 
 
-                                                        <div class="form-date-range-group" *ngIf="selectedElement?.validations?.dateRange">
+                                                        <div class="form-date-range-group"
+                                                            *ngIf="selectedElement?.validations?.dateRange">
 
                                                             <label>Range</label>
                                                             <div class="form-group">
                                                                 <label for="min">Min</label>
                                                                 <div class="input-group">
-                                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.minVal" ngbDatepicker #d1="ngbDatepicker">
+                                                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                        name="dp" [(ngModel)]="selectedElement.minVal"
+                                                                        ngbDatepicker #d1="ngbDatepicker">
                                                                     <div class="input-group-append">
-                                                                        <div class="input-group-text calendar" (click)="d1.toggle()"><i class="material-icons">date_range</i></div>
+                                                                        <div class="input-group-text calendar"
+                                                                            (click)="d1.toggle()"><i
+                                                                                class="material-icons">date_range</i>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="min">Max</label>
                                                                 <div class="input-group">
-                                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.maxVal" ngbDatepicker #d="ngbDatepicker">
+                                                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                        name="dp" [(ngModel)]="selectedElement.maxVal"
+                                                                        ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
-                                                                        <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i class="material-icons">date_range</i></div>
+                                                                        <div class="input-group-text calendar"
+                                                                            (click)="d.toggle()" type="button"><i
+                                                                                class="material-icons">date_range</i>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
 
 
                                                         </div>
-                                                        <ng-container *ngIf="selectedElement?.validations?.pageBreakName">
+                                                        <ng-container
+                                                            *ngIf="selectedElement?.validations?.pageBreakName">
                                                             <div class="form-group">
                                                                 <label for="text">Page Name</label>
-                                                                <input id="text" name="text" [(ngModel)]="selectedElement.value" placeholder="Untitled" type="text" class="form-control">
+                                                                <input id="text" name="text"
+                                                                    [(ngModel)]="selectedElement.value"
+                                                                    placeholder="Untitled" type="text"
+                                                                    class="form-control">
                                                             </div>
                                                         </ng-container>
-                                                        <div *ngIf="selectedElement?.validations?.help" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.help"
+                                                            class="form-group">
                                                             <label for="Help Text">Help Text</label>
-                                                            <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
+                                                            <textarea [(ngModel)]="selectedElement.helpText"
+                                                                id="Help Text" name="Help Text" cols="40" rows="5"
+                                                                class="form-control"></textarea>
                                                         </div>
-                                                        <div *ngIf="showPaymentFields() && selectedElement?.inputType === 'payment'">
+                                                        <div
+                                                            *ngIf="showPaymentFields() && selectedElement?.inputType === 'payment'">
                                                             <label>Payment Setting</label>
-                                                            <button *ngIf="paymentSetting?.extraBill.length === 0" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">Add Extra bill</button>
-                                                            <div style="display: flex;" *ngFor="let item of paymentSetting?.extraBill; let i = index">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="paymentSetting?.extraBill[i].name">
-                                                                <input style="width: 70px;" type="text" [(ngModel)]="paymentSetting?.extraBill[i].value">
-                                                                <select style="width: 70px;" [(ngModel)]="paymentSetting?.extraBill[i].type">
-                                                            <option [value]="'dollar'">Amount</option>
-                                                            <option [value]="'perentage'">Percentage</option>
-                                                        </select>
-                                                                <button (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">+</button>
-                                                                <button (click)="paymentSetting?.extraBill.splice(i, 1)">x</button>
+                                                            <button *ngIf="paymentSetting?.extraBill.length === 0"
+                                                                (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">Add
+                                                                Extra bill</button>
+                                                            <div class="d-flex form-group"
+                                                                *ngFor="let item of paymentSetting?.extraBill; let i = index">
+                                                                <input class="form-control mr-1" type="text"
+                                                                    [(ngModel)]="paymentSetting?.extraBill[i].name">
+                                                                <input class="form-control mr-1" type="text"
+                                                                    [(ngModel)]="paymentSetting?.extraBill[i].value">
+                                                                <select class="form-control mr-2"
+                                                                    [(ngModel)]="paymentSetting?.extraBill[i].type">
+                                                                    <option [value]="'dollar'">Amount</option>
+                                                                    <option [value]="'perentage'">Percentage</option>
+                                                                </select>
+                                                                <button
+                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i
+                                                                        class="material-icons">add</i></button>
+                                                                <button
+                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    (click)="paymentSetting?.extraBill.splice(i, 1)"><i
+                                                                        class="material-icons">remove</i></button>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="paymentSetting.showSubTotal"> Show Sub Total
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    [(ngModel)]="paymentSetting.showSubTotal">
+                                                                <label class="custom-control-label">Sub Total</label>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="paymentSetting.showLineItems">Shop Line Items
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    [(ngModel)]="paymentSetting.showLineItems">
+                                                                <label class="custom-control-label">Shop Line
+                                                                    Items</label>
                                                             </div>
-                                                            <div>
-                                                                <input type="checkbox" [(ngModel)]="paymentSetting.mapBillingFields">Map Billing fields
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    [(ngModel)]="paymentSetting.mapBillingFields">
+                                                                <label class="custom-control-label"> Map Billing
+                                                                    fields</label>
                                                             </div>
-                                                            <button (click)="addNewStripeAccount()">Add Account</button>
-                                                            <div>
-                                                                Accounts
-                                                                <select [(ngModel)]="paymentSetting.stripeAccount" (change)="addStripeAccount($event)">
-                                                            <option
-                                                                *ngFor="let account of stripeAccounts"
-                                                                [value]="account.accountName">{{account.accountName}}</option>
-                                                        </select>
+                                                            <div class="form-group">
+                                                                <button (click)="addNewStripeAccount()">Add
+                                                                    Account</button>
+
+                                                                <label>Accounts</label>
+                                                                <select class="form-control"
+                                                                    [(ngModel)]="paymentSetting.stripeAccount">
+                                                                    <option *ngFor="let account of stripeAccounts"
+                                                                        [value]="account.accountName">
+                                                                        {{account.accountName}}</option>
+                                                                </select>
                                                             </div>
                                                         </div>
 
@@ -280,20 +393,26 @@
 
                                                 </div>
 
-                                                <div class="form-field-control form-conditional-properties bg-white mb-2 pb-5">
+                                                <div
+                                                    class="form-field-control form-conditional-properties bg-white mb-2 pb-5">
                                                     <div class="col-md-12">
                                                         <h4 class="text-center py-2 mb-2">Conditional Properties</h4>
-                                                        <div *ngIf="selectedElement?.validations?.view" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.view"
+                                                            class="form-group">
                                                             <label class=" col-form-label">Show This Field</label>
                                                             <div class="field-visibility-radio">
-                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
-                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
-                                                                        <label ngbButtonLabel class="btn btn-outline-secondary">
-                                                                <input ngbButton
-                                                                    (click)="openModal(selectedElement, tab.value, 'dependUpon')"
-                                                                    type="radio" [value]="tab.value">
-                                                                {{tab.label}}
-                                                            </label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup
+                                                                    name="radioBasic"
+                                                                    [(ngModel)]="selectedElement.view">
+                                                                    <ng-container
+                                                                        *ngFor="let tab of selectedElement?.validations?.view.options">
+                                                                        <label ngbButtonLabel
+                                                                            class="btn border bf-radio-group-btn">
+                                                                            <input ngbButton
+                                                                                (click)="openModal(selectedElement, tab.value, 'dependUpon')"
+                                                                                type="radio" [value]="tab.value">
+                                                                            {{tab.label}}
+                                                                        </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -302,17 +421,22 @@
                                                         </div>
 
 
-                                                        <div *ngIf="selectedElement?.validations?.required" class="form-group">
+                                                        <div *ngIf="selectedElement?.validations?.required"
+                                                            class="form-group">
                                                             <label class=" col-form-label">Require This Field</label>
                                                             <div class="field-visibility-radio">
-                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
-                                                                    <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
-                                                                        <label ngbButtonLabel class="btn btn-outline-secondary">
-                                                                <input ngbButton
-                                                                    (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
-                                                                    type="radio" [value]="tab.value">
-                                                                {{tab.label}}
-                                                            </label>
+                                                                <div class="btn-group btn-group-toggle" ngbRadioGroup
+                                                                    name="radioBasic"
+                                                                    [(ngModel)]="selectedElement.isRequired">
+                                                                    <ng-container
+                                                                        *ngFor="let tab of selectedElement?.validations?.required.options">
+                                                                        <label ngbButtonLabel
+                                                                            class="btn border bf-radio-group-btn">
+                                                                            <input ngbButton
+                                                                                (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
+                                                                                type="radio" [value]="tab.value">
+                                                                            {{tab.label}}
+                                                                        </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -336,32 +460,51 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-lg main">
-                                    <div class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
+                                    <div
+                                        class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
 
                                         <div class="form-build-head">
                                             <h2 class="text-center form-heading mb-1">{{builderObj.name}}</h2>
                                             <p class="text-center text-muted"> {{builderObj.description}}</p>
 
                                         </div>
-                                        <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
+                                        <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
+                                            dropZone="builder-target" [removeOnSpill]="true"
+                                            [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
+                                            direction="mixed" [moves]="abc" (over)="log1($event)">
 
-                                            <ng-template let-model="model" let-index="index" let-template="template" class="">
+                                            <ng-template let-model="model" let-index="index" let-template="template"
+                                                class="">
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
-                                                    <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)" class="mjui">
+                                                    <div *ngSwitchCase="'section'"
+                                                        (click)="sectionClicked($event, model, template)" class="mjui">
                                                         <div class="shadow">
                                                             {{model.name}}
-                                                            <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
-                                                                (remove)="log($event)" (cancel)="log($event)" direction="mixed">
+                                                            <ngx-dnd-container *ngIf="!viewExportedView"
+                                                                dropZone="builder-target" [model]="model.children"
+                                                                [removeOnSpill]="false" [template]="template"
+                                                                [droppableItemClass]="droppableItemClass"
+                                                                (drag)="log($event)" (drop)="drop($event)"
+                                                                (over)="log($event)" (out)="log($event)"
+                                                                (remove)="log($event)" (cancel)="log($event)"
+                                                                direction="mixed">
                                                             </ngx-dnd-container>
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'repeatSection'" (click)="sectionClicked($event, model, template)">
+                                                    <div *ngSwitchCase="'repeatSection'"
+                                                        (click)="sectionClicked($event, model, template)">
                                                         <div class="shadow">
                                                             {{model.name}}
-                                                            <div (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
+                                                            <div
+                                                                (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
                                                                 Add</div>
                                                             <div *ngFor="let rSection of model.childSection">
-                                                                <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="rSection.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" direction="mixed">
+                                                                <ngx-dnd-container *ngIf="!viewExportedView"
+                                                                    dropZone="builder-target"
+                                                                    [model]="rSection.children" [removeOnSpill]="false"
+                                                                    [template]="template"
+                                                                    [droppableItemClass]="droppableItemClass"
+                                                                    direction="mixed">
                                                                 </ngx-dnd-container>
                                                             </div>
 
@@ -376,60 +519,91 @@
                                                     </div>
                                                     <div *ngSwitchCase="'break'" class="page-break target-droppable">
                                                         <div class="text-center position-relative">
-                                                            <span class="position-absolute page-break-head text-center bg-white">{{model.value}}</span>
+                                                            <span
+                                                                class="position-absolute page-break-head text-center bg-white">{{model.value}}</span>
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'date'" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'date'"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
                                                         <div class="input-group">
-                                                            <input class="form-control" [minDate]="model.minVal" [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model.value" ngbDatepicker #d="ngbDatepicker">
+                                                            <input class="form-control" [minDate]="model.minVal"
+                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd"
+                                                                name="dp" [(ngModel)]="model.value" ngbDatepicker
+                                                                #d="ngbDatepicker">
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i class="material-icons">date_range</i></div>
+                                                                <div class="input-group-text calendar"
+                                                                    (click)="d.toggle()" type="button"><i
+                                                                        class="material-icons">date_range</i></div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'radio'" (click)="clicked($event, model, template)" class="form-group-rating">
+                                                    <div *ngSwitchCase="'radio'"
+                                                        (click)="clicked($event, model, template)"
+                                                        class="form-group-rating">
                                                         <label>{{model.name}}</label>
-                                                        <div *ngFor="let option of model.options" class="form-group">
+                                                        <div class="form-group">
 
-                                                            <div (click)="model.value = option" class="custom-control custom-radio custom-control-inline">
-                                                                <input name="radio" [value]="model.value" [checked]="model.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
-                                                                <label for="radio_0{{option}}" class="custom-control-label">{{option}}</label>
+                                                            <div (click)="model.value = option"
+                                                                class="custom-control custom-radio"
+                                                                *ngFor="let option of model.options">
+                                                                <input name="radio" [value]="model.value"
+                                                                    [checked]="model.value === option"
+                                                                    id="radio_0{{option}}" type="radio"
+                                                                    class="custom-control-input">
+                                                                <label for="radio_0{{option}}"
+                                                                    class="custom-control-label">{{option}}</label>
                                                             </div>
 
 
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'rating'" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'rating'"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <div class="row" *ngFor="let item of model.ratingOptions | keyvalue">
+                                                        <div class="row"
+                                                            *ngFor="let item of model.ratingOptions | keyvalue">
                                                             <div class="col-2">{{item.key}}</div>
-                                                            <div class="custom-control custom-radio custom-control-inline" *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
+                                                            <div class="custom-control custom-radio custom-control-inline"
+                                                                *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
                                                                 <div class="custom-control custom-radio">
-                                                                    <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                    <input name="radio" [value]="item.value"
+                                                                        [checked]="item.value === option"
+                                                                        id="radio_0{{option}}" type="radio"
+                                                                        class="custom-control-input">
                                                                     <label class="custom-control-label"> </label>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'checkbox'" class="form-group" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'checkbox'" class="form-group"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <div (click)="checkBox($event, model, option)" *ngFor="let option of model.options" class="custom-control custom-checkbox">
-                                                            <input type="checkbox" id="rememberMe{{option}}" name="rememberMe{{option}}" [checked]="model.value.includes(option)" [value]="option" class="custom-control-input">
-                                                            <label class="custom-control-label" for="rememberMe{{option}}">{{option}}</label>
+                                                        <div (click)="checkBox($event, model, option)"
+                                                            *ngFor="let option of model.options"
+                                                            class="custom-control custom-checkbox">
+                                                            <input type="checkbox" id="rememberMe{{option}}"
+                                                                name="rememberMe{{option}}"
+                                                                [checked]="model.value.includes(option)"
+                                                                [value]="option" class="custom-control-input">
+                                                            <label class="custom-control-label"
+                                                                for="rememberMe{{option}}">{{option}}</label>
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'dropdown'" (click)="clicked($event, model, template)" class="form-group">
+                                                    <div *ngSwitchCase="'dropdown'"
+                                                        (click)="clicked($event, model, template)" class="form-group">
                                                         <label class="col-form-label">{{model.name}}</label>
                                                         <select [(ngModel)]="model.value" class="custom-select">
-                                                        <option *ngFor="let option of model.options" [value]="option">
-                                                            {{option}}</option>
-                                                    </select>
+                                                            <option *ngFor="let option of model.options"
+                                                                [value]="option">
+                                                                {{option}}</option>
+                                                        </select>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'sign'"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
                                                         <app-signature-field [model]="model"></app-signature-field>
 
@@ -453,19 +627,32 @@
                                                     </div>
 
                                                 </div> -->
-                                                    <div *ngSwitchCase="'email'" class="page-break target-droppable" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'email'" class="page-break target-droppable"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <input type="email" class="form-control" id="email" [(ngModel)]="model.value" name="email" #name="ngModel" [attr.maxlength]="model.maxVal" [attr.minlength]="model.minVal" [attr.placeholder]="model.placeholder" [required]="checkForDependency(model)" autocomplete="off">
+                                                        <input type="email" class="form-control" id="email"
+                                                            [(ngModel)]="model.value" name="email" #name="ngModel"
+                                                            [attr.maxlength]="model.maxVal"
+                                                            [attr.minlength]="model.minVal"
+                                                            [attr.placeholder]="model.placeholder"
+                                                            [required]="checkForDependency(model)" autocomplete="off">
                                                     </div>
-                                                    <div *ngSwitchCase="'website'" class="page-break target-droppable" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'website'" class="page-break target-droppable"
+                                                        (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <input type="text" class="form-control" id="website" [(ngModel)]="model.value" name="website" #name="ngModel" [attr.maxlength]="model.maxVal" [attr.minlength]="model.minVal" [attr.placeholder]="model.placeholder" [required]="checkForDependency(model)"
-                                                            autocomplete="off">
+                                                        <input type="text" class="form-control" id="website"
+                                                            [(ngModel)]="model.value" name="website" #name="ngModel"
+                                                            [attr.maxlength]="model.maxVal"
+                                                            [attr.minlength]="model.minVal"
+                                                            [attr.placeholder]="model.placeholder"
+                                                            [required]="checkForDependency(model)" autocomplete="off">
 
                                                     </div>
                                                     <div *ngSwitchDefault (click)="clicked($event, model, template)">
-                                                        <label >{{model?.name}}</label>
-                                                        <app-ui-input [model]="model" [targetBuilderTools]="targetBuilderTools" *ngIf="!model?.dependUpon || checkForDependency(model) ">
+                                                        <label>{{model?.name}}</label>
+                                                        <app-ui-input [model]="model"
+                                                            [targetBuilderTools]="targetBuilderTools"
+                                                            *ngIf="!model?.dependUpon || checkForDependency(model) ">
                                                         </app-ui-input>
 
                                                     </div>
@@ -480,7 +667,8 @@
                                                 </ngx-dnd-container>
                                             </div>
                                         </div> -->
-                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()" class="item-payment-wrap">
+                                        <div *ngIf="showPaymentFields()" (click)="selectPayment()"
+                                            class="item-payment-wrap">
 
                                             <!--    <div>
                                                 <span>Line Items</span>
@@ -488,17 +676,20 @@
                                                 <span>Amount Due</span>
                                             </div> -->
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Line Items</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+
+                                                <div class="col-12 text-right">Line Items <span class="pl-2">$
+                                                        46.98</span></div>
+
                                             </div>
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Sub Total</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+                                                <div class="col-12 text-right"> <strong>Sub Total</strong><span
+                                                        class="pl-2">$ 46.98</span> </div>
                                             </div>
                                             <hr class="mb-4">
                                             <div class="row lower">
-                                                <div class="col-8 text-right">Amount Due</div>
-                                                <div class="col-4 text-right">$ 46.98</div>
+                                                <div class="col-12 text-right"><strong>Amount Due</strong> <span
+                                                        class="pl-2">$ 46.98</span></div>
+
                                             </div>
                                         </div>
                                         <!-- <div>
@@ -527,28 +718,34 @@
                                     <div class="col-md-6">
                                         <div class="bars">
 
-                                            <button type="button" class="btn btn-primary btn-bf mr-2"(click)="getNewEntries()"> Refresh </button>
+                                            <button type="button" class="btn btn-primary btn-bf mr-2"
+                                                (click)="getNewEntries()"> Refresh </button>
 
 
                                             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="filterDropdown" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
+                                                <button class="btn btn-primary btn-bf mr-2" id="filterDropdown"
+                                                    ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
                                                 <div ngbDropdownMenu aria-labelledby="filterDropdown">
                                                     <button ngbDropdownItem (click)="filter = null">All</button>
-                                                    <button ngbDropdownItem  (click)="filter = 'Submitted'">Submitted</button>
-                                                    <button ngbDropdownItem  (click)="filter = 'Reviewed'">Reviewed</button>
+                                                    <button ngbDropdownItem
+                                                        (click)="filter = 'Submitted'">Submitted</button>
+                                                    <button ngbDropdownItem
+                                                        (click)="filter = 'Reviewed'">Reviewed</button>
                                                 </div>
                                             </div>
 
                                             <div class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown" ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
+                                                <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
+                                                    ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
                                                 <div ngbDropdownMenu aria-labelledby="actionsDropdown">
                                                     <!-- <button ngbDropdownItem>Delete</button> -->
                                                     <button ngbDropdownItem (click)="export()">Export</button>
                                                 </div>
                                             </div>
 
-                                            <div class="d-inline-block" >
-                                                <button class="btn btn-primary btn-bf mr-2" id="newEntry" (click)="newEntry()" >New Entry</button>
+                                            <div class="d-inline-block">
+                                                <button class="btn btn-primary btn-bf mr-2" id="newEntry"
+                                                    (click)="newEntry()">New Entry</button>
                                                 <!-- <div ngbDropdownMenu aria-labelledby="newEntry">
                                                     <button ngbDropdownItem>Action - 1</button>
                                                     <button ngbDropdownItem>Another Action</button>
@@ -566,10 +763,13 @@
                                         <div class="tool-filter text-right">
 
                                             <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="column" ngbDropdownAnchor (focus)="column.open()">Columns</button>
+                                                <button class="btn btn-primary btn-bf mr-2" id="column"
+                                                    ngbDropdownAnchor (focus)="column.open()">Columns</button>
                                                 <div ngbDropdownMenu aria-labelledby="column">
-                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem" type="checkbox">AA</button>
-                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem" type="checkbox">AA</button>
+                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem"
+                                                            type="checkbox">AA</button>
+                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem"
+                                                            type="checkbox">AA</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -581,22 +781,30 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-toolbar="#toolbar">
+                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
+                                            data-search="true" data-filter-control="true" data-show-export="true"
+                                            data-show-refresh="true" data-show-toggle="true" data-pagination="true"
+                                            data-toolbar="#toolbar">
                                             <thead class="thead-light">
                                                 <tr>
-                                                    <th data-field="state" data-checkbox="true"><input data-index="0" name="btnAllSelectItem" type="checkbox"></th>
-                                                    <th *ngFor="let item of entries.columns" data-field="prenom" data-filter-control="input" data-sortable="true">{{item.headerName}}</th>
+                                                    <th data-field="state" data-checkbox="true"><input data-index="0"
+                                                            name="btnAllSelectItem" type="checkbox"></th>
+                                                    <th *ngFor="let item of entries.columns" data-field="prenom"
+                                                        data-filter-control="input" data-sortable="true">
+                                                        {{item.headerName}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
-                                                    <tr  *ngIf="!filter || (filter && filter === row[1])">
-                                                        <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                        <td *ngFor="let col of entries.columns">{{row?.[col?.field]}}</td>
+                                                    <tr *ngIf="!filter || (filter && filter === row[1])">
+                                                        <td class="bs-checkbox "><input data-index="0"
+                                                                name="btSelectItem" type="checkbox"></td>
+                                                        <td *ngFor="let col of entries.columns">{{row?.[col?.field]}}
+                                                        </td>
                                                     </tr>
                                                 </ng-container>
-                                                
-                                                
+
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -665,5 +873,5 @@
     </div>
 </ng-template>
 <button type="button" class="btn btn-secondary" [ngbPopover]="popContent">
-popover!
+    popover!
 </button>
