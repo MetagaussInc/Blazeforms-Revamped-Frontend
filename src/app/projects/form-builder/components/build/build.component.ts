@@ -316,6 +316,28 @@ userInfo: any;
     }
   }
 
+  delete(id: any) {
+    this.targetBuilderTools = this.targetBuilderTools.filter((x: any) => id !== x.uiIndexId);
+    this.saveForm();
+  }
+
+  duplicate(id: any) {
+    let indexE: any = {};
+    let i = 0;
+    for (let index = 0; index < this.targetBuilderTools.length; index++) {
+      if (this.targetBuilderTools[index]?.uiIndexId === id) {
+        indexE = JSON.parse(JSON.stringify(this.targetBuilderTools[index]));
+        i = index;
+        this.count = this.count + 2
+        indexE.uiIndexId = this.count;
+        break;
+      }
+    }
+    this.targetBuilderTools.splice((i + 1), 0, indexE);
+    this.saveForm();
+
+  }
+
   change($event: any, val: any) {
     this.selectedElement.options[val] = $event.target.value;
   }

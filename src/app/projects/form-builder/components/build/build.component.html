@@ -369,14 +369,14 @@
 
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
 
-                                                    <div class="popover bs-popover-bottom field-popover-wrap">
+                                                    <div class="popover bs-popover-bottom field-popover-wrap" *ngIf="selectedElement?.uiIndexId === model.uiIndexId">
                                                         <div class="arrow"></div>
                                                         <div class="popover-body">
                                                             <div class="row my-2">
-                                                                <div class="col-md-12"><i class="material-icons">content_copy</i>Duplicate</div>
+                                                                <div class="col-md-12" (click)="duplicate(model.uiIndexId)"><i class="material-icons">content_copy</i>Duplicate</div>
                                                             </div>
                                                             <div class="row my-2">
-                                                                <div class="col-md-12"><i class="material-icons">delete</i> Delete</div>
+                                                                <div class="col-md-12"  (click)="delete(model.uiIndexId)"><i class="material-icons">delete</i> Delete</div>
                                                             </div>
                                                         </div>
                                                     </div>
