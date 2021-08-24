@@ -55,7 +55,7 @@ export class EditFormModalComponent implements OnInit {
       FormType: "Form",
       IsActive: true,
       Name: this.addForm.value.name,
-      SessionUser: this.userId, // to do
+      SessionUser: this.userId,
       SubmissionButtonName: "NOUSAGE",
       SubmissionSettings: "NOUSAGE",
       WorkSpaceId: this.workSpaceId

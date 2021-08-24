@@ -7,7 +7,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { advancedLayout, config, layoutInputs } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
-
+import { ExcelService } from '../../excelservice.service';
 @Component({
   selector: 'app-build',
   templateUrl: './build.component.html',
@@ -65,6 +65,7 @@ export class BuildComponent  {
   }
 }
 url = '';
+filter: any = null;
 userInfoSubscription$: any;
 userInfo: any;
   sourceBuilderTools = config;
@@ -75,6 +76,15 @@ userInfo: any;
   builderObj: any = {
     MiscellaneousJSON:''
   };
+  paymentSetting: any = {
+    extraBill: [],
+    showSubTotal: true,
+    showLineItems: true,
+    mapBillingFields: true,
+    stripeAccount: "",
+    paymentOption: ['Card', 'Cash'],
+    selectedPaymentOption: 'Cash'
+  }
   stripeAccounts: any;
 
   entries: any = {
@@ -82,16 +92,29 @@ userInfo: any;
     rows: []
   }
 
-  constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  formId: any = null;
+
+
+  constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
       if (userInfo) {
         this.route.queryParams.subscribe(res => {
+          this.formId = res.ID;
           this.getForm(res?.ID )
         })
       }
     })
+
+  }
+
+  export() {
+      this.excelService.exportAsExcelFile(this.entries.rows, 'Form entries');
+  }
+
+  newEntry() {
+    this.router.navigate([`/blazeforms/${this.userInfo.WorkspaceDetail.Name.split(" ").join("_")}/${this.builderObj.name.split(" ").join("_")}`])
   }
 
   getForm(ID: any) {
@@ -115,7 +138,8 @@ userInfo: any;
         this.targetBuilderTools = [];
         this.targetBuilderTools.push(config[0])
       }
-      this.createColums(this.targetBuilderTools)
+      this.paymentSetting = resp.paymentSetting || this.paymentSetting;
+      // this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
       if (element.uiIndexId >= this.count) {
@@ -125,39 +149,52 @@ userInfo: any;
       this.getWorkSpaceAccounts();
       this.getFoldersWithList(this.userInfo)
     })
+
+    this.getNewEntries();
+
+  }
+
+  getNewEntries() {
+    this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
+      const data: any = [];
+      res.formEntries.forEach((element: any, index: any) => {
+        const entry = JSON.parse(element.formEntryJSON) 
+        data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
+      });
+      this.createColums(data)
+    })
   }
 
   createColums(Elements: any) {
-    const dummyData = {
-      "entry":"First Name=Rohit||Text=S||",
-      "status":"Submitted",
-      "SubmittedDate":"2021-08-19T06:26:26.181Z"
-    };
-
-    const data = dummyData.entry.split("||")
-    console.log('submitted Data',data)
-    const Columns = [
-      {
-        headerName: 'ID',
-        field: 'id'
-      },
-      {
-        headerName: 'Status',
-        field: 'status'
-      },
-      {
-        headerName: 'Submitted',
-        field: 'SubmittedDate'
-      }
-    ]
-    // Elements.forEach((element: any) => {
-    //   // Columns.push({
-    //   //   headerName: element.name,
-    //   //   field: value
-    //   // })
-    // });
-    console.log(Columns)
+    console.log
+    const Columns: any = [ ]
+    const dataArr: any = Elements;
+    const rows: any = [];
+    dataArr.forEach((entry: string, entryIndex: any) => {
+      const separatedData = entry?.split("&&");
+      const data: any = separatedData[0].split('||');
+      const formData: any = separatedData[1];
+      const rowObj: any = {};
+      data.forEach((elementWithValue: any, colIndex: any) => {
+        if (elementWithValue && elementWithValue?.length > 0) {
+          if (entryIndex === 0) {
+            Columns.push({
+                headerName: elementWithValue?.split("=")?.[0],
+                field: colIndex
+              })
+            }
+            rowObj[colIndex] = elementWithValue?.split("=")?.[1];
+        }
+        
+        });
+      rowObj.formDetail = formData;
+      
+      rows.push(rowObj)
+    });
+    
+    console.log(Columns, rows)
     this.entries.columns = Columns;
+    this.entries.rows = rows;
   }
 
   getFoldersWithList(userInfo: any) {
@@ -177,7 +214,7 @@ userInfo: any;
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
-      Description: "", // to do
+      Description: this.builderObj.description, // to do
       FormChanges: true, // to do
       FormNewJSON: "", // to do
       FormSettings: "", // to do
@@ -188,13 +225,14 @@ userInfo: any;
       SubmissionButtonName: "", //to do
       SubmissionDependenciesJSON: "[]",
       SubmissionSettings: "",
-      URL: "",
+      URL: this.builderObj.url,
       WorkFlowLevels: null,
       WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       formLabels: "",
       MiscellaneousJSON: JSON.stringify({
         targetBuilderTools: this.targetBuilderTools,
-        count: this.count
+        count: this.count,
+        paymentSetting: (this.showPaymentFields() ? this.paymentSetting : null)
       })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
@@ -475,6 +513,13 @@ userInfo: any;
 
   setConditionalDependency() {
 
+  }
+  addStripeAccount($event: any, account?: any) {
+    this.stripeAccounts.forEach((account: any) => {
+      if (account.accountName === this.paymentSetting.stripeAccount) {
+        this.paymentSetting.accountDetail = account;
+      }
+    });
   }
 
   openModal(selectedElement: any, value: string, type: string) {

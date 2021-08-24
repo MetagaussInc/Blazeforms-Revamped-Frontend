@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ItemComponent } from '@swimlane/ngx-dnd';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BillPayComponent } from 'src/app/projects/blazeforms/bill-pay/bill-pay.component';
 
 @Component({
   selector: 'app-exported-form',
@@ -9,6 +12,10 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 export class ExportedFormComponent implements OnInit {
 
   @Input() public elements: any;
+  @Input() public config: any;
+  @Input() public initial: any;
+  @Input() public payments: any;
+  @Input() public styling: any;
   model = {
     name: ''
   }
@@ -17,12 +24,12 @@ export class ExportedFormComponent implements OnInit {
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-    constructor(private http: HttpService) {
+    constructor(private http: HttpService, private modalService: NgbModal) {
 
     }
   
     ngOnInit(): void {
-      console.log(this.elements)
+      console.log(this.initial)
       let count = 0;
       if (this.elements?.length > 0) {
         for (const iterator of this.elements) {
@@ -94,6 +101,31 @@ export class ExportedFormComponent implements OnInit {
       }
       return false;
     }
+
+    getSubTotal() {
+      let total = 0;
+      this.payments.forEach((element: any) => {
+        total = total + Number(element.value);
+      });
+      return total;
+    }
+
+    getAmountDue() {
+      let total = 0;
+      let subTotal = this.getSubTotal();
+      if (subTotal == 0) {
+        return 0;
+      }
+      this.initial.extraBill.forEach((additional: any) => {
+        if (additional.type === "dollar") {
+          total = total + Number(additional.value); 
+        } else {
+          total + total + (subTotal * (Number(additional.value) / 100))
+        }
+      });
+      total = total + subTotal;
+      return total;
+    }
   
     checkForRDependency(model: any, T: any): boolean {
       const dependUpon = model?.[T];
@@ -139,6 +171,18 @@ export class ExportedFormComponent implements OnInit {
       }
       return true;
     }
+
+    billPay() {
+      const modalRef: any = this.modalService.open(BillPayComponent, { size: 'lg' })
+      modalRef.componentInstance.config = {
+        initial: this.initial
+      }
+      modalRef.result.then((result: any) => {
+        console.log(`Closed with: ${result}`);
+      }, (reason: any) => {
+        console.log(`Dismissed `);
+      });
+    }
     submitParentForm(parentForm: any){
       let data = '';
       if (this.haveTabs) {
@@ -158,23 +202,23 @@ export class ExportedFormComponent implements OnInit {
       const payload = {
         EncryptEntryData: false,
 FormType: "Form",
-Id: "2dz77r3bzZJ6UaCmrfOSeg==",
+Id: this.config.id, //"2dz77r3bzZJ6UaCmrfOSeg==",
 IsValidNotification: false,
-Name: "R2",
+Name: this.config.name, //"R2",
 PaymentMode: "Cash",
 SubmissionSettings: "NOVALUE",
 SubmittedWhenStatus: false,
 TotalEntries: 1000000000,
 UpdatedWhenStatus: false,
 // UserName: "admin1223489   blazeforms",
-WorkSpaceId: "TXYu0NjodAYzBODQlLqdmg==",
-WorkSpaceName: "Super_Admin_WorkSpace1",
+WorkSpaceId: this.config.workSpaceId, // "TXYu0NjodAYzBODQlLqdmg==",
+WorkSpaceName: this.config.workspaceName, //"Super_Admin_WorkSpace1",
 formEntry: JSON.stringify({
   entry: data,
   status: 'Submitted',
   SubmittedDate: new Date()
 }),
-userID: "TXYu0NjodAYzBODQlLqdmg==",
+userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
       }
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
         console.log(res)

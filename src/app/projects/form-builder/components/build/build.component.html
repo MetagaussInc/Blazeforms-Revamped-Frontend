@@ -6,7 +6,8 @@
 
             <div class="col-md-2 text-center">
                 <div ngbDropdown class="d-inline-block btn-group w-100 dropdown-split-warning">
-                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more </i></button>
+                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more
+                        </i></button>
                     <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto py-2">
                         <a *ngFor="let form of formsList" class="border-bottom" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
                     </div>
@@ -107,15 +108,15 @@
                                                             <label for="form-validation">Form Validation</label>
                                                             <div>
                                                                 <select id="form-validation" name="form-validation" class="custom-select">
-                                                            <option value="Select">Select</option>
-                                                            <option value="Alphabetic">Alphabetic</option>
-                                                            <option value="Numeric">Numeric</option>
-                                                            <option value="Alphanumeric">Alphanumeric</option>
-                                                            <option value="SSN">SSN</option>
-                                                            <option value="Zip Code">Zip Code</option>
-                                                            <option value="IP Address">IP Address</option>
-                                                            <option value="MAC Address">MAC Address</option>
-                                                        </select>
+                                                                    <option value="Select">Select</option>
+                                                                    <option value="Alphabetic">Alphabetic</option>
+                                                                    <option value="Numeric">Numeric</option>
+                                                                    <option value="Alphanumeric">Alphanumeric</option>
+                                                                    <option value="SSN">SSN</option>
+                                                                    <option value="Zip Code">Zip Code</option>
+                                                                    <option value="IP Address">IP Address</option>
+                                                                    <option value="MAC Address">MAC Address</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.defaultValue" class="form-group">
@@ -130,8 +131,10 @@
                                                                     <input type="text" [value]="val" (change)="change($event, i)" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <button (click)="remove(i)" class="btn option-btn border btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                    <button class="btn option-btn border btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i class="material-icons">add</i></button>
+                                                                    <button (click)="remove(i)" class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                            class="material-icons">remove</i></button>
+                                                                    <button class="btn option-btn border btn-sm rounded p-0" (click)="selectedElement.options.push('')"><i
+                                                                            class="material-icons">add</i></button>
                                                                 </div>
 
                                                             </div>
@@ -147,10 +150,10 @@
                                                                 <label for="Default Value">Rating</label>
 
                                                                 <select [(ngModel)]="selectedElement.selectedRatingScale" class="form-control">
-                                                        <option
-                                                            *ngFor="let key of selectedElement?.ratingScale | keyvalue"
-                                                            [value]="key.key">{{key.key}}</option>
-                                                    </select>
+                                                                    <option
+                                                                        *ngFor="let key of selectedElement?.ratingScale | keyvalue"
+                                                                        [value]="key.key">{{key.key}}</option>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <ng-container *ngIf="selectedElement.selectedRatingScale === 'Custom'">
@@ -164,8 +167,10 @@
                                                                 <div *ngFor="let key of selectedElement?.ratingOptions | keyvalue" class="row my-2">
                                                                     <div class="col-8"> <input type="text" [value]="key.key" (change)="updateObj($event, selectedElement, 'ratingOptions')" class="form-control cursor-pointer"></div>
                                                                     <div class="col-4">
-                                                                        <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')" class="btn option-btn border btn-sm rounded p-0 mr-1"><i class="material-icons">remove</i></button>
-                                                                        <button (click)="selectedElement.ratingOptions.push('')" class="btn option-btn border btn-sm rounded p-0"><i class="material-icons">add</i></button>
+                                                                        <button (click)="removeObj(key.key, selectedElement, 'ratingOptions')" class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                                class="material-icons">remove</i></button>
+                                                                        <button (click)="selectedElement.ratingOptions.push('')" class="btn option-btn border btn-sm rounded p-0"><i
+                                                                                class="material-icons">add</i></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -215,7 +220,8 @@
                                                                 <div class="input-group">
                                                                     <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.minVal" ngbDatepicker #d1="ngbDatepicker">
                                                                     <div class="input-group-append">
-                                                                        <div class="input-group-text calendar" (click)="d1.toggle()"><i class="material-icons">date_range</i></div>
+                                                                        <div class="input-group-text calendar" (click)="d1.toggle()"><i class="material-icons">date_range</i>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -224,7 +230,8 @@
                                                                 <div class="input-group">
                                                                     <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="selectedElement.maxVal" ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
-                                                                        <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i class="material-icons">date_range</i></div>
+                                                                        <div class="input-group-text calendar" (click)="d.toggle()" type="button"><i class="material-icons">date_range</i>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -241,37 +248,48 @@
                                                             <label for="Help Text">Help Text</label>
                                                             <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
                                                         </div>
-                                                        <div *ngIf="selectedElement?.extraBill">
+                                                        <div *ngIf="showPaymentFields() && selectedElement?.inputType === 'payment'">
                                                             <label>Payment Setting</label>
-                                                            <div class="d-flex form-group" *ngFor="let item of selectedElement?.extraBill; let i = index">
-                                                                <input class="form-control mr-1" type="text" [(ngModel)]="selectedElement?.extraBill[i].name">
-                                                                <input class="form-control mr-1" type="text" [(ngModel)]="selectedElement?.extraBill[i].value">
-                                                                <select class="form-control mr-2" [(ngModel)]="selectedElement?.extraBill[i].type">
-                                                            <option [value]="'dollar'">Amount</option>
-                                                            <option [value]="'perentage'">Percentage</option>
-                                                        </select>
-                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i class="material-icons">add</i></button>
-                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="selectedElement?.extraBill.splice(i, 1)"><i  class="material-icons">remove</i></button>
+                                                            <button *ngIf="paymentSetting?.extraBill.length === 0" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">Add
+                                                                Extra bill</button>
+                                                            <div class="d-flex form-group" *ngFor="let item of paymentSetting?.extraBill; let i = index">
+                                                                <input class="form-control mr-1" type="text" [(ngModel)]="paymentSetting?.extraBill[i].name">
+                                                                <input class="form-control mr-1" type="text" [(ngModel)]="paymentSetting?.extraBill[i].value">
+                                                                <select class="form-control mr-2" [(ngModel)]="paymentSetting?.extraBill[i].type">
+                                                                    <option [value]="'dollar'">Amount</option>
+                                                                    <option [value]="'perentage'">Percentage</option>
+                                                                </select>
+                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i
+                                                                        class="material-icons">add</i></button>
+                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="paymentSetting?.extraBill.splice(i, 1)"><i
+                                                                        class="material-icons">remove</i></button>
                                                             </div>
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.showSubTotal">
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.showSubTotal">
                                                                 <label class="custom-control-label">Sub Total</label>
                                                             </div>
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.showLineItems">
-                                                                <label class="custom-control-label">Shop Line Items</label>
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.showLineItems">
+                                                                <label class="custom-control-label">Shop Line
+                                                                    Items</label>
                                                             </div>
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedElement.mapBillingFields">
-                                                                <label class="custom-control-label"> Map Billing fields</label>
+                                                                <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.mapBillingFields">
+                                                                <label class="custom-control-label"> Map Billing
+                                                                    fields</label>
                                                             </div>
+                                                            <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="addNewStripeAccount()"><i
+                                                                        class="material-icons">add</i>Add Account</button>
                                                             <div class="form-group">
+
+
+
                                                                 <label>Accounts</label>
-                                                                <select class="form-control" [(ngModel)]="selectedElement.stripeAccount">
-                                                            <option
-                                                                *ngFor="let account of stripeAccounts"
-                                                                [value]="account.name">{{account.accountName}}</option>
-                                                        </select>
+                                                                <select class="form-control" [(ngModel)]="paymentSetting.stripeAccount">
+                                                                    <option *ngFor="let account of stripeAccounts"
+                                                                        [value]="account.accountName">
+                                                                        {{account.accountName}}</option>
+                                                                </select>
                                                             </div>
                                                         </div>
 
@@ -290,11 +308,11 @@
                                                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.view">
                                                                     <ng-container *ngFor="let tab of selectedElement?.validations?.view.options">
                                                                         <label ngbButtonLabel class="btn border bf-radio-group-btn">
-                                                                <input ngbButton
-                                                                    (click)="openModal(selectedElement, tab.value, 'dependUpon')"
-                                                                    type="radio" [value]="tab.value">
-                                                                {{tab.label}}
-                                                            </label>
+                                                                            <input ngbButton
+                                                                                (click)="openModal(selectedElement, tab.value, 'dependUpon')"
+                                                                                type="radio" [value]="tab.value">
+                                                                            {{tab.label}}
+                                                                        </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -309,11 +327,11 @@
                                                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedElement.isRequired">
                                                                     <ng-container *ngFor="let tab of selectedElement?.validations?.required.options">
                                                                         <label ngbButtonLabel class="btn border bf-radio-group-btn">
-                                                                <input ngbButton
-                                                                    (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
-                                                                    type="radio" [value]="tab.value">
-                                                                {{tab.label}}
-                                                            </label>
+                                                                            <input ngbButton
+                                                                                (click)="openModal(selectedElement, tab.value, 'reqDependUpOn')"
+                                                                                type="radio" [value]="tab.value">
+                                                                            {{tab.label}}
+                                                                        </label>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -347,7 +365,22 @@
                                         <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true" [droppableItemClass]="droppableItemClass" (drop)="drop($event)" direction="mixed" [moves]="abc" (over)="log1($event)">
 
                                             <ng-template let-model="model" let-index="index" let-template="template" class="">
+
+
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
+
+                                                    <div class="popover bs-popover-bottom field-popover-wrap">
+                                                        <div class="arrow"></div>
+                                                        <div class="popover-body">
+                                                            <div class="row my-2">
+                                                                <div class="col-md-12"><i class="material-icons">content_copy</i>Duplicate</div>
+                                                            </div>
+                                                            <div class="row my-2">
+                                                                <div class="col-md-12"><i class="material-icons">delete</i> Delete</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div *ngSwitchCase="'section'" (click)="sectionClicked($event, model, template)" class="mjui">
                                                         <div class="shadow">
                                                             {{model.name}}
@@ -425,9 +458,10 @@
                                                     <div *ngSwitchCase="'dropdown'" (click)="clicked($event, model, template)" class="form-group">
                                                         <label class="col-form-label">{{model.name}}</label>
                                                         <select [(ngModel)]="model.value" class="custom-select">
-                                                        <option *ngFor="let option of model.options" [value]="option">
-                                                            {{option}}</option>
-                                                    </select>
+                                                            <option *ngFor="let option of model.options"
+                                                                [value]="option">
+                                                                {{option}}</option>
+                                                        </select>
 
                                                     </div>
                                                     <div *ngSwitchCase="'sign'" (click)="clicked($event, model, template)">
@@ -490,7 +524,8 @@
                                             </div> -->
                                             <div class="row lower">
 
-                                                <div class="col-12 text-right">Line Items <span class="pl-2">$ 46.98</span></div>
+                                                <div class="col-12 text-right">Line Items <span class="pl-2">$
+                                                        46.98</span></div>
 
                                             </div>
                                             <div class="row lower">
@@ -528,34 +563,33 @@
                                     <div class="col-md-6">
                                         <div class="bars">
 
-                                            <button type="button" class="btn btn-primary btn-bf mr-2"> Refresh </button>
+                                            <button type="button" class="btn btn-primary btn-bf mr-2" (click)="getNewEntries()"> Refresh </button>
 
 
                                             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
-                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                    <button ngbDropdownItem>Action - 1</button>
-                                                    <button ngbDropdownItem>Another Action</button>
-                                                    <button ngbDropdownItem>Something else is here</button>
+                                                <button class="btn btn-primary btn-bf mr-2" id="filterDropdown" ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
+                                                <div ngbDropdownMenu aria-labelledby="filterDropdown">
+                                                    <button ngbDropdownItem (click)="filter = null">All</button>
+                                                    <button ngbDropdownItem (click)="filter = 'Submitted'">Submitted</button>
+                                                    <button ngbDropdownItem (click)="filter = 'Reviewed'">Reviewed</button>
                                                 </div>
                                             </div>
 
-                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Actions</button>
-                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                    <button ngbDropdownItem>Action - 1</button>
-                                                    <button ngbDropdownItem>Another Action</button>
-                                                    <button ngbDropdownItem>Something else is here</button>
+                                            <div class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown" ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
+                                                <div ngbDropdownMenu aria-labelledby="actionsDropdown">
+                                                    <!-- <button ngbDropdownItem>Delete</button> -->
+                                                    <button ngbDropdownItem (click)="export()">Export</button>
                                                 </div>
                                             </div>
 
-                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">New Entry</button>
-                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                                            <div class="d-inline-block">
+                                                <button class="btn btn-primary btn-bf mr-2" id="newEntry" (click)="newEntry()">New Entry</button>
+                                                <!-- <div ngbDropdownMenu aria-labelledby="newEntry">
                                                     <button ngbDropdownItem>Action - 1</button>
                                                     <button ngbDropdownItem>Another Action</button>
                                                     <button ngbDropdownItem>Something else is here</button>
-                                                </div>
+                                                </div> -->
                                             </div>
 
 
@@ -567,12 +601,13 @@
                                     <div class="col-md-6">
                                         <div class="tool-filter text-right">
 
-                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Columns</button>
-                                                <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                                                    <button ngbDropdownItem>Action - 1</button>
-                                                    <button ngbDropdownItem>Another Action</button>
-                                                    <button ngbDropdownItem>Something else is here</button>
+                                            <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
+                                                <button class="btn btn-primary btn-bf mr-2" id="column" ngbDropdownAnchor (focus)="column.open()">Columns</button>
+                                                <div ngbDropdownMenu aria-labelledby="column">
+                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem"
+                                                            type="checkbox">AA</button>
+                                                    <button ngbDropdownItem><input data-index="0" name="btSelectItem"
+                                                            type="checkbox">AA</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -588,109 +623,18 @@
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th data-field="state" data-checkbox="true"><input data-index="0" name="btnAllSelectItem" type="checkbox"></th>
-                                                    <th data-field="prenom" data-filter-control="input" data-sortable="true">ID</th>
-                                                    <th data-field="date" data-filter-control="select" data-sortable="true">
-                                                        Status</th>
-                                                    <th data-field="examen" data-filter-control="select" data-sortable="true">Submitted</th>
-                                                    <th data-field="note" data-sortable="true">Name</th>
-                                                    <th data-field="note" data-sortable="true">Price</th>
-                                                    <th data-field="note" data-sortable="true">Currency</th>
+                                                    <th *ngFor="let item of entries.columns" data-field="prenom" data-filter-control="input" data-sortable="true">
+                                                        {{item.headerName}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                                    <td>1</td>
-                                                    <td>Submitted</td>
-                                                    <td>2021-08-02 13:47:30</td>
-                                                    <td>firstName:bhagayshri,lastName:mane</td>
-                                                    <td>200.00</td>
-                                                    <td>USD</td>
-                                                </tr>
-
-
-
+                                                <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
+                                                    <tr *ngIf="!filter || (filter && filter === row[1])">
+                                                        <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                                        <td *ngFor="let col of entries.columns">{{row?.[col?.field]}}
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
 
 
                                             </tbody>
@@ -761,5 +705,5 @@
     </div>
 </ng-template>
 <button type="button" class="btn btn-secondary" [ngbPopover]="popContent">
-popover!
+    popover!
 </button>
