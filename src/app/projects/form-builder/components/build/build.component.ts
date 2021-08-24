@@ -7,7 +7,6 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { advancedLayout, config, layoutInputs } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
-import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import { ExcelService } from '../../excelservice.service';
 @Component({
   selector: 'app-build',
@@ -108,46 +107,6 @@ userInfo: any;
       }
     })
 
-    const options = { 
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true, 
-      showTitle: true,
-      title: 'Your title',
-      useBom: true,
-      noDownload: true,
-      headers: ["First Name", "Last Name", "ID"],
-      useHeader: false,
-      nullToEmptyString: true,
-    };
-    const data = [
-      {
-        name: "Test 1",
-        age: 13,
-        average: 8.2,
-        approved: true,
-        description: "using 'Content here, content here' "
-      },
-      {
-        name: 'Test 2',
-        age: 11,
-        average: 8.2,
-        approved: true,
-        description: "using 'Content here, content here' "
-      },
-      {
-        name: 'Test 4',
-        age: 10,
-        average: 8.2,
-        approved: true,
-        description: "using 'Content here, content here' "
-      },
-    ];
-    
-    setTimeout(() => {
-      new AngularCsv(data, 'My Report', options);
-    }, 5000);
   }
 
   export() {
