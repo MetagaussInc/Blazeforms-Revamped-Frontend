@@ -1,0 +1,68 @@
+<!--Edit form Modal-->
+<div class="" tabindex="-1" id="edit-form-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Blaze Forms Payments</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form [formGroup]="paymentForm" (keyup.enter)="!paymentForm.invalid">
+            <div class="modal-body">
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-name">Email Id</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" formControlName="email" class="form-control" placeholder="Account Name">
+                        <ng-container *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                            <div *ngIf="f.email.errors?.required || f.email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email id is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-desc">Card Number</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" formControlName="card" placeholder="Publishable Key">
+                        <ng-container *ngIf="f.card.invalid && (f.card.dirty || f.card.touched)">
+                            <div *ngIf="f.card.errors?.required" class="field-error text-right mt-1 pr-2 small">Card No. is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-desc">CCV</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" formControlName="ccv" placeholder="Secret Key">
+                        <ng-container *ngIf="f.ccv.invalid && (f.ccv.dirty || f.ccv.touched)">
+                            <div *ngIf="f.ccv.errors?.required" class="field-error text-right mt-1 pr-2 small">CCV is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row my-4 px-4 form-group">
+                    <div class="col-md-3">
+                        <label for="form-desc">Expiry Date</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" formControlName="date" placeholder="Secret Key">
+                        <ng-container *ngIf="f.date.invalid && (f.date.dirty || f.date.touched)">
+                            <div *ngIf="f.date.errors?.required" class="field-error text-right mt-1 pr-2 small">Expiry Date is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <div class="modal-footer border-0">
+            <button type="button" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-bf btn-sm" [disabled]="paymentForm.invalid" (click)="saveAccount()">Save</button>
+        </div>
+    </div>
+</div>

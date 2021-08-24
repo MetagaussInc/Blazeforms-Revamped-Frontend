@@ -11,6 +11,30 @@ export class ExportedViewComponent implements OnInit {
 model = {
   name: ''
 }
+styling = {
+  labels: {
+    font: 'Roboto',
+    size: 16,
+    color: 'red'
+  },
+  text: {
+    font: 'Roboto',
+    size: 16,
+    color: 'red'
+  },
+  placeholders: {
+    font: 'Roboto',
+    size: 16,
+    color: 'red'
+  },
+  buttons: {
+    font: 'Roboto',
+    size: 16,
+    color: 'red'
+  },
+  pagebackgroundColor: 'white',
+  pagebackgroundImage: ''
+}
 
 active = 1;
   constructor() { }

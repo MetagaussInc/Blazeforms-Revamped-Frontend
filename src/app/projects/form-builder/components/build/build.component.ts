@@ -7,7 +7,8 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { advancedLayout, config, layoutInputs } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
-
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
+import { ExcelService } from '../../excelservice.service';
 @Component({
   selector: 'app-build',
   templateUrl: './build.component.html',
@@ -65,6 +66,7 @@ export class BuildComponent  {
   }
 }
 url = '';
+filter: any = null;
 userInfoSubscription$: any;
 userInfo: any;
   sourceBuilderTools = config;
@@ -81,6 +83,8 @@ userInfo: any;
     showLineItems: true,
     mapBillingFields: true,
     stripeAccount: "",
+    paymentOption: ['Card', 'Cash'],
+    selectedPaymentOption: 'Cash'
   }
   stripeAccounts: any;
 
@@ -89,16 +93,69 @@ userInfo: any;
     rows: []
   }
 
-  constructor(private modalService: NgbModal, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  formId: any = null;
+
+
+  constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
       if (userInfo) {
         this.route.queryParams.subscribe(res => {
+          this.formId = res.ID;
           this.getForm(res?.ID )
         })
       }
     })
+
+    const options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Your title',
+      useBom: true,
+      noDownload: true,
+      headers: ["First Name", "Last Name", "ID"],
+      useHeader: false,
+      nullToEmptyString: true,
+    };
+    const data = [
+      {
+        name: "Test 1",
+        age: 13,
+        average: 8.2,
+        approved: true,
+        description: "using 'Content here, content here' "
+      },
+      {
+        name: 'Test 2',
+        age: 11,
+        average: 8.2,
+        approved: true,
+        description: "using 'Content here, content here' "
+      },
+      {
+        name: 'Test 4',
+        age: 10,
+        average: 8.2,
+        approved: true,
+        description: "using 'Content here, content here' "
+      },
+    ];
+    
+    setTimeout(() => {
+      new AngularCsv(data, 'My Report', options);
+    }, 5000);
+  }
+
+  export() {
+      this.excelService.exportAsExcelFile(this.entries.rows, 'Form entries');
+  }
+
+  newEntry() {
+    this.router.navigate([`/blazeforms/${this.userInfo.WorkspaceDetail.Name.split(" ").join("_")}/${this.builderObj.name.split(" ").join("_")}`])
   }
 
   getForm(ID: any) {
@@ -123,7 +180,7 @@ userInfo: any;
         this.targetBuilderTools.push(config[0])
       }
       this.paymentSetting = resp.paymentSetting || this.paymentSetting;
-      this.createColums(this.targetBuilderTools)
+      // this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
       if (element.uiIndexId >= this.count) {
@@ -133,32 +190,31 @@ userInfo: any;
       this.getWorkSpaceAccounts();
       this.getFoldersWithList(this.userInfo)
     })
+
+    this.getNewEntries();
+
+  }
+
+  getNewEntries() {
+    this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
+      const data: any = [];
+      res.formEntries.forEach((element: any, index: any) => {
+        const entry = JSON.parse(element.formEntryJSON) 
+        data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
+      });
+      this.createColums(data)
+    })
   }
 
   createColums(Elements: any) {
-    const dummyData = {
-      "entry":["First Name=Rohit||Text=S||", "First Name=Rohit2||Text=S2||"],
-      "status":"Submitted",
-      "SubmittedDate":"2021-08-19T06:26:26.181Z"
-    };
-    const Columns: any = [
-      {
-        headerName: 'ID',
-        field: 'id'
-      },
-      {
-        headerName: 'Status',
-        field: 'status'
-      },
-      {
-        headerName: 'Submitted',
-        field: 'SubmittedDate'
-      }
-    ]
-    const dataArr = dummyData.entry;
+    console.log
+    const Columns: any = [ ]
+    const dataArr: any = Elements;
     const rows: any = [];
-    dataArr.forEach((entry: any, entryIndex) => {
-      const data = entry.split("||");
+    dataArr.forEach((entry: string, entryIndex: any) => {
+      const separatedData = entry?.split("&&");
+      const data: any = separatedData[0].split('||');
+      const formData: any = separatedData[1];
       const rowObj: any = {};
       data.forEach((elementWithValue: any, colIndex: any) => {
         if (elementWithValue && elementWithValue?.length > 0) {
@@ -172,7 +228,7 @@ userInfo: any;
         }
         
         });
-        
+      rowObj.formDetail = formData;
       
       rows.push(rowObj)
     });
