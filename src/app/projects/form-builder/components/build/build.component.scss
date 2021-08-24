@@ -57,3 +57,13 @@
         display: grid;
     }
 }
+
+.builder-dropped-field {
+    position: relative;
+}
+
+.builder-dropped-field .field-popover-wrap {
+    top: 27px;
+    left: 0%;
+    min-width: 160px;
+}
