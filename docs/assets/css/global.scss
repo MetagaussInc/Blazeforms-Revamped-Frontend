@@ -1,728 +1,726 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import '~swiper/swiper-bundle';
-
-/* Importing Bootstrap SCSS file. */
-
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap/dist/css/bootstrap.min.css';
-
-/*--- Import variables ---*/
-
-@import "core/variables";
-html {
-    height: 100%;
-}
-
-body {
-    font-family: $baseFont;
-    font-size: 0.875rem;
-    height: 100%;
-}
-
-a {
-    color: $base-color;
-    cursor: pointer;
-}
-
-.nav-item-active {
-    border-bottom: 3px solid $base-color;
-}
-
-i.material-icons,
-i.material-icons-round,
-i.material-icons-outlined {
-    vertical-align: bottom;
-    color: $base-color;
-    font-size: 1.5rem;
-}
-
-.form-check-input:checked {
-    background-color: $base-color;
-    border-color: $base-color;
-}
-
-.input-group-text {
-    i.material-icons {
-        color: $input-icon-color;
-        font-size: 1.25rem;
-    }
-}
-
-input {
-    font-size: 0.875rem !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: $seconderyFont;
-}
-
-.btn-bf {
-    color: $btn-text-color;
-    background-color: $base-color;
-    border-color: $base-color;
-    &:hover {
-        color: $btn-text-color;
-        background-color: $base-hover-color;
-        border-color: $base-hover-color;
-    }
-    &:active {
-        color: $btn-text-color;
-        background-color: $base-active-color;
-        border-color: $base-active-color;
-    }
-}
-
-.custom-control-input {
-    &:checked~.custom-control-label {
-        &::before {
-            color: #f04564;
-            background-color: transparent;
-            background-image: none;
+        /* You can add global styles to this file, and also import other style files */
+        
+        @import '~swiper/swiper-bundle';
+        /* Importing Bootstrap SCSS file. */
+        
+        @import '~bootstrap/scss/bootstrap';
+        @import '~bootstrap/dist/css/bootstrap.min.css';
+        /*--- Import variables ---*/
+        
+        @import "core/variables";
+        html {
+            height: 100%;
         }
-    }
-}
-
-.custom-radio .custom-control-input {
-    &:checked~.custom-control-label {
-        &::before {
-            border-color: #f04564;
-            background-color: #f04564;
-            background-image: none;
+        
+        body {
+            font-family: $baseFont;
+            font-size: 0.875rem;
+            height: 100%;
         }
-    }
-}
-
-.custom-control.custom-checkbox input[type=checkbox] {
-    display: none;
-}
-
-input[type=checkbox] {
-    // display: none;
-    &:checked+label::before {
-        content: '\e834';
-        color: $base-color;
-        font-size: 1.5rem;
-    }
-    &:checked+label::after {
-        display: none;
-    }
-    &+label {
-        cursor: pointer;
-        &::before {
-            font-family: $fontIcon;
-            display: inline-block;
-            letter-spacing: 0.2rem;
-            content: '\e835';
+        
+        a {
+            color: $base-color;
+            cursor: pointer;
+        }
+        
+        .nav-item-active {
+            border-bottom: 3px solid $base-color;
+        }
+        
+        i.material-icons,
+        i.material-icons-round,
+        i.material-icons-outlined {
+            vertical-align: bottom;
+            color: $base-color;
             font-size: 1.5rem;
-            border: 0px;
-            background: transparent;
         }
-    }
-}
-
-.form-control {
-    &:focus {
-        border-color: rgba($base-color, 0.50);
-        box-shadow: inset 0 0 0 .2rem rgba($base-color, .25);
-    }
-}
-
-
-/*--- Common CSS--*/
-
-.height-fix {
-    overflow-x: hidden;
-    max-height: 500px;
-}
-
-.organization-list {
-    max-width: 99%;
-}
-
-
-/* ----  Login Page CSS ---*/
-
-.login-area-container {
-    height: calc(100% - 80px);
-}
-
-.signup-success-container {
-    height: calc(100% - 80px);
-}
-
-.thank-you-container {
-    height: calc(100% - 80px);
-}
-
-.login-box {
-    max-width: 100%;
-    background-color: #fff;
-    img {
-        max-width: 100% !important;
-        height: auto;
-    }
-}
-
-.header-wrapper {
-    background-color: #fff;
-}
-
-.nav-pills {
-    .nav-link {
-        border-radius: 0;
-        &.active {
-            background-color: transparent;
-            color: #000;
-            border-bottom: 0.2rem solid #f04564;
+        
+        .form-check-input:checked {
+            background-color: $base-color;
+            border-color: $base-color;
         }
-    }
-}
-
-.form-control {
-    height: 2.5rem !important;
-}
-
-.field-error {
-    color: #f04564;
-}
-
-img {
-    &.fingerprint-icon-svg {
-        height: 100px;
-    }
-}
-
-.btn {
-    .spinner-border {
-        vertical-align: middle;
-    }
-}
-
-.monochrome-logo {
-    height: 1.75rem;
-    width: 1.75rem;
-}
-
-.footer-copyright-text {
-    line-height: 1.95rem;
-}
-
-.plan-name-wrapper {
-    background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
-}
-
-
-/*--- SignUp Form ---*/
-
-.signup-recaptcha-wrapper .angular-google-recaptcha-container {
-    display: inline-block;
-}
-
-
-/*-- Form CSS -- */
-
-.form-badges-wrapper {
-    visibility: hidden;
-}
-
-.form-list-item {
-    &:hover .form-badges-wrapper {
-        visibility: visible;
-    }
-    i {
-        font-size: 1.3rem;
-    }
-}
-
-.border-2 {
-    border-width: 2px !important;
-}
-
-.border-5 {
-    border-width: 5px !important;
-}
-
-.bg-bf-light {
-    background-color: $base-color-light;
-}
-
-.border-bf {
-    border-color: $base-color !important;
-}
-
-.text-bf {
-    color: $base-color;
-}
-
-.form-control,
-.form-select {
-    font-size: 0.875rem;
-}
-
-.form-list-item .form-checkbox-wrapper label .form-checkbox-wrap .form-checkbox-active {
-    display: none;
-}
-
-.form-list-item .form-checkbox-wrapper input[type="checkbox"] {
-    display: none;
-}
-
-.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-active {
-    display: block;
-}
-
-.form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-deactive {
-    display: none;
-}
-
-app-form-builder {
-    .builder-container {
-        display: flex;
-        .builder-source {
-            flex: 1 1 50%;
-            box-sizing: border-box;
-            max-width: 30%;
-        }
-        .builder-target {
-            flex: 1 1 50%;
-            box-sizing: border-box;
-            max-width: 70%;
-        }
-    }
-    .ngx-dnd-item {
-        font-size: 16px;
-    }
-    .builder-source .ngx-dnd-container {
-        border: none;
-        background-color: lightgrey;
-        border-radius: 5px;
-        padding: 5px;
-    }
-    .builder-target {
-        .ngx-input {
-            margin: 0;
-            .ngx-input-wrap {
-                margin: 0;
+        
+        .input-group-text {
+            i.material-icons {
+                color: $input-icon-color;
+                font-size: 1.25rem;
             }
         }
-        >*>.ngx-dnd-container {
-            min-height: 400px;
+        
+        input {
+            font-size: 0.875rem !important;
         }
-        .ngx-dnd-container {
-            justify-content: space-between;
-            flex-flow: row wrap;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            box-sizing: border-box;
-            border: 1px dashed lightgrey;
-            background-color: white;
-            padding: 0;
-            min-height: 60px;
-            .gu-unselectable &,
-            &.gu-over,
-            &.gu-over .ngx-dnd-container {
-                border: 1px dashed orange;
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: $seconderyFont;
+        }
+        
+        .btn-bf {
+            color: $btn-text-color;
+            background-color: $base-color;
+            border-color: $base-color;
+            &:hover {
+                color: $btn-text-color;
+                background-color: $base-hover-color;
+                border-color: $base-hover-color;
             }
-            .ngx-dnd-item {
-                margin: 5px 1%;
-                border: 1px solid transparent;
-                flex: 1 1 100%;
-                box-sizing: border-box;
-                -webkit-box-flex: 1;
-                max-width: 100%;
-                &.half {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 48%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
+            &:active {
+                color: $btn-text-color;
+                background-color: $base-active-color;
+                border-color: $base-active-color;
+            }
+        }
+        
+        .custom-control-input {
+            &:checked~.custom-control-label {
+                &::before {
+                    color: #f04564;
+                    background-color: transparent;
+                    background-image: none;
                 }
-                &.small {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 23%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
+            }
+        }
+        
+        .custom-radio .custom-control-input {
+            &:checked~.custom-control-label {
+                &::before {
+                    border-color: #f04564;
+                    background-color: #f04564;
+                    background-image: none;
                 }
-                &.medium {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 46%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.large {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 69%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.extra-large {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 100%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                label {
-                    // font-size: 0.6em;
-                    // margin-left: 0.2em;
-                }
-                input {
-                    width: 100%;
-                    padding: .5em .6em;
+            }
+        }
+        
+        .custom-control.custom-checkbox input[type=checkbox] {
+            display: none;
+        }
+        
+        input[type=checkbox] {
+            // display: none;
+            &:checked+label::before {
+                content: '\e834';
+                color: $base-color;
+                font-size: 1.5rem;
+            }
+            &:checked+label::after {
+                display: none;
+            }
+            &+label::before {
+                top: 0px;
+            }
+            &+label {
+                cursor: pointer;
+                &::before {
+                    font-family: $fontIcon;
                     display: inline-block;
-                    border: 1px solid #ccc;
-                    box-shadow: inset 0 1px 3px #ddd;
-                    border-radius: 4px;
-                    vertical-align: middle;
-                    box-sizing: border-box;
+                    letter-spacing: 0.2rem;
+                    content: '\e835';
+                    font-size: 1.5rem;
+                    border: 0px;
+                    background: transparent;
                 }
             }
-            .ngx-dnd-item.gu-transit,
-            .ngx-dnd-item:hover {
-                border: 1px solid #1786e9
+        }
+        
+        .form-control {
+            &:focus {
+                border-color: rgba($base-color, 0.50);
+                box-shadow: inset 0 0 0 .2rem rgba($base-color, .25);
             }
         }
-    }
-}
-
-app-build {
-    .builder-container {
-        display: flex;
-        .builder-source {
-            flex: 1 1 50%;
-            box-sizing: border-box;
-            max-width: 30%;
+        /*--- Common CSS--*/
+        
+        .height-fix {
+            overflow-x: hidden;
+            max-height: 500px;
         }
-        .builder-target {
-            flex: 1 1 50%;
-            box-sizing: border-box;
-            max-width: 70%;
+        
+        .organization-list {
+            max-width: 99%;
         }
-    }
-    .ngx-dnd-item {
-        font-size: 16px;
-    }
-    .ngx-dnd-container {
-        border: none;
-        background-color: white !important;
-        /* border-radius: 5px; */
-        padding: 0px;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        .ngx-dnd-item {
-            background-color: white;
-            margin: 0;
-            border: 0;
-            outline: 0px;
-            li {
-                padding: 0 !important;
-                margin: 0 !important;
+        /* ----  Login Page CSS ---*/
+        
+        .login-area-container {
+            height: calc(100% - 80px);
+        }
+        
+        .signup-success-container {
+            height: calc(100% - 80px);
+        }
+        
+        .thank-you-container {
+            height: calc(100% - 80px);
+        }
+        
+        .login-box {
+            max-width: 100%;
+            background-color: #fff;
+            img {
+                max-width: 100% !important;
+                height: auto;
             }
         }
-    }
-    .builder-target {
-        .ngx-input {
-            margin: 0;
-            .ngx-input-wrap {
-                margin: 0;
+        
+        .header-wrapper {
+            background-color: #fff;
+        }
+        
+        .nav-pills {
+            .nav-link {
+                border-radius: 0;
+                &.active {
+                    background-color: transparent;
+                    color: #000;
+                    border-bottom: 0.2rem solid #f04564;
+                }
             }
         }
-        >*>.ngx-dnd-container {
-            min-height: 400px;
+        
+        .form-control {
+            height: 2.5rem !important;
         }
-        .ngx-dnd-container {
-            background-color: white;
-            // justify-content: space-between;
-            flex-flow: row wrap;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            box-sizing: border-box;
-            border: 2px dashed rgb(255, 255, 255);
-            background-color: white;
-            padding: 0;
-            min-height: 60px;
-            .gu-unselectable &,
-            &.gu-over,
-            &.gu-over .ngx-dnd-container {
-                border: 2px dashed rgb(206, 206, 206);
+        
+        .field-error {
+            color: #f04564;
+        }
+        
+        img {
+            &.fingerprint-icon-svg {
+                height: 100px;
+            }
+        }
+        
+        .btn {
+            .spinner-border {
+                vertical-align: middle;
+            }
+        }
+        
+        .monochrome-logo {
+            height: 1.75rem;
+            width: 1.75rem;
+        }
+        
+        .footer-copyright-text {
+            line-height: 1.95rem;
+        }
+        
+        .plan-name-wrapper {
+            background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
+        }
+        /*--- SignUp Form ---*/
+        
+        .signup-recaptcha-wrapper .angular-google-recaptcha-container {
+            display: inline-block;
+        }
+        /*-- Form CSS -- */
+        
+        .form-badges-wrapper {
+            visibility: hidden;
+        }
+        
+        .form-list-item {
+            &:hover .form-badges-wrapper {
+                visibility: visible;
+            }
+            i {
+                font-size: 1.3rem;
+            }
+        }
+        
+        .border-2 {
+            border-width: 2px !important;
+        }
+        
+        .border-5 {
+            border-width: 5px !important;
+        }
+        
+        .bg-bf-light {
+            background-color: $base-color-light;
+        }
+        
+        .border-bf {
+            border-color: $base-color !important;
+        }
+        
+        .text-bf {
+            color: $base-color;
+        }
+        
+        .form-control,
+        .form-select {
+            font-size: 0.875rem;
+        }
+        
+        .form-list-item .form-checkbox-wrapper label .form-checkbox-wrap .form-checkbox-active {
+            display: none;
+        }
+        
+        .form-list-item .form-checkbox-wrapper input[type="checkbox"] {
+            display: none;
+        }
+        
+        .form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-active {
+            display: block;
+        }
+        
+        .form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-deactive {
+            display: none;
+        }
+        
+        app-form-builder {
+            .builder-container {
+                display: flex;
+                .builder-source {
+                    flex: 1 1 50%;
+                    box-sizing: border-box;
+                    max-width: 30%;
+                }
+                .builder-target {
+                    flex: 1 1 50%;
+                    box-sizing: border-box;
+                    max-width: 70%;
+                }
             }
             .ngx-dnd-item {
-                background-color: white;
-                margin: 5px 1%;
-                border: 1px solid transparent;
-                // flex: 1 1 100%;
-                box-sizing: border-box;
-                -webkit-box-flex: 1;
-                max-width: 100%;
-                &.half {
-                    flex: 1 1 48%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 48%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.small {
-                    flex: 1 1 23%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 23%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.medium {
-                    flex: 1 1 46%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 46%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.large {
-                    flex: 1 1 69%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 69%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                &.extra-large {
-                    flex: 1 1 92%;
-                    box-sizing: border-box;
-                    -webkit-box-flex: 1;
-                    max-width: 100%;
-                    max-height: 100%;
-                    padding: 0 5px 5px 5px;
-                }
-                label {}
-                input {
-                    box-sizing: border-box;
-                }
+                font-size: 16px;
             }
-            .ngx-dnd-item.gu-transit,
-            .ngx-dnd-item.current-active,
-            .ngx-dnd-item:hover {
-                border: 1px dashed $base-color;
-                background-color: $bf-input-bg;
+            .builder-source .ngx-dnd-container {
+                border: none;
+                background-color: lightgrey;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            .builder-target {
+                .ngx-input {
+                    margin: 0;
+                    .ngx-input-wrap {
+                        margin: 0;
+                    }
+                }
+                >*>.ngx-dnd-container {
+                    min-height: 400px;
+                }
+                .ngx-dnd-container {
+                    justify-content: space-between;
+                    flex-flow: row wrap;
+                    display: flex;
+                    -webkit-box-orient: horizontal;
+                    -webkit-box-direction: normal;
+                    box-sizing: border-box;
+                    border: 1px dashed lightgrey;
+                    background-color: white;
+                    padding: 0;
+                    min-height: 60px;
+                    .gu-unselectable &,
+                    &.gu-over,
+                    &.gu-over .ngx-dnd-container {
+                        border: 1px dashed orange;
+                    }
+                    .ngx-dnd-item {
+                        margin: 5px 1%;
+                        border: 1px solid transparent;
+                        flex: 1 1 100%;
+                        box-sizing: border-box;
+                        -webkit-box-flex: 1;
+                        max-width: 100%;
+                        &.half {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 48%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.small {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 23%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.medium {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 46%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.large {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 69%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.extra-large {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 100%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        label {
+                            // font-size: 0.6em;
+                            // margin-left: 0.2em;
+                        }
+                        input {
+                            width: 100%;
+                            padding: .5em .6em;
+                            display: inline-block;
+                            border: 1px solid #ccc;
+                            box-shadow: inset 0 1px 3px #ddd;
+                            border-radius: 4px;
+                            vertical-align: middle;
+                            box-sizing: border-box;
+                        }
+                    }
+                    .ngx-dnd-item.gu-transit,
+                    .ngx-dnd-item:hover {
+                        border: 1px solid #1786e9
+                    }
+                }
             }
         }
-    }
-}
-
-app-build .builder-target .droppableContainer .ngx-dnd-container.gu-empty {
-    border: 2px dashed rgb(206, 206, 206);
-}
-
-
-/*-- user Module Common CSS--*/
-
-.email-sent-image-wrap img {
-    width: 130px;
-}
-
-
-/* Slider */
-
-@media (min-width: 768px) and (max-width: 991px) {
-    /* Show 4th slide on md  if col-md-4*/
-    .carousel-inner .active.col-md-4.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: absolute;
-        top: 0;
-        right: -33.3333%;
-        /*change this with javascript in the future*/
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-    /* Show 3rd slide on sm  if col-sm-6*/
-    .carousel-inner .active.col-sm-6.carousel-item+.carousel-item+.carousel-item {
-        position: absolute;
-        top: 0;
-        right: -50%;
-        /*change this with javascript in the future*/
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-}
-
-@media (min-width: 576px) {
-    .carousel-item {
-        margin-right: 0;
-    }
-    /* show 2 items */
-    .carousel-inner .active+.carousel-item {
-        display: block;
-    }
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item {
-        transition: none;
-    }
-    .carousel-inner .carousel-item-next {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-    }
-    /* left or forward direction */
-    .active.carousel-item-left+.carousel-item-next.carousel-item-left,
-    .carousel-item-next.carousel-item-left+.carousel-item,
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
-    /* farthest right hidden item must be abso position for animations */
-    .carousel-inner .carousel-item-prev.carousel-item-right {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-    /* right or prev direction */
-    .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
-    .carousel-item-prev.carousel-item-right+.carousel-item,
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-
-
-/*MD*/
-
-@media (min-width: 768px) {
-    /* show 3rd of 3 item slide */
-    .carousel-inner .active+.carousel-item+.carousel-item {
-        display: block;
-    }
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item {
-        transition: none;
-    }
-    .carousel-inner .carousel-item-next {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-    }
-    /* left or forward direction */
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
-    /* right or prev direction */
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-
-
-/*LG */
-
-@media (min-width: 991px) {
-    /* show 4th item */
-    .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
-        display: block;
-    }
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item+.carousel-item {
-        transition: none;
-    }
-    /* Show 5th slide on lg if col-lg-3 */
-    .carousel-inner .active.col-lg-3.carousel-item+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: absolute;
-        top: 0;
-        right: -25%;
-        /*change this with javascript in the future*/
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-    /* left or forward direction */
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
-    /* right or prev direction //t - previous slide direction last item animation fix */
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-
-
-/*---- Form Publish----*/
-
-.formtabs-wrap ul.nav-tabs li.nav-item a {
-    background-color: $tabs-bg;
-    color: $tab-color;
-    border: 0px;
-}
-
-.formtabs-wrap ul.nav-tabs li.nav-item a.active {
-    background-color: $base-color;
-    color: $btn-text-color;
-}
-
-// Form Builder
-.form-builder-sidebar {
-    min-width: 24rem;
-    height: 100%;
-}
-
-.build-container {
-    //height: 600px;
-}
-
-.sidebar-container {
-    overflow-y: auto!important;
-    overflow-x: hidden;
-    height: 100vh;
-}
-
-app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
-    border-top: 2px dashed #cecece;
-    padding: 0px;
-    margin: 20px 0px;
-}
-
-.target-droppable .page-break-head {
-    top: -14px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-}
-
-.form-conditional-properties .field-visibility-radio .btn-outline-secondary.active {
-    background-color: rgba($base-color, 1);
-    border-color: #bf314b;
-}
+        
+        app-build {
+            .builder-container {
+                display: flex;
+                .builder-source {
+                    flex: 1 1 50%;
+                    box-sizing: border-box;
+                    max-width: 30%;
+                }
+                .builder-target {
+                    flex: 1 1 50%;
+                    box-sizing: border-box;
+                    max-width: 70%;
+                }
+            }
+            .ngx-dnd-item {
+                font-size: 16px;
+            }
+            .ngx-dnd-container {
+                border: none;
+                background-color: white !important;
+                /* border-radius: 5px; */
+                padding: 0px;
+                margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+                .ngx-dnd-item {
+                    background-color: white;
+                    margin: 0;
+                    border: 0;
+                    outline: 0px;
+                    li {
+                        padding: 0 !important;
+                        margin: 0 !important;
+                    }
+                }
+            }
+            .builder-target {
+                .ngx-input {
+                    margin: 0;
+                    .ngx-input-wrap {
+                        margin: 0;
+                    }
+                }
+                >*>.ngx-dnd-container {
+                    min-height: 400px;
+                }
+                .ngx-dnd-container {
+                    background-color: white;
+                    // justify-content: space-between;
+                    flex-flow: row wrap;
+                    display: flex;
+                    -webkit-box-orient: horizontal;
+                    -webkit-box-direction: normal;
+                    box-sizing: border-box;
+                    border: 2px dashed rgb(255, 255, 255);
+                    background-color: white;
+                    padding: 0;
+                    min-height: 60px;
+                    .gu-unselectable &,
+                    &.gu-over,
+                    &.gu-over .ngx-dnd-container {
+                        border: 2px dashed rgb(206, 206, 206);
+                    }
+                    .ngx-dnd-item {
+                        background-color: white;
+                        margin: 5px 1%;
+                        border: 1px solid transparent;
+                        // flex: 1 1 100%;
+                        box-sizing: border-box;
+                        -webkit-box-flex: 1;
+                        max-width: 100%;
+                        &.half {
+                            flex: 1 1 48%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 48%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.small {
+                            flex: 1 1 23%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 23%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.medium {
+                            flex: 1 1 46%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 46%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.large {
+                            flex: 1 1 69%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 69%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        &.extra-large {
+                            flex: 1 1 92%;
+                            box-sizing: border-box;
+                            -webkit-box-flex: 1;
+                            max-width: 100%;
+                            max-height: 100%;
+                            padding: 0 5px 5px 5px;
+                        }
+                        label {}
+                        input {
+                            box-sizing: border-box;
+                        }
+                    }
+                    .ngx-dnd-item.gu-transit,
+                    .ngx-dnd-item.current-active,
+                    .ngx-dnd-item:hover {
+                        border: 1px dashed $base-color;
+                        background-color: $bf-input-bg;
+                    }
+                }
+            }
+        }
+        
+        app-build .builder-target .droppableContainer .ngx-dnd-container.gu-empty {
+            border: 2px dashed rgb(206, 206, 206);
+        }
+        /*-- user Module Common CSS--*/
+        
+        .email-sent-image-wrap img {
+            width: 130px;
+        }
+        /* Slider */
+        
+        @media (min-width: 768px) and (max-width: 991px) {
+            /* Show 4th slide on md  if col-md-4*/
+            .carousel-inner .active.col-md-4.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+                position: absolute;
+                top: 0;
+                right: -33.3333%;
+                /*change this with javascript in the future*/
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        }
+        
+        @media (min-width: 576px) and (max-width: 768px) {
+            /* Show 3rd slide on sm  if col-sm-6*/
+            .carousel-inner .active.col-sm-6.carousel-item+.carousel-item+.carousel-item {
+                position: absolute;
+                top: 0;
+                right: -50%;
+                /*change this with javascript in the future*/
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        }
+        
+        @media (min-width: 576px) {
+            .carousel-item {
+                margin-right: 0;
+            }
+            /* show 2 items */
+            .carousel-inner .active+.carousel-item {
+                display: block;
+            }
+            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item {
+                transition: none;
+            }
+            .carousel-inner .carousel-item-next {
+                position: relative;
+                transform: translate3d(0, 0, 0);
+            }
+            /* left or forward direction */
+            .active.carousel-item-left+.carousel-item-next.carousel-item-left,
+            .carousel-item-next.carousel-item-left+.carousel-item,
+            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+            /* farthest right hidden item must be abso position for animations */
+            .carousel-inner .carousel-item-prev.carousel-item-right {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+            /* right or prev direction */
+            .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
+            .carousel-item-prev.carousel-item-right+.carousel-item,
+            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+        /*MD*/
+        
+        @media (min-width: 768px) {
+            /* show 3rd of 3 item slide */
+            .carousel-inner .active+.carousel-item+.carousel-item {
+                display: block;
+            }
+            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item {
+                transition: none;
+            }
+            .carousel-inner .carousel-item-next {
+                position: relative;
+                transform: translate3d(0, 0, 0);
+            }
+            /* left or forward direction */
+            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+            /* right or prev direction */
+            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+        /*LG */
+        
+        @media (min-width: 991px) {
+            /* show 4th item */
+            .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
+                display: block;
+            }
+            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item+.carousel-item {
+                transition: none;
+            }
+            /* Show 5th slide on lg if col-lg-3 */
+            .carousel-inner .active.col-lg-3.carousel-item+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+                position: absolute;
+                top: 0;
+                right: -25%;
+                /*change this with javascript in the future*/
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+            /* left or forward direction */
+            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+            /* right or prev direction //t - previous slide direction last item animation fix */
+            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+        /*---- Form Publish----*/
+        
+        .formtabs-wrap ul.nav-tabs li.nav-item a {
+            background-color: $tabs-bg;
+            color: $tab-color;
+            border: 0px;
+        }
+        
+        .formtabs-wrap ul.nav-tabs li.nav-item a.active {
+            background-color: $base-color;
+            color: $btn-text-color;
+        }
+        
+        // Form Builder
+        .form-builder-sidebar {
+            min-width: 24rem;
+            height: 100%;
+        }
+        
+        .build-container {
+            //height: 600px;
+        }
+        
+        .sidebar-container {
+            overflow-y: auto!important;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+        
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
+            border-top: 2px dashed #cecece;
+            padding: 0px;
+            margin: 20px 0px;
+        }
+        
+        .target-droppable .page-break-head {
+            top: -14px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+        
+        .form-conditional-properties .field-visibility-radio .btn-outline-secondary.active {
+            background-color: rgba($base-color, 1);
+            border-color: #bf314b;
+        }
+        
+        .bf-radio-group-btn.active {
+            background-color: $base-color;
+            color: $btn-text-color;
+        }
+        
+        #forms-listing-selector {}
+        
+        #forms-listing-selector:after {
+            display: none;
+        }
+        
+        .forms-listing-dropdown {
+            max-height: 400px;
+        }

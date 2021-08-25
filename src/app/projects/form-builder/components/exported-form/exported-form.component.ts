@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ItemComponent } from '@swimlane/ngx-dnd';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BillPayComponent } from 'src/app/projects/blazeforms/bill-pay/bill-pay.component';
 
 @Component({
   selector: 'app-exported-form',
@@ -12,6 +15,8 @@ export class ExportedFormComponent implements OnInit {
   @Input() public config: any;
   @Input() public initial: any;
   @Input() public payments: any;
+  @Input() public styling: any;
+  strikeCheckout:any = null;
   model = {
     name: ''
   }
@@ -20,12 +25,12 @@ export class ExportedFormComponent implements OnInit {
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-    constructor(private http: HttpService) {
+    constructor(private http: HttpService, private modalService: NgbModal) {
 
     }
   
     ngOnInit(): void {
-      console.log(this.elements)
+      console.log(this.initial)
       let count = 0;
       if (this.elements?.length > 0) {
         for (const iterator of this.elements) {
@@ -51,6 +56,9 @@ export class ExportedFormComponent implements OnInit {
       }
       console.log(this.allArr)
       
+      if (this.initial) {
+        this.stripePaymentGateway()
+      }
     }
   
     checkForDependency(model: any, T: any): boolean {
@@ -97,6 +105,31 @@ export class ExportedFormComponent implements OnInit {
       }
       return false;
     }
+
+    getSubTotal() {
+      let total = 0;
+      this.payments.forEach((element: any) => {
+        total = total + Number(element.value);
+      });
+      return total;
+    }
+
+    getAmountDue() {
+      let total = 0;
+      let subTotal = this.getSubTotal();
+      if (subTotal == 0) {
+        return 0;
+      }
+      this.initial.extraBill.forEach((additional: any) => {
+        if (additional.type === "dollar") {
+          total = total + Number(additional.value); 
+        } else {
+          total + total + (subTotal * (Number(additional.value) / 100))
+        }
+      });
+      total = total + subTotal;
+      return total;
+    }
   
     checkForRDependency(model: any, T: any): boolean {
       const dependUpon = model?.[T];
@@ -141,6 +174,59 @@ export class ExportedFormComponent implements OnInit {
         }
       }
       return true;
+    }
+
+    billPay() {
+      // const modalRef: any = this.modalService.open(BillPayComponent, { size: 'lg' })
+      // modalRef.componentInstance.config = {
+      //   initial: this.initial
+      // }
+      // modalRef.result.then((result: any) => {
+      //   console.log(`Closed with: ${result}`);
+      // }, (reason: any) => {
+      //   console.log(`Dismissed `);
+      // });
+      this.checkout(this.getAmountDue())
+    }
+    checkout(amount: any) {
+      console.log(amount);
+      const strikeCheckout = (<any>window).StripeCheckout.configure({
+        key: this.initial?.accountDetail?.publishableKey,
+        locale: 'auto',
+        token: function (stripeToken: any) {
+          console.log(stripeToken)
+          alert('Stripe token generated!');
+        }
+      });
+    
+      strikeCheckout.open({
+        name: 'Dummy Payment Rohit',
+        description: 'Dummy Payment Rohit Desc',
+        amount: amount * 100
+      });
+    }
+
+    stripePaymentGateway() {
+      console.log(this.initial)
+      if(!window.document.getElementById('stripe-script')) {
+        const scr = window.document.createElement("script");
+        scr.id = "stripe-script";
+        scr.type = "text/javascript";
+        scr.src = "https://checkout.stripe.com/checkout.js";
+  
+        scr.onload = () => {
+          this.strikeCheckout = (<any>window).StripeCheckout.configure({
+            key: this.initial?.accountDetail?.publishableKey,
+            locale: 'auto',
+            token: function (token: any) {
+              console.log(token)
+              alert('Payment via stripe successfull!');
+            }
+          });
+        }
+          
+        window.document.body.appendChild(scr);
+      }
     }
     submitParentForm(parentForm: any){
       let data = '';

@@ -34,9 +34,13 @@
                 <span class="folder-name">
                     {{folder.folderPath}}
                 </span>
+                <span class="ml-1 badge badge-success">
+                    {{folder?.forms?.length}}
+                </span>
             </div>
             <div class="forms-list col-md-12 border rounded">
-                <ng-container *ngFor="let form of folder?.forms">
+                <ng-container *ngFor="let form of folder?.forms; let folderIndex = index">
+                <ng-container *ngIf="folder?.expanded || (!folder?.expanded && folderIndex < 3)">
                     <div 
                     *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.toLowerCase())"
                      class="form-list-item row p-3 border-bottom">
@@ -71,8 +75,15 @@
                         <i *ngIf="formPermissions.canDelete" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                     </div>
                 </div>
+                </ng-container>
             </ng-container>    
-                
+            </div>
+            <div class="folder-more col-md-12 py-3" *ngIf="folder?.forms?.length > 3">
+                <div class="text-right text-bf" (click)="folder.expanded = !folder.expanded">
+                    <span class="align-top" *ngIf="!folder.expanded">Browse all {{folder?.forms?.length}} forms in this folder</span>
+                    <span class="align-top" *ngIf="folder.expanded">Hide all forms in this folder</span>
+                    <span class="material-icons-round">navigate_next</span>
+                </div>
             </div>
         </div>
     </ng-container>

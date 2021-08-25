@@ -27,6 +27,7 @@ export const api: any = {
     SaveFormAttributes: "Forms/SaveFormAttributes",
     GetFormDesign: "Forms/GetFormDesign",
     saveFormDesign: "Forms/SaveFormDesign",
+    GetFormEntries: "Forms/GetFormEntries",
     GetWorkspaceAccountSettingsByWorkspaceId: "Payment/GetWorkspaceAccountSettingsByWorkspaceId",
     resetPassword: 'Account/ResetPassword',
     activateResetPasswordLink: 'Account/ActivateResetPasswordLink',
