@@ -1,12 +1,12 @@
 <div class="my-5 px-5 organize-user-role">
     <div class="search-wrapper">
         <div class="form-group has-search mb-5">
-            <input type="text" class="form-control" placeholder="Search here" [(ngModel)]="searchedString" (ngModelChange)="searchRoles($event)">
+            <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchedString" (ngModelChange)="searchRoles($event)">
         </div>
     </div>
     <div class="add-account-wrapper d-flex flex-wrap justify-content-between mb-5" *ngIf="rolePermissions.canEdit">
         <a (click)="addRole()">
-            <button type="button" id="add-form" class="btn btn-bf btn-sm">Add Role</button>
+            <button type="button" id="add-form" class="btn btn-bf btn-sm" title="Add New Role">Add Role</button>
         </a>
     </div>
     <ng-container *ngIf="accountRolesLists.length == 0">
@@ -23,15 +23,15 @@
                     <span *ngIf="!role.isActive" class="badge badge-pill badge-warning py-2 px-3 mt-2">In-Active</span>
                 </div>
                 <div *ngIf="!role.isEditable" class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <a (click)="manageRoleData(role)">
+                    <a (click)="manageRoleData(role)" title="View">
                         <i class="material-icons-round mr-3 text-dark">visibility</i>
                     </a>
                 </div>
                 <div *ngIf="role.isEditable" class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <a (click)="manageRoleData(role)" *ngIf="rolePermissions.canEdit">
+                    <a (click)="manageRoleData(role)" *ngIf="rolePermissions.canEdit" title="Edit">
                         <i class="material-icons-round mr-3 text-dark">edit</i>
                     </a>
-                    <i *ngIf="rolePermissions.canDelete" class="material-icons-round text-dark" (click)="deleteRole(role)" data-toggle="modal" data-target="#">delete</i>
+                    <i *ngIf="rolePermissions.canDelete" class="material-icons-round text-dark" (click)="deleteRole(role)" data-toggle="modal" data-target="#" title="Delete">delete</i>
                 </div>
             </div>
         </ng-container>

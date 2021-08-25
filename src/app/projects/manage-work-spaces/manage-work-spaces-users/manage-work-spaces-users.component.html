@@ -1,11 +1,11 @@
 <div class="my-5 px-5 ">
     <div class="search-wrapper">
         <div class="form-group has-search mb-5">
-            <input type="text" class="form-control" placeholder="Search users" [(ngModel)]="searchedString" (ngModelChange)="searchUsers($event)">
+            <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchedString" (ngModelChange)="searchUsers($event)">
         </div>
     </div>
     <div class="add-account-wrapper d-flex flex-wrap justify-content-between mb-5" *ngIf="userPermissions.canEdit">
-        <button type="button" (click)="inviteUser()" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal" data-target="#user-invite-modal">Invite</button>
+        <button type="button" (click)="inviteUser()" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal" data-target="#user-invite-modal" title="Invite Users">Invite</button>
     </div>
     <div class="organization-list col-md-12 border rounded">
         <ng-container *ngIf="accountUsersLists.length == 0">
@@ -23,8 +23,8 @@
                 </div>
                 <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end" *ngIf="organizationUserId != user.id">
                     <i class="material-icons-round mr-3 text-dark" *ngIf="!user.isLinkActivated" (click)="resendEmail(user)" title="Resend Email">email</i>
-                    <i *ngIf="userPermissions.canEdit && organizationUserId != user.id" class="material-icons-round mr-3 text-dark" (click)="editUser(user)" data-toggle="modal" data-target="#user-invite-modal">edit</i>
-                    <i *ngIf="userPermissions.canDelete && organizationUserId != user.id" class="material-icons-round text-dark" (click)="deleteUser(user)" data-toggle="modal" data-target="#delete-user-modal">delete</i>
+                    <i *ngIf="userPermissions.canEdit && organizationUserId != user.id" class="material-icons-round mr-3 text-dark" (click)="editUser(user)" data-toggle="modal" data-target="#user-invite-modal" title="Edit">edit</i>
+                    <i *ngIf="userPermissions.canDelete && organizationUserId != user.id" class="material-icons-round text-dark" (click)="deleteUser(user)" data-toggle="modal" data-target="#delete-user-modal" title="Delete">delete</i>
                 </div>
             </div>
         </ng-container>

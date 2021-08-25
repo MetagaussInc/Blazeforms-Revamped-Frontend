@@ -5,7 +5,7 @@
                 <label for="organization-name">Organization Name</label><span class="text-danger"> *</span>
             </div>
             <div class="col-md-9">
-                <input type="text" class="form-control" id="organization-name" formControlName="Name">
+                <input type="text" class="form-control" id="organization-name" formControlName="Name" placeholder="Organization Name">
             </div>
             <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
                 <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
@@ -18,7 +18,7 @@
                 <label for="organization-email">Default Reply Email</label><span class="text-danger"> *</span>
             </div>
             <div class="col-md-9">
-                <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Enter Email">
+                <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Your Email Address">
             </div>
             <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
                 <div *ngIf="f.DefaultReplyEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
@@ -87,8 +87,8 @@
             </div>
         </div>
         <div class="form-group row manage-btn-container mt-5">
-            <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
-            <button [disabled]="organizationGeneralForm.invalid" (click)="submit()" type="button" class="btn btn-bf btn-md ml-3">Save</button>
+            <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf" title="Go Back">Back</button>
+            <button [disabled]="organizationGeneralForm.invalid" (click)="submit()" type="button" class="btn btn-bf btn-md ml-3" title="Save Organization">Save</button>
         </div>
     </form>
 </div>

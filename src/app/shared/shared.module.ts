@@ -5,11 +5,13 @@ import { SignatureFieldComponent } from '../projects/form-builder/components/sig
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignaturePadModule } from 'angular2-signaturepad';
+//import { StorageCountPipe } from './storage-count.pipe';
 
 @NgModule({
   declarations: [
     ExportedFormComponent,
-    SignatureFieldComponent
+    SignatureFieldComponent,
+    //StorageCountPipe
   ],
   imports: [
     CommonModule,

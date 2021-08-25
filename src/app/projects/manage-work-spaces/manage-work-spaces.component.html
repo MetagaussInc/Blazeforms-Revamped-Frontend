@@ -39,7 +39,7 @@
                                                                                     <i class="material-icons">person</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
+                                                                            <input autofocus type="text" #firstname formControlName="FirstName" class="form-control" placeholder="First Name">
                                                                         </div>
                                                                         <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
                                                                             <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
@@ -53,7 +53,7 @@
                                                                                     <i class="material-icons">person</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="text" formControlName="LastName" class="form-control" placeholder="Last Name">
+                                                                            <input type="text" #lastname formControlName="LastName" class="form-control" placeholder="Last Name">
                                                                         </div>
                                                                         <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
                                                                             <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
@@ -69,7 +69,7 @@
                                                                                     <i class="material-icons">email</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="email" formControlName="Email" class="form-control" placeholder="Your Email">
+                                                                            <input type="email" #email formControlName="Email" class="form-control" placeholder="Your Email">
                                                                         </div>
                                                                         <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
                                                                             <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
@@ -89,7 +89,7 @@
                                                                                     <i class="material-icons">smartphone</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="tel" formControlName="PhoneNumber" class="form-control" placeholder="Your Phone">
+                                                                            <input type="text" #phonenumber formControlName="PhoneNumber" class="form-control" placeholder="Your Phone">
                                                                         </div>
                                                                         <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
                                                                             <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
@@ -108,7 +108,7 @@
                                                                                     <i class="material-icons">password</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="password" formControlName="Password" class="form-control" placeholder="Choose Password">
+                                                                            <input type="password" #password formControlName="Password" class="form-control" placeholder="Choose Password">
                                                                         </div>
                                                                         <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
                                                                             <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
@@ -123,7 +123,7 @@
                                                                                     <i class="material-icons">password</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+                                                                            <input type="password" #cpassword formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
                                                                         </div>
                                                                         <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
                                                                             <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
@@ -142,7 +142,7 @@
                                                                                     <i class="material-icons">apartment</i>
                                                                                 </span>
                                                                             </div>
-                                                                            <input type="text" formControlName="WorkSpaceName" class="form-control" placeholder="Your Organization Name">
+                                                                            <input type="text" #organization formControlName="WorkSpaceName" class="form-control" placeholder="Your Organization Name">
                                                                         </div>
                                                                         <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
                                                                             <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required

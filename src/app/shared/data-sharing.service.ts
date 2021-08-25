@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +20,23 @@ export class DataSharingService {
   public permissions: any;
   private userInfoSubscription$: any;
   public userInfo: any;
-  private isSuperAdmin: boolean = false;
+  public selectedWorkspaceId: any;
+  public userId: any;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private http: HttpService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo){
-        this.isSuperAdmin = this.userInfo.IsSuperAdmin;
+        this.userId = this.userInfo.Id;
+        this.selectedWorkspaceId = this.userInfo.WorkspaceDetail.Id;
       }
     });
+  }
+
+  SetUserInfoData(userInfo: any){
+    if(!this.userInfo){
+      this.userInfo = userInfo;
+    }
   }
 
   GetPermissions(val: any) {
@@ -73,17 +82,40 @@ export class DataSharingService {
   }
 
   IsSuperAdmin(){
-    return this.isSuperAdmin;
+    if(this.userInfo){
+      return this.userInfo.IsSuperAdmin;
+    }
+    return false;
   }
 
   GetUserId(){
-    if(this.userInfo){
-      return this.userInfo.Id;
-    }
-    return null;
+    return this.userId;
   }
 
   GetLoggedInUserData(){
     return this.userInfo;
   }
+
+  GetUserWorkspaceList(){
+    if(this.userInfo){
+      let workspaceDetails = this.userInfo.WorkspaceDetail;
+      let userWorkspaceList = {id: workspaceDetails.Id, name: workspaceDetails.Name};
+      return userWorkspaceList;
+    }
+    return null;
+  }
+
+  GetSelectedWorkspaceId(){
+    return this.selectedWorkspaceId;
+  }
+
+  GetUserWorkSpace(){
+    const obj = {
+      Id: this.userId,
+    }
+    this.http.call('getUserWorkSpacesWithoutPagination', 'POST', obj).subscribe(response => {
+      console.log(response);
+    });
+  }
+
 }

@@ -8,17 +8,30 @@
         </div>
         <div class="nav-area col d-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
             <div class="nav mr-5">
-                <div class="nav-item active p-4" [hidden]="formPermission.canView">
+                <div class="nav-item active p-4" [hidden]="!formPermission.canView">
                     <a [routerLink]="['/forms']">Forms</a>
                 </div>
-                <div class="nav-item p-4" [hidden]="organizationPermission.canView">
+                <div class="nav-item p-4" [hidden]="!organizationPermission.canView">
                     <a [routerLink]="['/work-spaces']">Organizations</a>
                 </div>
             </div>
-            <div class="org-switch-wrapper mx-4 bg-light">
-                <div class="org-switch-wrapper border rounded py-2 pl-3">
-                    <span class="org-name mr-3">Company Name</span>
-                    <i class="material-icons pr-2">expand_more</i>
+            <div class="org-switch-wrapper mx-4 bg-light" *ngIf="userWorkspaceList">
+                <div class="org-switch-wrapper border rounded">
+                    <!-- <span class="org-name mr-3">Company Name</span>
+                    <i class="material-icons pr-2">expand_more</i> -->
+                    <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
+                        <li ngbDropdown class="nav-item">
+                          <a href (click)="false" class="nav-link" ngbDropdownToggle>{{userWorkspaceList.name}}</a>
+                          <!-- <div ngbDropdownMenu>
+                            <button ngbDropdownItem>Action</button>
+                            <button ngbDropdownItem>Another action</button>
+                            <button ngbDropdownItem>Something else here</button>
+                            <div class="dropdown-divider"></div>
+                            <button ngbDropdownItem>Separated link</button>
+                          </div> -->
+                        </li>
+                      </ul>
+                      <div [ngbNavOutlet]="nav"></div>
                 </div>
             </div>
             <div class="lang-switcher-wrapper mr-4">
@@ -36,6 +49,16 @@
                   </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="workSpacePlanDetail">
+        <span class="plan" [hidden]="!planPermission.canView && isSuperAdmin">
+            Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}}
+            USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} 
+            Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
+            ENTRIES | {{workSpacePlanDetail.storageSize | storageCount}}/{{workSpacePlanDetail.plandetails.storageSize | storageCount}} Storage
+            <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
+            <i class="material-icons">close</i>
+        </span>
     </div>
 </div>
 <!-- Header End-->

@@ -15,6 +15,7 @@ export class AddAccountsModalComponent implements OnInit {
   @Input() public workSpaceId: any;
   @Input() public workSpaceUserId: any;
   @Input() public modalTitle: any;
+  @Input() public buttonTitle: any;
   @Input() public data: any;
 
   accountAddForm = new FormGroup({

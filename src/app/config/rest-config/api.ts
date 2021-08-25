@@ -63,5 +63,6 @@ export const api: any = {
     uploadProfileImage: "User/UploadProfileImage",
     updateUserProfile: "User/UpdateUserProfile",
     checkUserByPassword: "Account/CheckUserByPassword",
-    changePassword: "Account/ChangePassword"
+    changePassword: "Account/ChangePassword",
+    uploadFilesForWorkspace: "WorkSpace/UploadFilesForWorkspace"
 }   

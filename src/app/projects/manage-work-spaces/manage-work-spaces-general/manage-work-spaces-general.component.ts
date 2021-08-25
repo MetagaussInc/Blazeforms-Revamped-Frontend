@@ -43,18 +43,20 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public isSuperAdmin: boolean = false;
   public logo: any;
   public currentOrgname: any;
+  public userId: any;
 
   constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
+    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
+    this.userId = this.dataSharingService.GetUserId();
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
         let orgUserId: any = params.get('orgUserId');
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
-        this.getCurrentWorkspaceData(this.organizationId, this.organizationUserId);
+        this.getCurrentWorkspaceData();
       }
     });
-    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
   }
 
   ngOnInit(): void {
@@ -65,11 +67,11 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
     this.currencyList = sharedData.getCurrencies();
   }
 
-  getCurrentWorkspaceData(orgId: any, userId: any){
+  getCurrentWorkspaceData(){
     let obj = {
-      Id: orgId,
+      Id: this.organizationId,
       IsOrganizationSettings: true,
-      UserId: userId
+      UserId: this.organizationUserId
     }
     let dataRes: any;
     if(this.isSuperAdmin){

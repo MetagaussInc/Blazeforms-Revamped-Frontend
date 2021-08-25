@@ -21,8 +21,11 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public logoExt: any;
   public logo: any;
   public userId: any;
+  public isSuperAdmin: boolean = false;
 
   constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService) {
+    this.userId = this.dataSharingService.GetUserId();
+    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -31,19 +34,28 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
         this.organizationUserId = decodeURIComponent(orgUserId);
       }
     });
-    this.userId = this.dataSharingService.GetUserId();
     let obj = {
       Id: this.organizationId,
       IsOrganizationSettings: true,
       UserId: this.organizationUserId
     }
     let dataRes: any;
-    this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
-      dataRes = res.result.data;
-      this.logo = atob(dataRes.workspaceDetail.logo);
-      this.logoExt = 'png';
-      this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
-    });
+    if(this.isSuperAdmin){
+      this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
+        dataRes = res.result.data;
+        this.logo = dataRes.workspaceDetail.logo;
+        this.logoExt = dataRes.workspaceDetail.logoExt;
+        this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+      });
+    }
+    else{
+      this.http.call('setCurrentWorkSpace', 'POST', obj).subscribe(res => {
+        dataRes = res.result.data;
+        this.logo = dataRes.workspaceDetail.logo;
+        this.logoExt = dataRes.workspaceDetail.logoExt;
+        this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -62,8 +74,8 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   }
 
   submit(){
-    let model = {'UserId': this.userId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
-    this.http.call('uploadFiles', 'POST', model).subscribe(res => {
+    let model = {'LogoWorkSpaceId': this.organizationId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
+    this.http.call('uploadFilesForWorkspace', 'POST', model).subscribe(res => {
       console.log(res);
     });
   }

@@ -63,6 +63,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
     modalRef.componentInstance.workSpaceId = this.organizationId;
     modalRef.componentInstance.workSpaceUserId = this.organizationUserId;
     modalRef.componentInstance.modalTitle = 'Configure Stripe Account';
+    modalRef.componentInstance.buttonTitle = 'Save';
     modalRef.result.then((result: any) => {
       if(result == 'getAccountsData'){
         this.accountsLists = [];
@@ -79,6 +80,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
     modalRef.componentInstance.workSpaceId = this.organizationId;
     modalRef.componentInstance.workSpaceUserId = this.organizationUserId;
     modalRef.componentInstance.modalTitle = 'Edit Stripe Account';
+    modalRef.componentInstance.buttonTitle = 'Update';
     modalRef.componentInstance.data = accountEditData;
     modalRef.result.then((result: any) => {
       if(result == 'getAccountsData'){
