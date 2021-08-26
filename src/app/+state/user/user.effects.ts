@@ -29,6 +29,25 @@ export class UserEffects {
     );
   });
 
+  seconAPICALL$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.userLoginSuccess),
+      concatMap((action: any) => {
+        console.log(action.props.user.Id)
+        const payload = {
+          UserId: action.props.user.Id,
+          WorkspaceId: action.props.user.WorkspaceDetail.Id,
+        }
+        return this.http.call('getUserPlanDetailByWorkspace', 'POST', payload).pipe(
+          map(data => {
+              const props = {...data};
+              return UserActions.secondAPICallSuccess({ props })
+           
+          }))
+      })
+    );
+  });
+
   // userRegister$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(UserActions.userRegister),

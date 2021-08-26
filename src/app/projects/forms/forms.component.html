@@ -2,6 +2,7 @@
     <div class="container py-4">
         <h2>Forms</h2>
     </div>
+    
 </div>
 <div class="forms-container container">
     <div class="search-wrapper">
@@ -21,6 +22,25 @@
             <i class="material-icons mr-3">archive</i>
             <i class="material-icons mr-3">drive_file_move</i>
             <i class="material-icons">filter_alt</i>
+            <div class="filter-dropdown bg-white rounded shadow filter-down">
+                <div class="filter-dropdown-top border-bottom py-2">
+                    <div class="filter-dropdown-item py-2 px-5" (click)="selectedFolder = null;">Clear Filter</div>
+                    <div class="filter-dropdown-item py-2 px-5 bg-light text-bf">Add New Folder</div>
+                </div>
+                <app-filter-tree *ngIf="folderList" (selectFolderEvent)="selectionChange($event)" [selectedFolder]="selectedFolder" [data]="folderList"></app-filter-tree>
+                <div class="filter-dropdown-bottom py-2">
+                    <div class="filter-dropdown-item py-2 px-5" [ngClass]="{'px-4 bg-light': viewBy === 'All Forms'}" (click)="viewBy = 'All Forms'">
+                        <span *ngIf=" viewBy === 'All Forms'" class="material-icons-round selected-item-tick align-bottom text-bf">done</span>
+                        All Forms</div>
+                    <div class="filter-dropdown-item py-2 px-5 " [ngClass]="{'px-4 bg-light': viewBy === 'Starred'}" (click)="viewBy = 'Starred'">
+                        <span *ngIf="viewBy === 'Starred'" class="material-icons-round selected-item-tick align-bottom text-bf">done</span>
+                        Starred
+                    </div>
+                    <div class="filter-dropdown-item py-2 px-5" [ngClass]="{'px-4 bg-light': viewBy === 'Archived'}" (click)="viewBy = 'Archived'">
+                        <span *ngIf="viewBy === 'Archived'" class="material-icons-round selected-item-tick align-bottom text-bf">done</span>
+                        Archived</div>
+                </div>
+            </div>
         </div>
     </div>
     <ng-container *ngFor="let folder of formsList">

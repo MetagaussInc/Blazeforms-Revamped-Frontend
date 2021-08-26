@@ -33,6 +33,11 @@ export const userProfileImageUpdate = createAction(
   props<{ props: any }>()
 );
 
+export const secondAPICallSuccess = createAction(
+  '[User] secondAPICall',
+  props<{ props: any }>()
+);
+
 
 // export const userRegister = createAction(
 //   '[User] Register',

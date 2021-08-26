@@ -34,6 +34,12 @@ export const reducer = createReducer(
       access_token: action.props.access_token
     };
   }),
+  on(UserActions.secondAPICallSuccess, (state, action) => {
+    console.log('data from secondAPI call', action)
+    const updatedState = JSON.parse(JSON.stringify(state));
+
+    return state;
+  }),
   on(UserActions.userLoginError, (state, action) => {
     console.log(action)
     return {
