@@ -25,7 +25,9 @@ export class FormsComponent implements OnInit {
     pageNumber: 1,
     pageSize: 14
   };
+  selectedFolder: any = 'Root';
 
+  viewBy = '';
   public selectedForms: any[] = [];
 
   private userInfoSubscription$: any;
@@ -106,6 +108,9 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectionChange($event: any) {
+    this.selectedFolder = $event;
+}
   open() {
     const modalRef: any = this.modalService.open(AddFormModalComponent,{ size: 'lg' })
     modalRef.componentInstance.formsList = this.allForms;      
