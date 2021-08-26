@@ -58,6 +58,7 @@ export class TSelectComponent implements OnInit {
   @Input() public data: any;
   @Input() public currentFormId: any;
   @Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
+  @Output() selectFolderLevel: EventEmitter<any> = new EventEmitter()
   selected = 'Root';
   searchedString = '';
   public viewDropDown = false;
@@ -93,12 +94,13 @@ export class TSelectComponent implements OnInit {
   constructor() {
   }
 
-  ExtractChild(parentElements: any, childElements: any) {
+  ExtractChild(parentElements: any, childElements: any, parentlevel: any) {
     childElements.forEach((child: any) => {
       // child.fullFolderPath = [];
       // child.fullFolderPath.push(child.text);
       child.fullFolderPath = '';
       child.fullFolderPath += '/' + child.text.toLowerCase();
+      child.level = parentlevel + 1;
       parentElements.forEach((element: any) => {
         element.fullFolderPath += '/' + child.text.toLowerCase();
 
@@ -110,7 +112,7 @@ export class TSelectComponent implements OnInit {
         this.selected = child.text;
       }
       if (child.children) {
-        this.ExtractChild(parent, child.children)
+        this.ExtractChild(parent, child.children, child.level)
 
       }
     });
@@ -122,6 +124,7 @@ export class TSelectComponent implements OnInit {
     this.treeControl.collapseAll();
     this.viewDropDown = false;
     this.selectFolderEvent.emit(node.value);
+    this.selectFolderLevel.emit(node.level);
     // console.log(this.treeControl)
   }
 
@@ -133,6 +136,7 @@ export class TSelectComponent implements OnInit {
     const newData: any = [{
       text: 'Root',
       main: true,
+      level: 1,
       children: this.data
     }];
 
@@ -147,7 +151,7 @@ export class TSelectComponent implements OnInit {
       const parentData = [];
       parentData.push(element);
       if (element.children) {
-        this.ExtractChild(parentData, element.children)
+        this.ExtractChild(parentData, element.children, element.level)
 
       }
 

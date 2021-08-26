@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tree-select',
@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tree-select.component.scss']
 })
 export class TreeSelectComponent implements OnInit {
+@Input() data: any;
+@Input() selectedFolder: any;
+@Input() searchedString: any;
+@Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log('tree select ',this.data)
   }
 
+  selectionChange($event: any) {
+      this.selectFolderEvent.emit($event);
+  }
 }

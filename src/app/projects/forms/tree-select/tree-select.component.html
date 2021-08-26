@@ -1,1 +1,20 @@
-<p>tree-select works!</p>
+<div *ngIf="data?.children?.length > 0" [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}" class="filter-dropdown-folder-item small mb-1 ml-3">
+    <!-- <span class="material-icons-round align-bottom" >arrow_drop_up</span> -->
+    <mat-icon style="cursor: pointer;" class="mat-icon-rtl-mirror" (click)="data.expanded = !data?.expanded"> {{data.expanded ? 'expand_more' : 'chevron_right'}} </mat-icon>
+    <span class="material-icons-outlined align-bottom" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
+    <span class="filter-dropdown-folder-name" [ngClass]="{'font-weight-bold': selectedFolder === data.value}" (click)="selectionChange(data.value)">{{data.text}}</span>
+    
+</div>
+<div class="ml-3" [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}">
+    <ng-container *ngIf="searchedString?.length > 0 || data?.expanded">
+        <ng-container *ngFor="let item of data?.children">
+            <app-tree-select [data]="item" [selectedFolder]="selectedFolder" [searchedString]="searchedString" (selectFolderEvent)="selectionChange($event)"></app-tree-select>
+        </ng-container>
+    </ng-container>
+</div>
+
+<div [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}" *ngIf="!data?.children" class="filter-dropdown-folder-item small mb-1 ml-3">
+    <span style="opacity: 0;" class="material-icons-round align-bottom">arrow_drop_down</span>
+    <span class="material-icons-outlined align-bottom" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
+    <span class="filter-dropdown-folder-name" [ngClass]="{'font-weight-bold': selectedFolder === data.value}" (click)="selectionChange(data.value)">{{data.text}}</span>
+</div>

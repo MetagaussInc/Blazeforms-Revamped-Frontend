@@ -1,0 +1,41 @@
+<div class="filter-dropdown-folders border-bottom py-2">
+    <div class="filter-dropdown-folder-search px-3 py-2">
+        <input type="search" class="form-control" [(ngModel)]="searchedString" placeholder="search folders">
+    </div>
+    <div class="filter-dropdown-folder-area pl-4">
+        <div class="filter-dropdown-folder-area-title">
+            <span class="text-bf font-weight-bold small">Filter By Folders</span>
+        </div>
+        <div class="filter-dropdown-folder-list overflow-auto py-2">
+            <ng-container *ngFor="let item of childData">
+                <app-tree-select [data]="item" [searchedString]="searchedString" [selectedFolder]="selectedFolder" (selectFolderEvent)="selectionChange($event)"></app-tree-select>
+            </ng-container>
+            
+            <!-- <div class="filter-dropdown-folder-item small mb-1">
+                <span class="material-icons-round align-bottom">arrow_drop_down</span>
+                <span class="material-icons-outlined align-bottom">folder</span>
+                <span class="filter-dropdown-folder-name">Folder Name</span>
+            </div>
+            <div class="filter-dropdown-folder-item small mb-1 bg-light rounded-pill mr-2">
+                <span class="material-icons-round align-bottom">arrow_drop_down</span>
+                <span class="material-icons-outlined align-bottom">folder</span>
+                <span class="filter-dropdown-folder-name">Folder Name</span>
+            </div>
+            <div class="filter-dropdown-folder-item small mb-1 ml-3">
+                <span class="material-icons-round align-bottom text-bf">arrow_drop_down</span>
+                <span class="material-icons-outlined align-bottom text-bf">folder</span>
+                <span class="filter-dropdown-folder-name font-weight-bold">Folder Name</span>
+            </div>
+            <div class="filter-dropdown-folder-item small mb-1">
+                <span class="material-icons-round align-bottom">arrow_drop_down</span>
+                <span class="material-icons-outlined align-bottom">folder</span>
+                <span class="filter-dropdown-folder-name">Folder Name</span>
+            </div>
+            <div class="filter-dropdown-folder-item small mb-1">
+                <span class="material-icons-round align-bottom">arrow_drop_down</span>
+                <span class="material-icons-outlined align-bottom">folder</span>
+                <span class="filter-dropdown-folder-name">Folder Name</span>
+            </div> -->
+        </div>
+    </div>
+</div>
