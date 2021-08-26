@@ -21,7 +21,7 @@
             <i class="material-icons mr-3">delete</i>
             <i class="material-icons mr-3">archive</i>
             <i class="material-icons mr-3">drive_file_move</i>
-            <i class="material-icons" (click)="viewFilterDropdown = true">filter_alt</i>
+            <i class="material-icons" (click)="viewFilterDropdown = !viewFilterDropdown">filter_alt</i>
             <div class="filter-dropdown bg-white rounded shadow filter-down" *ngIf="viewFilterDropdown">
                 <div class="filter-dropdown-top border-bottom mb-2">
                     <div class="filter-dropdown-item py-2 px-5 border-bottom" (click)="selectedFolder = null; viewBy = null; viewFilterDropdown = false;">Clear Filter</div>
