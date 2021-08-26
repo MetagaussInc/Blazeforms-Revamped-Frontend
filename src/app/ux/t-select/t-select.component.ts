@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
@@ -132,7 +132,15 @@ export class TSelectComponent implements OnInit {
     // console.log(_)
     return node.expandable
   };
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.init();
+  }
   ngOnInit(): void {
+    this.init();
+  }
+  init(): void {
     const newData: any = [{
       text: 'Root',
       main: true,

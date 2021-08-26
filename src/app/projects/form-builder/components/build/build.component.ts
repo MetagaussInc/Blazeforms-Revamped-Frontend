@@ -376,11 +376,11 @@ userInfo: any;
     }
     this.viewProperties = 1; 
 
-    this.targetBuilderTools.forEach((element: any) => {
-      if (element.uiIndexId === this.count) {
-        this.selectedElement = element;
-      }
-    });
+    // this.targetBuilderTools.forEach((element: any) => {
+    //   if (element.uiIndexId === this.count) {
+        this.selectedElement = e.value;
+      // }
+    // });
 
     setTimeout(() => {
       this.saveForm()
