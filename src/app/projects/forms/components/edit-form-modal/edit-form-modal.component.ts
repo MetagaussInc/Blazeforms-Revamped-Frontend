@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { AddNewFolderComponent } from '../add-new-folder/add-new-folder.component';
 
 @Component({
   selector: 'app-edit-form-modal',
@@ -34,7 +35,7 @@ export class EditFormModalComponent implements OnInit {
     console.log($event)
     this.folder?.setValue($event);
   }
-  constructor(private http: HttpService, public activeModal: NgbActiveModal) { }
+  constructor(private http: HttpService, public activeModal: NgbActiveModal, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     console.log(this.folderList, this.type);
@@ -53,6 +54,7 @@ export class EditFormModalComponent implements OnInit {
       DocumentTemplatesJson: "NOUSAGE",
       FormSettings: "NOUSAGE",
       FormType: "Form",
+      FolderID: this.addForm.value.folder,
       IsActive: true,
       Name: this.addForm.value.name,
       SessionUser: this.userId,
@@ -67,6 +69,26 @@ export class EditFormModalComponent implements OnInit {
       console.log(res)
     })
 
+  }
+
+  openAddNewFolderModal() {
+    console.log('open')
+    const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
+    modalRef.componentInstance.folderList =  this.folderList; 
+    modalRef.componentInstance.workSpaceId = this.workSpaceId;
+    modalRef.componentInstance.userId = this.userId;
+
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        this.http.call('getFolders', 'POST', {
+          WorkSpaceId: this.workSpaceId,}).subscribe(res => {
+          this.folderList = res;
+        })
+        // this.getFormsList(this.userInfo);
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
   }
 
   get name() { return this.addForm.get('name'); }

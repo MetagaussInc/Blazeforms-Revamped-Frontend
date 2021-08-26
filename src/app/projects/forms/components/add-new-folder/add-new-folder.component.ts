@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -25,7 +25,7 @@ export class AddNewFolderComponent implements OnInit {
     folder: new FormControl('', [Validators.required, Validators.minLength(10)]),
     active: new FormControl(false)
   });
-    constructor(private http: HttpService, public activeModal: NgbActiveModal) { }
+    constructor(private http: HttpService, public activeModal: NgbActiveModal, private modalService: NgbModal) { }
   
     ngOnInit(): void {
     }
@@ -34,16 +34,14 @@ export class AddNewFolderComponent implements OnInit {
     //   this.id = $event;
     // }
     selectFolderEventHandler($event: any) {
-      console.log($event)
       this.folder?.setValue($event);
     }
     save() {
-      console.log(this.newFolderDef.value)
       const payload = {
         Description: this.newFolderDef.value.desc,
         IsActive: this.newFolderDef.value.active,
         Name: this.newFolderDef.value.name,
-        ParentId: this.newFolderDef.value.folder?.length > 0 ? this.newFolderDef.value.folder?.length : null,
+        ParentId: this.newFolderDef.value.folder?.length > 0 ? this.newFolderDef.value.folder : null,
         SessionUser: this.userId,
         WorkSpaceId: this.workSpaceId
       }
@@ -73,6 +71,21 @@ export class AddNewFolderComponent implements OnInit {
 
     selectFolderLevelHandler($event: any) {
     this.selectedLevel = $event;
+    }
+
+    openAddNewFolderModal() {
+      const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
+      modalRef.componentInstance.folderList =  this.folderList; 
+      modalRef.componentInstance.workSpaceId = this.workSpaceId;
+      modalRef.componentInstance.userId = this.userId;
+  
+      modalRef.result.then((result: any) => {
+        if (result !== 'close') {
+          // this.getFormsList(this.userInfo);
+        }
+      }, (reason: any) => {
+        console.log(`Dismissed `);
+      });
     }
     
   get name() { return this.newFolderDef.get('name'); }

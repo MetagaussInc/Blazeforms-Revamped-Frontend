@@ -39,6 +39,7 @@ export class FormsComponent implements OnInit {
   public folderList: any;
   userInfo: any;
   public formPermissions: any;
+  public favs: any = []
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -60,12 +61,26 @@ export class FormsComponent implements OnInit {
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
       WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
       this.allForms = res;
+      this.allForms.forEach((element: any) => {
+        if (element.isFavourite) {
+          this.favs.push(element.id);
+        }
+      });
     })
 
     this.http.call('getFolders', 'POST', {
       WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
       this.folderList = res;
     })
+  }
+
+  enableStarred(form: any) {
+    this.http.call('UpdateFormAttributes', 'POST', {
+      FormUpdateAction: "IsFavourite",
+      Id: form.value,}).subscribe(res => {
+        this.getFormsList(this.userInfo)
+    })
+
   }
 
   getFoldersWithList(userInfo: any) {

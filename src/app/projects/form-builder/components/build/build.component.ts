@@ -136,9 +136,9 @@ userInfo: any;
       this.targetBuilderTools = resp?.targetBuilderTools || [];
       if (!this.targetBuilderTools?.length) {
         this.targetBuilderTools = [];
-        this.targetBuilderTools.push(config[0])
+        // this.targetBuilderTools.push(config[0])
       }
-      this.paymentSetting = resp.paymentSetting || this.paymentSetting;
+      this.paymentSetting = resp?.paymentSetting || this.paymentSetting;
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -157,7 +157,7 @@ userInfo: any;
   getNewEntries() {
     this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
       const data: any = [];
-      res.formEntries.forEach((element: any, index: any) => {
+      res.formEntries?.forEach((element: any, index: any) => {
         const entry = JSON.parse(element.formEntryJSON) 
         data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
       });
@@ -375,6 +375,12 @@ userInfo: any;
     }
     }
     this.viewProperties = 1; 
+
+    this.targetBuilderTools.forEach((element: any) => {
+      if (element.uiIndexId === this.count) {
+        this.selectedElement = element;
+      }
+    });
 
     setTimeout(() => {
       this.saveForm()

@@ -2,7 +2,7 @@
 <div tabindex="-1" id="copy-form-workflow-modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Move </h5>
+            <h5 class="modal-title">Add Folder </h5>
             <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
         </div>
         <div class="modal-body">
@@ -36,16 +36,16 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="form-folder">Folder</label>
+                            <label for="form-folder" (click)="openAddNewFolderModal()">Folder</label>
                         </div>
                         <div class="col-md-7">
                             <app-t-select [data]="folderList" [currentFormId]="null" (selectFolderEvent)="selectFolderEventHandler($event)" (selectFolderLevel)="selectFolderLevelHandler($event)"></app-t-select>
 
                         </div>
                         <div class="col-md-2 p-2">
-                            <i class="material-icons-round">create_new_folder</i>
+                            <!-- <i class="material-icons-round">create_new_folder</i> -->
                         </div>
-                        <div *ngIf="true" class="field-error text-right mt-1 pr-2 small offset-7">
+                        <div *ngIf="selectedLevel > 3" class="field-error text-right mt-1 pr-2 small offset-7">
                             You can add folder upto five levels 
                         </div>
                     </div>

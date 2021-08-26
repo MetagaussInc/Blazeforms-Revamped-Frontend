@@ -8,6 +8,7 @@ export const api: any = {
     getFormsList: `${FORMS}/FilterWorkSpaceforms`,
     GetFoldersListWithForms: 'Folders/GetFoldersListWithForms',
     SendResetPasswordLinq: 'Account/SendResetPasswordLinq',
+    UpdateFormAttributes: "Forms/UpdateFormAttributes",
     getMasterPlanDetailById: "Plan/GetMasterPlanDetailById",
     getAllActiveForms: 'Forms/GetActiveFormswithoutPagination',
     getFolders: 'Folders/GetFolderswithoutPagination',
