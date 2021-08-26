@@ -12,6 +12,7 @@ import { MoveModalComponent } from './move-modal/move-modal.component';
 import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
 import { DataSharingService } from '../../shared/data-sharing.service';
 import { Router } from '@angular/router';
+import { AddNewFolderComponent } from './components/add-new-folder/add-new-folder.component';
 
 @Component({
   selector: 'app-forms',
@@ -25,11 +26,11 @@ export class FormsComponent implements OnInit {
     pageNumber: 1,
     pageSize: 14
   };
-  selectedFolder: any = 'Root';
+  selectedFolder: any = null;
 
-  viewBy = '';
+  viewBy: any = null;
   public selectedForms: any[] = [];
-
+  viewFilterDropdown = false;
   private userInfoSubscription$: any;
   private searchedFormKeyword: string = '';
   private FilterAttribute: string = 'null';
@@ -88,6 +89,7 @@ export class FormsComponent implements OnInit {
         arr.push({
           folderPath: obj.folderPath,
           text: obj.text,
+          folderId: obj.value,
           forms: obj.childrenForms.map((x: any) => {
             x.folderId = obj.value;
             return x;
@@ -220,6 +222,47 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => { }, (reason: any) => {
       console.log(`Dismissed `);
     });
+  }
+  openAddNewFolderModal() {
+    const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
+    modalRef.componentInstance.folderList =  this.folderList; 
+    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.userId = this.userInfo.Id;
+
+    modalRef.result.then((result: any) => {
+      if (result !== 'close') {
+        this.getFormsList(this.userInfo);
+      }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  changeViewBy(view: any) {
+    this.selectedFolder = null;
+    this.viewBy = view;
+    if (view === 'All Forms') {
+      this.getFoldersWithList(this.userInfo)
+    } else {
+      this.getFilteredForm();
+    }
+  }
+
+  getFilteredForm() {
+     this.http.call('getFormsList', 'POST', {
+      FilterAttribute: this.viewBy,
+      SearchKeyword: "",
+      UserId: this.userInfo.Id,
+      WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
+      pageNumber: 1,
+      pageSize: 14
+     }).subscribe(res => {
+       this.formsList = [{
+         folderPath: this.viewBy === 'StarredForms' ? 'All Starred Forms' : 'All Archived Forms',
+         forms: res.res
+       }]
+      console.log(res)
+    })
   }
   ngOnDestroy() {
     this.userInfoSubscription$.unsubscribe();

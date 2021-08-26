@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserPermissionModalComponent } from './components/user-permission-modal/user-permission-modal.component';
 import { AddUserPermissionModalComponent } from './components/add-user-permission-modal/add-user-permission-modal.component';
 import { FilterTreeComponent } from './components/filter-tree/filter-tree.component';
+import { AddNewFolderComponent } from './components/add-new-folder/add-new-folder.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FilterTreeComponent } from './components/filter-tree/filter-tree.compon
     TSelectComponent,
     UserPermissionModalComponent,
     AddUserPermissionModalComponent,
-    FilterTreeComponent
+    FilterTreeComponent,
+    AddNewFolderComponent
 
   ],
   imports: [
