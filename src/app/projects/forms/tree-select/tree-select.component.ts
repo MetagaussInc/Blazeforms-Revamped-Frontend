@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TreeSelectComponent implements OnInit {
 @Input() data: any;
 @Input() selectedFolder: any;
+@Input() searchedString: any;
 @Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
