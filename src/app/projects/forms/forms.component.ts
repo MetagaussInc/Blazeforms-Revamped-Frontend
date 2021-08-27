@@ -30,6 +30,7 @@ export class FormsComponent implements OnInit {
 
   viewBy: any = null;
   public selectedForms: any[] = [];
+  public selectedFormName: any[] = [];
   viewFilterDropdown = false;
   private userInfoSubscription$: any;
   private searchedFormKeyword: string = '';
@@ -37,9 +38,10 @@ export class FormsComponent implements OnInit {
   public formsList: any;
   public allForms :any;
   public folderList: any;
+  folderListWithForms: any;
   userInfo: any;
   public formPermissions: any;
-  public favs: any = []
+  public favs: any = [];
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -83,7 +85,7 @@ export class FormsComponent implements OnInit {
 
   }
 
-  getFoldersWithList(userInfo: any) {
+  getFoldersWithList(userInfo: any, ) {
     const obj = {
       FilterAttribute: this.FilterAttribute,
       SearchKeyword: this.searchedFormKeyword,
@@ -95,9 +97,24 @@ export class FormsComponent implements OnInit {
       const arr: any = [];
       this.getfolderNameWithForms(res, arr);
       this.formsList = arr;
+      this.folderListWithForms = arr;;
+  
     })
   }
 
+  selectBulkForms(form: any) {
+    if (this.selectedForms.includes(form.value)) {
+      this.selectedForms = this.selectedForms.filter((x: any) => form.value !== x);
+      this.selectedFormName = this.selectedForms.filter((x: any) => form.value !== x && form?.name !== x);
+    } else {
+      this.selectedForms.push(form.value);
+      this.selectedFormName.push(form.text ? form.text : form.name);
+    }
+  }
+
+  get bulkId() {
+    return this.selectedForms.join(',');
+  } 
   getfolderNameWithForms(res: any[], arr: any[]) {
     res.forEach((obj: any) => {
       if (obj?.childrenForms?.length > 0) {
@@ -110,7 +127,7 @@ export class FormsComponent implements OnInit {
             return x;
           } ),
           childNameList: function(){
-            let list = obj.text;
+            let list = '';
             obj?.childrenForms.forEach((x: any) => { list += '/'+ x.text} );
             return list;
           }()
@@ -126,6 +143,10 @@ export class FormsComponent implements OnInit {
   }
 
   selectionChange($event: any) {
+    if (this.viewBy === 'StarredForms' || this.viewBy === 'ArchievedForms') {
+      this.formsList =  this.folderListWithForms;
+      this.viewBy = null;
+    }
     this.selectedFolder = $event;
 }
   open() {
@@ -166,6 +187,10 @@ export class FormsComponent implements OnInit {
 
   }
 
+  openFormURL(form: any) {
+    // console.log(this.userInfo.WorkSpaceName)
+    this.router.navigate([`/blazeforms/${this.userInfo.WorkSpaceName.split(' ').join('_')}/${form.text ? form.text.split(' ').join('_') : form.name.split(' ').join(_)}`]);
+  }
   openPermissions(form: any) {
     console.log('openPermissions', form)
     const modalRef: any = this.modalService.open(RestrictFormEntriesComponent,{ size: 'lg' })
@@ -190,6 +215,8 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         this.getFoldersWithList(this.userInfo)
+        this.selectedForms = [];
+          this.selectedFormName = [];
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
         //   console.log(res)
         // })
@@ -207,11 +234,23 @@ export class FormsComponent implements OnInit {
       if (result !== 'close') {
         this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
           console.log(res)
+          this.selectedForms = [];
+          this.selectedFormName = [];
         })
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
     });
+  }
+
+  bulkDelete() {
+    this.deleteForm({text: this.selectedFormName.join(','), value: this.bulkId});
+  }
+  bulkMove() {
+    this.move({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true});
+  }
+  bulkArchive() {
+    this.archive({text: this.selectedFormName.join(','), value: this.bulkId});
   }
 
   deleteForm(form: any) {
@@ -222,6 +261,8 @@ export class FormsComponent implements OnInit {
       if (result !== 'close') {
         this.http.call('archive', 'POST', {Action: 'Delete', FormIds: form.value }).subscribe(res => {
           this.getFormsList(this.userInfo);
+          this.selectedForms = [];
+          this.selectedFormName = [];
         })
       }
     }, (reason: any) => {

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">New Form</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" (click)="activeModal.close('close')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
 
@@ -17,10 +17,10 @@
                                 <button type="button" class="btn btn-bf btn-sm mb-2" data-bs-dismiss="modal" (click)="openEdit('forms')">Add
                                     Form</button>
                                 <div>Or</div>
-                                <div><a href="#" class="">Copy Existing Form </a></div>
+                                <div class="disabled"><a href="#" class="">Copy Existing Form </a></div>
                             </div>  
                         </div>
-                        <div class="col-md-6 d-flex d-wrap justify-content-center align-content-center py-5">
+                        <div class="col-md-6 d-flex d-wrap justify-content-center align-content-center py-5 disabled" >
                             <div class="add-form-area text-center">
                                 <button type="button" class="btn btn-bf btn-sm mb-2"  (click)="openEdit('Workflow')">Add Workflow</button>
                                 <div>Or</div>

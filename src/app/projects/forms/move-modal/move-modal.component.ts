@@ -20,8 +20,21 @@ id: any;
     this.id = $event;
   }
   save() {
-    this.http.call('moveFolder', 'POST', { FolderID: this.id,
-      Id: this.form.value }).subscribe(res => {console.log(res);
+    let p = {}
+    if (this.form.bulk) {
+p = {
+  Action: "Move",
+FolderId: this.id,
+FormIds: this.form.value
+}
+    } else {
+      p = {
+        FolderID: this.id,
+        Id: this.form.value 
+      }
+    }
+
+    this.http.call(this.form.bulk ? 'bulkAction' : 'moveFolder', 'POST', p).subscribe(res => {console.log(res);
         this.close();
       })
   }

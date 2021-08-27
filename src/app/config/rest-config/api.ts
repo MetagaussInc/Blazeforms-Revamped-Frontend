@@ -15,6 +15,7 @@ export const api: any = {
     validateFormName: 'Forms/ValidateFormName',
     archive: 'Forms/BulkAction',
     deleteForm: 'Forms/BulkAction',
+    bulkAction: 'Forms/BulkAction',
     getRoleUsers: 'Forms/GetFormUserRoleWorkSpace',
     saveRolePermission: 'Forms/SaveRolePermission',
     getRolePermissions: 'Forms/GetRolePermission',
