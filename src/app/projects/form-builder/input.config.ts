@@ -1630,6 +1630,21 @@ export const layoutInputs = [
         validations: {
             pageBreakName: true
         }
+    },
+    {
+        name: 'Content',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: 'Page',
+        inputType: 'content',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'extra-large',
+        validations: {
+            contentEditor: true
+        }
     }
 ]
 

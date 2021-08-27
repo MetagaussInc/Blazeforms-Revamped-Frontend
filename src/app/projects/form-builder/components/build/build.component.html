@@ -244,6 +244,13 @@
                                                                 <input id="text" name="text" [(ngModel)]="selectedElement.value" placeholder="Untitled" type="text" class="form-control">
                                                             </div>
                                                         </ng-container>
+
+                                                        <ng-container *ngIf="selectedElement?.validations?.contentEditor">
+                                                            <div class="form-group">
+                                                                <label for="text">Edit content</label>
+                                                                <angular-editor [placeholder]="'Enter text here...'"
+                                                                [(ngModel)]="selectedElement.value"></angular-editor>                                                            </div>
+                                                        </ng-container>
                                                         <div *ngIf="selectedElement?.validations?.help" class="form-group">
                                                             <label for="Help Text">Help Text</label>
                                                             <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
@@ -387,6 +394,12 @@
                                                             <ngx-dnd-container *ngIf="!viewExportedView" dropZone="builder-target" [model]="model.children" [removeOnSpill]="false" [template]="template" [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
                                                                 (remove)="log($event)" (cancel)="log($event)" direction="mixed">
                                                             </ngx-dnd-container>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'content'" (click)="sectionClicked($event, model, template)" class="mjui">
+                                                        <div class="shadow">
+                                                            {{model.name}}
+                                                            <div [innerHTML]="model.value"></div>
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'repeatSection'" (click)="sectionClicked($event, model, template)">
