@@ -52,8 +52,8 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
     this.http.call('getUserPlanDetailByWorkspace', 'POST', userPlan).subscribe(response => {
       this.userPlanData = response;
       this.planDetail = this.userPlanData.plandetails;
-      this.userPlanData.storageSize = ((this.userPlanData.storageSize) / (1024 * 1024));
-      this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
+      //this.userPlanData.storageSize = ((this.userPlanData.storageSize) / (1024 * 1024));
+      //this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
     });
   }
 
@@ -77,7 +77,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetail = plan;
-    this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
+    //this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
   }
 
 }

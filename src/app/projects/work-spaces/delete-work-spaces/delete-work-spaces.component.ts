@@ -17,6 +17,10 @@ export class DeleteWorkSpacesComponent implements OnInit {
     console.log(this.modalName);
   }
 
+  closePopup(){
+    this.activeModal.close();
+  }
+
   deleteUserOrganization(){
     this.activeModal.close('deleteWorkSpace');
   }

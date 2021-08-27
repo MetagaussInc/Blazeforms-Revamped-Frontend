@@ -95,7 +95,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
 
   deleteAccount(accountEditData: any){
     const modalRef: any = this.modalService.open(DeleteAccountsModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete your account ${accountEditData.accountName}`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete your account ${accountEditData.accountName} ?`;      
     modalRef.componentInstance.modalName = 'Delete'; 
     modalRef.result.then((result: any) => {
       if (result === 'deleteAccount') {

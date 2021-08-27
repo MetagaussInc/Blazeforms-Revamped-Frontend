@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StorageCountPipe implements PipeTransform {
 
-  transform(value: any): any {
+  transform(value: any, precision: number = 2): any {
     if (value == 0) return '0';
     if (value > 0 && value < 1073741824) {
       var i = (value) / (1024 * 1024);
@@ -17,7 +17,7 @@ export class StorageCountPipe implements PipeTransform {
     }
 
     if (i == 0) return value + ' ' + sizes;
-    return (i).toFixed(4) + ' ' + sizes;
+    return (i).toFixed(precision) + ' ' + sizes;
   }
 
 }

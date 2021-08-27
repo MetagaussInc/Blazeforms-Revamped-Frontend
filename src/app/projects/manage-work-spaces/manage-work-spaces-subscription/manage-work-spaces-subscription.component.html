@@ -29,7 +29,7 @@
                             <span>{{ planDetail.noOfEntries }}</span><span class="text-secondary"> Entries</span>
                         </div>
                         <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetail.storageSize }} GB</span><span class="text-secondary"> Storage</span>
+                            <span>{{ planDetail.storageSize }}</span><span class="text-secondary"> Storage</span>
                         </div>
                         <div class="plan-price-button col-md-12 mt-3" *ngIf="planPermissions.canEdit">
                             <button type="button" (click)="planChange()" class="btn btn-bf btn-sm">Change Plan</button>

@@ -13,13 +13,13 @@
                                 <label for="account-name">Email</label>
                             </div>
                             <div class="col-md-9">
-                                <input formControlName="Email" type="text" class="form-control" id="account-email" placeholder="Enter Email address to invite">
+                                <input formControlName="Email" type="email" class="form-control" id="account-email" placeholder="Enter Email address to invite">
                             </div>
                             <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                <div *ngIf="f.Email.errors?.required || f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required
-                                </div>
+                                <div *ngIf="f.Email.errors?.required || f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required.</div>
                             </ng-container>
-                            <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">User is already exist</div>
+                            <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain.</div>
+                            <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">User is already exist.</div>
                         </div>
                         <div class="row my-4 px-4 form-group">
                             <div class="col-md-3">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal">Back</button>
+                        <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal">Close</button>
                         <button type="button" (click)="submit()" class="btn btn-bf btn-sm" [disabled]="accountInviteForm.invalid">{{ modalButtonTitle }}</button>
                     </div>
                 </form>

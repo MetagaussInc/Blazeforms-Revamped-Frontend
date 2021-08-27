@@ -109,7 +109,7 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
 
   deleteUser(user: any){
     const modalRef: any = this.modalService.open(DeleteUserModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete user  ${user.email}`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete user  ${user.email} ?`;      
     modalRef.componentInstance.modalName = 'Delete User'; 
     modalRef.result.then((result: any) => {
       if (result === 'deleteUser') {

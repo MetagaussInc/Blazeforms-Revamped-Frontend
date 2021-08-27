@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../../../shared/toast.service';
+import { EMPTY, Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invite-user-modal',
@@ -21,9 +23,17 @@ export class InviteUserModalComponent implements OnInit {
   
   public activeRoles: any;
   public planError: boolean = false;
+  public currentUserEmail: any;
 
   accountInviteForm = new FormGroup({
-    Email: new FormControl('', [Validators.required, this.validateUserEmail.bind(this)]),
+    Email: new FormControl('', [
+      Validators.required,
+      this.validateUserEmail.bind(this),
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
+      this.doubleDotValidator.bind(this)
+    ],
+      this.validateEmailViaServer.bind(this)
+    ),
     RoleId: new FormControl(null, [Validators.required]),
   });
 
@@ -38,6 +48,7 @@ export class InviteUserModalComponent implements OnInit {
         Email: this.data.email,
         RoleId: this.data.roleId,
       });
+      this.currentUserEmail = this.data.email;
     }
   }
 
@@ -50,6 +61,35 @@ export class InviteUserModalComponent implements OnInit {
       return {isExists: true};
     }
     return null;
+  }
+
+  doubleDotValidator({ value }: AbstractControl): any {
+    if (value?.includes('@')) {
+      if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
+        return { specialCharInDomain: true };
+      }
+      if (value.split('@')[1]?.includes('..')) {
+        return {doubleDotInDomain: true};
+      }
+    }
+    return null;
+  }
+
+  validateEmailViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    return this.http.call('checkEmail', 'POST', { Email: value })
+      .pipe(debounceTime(1000),
+        map((response: any) => {
+          if(this.currentUserEmail != value){
+            if (response.data) {
+              return {
+                isExists: true
+              };
+            }
+          }
+          return null;
+        }
+      )
+    )
   }
 
   submit(){

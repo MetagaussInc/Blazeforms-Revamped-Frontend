@@ -12,7 +12,7 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="account-name">From</label>
+                            <label for="account-name">From <span style="color: red">*</span></label>
                         </div>
                         <div class="col-md-7">
                             <input type="email" readonly formControlName="DefaultReplyEmail" class="form-control" id="default-email" placeholder="Default Email">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="account-name">To</label>
+                            <label for="account-name">To <span style="color: red">*</span></label>
                         </div>
                         <div class="col-md-7">
                             <input type="email" formControlName="ToEmail" class="form-control" id="to-email" placeholder="To Email">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="account-name">Subject</label>
+                            <label for="account-name">Subject <span style="color: red">*</span></label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" formControlName="Subject" class="form-control" id="subject" placeholder="Subject">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="account-name">Message</label>
+                            <label for="account-name">Message <span style="color: red">*</span></label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" formControlName="Message" class="form-control" id="message" placeholder="Message">
@@ -60,8 +60,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal">Back</button>
-                    <button type="button" [disabled]="referFriendForm.invalid" (click)="submit()" class="btn btn-bf btn-sm">Save</button>
+                    <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal" title="Close">Close</button>
+                    <button type="button" [disabled]="referFriendForm.invalid" (click)="submit()" class="btn btn-bf btn-sm" title="Send">Send</button>
                 </div>
             </form>
         </div>

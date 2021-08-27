@@ -75,7 +75,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
 
   deleteRole(role: any){
     const modalRef: any = this.modalService.open(DeleteRoleModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete role ${role.name}`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete role ${role.name} ?`;      
     modalRef.componentInstance.modalName = 'Delete Role'; 
     modalRef.result.then((result: any) => {
       if (result === 'deleteRole') {

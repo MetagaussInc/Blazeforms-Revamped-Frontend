@@ -80,7 +80,7 @@ export class WorkSpacesComponent implements OnInit {
 
   deleteUserOrganization(organization: any){
     const modalRef: any = this.modalService.open(DeleteWorkSpacesComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete organization ${organization.name}`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete organization ${organization.name} ?`;      
     modalRef.componentInstance.modalName = 'Delete Organization'; 
     modalRef.result.then((result: any) => {
       if (result === 'deleteWorkSpace') {
