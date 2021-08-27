@@ -49,17 +49,19 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-left">Module</th>
-                                <th *ngFor="let permission of rolePermissionData.rolePermissionList">{{ permission.permissionName }}</th>
+                                <th *ngFor="let permission of rolePermissionData.rolePermissionModel.rolePermissionList">{{ permission.permissionName }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let module of rolePermissionData.roleModuleList">
-                                <td class="text-left">{{ module.moduleName }}</td>
+                            <tr *ngFor="let module of rolePermissionData.rolePermissionModel.roleModuleList">
+                                <td class="text-left" *ngIf="module.moduleName != 'Forms'">{{ module.moduleName }}</td>
                                 <td *ngFor="let modulepermission of module.modulePermissionList">
-                                    <div *ngIf="modulepermission.isAvailable">
-                                        <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive"> 
-                                        <label for="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}"></label>
-                                    </div>
+                                    <ng-container *ngIf="module.moduleName != 'Forms'">
+                                        <div *ngIf="modulepermission.isAvailable">
+                                            <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive"> 
+                                            <label for="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}"></label>
+                                        </div>
+                                    </ng-container>
                                 </td>
                             </tr>
                         </tbody>

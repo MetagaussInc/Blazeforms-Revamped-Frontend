@@ -37,8 +37,7 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.SuperUserId = userInfo.Id;
-    })
-    
+    });
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -48,18 +47,19 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
         this.organizationName = decodeURIComponent(orgName);
+        this.getAccountRolesData();
+        this.rolePermissions = this.dataSharingService.GetPermissions("Role");
       }
     });
-    this.rolePermissions = this.dataSharingService.GetPermissions("Role");
-    this.getAccountRolesData();
   }
 
   ngOnInit(): void {
   }
 
   getAccountRolesData(){
+    this.accountRolesLists = [];
     const accountRoleData = {
-      WorkSpaceId: this.userInfo.WorkspaceId,
+      WorkSpaceId: this.organizationId,
       SearchKeyword: this.searchedString,
       ...this.pageDetail
     }

@@ -42,15 +42,16 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
         this.getAccountUsersData();
+        this.userPermissions = this.dataSharingService.GetPermissions("User");
       }
     });
-    this.userPermissions = this.dataSharingService.GetPermissions("User");
   }
 
   ngOnInit(): void {
   }
 
   getAccountUsersData(){
+    this.accountUsersLists = [];
     const accountUserData = {
       Id: this.organizationId,
       SearchKeyword: this.searchedString,

@@ -33,8 +33,18 @@ export const userProfileImageUpdate = createAction(
   props<{ props: any }>()
 );
 
-export const secondAPICallSuccess = createAction(
-  '[User] secondAPICall',
+export const userPlanDetailSuccess = createAction(
+  '[User] User Plan Detail',
+  props<{ props: any }>()
+);
+
+export const userWorkspaceDetailSuccess = createAction(
+  '[User] User Workspace Detail',
+  props<{ props: any }>()
+);
+
+export const updateUserPlanDetail = createAction(
+  '[User] User Plan Detail Update',
   props<{ props: any }>()
 );
 

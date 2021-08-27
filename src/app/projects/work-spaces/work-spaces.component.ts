@@ -31,6 +31,7 @@ export class WorkSpacesComponent implements OnInit {
   public permissions: any;
   public isPaginationLoading: boolean = false;
   public isLoading: boolean = false;
+  public selectedWorkspaceId: any;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -41,6 +42,8 @@ export class WorkSpacesComponent implements OnInit {
       this.getUserOrganizationsList();
     })
     this.permissions = this.dataSharingService.GetPermissions("Organizations");
+    let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
+    this.selectedWorkspaceId = workSpaceListData.id;
   }
 
   ngOnInit(): void {}

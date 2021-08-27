@@ -15,3 +15,13 @@ export const accessToken = createSelector(
   selectUserState,
   (state: UserState) => state.access_token
 );
+
+export const userPlanDetail = createSelector(
+  selectUserState,
+  (state: UserState) => state.user_plan_detail
+);
+
+export const userWorkspaceLists = createSelector(
+  selectUserState,
+  (state: UserState) => state.user_workspace_detail
+);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUserInfo } from 'src/app/+state/user/user.selectors';
+import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Injectable({
@@ -22,6 +22,7 @@ export class DataSharingService {
   public userInfo: any;
   public selectedWorkspaceId: any;
   public userId: any;
+  public userWorkspaceList: any;
 
   constructor(private store: Store, private http: HttpService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -97,10 +98,13 @@ export class DataSharingService {
   }
 
   GetUserWorkspaceList(){
+    if(this.userWorkspaceList){
+      return this.userWorkspaceList;
+    }
     if(this.userInfo){
       let workspaceDetails = this.userInfo.WorkspaceDetail;
-      let userWorkspaceList = {id: workspaceDetails.Id, name: workspaceDetails.Name};
-      return userWorkspaceList;
+      this.userWorkspaceList = {id: workspaceDetails.Id, name: workspaceDetails.Name};
+      return this.userWorkspaceList;
     }
     return null;
   }
@@ -110,12 +114,19 @@ export class DataSharingService {
   }
 
   GetUserWorkSpace(){
-    const obj = {
-      Id: this.userId,
-    }
-    this.http.call('getUserWorkSpacesWithoutPagination', 'POST', obj).subscribe(response => {
-      console.log(response);
+    this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+      return workspacesList;
     });
+  }
+
+  GetWorkspacePlanDetail(){
+    this.store.select(userPlanDetail).subscribe(planInfo => {
+      return planInfo;
+    });
+  }
+
+  SetUserWorkspace(workspace: any){
+    this.userWorkspaceList = {id: workspace.id, name: workspace.name};
   }
 
 }

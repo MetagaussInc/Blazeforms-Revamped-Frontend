@@ -42,6 +42,7 @@ export class ManageWorkSpacesAccountSettingsComponent implements OnInit {
   }
 
   getAccountsData(){
+    this.accountsLists = [];
     const accountsdata = {
       WorkSpaceId: this.organizationId,
       SearchKeyword: this.searchedString,

@@ -23,7 +23,7 @@ export class ManageRolesComponent implements OnInit {
   private userInfoSubscription$: any;
   public userInfo: any;
   public SuperUserId: any;
-  public roledataId: any = null;
+  public roledataId: any;
   public rolePermissionData: any;
   public roleDetails: any[] = [];
   public isFormSubmitted: boolean = false;
@@ -53,22 +53,29 @@ export class ManageRolesComponent implements OnInit {
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
         this.organizationName = decodeURIComponent(orgName);
-        this.roledataId = decodeURIComponent(roleId);
+        if(roleId){
+          this.roledataId = decodeURIComponent(roleId);
+        }
         this.getRoleDetail();
+        this.rolePermissions = this.dataSharingService.GetPermissions("Role");
       }
     });
-    this.rolePermissions = this.dataSharingService.GetPermissions("Role");
   }
 
   ngOnInit(): void {
   }
 
   getRoleDetail(){
-    let obj = {
-      UserId: this.SuperUserId
+    let obj = {};
+    if(!this.roledataId){
+      obj = {
+        UserId: this.SuperUserId
+      }
     }
-    if(this.roledataId){
-      let obj = {
+    else{
+      console.log("Edit Role")
+      console.log(this.roledataId);
+      obj = {
         Id: this.roledataId,
         UserId: this.SuperUserId
       }
@@ -111,9 +118,7 @@ export class ManageRolesComponent implements OnInit {
             'PermissionId': item.permissionId, 'IsSelected': item.isActive
           });
         }
-        
         if(this.roledataId !== null){
-          console.log(this.roledataId);
           this.roleDetails.push({
             'ModuleId': data.moduleId, 'Permissions': permissions, 'CreatedBy': this.SuperUserId, 'ModifiedBy': this.SuperUserId
           });

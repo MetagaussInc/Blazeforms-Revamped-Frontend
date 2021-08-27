@@ -38,10 +38,13 @@ export class FormsComponent implements OnInit {
   public folderList: any;
   userInfo: any;
   public formPermissions: any;
+  public selectedWorkspaceId: any;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
+      let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
+      this.selectedWorkspaceId = workSpaceListData.id;
       this.getFormsList(userInfo);
     })
     this.formPermissions = this.dataSharingService.GetPermissions("Forms");
@@ -57,12 +60,12 @@ export class FormsComponent implements OnInit {
     this.getFoldersWithList(userInfo)
 
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
+      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
       this.allForms = res;
     })
 
     this.http.call('getFolders', 'POST', {
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
+      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
       this.folderList = res;
     })
   }
@@ -72,7 +75,7 @@ export class FormsComponent implements OnInit {
       FilterAttribute: this.FilterAttribute,
       SearchKeyword: this.searchedFormKeyword,
       UserId: userInfo.Id,
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,
+      WorkSpaceId: this.selectedWorkspaceId,
       ...this.pageDetail,
     }
     this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
@@ -131,7 +134,7 @@ export class FormsComponent implements OnInit {
     modalRef.componentInstance.folderList = this.folderList;      
     modalRef.componentInstance.type = type;      
     modalRef.componentInstance.modalType = 'Add';      
-    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
     
     modalRef.result.then((result: any) => {
@@ -216,7 +219,7 @@ export class FormsComponent implements OnInit {
     const modalRef: any = this.modalService.open(UserPermissionModalComponent,{ size: 'lg' })
     modalRef.componentInstance.formId = formId;      
     modalRef.componentInstance.modalType = 'permission';
-    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.result.then((result: any) => { }, (reason: any) => {
       console.log(`Dismissed `);
     });
