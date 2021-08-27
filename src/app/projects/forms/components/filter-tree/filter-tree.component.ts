@@ -12,6 +12,7 @@ export class FilterTreeComponent implements OnInit {
 @Output() selectFolderEvent: EventEmitter<any> = new EventEmitter()
 selected: any = 'Root';
   childData: any;
+  searchedString: any = null;
   constructor() { }
 
   ngOnInit(): void {

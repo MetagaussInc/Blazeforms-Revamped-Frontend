@@ -35,14 +35,14 @@
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
-                            <label for="form-folder">Folder</label>
+                            <label for="form-folder" >Folder</label>
                         </div>
                         <div class="col-md-7">
                             <app-t-select [data]="folderList" [currentFormId]="null" (selectFolderEvent)="selectFolderEventHandler($event)"></app-t-select>
 
                         </div>
                         <div class="col-md-2 p-2">
-                            <i class="material-icons-round">create_new_folder</i>
+                            <i class="material-icons-round" (click)="openAddNewFolderModal()">create_new_folder</i>
                         </div>
                     </div>
                     <div class="row my-4 px-4 form-group">

@@ -8,12 +8,60 @@ import { advancedLayout, config, layoutInputs } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 import { ExcelService } from '../../excelservice.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
   selector: 'app-build',
   templateUrl: './build.component.html',
   styleUrls: ['./build.component.scss']
 })
 export class BuildComponent  {
+  editorConfig: AngularEditorConfig = {
+       editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    upload: (file: File): any => { return '' },
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+};
   model: any = {
     name: '',
   };
@@ -136,9 +184,9 @@ userInfo: any;
       this.targetBuilderTools = resp?.targetBuilderTools || [];
       if (!this.targetBuilderTools?.length) {
         this.targetBuilderTools = [];
-        this.targetBuilderTools.push(config[0])
+        // this.targetBuilderTools.push(config[0])
       }
-      this.paymentSetting = resp.paymentSetting || this.paymentSetting;
+      this.paymentSetting = resp?.paymentSetting || this.paymentSetting;
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -157,7 +205,7 @@ userInfo: any;
   getNewEntries() {
     this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
       const data: any = [];
-      res.formEntries.forEach((element: any, index: any) => {
+      res.formEntries?.forEach((element: any, index: any) => {
         const entry = JSON.parse(element.formEntryJSON) 
         data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
       });
@@ -375,6 +423,12 @@ userInfo: any;
     }
     }
     this.viewProperties = 1; 
+
+    // this.targetBuilderTools.forEach((element: any) => {
+    //   if (element.uiIndexId === this.count) {
+        this.selectedElement = e.value;
+      // }
+    // });
 
     setTimeout(() => {
       this.saveForm()

@@ -15,6 +15,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { AddStripeAccountComponent } from './components/add-stripe-account/add-stripe-account.component';
 import { ExportedFormComponent } from './components/exported-form/exported-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     NgbModule,
     NgxDnDModule.forRoot(),
+    AngularEditorModule 
     // SignaturePadModule
   ] ,
 })

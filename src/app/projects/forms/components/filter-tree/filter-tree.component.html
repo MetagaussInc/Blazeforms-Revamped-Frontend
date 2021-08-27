@@ -1,16 +1,16 @@
 <div class="filter-dropdown-folders border-bottom py-2">
     <div class="filter-dropdown-folder-search px-3 py-2">
-        <input type="search" class="form-control" placeholder="search folders">
+        <input type="search" class="form-control" [(ngModel)]="searchedString" placeholder="search folders">
     </div>
     <div class="filter-dropdown-folder-area pl-4">
         <div class="filter-dropdown-folder-area-title">
             <span class="text-bf font-weight-bold small">Filter By Folders</span>
         </div>
-        <div class="filter-dropdown-folder-list overflow-auto py-2">
+        <div class="filter-dropdown-folder-list overflow-auto py-2 pr-3">
             <ng-container *ngFor="let item of childData">
-                <app-tree-select [data]="item" [selectedFolder]="selectedFolder" (selectFolderEvent)="selectionChange($event)"></app-tree-select>
+                <app-tree-select [data]="item" [searchedString]="searchedString" [selectedFolder]="selectedFolder" (selectFolderEvent)="selectionChange($event)"></app-tree-select>
             </ng-container>
-            
+
             <!-- <div class="filter-dropdown-folder-item small mb-1">
                 <span class="material-icons-round align-bottom">arrow_drop_down</span>
                 <span class="material-icons-outlined align-bottom">folder</span>

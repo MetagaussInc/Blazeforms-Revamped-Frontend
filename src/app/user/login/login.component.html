@@ -36,7 +36,9 @@
                                                     <label for="email" class="ml-1">Email</label>
                                                     <input type="email" formControlName="email" autocomplete="off" class="form-control rounded-sm" id="email" placeholder="Enter your email address" autofocus>
                                                     <ng-container *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
-                                                        <div *ngIf="f.email.errors?.required || f.email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required
+                                                        <div>
+                                                            <div *ngIf="f.email.errors?.required || f.email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required
+                                                            </div>
                                                         </div>
                                                     </ng-container>
                                                 </div>
