@@ -73,20 +73,18 @@ export class ManageRolesComponent implements OnInit {
       }
     }
     else{
-      console.log("Edit Role")
-      console.log(this.roledataId);
       obj = {
         Id: this.roledataId,
         UserId: this.SuperUserId
       }
     }
     this.http.call('getRoleDetails', 'POST', obj).subscribe(response => {
-      this.rolePermissionData = response;
+      this.rolePermissionData = response.rolePermissionModel;
       if(this.roledataId){
         this.roleAddForm.patchValue({
-          Name: this.rolePermissionData.name,
-          Description: this.rolePermissionData.description,
-          IsActive: this.rolePermissionData.isActive,
+          Name: response.roleDetails.name,
+          Description: response.roleDetails.description,
+          IsActive: response.roleDetails.isActive,
         });
       }
     });
@@ -131,16 +129,9 @@ export class ManageRolesComponent implements OnInit {
       }
     }
 
-    let obj = {
-      ...JSON.parse(JSON.stringify(this.roleAddForm.value)),
-      CreatedBy: this.SuperUserId,
-      IsDeleted: false,
-      WorkSpaceId: this.organizationId,
-      isEditable: true,
-      modulePermission: this.roleDetails
-    }
+    let obj = {};
     if(this.roledataId && this.roledataId !== null){
-      let obj = {
+      obj = {
         ...JSON.parse(JSON.stringify(this.roleAddForm.value)),
         CreatedBy: this.SuperUserId,
         IsDeleted: false,
@@ -149,6 +140,16 @@ export class ManageRolesComponent implements OnInit {
         modulePermission: this.roleDetails,
         Id: this.roledataId,
         isActiveAssignedUser: true
+      }
+    }
+    else{
+      obj = {
+        ...JSON.parse(JSON.stringify(this.roleAddForm.value)),
+        CreatedBy: this.SuperUserId,
+        IsDeleted: false,
+        WorkSpaceId: this.organizationId,
+        isEditable: true,
+        modulePermission: this.roleDetails
       }
     }
     this.http.call('saveRole', 'POST', obj).subscribe(response => {

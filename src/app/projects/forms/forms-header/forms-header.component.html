@@ -51,7 +51,7 @@
             Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}}
             USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} 
             Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
-            ENTRIES | {{workSpacePlanDetail.storageSize | storageCount: 4}}/{{workSpacePlanDetail.plandetails.storageSize | storageCount}} Storage
+            ENTRIES | {{ calulateUites(workSpacePlanDetail.storageSize, 4) }}/{{ calulateUites(workSpacePlanDetail.plandetails.storageSize) }} Storage
             <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
             <i class="material-icons">close</i>
         </span>

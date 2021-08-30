@@ -1,12 +1,12 @@
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title">Restrict Form Entries</h5>
-    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close('close')">&times;</button>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close('close')" title="Close">&times;</button>
   </div>
   <div class="modal-body">
     <div class="row p-3">
       <div class="col-md-12 text-right mt-4 mb-3">
-        <button (click)="openAddUserPermissionModal()" type="button" data-dismiss="modal" data-toggle="modal" data-target="#user-provide-form-permissions-modal" class="btn btn-bf btn-sm">
+        <button (click)="openAddUserPermissionModal()" type="button" data-dismiss="modal" data-toggle="modal" data-target="#user-provide-form-permissions-modal" class="btn btn-bf btn-sm" title="Add User">
           Add User
         </button>
       </div>
@@ -27,18 +27,26 @@
             </tr>
             <tr *ngFor="let userList of userLists">
               <td *ngIf="userList" class="text-left">{{ userList.userEmail }}</td>
-              <td *ngFor="let permissions of userPermissions">
-                <input type="checkbox" id="user-form-{{ permissions.short }}" 
-                [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
-                [disabled]="!isEditMode"
-                (change)="onCheckboxChange($event, userList)"
-                value="{{ permissions.value }}"> 
-                <label for="user-form-{{ permissions.short }}"></label>
-              </td>
+              <ng-container *ngIf="userList">
+                <td *ngFor="let permissions of userPermissions">
+                  <input type="checkbox" id="user-form-{{ permissions.short }}" 
+                  [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
+                  [disabled]="!isEditMode"
+                  (change)="onCheckboxChange($event, userList)"
+                  value="{{ permissions.value }}"> 
+                  <label for="user-form-{{ permissions.short }}"></label>
+                </td>
+              </ng-container>
               <td *ngIf="userList">
-                <span *ngIf="!isEditMode" (click)="editFormUser(userList)"><i class="material-icons text-dark mr-2">edit</i></span>
-                <span *ngIf="isEditMode" (click)="updateFormUser(userList)"><i class="material-icons text-dark mr-2">update</i></span>
-                <span (click)="deleteFormUser(userList)"><i class="material-icons text-dark">delete</i></span>
+                <span *ngIf="isEditMode != userList.id" (click)="editFormUser(userList)">
+                  <i class="material-icons text-dark mr-2" title="Edit">edit</i>
+                </span>
+                <span *ngIf="(isEditMode && isEditMode == userList.id)" (click)="updateFormUser(userList)">
+                  <i class="material-icons text-dark mr-2" title="Update">update</i>
+                </span>
+                <span (click)="deleteFormUser(userList)">
+                  <i class="material-icons text-dark" title="Delete">delete</i>
+                </span>
               </td>
             </tr>
           </tbody>

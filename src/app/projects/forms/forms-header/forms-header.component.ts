@@ -5,6 +5,7 @@ import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+sta
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { Router } from '@angular/router';
 import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
+import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
 
 @Component({
   selector: 'app-forms-header',
@@ -23,6 +24,7 @@ export class FormsHeaderComponent implements OnInit {
   public workSpacePlanDetail: any;
   public isSuperAdmin: boolean = false;
   public userWorkspaceLists: any;
+  public calulateUites = storageCountFormatter;
 
   constructor(private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {

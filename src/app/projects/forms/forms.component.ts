@@ -43,7 +43,6 @@ export class FormsComponent implements OnInit {
   public formPermissions: any;
   public selectedWorkspaceId: any;
   public favs: any = []
-  public favs: any = [];
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
