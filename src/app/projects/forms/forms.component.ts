@@ -232,7 +232,7 @@ export class FormsComponent implements OnInit {
 
   archive(form: any) {
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to archive ${form.text} forms`;      
+    modalRef.componentInstance.message = `Are you sure you want to archive ${form.text} forms ?`;      
     modalRef.componentInstance.modalName = 'Archive'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
@@ -259,7 +259,7 @@ export class FormsComponent implements OnInit {
 
   deleteForm(form: any) {
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete ${form.text} forms`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete ${form.text} forms ?`;      
     modalRef.componentInstance.modalName = 'Delete'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
