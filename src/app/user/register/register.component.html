@@ -179,13 +179,14 @@
                         <div class="register-fields-wrapper row mb-3">
                             <div class="terms-conditions-wrapper col-md-12 my-3 text-center">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="customCheck" name="example1">
-                                    <label class="custom-control-label" for="customCheck">I have read and accepted <a
+                                    <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="SignUpTermsConditions" name="example1">
+                                    <label class="custom-control-label" for="SignUpTermsConditions">I have read and accepted <a
                                             href="#">Terms &#38; Conditions</a>
-                                        {{f.acceptAgreement.errors?.isRefused}}</label>
+                                        <!-- {{f.acceptAgreement.errors?.isRefused}} -->
+                                    </label>
                                 </div>
                                 <ng-container *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
-                                    <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
+                                    <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small text-center">Please accept the agreement</div>
                                 </ng-container>
                             </div>
                         </div>
