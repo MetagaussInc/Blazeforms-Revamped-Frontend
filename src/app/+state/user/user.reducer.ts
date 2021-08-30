@@ -26,8 +26,8 @@ export const reducer = createReducer(
     return {
       user: JSON.parse(bForms)?.user,
       access_token: JSON.parse(bForms)?.access_token,
-      user_plan_detail: null,
-      user_workspace_detail: null
+      user_plan_detail:JSON.parse(bForms)?.user_plan_detail,
+      user_workspace_detail: JSON.parse(bForms)?.user_workspace_detail
     };
   }),
   on(UserActions.userLoginSuccess, (state, action) => {
@@ -43,12 +43,28 @@ export const reducer = createReducer(
   }),
   on(UserActions.userPlanDetailSuccess, (state, action) => {
     const updatedState = JSON.parse(JSON.stringify(state));
+    const bForms: any = localStorage.getItem('bforms');
+
+    localStorage.setItem('bforms', JSON.stringify(
+      {
+        ...(JSON.parse(bForms)),
+        user_plan_detail: action.props
+      }
+      ));
+
     updatedState.user_plan_detail = action.props;
     return updatedState;
   }),
   on(UserActions.userWorkspaceDetailSuccess, (state, action) => {
     const updatedState = JSON.parse(JSON.stringify(state));
     updatedState.user_workspace_detail = action.props;
+    const bForms: any = localStorage.getItem('bforms');
+    localStorage.setItem('bforms', JSON.stringify(
+      {
+        ...(JSON.parse(bForms)),
+        user_workspace_detail: action.props
+      }
+      ));
     return updatedState;
   }),
   on(UserActions.userLoginError, (state, action) => {

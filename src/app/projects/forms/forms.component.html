@@ -24,7 +24,7 @@
             <i class="material-icons" (click)="viewFilterDropdown = !viewFilterDropdown">filter_alt</i>
             <div class="filter-dropdown bg-white rounded shadow filter-down" *ngIf="viewFilterDropdown">
                 <div class="filter-dropdown-top border-bottom mb-2">
-                    <div class="filter-dropdown-item py-2 px-5 border-bottom" (click)="selectedFolder = null; viewBy = null; viewFilterDropdown = false;">Clear Filter</div>
+                    <div class="filter-dropdown-item py-2 px-5 border-bottom" (click)="selectedFolder = null; viewBy = null; viewFilterDropdown = false;getFormsList(userInfo)">Clear Filter</div>
                     <div class="filter-dropdown-item py-2 px-5" (click)="openAddNewFolderModal(); viewFilterDropdown = false;">Add New Folder</div>
                 </div>
                 <app-filter-tree *ngIf="folderList" (selectFolderEvent)="selectionChange($event)" [selectedFolder]="selectedFolder" [data]="folderList"></app-filter-tree>

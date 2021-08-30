@@ -68,7 +68,7 @@ export class FormsHeaderComponent implements OnInit {
         let orgId = workspace.id;
         let orgName = workspace.name;
         let orgUserId = workspace.userId;
-        this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
+        // this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
       }
     });
   }
