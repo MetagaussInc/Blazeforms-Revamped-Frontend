@@ -25,6 +25,7 @@ export class ManageRolesComponent implements OnInit {
   public SuperUserId: any;
   public roledataId: any;
   public rolePermissionData: any;
+  public roleDetailsData: any;
   public roleDetails: any[] = [];
   public isFormSubmitted: boolean = false;
   public rolePermissions: any;
@@ -80,11 +81,12 @@ export class ManageRolesComponent implements OnInit {
     }
     this.http.call('getRoleDetails', 'POST', obj).subscribe(response => {
       this.rolePermissionData = response.rolePermissionModel;
+      this.roleDetailsData = response.roleDetails;
       if(this.roledataId){
         this.roleAddForm.patchValue({
-          Name: response.roleDetails.name,
-          Description: response.roleDetails.description,
-          IsActive: response.roleDetails.isActive,
+          Name: this.roleDetailsData.name,
+          Description: this.roleDetailsData.description,
+          IsActive: this.roleDetailsData.isActive,
         });
       }
     });

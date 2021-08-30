@@ -68,7 +68,7 @@
                     </table>
                     <div class="form-group mt-5 row role-btn-container">
                         <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
-                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3 ">
+                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3" *ngIf="roleDetailsData.isEditable">
                             Save
                             <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
                         </button>
