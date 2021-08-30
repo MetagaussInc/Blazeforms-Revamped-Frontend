@@ -94,9 +94,9 @@
                         </ng-container>
                     </div>
                     <div class="folder-more col-md-12 py-3" *ngIf="folder?.forms?.length > 3">
-                        <div class="text-right text-bf" (click)="folder.expanded = !folder.expanded">
-                            <span class="align-top" *ngIf="!folder.expanded">Browse all {{folder?.forms?.length}} forms in this folder</span>
-                            <span class="align-top" *ngIf="folder.expanded">Hide all forms in this folder</span>
+                        <div class="text-right text-bf" >
+                            <span class="align-top" *ngIf="!folder.expanded" (click)="folder.expanded = !folder.expanded">Browse all {{folder?.forms?.length}} forms in this folder</span>
+                            <span class="align-top" *ngIf="folder.expanded" (click)="folder.expanded = !folder.expanded">Hide all forms in this folder</span>
                             <span class="material-icons-round">navigate_next</span>
                         </div>
                     </div>
