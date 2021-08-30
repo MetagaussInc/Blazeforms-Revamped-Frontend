@@ -53,7 +53,8 @@ const routes: Routes = [
     loadChildren: () => import('./projects/my-profile/my-profile.module').then(m => m.MyProfileModule), 
     canLoad: [ModuleAuthGuardComponent] 
   },
-  { path: 'blazeforms', loadChildren: () => import('./projects/blazeforms/blazeforms.module').then(m => m.BlazeformsModule) }
+  { path: 'blazeforms', loadChildren: () => import('./projects/blazeforms/blazeforms.module').then(m => m.BlazeformsModule) },
+  { path: 'manage-workflow', loadChildren: () => import('./projects/manage-workflow/manage-workflow.module').then(m => m.ManageWorkflowModule) }
 ];
 
 @NgModule({

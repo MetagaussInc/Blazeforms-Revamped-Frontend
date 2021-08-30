@@ -1,4 +1,4 @@
-<div class="login-area-container container d-flex align-items-center justify-content-center">
+<div class="registration-area-container box-container container d-flex align-items-center justify-content-center my-5">
     <div class="login-box row border rounded-lg">
         <!--Login Area Left Column-->
         <div class="left-column col-md-4 p-5 border-right d-flex justify-content-center flex-wrap align-content-center">
@@ -109,7 +109,7 @@
                                             <i class="material-icons">smartphone</i>
                                         </span>
                                     </div>
-                                    <input type="tel"  maxlength="14" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
+                                    <input type="tel" maxlength="14" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
 
                                 </div>
                                 <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
@@ -151,7 +151,7 @@
                                 <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
                                     <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
                                     </div>
-                                    
+
                                 </ng-container>
                                 <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched || matchPass()">
                                     Confirm Password is not matched

@@ -6,7 +6,7 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </div>
-        <div class="nav-area col d-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
+        <div class="nav-area col d-md-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
             <div class="nav mr-5">
                 <div class="nav-item active p-4" [hidden]="!formPermission.canView">
                     <a [routerLink]="['/forms']">Forms</a>
@@ -15,7 +15,7 @@
                     <a [routerLink]="['/work-spaces']">Organizations</a>
                 </div>
             </div>
-            <div class="org-switch-wrapper mx-4 bg-light" *ngIf="userWorkspaceList">
+            <div class="org-switch-wrapper mx-4 bg-light" *ngIf="userWorkspaceList && !hideDropdown">
                 <div class="org-switch-wrapper border rounded">
                     <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
                         <li ngbDropdown class="nav-item">
@@ -42,7 +42,7 @@
                         <a [routerLink]="['/my-profile']" ngbDropdownItem>My Account</a>
                         <a [routerLink]="['/user/logout']" ngbDropdownItem>Logout</a>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>

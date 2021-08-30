@@ -3,9 +3,10 @@ import { DataSharingService } from '../../../shared/data-sharing.service';
 import { Store } from '@ngrx/store';
 import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-import { Router } from '@angular/router';
-import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { updateCurrentWorkSpaceDetail, updateUserPlanDetail } from 'src/app/+state/user/user.actions';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forms-header',
@@ -25,8 +26,19 @@ export class FormsHeaderComponent implements OnInit {
   public isSuperAdmin: boolean = false;
   public userWorkspaceLists: any;
   public calulateUites = storageCountFormatter;
-
-  constructor(private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
+  private redirectToWorkSpace: boolean = false;
+  public hideDropdown = false;
+  
+  constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.rootRoute(this.route)),
+      filter((route: ActivatedRoute) => route.outlet === 'primary'),
+    ).subscribe((res: ActivatedRoute) => {
+      this.redirectToWorkSpace = !this.router.url.includes('forms')
+      this.hideDropdown = this.router.url.includes('form-builder')
+    });
+    
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo){
@@ -50,6 +62,12 @@ export class FormsHeaderComponent implements OnInit {
     });
   }
 
+  private rootRoute(route: ActivatedRoute): ActivatedRoute {
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return route;
+  }
   ngOnInit(): void {}
 
   changeWorkSpace(workspace: any){
@@ -66,11 +84,14 @@ export class FormsHeaderComponent implements OnInit {
           payload: res
         }
         this.store.dispatch(updateUserPlanDetail({props}));
+        this.store.dispatch(updateCurrentWorkSpaceDetail({props: {WorkSpaceId: workspace.id,WorkSpaceName: workspace.name}}))
 
         let orgId = workspace.id;
         let orgName = workspace.name;
         let orgUserId = workspace.userId;
+        if (this.redirectToWorkSpace) {
         this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
+        }
       }
     });
   }
