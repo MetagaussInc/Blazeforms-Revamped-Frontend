@@ -85,6 +85,7 @@ export class FormsComponent implements OnInit {
       FormUpdateAction: "IsFavourite",
       Id: form.value,}).subscribe(res => {
         this.getFormsList(this.userInfo)
+        this.favs= [];
     })
 
   }
