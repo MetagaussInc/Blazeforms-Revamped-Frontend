@@ -47,6 +47,7 @@ export class FormsComponent implements OnInit {
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      console.log(userInfo)
       this.userInfo = userInfo;
       let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
       this.selectedWorkspaceId = workSpaceListData.id;
@@ -296,7 +297,8 @@ export class FormsComponent implements OnInit {
   openAddNewFolderModal() {
     const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
     modalRef.componentInstance.folderList =  this.folderList; 
-    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    // modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
 
     modalRef.result.then((result: any) => {
@@ -324,7 +326,8 @@ export class FormsComponent implements OnInit {
       FilterAttribute: this.viewBy,
       SearchKeyword: "",
       UserId: this.userInfo.Id,
-      WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
+      WorkSpaceId: this.selectedWorkspaceId,
+      // WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       pageNumber: 1,
       pageSize: 14
      }).subscribe(res => {
