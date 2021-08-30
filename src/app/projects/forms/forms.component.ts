@@ -81,11 +81,16 @@ export class FormsComponent implements OnInit {
   }
 
   enableStarred(form: any) {
+    if (this.favs?.includes(form.value)) {
+      this.favs = this.favs.filter((x: any) => x !== form.value)
+    } else {
+      this.favs.push(form.push);
+    }
     this.http.call('UpdateFormAttributes', 'POST', {
       FormUpdateAction: "IsFavourite",
       Id: form.value,}).subscribe(res => {
-        this.getFormsList(this.userInfo)
-        this.favs= [];
+        // this.getFormsList(this.userInfo)
+        // this.favs= [];
     })
 
   }
@@ -103,7 +108,7 @@ export class FormsComponent implements OnInit {
       this.getfolderNameWithForms(res, arr);
       this.formsList = arr;
       this.folderListWithForms = arr;;
-  
+      
     })
   }
 
@@ -149,9 +154,9 @@ export class FormsComponent implements OnInit {
 
   selectionChange($event: any) {
     if (this.viewBy === 'StarredForms' || this.viewBy === 'ArchievedForms') {
-      this.formsList =  this.folderListWithForms;
-      this.viewBy = null;
+      this.formsList =  JSON.parse(JSON.stringify(this.folderListWithForms));
     }
+    this.viewBy = null;
     this.selectedFolder = $event;
 }
   open() {
@@ -303,7 +308,8 @@ export class FormsComponent implements OnInit {
     this.selectedFolder = null;
     this.viewBy = view;
     if (view === 'All Forms') {
-      this.getFoldersWithList(this.userInfo)
+      this.getFormsList(this.userInfo)
+      // this.getFoldersWithList(this.userInfo)
     } else {
       this.getFilteredForm();
     }
@@ -318,6 +324,13 @@ export class FormsComponent implements OnInit {
       pageNumber: 1,
       pageSize: 14
      }).subscribe(res => {
+       if (this.viewBy === 'StarredForms') {
+        res?.res?.forEach((element: any) => {
+          this.favs.push(element.id);
+        });
+       } else {
+        this.favs = [];
+       }
        this.formsList = [{
          folderPath: this.viewBy === 'StarredForms' ? 'All Starred Forms' : 'All Archived Forms',
          forms: res.res
