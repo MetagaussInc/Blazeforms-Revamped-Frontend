@@ -166,6 +166,7 @@
             img {
                 max-width: 100% !important;
                 height: auto;
+                max-height: 415px;
             }
         }
         
@@ -729,7 +730,29 @@
         }
         
         @media screen and (max-height: 742px) {
-            .login-area-container {
+            .login-area-container,
+            .forgot-password-container {
                 height: calc(100% - 142px);
             }
+        }
+        
+        @media screen and (max-width: 1350px) {
+            .login-area-container,
+            .forgot-password-container {
+                height: calc(100vh - 142px);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .login-area-container,
+            .forgot-password-container {
+                height: 100%;
+            }
+        }
+        
+        // Organization //
+        .organization-wrapper .nav-tabs .nav-link.active {
+            color: #f04564;
+            border-color: #fff #fff #f04564 #fff;
+            border-width: 2px;
         }
