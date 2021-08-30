@@ -40,7 +40,7 @@ FormIds: this.form.value
   }
 
   close() {
-    this.activeModal.close();
+    this.activeModal.close('close');
   }
 
 }
