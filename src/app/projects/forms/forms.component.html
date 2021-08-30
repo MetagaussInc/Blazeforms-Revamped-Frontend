@@ -18,9 +18,9 @@
             </button>
         </div>
         <div class="forms-filters-wrapper">
-            <i class="material-icons mr-3">delete</i>
-            <i class="material-icons mr-3">archive</i>
-            <i class="material-icons mr-3">drive_file_move</i>
+            <i class="material-icons mr-3" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkDelete()">delete</i>
+            <i class="material-icons mr-3" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkMove()">archive</i>
+            <i class="material-icons mr-3" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkArchive()">drive_file_move</i>
             <i class="material-icons" (click)="viewFilterDropdown = !viewFilterDropdown">filter_alt</i>
             <div class="filter-dropdown bg-white rounded shadow filter-down" *ngIf="viewFilterDropdown">
                 <div class="filter-dropdown-top border-bottom mb-2">
@@ -63,7 +63,7 @@
                                     <div class="form-checkbox-wrapper col-md-1">
                                         <label class="p-0 m-0 align-bottom">
                                     <input  type="checkbox">
-                                    <span class="form-checkbox-wrap">
+                                    <span class="form-checkbox-wrap" (click)="selectBulkForms(form)">
                                         <i class="form-checkbox-deactive material-icons-round mr-1 text-dark">check_box_outline_blank</i>
                                         <i class="form-checkbox-active material-icons-round mr-1">check_box</i>
                                     </span>
@@ -74,13 +74,13 @@
                                         <span clss="form-name" (click)="openbuilder(form)">{{form.text ? form.text : form.name}}</span>
                                     </div>
                                     <div class="form-badges-wrapper col-md-4">
-                                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2">Build</span>
-                                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2">Publish</span>
-                                        <span class="entries-badge py-1 mr-1 rounded-pill small border border-2">
+                                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2" (click)="openbuilder(form)">Build</span>
+                                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2" (click)="openbuilder(form)">Publish</span>
+                                        <span class="entries-badge py-1 mr-1 rounded-pill small border border-2" (click)="openbuilder(form)">
                                     <span class="pl-2 pr-1">Entries</span>
-                                        <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>
-                                        </span>
-                                        <span class="url-badge px-2 py-1 rounded-pill small border border-2">URL</span>
+                                        <!-- <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>-->
+                                        </span> 
+                                        <span class="url-badge px-2 py-1 rounded-pill small border border-2" (click)="openFormURL(form)">URL</span>
                                     </div>
                                     <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
                                         <i class="material-icons-round mr-3 text-dark" (click)="openModal(form.value)">people</i>
