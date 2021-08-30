@@ -80,15 +80,19 @@ export class FormsComponent implements OnInit {
     })
   }
 
+  getFormId(form: any): string {
+    return form.value ? form.value : form.id;
+  }
   enableStarred(form: any) {
-    if (this.favs?.includes(form.value)) {
-      this.favs = this.favs.filter((x: any) => x !== form.value)
+    const value = this.getFormId(form);
+    if (this.favs?.includes(value)) {
+      this.favs = this.favs.filter((x: any) => x !== value)
     } else {
-      this.favs.push(form.push);
+      this.favs.push(value);
     }
     this.http.call('UpdateFormAttributes', 'POST', {
       FormUpdateAction: "IsFavourite",
-      Id: form.value,}).subscribe(res => {
+      Id: value,}).subscribe(res => {
         // this.getFormsList(this.userInfo)
         // this.favs= [];
     })
