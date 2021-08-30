@@ -44,7 +44,7 @@
     <div class="folder-list-with-forms">
         <ng-container *ngFor="let folder of formsList">
             <ng-container *ngIf="!selectedFolder || (!viewBy && selectedFolder && folder.folderId === selectedFolder)">
-                <div *ngIf="formPermissions.canView" [style.display]=" searchedString.length === 0 ? 'block' : !folder.childNameList?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'block'" class="forms-folder-wrapper row mb-5">
+                <div *ngIf="formPermissions.canView" [style.display]=" searchedString.length === 0 ? 'block' : !folder.childNameList?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'block'" class="forms-folder-wrapper row mb-5">
                     <div class="folder-header col-md-12 mb-2">
                         <span class="folder-icon me-2">
                             <i class="material-icons-outlined">folder</i>
@@ -59,7 +59,7 @@
                     <div class="forms-list col-md-12 border rounded">
                         <ng-container *ngFor="let form of folder?.forms; let folderIndex = index">
                             <ng-container *ngIf="folder?.expanded || (!folder?.expanded && folderIndex < 3)">
-                                <div *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.toLowerCase())" class="form-list-item row p-3 border-bottom">
+                                <div *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.trim()?.toLowerCase())" class="form-list-item row p-3 border-bottom">
                                     <div class="form-checkbox-wrapper col-md-1">
                                         <label class="p-0 m-0 align-bottom">
                                     <input  type="checkbox">

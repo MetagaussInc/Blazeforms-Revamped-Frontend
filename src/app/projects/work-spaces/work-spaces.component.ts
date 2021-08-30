@@ -64,6 +64,9 @@ export class WorkSpacesComponent implements OnInit {
         }
         this.isPaginationLoading = false;
       });
+      console.log(this.organizationLists.length);
+      console.log(this.totalOrgCount);
+      console.log(this.scrollCheck);
     }
     else{
       this.http.call('getUserWorkSpaces', 'POST', workspacedata).subscribe(response => {
@@ -80,7 +83,7 @@ export class WorkSpacesComponent implements OnInit {
 
   deleteUserOrganization(organization: any){
     const modalRef: any = this.modalService.open(DeleteWorkSpacesComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete organization ${organization.name} ?`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete organization ${organization.name} ?`;
     modalRef.componentInstance.modalName = 'Delete Organization'; 
     modalRef.result.then((result: any) => {
       if (result === 'deleteWorkSpace') {
@@ -126,6 +129,8 @@ export class WorkSpacesComponent implements OnInit {
     this.isPaginationLoading = true;
     this.pageDetail.pageNumber++;
     this.getUserOrganizationsList();
+    console.log(this.pageDetail.pageNumber);
+    console.log(this.scrollCheck);
     if(this.organizationLists.length >= this.totalOrgCount){
       this.scrollCheck = true;
     }
