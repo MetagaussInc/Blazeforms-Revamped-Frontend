@@ -24,7 +24,7 @@
         <div class="organization-list col-md-12 border rounded" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="scrollCheck" (scrolled)="onScroll()">
             <ng-container *ngFor="let organization of organizationLists">
                 <div *ngIf="permissions.canView" [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'block'">
-                    <div class="organization-list-item row p-3 border-bottom">
+                    <div class="organization-list-item row p-3 border-bottom justify-content-end align-items-center">
                         <div class="organization-img-wrapper col-md-1">
                             <img src="assets/images/pepsi.png" class="workspace-img" alt="" title="" width="30" height="30">
                         </div>
