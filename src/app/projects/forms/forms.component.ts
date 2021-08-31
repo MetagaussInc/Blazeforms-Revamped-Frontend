@@ -43,10 +43,10 @@ export class FormsComponent implements OnInit {
   public formPermissions: any;
   public selectedWorkspaceId: any;
   public favs: any = []
-  // public favs: any = [];/
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      console.log(userInfo)
       this.userInfo = userInfo;
       let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
       this.selectedWorkspaceId = workSpaceListData.id;
@@ -80,12 +80,21 @@ export class FormsComponent implements OnInit {
     })
   }
 
+  getFormId(form: any): string {
+    return form.value ? form.value : form.id;
+  }
   enableStarred(form: any) {
+    const value = this.getFormId(form);
+    if (this.favs?.includes(value)) {
+      this.favs = this.favs.filter((x: any) => x !== value)
+    } else {
+      this.favs.push(value);
+    }
     this.http.call('UpdateFormAttributes', 'POST', {
       FormUpdateAction: "IsFavourite",
-      Id: form.value,}).subscribe(res => {
-        this.getFormsList(this.userInfo)
-        this.favs= [];
+      Id: value,}).subscribe(res => {
+        // this.getFormsList(this.userInfo)
+        // this.favs= [];
     })
 
   }
@@ -103,7 +112,7 @@ export class FormsComponent implements OnInit {
       this.getfolderNameWithForms(res, arr);
       this.formsList = arr;
       this.folderListWithForms = arr;;
-  
+      
     })
   }
 
@@ -149,9 +158,9 @@ export class FormsComponent implements OnInit {
 
   selectionChange($event: any) {
     if (this.viewBy === 'StarredForms' || this.viewBy === 'ArchievedForms') {
-      this.formsList =  this.folderListWithForms;
-      this.viewBy = null;
+      this.formsList =  JSON.parse(JSON.stringify(this.folderListWithForms));
     }
+    this.viewBy = null;
     this.selectedFolder = $event;
 }
   open() {
@@ -287,7 +296,8 @@ export class FormsComponent implements OnInit {
   openAddNewFolderModal() {
     const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
     modalRef.componentInstance.folderList =  this.folderList; 
-    modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    // modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
+    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
 
     modalRef.result.then((result: any) => {
@@ -303,7 +313,8 @@ export class FormsComponent implements OnInit {
     this.selectedFolder = null;
     this.viewBy = view;
     if (view === 'All Forms') {
-      this.getFoldersWithList(this.userInfo)
+      this.getFormsList(this.userInfo)
+      // this.getFoldersWithList(this.userInfo)
     } else {
       this.getFilteredForm();
     }
@@ -314,10 +325,18 @@ export class FormsComponent implements OnInit {
       FilterAttribute: this.viewBy,
       SearchKeyword: "",
       UserId: this.userInfo.Id,
-      WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
+      WorkSpaceId: this.selectedWorkspaceId,
+      // WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       pageNumber: 1,
       pageSize: 14
      }).subscribe(res => {
+       if (this.viewBy === 'StarredForms') {
+        res?.res?.forEach((element: any) => {
+          this.favs.push(element.id);
+        });
+       } else {
+        this.favs = [];
+       }
        this.formsList = [{
          folderPath: this.viewBy === 'StarredForms' ? 'All Starred Forms' : 'All Archived Forms',
          forms: res.res

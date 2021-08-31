@@ -25,3 +25,8 @@ export const userWorkspaceLists = createSelector(
   selectUserState,
   (state: UserState) => state.user_workspace_detail
 );
+
+export const getCurrentWorkSpaceDetails = createSelector(
+  selectUserState,
+  (state: UserState) => state.currentWorkSpaceDetail
+);

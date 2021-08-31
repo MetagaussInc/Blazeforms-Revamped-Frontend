@@ -58,6 +58,7 @@ export class ManageWorkSpacesComponent implements OnInit {
   public formPermissions: any;
   public isSuperAdmin: boolean = false;
   public userId: any;
+  public activeTabId = 1;
 
   constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
@@ -182,7 +183,6 @@ export class ManageWorkSpacesComponent implements OnInit {
   getMasterPlan(){
     this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
       this.planDetails = res;
-      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })
   }
 
@@ -196,7 +196,6 @@ export class ManageWorkSpacesComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetails = plan;
-    this.planDetails.storageSize = ((plan.storageSize) / (1024 * 1024));
   }
 
   get FirstName() { return this.organizationSignupForm.get('FirstName'); }

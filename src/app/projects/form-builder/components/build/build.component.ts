@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   templateUrl: './build.component.html',
   styleUrls: ['./build.component.scss']
 })
-export class BuildComponent  {
+export class BuildComponent implements OnDestroy  {
   editorConfig: AngularEditorConfig = {
        editable: true,
       spellcheck: true,
@@ -71,7 +71,7 @@ export class BuildComponent  {
   selectedElement: any;
   viewExportedView = false;
   selectedDependency: any;
-  count = 0;
+  count: number = 0;
   dummyContainer: any = [];
   formLoaded = false;
   PaymentModel = {
@@ -188,7 +188,7 @@ userInfo: any;
       }
       this.paymentSetting = resp?.paymentSetting || this.paymentSetting;
       // this.createColums(this.targetBuilderTools)
-      this.count = resp?.count;
+      this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
       if (element.uiIndexId >= this.count) {
         this.count = element.uiIndexId + 1;
@@ -247,7 +247,8 @@ userInfo: any;
 
   getFoldersWithList(userInfo: any) {
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,}).subscribe(res => {
+      WorkSpaceId: userInfo.WorkspaceDetail.Id,
+    }).subscribe(res => {
       this.formsList = res;
       console.log(this.formsList);
     })
@@ -651,9 +652,18 @@ userInfo: any;
   }
 
   getWorkSpaceAccounts() {
-    this.http.call('GetWorkspaceAccountSettingsByWorkspaceId', 'POST', {WorkspaceId: this.userInfo.WorkspaceDetail.Id}).subscribe(res => {
+    this.http.call('GetWorkspaceAccountSettingsByWorkspaceId', 'POST', 
+    {
+      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+    }).subscribe(res => {
       this.stripeAccounts = res;
       console.log(res)
     })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.userInfoSubscription$.unsubscribe();
   }
 }

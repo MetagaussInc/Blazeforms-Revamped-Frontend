@@ -14,7 +14,7 @@
     </ng-container>
     <div class="organization-list col-md-12 border rounded">
         <ng-container *ngFor="let role of accountRolesLists">
-            <div *ngIf="rolePermissions.canView" [style.display]="searchedString.length === 0 ? 'flex' : !role.name?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
+            <div *ngIf="rolePermissions.canView" [style.display]="searchedString.length === 0 ? 'flex' : !role.name?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
                 <div class="organization-title-wrapper col-md-6">
                     <div clss="organization-name">{{ role.name }}</div>
                 </div>

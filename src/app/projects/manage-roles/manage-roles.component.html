@@ -49,11 +49,11 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-left">Module</th>
-                                <th *ngFor="let permission of rolePermissionData.rolePermissionModel.rolePermissionList">{{ permission.permissionName }}</th>
+                                <th *ngFor="let permission of rolePermissionData.rolePermissionList">{{ permission.permissionName }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let module of rolePermissionData.rolePermissionModel.roleModuleList">
+                            <tr *ngFor="let module of rolePermissionData.roleModuleList">
                                 <td class="text-left" *ngIf="module.moduleName != 'Forms'">{{ module.moduleName }}</td>
                                 <td *ngFor="let modulepermission of module.modulePermissionList">
                                     <ng-container *ngIf="module.moduleName != 'Forms'">
@@ -68,7 +68,7 @@
                     </table>
                     <div class="form-group mt-5 row role-btn-container">
                         <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
-                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3 ">
+                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3" *ngIf="roleDetailsData.isEditable">
                             Save
                             <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
                         </button>

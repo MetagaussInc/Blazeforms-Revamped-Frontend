@@ -12,7 +12,7 @@
             <div class="organization-list-item row p-3 border-bottom">No Record Found</div>
         </ng-container>
         <ng-container *ngFor="let user of accountUsersLists">
-            <div *ngIf="userPermissions.canView" [style.display]="searchedString.length === 0 ? 'flex' : !user.email?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
+            <div *ngIf="userPermissions.canView" [style.display]="searchedString.length === 0 ? 'flex' : !user.email?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
                 <div class="organization-title-wrapper col-md-6">
                     <div clss="organization-name">{{ user.email }}</div>
                     <span class="text-muted"><i>{{ user.userName }} ( {{ user.roleName }} )</i></span>

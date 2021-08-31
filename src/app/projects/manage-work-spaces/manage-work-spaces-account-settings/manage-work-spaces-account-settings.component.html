@@ -12,7 +12,7 @@
             <div class="organization-list-item row p-3 border-bottom">No Record Found</div>
         </ng-container>
         <ng-container *ngFor="let account of accountsLists">
-            <div [style.display]="searchedString.length === 0 ? 'flex' : !account.accountName?.toLowerCase()?.includes(searchedString?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
+            <div [style.display]="searchedString.length === 0 ? 'flex' : !account.accountName?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'flex'" class="organization-list-item row p-3 border-bottom">
                 <div class="organization-title-wrapper col-md-9">
                     <div clss="organization-name">{{ account.accountName }}</div>
                     <span><i>{{ account.createdDate | date: 'dd-MMM-Y' }}</i></span>

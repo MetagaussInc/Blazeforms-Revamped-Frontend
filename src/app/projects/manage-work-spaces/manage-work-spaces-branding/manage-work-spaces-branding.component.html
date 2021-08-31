@@ -10,8 +10,8 @@
                             <label id="file_input_label" class="custom-file-label" for="image">Select file</label>
                         </div>
                     </div>
-                    <button id="upload_btn" [disabled]="!fileSource" class="btn btn-primary btn-bf" (click)="submit()">Upload</button>
-                    <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
+                    <button id="upload_btn" [disabled]="Image.invalid" class="btn btn-primary btn-bf" (click)="submit()" [hidden]="isFormSubmitted">Upload</button>
+                    <button class="btn btn-primary" id="loading_btn" type="button" [hidden]="!isFormSubmitted" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Uploading...
                     </button>
