@@ -25,7 +25,7 @@ export class MyProfileGeneralComponent implements OnInit {
   public userId: any;
   public userData: any;
   public imageSrc: any;
-  public acivePanel = 'static-1';
+  public activePanel = 'static-1';
   public fileSource: any;
   public isFormSubmitted: boolean = false;
   public isImageSubmitted: boolean = false;
@@ -51,10 +51,10 @@ export class MyProfileGeneralComponent implements OnInit {
   public beforeChange($event: NgbPanelChangeEvent) {
     //console.log($event);
     if($event.panelId == 'static-1'){
-      this.acivePanel = 'static-2';
+      this.activePanel = 'static-2';
     }
     else{
-      this.acivePanel = 'static-1';
+      this.activePanel = 'static-1';
     }    
   }
 
@@ -83,6 +83,10 @@ export class MyProfileGeneralComponent implements OnInit {
         this.toastService.showError('Only JPG or PNG allowed!');
       }
     }
+  }
+
+  changePanel(panelId: any){
+    this.activePanel = panelId;
   }
 
   submit(){
