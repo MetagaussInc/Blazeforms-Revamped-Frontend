@@ -1,7 +1,7 @@
 <div *ngIf="data?.children?.length > 0" [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}" class="filter-dropdown-folder-item small mb-1 d-flex">
     <!-- <span class="material-icons-round align-bottom" >arrow_drop_up</span> -->
-    <mat-icon class="mat-icon-rtl-mirror material-icons-round" (click)="data.expanded = !data?.expanded"> {{data.expanded ? 'arrow_drop_down' : 'arrow_right'}} </mat-icon>
-    <span class="material-icons-outlined align-bottom" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
+    <mat-icon class="mat-icon-rtl-mirror material-icons-round" role="button" (click)="data.expanded = !data?.expanded"> {{data.expanded ? 'arrow_drop_down' : 'arrow_right'}} </mat-icon>
+    <span class="material-icons-outlined align-bottom mr-1" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
     <span class="filter-dropdown-folder-name" [ngClass]="{'font-weight-bold': selectedFolder === data.value}" (click)="selectionChange(data.value)">{{data.text}}</span>
 
 </div>
@@ -13,8 +13,8 @@
     </ng-container>
 </div>
 
-<div [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}" *ngIf="!data?.children" class="filter-dropdown-folder-item small mb-1">
-    <span style="opacity: 0;" class="material-icons-round align-bottom">arrow_right</span>
-    <span class="material-icons-outlined align-bottom" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
+<div [ngClass]="{'d-none': searchedString?.length > 0 && !data?.fullFolderPath?.includes(searchedString?.toLowerCase())}" *ngIf="!data?.children" class="filter-dropdown-folder-item small d-flex align-items-center mb-1">
+    <span style="opacity: 0;" class="material-icons-round align-bottom mr-1" role="button">arrow_right</span>
+    <span class="material-icons-outlined align-bottom mr-1" [ngClass]="{'text-bf': selectedFolder === data.value}">folder</span>
     <span class="filter-dropdown-folder-name" [ngClass]="{'font-weight-bold': selectedFolder === data.value}" (click)="selectionChange(data.value)">{{data.text}}</span>
 </div>
