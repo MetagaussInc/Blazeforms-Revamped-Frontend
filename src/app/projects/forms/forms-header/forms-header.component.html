@@ -161,7 +161,7 @@
     </nav>
 </header>
 
-<div *ngIf="workSpacePlanDetail" class="workspace-plandetail row">
+<div *ngIf="workSpacePlanDetail" class="workspace-plan-detail row">
     <div class="text-center col-md-12 btn-bf py-2" [hidden]="!planPermission.canView && isSuperAdmin">
 
         Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
