@@ -13,7 +13,7 @@
                 </li>
             </ul> -->
 
-            <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId">
                 <li [ngbNavItem]="1" *ngIf="workspacePermissions.canView">
                     <a ngbNavLink>General</a>
                     <ng-template ngbNavContent>
@@ -129,7 +129,7 @@
                                                                             <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
                                                                             </div>
                                                                         </ng-container>
-                                                                        <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched || matchPass()">
+                                                                        <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched && matchPass()">
                                                                             Confirm Password is not matched
                                                                         </div>
                                                                     </div>
@@ -201,7 +201,7 @@
                                                                     <span>{{ planDetails.noOfEntries }}</span><span class="text-secondary"> Entries</span>
                                                                 </div>
                                                                 <div class="plan-attribute col-md-12 py-1">
-                                                                    <span>{{ planDetails.storageSize }} GB</span><span class="text-secondary"> Storage</span>
+                                                                    <span>{{ planDetails.storageSize | storageCount }}</span><span class="text-secondary"> Storage</span>
                                                                 </div>
                                                                 <div class="plan-price-button col-md-12 mt-3">
                                                                     <button type="button" (click)="planChange()" class="btn btn-bf btn-sm">Change Plan</button>
@@ -246,7 +246,7 @@
                                                                                     <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
                                                                                 </div>
                                                                                 <div class="plan-attribute col-md-12 py-1">
-                                                                                    <span>{{ plan.storageSize }} {{ plan.storageUnit }}</span><span class="text-secondary"> Storage</span>
+                                                                                    <span>{{ plan.storageSize | storageCount }}</span><span class="text-secondary"> Storage</span>
                                                                                 </div>
                                                                                 <div class="plan-price-button col-md-12 mt-3">
                                                                                     <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>

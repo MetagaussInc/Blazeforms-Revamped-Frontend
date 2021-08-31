@@ -3,6 +3,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddUserPermissionModalComponent } from '../add-user-permission-modal/add-user-permission-modal.component';
 import { analyze } from 'eslint-scope';
+import { ToastService } from '../../../../shared/toast.service';
 
 @Component({
   selector: 'app-user-permission-modal',
@@ -16,7 +17,7 @@ export class UserPermissionModalComponent implements OnInit {
   @Input() public workSpaceId: any;
 
   public userLists: any;
-  public isEditMode: boolean = false;
+  public isEditMode: any;
   public assignedUserPermission = [] as  any;
   public assignedPer = [] as any;
   public assignedidx: any;
@@ -27,18 +28,19 @@ export class UserPermissionModalComponent implements OnInit {
     { name: 'Delete', value: 2, short: 'delete'}
   ];
 
-  constructor(private http: HttpService, private modalService: NgbModal, public activeModal: NgbActiveModal) {
-  }
+  constructor(private http: HttpService, private modalService: NgbModal, public activeModal: NgbActiveModal, private toastService: ToastService) { }
   
   ngOnInit(): void {
-    this.http.call('getRolePermission', 'POST', {FormId: this.formId}).subscribe(res => {
-      console.log(res);
-      this.userLists = res;
-      res.forEach((item: any) => {
-        let itemPer = {id: item.id, permissions: item.permissions};
-        this.assignedUserPermission.push(itemPer);
+    setTimeout(() =>{
+      this.http.call('getRolePermission', 'POST', {FormId: this.formId}).subscribe(res => {
+        console.log(res);
+        this.userLists = res;
+        res.forEach((item: any) => {
+          let itemPer = {id: item.id, permissions: item.permissions};
+          this.assignedUserPermission.push(itemPer);
+        });
       });
-    });
+    }, 1000);
   }
 
   openAddUserPermissionModal(){
@@ -64,6 +66,7 @@ export class UserPermissionModalComponent implements OnInit {
         this.userLists.forEach((item:any, index:number) => {
           if(item.id === userList.id){
             delete this.userLists[index];
+            this.toastService.showSuccess('User Deleted Successfully!');
           }
         });
       });
@@ -71,7 +74,7 @@ export class UserPermissionModalComponent implements OnInit {
   }
 
   editFormUser(userList: any){
-    this.isEditMode = true;
+    this.isEditMode = userList.id;
   }
 
   updateFormUser(userList: any){
@@ -94,7 +97,8 @@ export class UserPermissionModalComponent implements OnInit {
       this.userLists.forEach((item:any, index:number) => {
         if(item.id === res.id){
           this.userLists[index] = res;
-          this.isEditMode = false;
+          this.isEditMode = '';
+          this.toastService.showSuccess('Permission Updated Successfully!');
         }
       });
     });

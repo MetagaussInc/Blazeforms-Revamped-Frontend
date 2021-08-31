@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
     ModifiedBy: '',
     StripePlanId: ''
   };
+  
   constructor(private http: HttpService, private router: Router) { }
 
   checkforAgreements({ value }: AbstractControl): any {
@@ -76,6 +77,7 @@ export class RegisterComponent implements OnInit {
     }
     return null
   }
+
   validateNameViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
     return this.http.call('checkEmail', 'POST', { WorkSpaceName: value })
       .pipe(debounceTime(1000),
@@ -102,7 +104,6 @@ export class RegisterComponent implements OnInit {
         }))
   }
 
-
   matchPass(): boolean {
 
     if ((this.confirmPassword?.dirty || this.confirmPassword?.touched)) {
@@ -114,6 +115,7 @@ export class RegisterComponent implements OnInit {
     
     return false
   }
+
   matchPassword({ value }: AbstractControl): any {
     return this.Password?.value === value ? null : { passwordNotMatched: true };
   }
@@ -129,13 +131,13 @@ export class RegisterComponent implements OnInit {
     }
     return null;
   }
+
   ngOnInit(): void {
     this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
       this.planDetails = res;
       this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })
   }
-
 
   onScriptLoad() {
     console.log('Google reCAPTCHA loaded and is ready for use!')
@@ -144,7 +146,6 @@ export class RegisterComponent implements OnInit {
   onScriptError() {
     console.log('Something went long when loading the Google reCAPTCHA')
   }
-
 
   submit() {
     const obj = {

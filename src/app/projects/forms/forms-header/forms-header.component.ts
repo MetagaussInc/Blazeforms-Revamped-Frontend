@@ -3,6 +3,7 @@ import { DataSharingService } from '../../../shared/data-sharing.service';
 import { Store } from '@ngrx/store';
 import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { updateCurrentWorkSpaceDetail, updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 import { filter, map } from 'rxjs/operators';
@@ -24,8 +25,10 @@ export class FormsHeaderComponent implements OnInit {
   public workSpacePlanDetail: any;
   public isSuperAdmin: boolean = false;
   public userWorkspaceLists: any;
+  public calulateUites = storageCountFormatter;
   private redirectToWorkSpace: boolean = false;
   public hideDropdown = false;
+  
   constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

@@ -3,6 +3,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserPermissionModalComponent } from '../user-permission-modal/user-permission-modal.component';
+import { ToastService } from '../../../../shared/toast.service';
 
 @Component({
   selector: 'app-add-user-permission-modal',
@@ -26,7 +27,7 @@ export class AddUserPermissionModalComponent implements OnInit {
     { name: 'Delete', value: 2, short: 'delete'}
   ];
 
-  constructor(private http: HttpService, private fb: FormBuilder, private modalService: NgbModal, public activeModal: NgbActiveModal) {
+  constructor(private http: HttpService, private fb: FormBuilder, private modalService: NgbModal, public activeModal: NgbActiveModal, private toastService: ToastService) {
     this.addPermissionForm = this.fb.group({
       email: ['', Validators.required],
       permission: this.fb.array([])
@@ -83,6 +84,7 @@ export class AddUserPermissionModalComponent implements OnInit {
       'UserName': null
     }
     this.http.call('saveRolePermission', 'POST', saveUserData).subscribe(res => {
+      this.toastService.showSuccess('User Added Successfully!');
       this.closeAddModal();
     });
   }
