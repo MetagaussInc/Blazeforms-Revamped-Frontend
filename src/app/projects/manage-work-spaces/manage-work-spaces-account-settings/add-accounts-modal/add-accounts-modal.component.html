@@ -1,54 +1,53 @@
-<div class="dggfg" tabindex="-1" id="edit-account-setting-modal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <form class="organization-account-add" [formGroup]="accountAddForm" autocomplete="off">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ modalTitle }}</h5>
-                    <button type="button" (click)="closePopup()" class="close" data-dismiss="modal" title="Close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row my-4 px-4 form-group">
-                        <div class="col-md-3">
-                            <label for="account-name">Account Name</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" formControlName="accountName" class="form-control" id="account-name" placeholder="Account Name">
-                        </div>
-                        <ng-container *ngIf="f.accountName.invalid && (f.accountName.dirty || f.accountName.touched)">
-                            <div *ngIf="f.accountName.errors?.required || f.accountName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Account Name is required
-                            </div>
-                        </ng-container>
-                    </div>
-                    <div class="row my-4 px-4 form-group">
-                        <div class="col-md-3">
-                            <label for="publishable-key">Publishable Key</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" formControlName="publishableKey" class="form-control" id="publishable-key" placeholder="Publishable Key">
-                        </div>
-                        <ng-container *ngIf="f.publishableKey.invalid && (f.publishableKey.dirty || f.publishableKey.touched)">
-                            <div *ngIf="f.publishableKey.errors?.required || f.publishableKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Publishable Key is required
-                            </div>
-                        </ng-container>
-                    </div>
-                    <div class="row my-4 px-4 form-group">
-                        <div class="col-md-3">
-                            <label for="secret-key">Secret Key</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" formControlName="secretKey" class="form-control" id="secret-key" placeholder="Secret Key">
-                        </div>
-                        <ng-container *ngIf="f.secretKey.invalid && (f.secretKey.dirty || f.secretKey.touched)">
-                            <div *ngIf="f.secretKey.errors?.required || f.secretKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Secret Key is required
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal" title="Go Back">Back</button>
-                    <button type="button" [disabled]="accountAddForm.invalid" (click)="submit()" class="btn btn-bf btn-sm" title="{{ buttonTitle }}">{{ buttonTitle }}</button>
-                </div>
-            </form>
+<div class="modal-content">
+    <form class="organization-account-add" [formGroup]="accountAddForm" autocomplete="off">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ modalTitle }}</h5>
+            <button type="button" (click)="closePopup()" class="close" data-dismiss="modal" title="Close">&times;</button>
         </div>
-    </div>
+        <div class="modal-body">
+            <div class="row my-4 px-4 form-group">
+                <div class="col-md-3">
+                    <label for="account-name">Account Name</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" formControlName="accountName" class="form-control" id="account-name" placeholder="Account Name">
+                    <ng-container *ngIf="f.accountName.invalid && (f.accountName.dirty || f.accountName.touched)">
+                        <div *ngIf="f.accountName.errors?.required || f.accountName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Account Name is required
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="row my-4 px-4 form-group">
+                <div class="col-md-3">
+                    <label for="publishable-key">Publishable Key</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" formControlName="publishableKey" class="form-control" id="publishable-key" placeholder="Publishable Key">
+                    <ng-container *ngIf="f.publishableKey.invalid && (f.publishableKey.dirty || f.publishableKey.touched)">
+                        <div *ngIf="f.publishableKey.errors?.required || f.publishableKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Publishable Key is required
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="row my-4 px-4 form-group">
+                <div class="col-md-3">
+                    <label for="secret-key">Secret Key</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" formControlName="secretKey" class="form-control" id="secret-key" placeholder="Secret Key">
+                    <ng-container *ngIf="f.secretKey.invalid && (f.secretKey.dirty || f.secretKey.touched)">
+                        <div *ngIf="f.secretKey.errors?.required || f.secretKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Secret Key is required
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer border-0">
+            <button type="button" (click)="closePopup()" class="btn btn-link btn-sm text-bf" data-dismiss="modal" title="Go Back">Back</button>
+            <button type="button" [disabled]="accountAddForm.invalid" (click)="submit()" class="btn btn-bf btn-sm" title="{{ buttonTitle }}">{{ buttonTitle }}</button>
+        </div>
+    </form>
 </div>
