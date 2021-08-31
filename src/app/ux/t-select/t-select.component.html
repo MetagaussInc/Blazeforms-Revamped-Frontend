@@ -1,32 +1,24 @@
-
-<div (click)="viewDropDown = !viewDropDown" class="folder-tree-selector form-control pt-2" >{{selected}}<span class="material-icons float-right"> arrow_drop_down </span></div>
+<div (click)="viewDropDown = !viewDropDown" class="folder-tree-selector form-control pt-2">
+    {{selected}}<span class="material-icons float-right"> arrow_drop_down </span></div>
 <div *ngIf="viewDropDown" class="folder-tree-wrap filter-dropdown bg-white rounded shadow">
-  <div class="p-3"><input class="form-control" id="folder-search" [(ngModel)]="searchedString" (keyup)="search($event)"></div>
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="folder-tree-node overflow-auto py-2" >
-      <!-- This is the tree node template for leaf nodes -->
-      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'"
-         *matTreeNodeDef="let node" matTreeNodePadding (click)="select(node)" class="cdk-tree-node  d-flex mat-tree-node ng-star-inserted ">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled class="mat-focus-indicator mat-icon-button mat-button-base mat-button-disabled"></button>
-        <span class="material-icons-outlined">folder</span><span style="cursor: pointer;">{{node.text}}</span>
-      </mat-tree-node>
-      <!-- This is the tree node template for expandable nodes -->
-      <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'"
-        *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding
-        (click)="select(node)" class="d-flex">
-        <button class="mat-focus-indicator mat-icon-button mat-button-base " mat-icon-button matTreeNodeToggle
-                [attr.aria-label]="'Toggle ' + node.text">
+    <div class="p-3"><input class="form-control" id="folder-search" placeholder="Search" [(ngModel)]="searchedString" (keyup)="search($event)"></div>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="folder-tree-node overflow-auto py-2">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'" *matTreeNodeDef="let node" matTreeNodePadding (click)="select(node)" class="cdk-tree-node  d-flex mat-tree-node ng-star-inserted ">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button disabled class="mat-focus-indicator mat-icon-button mat-button-base mat-button-disabled"></button>
+            <span class="material-icons-outlined">folder</span><span style="cursor: pointer;">{{node.text}}</span>
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node [style.display]=" searchedString.length === 0 ? 'block' : !node.fullFolderPath.includes(searchedString?.toLowerCase()) ? 'none !important' : 'block'" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding (click)="select(node)" class="d-flex">
+            <button class="mat-focus-indicator mat-icon-button mat-button-base " mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.text">
           <mat-icon class="mat-icon-rtl-mirror">
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
           <span class="material-icons-outlined">folder</span>
         </button>
-        <!-- {{(node.level === 0 && !treeControl.isExpanded(node)) ? selected : node.text}} -->
-        <div class="folder-name"><span style="cursor: pointer;">{{node.text}}</span></div>
-      </mat-tree-node>
+            <!-- {{(node.level === 0 && !treeControl.isExpanded(node)) ? selected : node.text}} -->
+            <div class="folder-name"><span style="cursor: pointer;">{{node.text}}</span></div>
+        </mat-tree-node>
     </mat-tree>
 </div>
-
-
-
-  
