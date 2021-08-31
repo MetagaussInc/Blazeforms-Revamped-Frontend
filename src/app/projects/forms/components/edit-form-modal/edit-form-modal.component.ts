@@ -41,6 +41,10 @@ export class EditFormModalComponent implements OnInit {
     console.log(this.folderList, this.type);
   }
 
+  closeModal() {
+    this.activeModal.close('close');
+  }
+
   submit() {
     const payload = {
       Description: this.addForm.value.desc,

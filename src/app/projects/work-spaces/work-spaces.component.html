@@ -29,21 +29,20 @@
                             <img src="assets/images/pepsi.png" class="workspace-img" alt="" title="" width="30" height="30">
                         </div>
                         <div class="organization-title-wrapper col-md-8">
-                            <span clss="organization-name" (click)="goToManageWorkSpaces('edit', organization.id)">{{ organization.name }}</span>
+                            <span clss="organization-name" (click)="goToManageWorkSpaces('edit', organization.id)" role="link">{{ organization.name }}</span>
                             <span *ngIf="organization.id == selectedWorkspaceId">( Default )</span>
                         </div>
-                        <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
+                        <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end align-items-center">
                             <button *ngIf="organization.isOrganizationAdmin" [disabled]="!organization.recurringPayment" (click)="UnSubscribePlan(organization.stripeSubscriptionId)" [ngClass]="{unsubscribed: !organization.recurringPayment }" class="btn animate-mat" title="Unsubscribe">
                                 <i class="material-icons"> domain_disabled </i>
                             </button>
                             <button *ngIf="IsSuperAdmin" class="btn animate-mat" title="Redirect">
                                 <i class="material-icons-round mr-3 text-dark"> open_in_browser </i>
                             </button>
-                            <a *ngIf="permissions.canEdit" (click)="goToManageWorkSpaces('edit', organization.id)" title="Edit"> 
+                            <a *ngIf="permissions.canEdit" (click)="goToManageWorkSpaces('edit', organization.id)" title="Edit">
                                 <i class="material-icons-round mr-3 text-dark">edit</i>
                             </a>
-                            <a *ngIf="(organization.id != userInfo.WorkspaceId && permissions.canDelete) || IsSuperAdmin"
-                                (click)="deleteUserOrganization(organization)" title="Delete">
+                            <a *ngIf="(organization.id != userInfo.WorkspaceId && permissions.canDelete) || IsSuperAdmin" (click)="deleteUserOrganization(organization)" title="Delete">
                                 <i class="material-icons-round text-dark">delete</i>
                             </a>
                         </div>

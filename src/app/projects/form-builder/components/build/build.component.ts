@@ -126,6 +126,7 @@ userInfo: any;
   };
   paymentSetting: any = {
     extraBill: [],
+    inputType: 'paymentSection',
     showSubTotal: true,
     showLineItems: true,
     mapBillingFields: true,
@@ -186,7 +187,10 @@ userInfo: any;
         this.targetBuilderTools = [];
         // this.targetBuilderTools.push(config[0])
       }
-      this.paymentSetting = resp?.paymentSetting || this.paymentSetting;
+      this.paymentSetting = {
+        ...resp?.paymentSetting,
+        inputType: 'paymentSection'
+      } || this.paymentSetting;
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -574,7 +578,7 @@ userInfo: any;
   }
 
   selectPayment() {
-    this.selectedElement = this.PaymentModel
+    this.selectedElement = this.paymentSetting;
   }
 
   sectionClicked($event: any, model: any, i: any) {

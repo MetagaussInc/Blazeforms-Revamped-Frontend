@@ -11,14 +11,14 @@
         <div class="modal-body">
             <ng-container>
                 <div class="justify-content-center align-content-center">
-                    {{message}}
+                    <div [innerHTML]="message"> </div>
                 </div>
             </ng-container>
-           
+
         </div>
         <div class="modal-footer border-0">
             <button type="button" (click)="close('close')" class="btn btn-link btn-sm text-bf" data-bs-dismiss="modal">close</button>
             <button type="button" class="btn btn-bf btn-sm" (click)="archive()">{{modalName}}</button>
         </div>
     </div>
-</div> 
+</div>
