@@ -165,7 +165,7 @@
     <div class="text-center col-md-12 btn-bf py-2" [hidden]="!planPermission.canView && isSuperAdmin">
 
         Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
-        ENTRIES | {{workSpacePlanDetail.storageSize | storageCount: 4}}/{{workSpacePlanDetail.plandetails.storageSize | storageCount}} Storage
+        ENTRIES | {{workSpacePlanDetail.storageSize }}/{{workSpacePlanDetail.plandetails.storageSize}} Storage
         <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
         <i class="material-icons">close</i>
 
