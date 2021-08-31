@@ -260,7 +260,7 @@ export class FormsComponent implements OnInit {
 
   deleteForm(form: any) {
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete <strong>${form.text}</strong> forms ?`;      
+    modalRef.componentInstance.message = `Are you sure you want to delete <strong>${form.text}</strong> ?`;      
     modalRef.componentInstance.modalName = 'Delete'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
