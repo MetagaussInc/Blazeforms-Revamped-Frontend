@@ -20,6 +20,10 @@ export class ConfirmModalComponent implements OnInit {
     this.activeModal.close(message);
   }
 
+  closeModal() {
+    this.activeModal.close('close');
+  }
+
   archive() {
     this.activeModal.close('archive');
   }
