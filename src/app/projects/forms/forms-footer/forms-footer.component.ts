@@ -21,6 +21,7 @@ export class FormsFooterComponent implements OnInit {
         this.userId = this.userInfo.Id;
       }
     });
+    console.log(this.userId);
   }
 
   ngOnInit(): void {

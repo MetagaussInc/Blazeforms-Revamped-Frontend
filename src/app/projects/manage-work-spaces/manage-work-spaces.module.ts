@@ -24,6 +24,7 @@ import { ReferFriendModalComponent } from './manage-work-spaces-referral-program
 import { SwiperModule } from 'swiper/angular';
 import { AddOrganizationWithoutSuperAdminComponent } from './add-organization-without-super-admin/add-organization-without-super-admin.component';
 import { StorageCountPipe } from '../../shared/storage-count.pipe';
+import { ManageWorkSpacesBillingInfoComponent } from './manage-work-spaces-billing-info/manage-work-spaces-billing-info.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { StorageCountPipe } from '../../shared/storage-count.pipe';
     AddReferralLinkModalComponent,
     ReferFriendModalComponent,
     AddOrganizationWithoutSuperAdminComponent,
-    StorageCountPipe
+    StorageCountPipe,
+    ManageWorkSpacesBillingInfoComponent
   ],
   imports: [
     CommonModule,

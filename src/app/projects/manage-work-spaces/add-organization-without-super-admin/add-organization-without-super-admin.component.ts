@@ -36,6 +36,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   public languageList: any;
   public currencyList: any;
   public showPlanPage: boolean = false;
+  public showBillingPage: boolean = false;
   public masterPlans: any[] = [];
   planDetails: any = {};
   public userId: any;
@@ -55,7 +56,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   getMasterPlan(){
     this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
       this.planDetails = res;
-      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
+      //this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })
   }
 
@@ -103,6 +104,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
 
   planChange(){
     this.showPlanPage = true;
+    this.showBillingPage = false;
     this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
       this.masterPlans = res;
     })
@@ -111,7 +113,8 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetails = plan;
-    this.planDetails.storageSize = ((plan.storageSize) / (1024 * 1024));
+    this.showBillingPage = true;
+    //this.planDetails.storageSize = ((plan.storageSize) / (1024 * 1024));
   }
 
   submit(){

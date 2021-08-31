@@ -1,4 +1,4 @@
-<div class="login-box row border rounded-lg" *ngIf="!showPlanPage">
+<div class="login-box row border rounded-lg" *ngIf="!showPlanPage && !showBillingPage">
     <!--Login Area left Column-->
     <div class="col-md-12">
         <div class="left-column-top row px-3 pt-3">
@@ -92,7 +92,7 @@
     </div>
 </div>
 
-<div class="login-box border rounded-lg" *ngIf="showPlanPage">
+<div class="login-box border rounded-lg" *ngIf="showPlanPage && !showBillingPage">
     <div class="container py-3">
         <div class="p-3 m-n3 overflow-hidden">                                                        
             <swiper 

@@ -305,6 +305,12 @@
                         <app-manage-work-spaces-referral-program></app-manage-work-spaces-referral-program>
                     </ng-template>
                 </li>
+                <li [ngbNavItem]="8" *ngIf="isOrganizationEdit">
+                    <a ngbNavLink>Billing Informaton</a>
+                    <ng-template ngbNavContent>
+                        <app-manage-work-spaces-billing-info></app-manage-work-spaces-billing-info>
+                    </ng-template>
+                </li>
             </ul>
 
             <div [ngbNavOutlet]="nav" class="mt-2"></div>

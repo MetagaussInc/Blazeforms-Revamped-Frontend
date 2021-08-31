@@ -1,80 +1,3 @@
-<!-- Header Started-->
-<!-- <div class="header-container container-fluid">
-    <div class="header-wrapper row px-3 border-bottom d-flex flex-nowrap align-items-center justify-content-between">
-        <div class="logo-wrapper col-md-6 py-3">
-            <div class="colored-logo">
-                <img src="assets/images/logo.png" height="41">
-            </div>
-        </div>
-        <div class="nav-area col flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-md-flex': userId}">
-            <div class="nav mr-5">
-                <div class="nav-item active p-4" [hidden]="!formPermission.canView">
-                    <a [routerLink]="['/forms']">Forms</a>
-                </div>
-                <div class="nav-item p-4" [hidden]="!organizationPermission.canView">
-                    <a [routerLink]="['/work-spaces']">Organizations</a>
-                </div>
-            </div>
-            <div class="org-switch-wrapper mx-4 bg-light" *ngIf="userWorkspaceList && !hideDropdown">
-                <div class="org-switch-wrapper border rounded">
-                    <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
-                        <li ngbDropdown class="nav-item">
-                            <a href (click)="false" class="nav-link" ngbDropdownToggle>{{userWorkspaceList.name}}</a>
-                            <div ngbDropdownMenu>
-                                <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
-                                    <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
-                                </ng-container>
-                            </div>
-                        </li>
-                    </ul>
-                    <div [ngbNavOutlet]="nav"></div>
-                </div>
-            </div>
-            <div class="lang-switcher-wrapper mr-4">
-                <i class="material-icons">language</i>
-            </div>
-            <div class="account-image-wrapper">
-                <div ngbDropdown class="d-inline-block">
-                    <div class="account-image" id="dropdownBasic1" ngbDropdownToggle>
-                        <img class="rounded-circle" src="assets/images/user.jpg" height="35">
-                    </div>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <a [routerLink]="['/my-profile']" ngbDropdownItem>My Account</a>
-                        <a [routerLink]="['/user/logout']" ngbDropdownItem>Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--    <div *ngIf="workSpacePlanDetail" class="text-center">
-        <span class="plan" [hidden]="!planPermission.canView && isSuperAdmin">
-            Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}}
-            USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} 
-            Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
-            ENTRIES | {{ calulateUites(workSpacePlanDetail.storageSize, 4) }}/{{ calulateUites(workSpacePlanDetail.plandetails.storageSize) }} Storage
-            <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
-            <i class="material-icons">close</i>
-        </span>
-    </div> -->
-
-<!--    <div *ngIf="workSpacePlanDetail" class="workspace-plandetail row">
-        <div class="text-center col-md-12 btn-bf py-2" [hidden]="!planPermission.canView && isSuperAdmin">
-
-            Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
-            ENTRIES | {{workSpacePlanDetail.storageSize | storageCount: 4}}/{{workSpacePlanDetail.plandetails.storageSize | storageCount}} Storage
-            <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
-            <i class="material-icons">close</i>
-
-        </div>
-    </div> -->
-
-
-
-<!-- Header End-->
-
-
-
-
 <header class="header border-bottom">
     <nav class="px-4 py-0 navbar navbar-expand-lg bg-white">
         <a href="/" class="navbar-brand">
@@ -82,15 +5,20 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </a>
-        <div class="ml-auto d-md-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
-            <div class="me-2 nav-item">
-                <a id="form-builder-page" class="text-gray-link nav-link active p-4" role="button" [routerLink]="['/forms']">Forms</a>
+        <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-md-flex': userId}">
+            <div class="me-2 nav-item" [hidden]="!formPermission.canView">
+                <a id="form-builder-page" 
+                class="text-gray-link nav-link active p-4" 
+                role="button" [routerLink]="['/forms']">Forms</a>
             </div>
-            <div class="me-2 nav-item ">
-                <a aria-haspopup="true" aria-expanded="false" id="Organizations" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']">Organizations</a>
+            <div class="me-2 nav-item" [hidden]="!organizationPermission.canView">
+                <a aria-haspopup="true" 
+                aria-expanded="false" 
+                id="Oragnization" 
+                class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']">Oragnization</a>
             </div>
             <div class="dropdown nav-item">
-                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList || !hideDropdown">
+                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
                     <div class="org-switch-wrapper mx-4 bg-light">
                         <div class="org-switch-wrapper border rounded">
                             <ul ngbNav #nav="ngbNav" class="nav-tabs border-0 justify-content-center">
@@ -106,16 +34,13 @@
                             <div [ngbNavOutlet]="nav"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="lang-switcher-wrapper header-dropdown-wrap mr-4">
-
                 <div ngbDropdown class="d-inline-block">
                     <div class="dropdown-toggle" id="langswitcherdropdown" role="button" ngbDropdownToggle>
                         <i class="material-icons">language</i>
                     </div>
-
                     <div ngbDropdownMenu class="dropdown-menu header-dropdown shadow border-0" aria-labelledby="langswitcherdropdown">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -123,27 +48,12 @@
                     </div>
                 </div>
             </div>
-
-
-            <!--      <div class="ml-auto lang-switcher-wrapper mr-4" ngbDropdown>
-                <div class="dropdown-toggle" id="userinfodropdown" ngbDropdownToggle>
-                    <img class="rounded-circle" src="assets/images/user.jpg" height="35">
-                </div>
-
-                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="userinfodropdown">
-                    <a [routerLink]="['/my-profile']" ngbDropdownItem>My Account</a>
-                    <a [routerLink]="['/user/logout']" ngbDropdownItem>Logout</a>
-                </div>
-
-            </div> -->
-
             <div class="account-image-wrapper header-dropdown-wrap">
                 <div ngbDropdown class="d-inline-block">
                     <div class="account-image" id="UserProfile" ngbDropdownToggle role="button">
                         <img class="rounded-circle" src="assets/images/user.jpg" height="35">
                     </div>
                     <div ngbDropdownMenu class="dropdown-menu header-dropdown shadow border-0" aria-labelledby="UserProfile" x-placement="bottom-left">
-
                         <div class="dropdown-header" role="heading">
                             <h6 class="font-weight-bold">User Name</h6>
                             <small>Admin</small>
@@ -156,20 +66,17 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
 </header>
 
-<div *ngIf="workSpacePlanDetail" class="workspace-plan-details container-fluid">
-    <div class="row my-2">
-        <div class="text-center col-md-12 py-2 workspace-plan-notice" [hidden]="!planPermission.canView && isSuperAdmin">
-
-            Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
-            ENTRIES | {{workSpacePlanDetail.storageSize }}/{{workSpacePlanDetail.plandetails.storageSize}} Storage
-            <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
-            <i class="material-icons float-right">close</i>
-        </div>
+<div *ngIf="workSpacePlanDetail" class="workspace-plan-detail row">
+    <div class="text-center col-md-12 btn-bf py-2" [hidden]="!planPermission.canView && isSuperAdmin">
+        Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} 
+        USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} 
+        Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
+        ENTRIES | {{workSpacePlanDetail.storageSize }}/{{workSpacePlanDetail.plandetails.storageSize}} Storage
+        <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
+        <i class="material-icons">close</i>
     </div>
-
 </div>
