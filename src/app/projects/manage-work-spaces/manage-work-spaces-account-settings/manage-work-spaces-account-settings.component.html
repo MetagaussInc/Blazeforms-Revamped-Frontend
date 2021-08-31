@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="add-account-wrapper d-flex flex-wrap justify-content-between mb-5">
-        <button type="button" (click)="openAddAccountModal()" id="add-form" class="btn btn-bf btn-sm" data-toggle="modal" data-target="#edit-account-setting-modal" title="Add New Setting">Add Setting</button>
+        <button type="button" (click)="openAddAccountModal()" id="add-form" class="btn btn-bf btn-sm" title="Add New Setting">Add Setting</button>
     </div>
     <div class="organization-list col-md-12 border rounded">
         <ng-container *ngIf="accountsLists.length == 0">
@@ -18,8 +18,8 @@
                     <span><i>{{ account.createdDate | date: 'dd-MMM-Y' }}</i></span>
                 </div>
                 <div class="organization-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                    <i class="material-icons-round mr-3 text-dark" (click)="editAccount(account)" data-toggle="modal" data-target="#edit-account-setting-modal" title="Edit">edit</i>
-                    <i class="material-icons-round text-dark" (click)="deleteAccount(account)" data-toggle="modal" data-target="#delete-account-setting-modal" title="Delete">delete</i>
+                    <i class="material-icons-round mr-3 text-dark" (click)="editAccount(account)" data-toggle="modal" role="button" title="Edit">edit</i>
+                    <i class="material-icons-round text-dark" (click)="deleteAccount(account)" data-toggle="modal" role="button" title="Delete">delete</i>
                 </div>
             </div>
         </ng-container>

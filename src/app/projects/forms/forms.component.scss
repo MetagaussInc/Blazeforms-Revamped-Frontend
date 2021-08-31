@@ -27,7 +27,18 @@
     cursor: pointer;
 }
 
-.folder-list-with-forms {
-    
+.form-list-item .form-title-wrapper .form-name {
+    cursor: pointer;
 }
 
+.filter-dropdown-folder-list .filter-dropdown-folder-item {
+    cursor: pointer;
+}
+
+.filter-dropdown-bottom .filter-dropdown-item {
+    cursor: pointer;
+}
+
+.filter-dropdown-bottom .filter-dropdown-item .selected-item-tick {
+    margin-left: -24px;
+}

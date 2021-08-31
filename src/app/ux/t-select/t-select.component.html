@@ -1,5 +1,5 @@
 <div (click)="viewDropDown = !viewDropDown" class="folder-tree-selector form-control pt-2">
-    {{selected}}<span class="material-icons float-right"> arrow_drop_down </span></div>
+    {{selected}}<span class="material-icons float-right" role="button"> arrow_drop_down </span></div>
 <div *ngIf="viewDropDown" class="folder-tree-wrap filter-dropdown bg-white rounded shadow">
     <div class="p-3"><input class="form-control" id="folder-search" placeholder="Search" [(ngModel)]="searchedString" (keyup)="search($event)"></div>
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="folder-tree-node overflow-auto py-2">

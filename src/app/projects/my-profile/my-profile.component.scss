@@ -1,0 +1,11 @@
+.user-profile-tabs .nav-tabs .nav-link {
+    color: #495057;
+    border-width: 2px;
+    border-color: #fff #fff transparent #fff;
+}
+
+.user-profile-tabs .nav-tabs .nav-link.active {
+    color: #f04564;
+    border-color: #fff #fff #f04564 #fff;
+    border-width: 2px;
+}

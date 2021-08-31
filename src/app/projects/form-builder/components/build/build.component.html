@@ -248,8 +248,8 @@
                                                         <ng-container *ngIf="selectedElement?.validations?.contentEditor">
                                                             <div class="form-group">
                                                                 <label for="text">Edit content</label>
-                                                                <angular-editor [placeholder]="'Enter text here...'"
-                                                                [(ngModel)]="selectedElement.value"></angular-editor>                                                            </div>
+                                                                <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="selectedElement.value"></angular-editor>
+                                                            </div>
                                                         </ng-container>
                                                         <div *ngIf="selectedElement?.validations?.help" class="form-group">
                                                             <label for="Help Text">Help Text</label>
@@ -389,11 +389,29 @@
                                                         <div class="arrow"></div>
                                                         <div class="popover-body">
                                                             <div class="row my-2">
-                                                                <div class="col-md-12" (click)="duplicate(model.uiIndexId)"><i class="material-icons">content_copy</i>Duplicate</div>
+                                                                <div class="col-md-6" (click)="duplicate(model.uiIndexId)">
+                                                                    <div class="field-action field-action d-flex  align-items-center p-2">
+                                                                        <i class="material-icons">content_copy</i>
+                                                                        <span>Duplicate</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6" (click)="delete(model.uiIndexId)">
+
+                                                                    <div class="field-action field-action d-flex align-items-center p-2">
+                                                                        <i class="material-icons">delete</i>
+                                                                        <span>Delete</span>
+                                                                    </div>
+
+                                                                </div>
                                                             </div>
+
+
                                                             <div class="row my-2">
-                                                                <div class="col-md-12" (click)="delete(model.uiIndexId)"><i class="material-icons">delete</i> Delete</div>
+                                                                <div class="col-md-6" (click)="delete(model.uiIndexId)"><i class="material-icons">arrow_back</i> Make Small</div>
+                                                                <div class="col-md-6" (click)="delete(model.uiIndexId)"><i class="material-icons">arrow_forward</i> Make Bigger</div>
                                                             </div>
+
+
                                                         </div>
                                                     </div>
 
