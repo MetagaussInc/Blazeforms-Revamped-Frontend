@@ -4,28 +4,29 @@
     </div>
 </div>
 <div class="container-xl">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li [ngbNavItem]="1">
-            <a ngbNavLink>Profile</a>
-            <ng-template ngbNavContent>
-                <ng-container>
-                    <app-my-profile-general></app-my-profile-general>
-                </ng-container>
-            </ng-template>
-        </li>
-        <li [ngbNavItem]="2">
-            <a ngbNavLink>Change Password</a>
-            <ng-template ngbNavContent>
-                <app-my-profile-change-password></app-my-profile-change-password>
-            </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
-            <a ngbNavLink>Fingerprint Authentication</a>
-            <ng-template ngbNavContent>
-                <app-my-profile-fingerprint></app-my-profile-fingerprint>
-            </ng-template>
-        </li>
-    </ul>
-      
+    <div class="user-profile-tabs">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink class="nav-item nav-link p-3">Profile</a>
+                <ng-template ngbNavContent>
+                    <ng-container>
+                        <app-my-profile-general></app-my-profile-general>
+                    </ng-container>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink class="nav-item nav-link p-3">Change Password</a>
+                <ng-template ngbNavContent>
+                    <app-my-profile-change-password></app-my-profile-change-password>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink class="nav-item nav-link p-3">Fingerprint Authentication</a>
+                <ng-template ngbNavContent>
+                    <app-my-profile-fingerprint></app-my-profile-fingerprint>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

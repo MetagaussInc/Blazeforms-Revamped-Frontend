@@ -63,7 +63,13 @@
 }
 
 .builder-dropped-field .field-popover-wrap {
-    top: 27px;
-    left: 0%;
-    min-width: 160px;
+    top: 78px;
+    right: 0px;
+    left: auto;
+    width: 284px !important;
+    max-width: 100% !important;
+}
+
+.field-popover-wrap .field-action:hover {
+    background-color: #fff4f5;
 }

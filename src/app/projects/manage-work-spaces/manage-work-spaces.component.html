@@ -13,9 +13,9 @@
                 </li>
             </ul> -->
 
-            <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-start nav-justified" [(activeId)]="activeTabId">
                 <li [ngbNavItem]="1" *ngIf="workspacePermissions.canView">
-                    <a ngbNavLink>General</a>
+                    <a ngbNavLink class="nav-link p-3">General</a>
                     <ng-template ngbNavContent>
                         <ng-container *ngIf="isOrganizationAdd">
                             <div class="tab-content px-4" id="add-organization-tabs">
@@ -214,12 +214,8 @@
 
                                             <div class="login-box border rounded-lg" *ngIf="showPlanPage">
                                                 <div class="container py-3">
-                                                    <div class="p-3 m-n3 overflow-hidden">                                                        
-                                                        <swiper 
-                                                        [slidesPerView]="3" 
-                                                        [spaceBetween]="30"
-                                                        [navigation]="true"
-                                                        class="mySwiper">
+                                                    <div class="p-3 m-n3 overflow-hidden">
+                                                        <swiper [slidesPerView]="3" [spaceBetween]="30" [navigation]="true" class="mySwiper">
                                                             <ng-container *ngFor="let plan of masterPlans; let i = index;">
                                                                 <ng-template swiperSlide>
                                                                     <div class="selected-plan-wrapper shadow-sm row no-gutters rounded border text-center">
@@ -274,37 +270,37 @@
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="2" *ngIf="isOrganizationEdit && workspacePermissions.canView">
-                    <a ngbNavLink>Account Settings</a>
+                    <a ngbNavLink class="nav-link p-3">Account Settings</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-account-settings></app-manage-work-spaces-account-settings>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="3" *ngIf="isOrganizationEdit && workspacePermissions.canView">
-                    <a ngbNavLink>Branding</a>
+                    <a ngbNavLink class="nav-link p-3">Branding</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-branding></app-manage-work-spaces-branding>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="4" *ngIf="isOrganizationEdit && userPermissions.canView">
-                    <a ngbNavLink>Users</a>
+                    <a ngbNavLink class="nav-link p-3">Users</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-users></app-manage-work-spaces-users>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="5" *ngIf="isOrganizationEdit && rolePermissions.canView">
-                    <a ngbNavLink>Roles</a>
+                    <a ngbNavLink class="nav-link p-3">Roles</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-roles></app-manage-work-spaces-roles>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="6" *ngIf="isOrganizationEdit && planPermissions.canView">
-                    <a ngbNavLink>Subscription</a>
+                    <a ngbNavLink class="nav-link p-3">Subscription</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-subscription></app-manage-work-spaces-subscription>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="7" *ngIf="isOrganizationEdit">
-                    <a ngbNavLink>Referral Program</a>
+                    <a ngbNavLink class="nav-link p-3">Referral Program</a>
                     <ng-template ngbNavContent>
                         <app-manage-work-spaces-referral-program></app-manage-work-spaces-referral-program>
                     </ng-template>
@@ -316,7 +312,7 @@
                     </ng-template>
                 </li>
             </ul>
-              
+
             <div [ngbNavOutlet]="nav" class="mt-2"></div>
         </div>
     </div>
