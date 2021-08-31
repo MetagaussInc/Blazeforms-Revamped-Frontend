@@ -90,7 +90,7 @@
                 <a aria-haspopup="true" aria-expanded="false" id="Oragnization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']">Oragnization</a>
             </div>
             <div class="dropdown nav-item">
-                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList">
+                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList || !hideDropdown">
                     <div class="org-switch-wrapper mx-4 bg-light">
                         <div class="org-switch-wrapper border rounded">
                             <ul ngbNav #nav="ngbNav" class="nav-tabs border-0 justify-content-center">

@@ -255,10 +255,16 @@
                                                             <label for="Help Text">Help Text</label>
                                                             <textarea [(ngModel)]="selectedElement.helpText" id="Help Text" name="Help Text" cols="40" rows="5" class="form-control"></textarea>
                                                         </div>
-                                                        <div *ngIf="showPaymentFields() && selectedElement?.inputType === 'payment'">
+                                                        <div *ngIf="showPaymentFields() && (selectedElement?.inputType === 'payment' || selectedElement?.inputType ===  'paymentSection')">
                                                             <label>Payment Setting</label>
-                                                            <button *ngIf="paymentSetting?.extraBill.length === 0" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})">Add
-                                                                Extra bill</button>
+                                                            <div  class="p-1 mr-1">
+                                                                <button *ngIf="paymentSetting?.extraBill.length === 0" (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"
+                                                                class="btn option-btn border btn-sm rounded p-1 mr-1">
+                                                                <i
+                                                                    class="material-icons">add</i>Add
+                                                                    Extra bill</button>
+                                                            </div>
+                                                            
                                                             <div class="d-flex form-group" *ngFor="let item of paymentSetting?.extraBill; let i = index">
                                                                 <input class="form-control mr-1" type="text" [(ngModel)]="paymentSetting?.extraBill[i].name">
                                                                 <input class="form-control mr-1" type="text" [(ngModel)]="paymentSetting?.extraBill[i].value">
@@ -271,22 +277,25 @@
                                                                 <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="paymentSetting?.extraBill.splice(i, 1)"><i
                                                                         class="material-icons">remove</i></button>
                                                             </div>
-                                                            <div class="custom-control custom-checkbox">
+                                                            <div *ngIf="selectedElement?.inputType ===  'paymentSection'" class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.showSubTotal">
                                                                 <label class="custom-control-label">Sub Total</label>
                                                             </div>
-                                                            <div class="custom-control custom-checkbox">
+                                                            <div *ngIf="selectedElement?.inputType ===  'paymentSection'" class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.showLineItems">
-                                                                <label class="custom-control-label">Shop Line
+                                                                <label class="custom-control-label">Show Line
                                                                     Items</label>
                                                             </div>
-                                                            <div class="custom-control custom-checkbox">
+                                                            <div *ngIf="selectedElement?.inputType ===  'paymentSection'" class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentSetting.mapBillingFields">
                                                                 <label class="custom-control-label"> Map Billing
                                                                     fields</label>
                                                             </div>
-                                                            <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="addNewStripeAccount()"><i
-                                                                        class="material-icons">add</i>Add Account</button>
+                                                            <div class="p-1 mr-1">
+                                                                <button class="btn option-btn border btn-sm rounded p-1 mr-1" (click)="addNewStripeAccount()"><i
+                                                                    class="material-icons">add</i>Add Account</button>
+                                                            </div>
+                                                            
                                                             <div class="form-group">
 
 
@@ -300,6 +309,7 @@
                                                             </div>
                                                         </div>
 
+                                                        
 
 
                                                     </div>
