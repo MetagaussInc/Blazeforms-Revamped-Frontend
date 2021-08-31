@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 
 @Component({
   selector: 'app-forms-footer',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormsFooterComponent implements OnInit {
 
-  constructor() { }
+  public userId: any = null;
+  public userWorkspaceList: any;
+  private userInfoSubscription$: any;
+  public userInfo: any;
+
+  constructor(private store: Store) {
+    this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
+      if(this.userInfo){
+        this.userId = this.userInfo.Id;
+      }
+    });
+  }
 
   ngOnInit(): void {
   }

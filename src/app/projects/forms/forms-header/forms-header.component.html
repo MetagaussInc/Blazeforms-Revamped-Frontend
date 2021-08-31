@@ -6,7 +6,7 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </div>
-        <div class="nav-area col d-md-flex flex-nowrap align-items-center justify-content-end" [hidden]="!userId">
+        <div class="nav-area col flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-md-flex': userId}">
             <div class="nav mr-5">
                 <div class="nav-item active p-4" [hidden]="!formPermission.canView">
                     <a [routerLink]="['/forms']">Forms</a>
