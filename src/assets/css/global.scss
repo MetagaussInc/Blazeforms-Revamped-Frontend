@@ -708,6 +708,22 @@
             //height: 600px;
         }
         
+        .draggable-fields-wrap {
+            scroll-behavior: smooth;
+        }
+        
+        .draggable-fields-wrap::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .draggable-fields-wrap::-webkit-scrollbar-thumb {
+            background: #D9D9D9;
+        }
+        
+        .draggable-fields-wrap::-webkit-scrollbar-track {
+            background: #999999;
+        }
+        
         .sidebar-container {
             overflow-y: auto!important;
             overflow-x: hidden;
