@@ -21,6 +21,7 @@
         </div>
         <div class="col-md-6">
             <div class="preview-brandig text-center ">
+                <img src="assets/images/logo.png" *ngIf="!imageSrc" class="col d-flex align-items-center justify-content-center">
                 <img [src]="imageSrc" *ngIf="imageSrc" class="col d-flex align-items-center justify-content-center">
             </div>
         </div>

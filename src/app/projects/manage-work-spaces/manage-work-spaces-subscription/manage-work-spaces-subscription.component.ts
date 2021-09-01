@@ -23,6 +23,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
   public planPermissions: any;
+  public isSuperAdmin: boolean = false;
 
   constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -39,6 +40,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
       }
     });
     this.planPermissions = this.dataSharingService.GetPermissions("Plan");
+    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
   }
 
   ngOnInit(): void {

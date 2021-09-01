@@ -46,16 +46,20 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
       this.http.call('setCurrentWorkSpaceForAdmin', 'POST', obj).subscribe(res => {
         dataRes = res.result.data;
         this.logo = dataRes.workspaceDetail.logo;
-        this.logoExt = dataRes.workspaceDetail.logoExt;
-        this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+        if(this.logo){
+          this.logoExt = dataRes.workspaceDetail.logoExt;
+          this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+        }
       });
     }
     else{
       this.http.call('setCurrentWorkSpace', 'POST', obj).subscribe(res => {
         dataRes = res.result.data;
         this.logo = dataRes.workspaceDetail.logo;
-        this.logoExt = dataRes.workspaceDetail.logoExt;
-        this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+        if(this.logo){
+          this.logoExt = dataRes.workspaceDetail.logoExt;
+          this.imageSrc = `data:image/${this.logoExt};base64,${this.logo}`;
+        }
       });
     }
   }
@@ -89,7 +93,6 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
     this.isFormSubmitted = true;
     let model = {'LogoWorkSpaceId': this.organizationId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
     this.http.call('uploadFilesForWorkspace', 'POST', model).subscribe(res => {
-      console.log(res);
       this.isFormSubmitted = false;
       if(res){
         this.imageSrc = this.fileSource as string;

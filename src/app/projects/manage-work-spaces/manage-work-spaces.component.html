@@ -13,7 +13,7 @@
                 </li>
             </ul> -->
 
-            <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-start nav-justified" [(activeId)]="activeTabId">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-start nav-justified" [(activeId)]="activeTabId" [ngClass]="{'general-setting-tab': !isOrganizationEdit}">
                 <li [ngbNavItem]="1" *ngIf="workspacePermissions.canView">
                     <a ngbNavLink class="nav-link p-3">General</a>
                     <ng-template ngbNavContent>
