@@ -43,10 +43,24 @@
                             <label for="country-select">Country</label>
                         </div>
                         <div class="col-9">
-                            <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control">
+                            <!-- <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control">
                                 <option [ngValue]="null" disabled>Select Country</option>
                                 <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
-                            </select>
+                            </select> -->
+
+                            <!-- <ng-select formControlName="Country" id="country-select" name="Country" class="country-selector form-control" [options]="countryList">
+                                <ng-template #optionTemplate let-option="option">
+                                  <div class="famfamfam-flags {{
+                                      option?.value.toLowerCase()
+                                    }}"></div>
+                                  {{ option?.label }}
+                                </ng-template>
+                            </ng-select> -->
+
+                            <ng-select #select formControlName="Country" appearance="outline" [searchable]="true" (change)="countryOnChange($event)" placeholder="Select Country">
+                                <ng-option *ngFor="let item of items" value="{{item.id}}">{{item.name}}</ng-option>
+                            </ng-select>
+
                         </div>
                     </div>
                     <div class="row my-4 form-group">
@@ -54,7 +68,7 @@
                             <label for="time-zone-select">Time Zone</label>
                         </div>
                         <div class="col-9">
-                            <select formControlName="Timezone" id="time-zone-select" name="Timezone" class="zone-selector form-control">
+                            <select formControlName="TimeZoneId" id="time-zone-select" name="TimeZoneId" class="zone-selector form-control">
                                 <option [ngValue]="null" disabled>Select Timezone</option>
                                 <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
                             </select>
@@ -78,7 +92,7 @@
                         <div class="col-9">
                             <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control">
                                 <option [ngValue]="null" disabled>Select Currency</option>
-                                <option *ngFor="let currency of currencyList" [ngValue]="currency.value">{{currency.label}}</option>
+                                <option *ngFor="let currency of currencyList" [ngValue]="currency.label">{{currency.label}}</option>
                             </select>
                         </div>
                     </div>
@@ -94,9 +108,9 @@
 
 <div class="login-box border rounded-lg" *ngIf="showPlanPage && !showBillingPage">
     <div class="container py-3">
-        <div class="p-3 m-n3 overflow-hidden">                                                        
-            <swiper 
-            [slidesPerView]="3" 
+        <div class="p-3 m-n3 overflow-hidden">
+            <swiper
+            [slidesPerView]="3"
             [spaceBetween]="30"
             [navigation]="true"
             class="mySwiper">

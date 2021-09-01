@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import { updateCurrentWorkSpaceDetail, updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 import { filter, map } from 'rxjs/operators';
 
@@ -28,6 +28,9 @@ export class FormsHeaderComponent implements OnInit {
   public calulateUites = storageCountFormatter;
   private redirectToWorkSpace: boolean = false;
   public hideDropdown = false;
+  public profileImageSrc: any;
+  private eventUrl$: any;
+  public currentUrl: any;
   
   constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
     this.router.events.pipe(
@@ -42,6 +45,9 @@ export class FormsHeaderComponent implements OnInit {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo){
+        if(this.userInfo.ProfileImage){
+          this.profileImageSrc = `data:image/JPEG;base64,${this.userInfo.ProfileImage}`;
+        }
         this.dataSharingService.SetUserInfoData(this.userInfo);
         this.selectedWorkspaceId    = this.userInfo.WorkspaceDetail.Id;
         this.formPermission         = this.dataSharingService.GetPermissions('Forms');
@@ -53,12 +59,20 @@ export class FormsHeaderComponent implements OnInit {
         this.store.select(userPlanDetail).subscribe(planInfo => {
           this.workSpacePlanDetail = planInfo;
         });
-        this.store.select(userWorkspaceLists).subscribe(workspacesList => {
-          if(workspacesList){
-            this.userWorkspaceLists = Array.from(Object.values(workspacesList));
-          }
-        });
       }
+    });
+
+    this.eventUrl$ = this.router.events.subscribe((event: NavigationEvent) => {
+      if(event instanceof NavigationStart) {
+        this.currentUrl = event.url;
+      }
+    });
+            
+    this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+      if(workspacesList){
+        this.userWorkspaceLists = Array.from(Object.values(workspacesList));
+      }
+      console.log(this.userWorkspaceLists);
     });
   }
 

@@ -6,6 +6,9 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
 import { DataSharingService } from '../../../shared/data-sharing.service';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { userWorkspaceDetailSuccess } from 'src/app/+state/user/user.actions';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-add-organization-without-super-admin',
@@ -26,7 +29,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
       this.validateEmailViaServer.bind(this)
     ),
     Country: new FormControl(null),
-    Timezone: new FormControl(null),
+    TimeZoneId: new FormControl(null),
     Language: new FormControl(null),
     Currency: new FormControl(null),
   });
@@ -40,14 +43,21 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   public masterPlans: any[] = [];
   planDetails: any = {};
   public userId: any;
+  public items: Array<any> = [];
 
-  constructor(private router: Router, private http: HttpService, private dataSharingService: DataSharingService) {
+  constructor(private router: Router, private http: HttpService, private dataSharingService: DataSharingService, private store: Store, private toastService: ToastService) {
     this.userId = this.dataSharingService.GetUserId();
   }
 
   ngOnInit(): void {
     let sharedData = new SharedData();
     this.countryList = sharedData.getCountries();
+    this.countryList.forEach((country:{label:string, value:string}) => {
+      this.items.push({
+        id: country.value,
+        name: country.label
+      });
+    });
     this.timeZoneList = sharedData.getTimezones();
     this.languageList = sharedData.getLanguages();
     this.currencyList = sharedData.getCurrencies();
@@ -119,20 +129,37 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
 
   submit(){
     const obj = {
-      ...JSON.parse(JSON.stringify(this.organizationSaveForm
-        .value)),
+      ...JSON.parse(JSON.stringify(this.organizationSaveForm.value)),
       UserId: this.userId
     };
     this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
+      if(res){
+        this.toastService.showSuccess('Organization Saved Successfully!');
+        this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
+          const props = response;
+          this.store.dispatch(userWorkspaceDetailSuccess({props}));
+        });
+      }
       //this.router.navigate(['user/register-confirm'])
       this.planChange();
+    });
+  }
+
+  countryOnChange(e: any) {
+    let crru = this.currencyList.filter((item: { [x: string]: { toString: () => string; }; }) =>
+      Object.keys(item).some(k => item[k] != null && k != "label" &&
+        item[k].toString().toLowerCase()
+          .includes(e.toLowerCase()))
+    );
+    this.organizationSaveForm.patchValue({
+      Currency: crru[0].label
     });
   }
 
   get Name() { return this.organizationSaveForm.get('Name'); }
   get DefaultReplyEmail() { return this.organizationSaveForm.get('DefaultReplyEmail'); }
   get Country() { return this.organizationSaveForm.get('Country'); }
-  get Timezone() { return this.organizationSaveForm.get('Timezone'); }
+  get TimeZoneId() { return this.organizationSaveForm.get('TimeZoneId'); }
   get Language() { return this.organizationSaveForm.get('Language'); }
   get Currency() { return this.organizationSaveForm?.get('Currency'); }
   get f() { return this.organizationSaveForm.controls; }

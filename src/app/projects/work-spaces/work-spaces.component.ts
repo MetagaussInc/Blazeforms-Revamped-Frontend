@@ -8,6 +8,8 @@ import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spac
 import { debounceTime, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataSharingService } from '../../shared/data-sharing.service';
+import { userWorkspaceDetailSuccess } from 'src/app/+state/user/user.actions';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-work-spaces',
@@ -33,7 +35,7 @@ export class WorkSpacesComponent implements OnInit {
   public isLoading: boolean = false;
   public selectedWorkspaceId: any;
 
-  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
+  constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo.IsSuperAdmin){
@@ -95,9 +97,14 @@ export class WorkSpacesComponent implements OnInit {
         }
         this.http.call('deleteWorkSpace', 'POST', workdata).subscribe(res => {
           if(res == true){
+            this.toastService.showSuccess('Organization Deleted Successfully!');
             this.organizationLists = [];
             this.pageDetail.pageNumber = 1;
             this.getUserOrganizationsList();
+            this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userInfo.Id}).subscribe(response => {
+              const props = response;
+              this.store.dispatch(userWorkspaceDetailSuccess({props}));
+            });
           }
         })
       }
