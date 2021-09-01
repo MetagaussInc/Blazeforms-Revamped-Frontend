@@ -76,6 +76,13 @@
                 background-color: $base-active-color;
                 border-color: $base-active-color;
             }
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
+            }
+        }
+        
+        .dropdown-item:active {
+            background-color: $base-color;
         }
         /*      .custom-control-input {
             &:checked~.custom-control-label {
@@ -156,6 +163,10 @@
         
         .login-area-container {
             //height: calc(100% - 80px);
+            height: calc(100vh - 142px);
+        }
+        
+        .forgot-password-container {
             height: calc(100vh - 142px);
         }
         
