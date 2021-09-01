@@ -740,14 +740,14 @@
         @media screen and (max-height: 742px) {
             .login-area-container,
             .forgot-password-container {
-                height: calc(100% - 142px);
+                height: calc(100% - 94px);
             }
         }
         
         @media screen and (max-width: 1350px) {
             .login-area-container,
             .forgot-password-container {
-                height: calc(100vh - 142px);
+                height: 100vh;
             }
         }
         
@@ -768,6 +768,10 @@
         // Header Menu
         header .nav-item .nav-link {
             position: relative;
+        }
+        
+        header .nav-item .nav-link:hover {
+            color: $base-color;
         }
         
         header .nav-item .nav-link.active::after {
@@ -807,6 +811,23 @@
             display: block;
         }
         
-        .workspace-plan-detail a {
+        .workspace-plan-details a {
             color: #fff;
+        }
+        
+        .workspace-plan-details .workspace-plan-notice {
+            background-color: #f04563;
+            color: #ffffff;
+        }
+        
+        .workspace-plan-details .workspace-plan-notice i {
+            color: #fff;
+        }
+        
+        .workspace-plan-details .workspace-plan-notice .plan-detail {
+            text-decoration: underline;
+        }
+        
+        .workspace-plan-details .workspace-plan-notice .plan-detail:hover {
+            text-decoration: none;
         }
