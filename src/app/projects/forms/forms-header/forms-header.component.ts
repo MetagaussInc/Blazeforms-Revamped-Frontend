@@ -53,12 +53,15 @@ export class FormsHeaderComponent implements OnInit {
         this.store.select(userPlanDetail).subscribe(planInfo => {
           this.workSpacePlanDetail = planInfo;
         });
-        this.store.select(userWorkspaceLists).subscribe(workspacesList => {
-          if(workspacesList){
-            this.userWorkspaceLists = Array.from(Object.values(workspacesList));
-          }
-        });
       }
+    });
+    this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+      console.log("Work spaces list");
+      console.log(workspacesList);
+      if(workspacesList){
+        this.userWorkspaceLists = Array.from(Object.values(workspacesList));
+      }
+      console.log(this.userWorkspaceLists);
     });
   }
 

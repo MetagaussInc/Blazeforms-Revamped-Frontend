@@ -35,7 +35,9 @@ export class MyProfileChangePasswordComponent implements OnInit {
   constructor(private dataSharingService: DataSharingService, private http: HttpService, private sanitizer: DomSanitizer, private toastService: ToastService) {
     this.userId = this.dataSharingService.GetUserId();
     this.userData = this.dataSharingService.GetLoggedInUserData();
-    this.imageSrc = `data:image/JPEG;base64,${this.userData.ProfileImage}`;
+    if(this.userData.ProfileImage){
+      this.imageSrc = `data:image/JPEG;base64,${this.userData.ProfileImage}`;
+    }
   }
 
   ngOnInit(): void {

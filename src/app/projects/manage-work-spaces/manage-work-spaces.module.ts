@@ -25,6 +25,7 @@ import { SwiperModule } from 'swiper/angular';
 import { AddOrganizationWithoutSuperAdminComponent } from './add-organization-without-super-admin/add-organization-without-super-admin.component';
 import { StorageCountPipe } from '../../shared/storage-count.pipe';
 import { ManageWorkSpacesBillingInfoComponent } from './manage-work-spaces-billing-info/manage-work-spaces-billing-info.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ManageWorkSpacesBillingInfoComponent } from './manage-work-spaces-billi
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    SwiperModule
+    SwiperModule,
+    NgSelectModule
   ]
 })
 export class ManageWorkSpacesModule { }

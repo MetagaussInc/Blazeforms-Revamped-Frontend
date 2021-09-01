@@ -33,7 +33,9 @@ export class MyProfileGeneralComponent implements OnInit {
   constructor(private dataSharingService: DataSharingService, private http: HttpService, private sanitizer: DomSanitizer, private toastService: ToastService, private store: Store) {
     this.userId = this.dataSharingService.GetUserId();
     this.userData = this.dataSharingService.GetLoggedInUserData();
-    this.imageSrc = `data:image/JPEG;base64,${this.userData.ProfileImage}`;
+    if(this.userData.ProfileImage){
+      this.imageSrc = `data:image/JPEG;base64,${this.userData.ProfileImage}`;
+    }
     this.updateProfileData();
   }
 
@@ -99,8 +101,8 @@ export class MyProfileGeneralComponent implements OnInit {
           mappingKey: 'uploadProfileImage',
           payload: res.profileImage
         }
-        this.store.dispatch(userProfileImageUpdate({props}))
-        this.toastService.showSuccess('Profile updated successfully!');
+        this.store.dispatch(userProfileImageUpdate({props}));
+        this.toastService.showSuccess('Profile Image updated successfully!');
       }
       else{
         this.toastService.showError('Something wrong');
@@ -129,6 +131,7 @@ export class MyProfileGeneralComponent implements OnInit {
         payload: obj
       }
       this.store.dispatch(userProfileUpdate({props}));
+      this.userData = this.dataSharingService.GetLoggedInUserData();
       this.toastService.showSuccess('Profile updated successfully!');
     });    
   }
