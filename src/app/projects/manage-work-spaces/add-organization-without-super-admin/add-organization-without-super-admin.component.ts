@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SharedData } from '../sharedData';
 import { Router } from '@angular/router';
@@ -39,7 +39,6 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   public languageList: any;
   public currencyList: any;
   public showPlanPage: boolean = false;
-  public showBillingPage: boolean = false;
   public masterPlans: any[] = [];
   planDetails: any = {};
   public userId: any;
@@ -114,7 +113,6 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
 
   planChange(){
     this.showPlanPage = true;
-    this.showBillingPage = false;
     this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
       this.masterPlans = res;
     })
@@ -123,7 +121,6 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetails = plan;
-    this.showBillingPage = true;
     //this.planDetails.storageSize = ((plan.storageSize) / (1024 * 1024));
   }
 
@@ -135,10 +132,10 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
     this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
       if(res){
         this.toastService.showSuccess('Organization Saved Successfully!');
-        this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
-          const props = response;
-          this.store.dispatch(userWorkspaceDetailSuccess({props}));
-        });
+        // this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
+        //   const props = response;
+        //   this.store.dispatch(userWorkspaceDetailSuccess({props}));
+        // });
       }
       //this.router.navigate(['user/register-confirm'])
       this.planChange();
