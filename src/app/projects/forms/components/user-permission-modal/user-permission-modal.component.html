@@ -31,7 +31,7 @@
                 <td *ngFor="let permissions of userPermissions">
                   <input type="checkbox" id="user-form-{{ permissions.short }}" 
                   [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
-                  [disabled]="!isEditMode"
+                  [disabled]="(!isEditMode || isEditMode != userList.id)"
                   (change)="onCheckboxChange($event, userList)"
                   value="{{ permissions.value }}"> 
                   <label for="user-form-{{ permissions.short }}"></label>

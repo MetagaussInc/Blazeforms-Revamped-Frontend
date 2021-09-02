@@ -35,11 +35,11 @@ export class AddUserPermissionModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.call('getFormUserRoleWorkSpaces', 'POST', {FormId: this.formId, WorkSpaceId: this.workSpaceId}).subscribe(res => {
+    this.http.call('getFormUserRoleWorkSpaces', 'POST', {Id: this.formId, WorkSpaceId: this.workSpaceId}).subscribe(res => {
       this.userRolesData = res;
       let userNameArr : any[] = [];
       res.data.forEach( function(value:any, index:number) {
-        if(res.data.length > 1 && index == 0) return;
+        if(index == 0) return;
         let username = `${value.firstName} ${value.lastName} (${value.email})`;
         userNameArr.push({id : index+1, name : username});
       });

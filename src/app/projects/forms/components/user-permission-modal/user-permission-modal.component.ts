@@ -128,6 +128,7 @@ export class UserPermissionModalComponent implements OnInit {
         i++;
       });
     }
+    this.assignedPer = this.assignedPer.filter(function(e: any){return e}); 
     this.assignedUserPermission[this.assignedidx].permissions = this.assignedPer.join(',');
   }
 
