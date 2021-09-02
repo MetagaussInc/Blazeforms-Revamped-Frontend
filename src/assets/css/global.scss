@@ -705,6 +705,16 @@
             height: 100%;
         }
         
+        .form-builder-sidebar .nav-tabs .nav-item a.nav-link {
+            border-width: 2px;
+            color: #495057
+        }
+        
+        .form-builder-sidebar .nav-tabs .nav-item a.nav-link.active {
+            color: #f04564;
+            border-color: #fff #fff #f04564 #fff;
+        }
+        
         .build-container {
             //height: 600px;
         }
@@ -924,4 +934,10 @@
         
         .scroller::-webkit-scrollbar-track {
             background: #D9D9D9;
+        }
+        /*--- Slider CSS----*/
+        
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: #f04563 !important;
         }
