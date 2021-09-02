@@ -795,6 +795,7 @@
         // Header Menu
         header .nav-item .nav-link {
             position: relative;
+            font-family: $baseFont;
         }
         
         header .nav-item .nav-link:hover {
@@ -828,6 +829,31 @@
             left: 0px;
             will-change: transform;
             transform: translate(-113px, 35px);
+        }
+        
+        .org-switcher-btn button#org-switcher {
+            font-family: $baseFont;
+            font-size: 0.875rem;
+            color: #212529;
+        }
+        
+        #UserProfile img {
+            object-fit: cover;
+        }
+        
+        .org-switcher-btn #org-switcher {
+            min-width: 200px;
+        }
+        
+        .org-switcher-btn #org-switcher::after {
+            font-family: 'Material Icons';
+            content: "\e5cf";
+            color: $base-color;
+            border: 0px;
+            font-size: 1.5rem;
+            position: absolute;
+            right: 4px;
+            top: 0px;
         }
         
         .header-dropdown-wrap .dropdown-toggle::after {

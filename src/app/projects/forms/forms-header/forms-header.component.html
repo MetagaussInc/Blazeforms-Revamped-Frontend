@@ -7,43 +7,25 @@
         </a>
         <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-md-flex': userId}">
             <div class="me-2 nav-item" [hidden]="!formPermission.canView">
-                <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" 
-                role="button" [routerLink]="['/forms']">Forms</a>
+                <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>
-            <div class="me-2 nav-item" [hidden]="!organizationPermission.canView">
-                <a aria-haspopup="true" aria-expanded="false" id="Organization" 
-                class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}" >Organization</a>
+            <div class="me-2 nav-item mr-5" [hidden]="!organizationPermission.canView">
+                <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}">Organization</a>
             </div>
-            <div class="dropdown nav-item">
-                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
-                    <div class="org-switch-wrapper mx-4 bg-light">
-                        <div class="org-switch-wrapper border rounded">
-                            <!-- <ul ngbNav #nav="ngbNav" class="nav-tabs border-0 justify-content-center">
-                                <li ngbDropdown class="nav-item">
-                                    <a href (click)="false" class="nav-link" ngbDropdownToggle>{{userWorkspaceList.name}}</a>
-                                    <div ngbDropdownMenu>
-                                        <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
-                                            <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
-                                        </ng-container>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div [ngbNavOutlet]="nav"></div> -->
 
-
-                            <div ngbDropdown class="d-inline-block">
-                                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{userWorkspaceList.name}}</button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                    <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
-                                        <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
-                                    </ng-container>
-                                </div>
-                            </div>
-
+            <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
+                <div class="org-switch-wrapper mx-4">
+                    <div ngbDropdown class="d-inline-block org-switcher-btn">
+                        <div class="border rounded bg-light py-2 px-3" id="org-switcher" role="button" ngbDropdownToggle>{{userWorkspaceList.name}}</div>
+                        <div ngbDropdownMenu aria-labelledby="org-switcher">
+                            <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
+                                <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
+                            </ng-container>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="lang-switcher-wrapper header-dropdown-wrap mr-4">
                 <div ngbDropdown class="d-inline-block">
                     <div class="dropdown-toggle" id="langswitcherdropdown" role="button" ngbDropdownToggle>
@@ -59,8 +41,8 @@
             <div class="account-image-wrapper header-dropdown-wrap">
                 <div ngbDropdown class="d-inline-block">
                     <div class="account-image" id="UserProfile" ngbDropdownToggle role="button">
-                        <img class="rounded-circle" src="assets/images/user.jpg" height="35" *ngIf="!profileImageSrc">
-                        <img class="rounded-circle" [src]="profileImageSrc" height="35" *ngIf="profileImageSrc">
+                        <img class="rounded-circle" src="assets/images/user.jpg" height="35" width="35" *ngIf="!profileImageSrc">
+                        <img class="rounded-circle" [src]="profileImageSrc" height="35" width="35" *ngIf="profileImageSrc">
                     </div>
                     <div ngbDropdownMenu class="dropdown-menu header-dropdown shadow border-0" aria-labelledby="UserProfile" x-placement="bottom-left">
                         <div class="dropdown-header" role="heading">
