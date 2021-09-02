@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -24,6 +24,9 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   public masterPlans: any[] = [];
   public planPermissions: any;
   public isSuperAdmin: boolean = false;
+
+  @Output() outputFromChild : EventEmitter<string> = new EventEmitter();
+  outputText : string = "Hi ... message from child";
 
   constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -77,8 +80,9 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   }
 
   updateSelectedPlan(plan: any){
-    this.showPlanPage = false;
-    this.planDetail = plan;
+    //this.showPlanPage = false;
+    //this.planDetail = plan;
+    this.outputFromChild.emit(this.outputText);
     //this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
   }
 

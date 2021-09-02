@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { EMPTY, Observable } from 'rxjs';
@@ -59,6 +59,7 @@ export class ManageWorkSpacesComponent implements OnInit {
   public isSuperAdmin: boolean = false;
   public userId: any;
   public activeTabId = 1;
+  public showBillingPage: boolean = false;
 
   constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
@@ -86,7 +87,8 @@ export class ManageWorkSpacesComponent implements OnInit {
     this.userId = this.dataSharingService.GetUserId();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   checkforAgreements({ value }: AbstractControl): any {
     if (!value) {
@@ -196,6 +198,10 @@ export class ManageWorkSpacesComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetails = plan;
+  }
+
+  receiveChildData(data: any){
+    console.log(data);
   }
 
   get FirstName() { return this.organizationSignupForm.get('FirstName'); }

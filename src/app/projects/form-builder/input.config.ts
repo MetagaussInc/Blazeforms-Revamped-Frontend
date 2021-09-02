@@ -356,7 +356,7 @@ export const config = [
     },
     {
         name: 'Phone Number',
-        inputType: 'number',
+        inputType: 'phoneNumber',
         icon: 'fas fa-hashtag',
         class: 'half',
         placeholder: '',

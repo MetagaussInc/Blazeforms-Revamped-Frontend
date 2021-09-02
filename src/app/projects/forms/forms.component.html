@@ -86,7 +86,7 @@
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="openModal(form.value)">people</i>
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="move(form)">drive_file_move</i>
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="archive(form)">archive</i>
-                                        <i *ngIf="formPermissions.canEdit" role="button" (click)="openEdit('form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
+                                        <i *ngIf="formPermissions.canEdit" role="button" (click)="openEdit('Form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
                                         <i *ngIf="formPermissions.canDelete" role="button" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                                     </div>
                                 </div>
