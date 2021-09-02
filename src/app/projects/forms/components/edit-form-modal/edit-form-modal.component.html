@@ -51,8 +51,12 @@
                     </div>
                     <div class="col-md-7">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" formControlName="active">
+                            <input type="checkbox" id="bf_active_form" class="custom-control-input" formControlName="active">
                             <label class="custom-control-label" for="bf_active_form"></label>
+
+                            <!-- <input type="checkbox" formControlName="isActive" class="custom-control-input" id="bf_active_organization">
+                            <label class="custom-control-label" for="bf_active_organization"></label> -->
+                       
                         </div>
                     </div>
                 </div>
@@ -61,7 +65,7 @@
 
         <div class="modal-footer border-0">
             <button type="button" class="btn btn-link btn-sm text-bf" (click)="closeModal()">Cancel</button>
-            <button type="button" class="btn btn-bf btn-sm" (click)="submit()">Save</button>
+            <button type="button" class="btn btn-bf btn-sm" [disabled]="f.name.invalid || f.desc.invalid" (click)="submit()">Save</button>
         </div>
     </div>
 </div>

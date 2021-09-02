@@ -57,7 +57,7 @@ export class EditFormModalComponent implements OnInit {
       Description: this.addForm.value.desc,
       DocumentTemplatesJson: "NOUSAGE",
       FormSettings: "NOUSAGE",
-      FormType: "Form",
+      FormType: this.type,
       FolderID: this.addForm.value.folder,
       IsActive: true,
       Name: this.addForm.value.name,

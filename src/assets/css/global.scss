@@ -705,6 +705,16 @@
             height: 100%;
         }
         
+        .form-builder-sidebar .nav-tabs .nav-item a.nav-link {
+            border-width: 2px;
+            color: #495057
+        }
+        
+        .form-builder-sidebar .nav-tabs .nav-item a.nav-link.active {
+            color: #f04564;
+            border-color: #fff #fff #f04564 #fff;
+        }
+        
         .build-container {
             //height: 600px;
         }
@@ -795,6 +805,7 @@
         // Header Menu
         header .nav-item .nav-link {
             position: relative;
+            font-family: $baseFont;
         }
         
         header .nav-item .nav-link:hover {
@@ -830,6 +841,31 @@
             transform: translate(-113px, 35px);
         }
         
+        .org-switcher-btn button#org-switcher {
+            font-family: $baseFont;
+            font-size: 0.875rem;
+            color: #212529;
+        }
+        
+        #UserProfile img {
+            object-fit: cover;
+        }
+        
+        .org-switcher-btn #org-switcher {
+            min-width: 200px;
+        }
+        
+        .org-switcher-btn #org-switcher::after {
+            font-family: 'Material Icons';
+            content: "\e5cf";
+            color: $base-color;
+            border: 0px;
+            font-size: 1.5rem;
+            position: absolute;
+            right: 4px;
+            top: 0px;
+        }
+        
         .header-dropdown-wrap .dropdown-toggle::after {
             display: none;
         }
@@ -857,4 +893,51 @@
         
         .workspace-plan-details .workspace-plan-notice .plan-detail:hover {
             text-decoration: none;
+        }
+        
+        .popover-controller {
+            position: absolute;
+            right: -26px;
+            top: -1px;
+            background-color: #efefef;
+            padding: 0px;
+            line-height: 8px;
+            border-color: #f04564;
+            border-style: dashed;
+            border-width: 1px 1px 1px 0;
+        }
+        
+        .popover-controller {
+            display: none;
+        }
+        
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item:hover .popover-controller {
+            display: block;
+        }
+        
+        .popover-controller .popover-controller-icon {
+            font-size: 20px;
+        }
+        /*--Scroller---*/
+        
+        .scroller {
+            scroll-behavior: smooth;
+        }
+        
+        .scroller::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .scroller::-webkit-scrollbar-thumb {
+            background: #999999;
+        }
+        
+        .scroller::-webkit-scrollbar-track {
+            background: #D9D9D9;
+        }
+        /*--- Slider CSS----*/
+        
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: #f04563 !important;
         }
