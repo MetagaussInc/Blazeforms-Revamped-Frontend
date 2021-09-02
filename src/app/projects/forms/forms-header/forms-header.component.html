@@ -5,7 +5,7 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </a>
-        <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-md-flex': userId}">
+        <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-flex': userId}">
             <div class="me-2 nav-item" [hidden]="!formPermission.canView">
                 <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>

@@ -884,3 +884,27 @@
         .workspace-plan-details .workspace-plan-notice .plan-detail:hover {
             text-decoration: none;
         }
+        
+        .popover-controller {
+            position: absolute;
+            right: -27px;
+            top: -1px;
+            background-color: #efefef;
+            padding: 0px;
+            line-height: 8px;
+            border-color: #f04564;
+            border-style: dashed;
+            border-width: 1px 1px 1px 0;
+        }
+        
+        .popover-controller {
+            display: none;
+        }
+        
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item:hover .popover-controller {
+            display: block;
+        }
+        
+        .popover-controller .popover-controller-icon {
+            font-size: 22px;
+        }
