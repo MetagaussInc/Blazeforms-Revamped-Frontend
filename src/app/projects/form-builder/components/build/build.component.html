@@ -6,9 +6,9 @@
 
             <div class="col-md-2 text-center">
                 <div ngbDropdown class="d-inline-block btn-group w-100 dropdown-split-warning">
-                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more
+                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form<i class="material-icons float-right"> expand_more
                         </i></button>
-                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto py-2">
+                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto scroller w-100 py-2">
                         <a *ngFor="let form of formsList" class="border-bottom" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
                     </div>
                 </div>
@@ -24,40 +24,40 @@
                                     <h2>Workflow</h2>
                                 </div>
                             </div>
-                            
+
                             <div class="Workflow-container container">
-                            
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Invite Users</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text  d-flex h6 info-box-text">
                                                     <span class="material-icons-outlined mr-2">
                                             info
-                                        </span> You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners
-                                                    has full rights to edit workflow, modify levels, assign participants and design workflow forms.</p>
-                            
+                                        </span> You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification
+                                                    to activate themselves. Users added as owners has full rights to edit workflow, modify levels, assign participants and design workflow forms.</p>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
+
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Define owners for this workflow</h5>
                                             <div class="card-body">
-                            
+
                                                 <div class="form-group">
                                                     <label></label>
                                                     <input id="text1" name="text1" type="text" [(ngModel)]="userSerach" placeholder="Enter name or email of users to add as owner" class="form-control">
                                                     <div *ngIf="userSerach?.length > 0">
-                                                        <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
+                                                        <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers">
                                                             <div *ngIf="user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)" class="added-user-item row p-3 border-bottom">
-                                        
+
                                                                 <div class="added-user-title-wrapper col-md-1">
                                                                     <img src="src/assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                                 </div>
@@ -65,32 +65,32 @@
                                                                     <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
                                                                     <span class="text-muted"><i>{{user.email}}</i></span>
                                                                 </div>
-                                            
+
                                                                 <div class="added-user-title-wrapper col-md-3">
                                                                     <!-- <span *ngIf="user.isLinkActivated" class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span> -->
                                                                     <button class="btn btn-success" (click)="addUserToWorkFlow(user.id)">Add</button>
                                                                 </div>
                                                                 <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                            
+
                                                                 </div>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </div>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
+
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <h4>Added Users</h4>
                                         <div class="added-users-list col-md-12 border rounded">
-                                            <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
+                                            <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers">
                                                 <div *ngIf="addedUserId?.includes(user.id)" class="added-user-item row p-3 border-bottom">
-                            
+
                                                     <div class="added-user-title-wrapper col-md-1">
                                                         <img src="images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                     </div>
@@ -98,55 +98,55 @@
                                                         <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
                                                         <span class="text-muted"><i>{{user.email}}</i></span>
                                                     </div>
-                                
+
                                                     <div class="added-user-title-wrapper col-md-3">
                                                         <span *ngIf="user.isLinkActivated" class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
                                                     </div>
                                                     <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                
+
                                                         <i class="material-icons-round text-dark" (click)="deleteUser(user.id)">delete</i>
                                                     </div>
                                                 </div>
                                             </ng-container>
-                                            
-                                          
-                                                    
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Define various levels to this workflow</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text">
                                                     You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
-                            
+
                                                 <div class="text-center"> <a href="#" class="btn btn-primary btn-bf" (click)="addLevels()">Add Levels</a></div>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
+
+
                                 <div class="row mt-3">
                                     <div class="col">
-                                        <div class=" multi-collapse card" >
+                                        <div class=" multi-collapse card">
                                             <h5 class="card-header">Added Levels</h5>
                                             <div class="card-body">
-                            
+
                                                 <div *ngFor="let item of workFLowDetails?.workFlowLevels" class="row">
                                                     <div class="col-md-8">
                                                         <div class="form-group">
-                            
+
                                                             <input name="text1" type="text" class="form-control">
                                                         </div>
                                                     </div>
-                            
+
                                                     <div class="col-md-4 text-right">
                                                         <span class="material-icons animate-mat collapsed mr-1" title="Add Participants">person_add</span>
                                                         <span class="material-icons animate-mat mr-1" title="Drag n Drop">open_with</span>
@@ -158,27 +158,27 @@
                                             </div>
                                         </div>
                                     </div>
-                            
+
                                 </div>
-                            
-                            
+
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Build your form</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text">
                                                     You may add any under within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate theirselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
-                            
+
                                                 <div class="text-center"> <a href="#" class="btn btn-primary btn-bf" data-target="#">Build</a></div>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             </div>
                         </ng-template>
                     </li>
@@ -540,7 +540,7 @@
                                     <div class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
 
                                         <div class="form-build-head">
-                                            <h2 class="text-center form-heading mb-1">{{builderObj.name}}</h2>
+                                            <h4 class="text-center form-heading mb-1">{{builderObj.name}}</h4>
                                             <p class="text-center text-muted"> {{builderObj.description}}</p>
 
                                         </div>
@@ -550,6 +550,12 @@
 
 
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
+                                                    <div class="popover-controller"><span class="material-icons popover-controller-icon" role="button">
+                                                        more_vert <span class="">
+                                                            
+                                                            </span>
+                                                        </span>
+                                                    </div>
                                                     <div class="popover bs-popover-bottom field-popover-wrap" *ngIf="selectedElement?.uiIndexId === model.uiIndexId">
                                                         <div class="arrow"></div>
                                                         <div class="popover-body">

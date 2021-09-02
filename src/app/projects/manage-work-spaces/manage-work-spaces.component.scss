@@ -13,3 +13,8 @@
     color: #f04564;
     border-color: #fff #fff #f04564 #fff;
 }
+
+.organization-wrapper .general-setting-tab .nav-item {
+    flex-basis: auto;
+    flex-grow: revert;
+}
