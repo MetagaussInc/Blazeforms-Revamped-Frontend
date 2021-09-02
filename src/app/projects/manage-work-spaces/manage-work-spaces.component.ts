@@ -200,8 +200,10 @@ export class ManageWorkSpacesComponent implements OnInit {
     this.planDetails = plan;
   }
 
-  receiveChildData(data: any){
-    console.log(data);
+  onUpgradePlan(plan: any) {
+    this.showBillingPage = true;
+    this.activeTabId = 8;
+    this.dataSharingService.SetBillingPageData(plan);
   }
 
   get FirstName() { return this.organizationSignupForm.get('FirstName'); }

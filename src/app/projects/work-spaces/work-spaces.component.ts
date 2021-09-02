@@ -34,6 +34,9 @@ export class WorkSpacesComponent implements OnInit {
   public isPaginationLoading: boolean = false;
   public isLoading: boolean = false;
   public selectedWorkspaceId: any;
+  public p: number = 1;
+  public isPagination: boolean = false;
+  public showPagination: boolean = false;
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -51,6 +54,7 @@ export class WorkSpacesComponent implements OnInit {
   ngOnInit(): void {}
 
   getUserOrganizationsList(){
+    this.isLoading = true;
     const workspacedata = {
       Id: this.userInfo.Id,
       SearchKeyword: this.searchedString,
@@ -59,26 +63,23 @@ export class WorkSpacesComponent implements OnInit {
     if(this.IsSuperAdmin){
       this.http.call('getUserWorkSpacesForSuperMaster', 'POST', workspacedata).subscribe(response => {
         this.totalOrgCount = response.total;
-        for (let i = 0; i < this.pageDetail.pageSize; ++i) {
-          if(response.res[i]){
-            this.organizationLists.push(response.res[i]);
-          }
+        this.organizationLists = response.res;
+        this.isLoading = false;
+        this.showPagination = true;
+        if(this.isPagination){
+          window.scroll({ top: 100, left: 0, behavior: 'smooth' });
         }
-        this.isPaginationLoading = false;
       });
-      console.log(this.organizationLists.length);
-      console.log(this.totalOrgCount);
-      console.log(this.scrollCheck);
     }
     else{
       this.http.call('getUserWorkSpaces', 'POST', workspacedata).subscribe(response => {
         this.totalOrgCount = response.total;
-        for (let i = 0; i < this.pageDetail.pageSize; ++i) {
-          if(response.res[i]){
-            this.organizationLists.push(response.res[i]);
-          }
+        this.organizationLists = response.res;
+        this.isLoading = false;
+        this.showPagination = true;
+        if(this.isPagination){
+          window.scroll({ top: 100, left: 0, behavior: 'smooth' });
         }
-        this.isPaginationLoading = false;
       });
     }
   }
@@ -124,23 +125,8 @@ export class WorkSpacesComponent implements OnInit {
     .pipe(debounceTime(500),
       map((response: any) => {
       this.totalOrgCount = response.total;
-      for (let i = 0; i < this.pageDetail.pageSize; ++i) {
-        if(response.res[i]){
-          this.organizationLists.push(response.res[i]);
-        }
-      }
+      this.organizationLists = response.res;
     }));
-  }
-
-  onScroll(){
-    this.isPaginationLoading = true;
-    this.pageDetail.pageNumber++;
-    this.getUserOrganizationsList();
-    console.log(this.pageDetail.pageNumber);
-    console.log(this.scrollCheck);
-    if(this.organizationLists.length >= this.totalOrgCount){
-      this.scrollCheck = true;
-    }
   }
 
   goToManageWorkSpaces(action: any, orgId: string){
@@ -167,4 +153,12 @@ export class WorkSpacesComponent implements OnInit {
       });
     }
   }
+
+  getPage(page: any){
+    this.p = page;
+    this.pageDetail.pageNumber = page;
+    this.isPagination = true;
+    this.getUserOrganizationsList();
+  }
+
 }

@@ -296,7 +296,7 @@
                 <li [ngbNavItem]="6" *ngIf="isOrganizationEdit && planPermissions.canView && !showBillingPage">
                     <a ngbNavLink class="nav-link p-3">Subscription</a>
                     <ng-template ngbNavContent>
-                        <app-manage-work-spaces-subscription></app-manage-work-spaces-subscription>
+                        <app-manage-work-spaces-subscription (updatePlan)="onUpgradePlan($event)"></app-manage-work-spaces-subscription>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="7" *ngIf="isOrganizationEdit && !showBillingPage">
@@ -305,10 +305,10 @@
                         <app-manage-work-spaces-referral-program></app-manage-work-spaces-referral-program>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="8">
+                <li [ngbNavItem]="8" [hidden]="!showBillingPage">
                     <a ngbNavLink>Billing Informaton</a>
                     <ng-template ngbNavContent>
-                        <app-manage-work-spaces-billing-info (outputFromChild)="receiveChildData($event)"></app-manage-work-spaces-billing-info>
+                        <app-manage-work-spaces-billing-info></app-manage-work-spaces-billing-info>
                     </ng-template>
                 </li>
             </ul>

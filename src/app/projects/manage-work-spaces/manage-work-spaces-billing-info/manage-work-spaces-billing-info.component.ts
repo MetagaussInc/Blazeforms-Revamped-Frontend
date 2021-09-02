@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSharingService } from '../../../shared/data-sharing.service';
 
 @Component({
   selector: 'app-manage-work-spaces-billing-info',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageWorkSpacesBillingInfoComponent implements OnInit {
 
-  constructor() { }
+  public billingpageData: any;
+  constructor(private dataSharingService: DataSharingService) {
+    let billData = this.dataSharingService.GetBillingpageData();
+    if(billData){
+      this.billingpageData = JSON.parse(billData);
+    }
+    console.log(this.billingpageData);
+  }
 
   ngOnInit(): void {
   }

@@ -23,6 +23,7 @@ export class DataSharingService {
   public selectedWorkspaceId: any;
   public userId: any;
   public userWorkspaceList: any;
+  public billingPageData: any;
 
   constructor(private store: Store, private http: HttpService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -127,6 +128,14 @@ export class DataSharingService {
 
   SetUserWorkspace(workspace: any){
     this.userWorkspaceList = {id: workspace.id, name: workspace.name};
+  }
+
+  SetBillingPageData(data: any){
+    this.billingPageData = data;
+  }
+
+  GetBillingpageData(){
+    return this.billingPageData;
   }
 
 }

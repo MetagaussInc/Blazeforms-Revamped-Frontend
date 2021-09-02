@@ -35,7 +35,6 @@
     "bootstrap": "^4.5.0",
     "file-saver": "^2.0.5",
     "ng2-select": "^2.0.0",
-    "ngx-infinite-scroll": "^10.0.1",
     "rxjs": "~6.6.0",
     "swiper": "^6.8.1",
     "tslib": "^2.2.0",

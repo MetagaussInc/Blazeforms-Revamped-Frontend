@@ -11,7 +11,7 @@ export class ToastService {
 
   showSuccess(msg:any) {
     this.show(msg, {
-      classname: 'bg-success text-light',
+      //classname: 'bg-success text-light',
       delay: 5000 ,
       autohide: true,
       headertext: 'Success!'
@@ -19,7 +19,7 @@ export class ToastService {
   }
   showError(msg:any) {
     this.show(msg, {
-      classname: 'bg-danger text-light',
+      //classname: 'bg-danger text-light',
       delay: 5000 ,
       autohide: true,
       headertext: 'Error!'

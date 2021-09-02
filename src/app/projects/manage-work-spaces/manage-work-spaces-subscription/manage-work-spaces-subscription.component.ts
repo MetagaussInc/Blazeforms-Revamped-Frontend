@@ -25,8 +25,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   public planPermissions: any;
   public isSuperAdmin: boolean = false;
 
-  @Output() outputFromChild : EventEmitter<string> = new EventEmitter();
-  outputText : string = "Hi ... message from child";
+  @Output() updatePlan = new EventEmitter<any>();
 
   constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -80,9 +79,9 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   }
 
   updateSelectedPlan(plan: any){
-    //this.showPlanPage = false;
-    //this.planDetail = plan;
-    this.outputFromChild.emit(this.outputText);
+    this.showPlanPage = false;
+    this.planDetail = plan;
+    this.updatePlan.emit(JSON.stringify(plan));
     //this.planDetail.storageSize = ((this.planDetail.storageSize) / (1024 * 1024));
   }
 
