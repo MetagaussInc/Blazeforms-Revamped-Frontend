@@ -6,9 +6,9 @@
 
             <div class="col-md-2 text-center">
                 <div ngbDropdown class="d-inline-block btn-group w-100 dropdown-split-warning">
-                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form Name goes here <i class="material-icons float-right"> expand_more
+                    <button class="btn border text-muted w-100 text-left" id="forms-listing-selector" ngbDropdownToggle>Form<i class="material-icons float-right"> expand_more
                         </i></button>
-                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto py-2">
+                    <div ngbDropdownMenu aria-labelledby="forms-listing-selector" class="forms-listing-dropdown overflow-auto scroller w-100 py-2">
                         <a *ngFor="let form of formsList" class="border-bottom" (click)="openForm(form)" ngbDropdownItem>{{form.name}}</a>
                     </div>
                 </div>
