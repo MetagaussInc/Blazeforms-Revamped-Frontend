@@ -141,8 +141,10 @@ userInfo: any;
     rows: []
   }
 
+  workFLowDetails: any;
+  addedUserId: any = [];
   formId: any = null;
-
+  userSerach: any = null;
 
   constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -198,6 +200,9 @@ userInfo: any;
         this.count = element.uiIndexId + 1;
       }
       });
+      if (this.builderObj?.formType === 'WorkFlow') {
+        this.getWorkFlowDetails(ID);
+      }
       this.getWorkSpaceAccounts();
       this.getFoldersWithList(this.userInfo)
     })
@@ -206,6 +211,111 @@ userInfo: any;
 
   }
 
+  addUserToWorkFlow(id: any) {
+    this.userSerach = null;
+    const payload = {
+      CreatedBy: this.userInfo.Id,
+FormId: this.formId,
+LevelId: null,
+UserId: id,
+UserType: "Owner",// to do
+WorkspaceId: this.userInfo.WorkspaceDetail.Id
+    }
+
+    this.http.call('AddUserToWorkFlow', 'POST', payload).subscribe(res => {
+      // console.log(res)
+      this.getWorkFlowDetails(this.formId);
+      
+    })
+  }
+
+    deleteUser(id: any) {
+
+        let ID = ''
+      this.workFLowDetails.workFlowUsers.forEach((element: any) => {
+        if (element.userId === id) {
+          ID = element.id;
+        }
+      });
+      const payload = {
+        Id: ID,
+        UserId: id,
+        WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      }
+
+      this.http.call('DeleteUserFromWorkFlow', 'POST', payload).subscribe(res => {
+      this.getWorkFlowDetails(this.formId);
+        
+      })
+     
+    }
+
+    addLevels() {
+      const payload = {
+        CreatedBy: this.userInfo.id,
+        FormId: this.formId,
+        Id: null,
+        Level: null,
+        LevelOrder: this.workFLowDetails.workFlowLevels.length,
+        WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      }
+
+      this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
+        console.log(res)
+      this.getWorkFlowDetails(this.formId);
+       
+      })
+    }
+  getWorkFlowDetails(ID: any) {
+    return;
+    const payload = {
+      FormId: ID,
+      SearchKeyword: '',
+      UserId: this.userInfo.Id,
+      WorkSpaceId: this.userInfo.WorkspaceDetail.Id
+    }
+    this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
+      console.log(res)
+      this.workFLowDetails = res;
+      this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
+        this.addedUserId.push(element.userId)
+        
+      });
+    })
+  }
+
+  makeLarger(model: any) {
+    switch (model.size) {
+      case 'small':
+        model.size = 'medium';
+        break;
+        case 'medium': 
+          model.size = 'large';
+        break;
+        case 'large':
+          model.size = 'extra-large'
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  makeSmaller(model: any) {
+    switch (model.size) {
+      case 'medium':
+        model.size = 'small';
+        break;
+        case 'large': 
+          model.size = 'medium';
+        break;
+        case 'extra-large':
+          model.size = 'large'
+        break;
+      default:
+        break;
+  }
+}
   getNewEntries() {
     this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
       const data: any = [];

@@ -37,10 +37,13 @@ styling = {
 }
 
 active = 1;
+path: string = '';
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.elements)
+    // Remove this when code is deploy to stage.
+    console.log(this.url)
+   this.path = window.location.origin +'/#'+ this.url.split('#')[1].replace('BlazeForms', 'blazeforms')
   }
 
   checkForDependency(model: any, T: any): boolean {
