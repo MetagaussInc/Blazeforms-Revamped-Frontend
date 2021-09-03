@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { userLogin } from 'src/app/+state/user/user.actions';
 import { selectUserState } from 'src/app/+state/user/user.selectors';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8)
     ])
   });
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router, private toastService: ToastService) {
     this.store.select(selectUserState).subscribe((res: any) => {
       if (res.apiCompleted) {
         this.isFormSubmitted = false;

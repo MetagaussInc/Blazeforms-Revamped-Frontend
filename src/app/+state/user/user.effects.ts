@@ -5,6 +5,7 @@ import { Observable, EMPTY, of } from 'rxjs';
 
 import * as UserActions from './user.actions';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { ToastService } from '../../shared/toast.service';
 
 
 
@@ -19,9 +20,11 @@ export class UserEffects {
           map(data => {
             if (data.success) {
               const props = {...data};
+              this.toastService.showSuccess('Logged In Successfully!');
               return UserActions.userLoginSuccess({ props })
             } else {
               const props = {...data};
+              this.toastService.showError(data.message);
               return UserActions.userLoginError({ props })
             }
           })
@@ -81,6 +84,6 @@ export class UserEffects {
   //   );
   // });
 
-  constructor(private actions$: Actions, private http: HttpService) { }
+  constructor(private actions$: Actions, private http: HttpService, private toastService: ToastService) { }
 
 }
