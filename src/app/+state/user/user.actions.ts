@@ -53,6 +53,11 @@ export const updateCurrentWorkSpaceDetail = createAction(
   props<{ props: any }>()
 );
 
+export const updateUserLoginAttempts = createAction(
+  '[User] Update user login attempts',
+  props<{ props: any }>()
+);
+
 
 // export const userRegister = createAction(
 //   '[User] Register',

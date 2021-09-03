@@ -30,3 +30,8 @@ export const getCurrentWorkSpaceDetails = createSelector(
   selectUserState,
   (state: UserState) => state.currentWorkSpaceDetail
 );
+
+export const getUserLoginAttempts = createSelector(
+  selectUserState,
+  (state: UserState) => state.userLoginAttempts
+);
