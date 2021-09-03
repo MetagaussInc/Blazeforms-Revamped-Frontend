@@ -6,7 +6,8 @@
 <div class="organizations-container container">
     <div class="search-wrapper">
         <div class="form-group has-search mb-5">
-            <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString" (ngModelChange)="searchWorkSpace($event)">
+            <!-- <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString" (ngModelChange)="searchWorkSpace($event)"> -->
+            <input id="typeahead-basic" type="text" class="form-control" placeholder="Search Organization" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false"  (selectItem)="selectOrgItem($event)" />
         </div>
     </div>
     <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">

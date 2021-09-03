@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUserInfo } from 'src/app/+state/user/user.selectors';
+import { selectUserInfo, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteWorkSpacesComponent } from './delete-work-spaces/delete-work-spaces.component';
-import { debounceTime, map } from 'rxjs/operators';
+import {Observable, OperatorFunction} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataSharingService } from '../../shared/data-sharing.service';
-import { userWorkspaceDetailSuccess } from 'src/app/+state/user/user.actions';
+import { userWorkspaceDetailSuccess,  } from 'src/app/+state/user/user.actions';
 import { ToastService } from '../../shared/toast.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class WorkSpacesComponent implements OnInit {
   totalNum = 0;
   pageDetail = {
     pageNumber: 1,
-    pageSize: 14
+    pageSize: 10
   };
   private userInfoSubscription$: any;
   public userInfo: any;
@@ -37,6 +38,7 @@ export class WorkSpacesComponent implements OnInit {
   public p: number = 1;
   public isPagination: boolean = false;
   public showPagination: boolean = false;
+  public userWorkspaceLists: any[] = [];
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -49,6 +51,14 @@ export class WorkSpacesComponent implements OnInit {
     this.permissions = this.dataSharingService.GetPermissions("Organizations");
     let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
     this.selectedWorkspaceId = workSpaceListData.id;
+    this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+      if(workspacesList){
+        let workSpaceListData = Array.from(Object.values(workspacesList));
+        workSpaceListData.forEach((item: any) => {
+          this.userWorkspaceLists.push({id: item.id, name: item.name});
+        });
+      }
+    });
   }
 
   ngOnInit(): void {}
@@ -101,6 +111,7 @@ export class WorkSpacesComponent implements OnInit {
             this.toastService.showSuccess('Organization Deleted Successfully!');
             this.organizationLists = [];
             this.pageDetail.pageNumber = 1;
+            this.showPagination = false;
             this.getUserOrganizationsList();
             this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userInfo.Id}).subscribe(response => {
               const props = response;
@@ -159,6 +170,23 @@ export class WorkSpacesComponent implements OnInit {
     this.pageDetail.pageNumber = page;
     this.isPagination = true;
     this.getUserOrganizationsList();
+  }
+
+  formatter = (x: {name: string}) => x.name;
+
+  search: OperatorFunction<string, readonly {id: any, name: any}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter((term: any | any[]) => term.length >= 2),
+    map(term => this.userWorkspaceLists.filter((org: { name: string; }) => new RegExp(term, 'mi').test(org.name)).slice(0, 10))
+  );
+
+  selectOrgItem(org: any){
+    if(org){
+      if(org.item.id){
+        this.goToManageWorkSpaces('edit', org.item.id);
+      }
+    }
   }
 
 }

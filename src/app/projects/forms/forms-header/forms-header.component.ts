@@ -5,8 +5,9 @@ import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+sta
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
 import { ActivatedRoute, NavigationEnd, Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
-import { updateCurrentWorkSpaceDetail, updateUserPlanDetail } from 'src/app/+state/user/user.actions';
+import { updateCurrentWorkSpaceDetail, updateUserPlanDetail, userLogout } from 'src/app/+state/user/user.actions';
 import { filter, map } from 'rxjs/operators';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-forms-header',
@@ -32,7 +33,7 @@ export class FormsHeaderComponent implements OnInit {
   private eventUrl$: any;
   public currentUrl: any;
   
-  constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router) {
+  constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router, private toastService: ToastService) {
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map(() => this.rootRoute(this.route)),
@@ -60,6 +61,13 @@ export class FormsHeaderComponent implements OnInit {
           this.workSpacePlanDetail = planInfo;
         });
       }
+      else{
+        this.userId = this.selectedWorkspaceId = this.userWorkspaceList = this.workSpacePlanDetail = '';
+        this.isSuperAdmin = false;
+        this.formPermission = {canView: false, canEdit: false, canDelete: false};
+        this.organizationPermission = {canView: false, canEdit: false, canDelete: false};
+        this.planPermission = {canView: false, canEdit: false, canDelete: false};
+      }
     });
 
     this.eventUrl$ = this.router.events.subscribe((event: NavigationEvent) => {
@@ -72,7 +80,6 @@ export class FormsHeaderComponent implements OnInit {
       if(workspacesList){
         this.userWorkspaceLists = Array.from(Object.values(workspacesList));
       }
-      console.log(this.userWorkspaceLists);
     });
   }
 
@@ -112,6 +119,12 @@ export class FormsHeaderComponent implements OnInit {
 
   UpgradePlan(workspace: any){
 
+  }
+
+  orgUserLogout(){
+    this.store.dispatch(userLogout());
+    this.toastService.showSuccess('You Are Successfully Logged Out!');
+    this.router.navigate(['/user/login']);
   }
 
 }

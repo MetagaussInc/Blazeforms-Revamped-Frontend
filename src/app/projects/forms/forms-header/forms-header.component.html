@@ -5,7 +5,7 @@
                 <img src="assets/images/logo.png" height="41">
             </div>
         </a>
-        <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="!userId" [ngClass]="{'d-flex': userId}">
+        <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="(!userId || currentUrl == '/user/login')" [ngClass]="{'d-flex': userId}">
             <div class="me-2 nav-item" [hidden]="!formPermission.canView">
                 <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>
@@ -17,7 +17,7 @@
                 <div class="org-switch-wrapper mx-4">
                     <div ngbDropdown class="d-inline-block org-switcher-btn">
                         <div class="border rounded bg-light py-2 px-3" id="org-switcher" role="button" ngbDropdownToggle>{{userWorkspaceList.name}}</div>
-                        <div ngbDropdownMenu aria-labelledby="org-switcher">
+                        <div ngbDropdownMenu aria-labelledby="org-switcher" [hidden]="isSuperAdmin">
                             <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
                                 <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
                             </ng-container>
@@ -53,7 +53,7 @@
                         <a [routerLink]="['/my-profile']" ngbDropdownItem role="button">My Account</a>
                         <a [routerLink]="['/my-profile']" ngbDropdownItem role="button">Setting</a>
                         <hr class="dropdown-divider" role="separator">
-                        <a [routerLink]="['/user/logout']" ngbDropdownItem role="button">Logout</a>
+                        <a [routerLink]="['/user/logout']" ngbDropdownItem role="button" (click)="orgUserLogout()">Logout</a>
                     </div>
                 </div>
             </div>

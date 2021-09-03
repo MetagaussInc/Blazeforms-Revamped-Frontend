@@ -46,38 +46,40 @@ export class FormsComponent implements OnInit {
 
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
-      console.log(userInfo)
-      this.userInfo = userInfo;
-      let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
-      this.selectedWorkspaceId = workSpaceListData.id;
-      this.getFormsList(userInfo);
+      if(userInfo){
+        this.userInfo = userInfo;
+        let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
+        this.selectedWorkspaceId = workSpaceListData.id;
+        this.getFormsList(userInfo);
+      }
     })
     this.formPermissions = this.dataSharingService.GetPermissions("Forms");
   }
 
   getFormsList(userInfo: any) {
+    if(userInfo){
+      // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
+      //   this.formsList = _.groupBy(res.res, 'folderName');
+      //   console.log(this.formsList)
+      // })
     
-    // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
-    //   this.formsList = _.groupBy(res.res, 'folderName');
-    //   console.log(this.formsList)
-    // })
-   
-    this.getFoldersWithList(userInfo)
+      this.getFoldersWithList(userInfo)
 
-    this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
-      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-      this.allForms = res;
-      this.allForms.forEach((element: any) => {
-        if (element.isFavourite) {
-          this.favs.push(element.id);
-        }
-      });
-    })
+      this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
+        WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
+        this.allForms = res;
+        this.allForms.forEach((element: any) => {
+          if (element.isFavourite) {
+            this.favs.push(element.id);
+          }
+        });
+      })
 
-    this.http.call('getFolders', 'POST', {
-      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-      this.folderList = res;
-    })
+      this.http.call('getFolders', 'POST', {
+        WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
+        this.folderList = res;
+      })
+    }
   }
 
   getFormId(form: any): string {
@@ -100,20 +102,22 @@ export class FormsComponent implements OnInit {
   }
 
   getFoldersWithList(userInfo: any, ) {
-    const obj = {
-      FilterAttribute: this.FilterAttribute,
-      SearchKeyword: this.searchedFormKeyword,
-      UserId: userInfo.Id,
-      WorkSpaceId: this.selectedWorkspaceId,
-      ...this.pageDetail,
+    if(userInfo){
+      const obj = {
+        FilterAttribute: this.FilterAttribute,
+        SearchKeyword: this.searchedFormKeyword,
+        UserId: userInfo.Id,
+        WorkSpaceId: this.selectedWorkspaceId,
+        ...this.pageDetail,
+      }
+      this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
+        const arr: any = [];
+        this.getfolderNameWithForms(res, arr);
+        this.formsList = arr;
+        this.folderListWithForms = arr;;
+        
+      })
     }
-    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
-      const arr: any = [];
-      this.getfolderNameWithForms(res, arr);
-      this.formsList = arr;
-      this.folderListWithForms = arr;;
-      
-    })
   }
 
   selectBulkForms(form: any) {

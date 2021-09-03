@@ -105,7 +105,16 @@ export const reducer = createReducer(
   }),
   on(UserActions.userLogout, (state, action) => {
     localStorage.removeItem('bforms');
-    return state
+    return {
+      user: null,
+      access_token: null,
+      user_plan_detail: null,
+      user_workspace_detail: null,
+      currentWorkSpaceDetail: {
+        workSpaceName: null,
+        workSpaceId: null
+      }
+    }
   }),
   on(UserActions.userProfileUpdate, (state, action) => {
     const updatedState = JSON.parse(JSON.stringify(state));

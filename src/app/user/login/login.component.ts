@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit {
         this.isFormSubmitted = false;
         if (res.user) {
           this.router.navigate(['/forms'])
-
         }
       }
-      console.log(res)
     })
   }
 
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.loginForm.value)
     const props = {
       mappingKey: 'login',
       payload: this.loginForm.value
