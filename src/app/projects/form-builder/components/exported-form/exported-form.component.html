@@ -290,8 +290,8 @@
         <div class="form-btn-group my-3">
             <button *ngIf="active !== 0" (click)="active = active - 1" class="btn btn-bf btn-md">back</button>
             <button *ngIf="active !== allArr.length - 1" (click)="active = active + 1" class="btn btn-bf btn-md">Next</button>
-            <button *ngIf="!initial || initial?.selectedPaymentOption === 'Cash' && (!getAmountDue() || getAmountDue() === 0)" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="submitParentForm('parentForm')">Submit</button>
-            <button *ngIf="(initial && initial?.selectedPaymentOption === 'Card') && getAmountDue() !== 0" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="billPay()">Proceed to Payment</button>
+            <button *ngIf="!initial || initial?.selectedPaymentOption === 'Cash'" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="submitParentForm('parentForm')">Submit</button>
+            <button *ngIf="(initial && initial?.selectedPaymentOption === 'Card') && getAmountDue() > 0" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="billPay()">Proceed to Payment</button>
         </div>
     </div>
 </div>
