@@ -108,7 +108,7 @@ export class ExportedFormComponent implements OnInit {
 
     getSubTotal() {
       let total = 0;
-      this.payments.forEach((element: any) => {
+      this.payments?.forEach((element: any) => {
         total = total + Number(element.value);
       });
       return total;
@@ -120,7 +120,7 @@ export class ExportedFormComponent implements OnInit {
       if (subTotal == 0) {
         return 0;
       }
-      this.initial.extraBill.forEach((additional: any) => {
+      this.initial?.extraBill?.forEach((additional: any) => {
         if (additional.type === "dollar") {
           total = total + Number(additional.value); 
         } else {
