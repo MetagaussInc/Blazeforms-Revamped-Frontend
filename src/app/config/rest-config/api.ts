@@ -17,6 +17,8 @@ export const api: any = {
     AddUserToWorkFlow: "Forms/AddUserToWorkFlow",
     DeleteUserFromWorkFlow: "Forms/DeleteUserFromWorkFlow",
     AddLevelInWorkFlowLevels: "Forms/AddLevelInWorkFlowLevels",
+    DeleteLevelInWorkFlowLevels: "Forms/DeleteLevelInWorkFlowLevels",
+    GetNotifications: "Forms/GetNotifications",
     archive: 'Forms/BulkAction',
     deleteForm: 'Forms/BulkAction',
     bulkAction: 'Forms/BulkAction',

@@ -1779,3 +1779,14 @@ export const advancedLayout = [
         }
     },
 ]
+
+export const Level = {
+    name: 'Section',
+    value: '',
+    children: [] as any[],
+    inputType: 'levelSection',
+    icon: 'far fa-square',
+    class: 'wide',
+    size: 'extra-large',
+    view: 'always',
+}
