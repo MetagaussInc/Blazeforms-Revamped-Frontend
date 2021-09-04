@@ -12,7 +12,8 @@ export interface UserState {
   access_token: any;
   user_plan_detail: any;
   user_workspace_detail: any;
-  currentWorkSpaceDetail: WorkSpaceDetail
+  currentWorkSpaceDetail: WorkSpaceDetail,
+  userLoginAttempts: number
 }
 
 export const initialState: UserState = {
@@ -23,7 +24,8 @@ export const initialState: UserState = {
   currentWorkSpaceDetail: {
     workSpaceName: null,
     workSpaceId: null
-  }
+  },
+  userLoginAttempts: 0
 };
 
 
@@ -40,7 +42,8 @@ export const reducer = createReducer(
       currentWorkSpaceDetail: {
         workSpaceName: JSON.parse(bForms)?.currentWorkSpaceName,
         workSpaceId: JSON.parse(bForms)?.currentWorkSpaceId
-      }
+      },
+      userLoginAttempts: 0
     };
   }),
   on(UserActions.userLoginSuccess, (state, action) => {
@@ -60,7 +63,8 @@ export const reducer = createReducer(
       currentWorkSpaceDetail: {
         workSpaceName: action.props.user.WorkspaceDetail.Name,
         workSpaceId: action.props.user.WorkspaceDetail.Id
-      }
+      },
+      userLoginAttempts: 0
     };
   }),
   on(UserActions.userPlanDetailSuccess, (state, action) => {
@@ -90,6 +94,9 @@ export const reducer = createReducer(
     return updatedState;
   }),
   on(UserActions.userLoginError, (state, action) => {
+    console.log(state);
+    let loginAtt = state.userLoginAttempts;
+    loginAtt++;
     return {
       user: null,
       isUserLoggedin: false,
@@ -100,7 +107,8 @@ export const reducer = createReducer(
       currentWorkSpaceDetail: {
         workSpaceName: null,
         workSpaceId: null
-      }
+      },
+      userLoginAttempts: loginAtt
     }
   }),
   on(UserActions.userLogout, (state, action) => {
@@ -113,7 +121,8 @@ export const reducer = createReducer(
       currentWorkSpaceDetail: {
         workSpaceName: null,
         workSpaceId: null
-      }
+      },
+      userLoginAttempts: 0
     }
   }),
   on(UserActions.userProfileUpdate, (state, action) => {

@@ -1,12 +1,18 @@
-<ng-container *ngIf="dataLoaded; else notLoaded">
+<ng-container *ngIf="dataLoaded && !needLogin; else notLoaded">
     <div class="container-fluid">
         <h2 class="text-center form-heading my-1">{{formDetail.name}}</h2>
-        <app-exported-form [elements]="elements" [initial]="paymentDetails" [payments]="payments" [config]="formDetail">
+        <app-exported-form [levelDetails]="levelDetails" [isPublishPage]="true" [elements]="elements" [initial]="paymentDetails" [payments]="payments" [config]="formDetail">
         </app-exported-form>
     </div>
 </ng-container>
 <ng-template #notLoaded>
+    <ng-container *ngIf="needLogin; else elseTemplate">
+        Need Login
+    </ng-container>
+    <ng-template #elseTemplate>
     It's Loading
+    </ng-template>
+    
 </ng-template>
 
 

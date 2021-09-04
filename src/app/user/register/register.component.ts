@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -67,7 +68,7 @@ export class RegisterComponent implements OnInit {
     StripePlanId: ''
   };
   
-  constructor(private http: HttpService, private router: Router) { }
+  constructor(private http: HttpService, private router: Router, private toastService: ToastService) { }
 
   checkforAgreements({ value }: AbstractControl): any {
     if (!value) {
@@ -189,6 +190,7 @@ export class RegisterComponent implements OnInit {
     delete obj.confirmPassword;
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
+      //this.toastService.showSuccess('Logged In Successfully!');
       this.router.navigate(['user/register-confirm'])
     })
   }

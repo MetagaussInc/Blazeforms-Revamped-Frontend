@@ -7,7 +7,7 @@
             <img class="login-image" src="assets/images/login-vector.png">
         </div>
         <!--Login Area Right Column-->
-        <div class="right-column col-md-7">
+        <div class="right-column col-md-7" *ngIf="!isBlockUser">
             <div class="right-column-top row px-3 pt-3">
                 <div class="login-heading-wrapper col-md-12 py-3 text-center">
                     <h2 class="login-heading">Sign in with Email or Fingerprint</h2>
@@ -55,9 +55,7 @@
                                                     </ng-container>
                                                 </div>
                                             </div>
-
                                         </form>
-
                                         <div class="login-button-wrapper col-md-12 mt-3">
                                             <button (click)="submit()" [disabled]="loginForm.invalid" type="button" class="login-button btn btn-bf btn-block py-2">
                                                 <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
@@ -101,6 +99,13 @@
                         No account yet?
                         <a [routerLink]="['../register']" class="create-account-link">Create account</a>
                     </span>
+                </div>
+            </div>
+        </div>
+        <div class="right-column col-md-7" *ngIf="isBlockUser">
+            <div class="right-column-top row px-3 pt-3">
+                <div class="login-heading-wrapper col-md-12 py-3 text-center">
+                    <h2 class="login-heading">Your account has been blocked. Try after {{timerDisplay}} seconds.</h2>
                 </div>
             </div>
         </div>

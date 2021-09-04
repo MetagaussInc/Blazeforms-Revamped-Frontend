@@ -13,18 +13,18 @@
                 <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}">Organization</a>
             </div>
 
-            <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
-                <div class="org-switch-wrapper mx-4">
-                    <div ngbDropdown class="d-inline-block org-switcher-btn">
-                        <div class="border rounded bg-light py-2 px-3" id="org-switcher" role="button" ngbDropdownToggle>{{userWorkspaceList.name}}</div>
-                        <div ngbDropdownMenu aria-labelledby="org-switcher" [hidden]="isSuperAdmin">
-                            <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
-                                <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
-                            </ng-container>
+                <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
+                    <div class="org-switch-wrapper mx-4">
+                        <div ngbDropdown class="d-inline-block org-switcher-btn">
+                            <div class="border rounded bg-light py-2 px-3" id="org-switcher" role="button" ngbDropdownToggle>{{userWorkspaceList.name}}</div>
+                            <div ngbDropdownMenu aria-labelledby="org-switcher" [hidden]="isSuperAdmin">
+                                <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
+                                    <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
+                                </ng-container>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <div class="lang-switcher-wrapper header-dropdown-wrap mr-4">
                 <div ngbDropdown class="d-inline-block">
@@ -35,6 +35,17 @@
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-switcher-wrapper header-dropdown-wrap">
+                <div ngbDropdown class="d-inline-block">
+                    <div class="dropdown-toggle" id="langswitcherdropdown" role="button" ngbDropdownToggle>
+                        <i class="material-icons">information</i>
+                    </div>
+                    <div ngbDropdownMenu style="top: -15px" class="dropdown-menu header-dropdown shadow border-0" aria-labelledby="langswitcherdropdown">
+                        <a *ngFor="let item of notifications" class="dropdown-item">{{item.formName}} filled by <br />{{item.userName}} <span (click)="viewPublish(item)">View</span></a>
+                        
                     </div>
                 </div>
             </div>

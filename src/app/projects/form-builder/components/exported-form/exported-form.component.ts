@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemComponent } from '@swimlane/ngx-dnd';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -16,6 +17,9 @@ export class ExportedFormComponent implements OnInit {
   @Input() public initial: any;
   @Input() public payments: any;
   @Input() public styling: any;
+  @Input() public noTabs: any
+  @Input() public isPublishPage: any
+  @Input() public levelDetails: any;
   strikeCheckout:any = null;
   model = {
     name: ''
@@ -25,12 +29,12 @@ export class ExportedFormComponent implements OnInit {
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-    constructor(private http: HttpService, private modalService: NgbModal) {
+    constructor(private http: HttpService, private modalService: NgbModal, private router: Router) {
 
     }
   
     ngOnInit(): void {
-      console.log(this.initial)
+      console.log(this.elements)
       let count = 0;
       if (this.elements?.length > 0) {
         for (const iterator of this.elements) {
@@ -246,7 +250,7 @@ export class ExportedFormComponent implements OnInit {
       console.log(data);
       const payload = {
         EncryptEntryData: false,
-FormType: "Form",
+FormType: this.levelDetails ? 'WorkFlow' : "Form",
 Id: this.config.id, //"2dz77r3bzZJ6UaCmrfOSeg==",
 IsValidNotification: false,
 Name: this.config.name, //"R2",
@@ -261,13 +265,25 @@ WorkSpaceName: this.config.workspaceName, //"Super_Admin_WorkSpace1",
 formEntry: JSON.stringify({
   entry: data,
   status: 'Submitted',
-  SubmittedDate: new Date()
+  SubmittedDate: new Date(),
+  submittedBy: '',
+  levelDetails: this.levelDetails,
+  savedElementsWithValue: this.elements
 }),
 userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
       }
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
-        console.log(res)
+        this.router.navigate(['blazeforms/form-submitted'])
       })
+    }
+
+    viewLevelSection(form: any): boolean {
+      return this.levelDetails?.enabledLevelId?.includes(form.levelId);
+    }
+
+    enableLevelSection(form: any): boolean {
+      return this.levelDetails?.disabledLevel?.includes(form.levelId);
+
     }
 
 }

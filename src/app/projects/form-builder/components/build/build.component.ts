@@ -4,11 +4,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-import { advancedLayout, config, layoutInputs } from '../../input.config';
+import { advancedLayout, config, layoutInputs, Level, paymentModel } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 import { ExcelService } from '../../excelservice.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as lodash from 'lodash';
 
 @Component({
   selector: 'app-build',
@@ -68,7 +69,9 @@ export class BuildComponent implements OnDestroy  {
   active = 1;
   viewProperties = 0; 
   selectedIndex: any;
-  selectedElement: any;
+  selectedElement: any = {
+    viewOptions: false
+  };
   viewExportedView = false;
   selectedDependency: any;
   count: number = 0;
@@ -137,15 +140,20 @@ userInfo: any;
   stripeAccounts: any;
 
   entries: any = {
+    entries: [],
     columns: [],
-    rows: []
+    rows: [],
+    selected: []
   }
 
+  viewEntryPanel = false;
+
+  mainTab = 1;
   workFLowDetails: any;
   addedUserId: any = [];
   formId: any = null;
   userSerach: any = null;
-
+  listPayments: any = [];
   constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -153,7 +161,7 @@ userInfo: any;
       if (userInfo) {
         this.route.queryParams.subscribe(res => {
           this.formId = res.ID;
-          this.getForm(res?.ID )
+          this.getForm(res?.ID, true )
         })
       }
     })
@@ -168,7 +176,7 @@ userInfo: any;
     this.router.navigate([`/blazeforms/${this.userInfo.WorkspaceDetail.Name.split(" ").join("_")}/${this.builderObj.name.split(" ").join("_")}`])
   }
 
-  getForm(ID: any) {
+  getForm(ID: any, initial: boolean) {
     console.log(ID)
     const payload = {
       FormEntriesId: null, // to do
@@ -190,9 +198,9 @@ userInfo: any;
         // this.targetBuilderTools.push(config[0])
       }
       this.paymentSetting = {
-        ...resp?.paymentSetting,
+        ...(resp?.paymentSetting || this.paymentSetting),
         inputType: 'paymentSection'
-      } || this.paymentSetting;
+      } ;
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -200,15 +208,55 @@ userInfo: any;
         this.count = element.uiIndexId + 1;
       }
       });
-      if (this.builderObj?.formType === 'WorkFlow') {
-        this.getWorkFlowDetails(ID);
+
+      this.setLevels(resp?.levels);
+      
+      // Excecute function initially only
+      if (initial) {
+        if (this.builderObj?.formType === 'WorkFlow') {
+          this.mainTab = 0
+          this.getWorkFlowDetails(ID);
+        }
+        this.getWorkSpaceAccounts();
+        this.getFoldersWithList(this.userInfo)
       }
-      this.getWorkSpaceAccounts();
-      this.getFoldersWithList(this.userInfo)
+      
     })
 
-    this.getNewEntries();
+    if (initial) {
+      this.getNewEntries();
+    }
 
+  }
+
+  setLevels(levels: any[]) {
+    const groupByLevelId = lodash.groupBy(levels, 'levelId');
+    if (this.builderObj?.formType === 'WorkFlow' && this.builderObj?.workFlowLevels.length > 0) {
+      console.log(this.builderObj?.workFlowLevels)
+      this.builderObj?.workFlowLevels.forEach((level: any) => {
+        if (groupByLevelId[level.id]) {
+          this.targetBuilderTools.unshift(groupByLevelId[level.id][0])
+        } else {
+          this.count = this.count + 2;
+          const levelConfig: any = JSON.parse(JSON.stringify(Level));
+          levelConfig.name = level.level;
+          levelConfig.levelId = level.id;
+          levelConfig.levelOrder = level.levelOrder;
+          levelConfig.levelOrder = level.levelOrder;
+          levelConfig.uiIndexId = this.count;
+          this.targetBuilderTools.unshift(levelConfig);
+        }
+      });
+
+      
+    }
+  }
+
+  switchToBuild() {
+    console.log('Switch')
+    if (this.builderObj?.formType === 'WorkFlow') {
+      this.getForm(this.formId, false);
+    }
   }
 
   addUserToWorkFlow(id: any) {
@@ -250,12 +298,12 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
      
     }
 
-    addLevels() {
+    addLevels(id?: any, level?: any) {
       const payload = {
         CreatedBy: this.userInfo.id,
         FormId: this.formId,
-        Id: null,
-        Level: null,
+        Id: id ? id :null,
+        Level: level? level : null,
         LevelOrder: this.workFLowDetails.workFlowLevels.length,
         WorkspaceId: this.userInfo.WorkspaceDetail.Id
       }
@@ -266,8 +314,12 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
        
       })
     }
+
+    changeLevel($event: any, item: any) {
+      // console.log($event.target.value, item.id)
+      this.addLevels(item.id, $event.target.value)
+    }
   getWorkFlowDetails(ID: any) {
-    return;
     const payload = {
       FormId: ID,
       SearchKeyword: '',
@@ -319,6 +371,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   getNewEntries() {
     this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
       const data: any = [];
+      this.entries.entries = res.formEntries;
       res.formEntries?.forEach((element: any, index: any) => {
         const entry = JSON.parse(element.formEntryJSON) 
         data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
@@ -336,13 +389,15 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
       const separatedData = entry?.split("&&");
       const data: any = separatedData[0].split('||');
       const formData: any = separatedData[1];
+      
       const rowObj: any = {};
       data.forEach((elementWithValue: any, colIndex: any) => {
         if (elementWithValue && elementWithValue?.length > 0) {
           if (entryIndex === 0) {
             Columns.push({
                 headerName: elementWithValue?.split("=")?.[0],
-                field: colIndex
+                field: colIndex,
+                view: true
               })
             }
             rowObj[colIndex] = elementWithValue?.split("=")?.[1];
@@ -370,10 +425,20 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
 
   openForm(form: any) {
     console.log(form)
-    this.getForm(form.id)
+    this.getForm(form.id, true);
 
   }
   saveForm() {
+    const levels: any = []
+    const elements: any = []
+      this.targetBuilderTools.forEach((element: any) => {
+        if (element.inputType !== 'levelSection') {
+          elements.push(element);
+        } else {
+          levels.push(element)
+        }
+      });
+    
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
@@ -393,9 +458,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
       WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       formLabels: "",
       MiscellaneousJSON: JSON.stringify({
-        targetBuilderTools: this.targetBuilderTools,
+        targetBuilderTools: elements,
+        levels: levels,
         count: this.count,
-        paymentSetting: (this.showPaymentFields() ? this.paymentSetting : null)
+        paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(paymentModel) : null)
       })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
@@ -479,9 +545,18 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     }
   }
 
-  delete(id: any) {
+  delete(model: any) {
+    const id = model.uiIndexId;
     this.targetBuilderTools = this.targetBuilderTools.filter((x: any) => id !== x.uiIndexId);
-    this.saveForm();
+    if (model.inputType === 'levelSection') {
+      this.http.call('DeleteLevelInWorkFlowLevels', 'POST', {
+        Id: model.levelId
+      }).subscribe(res => {
+       this.saveForm();
+      })
+    } else {
+      this.saveForm();
+    }
   }
 
   duplicate(id: any) {
@@ -504,6 +579,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   change($event: any, val: any) {
     this.selectedElement.options[val] = $event.target.value;
   }
+
+  trackByFn(index: any, item: any) {
+    return index;
+ }
 
   remove(i: number) {
     this.selectedElement.options.splice(i, 1);
@@ -561,7 +640,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   }
 
   abc($event: any, source: any, handle: any, sibling: any): boolean {
-    //return ($event.name === 'Dnd') ? false : true; 
+    return ($event.name === 'AddressDnd') ? false : true; 
     return true;
   }
   drop2(e: any) {
@@ -677,6 +756,9 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   }
 
   clicked($event: any, model: any, i: any) {
+    if (this.selectedElement?.viewOption) {
+      this.selectedElement['viewOption'] = false;
+    }
     this.selectedElement = model;
     // this.selectedIndex = model.index;
     // this.selectedDependency = null;
@@ -689,6 +771,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
 
   selectPayment() {
     this.selectedElement = this.paymentSetting;
+    this.viewProperties = 1; 
   }
 
   sectionClicked($event: any, model: any, i: any) {
@@ -772,6 +855,28 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     }).subscribe(res => {
       this.stripeAccounts = res;
       console.log(res)
+    })
+  }
+
+  selectEntry(rowIndex: any) {
+    if (this.entries.selected.includes(rowIndex)) {
+      this.entries.selected = this.entries.selected.filter((x: any) => x !== rowIndex);
+    } else {
+      this.entries.selected.push(rowIndex);
+    }
+    console.log('selected entry', this.entries.selected)
+  }
+
+  deleteEntry() {
+    let string = '';
+    this.entries.selected.forEach((index: any) => {
+      string =  ',' + this.entries.entries[index]?.id;
+    });
+    this.http.call('DeleteFormEntries', 'POST', 
+    {
+      FormEntriesID :string   }).subscribe(res => {
+        this.entries.selected = [];
+        this.getNewEntries();
     })
   }
 

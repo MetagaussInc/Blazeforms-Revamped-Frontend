@@ -73,3 +73,12 @@
 .field-popover-wrap .field-action:hover {
     background-color: #fff4f5;
 }
+
+.entry-panel {
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    border: 8px solid #f04563;
+    border-radius: 10px;
+    transition: all .5s ease-out;
+}
