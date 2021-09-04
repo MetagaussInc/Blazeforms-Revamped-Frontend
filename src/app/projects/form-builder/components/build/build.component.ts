@@ -10,6 +10,7 @@ import { ConditionalRendereringModalComponent } from '../conditional-renderering
 import { ExcelService } from '../../excelservice.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as lodash from 'lodash';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-build',
@@ -157,7 +158,7 @@ userInfo: any;
   formId: any = null;
   userSerach: any = null;
   listPayments: any = [];
-  constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
@@ -912,7 +913,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   }
 
   get FormUrl() {
-    return window.location.href?.split('#')?.[0]+ `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`
+    return this.sanitizer.bypassSecurityTrustResourceUrl( window.location.href?.split('#')?.[0]+ `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
   }
 
   ngOnDestroy(): void {
