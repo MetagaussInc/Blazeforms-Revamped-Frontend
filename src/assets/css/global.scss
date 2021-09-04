@@ -73,9 +73,9 @@
                 border-color: $base-hover-color;
             }
             &:active {
-                color: $btn-text-color;
-                background-color: $base-active-color;
-                border-color: $base-active-color;
+                color: $btn-text-color !important;
+                background-color: $base-active-color !important;
+                border-color: $base-active-color !important;
             }
             &:focus {
                 box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
@@ -853,6 +853,7 @@
         
         .org-switcher-btn #org-switcher {
             min-width: 200px;
+            max-width: 260px;
         }
         
         .org-switcher-btn #org-switcher::after {
