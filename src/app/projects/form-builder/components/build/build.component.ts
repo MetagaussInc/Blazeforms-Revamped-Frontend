@@ -911,6 +911,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     })
   }
 
+  get FormUrl() {
+    return window.location.href?.split('#')?.[0]+ `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`
+  }
+
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
