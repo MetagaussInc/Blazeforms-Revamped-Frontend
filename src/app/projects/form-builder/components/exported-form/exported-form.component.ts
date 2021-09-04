@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemComponent } from '@swimlane/ngx-dnd';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -28,7 +29,7 @@ export class ExportedFormComponent implements OnInit {
   allArr:any = [];
   obj: any = {};
   submitted: boolean = false;
-    constructor(private http: HttpService, private modalService: NgbModal) {
+    constructor(private http: HttpService, private modalService: NgbModal, private router: Router) {
 
     }
   
@@ -272,7 +273,7 @@ formEntry: JSON.stringify({
 userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
       }
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
-        console.log(res)
+        this.router.navigate(['blazeforms/form-submitted'])
       })
     }
 

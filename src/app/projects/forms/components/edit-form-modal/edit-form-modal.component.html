@@ -28,7 +28,7 @@
                     <div class="col-md-7">
                         <input type="text" class="form-control" formControlName="desc" placeholder="Description">
                         <ng-container *ngIf="f.desc.invalid && (f.desc.dirty || f.desc.touched)">
-                            <div *ngIf="f.desc.errors?.required || f.desc.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
+                            <div *ngIf="f.desc.errors?.required || f.desc.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Description is required
                             </div>
                         </ng-container>
                     </div>

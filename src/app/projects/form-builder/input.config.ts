@@ -970,6 +970,144 @@ export const config = [
         }
     },
     {
+        name: 'Address',
+        value: '',
+        children: [
+            {
+                name: 'Text',
+                textValue: '',
+                minCharacter: 0,
+                maxCharacter: 100,
+                value: '', inputType: 'Address',
+                icon: 'fas fa-language',
+                class: 'full',
+                placeholder: '',
+                size: 'medium',
+                view: 'always',
+                minVal: 0,
+                maxVal: 50,
+                helpText: '',
+                isRequired: 'always'
+            },
+            {
+                name: 'Text',
+                textValue: '',
+                minCharacter: 0,
+                maxCharacter: 100,
+                value: '', inputType: 'Address',
+                icon: 'fas fa-language',
+                class: 'full',
+                placeholder: '',
+                size: 'medium',
+                view: 'always',
+                minVal: 0,
+                maxVal: 50,
+                helpText: '',
+                isRequired: 'always'
+            },
+            {
+                name: 'Text',
+                textValue: '',
+                minCharacter: 0,
+                maxCharacter: 100,
+                value: '', inputType: 'Address',
+                icon: 'fas fa-language',
+                class: 'full',
+                placeholder: '',
+                size: 'medium',
+                view: 'always',
+                minVal: 0,
+                maxVal: 50,
+                helpText: '',
+                isRequired: 'always'
+            },
+            {
+                name: 'Text',
+                textValue: '',
+                minCharacter: 0,
+                maxCharacter: 100,
+                value: '', inputType: 'Address',
+                icon: 'fas fa-language',
+                class: 'full',
+                placeholder: '',
+                size: 'medium',
+                view: 'always',
+                minVal: 0,
+                maxVal: 50,
+                helpText: '',
+                isRequired: 'always'
+            },
+        ] as any[
+            
+        ],
+        inputType: 'addressSection',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        get show() {
+
+            return true;
+        },
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
         name: 'Rating',
         inputType: 'rating',
         icon: 'fas fa-hashtag',
@@ -982,11 +1120,14 @@ export const config = [
         view: 'always', 
         helpText: '',
         isRequired: 'always',
-        ratingOptions: {
-            'Option 1': '',
-            'Option 2': '',
-            'Option 3': ''
-        },
+        ratingOptions: [
+            {label :'Option 1',
+            value: ''},
+            {label :'Option 2',
+            value: ''},
+            {label :'Option 3',
+            value: ''}
+        ],
         ratingScale: {
             'Agree/Disagree': ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
             'Satisfied/Unsatisfied': ['Very Unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'],
@@ -1790,3 +1931,14 @@ export const Level = {
     size: 'extra-large',
     view: 'always',
 }
+
+export const paymentModel = {
+    extraBill: [],
+    inputType: 'paymentSection',
+    showSubTotal: true,
+    showLineItems: true,
+    mapBillingFields: true,
+    stripeAccount: "",
+    paymentOption: ['Card', 'Cash'],
+    selectedPaymentOption: 'Cash'
+  }

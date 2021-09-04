@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-import { advancedLayout, config, layoutInputs, Level } from '../../input.config';
+import { advancedLayout, config, layoutInputs, Level, paymentModel } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
 import { ExcelService } from '../../excelservice.service';
@@ -69,7 +69,9 @@ export class BuildComponent implements OnDestroy  {
   active = 1;
   viewProperties = 0; 
   selectedIndex: any;
-  selectedElement: any;
+  selectedElement: any = {
+    viewOptions: false
+  };
   viewExportedView = false;
   selectedDependency: any;
   count: number = 0;
@@ -138,16 +140,20 @@ userInfo: any;
   stripeAccounts: any;
 
   entries: any = {
+    entries: [],
     columns: [],
-    rows: []
+    rows: [],
+    selected: []
   }
+
+  viewEntryPanel = false;
 
   mainTab = 1;
   workFLowDetails: any;
   addedUserId: any = [];
   formId: any = null;
   userSerach: any = null;
-
+  listPayments: any = [];
   constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -192,9 +198,9 @@ userInfo: any;
         // this.targetBuilderTools.push(config[0])
       }
       this.paymentSetting = {
-        ...resp?.paymentSetting,
+        ...(resp?.paymentSetting || this.paymentSetting),
         inputType: 'paymentSection'
-      } || this.paymentSetting;
+      } ;
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -365,6 +371,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   getNewEntries() {
     this.http.call('GetFormEntries', 'POST', {Id: this.formId}).subscribe(res => {
       const data: any = [];
+      this.entries.entries = res.formEntries;
       res.formEntries?.forEach((element: any, index: any) => {
         const entry = JSON.parse(element.formEntryJSON) 
         data.push(`ID=${index+1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
@@ -382,13 +389,15 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
       const separatedData = entry?.split("&&");
       const data: any = separatedData[0].split('||');
       const formData: any = separatedData[1];
+      
       const rowObj: any = {};
       data.forEach((elementWithValue: any, colIndex: any) => {
         if (elementWithValue && elementWithValue?.length > 0) {
           if (entryIndex === 0) {
             Columns.push({
                 headerName: elementWithValue?.split("=")?.[0],
-                field: colIndex
+                field: colIndex,
+                view: true
               })
             }
             rowObj[colIndex] = elementWithValue?.split("=")?.[1];
@@ -452,7 +461,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
         targetBuilderTools: elements,
         levels: levels,
         count: this.count,
-        paymentSetting: (this.showPaymentFields() ? this.paymentSetting : null)
+        paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(paymentModel) : null)
       })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
@@ -571,6 +580,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     this.selectedElement.options[val] = $event.target.value;
   }
 
+  trackByFn(index: any, item: any) {
+    return index;
+ }
+
   remove(i: number) {
     this.selectedElement.options.splice(i, 1);
   }
@@ -627,7 +640,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   }
 
   abc($event: any, source: any, handle: any, sibling: any): boolean {
-    //return ($event.name === 'Dnd') ? false : true; 
+    return ($event.name === 'AddressDnd') ? false : true; 
     return true;
   }
   drop2(e: any) {
@@ -743,6 +756,9 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   }
 
   clicked($event: any, model: any, i: any) {
+    if (this.selectedElement?.viewOption) {
+      this.selectedElement['viewOption'] = false;
+    }
     this.selectedElement = model;
     // this.selectedIndex = model.index;
     // this.selectedDependency = null;
@@ -755,6 +771,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
 
   selectPayment() {
     this.selectedElement = this.paymentSetting;
+    this.viewProperties = 1; 
   }
 
   sectionClicked($event: any, model: any, i: any) {
@@ -838,6 +855,28 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     }).subscribe(res => {
       this.stripeAccounts = res;
       console.log(res)
+    })
+  }
+
+  selectEntry(rowIndex: any) {
+    if (this.entries.selected.includes(rowIndex)) {
+      this.entries.selected = this.entries.selected.filter((x: any) => x !== rowIndex);
+    } else {
+      this.entries.selected.push(rowIndex);
+    }
+    console.log('selected entry', this.entries.selected)
+  }
+
+  deleteEntry() {
+    let string = '';
+    this.entries.selected.forEach((index: any) => {
+      string =  ',' + this.entries.entries[index]?.id;
+    });
+    this.http.call('DeleteFormEntries', 'POST', 
+    {
+      FormEntriesID :string   }).subscribe(res => {
+        this.entries.selected = [];
+        this.getNewEntries();
     })
   }
 

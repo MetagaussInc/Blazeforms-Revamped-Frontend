@@ -8,12 +8,14 @@ import { FormBuilderModule } from '../form-builder/form-builder.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BillPayComponent } from './bill-pay/bill-pay.component';
+import { EntrySubmittedComponent } from './entry-submitted/entry-submitted.component';
 
 
 @NgModule({
   declarations: [
     BlazeformsComponent,
-    BillPayComponent
+    BillPayComponent,
+    EntrySubmittedComponent
   ],
   imports: [
     CommonModule,
