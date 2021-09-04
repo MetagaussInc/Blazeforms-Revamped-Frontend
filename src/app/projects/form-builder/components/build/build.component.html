@@ -863,11 +863,23 @@
 
                                             <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="column" ngbDropdownAnchor (focus)="column.open()">Columns</button>
-                                                <div ngbDropdownMenu aria-labelledby="column">
-                                                    <button ngbDropdownItem *ngFor="let item of entries.columns" (click)="item.view = !item.view">
-                                                        <input data-index="0" [checked]="item.view" name="btSelectItem"
-                                                            type="checkbox">{{item.headerName}}</button>
+                                                <div ngbDropdownMenu aria-labelledby="column" class="">
+                                                    <div ngbDropdownItem *ngFor="let item of entries.columns" (click)="item.view = !item.view" class="">
+                                                        <!-- <label> <input data-index="0" [checked]="item.view" name="btSelectItem" type="checkbox">&nbsp;{{item.headerName}}</label> -->
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input data-index="0" [checked]="item.view" name="btSelectItem" type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label" for="SignUpTermsConditions">{{item.headerName}}
+                                                             
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
+
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
