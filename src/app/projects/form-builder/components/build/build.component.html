@@ -398,7 +398,7 @@
                                                                             class="btn option-btn border btn-sm rounded p-0 mr-1"><i
                                                                                 class="material-icons">remove</i></button>
                                                                         <button
-                                                                            (click)="selectedElement.ratingOptions.push('')"
+                                                                            (click)="selectedElement.ratingOptions.push({label :'Option 1',value: ''})"
                                                                             class="btn option-btn border btn-sm rounded p-0"><i
                                                                                 class="material-icons">add</i></button>
                                                                     </div>
@@ -1125,7 +1125,11 @@
                                                         <td class="bs-checkbox "><input data-index="0"
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)" type="checkbox"></td>
                                                                 <ng-container *ngFor="let col of entries.columns">
-                                                                    <td *ngIf="col.view">{{row?.[col?.field]}}
+                                                                    <td *ngIf="col.view && row?.[col?.field] !== 'No_value'">
+                                                                        {{row?.[col?.field]}}
+                                                                    </td>
+                                                                    <td *ngIf="col.view && row?.[col?.field] === 'No_value'">
+                                                                        <!-- <span class="empty-field">{{"<No Entry>"}}</span> -->
                                                                     </td>
                                                                 </ng-container>
                                                                 
