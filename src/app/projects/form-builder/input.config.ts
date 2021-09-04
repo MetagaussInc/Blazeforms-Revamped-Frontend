@@ -536,94 +536,94 @@ export const config = [
             }
         }
     },
-    {
-        name: 'Price',
-        inputType: 'number',
-        icon: 'fas fa-hashtag',
-        class: 'half',
-        numericValue: 0,
-        value: undefined,
-        minCharacter: 9,
-        maxCharacter: 11,
-        size: 'medium',
-        view: 'always',
-        minVal: 0,
-        maxVal: 50,
-        helpText: '',
-        isRequired: 'always',
-        collectPayment: false,
-        missing: ['Type for Date and time'],
-        validations: {
-            label: {
-                dataRefKey: 'name'
-            },
-            size: {
-                options: [
-                    {
-                        label: 'Small',
-                        value: 'small'
-                    },
-                    {
-                        label: 'Medium',
-                        value: 'medium'
-                    },
-                    {
-                        label: 'Large',
-                        value: 'large'
-                    },
-                    {
-                        label: 'Extra Large',
-                        value: 'extra-large'
-                    }
-                ],
-                dataRefKey: 'size'
-            },
-            defaultValue: {
-                dataRefKey: 'value'
-            },
-            range: {
-                minDataRefKey: 'minVal',
-                maxDataRefKey: 'maxVal'
-            },
-            help: {
-                dataRefKey: 'helpText'
-            },
-            view: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'view'
-            },
-            required: {
-                options: [
-                    {
-                        label: 'Always',
-                        value: 'always'
-                    },
-                    {
-                        label: 'When',
-                        value: 'when'
-                    },
-                    {
-                        label: 'Never',
-                        value: 'never'
-                    }
-                ],
-                dataRefKey: 'isRequired'
-            }
-        }
-    },    
+    // {
+    //     name: 'Price',
+    //     inputType: 'number',
+    //     icon: 'fas fa-hashtag',
+    //     class: 'half',
+    //     numericValue: 0,
+    //     value: undefined,
+    //     minCharacter: 9,
+    //     maxCharacter: 11,
+    //     size: 'medium',
+    //     view: 'always',
+    //     minVal: 0,
+    //     maxVal: 50,
+    //     helpText: '',
+    //     isRequired: 'always',
+    //     collectPayment: false,
+    //     missing: ['Type for Date and time'],
+    //     validations: {
+    //         label: {
+    //             dataRefKey: 'name'
+    //         },
+    //         size: {
+    //             options: [
+    //                 {
+    //                     label: 'Small',
+    //                     value: 'small'
+    //                 },
+    //                 {
+    //                     label: 'Medium',
+    //                     value: 'medium'
+    //                 },
+    //                 {
+    //                     label: 'Large',
+    //                     value: 'large'
+    //                 },
+    //                 {
+    //                     label: 'Extra Large',
+    //                     value: 'extra-large'
+    //                 }
+    //             ],
+    //             dataRefKey: 'size'
+    //         },
+    //         defaultValue: {
+    //             dataRefKey: 'value'
+    //         },
+    //         range: {
+    //             minDataRefKey: 'minVal',
+    //             maxDataRefKey: 'maxVal'
+    //         },
+    //         help: {
+    //             dataRefKey: 'helpText'
+    //         },
+    //         view: {
+    //             options: [
+    //                 {
+    //                     label: 'Always',
+    //                     value: 'always'
+    //                 },
+    //                 {
+    //                     label: 'When',
+    //                     value: 'when'
+    //                 },
+    //                 {
+    //                     label: 'Never',
+    //                     value: 'never'
+    //                 }
+    //             ],
+    //             dataRefKey: 'view'
+    //         },
+    //         required: {
+    //             options: [
+    //                 {
+    //                     label: 'Always',
+    //                     value: 'always'
+    //                 },
+    //                 {
+    //                     label: 'When',
+    //                     value: 'when'
+    //                 },
+    //                 {
+    //                     label: 'Never',
+    //                     value: 'never'
+    //                 }
+    //             ],
+    //             dataRefKey: 'isRequired'
+    //         }
+    //     }
+    // },    
     {
         name: 'Date',
         inputType: 'date',
@@ -973,82 +973,67 @@ export const config = [
         name: 'Address',
         value: '',
         children: [
-            {
-                name: 'Text',
-                textValue: '',
-                minCharacter: 0,
-                maxCharacter: 100,
-                value: '', inputType: 'Address',
-                icon: 'fas fa-language',
-                class: 'full',
-                placeholder: '',
-                size: 'medium',
-                view: 'always',
-                minVal: 0,
-                maxVal: 50,
-                helpText: '',
-                isRequired: 'always'
-            },
-            {
-                name: 'Text',
-                textValue: '',
-                minCharacter: 0,
-                maxCharacter: 100,
-                value: '', inputType: 'Address',
-                icon: 'fas fa-language',
-                class: 'full',
-                placeholder: '',
-                size: 'medium',
-                view: 'always',
-                minVal: 0,
-                maxVal: 50,
-                helpText: '',
-                isRequired: 'always'
-            },
-            {
-                name: 'Text',
-                textValue: '',
-                minCharacter: 0,
-                maxCharacter: 100,
-                value: '', inputType: 'Address',
-                icon: 'fas fa-language',
-                class: 'full',
-                placeholder: '',
-                size: 'medium',
-                view: 'always',
-                minVal: 0,
-                maxVal: 50,
-                helpText: '',
-                isRequired: 'always'
-            },
-            {
-                name: 'Text',
-                textValue: '',
-                minCharacter: 0,
-                maxCharacter: 100,
-                value: '', inputType: 'Address',
-                icon: 'fas fa-language',
-                class: 'full',
-                placeholder: '',
-                size: 'medium',
-                view: 'always',
-                minVal: 0,
-                maxVal: 50,
-                helpText: '',
-                isRequired: 'always'
-            },
-        ] as any[
-            
-        ],
+                {
+                    name: 'Text',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-12 p-2',
+                    placeholder: 'Address Line 1',
+                    size: 'medium'
+                },
+                {
+                    name: 'Text',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-12 p-2',
+                    placeholder: 'Address Line 2',
+                    size: 'medium'
+                },
+                {
+                    name: 'City',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-6 p-2',
+                    placeholder: 'City',
+                    size: 'medium'
+                },
+                {
+                    name: 'State',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-6 p-2',
+                    placeholder: 'State',
+                    size: 'medium'
+                },
+                {
+                    name: 'Zip',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-6 p-2',
+                    placeholder: 'Zip',
+                    size: 'medium'
+                },
+                {
+                    name: 'Country',
+                    value: '',
+                    inputType: 'AddressField',
+                    icon: 'fas fa-language',
+                    class: 'col-6 p-2',
+                    placeholder: 'Country',
+                    size: 'medium'
+                }
+            ] as any[],
+        selectedType: 'US',
         inputType: 'addressSection',
         icon: 'far fa-square',
         class: 'wide',
         size: 'medium',
         view: 'always',
-        get show() {
-
-            return true;
-        },
         validations: {
             size: {
                 dataRefKey: 'size',
@@ -1104,6 +1089,107 @@ export const config = [
                     }
                 ],
                 dataRefKey: 'isRequired'
+            },
+            typeOfAddress: {
+                US: [
+                    {
+                        name: 'Text',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-12 p-2',
+                        placeholder: 'Address Line 1',
+                        size: 'medium'
+                    },
+                    {
+                        name: 'Text',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-12 p-2',
+                        placeholder: 'Address Line 2',
+                        size: 'medium'
+                    },
+                    {
+                        name: 'City',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-6 p-2',
+                        placeholder: 'City',
+                        size: 'medium'
+                    },
+                    {
+                        name: 'State',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-6 p-2',
+                        placeholder: 'State',
+                        size: 'medium'
+                    },
+                    {
+                        name: 'Zip',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-6 p-2',
+                        placeholder: 'Zip',
+                        size: 'medium'
+                    },
+                    {
+                        name: 'Country',
+                        value: '',
+                        inputType: 'AddressField',
+                        icon: 'fas fa-language',
+                        class: 'col-6 p-2',
+                        placeholder: 'Country',
+                        size: 'medium'
+                    }
+                ],
+                NONUS: [
+                        {
+                            name: 'Text',
+                            value: '',
+                            inputType: 'AddressField',
+                            icon: 'fas fa-language',
+                            class: 'col-12 p-2',
+                            placeholder: 'Address Line 1'
+                        },
+                        {
+                            name: 'Text',
+                            value: '',
+                            inputType: 'AddressField',
+                            icon: 'fas fa-language',
+                            class: 'col-12 p-2',
+                            placeholder: 'Address Line 2'
+                        },
+                        {
+                            name: 'City',
+                            value: '',
+                            inputType: 'AddressField',
+                            icon: 'fas fa-language',
+                            class: 'col-4 p-1',
+                            placeholder: 'City',
+                            size: 'medium'
+                        },
+                        {
+                            name: 'State',
+                            value: '',
+                            inputType: 'AddressField',
+                            icon: 'fas fa-language',
+                            class: 'col-4 p-1',
+                            placeholder: 'State'
+                        },
+                        {
+                            name: 'Zip',
+                            value: '',
+                            inputType: 'AddressField',
+                            icon: 'fas fa-language',
+                            class: 'col-4 p-1',
+                            placeholder: 'Zip'
+                        }
+                ]
             }
         }
     },

@@ -379,26 +379,27 @@
                                                                 <ng-container
                                                                     *ngIf="selectedElement.selectedRatingScale === 'Custom'">
                                                                     <div
-                                                                        *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
-                                                                        <input type="text"
-                                                                            [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                                        *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index; trackBy:trackByFn">
+                                                                        <input type="text"  class="form-control cursor-pointer" id="custom__{{ii}}"
+                                                                            [(ngModel)]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
+                                                                            <label for="custom__{{ii}}">Option{{(ii + 1)}}</label>
 
                                                                     </div>
                                                                 </ng-container>
                                                             </div>
                                                             <div class="form-group">
-                                                                <div *ngFor="let key of selectedElement?.ratingOptions"
+                                                                <div *ngFor="let key of selectedElement?.ratingOptions; let iOpt = index"
                                                                     class="row my-2">
                                                                     <div class="col-8"> <input type="text"
-                                                                            [(ngModel)]="key.label"
+                                                                            [(ngModel)]="key.label" placeholder="Option name for rating"
                                                                             class="form-control cursor-pointer"></div>
                                                                     <div class="col-4">
                                                                         <button
-                                                                            (click)="removeObj(key.key, selectedElement, 'ratingOptions')"
+                                                                            (click)="selectedElement?.ratingOptions.splice(iOpt, 1)"
                                                                             class="btn option-btn border btn-sm rounded p-0 mr-1"><i
                                                                                 class="material-icons">remove</i></button>
                                                                         <button
-                                                                            (click)="selectedElement.ratingOptions.push({label :'Option 1',value: ''})"
+                                                                            (click)="selectedElement.ratingOptions.push({label :'',value: ''})"
                                                                             class="btn option-btn border btn-sm rounded p-0"><i
                                                                                 class="material-icons">add</i></button>
                                                                     </div>
@@ -406,7 +407,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <ng-container
+                                                        <!-- <ng-container
                                                             *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
                                                             <div
                                                                 *ngFor="let item of selectedElement.ratingScale[selectedElement.selectedRatingScale]; let ii = index">
@@ -414,7 +415,7 @@
                                                                     [value]="selectedElement.ratingScale[selectedElement.selectedRatingScale][ii]">
 
                                                             </div>
-                                                        </ng-container>
+                                                        </ng-container> -->
 
                                                         <div class="form-group"
                                                             *ngIf="selectedElement?.validations?.range">
@@ -512,6 +513,33 @@
                                                                 id="Help Text" name="Help Text" cols="40" rows="5"
                                                                 class="form-control"></textarea>
                                                         </div>
+                                                        <div *ngIf="selectedElement?.validations?.typeOfAddress">
+
+                                                            <div>
+                                                                <div class="custom-control custom-radio" (click)="selectedElement.selectedType = 'US'; selectedElement.children = selectedElement.validations.typeOfAddress.US;">
+                                                                    <input name="radio" [checked]="selectedElement.selectedType === 'US'" [value]="'US'" id="radio_US" type="radio" class="custom-control-input">
+                                                                    <label for="radio_card" class="custom-control-label">US</label>
+                                                                </div>
+                                                    
+                                                                <div class="custom-control custom-radio" (click)="selectedElement.selectedType = 'NONUS'; selectedElement.children = selectedElement.validations.typeOfAddress.NONUS;">
+                                                                    <input name="radio" [checked]="selectedElement.selectedType === 'NONUS'" [value]="'NONUS'" id="radio_NONUS" type="radio" class="custom-control-input">
+                                                                    <label for="radio_cash" class="custom-control-label">International</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div>
+                                                                <div
+                                                                class="custom-control custom-checkbox f-flex">
+                                                                <input type="checkbox" id="showSubTotal"
+                                                                    class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                    for="showSubTotal">Sub Total</label>
+                                                                    <input class="form-control mr-1" type="text">
+                                                                    
+                                                            </div>
+                                                            </div>
+                                                            
+                                                        </div>
                                                         <div
                                                             *ngIf="showPaymentFields() && (selectedElement?.inputType === 'payment' || selectedElement?.inputType ===  'paymentSection')">
                                                             <label>Payment Setting</label>
@@ -568,6 +596,24 @@
                                                                 <label class="custom-control-label"
                                                                     for="mapBillingFields"> Map Billing
                                                                     fields</label>
+                                                            </div>
+                                                            <div *ngIf="selectedElement?.inputType ===  'paymentSection' && paymentSetting.mapBillingFields">
+                                                                <div>
+                                                                    <select class="form-control mr-2" [(ngModel)]="paymentSetting.selectedName">
+                                                                    <option [value]="'item.name'" *ngFor="let item of nameField">{{item.name}}</option>
+                                                                </select>
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-control mr-2" [(ngModel)]="paymentSetting.selectedAddress">
+                                                                    <option [value]="'item.name'" *ngFor="let item of addressField">{{item.name}}</option>
+                                                                    </select>
+
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-control mr-2" [(ngModel)]="paymentSetting.selectedEmail">
+                                                                    <option [value]="'item.name'" *ngFor="let item of emailField">{{item.name}}</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                             <div class="p-1 mr-1">
                                                                 <button
@@ -750,12 +796,12 @@
                                                             </ngx-dnd-container>
                                                         </div>
                                                     </div>
-                                                    <!-- <div *ngSwitchCase="'addressSection'"
+                                                    <div *ngSwitchCase="'addressSection'"
                                                         (click)="sectionClicked($event, model, template); selectedElement.viewOptions = false;"
                                                         class="mjui">
-                                                        <div class="shadow">
+                                                        <div class="row  p-2">
                                                             {{model.name}}
-                                                            <div class="row">
+                                                            <!-- <div class="row">
                                                                 <div class="col-6 p-2 builder-dropped-field" *ngIf="model.children[0]">
                                                                     <input type="text" class="form-control" id="email"
                                                             [(ngModel)]="model.children[0].value" name="email" #name="ngModel"
@@ -777,9 +823,24 @@
                                                             [attr.minlength]="model.children[2].minVal"
                                                             [attr.placeholder]="model.children[2].placeholder" autocomplete="off">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
+                                                            <br />
+                                                            <ng-container *ngFor="let item of model.children; let i = index">
+                                                                <div *ngIf="i <= 1" class="{{item.class}}">
+                                                                    <input type="text" class="form-control"
+                                                                    [(ngModel)]="model.children[i].value"
+                                                                    [attr.placeholder]="item.placeholder" autocomplete="off">
+                                                                </div>
+                                                                <div *ngIf="i > 1" class="col-{{12/(model.children.length - 2)}} p-2">
+                                                                    <input type="text" class="form-control"
+                                                                    [(ngModel)]="model.children[i].value"
+                                                                    [attr.placeholder]="item.placeholder" autocomplete="off">
+                                                                </div>
+                                                            </ng-container>
+                                                            
+                                                            
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                     <div *ngSwitchCase="'levelSection'"
                                                         (click)="sectionClicked($event, model, template)" class="mjui">
                                                         <div class="shadow">
@@ -1083,13 +1144,17 @@
                                     <div class="col-md-6">
                                         <div class="tool-filter text-right">
 
-                                            <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
+                                            <div class="d-inline-block" ngbDropdown #column="ngbDropdown" *ngIf="entries.rows.length > 0">
                                                 <button class="btn btn-primary btn-bf mr-2" id="column"
                                                     ngbDropdownAnchor (focus)="column.open()">Columns</button>
                                                 <div ngbDropdownMenu aria-labelledby="column">
-                                                    <button ngbDropdownItem *ngFor="let item of entries.columns" (click)="item.view = !item.view">
-                                                        <input data-index="0" [checked]="item.view" name="btSelectItem"
-                                                            type="checkbox">{{item.headerName}}</button>
+                                                    <ng-container  *ngFor="let item of entries.columns">
+                                                        <button *ngIf="item.headerName?.length > 1" ngbDropdownItem (click)="item.view = !item.view">
+                                                            <input data-index="0" [checked]="item.view" name="btSelectItem"
+                                                                type="checkbox">{{item.headerName}}</button>
+                                                    </ng-container>
+                                                    
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -1107,7 +1172,8 @@
                                             data-toolbar="#toolbar">
                                             <thead class="thead-light">
                                                 <tr>
-                                                    <th *ngIf="entries.columns.length > 0" data-field="state" data-checkbox="true"><input data-index="0"
+                                                    <th *ngIf="entries.columns.length > 0" data-field="state" data-checkbox="true">
+                                                        <input data-index="0" (click)="selectAllEntries()"
                                                             name="btnAllSelectItem" type="checkbox"></th>
                                                    
                                                             <ng-container *ngFor="let item of entries.columns">
@@ -1123,10 +1189,11 @@
                                                 <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
                                                     <tr *ngIf="!filter || (filter && filter === row[1])">
                                                         <td class="bs-checkbox "><input data-index="0"
+                                                            [checked]="entries.selected.includes(rowIndex)"
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)" type="checkbox"></td>
-                                                                <ng-container *ngFor="let col of entries.columns">
+                                                                <ng-container *ngFor="let col of entries.columns; let colIndex = index">
                                                                     <td *ngIf="col.view && row?.[col?.field] !== 'No_value'">
-                                                                        {{row?.[col?.field]}}
+                                                                        {{colIndex === 2 ? getDateString(row?.[col?.field]) : row?.[col?.field]}}
                                                                     </td>
                                                                     <td *ngIf="col.view && row?.[col?.field] === 'No_value'">
                                                                         <!-- <span class="empty-field">{{"<No Entry>"}}</span> -->
@@ -1141,6 +1208,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                                <div *ngIf="entries.rows.length > 0">
+                                    No record found
                                 </div>
 
                             </div>

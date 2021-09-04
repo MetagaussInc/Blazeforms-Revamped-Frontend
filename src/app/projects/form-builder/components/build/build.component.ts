@@ -135,7 +135,10 @@ userInfo: any;
     mapBillingFields: true,
     stripeAccount: "",
     paymentOption: ['Card', 'Cash'],
-    selectedPaymentOption: 'Cash'
+    selectedPaymentOption: 'Cash',
+    selectedAddress: '',
+    selectedName: '',
+    selectedEmail: ''
   }
   stripeAccounts: any;
 
@@ -219,13 +222,11 @@ userInfo: any;
         }
         this.getWorkSpaceAccounts();
         this.getFoldersWithList(this.userInfo)
+        this.getNewEntries();
+
       }
       
     })
-
-    if (initial) {
-      this.getNewEntries();
-    }
 
   }
 
@@ -425,7 +426,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
 
   openForm(form: any) {
     console.log(form)
-    this.getForm(form.id, true);
+    // this.getForm(form.id, true);
+    this.router.navigate(['/form-builder'], {queryParams: {
+      ID: form.id
+    }})
 
   }
   saveForm() {
@@ -858,6 +862,18 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     })
   }
 
+  get nameField() {
+    return this.targetBuilderTools.filter((x: any) => x.inputType === 'string');
+  }
+
+  get emailField() {
+    return this.targetBuilderTools.filter((x: any) => x.inputType === 'email');
+  }
+
+  get addressField() {
+    return this.targetBuilderTools.filter((x: any) => x.inputType === 'address');
+  }
+
   selectEntry(rowIndex: any) {
     if (this.entries.selected.includes(rowIndex)) {
       this.entries.selected = this.entries.selected.filter((x: any) => x !== rowIndex);
@@ -867,6 +883,21 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     console.log('selected entry', this.entries.selected)
   }
 
+  selectAllEntries() {
+    if (this.entries.selected.length !== this.entries.rows.length) {
+      this.entries.selected = [];
+      this.entries.rows.forEach((element: any, index: any) => {
+        this.entries.selected.push(index)
+      });
+    } else {
+      this.entries.selected = [];
+    }
+    
+  }
+
+  getDateString(date: any) {
+    return new Date(date).toLocaleDateString()
+  }
   deleteEntry() {
     let string = '';
     this.entries.selected.forEach((index: any) => {
