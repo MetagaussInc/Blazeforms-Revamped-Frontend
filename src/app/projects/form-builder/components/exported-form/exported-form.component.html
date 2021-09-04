@@ -90,34 +90,27 @@
                         <ng-container *ngIf="form.inputType === 'rating'">
                             <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                               
-                                
+
+
                                 <!-- <div class="row" *ngFor="let item of form.ratingOptions">
                                     <div class="col-2">{{item.label}}</div>
                                     <div style="max-width: 15%;justify-content: center;" class="col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         <input name="radio" name="formFirld1_{{ form.uiIndexId }}{{option}}" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                                     </div>
                                 </div> -->
-                                
+
                                 <div class="row  rating-labels">
                                     <div class="col-2"></div>
-                                    <div style="padding: 0; justify-content: center;    margin: 0 !important;"
-                                        class="custom-control custom-radio custom-control-inline col-2"
-                                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                                    <div style="padding: 0; justify-content: center;    margin: 0 !important;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         {{option}}
                                     </div>
                                 </div>
                                 <div class="row" *ngFor="let item of form.ratingOptions">
                                     <div class="col-2" style="max-width: 15%;">{{item.label}}
                                     </div>
-                                    <div style="max-width: 15%;justify-content: center;"
-                                        class="custom-control custom-radio custom-control-inline col-2"
-                                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                                    <div style="max-width: 15%;justify-content: center;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         <div class="custom-control custom-radio">
-                                            <input name="radio" [value]="item.value"
-                                                [checked]="item.value === option"
-                                                id="radio_0{{option}}" type="radio"
-                                                class="custom-control-input">
+                                            <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                                             <label class="custom-control-label"> </label>
                                         </div>
                                     </div>
@@ -255,23 +248,16 @@
                 </div> -->
                 <div class="row  rating-labels">
                     <div class="col-2"></div>
-                    <div style="padding: 0; justify-content: center;    margin: 0 !important;"
-                        class="custom-control custom-radio custom-control-inline col-2"
-                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                    <div style="padding: 0; justify-content: center;    margin: 0 !important;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                         {{option}}
                     </div>
                 </div>
                 <div class="row" *ngFor="let item of form.ratingOptions">
                     <div class="col-2" style="max-width: 15%;">{{item.label}}
                     </div>
-                    <div style="max-width: 15%;justify-content: center;"
-                        class="custom-control custom-radio custom-control-inline col-2"
-                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                    <div style="max-width: 15%;justify-content: center;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                         <div class="custom-control custom-radio">
-                            <input name="radio" [value]="item.value"
-                                [checked]="item.value === option"
-                                id="radio_0{{option}}" type="radio"
-                                class="custom-control-input">
+                            <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                             <label class="custom-control-label"> </label>
                         </div>
                     </div>

@@ -711,7 +711,7 @@
                                                             </div>
                                                             <div style="max-width: 15%;justify-content: center;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of model.ratingScale[model.selectedRatingScale]">
                                                                 <div class="custom-control custom-radio">
-                                                                    <input name="fgf" value="fgfgfg" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                                                    <input [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                                                                     <label class="custom-control-label" for="radio_0{{option}}"> </label>
                                                                 </div>
                                                             </div>
