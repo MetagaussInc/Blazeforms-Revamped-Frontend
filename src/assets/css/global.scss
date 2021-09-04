@@ -65,12 +65,12 @@
         
         .btn-bf {
             color: $btn-text-color;
-            background-color: $base-color;
-            border-color: $base-color;
+            background-color: $base-color !important;
+            border-color: $base-color !important;
             &:hover {
-                color: $btn-text-color;
-                background-color: $base-hover-color;
-                border-color: $base-hover-color;
+                color: $btn-text-color !important;
+                background-color: $base-hover-color !important;
+                border-color: $base-hover-color !important;
             }
             &:active {
                 color: $btn-text-color !important;
@@ -78,7 +78,9 @@
                 border-color: $base-active-color !important;
             }
             &:focus {
-                box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
+                box-shadow: 0 0 0 0.2rem rgba($base-color, .25) !important;
+                color: $btn-text-color !important;
+                background-color: $base-active-color !important;
             }
         }
         
@@ -993,3 +995,6 @@
         .swiper-button-next {
             color: #f04563 !important;
         }
+        /*--- Footer ---*/
+        
+        footer.footer {}
