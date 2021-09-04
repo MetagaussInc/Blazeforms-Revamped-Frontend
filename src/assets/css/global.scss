@@ -774,6 +774,19 @@
             max-height: 400px;
         }
         
+        .forms-activity-dropdown {
+            max-height: 400px;
+            font-size: 0.8rem;
+        }
+        
+        .forms-activity-dropdown .version-time {
+            background-color: $base-color;
+        }
+        
+        #view-user-activity:after {
+            display: none;
+        }
+        
         @media screen and (max-height: 742px) {
             .login-area-container,
             .forgot-password-container {
