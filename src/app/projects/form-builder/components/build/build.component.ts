@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,6 @@ import { ConditionalRendereringModalComponent } from '../conditional-renderering
 import { ExcelService } from '../../excelservice.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as lodash from 'lodash';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-build',
@@ -158,13 +157,15 @@ userInfo: any;
   formId: any = null;
   userSerach: any = null;
   listPayments: any = [];
-  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  selectColElement: any;
+  constructor(private modalService: NgbModal,private excelService:ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
       if (userInfo) {
         this.route.queryParams.subscribe(res => {
           this.formId = res.ID;
+          this.mainTab = Number(res.seletedTab);
           this.getForm(res?.ID, true )
         })
       }
@@ -429,7 +430,8 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     console.log(form)
     // this.getForm(form.id, true);
     this.router.navigate(['/form-builder'], {queryParams: {
-      ID: form.id
+      ID: form.id,
+      seletedTab: this.mainTab
     }})
 
   }
@@ -443,7 +445,9 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
           levels.push(element)
         }
       });
+      this.addStripeAccount()
     
+      console.log(this.paymentSetting)
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
@@ -466,7 +470,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
         targetBuilderTools: elements,
         levels: levels,
         count: this.count,
-        paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(paymentModel) : null)
+        paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(this.paymentSetting) : null)
       })
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
@@ -562,6 +566,10 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     } else {
       this.saveForm();
     }
+    this.selectedElement = {
+      viewOptions: false
+    };
+    this.viewProperties = 0;
   }
 
   duplicate(id: any) {
@@ -793,7 +801,7 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
   setConditionalDependency() {
 
   }
-  addStripeAccount($event: any, account?: any) {
+  addStripeAccount() {
     this.stripeAccounts.forEach((account: any) => {
       if (account.accountName === this.paymentSetting.stripeAccount) {
         this.paymentSetting.accountDetail = account;
@@ -912,10 +920,18 @@ WorkspaceId: this.userInfo.WorkspaceDetail.Id
     })
   }
 
-  get FormUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl( window.location.href?.split('#')?.[0]+ `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
-  }
+  @HostListener('document:keydown.delete', ['$event'])
+    onDeleteComponent(event: KeyboardEvent) {
+      this.delete(this.selectedElement)
+}
 
+selectColumn($event: any, colId: any) {
+  console.log($event, colId);
+}
+
+addCol(col: any) {
+this.selectedElement.columns.push(JSON.parse(JSON.stringify(this.sourceBuilderTools[col])))
+}
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

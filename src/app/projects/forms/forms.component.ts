@@ -200,15 +200,15 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
       if (result?.message === 'added') {
-        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id}})
+        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: 1}})
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
     });
   }
 
-  openbuilder(form: any) {
-    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value}})
+  openbuilder(form: any, tabIndex: any) {
+    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: tabIndex}})
 
   }
 

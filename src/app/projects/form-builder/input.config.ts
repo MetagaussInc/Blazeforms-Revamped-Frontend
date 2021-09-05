@@ -1,3 +1,5 @@
+import { FunctionDeclaration } from "estree";
+
 export const config = [
     
     {
@@ -980,7 +982,8 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-12 p-2',
                     placeholder: 'Address Line 1',
-                    size: 'medium'
+                    disabled: false,
+                    notCustomizable: true
                 },
                 {
                     name: 'Text',
@@ -989,7 +992,7 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-12 p-2',
                     placeholder: 'Address Line 2',
-                    size: 'medium'
+                    disabled: false
                 },
                 {
                     name: 'City',
@@ -998,7 +1001,7 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-6 p-2',
                     placeholder: 'City',
-                    size: 'medium'
+                    disabled: false
                 },
                 {
                     name: 'State',
@@ -1007,7 +1010,7 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-6 p-2',
                     placeholder: 'State',
-                    size: 'medium'
+                    disabled: false
                 },
                 {
                     name: 'Zip',
@@ -1016,7 +1019,7 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-6 p-2',
                     placeholder: 'Zip',
-                    size: 'medium'
+                    disabled: false
                 },
                 {
                     name: 'Country',
@@ -1025,7 +1028,7 @@ export const config = [
                     icon: 'fas fa-language',
                     class: 'col-6 p-2',
                     placeholder: 'Country',
-                    size: 'medium'
+                    disabled: false
                 }
             ] as any[],
         selectedType: 'US',
@@ -1099,7 +1102,8 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-12 p-2',
                         placeholder: 'Address Line 1',
-                        size: 'medium'
+                        disabled: false,
+                        notCustomizable: true
                     },
                     {
                         name: 'Text',
@@ -1108,7 +1112,7 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-12 p-2',
                         placeholder: 'Address Line 2',
-                        size: 'medium'
+                        disabled: false
                     },
                     {
                         name: 'City',
@@ -1117,7 +1121,7 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-6 p-2',
                         placeholder: 'City',
-                        size: 'medium'
+                        disabled: false
                     },
                     {
                         name: 'State',
@@ -1126,7 +1130,7 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-6 p-2',
                         placeholder: 'State',
-                        size: 'medium'
+                        disabled: false
                     },
                     {
                         name: 'Zip',
@@ -1135,7 +1139,7 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-6 p-2',
                         placeholder: 'Zip',
-                        size: 'medium'
+                        disabled: false
                     },
                     {
                         name: 'Country',
@@ -1144,7 +1148,7 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-6 p-2',
                         placeholder: 'Country',
-                        size: 'medium'
+                        disabled: false
                     }
                 ],
                 NONUS: [
@@ -1154,15 +1158,18 @@ export const config = [
                             inputType: 'AddressField',
                             icon: 'fas fa-language',
                             class: 'col-12 p-2',
-                            placeholder: 'Address Line 1'
-                        },
+                            placeholder: 'Address Line 1',
+                            disabled: false,
+                            notCustomizable: true
+                    },
                         {
                             name: 'Text',
                             value: '',
                             inputType: 'AddressField',
                             icon: 'fas fa-language',
                             class: 'col-12 p-2',
-                            placeholder: 'Address Line 2'
+                            placeholder: 'Address Line 2',
+                            disabled: false
                         },
                         {
                             name: 'City',
@@ -1171,7 +1178,7 @@ export const config = [
                             icon: 'fas fa-language',
                             class: 'col-4 p-1',
                             placeholder: 'City',
-                            size: 'medium'
+                            disabled: false
                         },
                         {
                             name: 'State',
@@ -1179,7 +1186,8 @@ export const config = [
                             inputType: 'AddressField',
                             icon: 'fas fa-language',
                             class: 'col-4 p-1',
-                            placeholder: 'State'
+                            placeholder: 'State',
+                            disabled: false
                         },
                         {
                             name: 'Zip',
@@ -1187,12 +1195,81 @@ export const config = [
                             inputType: 'AddressField',
                             icon: 'fas fa-language',
                             class: 'col-4 p-1',
-                            placeholder: 'Zip'
+                            placeholder: 'Zip',
+                            disabled: false
                         }
                 ]
             }
         }
     },
+    // {
+    //     name: 'Table',
+    //     value: '',
+    //     columns: [] as any[],
+    //     inputType: 'table',
+    //     icon: 'far fa-square',
+    //     class: 'wide',
+    //     size: 'extra-large',
+    //     view: 'always',
+    //     validations: {
+    //         size: {
+    //             dataRefKey: 'size',
+    //             options: [
+    //                 {
+    //                     label: 'Small',
+    //                     value: 'small'
+    //                 },
+    //                 {
+    //                     label: 'Medium',
+    //                     value: 'medium'
+    //                 },
+    //                 {
+    //                     label: 'Large',
+    //                     value: 'large'
+    //                 },
+    //                 {
+    //                     label: 'Extra Large',
+    //                     value: 'extra-large'
+    //                 }
+    //             ]
+    //         },
+    //         view: {
+    //             options: [
+    //                 {
+    //                     label: 'Always',
+    //                     value: 'always'
+    //                 },
+    //                 {
+    //                     label: 'When',
+    //                     value: 'when'
+    //                 },
+    //                 {
+    //                     label: 'Never',
+    //                     value: 'never'
+    //                 }
+    //             ],
+    //             dataRefKey: 'view'
+    //         },
+    //         required: {
+    //             options: [
+    //                 {
+    //                     label: 'Always',
+    //                     value: 'always'
+    //                 },
+    //                 {
+    //                     label: 'When',
+    //                     value: 'when'
+    //                 },
+    //                 {
+    //                     label: 'Never',
+    //                     value: 'never'
+    //                 }
+    //             ],
+    //             dataRefKey: 'isRequired'
+    //         },
+    //         addColumns: true
+    //     }
+    // },
     {
         name: 'Rating',
         inputType: 'rating',

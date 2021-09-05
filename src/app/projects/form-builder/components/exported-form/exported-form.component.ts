@@ -126,9 +126,12 @@ export class ExportedFormComponent implements OnInit {
       }
       this.initial?.extraBill?.forEach((additional: any) => {
         if (additional.type === "dollar") {
-          total = total + Number(additional.value); 
+          total = total + Number(additional.value);
+          additional.calculated =  Number(additional.value);
         } else {
-          total + total + (subTotal * (Number(additional.value) / 100))
+          additional.calculated =  (subTotal * (Number(additional.value) / 100));
+          
+          total = total + (subTotal * (Number(additional.value) / 100))
         }
       });
       total = total + subTotal;
@@ -237,12 +240,24 @@ export class ExportedFormComponent implements OnInit {
       if (this.haveTabs) {
         this.allArr.forEach((arr: any) => {
           arr.forEach((element: any) => {
-            data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+            if (element.children) {
+              element.children.forEach((child: any) => {
+               data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+              });
+            } else {
+              data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+            }
           });
         });
       } else {
         this.elements.forEach((element: any) => {
-          data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+          if (element.children) {
+            element.children.forEach((child: any) => {
+             data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+            });
+          } else {
+            data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+          }
         });
       }
       
