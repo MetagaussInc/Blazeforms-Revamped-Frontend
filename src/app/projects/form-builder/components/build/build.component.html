@@ -556,11 +556,11 @@
                                                                 <div class="d-flex form-group">
                                                                 <select class="form-control mr-2" #ssss
                                                                 [(ngModel)]="selectColElement">
-                                                                    <option *ngFor="let elements of sourceBuilderTools; let elementIndex = index" [value]="elementIndex">{{elements.name}}</option>
+                                                                    <option *ngFor="let elements of selectedElement?.validations?.addColumns; let elementIndex = index" [value]="elementIndex">{{elements.name}}</option>
                                                                 </select>
-                                                                <button
+                                                                <button [disabled]="ssss.value === ''"
                                                                     class="btn option-btn border btn-sm rounded p-1 mr-1"
-                                                                    (click)="addCol(ssss.value)"><i
+                                                                    (click)="addCol(ssss.value); ssss.value = ''"><i
                                                                         class="material-icons">add</i></button>
                                                             </div>
 
@@ -897,7 +897,6 @@
                                                             <div [innerHTML]="model.value"></div>
                                                         </div>
                                                     </div>
-
                                                     <div *ngSwitchCase="'table'" (click)="clicked($event, model, template)">
                                                         <div class="col-md-12" >
                                                             Add columns
@@ -921,16 +920,33 @@
                                                                         <tr *ngIf="model.columns?.length > 0">
                                                                                     <ng-container *ngFor="let col of model.columns; let colIndex = index">
                                                                                         <td >
-                                                                                        <div *ngIf="'email'"
+                                                                                        <div *ngIf="col.inputType ==='phoneNumber'"
                                                                                             class="page-break target-droppable">
                                                                                             <input type="tel" class="form-control" id="email"
-                                                                                                [(ngModel)]="model.value" name="tel" #name="ngModel"
+                                                                                                [(ngModel)]="col.value" name="tel" #name="ngModel"
                                                                                                 [attr.maxlength]="col.maxVal"
                                                                                                 [attr.minlength]="col.minVal"
                                                                                                 [attr.placeholder]="col.placeholder"
                                                                                                  autocomplete="off">
                                                                                         </div>
-                                                                                        <div *ngIf="'email'"class="page-break target-droppable">
+                                                                                        <div *ngIf="col.inputType ==='dropdown'"
+                                                                                            class="page-break target-droppable">
+                                                                                            <select [(ngModel)]="col.value" class="custom-select">
+                                                                                                <option *ngFor="let option of col.options"
+                                                                                                    [value]="option">
+                                                                                                    {{option}}</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType ==='number'"
+                                                                                            class="page-break target-droppable">
+                                                                                            <input type="number" class="form-control" id="email"
+                                                                                                [(ngModel)]="col.value" name="tel" #name="ngModel"
+                                                                                                [attr.maxlength]="col.maxVal"
+                                                                                                [attr.minlength]="col.minVal"
+                                                                                                [attr.placeholder]="col.placeholder"
+                                                                                                 autocomplete="off">
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType ==='email'"class="page-break target-droppable">
                                                                                             <input type="email" class="form-control" id="email"
                                                                                                 [(ngModel)]="col.value" name="email" #name="ngModel"
                                                                                                 [attr.maxlength]="col.maxVal"
@@ -938,17 +954,56 @@
                                                                                                 [attr.placeholder]="col.placeholder"
                                                                                                  autocomplete="off">
                                                                                         </div>
-                                                                                        <!-- <div *ngSwitchCase="'website'" class="page-break target-droppable"
-                                                                                            (click)="clicked($event, model, template)">
-                                                                                            <label>{{model.name}}</label>
+                                                                                        <div *ngIf="col.inputType==='website'" class="page-break target-droppable"
+                                                                                            >
                                                                                             <input type="text" class="form-control" id="website"
-                                                                                                [(ngModel)]="model.value" name="website" #name="ngModel"
-                                                                                                [attr.maxlength]="model.maxVal"
-                                                                                                [attr.minlength]="model.minVal"
-                                                                                                [attr.placeholder]="model.placeholder"
-                                                                                                [required]="checkForDependency(model)" autocomplete="off">
+                                                                                                [(ngModel)]="col.value" name="website" #name="ngModel"
+                                                                                                [attr.maxlength]="col.maxVal"
+                                                                                                [attr.minlength]="col.minVal"
+                                                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
                                     
-                                                                                        </div> -->
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType==='date'" class="page-break target-droppable"
+                                                                                            >
+                                                                                            <div class="input-group">
+                                                                                                <input class="form-control" [minDate]="col.minVal"
+                                                                                                    [maxDate]="col.maxVal" placeholder="yyyy-mm-dd"
+                                                                                                    name="dp" [(ngModel)]="col.value" ngbDatepicker
+                                                                                                    #d="ngbDatepicker">
+                                                                                                <div class="input-group-append">
+                                                                                                    <div class="input-group-text calendar"
+                                                                                                        (click)="d.toggle()" type="button"><i
+                                                                                                            class="material-icons">date_range</i></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType==='string'" class="page-break target-droppable"
+                                                                                            >
+                                                                                            <input type="text" class="form-control" id="text"
+                                                                                                [(ngModel)]="col.value" name="website" #name="ngModel"
+                                                                                                [attr.maxlength]="col.maxVal"
+                                                                                                [attr.minlength]="col.minVal"
+                                                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                    
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType==='payment'" style="pointer-events: none;" class="page-break target-droppable"
+                                                                                            >
+                                                                                            <input type="text" class="form-control" id="text"
+                                                                                                [(ngModel)]="col.value" name="website" #name="ngModel"
+                                                                                                [attr.maxlength]="col.maxVal"
+                                                                                                [attr.minlength]="col.minVal"
+                                                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                    
+                                                                                        </div>
+                                                                                        <div *ngIf="col.inputType==='currency'" class="page-break target-droppable"
+                                                                                            >
+                                                                                            <input type="text" class="form-control" id="text"
+                                                                                                [(ngModel)]="col.value" name="website" #name="ngModel"
+                                                                                                [attr.maxlength]="col.maxVal"
+                                                                                                [attr.minlength]="col.minVal"
+                                                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                    
+                                                                                        </div>
                                                                                         <!-- <div *ngSwitchDefault (click)="clicked($event, model, template)">
                                                                                             <label>{{model?.name}}</label>
                                                                                             <app-ui-input [model]="model"
@@ -1225,7 +1280,7 @@
                                     </div>
 
                                     <div *ngIf="viewEntryPanel" class="entry-panel shadow py-2 bg-white" style="right: 0%;">
-                                        <iframe src="{{FormUrl()}}" width="1220px" height="500px" frameborder="0"></iframe>
+                                        <iframe [src]="FormUrl()" width="1220px" height="500px" frameborder="0"></iframe>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="tool-filter text-right">

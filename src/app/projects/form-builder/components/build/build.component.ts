@@ -931,7 +931,7 @@ selectColumn($event: any, colId: any) {
 }
 
 addCol(col: any) {
-this.selectedElement.columns.push(JSON.parse(JSON.stringify(this.sourceBuilderTools[col])))
+this.selectedElement.columns.push(JSON.parse(JSON.stringify(this.selectedElement?.validations?.addColumns[col])))
 }
 
 FormUrl() {

@@ -240,21 +240,37 @@ export class ExportedFormComponent implements OnInit {
       if (this.haveTabs) {
         this.allArr.forEach((arr: any) => {
           arr.forEach((element: any) => {
-            if (element.children) {
+            if (element.children && element.inputType !== 'addressSection') {
               element.children.forEach((child: any) => {
                data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
               });
-            } else {
+            } else if (element.inputType === 'addressSection') {
+              data = data + element.name + '='
+              element.children.forEach((child: any) => {
+                data = data + (child.value || '') + ', '
+               });
+               data = data + '||'
+            }  else if (element.columns) {
+              data = data + element.name + '=' + element.rows.length + '||';
+            }else {
               data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
             }
           });
         });
       } else {
         this.elements.forEach((element: any) => {
-          if (element.children) {
+          if (element.children && element.inputType !== 'addressSection') {
             element.children.forEach((child: any) => {
              data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
             });
+          } else if (element.inputType === 'addressSection') {
+            data = data + element.name + '='
+            element.children.forEach((child: any) => {
+              data = data + child.value + ', '
+             });
+             data = data + '||';
+          } else if (element.columns) {
+            data = data + element.name + '=' + element.rows.length + '||';
           } else {
             data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
           }
@@ -299,6 +315,17 @@ userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg=="
     enableLevelSection(form: any): boolean {
       return this.levelDetails?.disabledLevel?.includes(form.levelId);
 
+    }
+
+    addRow(form: any) {
+      if (!form.rows) {
+        form.rows = [];
+      }
+      const obj: any = {}
+      form.columns.forEach((column: any) => {
+        obj[column.name] = column.value;
+      });
+      form.rows.push(obj)
     }
 
 }

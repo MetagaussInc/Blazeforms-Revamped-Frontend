@@ -126,6 +126,13 @@ export class BlazeformsComponent implements OnInit {
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
+        if (element.rows) {
+          element.columns.forEach((column: any) => {
+            if ((column.inputType === 'payment' || column.inputType === 'currency')) {
+              this.payments.push({name: column.name, value: column.value});
+            }
+          });
+        }
       });
     }
   
