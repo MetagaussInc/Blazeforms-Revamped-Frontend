@@ -126,6 +126,23 @@ export class BlazeformsComponent implements OnInit {
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
+        if (element.inputType === 'radio') {
+          element.options?.forEach((option: any, i: any) => {
+            if (option?.label === element?.value) {
+              this.payments.push({name: element.name, value: element.options[i].payment});
+            }
+          });
+        }
+        if (element.inputType === 'checkbox') {
+          let p = 0;
+          element.options.forEach((option: any, i: any) => {
+            if (element?.value?.includes(option.label)) {
+              p = p + option.payment;
+            }
+          });
+          this.payments.push({name: element.name, value: p});
+
+        }
         if (element.rows) {
           console.log(element.columns)
           element.columns.forEach((column: any) => {
@@ -137,7 +154,10 @@ export class BlazeformsComponent implements OnInit {
       });
     }
   
-    
+    inputUpdateEventHandler($event: any) {
+      this.payments = [];
+      this.extractAllLineItems(this.elements)
+    }
     ngOnInit(): void {
       return;
       console.log(this.elements)

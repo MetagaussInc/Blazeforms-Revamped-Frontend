@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemComponent } from '@swimlane/ngx-dnd';
@@ -20,6 +20,8 @@ export class ExportedFormComponent implements OnInit {
   @Input() public noTabs: any
   @Input() public isPublishPage: any
   @Input() public levelDetails: any;
+@Output() inputUpdateEvent: EventEmitter<any> = new EventEmitter()
+
   strikeCheckout:any = null;
   model = {
     name: ''
@@ -306,6 +308,15 @@ userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg=="
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
         this.router.navigate(['blazeforms/form-submitted'])
       })
+    }
+
+    checkBox($event: any, model: any, option: any) {
+      if (model.value.includes(option)) {
+        model.value = model.value.filter((x: any) => x !== option);
+      } else {
+        model.value.push(option);
+      }
+      this.inputUpdateEvent.emit();
     }
 
     viewLevelSection(form: any): boolean {

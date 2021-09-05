@@ -634,15 +634,15 @@ export const config = [
         maxCharacter: 11,
         size: 'medium',
         view: 'always',
+        collectPayment: false,
         minVal: 0,
         maxVal: 50,
         helpText: '',
         isRequired: 'always',
-        collectPayment: false,
         options: [
-            'Option 1',
-            'Option 2',
-            'Option 3'
+            {label: 'Option 1', payment: 0},
+            {label: 'Option 2', payment: 0},
+            {label: 'Option 3', payment: 0}
         ],
         validations: {
             label: {
@@ -706,7 +706,8 @@ export const config = [
                 ],
                 dataRefKey: 'isRequired'
             },
-            options: true
+            options: true,
+            collectPayment: true
         }
     },
     {
@@ -727,14 +728,15 @@ export const config = [
         collectPayment: false,
         missing: ['Type for Date and time'],
         options: [
-            'Option 1',
-            'Option 2',
-            'Option 3'
+            {label: 'Option 1', payment: 0},
+            {label: 'Option 2', payment: 0},
+            {label: 'Option 3', payment: 0}
         ],
         validations: {
             label: {
                 dataRefKey: 'name'
             },
+            collectPayment: true,
             size: {
                 options: [
                     {

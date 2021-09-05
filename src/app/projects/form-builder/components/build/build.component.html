@@ -332,7 +332,25 @@
                                                                 [(ngModel)]="selectedElement.value"
                                                                 class="form-control">
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.options"
+                                                        <div *ngIf="selectedElement?.validations?.collectPayment && !selectedElement.collectPayment"
+                                                        (click)="selectedElement.collectPayment =  true">
+                                                            <input type="checkbox" id="collectPaymentCheckbox"
+                                                                        [checked]="selectedElement?.collectPayment"
+                                                                        
+                                                                            class="custom-control-input">
+                                                                            <label class="custom-control-label"
+                                                                            for="collectPaymentCheckbox">Collect Payments</label>
+                                                        </div>
+                                                        <div *ngIf="selectedElement?.validations?.collectPayment && selectedElement.collectPayment"
+                                                        (click)="selectedElement.collectPayment =  false">
+                                                            <input type="checkbox" id="collectPaymentCheckbox"
+                                                                        [checked]="selectedElement?.collectPayment"
+                                                                        
+                                                                            class="custom-control-input">
+                                                                            <label class="custom-control-label"
+                                                                            for="collectPaymentCheckbox">Collect Payments</label>
+                                                        </div>
+                                                        <div *ngIf="selectedElement?.validations?.options && !selectedElement?.collectPayment"
                                                             class="radio-opt">
 
                                                             <div class="col-12"><label
@@ -341,7 +359,8 @@
                                                                 class="row">
                                                                 <div class="form-group col-md-8">
                                                                     <input type="text"
-                                                                        [(ngModel)]="selectedElement.options[i]"
+                                                                        [(ngModel)]="selectedElement.options[i].label"
+                                                                        placeholder="Add Opation Name"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -350,7 +369,43 @@
                                                                             class="material-icons">remove</i></button>
                                                                     <button
                                                                         class="btn option-btn border btn-sm rounded p-0"
-                                                                        (click)="selectedElement.options.push('')"><i
+                                                                        (click)="selectedElement.options.push({label: '', payment: 0})"><i
+                                                                            class="material-icons">add</i></button>
+                                                                </div>
+
+                                                            </div>
+                                                            <!--   <div class="row">
+                                                                <div class="col-sm">
+                                                                    <button class="btn btn-success" (click)="selectedElement.options.push('')">Add</button>
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+
+                                                        <div *ngIf="selectedElement?.validations?.options && selectedElement?.collectPayment"
+                                                            class="radio-opt">
+
+                                                            <div class="col-12"><label
+                                                                    for="Default Value">Options</label></div>
+                                                            <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
+                                                                class="row">
+                                                                <div class="form-group col-md-6">
+                                                                    <input type="text"
+                                                                        [(ngModel)]="selectedElement.options[i].label"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <input type="number"
+                                                                        [(ngModel)]="selectedElement.options[i].payment"
+                                                                        placeholder="$"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <button (click)="remove(i)"
+                                                                        class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                            class="material-icons">remove</i></button>
+                                                                    <button
+                                                                        class="btn option-btn border btn-sm rounded p-0"
+                                                                        (click)="selectedElement.options.push({label: 'Option 1', payment: 0})"><i
                                                                             class="material-icons">add</i></button>
                                                                 </div>
 
@@ -1079,15 +1134,15 @@
                                                         <label>{{model.name}}</label>
                                                         <div class="form-group">
 
-                                                            <div (click)="model.value = option"
+                                                            <div (click)="model.value = option.label"
                                                                 class="custom-control custom-radio"
                                                                 *ngFor="let option of model.options">
                                                                 <input name="radio" [value]="model.value"
-                                                                    [checked]="model.value === option"
-                                                                    id="radio_0{{option}}" type="radio"
+                                                                    [checked]="model.value === option.label"
+                                                                    id="radio_builder__{{option.label}}" type="radio"
                                                                     class="custom-control-input">
-                                                                <label for="radio_0{{option}}"
-                                                                    class="custom-control-label">{{option}}</label>
+                                                                <label for="radio_builder__{{option.label}}"
+                                                                    class="custom-control-label">{{option.label}}</label>
                                                             </div>
 
 
@@ -1125,12 +1180,12 @@
                                                         <div (click)="checkBox($event, model, option)"
                                                             *ngFor="let option of model.options"
                                                             class="custom-control custom-checkbox">
-                                                            <input type="checkbox" id="rememberMe{{option}}"
-                                                                name="rememberMe{{option}}"
-                                                                [checked]="model.value.includes(option)"
-                                                                [value]="option" class="custom-control-input">
+                                                            <input type="checkbox" id="checkbox_builder_{{model.uiIndexId}}{{option.label}}"
+                                                                name="checkbox_builder_{{model.uiIndexId}}__{{option.label}}"
+                                                                [checked]="model.value.includes(option.label)"
+                                                                [value]="option.label" class="custom-control-input">
                                                             <label class="custom-control-label"
-                                                                for="rememberMe{{option}}">{{option}}</label>
+                                                                for="checkbox_builder_{{model.uiIndexId}}{{option.label}}">{{option.label}}</label>
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'dropdown'"
