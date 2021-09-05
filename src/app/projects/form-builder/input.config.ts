@@ -449,7 +449,7 @@ export const config = [
     },
     {
         name: 'Currency',
-        inputType: 'number',
+        inputType: 'currency',
         icon: 'fas fa-hashtag',
         class: 'half',
         numericValue: 0,
@@ -1447,11 +1447,11 @@ export const config = [
                 },
                 {
                     name: 'Currency',
-                    inputType: 'number',
+                    inputType: 'currency',
                     icon: 'fas fa-hashtag',
                     class: 'half',
                     numericValue: 0,
-                    value: undefined,
+                    value: 0,
                     minCharacter: 9,
                     maxCharacter: 11,
                     size: 'medium',

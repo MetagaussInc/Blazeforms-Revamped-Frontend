@@ -127,6 +127,7 @@ export class BlazeformsComponent implements OnInit {
           this.extractAllLineItems(element.children);
         }
         if (element.rows) {
+          console.log(element.columns)
           element.columns.forEach((column: any) => {
             if ((column.inputType === 'payment' || column.inputType === 'currency')) {
               this.payments.push({name: column.name, value: column.value});
