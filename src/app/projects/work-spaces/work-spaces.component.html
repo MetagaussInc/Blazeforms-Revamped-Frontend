@@ -7,7 +7,7 @@
     <div class="search-wrapper">
         <div class="form-group has-search mb-5">
             <!-- <input type="text" class="form-control" placeholder="Search Organization" [(ngModel)]="searchedString" (ngModelChange)="searchWorkSpace($event)"> -->
-            <input id="typeahead-basic" type="text" class="form-control" placeholder="Search Organization" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false"  (selectItem)="selectOrgItem($event)" />
+            <input id="typeahead-basic" type="text" class="form-control" placeholder="Search Organization" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false" (selectItem)="selectOrgItem($event)" />
         </div>
     </div>
     <div class="organization-controls-wrapper d-flex flex-wrap justify-content-between mb-5">
@@ -47,7 +47,7 @@
                 </div>
             </ng-container>
         </div>
-        <div class="has-text-centered w-100 my-5">
+        <div class="has-text-centered w-100 my-5 d-flex justify-content-center bd-highlight mb-3">
             <div class="text-center" *ngIf="isLoading">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
