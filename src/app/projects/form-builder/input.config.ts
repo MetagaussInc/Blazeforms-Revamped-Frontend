@@ -4,6 +4,8 @@ export const config = [
     
     {
         name: 'Text',
+        iconClass:'material-icons',
+        iconName:'text_fields',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -93,6 +95,8 @@ export const config = [
     },
     {
         name: 'First Name',
+        iconClass:'material-icons',
+        iconName:'person',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -182,6 +186,8 @@ export const config = [
     },
     {
         name: 'Last Name',
+        iconClass:'material-icons',
+        iconName:'person',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -271,6 +277,8 @@ export const config = [
     },
     {
         name: 'Number',
+        iconClass:'material-icons',
+        iconName:'numbers',
         inputType: 'number',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -358,6 +366,8 @@ export const config = [
     },
     {
         name: 'Phone Number',
+        iconClass:'material-icons',
+        iconName:'phone',
         inputType: 'phoneNumber',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -449,6 +459,8 @@ export const config = [
     },
     {
         name: 'Currency',
+        iconClass:'material-icons',
+        iconName:'payments',
         inputType: 'currency',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -540,6 +552,8 @@ export const config = [
     },
     {
         name: 'Date',
+        iconClass:'material-icons',
+        iconName:'date_range',
         inputType: 'date',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -625,6 +639,8 @@ export const config = [
     },
     {
         name: 'Radio',
+        iconClass:'material-icons',
+        iconName:'radio_button_checked',
         inputType: 'radio',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -712,6 +728,8 @@ export const config = [
     },
     {
         name: 'Checkbox',
+        iconClass:'material-icons',
+        iconName:'check_circle',
         inputType: 'checkbox',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -800,6 +818,8 @@ export const config = [
     },
     {
         name: 'Dropdown',
+        iconClass:'material-icons',
+        iconName:'list',
         inputType: 'dropdown',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -887,6 +907,8 @@ export const config = [
     },
     {
         name: 'Address',
+        iconClass:'material-icons',
+        iconName:'place',
         value: '',
         children: [
                 {
@@ -1981,6 +2003,8 @@ export const config = [
     },
     {
         name: 'Rating',
+        iconClass:'material-icons',
+        iconName:'grade',
         inputType: 'rating',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -2075,6 +2099,8 @@ export const config = [
     },
     {
         name: 'Payment',
+        iconClass:'material-icons',
+        iconName:'attach_money',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -2158,6 +2184,8 @@ export const config = [
     },
     {
         name: 'Calculations',
+        iconClass:'material-icons',
+        iconName:'calculate',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -2242,6 +2270,8 @@ export const config = [
     {
         name: 'Website',
         textValue: '',
+        iconClass:'material-icons',
+        iconName:'public',
         minCharacter: 0,
         maxCharacter: 100,
         value: '', inputType: 'website',
@@ -2330,6 +2360,8 @@ export const config = [
     },
     {
         name: 'Email',
+        iconClass:'material-icons',
+        iconName:'mail',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -2423,6 +2455,8 @@ export const config = [
 export const layoutInputs = [
     {
         name: 'Section',
+        iconClass:'material-icons',
+        iconName:'web',
         value: '',
         children: [] as any[],
         inputType: 'section',
