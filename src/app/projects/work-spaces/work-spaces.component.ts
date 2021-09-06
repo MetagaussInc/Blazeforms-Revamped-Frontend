@@ -85,6 +85,7 @@ export class WorkSpacesComponent implements OnInit {
     }
     else{
       this.http.call('getUserWorkSpaces', 'POST', workspacedata).subscribe(response => {
+        console.log(response);
         this.totalOrgCount = response.total;
         this.organizationLists = response.res;
         this.isLoading = false;
