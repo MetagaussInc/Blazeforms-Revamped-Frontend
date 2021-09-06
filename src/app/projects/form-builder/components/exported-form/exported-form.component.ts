@@ -319,6 +319,16 @@ export class ExportedFormComponent implements OnInit {
     this.inputUpdateEvent.emit();
   }
 
+  checkMobileNumber(form: any) {
+    if (/[~`!#$%\^&*+=\-a-z\[\]\\';,/{}()|\\":<>\?]/g.test(form.value) && form.type === 'US') {
+      return true;
+    } else if (/[~`!#$%\^&*=\a-z\[\]\\';,/{}|\\":<>\?]/g.test(form.value) && form.type !== 'US') {
+      return true;
+    }
+    return false;
+
+  }
+
   viewLevelSection(form: any): boolean {
     return this.levelDetails?.enabledLevelId?.includes(form.levelId);
   }

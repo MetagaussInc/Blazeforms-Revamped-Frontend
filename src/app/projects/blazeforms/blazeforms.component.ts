@@ -117,8 +117,19 @@ export class BlazeformsComponent implements OnInit {
 
     extractAllLineItems(elements: any) {
       elements?.forEach((element: any) => {
-        if ((element.inputType === 'payment' || element.inputType === 'currency') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
+        if ((element.inputType === 'payment') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
           this.payments.push({name: element.name, value: element.value});
+        }
+        if (element.inputType === 'currency') {
+          if ((Number(element.value) > 0)) {
+          this.payments.push({name: element.name, value: element.value});
+          }
+        }
+        console.log(element)
+        if (element.inputType === 'toggle' && element.collectPayment) {
+          if ((element.value) && Number(element.collectAmount) > 0) {
+          this.payments.push({name: element.name, value: element.collectAmount});
+          }
         }
         if (element.childSection) {
           this.extractAllLineItems(element.childSection);
@@ -126,14 +137,14 @@ export class BlazeformsComponent implements OnInit {
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
-        if (element.inputType === 'radio' || element.inputType === 'dropdown') {
+        if ((element.inputType === 'radio' || element.inputType === 'dropdown' )&&  element.collectPayment) {
           element.options?.forEach((option: any, i: any) => {
             if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
               this.payments.push({name: element.name, value: element.options[i].payment});
             }
           });
         }
-        if (element.inputType === 'checkbox') {
+        if (element.inputType === 'checkbox' && element.collectPayment) {
           let p = 0;
           element.options.forEach((option: any, i: any) => {
             if (element?.value?.includes(option.label)) {

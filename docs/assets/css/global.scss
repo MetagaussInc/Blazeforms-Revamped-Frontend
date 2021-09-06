@@ -998,3 +998,16 @@
         /*--- Footer ---*/
         
         footer.footer {}
+        /* ---- WorkSpace Pagination ---*/
+        
+        .pagination .page-item.active .page-link {
+            background-color: #f04564 !important;
+            border-color: #f04564;
+            color: #fff;
+        }
+        
+        ul.pagination {}
+        
+        .pagination .page-item .page-link {
+            color: #f04564;
+        }

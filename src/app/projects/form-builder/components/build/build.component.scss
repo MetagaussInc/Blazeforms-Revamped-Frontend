@@ -1,96 +1,96 @@
-    .form-builder-sidebar .nav-tabs .nav-item .nav-link.active {
-        color: #f04564;
-        border-color: #fff #fff #f04564 #fff;
-    }
-    
-    .form-builder-sidebar .nav-tabs .nav-item .nav-link:focus,
-    .form-builder-sidebar .nav-tabs .nav-item .nav-link:hover {
-        border-color: #fff #fff #f04564 #fff;
-    }
-    
-    .form-builder-sidebar.nav-tabs .nav-item .nav-link {
-        border-width: 2px;
-        color: #495057;
-    }
-    
-    #form-builder-topbar.nav-tabs .nav-item .nav-link.active {
-        color: #f04564;
-        border-color: #fff #fff #f04564 #fff;
-    }
-    
-    #form-builder-topbar.nav-tabs .nav-item .nav-link:focus,
-    #form-builder-topbar.nav-tabs .nav-item .nav-link:hover {
-        border-color: #fff #fff #f04564 #fff;
-    }
-    
-    #form-builder-topbar.nav-tabs .nav-item .nav-link {
-        border-width: 2px;
-        color: #495057;
-    }
-    
-    .form-field-control a i {
-        font-size: 1.2rem;
-    }
-    
-    .form-field-control a {
-        font-size: 0.8rem;
-        font-weight: 400;
-        color: #212529;
-    }
-    
-    #form-builder-sidebar {}
-    
-    .dummy-c:before {
-        text-align: center;
-        content: "Drag and Drop Here";
-        margin: 39%;
-        position: relative;
-        top: 40px;
-    }
-    
-    .dummy-c .ngx-dnd-container {
+.form-builder-sidebar .nav-tabs .nav-item .nav-link.active {
+    color: #f04564;
+    border-color: #fff #fff #f04564 #fff;
+}
+
+.form-builder-sidebar .nav-tabs .nav-item .nav-link:focus,
+.form-builder-sidebar .nav-tabs .nav-item .nav-link:hover {
+    border-color: #fff #fff #f04564 #fff;
+}
+
+.form-builder-sidebar.nav-tabs .nav-item .nav-link {
+    border-width: 2px;
+    color: #495057;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link.active {
+    color: #f04564;
+    border-color: #fff #fff #f04564 #fff;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link:focus,
+#form-builder-topbar.nav-tabs .nav-item .nav-link:hover {
+    border-color: #fff #fff #f04564 #fff;
+}
+
+#form-builder-topbar.nav-tabs .nav-item .nav-link {
+    border-width: 2px;
+    color: #495057;
+}
+
+.form-field-control a i {
+    font-size: 1.2rem;
+}
+
+.form-field-control a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #212529;
+}
+
+#form-builder-sidebar {}
+
+.dummy-c:before {
+    text-align: center;
+    content: "Drag and Drop Here";
+    margin: 39%;
+    position: relative;
+    top: 40px;
+}
+
+.dummy-c .ngx-dnd-container {
+    display: grid;
+}
+
+.dummy-c {
+    .ngx-dnd-container {
         display: grid;
     }
-    
-    .dummy-c {
-        .ngx-dnd-container {
-            display: grid;
-        }
-    }
-    
-    .builder-dropped-field {
-        position: relative;
-    }
-    
-    .builder-dropped-field .field-popover-wrap {
-        top: 26px;
-        right: -28px;
-        left: auto;
-        width: 295px !important;
-        max-width: 100% !important;
-    }
-    
-    .builder-dropped-field .field-popover-wrap .arrow {
-        right: 0px;
-    }
-    
-    .field-popover-wrap .field-action {
-        border: 1px solid transparent;
-        font-size: 0.8rem;
-    }
-    
-    .field-popover-wrap .field-action:hover {
-        background-color: #fff4f5;
-        border: 1px solid #dee2e6;
-    }
-    
-    .entry-panel {
-        position: fixed;
-        width: 50%;
-        right: -52%;
-        -webkit-transition: all ease-in-out 0.5s;
-        transition: all ease-in-out 0.5s;
-        bottom: 20px;
-        top: 15%;
-        z-index: 999;
-    }
+}
+
+.builder-dropped-field {
+    position: relative;
+}
+
+.builder-dropped-field .field-popover-wrap {
+    top: 26px;
+    right: -28px;
+    left: auto;
+    width: 295px !important;
+    max-width: 100% !important;
+}
+
+.builder-dropped-field .field-popover-wrap .arrow {
+    right: 0px;
+}
+
+.field-popover-wrap .field-action {
+    border: 1px solid transparent;
+    font-size: 0.8rem;
+}
+
+.field-popover-wrap .field-action:hover {
+    background-color: #fff4f5;
+    border: 1px solid #dee2e6;
+}
+
+.entry-panel {
+    position: fixed;
+    width: 50%;
+    right: -52%;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    bottom: 20px;
+    top: 15%;
+    z-index: 999;
+}
