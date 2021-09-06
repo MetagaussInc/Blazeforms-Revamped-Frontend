@@ -8,127 +8,173 @@
                 <div class="ngx-dnd-container">
                     <ng-template ngFor let-form [ngForOf]="items" let-index="index" let-isLast="last">
                         <ng-container *ngIf="form.inputType === 'string'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                                <input type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                                <input type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                                    placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'payment'  && form.inputType !== 'string'">
-                            <div style="pointer-events: none;" [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                                <input tabindex="-1" type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            <div style="pointer-events: none;" [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                                <input tabindex="-1" type="text" name="formFirld1_{{ form.uiIndexId }}"
+                                    [(ngModel)]="form.value" placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'number'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                                    placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'phoneNumber'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                                <input type="tel" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                                <input type="tel" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                                    placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'section'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <app-exported-form [elements]="form.childSection"></app-exported-form>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'levelSection' && viewLevelSection(form)">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <app-exported-form [elements]="form.children" [noTabs]="true"></app-exported-form>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'repeatSection'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <div (click)="form.childSection.push(form.childSection[form.childSection.length - 1])">
                                     Add</div>
                                 <app-exported-form [elements]="form.childSection"></app-exported-form>
 
 
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'fileupload'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                                <input type="file" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                                <input type="file" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                                    placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'addressSection'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <div class="row p-2">
                                     <ng-container *ngFor="let item of form.children; let i = index">
                                         <div *ngIf="i <= 1 && !item.disabled" class="{{item.class}}">
-                                            <input type="text" class="form-control"
-                                            [(ngModel)]="form.children[i].value"
-                                            [attr.placeholder]="item.placeholder" autocomplete="off">
+                                            <input type="text" class="form-control" [(ngModel)]="form.children[i].value"
+                                                [attr.placeholder]="item.placeholder" autocomplete="off">
                                         </div>
-                                        <div *ngIf="i > 1 && !item.disabled" class="col-{{12/(form.children.length - 2)}} p-2">
-                                            <input type="text" class="form-control"
-                                            [(ngModel)]="form.children[i].value"
-                                            [attr.placeholder]="item.placeholder" autocomplete="off">
+                                        <div *ngIf="i > 1 && !item.disabled"
+                                            class="col-{{12/(form.children.length - 2)}} p-2">
+                                            <input type="text" class="form-control" [(ngModel)]="form.children[i].value"
+                                                [attr.placeholder]="item.placeholder" autocomplete="off">
                                         </div>
-                                    </ng-container>   
+                                    </ng-container>
                                 </div>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'table'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
-                                data-search="true" data-filter-control="true" data-show-export="true"
-                                data-show-refresh="true" data-show-toggle="true" data-pagination="true"
-                                data-toolbar="#toolbar">
-                                <thead class="thead-light">
-                                    <tr>
-                                                <ng-container *ngFor="let item of form.columns">
-                                                    <th *ngIf="item.view" data-field="prenom"
-                                                    data-filter-control="input" data-sortable="true">
+                                    data-search="true" data-filter-control="true" data-show-export="true"
+                                    data-show-refresh="true" data-show-toggle="true" data-pagination="true"
+                                    data-toolbar="#toolbar">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <ng-container *ngFor="let item of form.columns">
+                                                <th *ngIf="item.view" data-field="prenom" data-filter-control="input"
+                                                    data-sortable="true">
                                                     {{item.name}}</th>
-                                                </ng-container>
-                                                
-                                               
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ng-container>
-                                        <tr *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
-                                                    <ng-container *ngFor="let col of form.columns; let colIndex = index">
-                                                        <td >
+                                            </ng-container>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container>
+                                            <tr *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
+                                                <ng-container *ngFor="let col of form.columns; let colIndex = index">
+                                                    <td>
                                                         <div *ngIf="col.inputType ==='phoneNumber'"
                                                             class="page-break target-droppable">
                                                             <input type="tel" class="form-control" id="email"
                                                                 [(ngModel)]="col.value" name="tel" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder"
-                                                                 autocomplete="off">
+                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
                                                         </div>
                                                         <div *ngIf="col.inputType ==='dropdown'"
                                                             class="page-break target-droppable">
-                                                            <select [(ngModel)]="col.value" (change)="inputUpdateEvent.emit()" class="custom-select">
+                                                            <select [(ngModel)]="col.value"
+                                                                (change)="inputUpdateEvent.emit()"
+                                                                class="custom-select">
                                                                 <option *ngFor="let option of col.options"
                                                                     [value]="option.label">
                                                                     {{option.label}}</option>
@@ -140,28 +186,27 @@
                                                                 [(ngModel)]="col.value" name="tel" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder"
-                                                                 autocomplete="off">
+                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
                                                         </div>
-                                                        <div *ngIf="col.inputType ==='email'"class="page-break target-droppable">
+                                                        <div *ngIf="col.inputType ==='email'"
+                                                            class="page-break target-droppable">
                                                             <input type="email" class="form-control" id="email"
                                                                 [(ngModel)]="col.value" name="email" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder"
-                                                                 autocomplete="off">
+                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
                                                         </div>
-                                                        <div *ngIf="col.inputType==='website'" class="page-break target-droppable"
-                                                            >
+                                                        <div *ngIf="col.inputType==='website'"
+                                                            class="page-break target-droppable">
                                                             <input type="text" class="form-control" id="website"
                                                                 [(ngModel)]="col.value" name="website" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
                                                                 [attr.placeholder]="col.placeholder" autocomplete="off">
-    
+
                                                         </div>
-                                                        <div *ngIf="col.inputType==='date'" class="page-break target-droppable"
-                                                            >
+                                                        <div *ngIf="col.inputType==='date'"
+                                                            class="page-break target-droppable">
                                                             <div class="input-group">
                                                                 <input class="form-control" [minDate]="col.minVal"
                                                                     [maxDate]="col.maxVal" placeholder="yyyy-mm-dd"
@@ -174,127 +219,167 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div *ngIf="col.inputType==='string'" class="page-break target-droppable"
-                                                            >
+                                                        <div *ngIf="col.inputType==='string'"
+                                                            class="page-break target-droppable">
                                                             <input type="text" class="form-control" id="text"
                                                                 [(ngModel)]="col.value" name="website" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
                                                                 [attr.placeholder]="col.placeholder" autocomplete="off">
-    
+
                                                         </div>
-                                                        <div *ngIf="col.inputType==='payment'" style="pointer-events: none;" class="page-break target-droppable"
-                                                            >
+                                                        <div *ngIf="col.inputType==='payment'"
+                                                            style="pointer-events: none;"
+                                                            class="page-break target-droppable">
                                                             <input type="text" class="form-control" id="text"
                                                                 [(ngModel)]="col.value" name="website" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
                                                                 [attr.placeholder]="col.placeholder" autocomplete="off">
-    
+
                                                         </div>
-                                                        <div *ngIf="col.inputType==='currency'" class="page-break target-droppable"
-                                                            >
+                                                        <div *ngIf="col.inputType==='currency'"
+                                                            class="page-break target-droppable">
                                                             <input type="text" class="form-control" id="text"
                                                                 [(ngModel)]="col.value" name="website" #name="ngModel"
                                                                 [attr.maxlength]="col.maxVal"
                                                                 [attr.minlength]="col.minVal"
                                                                 [attr.placeholder]="col.placeholder" autocomplete="off">
-    
+
                                                         </div>
-                                                        </td>
-                                                    </ng-container>
-                                        </tr>
-                                    </ng-container>
+                                                    </td>
+                                                </ng-container>
+                                            </tr>
+                                        </ng-container>
 
 
-                                </tbody>
-                                
-                            </table>
+                                    </tbody>
+
+                                </table>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'date'">
-                                <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                    <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
-                                </div>
-                                <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
-                    
-                            </ng-container>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}"
+                                    [(ngModel)]="form.value" placeholder="{{form.placeholder}}"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                            </div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
+
+                        </ng-container>
                         <ng-container *ngIf="form.inputType === 'radio'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <div *ngFor="let option of form.options" class="custom-control custom-radio">
-                                    <div (click)="form.value = option.label; inputUpdateEvent.emit()" class="custom-control custom-radio">
-                                        <input name="radio" [value]="form.value" [checked]="form.value === option.label" id="radio_0{{option.label}}" type="radio" class="custom-control-input">
+                                    <div (click)="form.value = option.label; inputUpdateEvent.emit()"
+                                        class="custom-control custom-radio">
+                                        <input name="radio" [value]="form.value" [checked]="form.value === option.label"
+                                            id="radio_0{{option.label}}" type="radio" class="custom-control-input">
                                         <label for="radio_0" class="custom-control-label">{{option.label}}</label>
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'rating'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                               
-                                
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+
+
                                 <!-- <div class="row" *ngFor="let item of form.ratingOptions">
                                     <div class="col-2">{{item.label}}</div>
                                     <div style="max-width: 15%;justify-content: center;" class="col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         <input name="radio" name="formFirld1_{{ form.uiIndexId }}{{option}}" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
                                     </div>
                                 </div> -->
-                                
+
                                 <div class="row  rating-labels">
                                     <div class="col-2"></div>
-                                    <div style="padding: 0; justify-content: center;    margin: 0 !important;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                                    <div style="padding: 0; justify-content: center;    margin: 0 !important;"
+                                        class="custom-control custom-radio custom-control-inline col-2"
+                                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         {{option}}
                                     </div>
                                 </div>
                                 <div class="row" *ngFor="let item of form.ratingOptions">
                                     <div class="col-2" style="max-width: 15%;">{{item.label}}
                                     </div>
-                                    <div style="max-width: 15%;justify-content: center;" class="custom-control custom-radio custom-control-inline col-2" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
+                                    <div style="max-width: 15%;justify-content: center;"
+                                        class="custom-control custom-radio custom-control-inline col-2"
+                                        *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                                         <div class="custom-control custom-radio">
-                                            <input name="radio" [value]="item.value" [checked]="item.value === option" id="radio_0{{option}}" type="radio" class="custom-control-input">
+                                            <input name="radio" [value]="item.value" [checked]="item.value === option"
+                                                id="radio_0{{option}}" type="radio" class="custom-control-input">
                                             <label class="custom-control-label"> </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'checkbox'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <div *ngFor="let option of form.options" class="custom-control custom-checkbox">
-                                    <input type="checkbox" id="checkbox_publish{{option.label}}" name="formFirld1_{{ form.uiIndexId }}{{option.label}}" [checked]="form.value.includes(option.label)" [value]="option.label" class="custom-control-input form-control">
-                                    <label class="custom-control-label" for="checkbox_publish{{option.label}}">{{option.label}}</label>
+                                    <input type="checkbox" id="checkbox_publish{{option.label}}"
+                                        name="formFirld1_{{ form.uiIndexId }}{{option.label}}"
+                                        [checked]="form.value.includes(option.label)" [value]="option.label"
+                                        class="custom-control-input form-control">
+                                    <label class="custom-control-label"
+                                        for="checkbox_publish{{option.label}}">{{option.label}}</label>
                                 </div>
                                 <!-- <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" /> -->
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'dropdown'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <label class="col-form-label">{{form.name}}</label>
-                                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
-                                        <option *ngFor="let option of form.options" [value]="option.label">
-                                            {{option.label}}</option>
-                                    </select>
+                                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()"
+                                    [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value"
+                                    class="custom-select">
+                                    <option *ngFor="let option of form.options" [value]="option.label">
+                                        {{option.label}}</option>
+                                </select>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'sign'">
-                            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                            <div [class]="form.size + ' ngx-dnd-item'"
+                                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                                <label [style.font-family]="styling?.labels?.font"
+                                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                                 <app-signature-field [model]="form"></app-signature-field>
                             </div>
-                            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+                            <div
+                                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                                Form field 1 is required</div>
                         </ng-container>
                     </ng-template>
                 </div>
@@ -310,174 +395,194 @@
 <div *ngIf="!haveTabs" class="ngx-dnd-container">
     <ng-template ngFor let-form [ngForOf]="elements" let-index="index" let-isLast="last">
         <ng-container *ngIf="form.inputType === 'string'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'number'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'currency'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input type="number" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'phoneNumber'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input type="tel" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input type="tel" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'section'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <app-exported-form [elements]="form.childSection"></app-exported-form>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'levelSection' && viewLevelSection(form)">
-            <div class="level-section" [ngClass]="{'disbaled': enableLevelSection(form)}" [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div class="level-section" [ngClass]="{'disbaled': enableLevelSection(form)}"
+                [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <app-exported-form [elements]="form.children" [noTabs]="true"></app-exported-form>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'repeatSection'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <div (click)="form.childSection.push(form.childSection[form.childSection.length - 1])">
                     Add</div>
                 <app-exported-form [elements]="form.childSection"></app-exported-form>
 
 
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'table'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
-                data-search="true" data-filter-control="true" data-show-export="true"
-                data-show-refresh="true" data-show-toggle="true" data-pagination="true"
-                data-toolbar="#toolbar">
-                <thead class="thead-light">
-                    <tr>
-                                <ng-container *ngFor="let item of form.columns">
-                                    <th *ngIf="item.view" data-field="prenom"
-                                    data-filter-control="input" data-sortable="true">
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <table class="table mt-3  text-center border" id="table-id" data-toggle="table" data-search="true"
+                    data-filter-control="true" data-show-export="true" data-show-refresh="true" data-show-toggle="true"
+                    data-pagination="true" data-toolbar="#toolbar">
+                    <thead class="thead-light">
+                        <tr>
+                            <ng-container *ngFor="let item of form.columns">
+                                <th *ngIf="item.view" data-field="prenom" data-filter-control="input"
+                                    data-sortable="true">
                                     {{item.name}}</th>
-                                </ng-container>
-                                
-                               
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container>
-                       
-                        <ng-container *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
-                            <tr *ngFor="let row of form.rows">
-                                <ng-container *ngFor="let col of form.columns; let colIndex = index">
-                                    <td >
-                                    <div *ngIf="col.inputType ==='phoneNumber'"
-                                        class="page-break target-droppable">
-                                        <input type="tel" class="form-control" id="email"
-                                            [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder"
-                                             autocomplete="off">
-                                    </div>
-                                    <div *ngIf="col.inputType ==='dropdown'"
-                                        class="page-break target-droppable">
-                                        <select [(ngModel)]="row[col.name]" (change)="inputUpdateEvent.emit()" class="custom-select">
-                                            <option *ngFor="let option of col.options"
-                                                [value]="option.label">
-                                                {{option.label}}</option>
-                                        </select>
-                                    </div>
-                                    <div *ngIf="col.inputType ==='number'"
-                                        class="page-break target-droppable">
-                                        <input type="number" class="form-control" id="email"
-                                            [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder"
-                                             autocomplete="off">
-                                    </div>
-                                    <div *ngIf="col.inputType ==='currency'"
-                                        class="page-break target-droppable">
-                                        <input type="number" class="form-control" id="email"
-                                            [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder"
-                                             autocomplete="off">
-                                    </div>
-                                    <div *ngIf="col.inputType ==='email'"class="page-break target-droppable">
-                                        <input type="email" class="form-control" id="email"
-                                            [(ngModel)]="row[col.name]" name="email" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder"
-                                             autocomplete="off">
-                                    </div>
-                                    <div *ngIf="col.inputType==='website'" class="page-break target-droppable"
-                                        >
-                                        <input type="text" class="form-control" id="website"
-                                            [(ngModel)]="row[col.name]" name="website" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder" autocomplete="off">
+                            </ng-container>
 
-                                    </div>
-                                    <div *ngIf="col.inputType==='date'" class="page-break target-droppable"
-                                        >
-                                        <div class="input-group">
-                                            <input class="form-control" [minDate]="col.minVal"
-                                                [maxDate]="col.maxVal" placeholder="yyyy-mm-dd"
-                                                name="dp" [(ngModel)]="row[col.name]" ngbDatepicker
-                                                #d="ngbDatepicker">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text calendar"
-                                                    (click)="d.toggle()" type="button"><i
-                                                        class="material-icons">date_range</i></div>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container>
+
+                            <ng-container *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
+                                <tr *ngFor="let row of form.rows">
+                                    <ng-container *ngFor="let col of form.columns; let colIndex = index">
+                                        <td>
+                                            <div *ngIf="col.inputType ==='phoneNumber'"
+                                                class="page-break target-droppable">
+                                                <input type="tel" class="form-control" id="email"
+                                                    [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="col.inputType==='string'" class="page-break target-droppable"
-                                        >
-                                        <input type="text" class="form-control" id="text"
-                                            [(ngModel)]="row[col.name]" name="website" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder" autocomplete="off">
+                                            <div *ngIf="col.inputType ==='dropdown'"
+                                                class="page-break target-droppable">
+                                                <select [(ngModel)]="row[col.name]" (change)="inputUpdateEvent.emit()"
+                                                    class="custom-select">
+                                                    <option *ngFor="let option of col.options" [value]="option.label">
+                                                        {{option.label}}</option>
+                                                </select>
+                                            </div>
+                                            <div *ngIf="col.inputType ==='number'" class="page-break target-droppable">
+                                                <input type="number" class="form-control" id="email"
+                                                    [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
+                                            </div>
+                                            <div *ngIf="col.inputType ==='currency'"
+                                                class="page-break target-droppable">
+                                                <input type="number" class="form-control" id="email"
+                                                    [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
+                                            </div>
+                                            <div *ngIf="col.inputType ==='email'" class="page-break target-droppable">
+                                                <input type="email" class="form-control" id="email"
+                                                    [(ngModel)]="row[col.name]" name="email" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
+                                            </div>
+                                            <div *ngIf="col.inputType==='website'" class="page-break target-droppable">
+                                                <input type="text" class="form-control" id="website"
+                                                    [(ngModel)]="row[col.name]" name="website" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
 
-                                    </div>
-                                    <div *ngIf="col.inputType==='payment'" style="pointer-events: none;" class="page-break target-droppable"
-                                        >
-                                        <input type="text" class="form-control" id="text"
-                                            [(ngModel)]="row[col.name]" name="website" #name="ngModel"
-                                            [attr.maxlength]="col.maxVal"
-                                            [attr.minlength]="col.minVal"
-                                            [attr.placeholder]="col.placeholder" autocomplete="off">
+                                            </div>
+                                            <div *ngIf="col.inputType==='date'" class="page-break target-droppable">
+                                                <div class="input-group">
+                                                    <input class="form-control" [minDate]="col.minVal"
+                                                        [maxDate]="col.maxVal" placeholder="yyyy-mm-dd" name="dp"
+                                                        [(ngModel)]="row[col.name]" ngbDatepicker #d="ngbDatepicker">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text calendar" (click)="d.toggle()"
+                                                            type="button"><i class="material-icons">date_range</i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="col.inputType==='string'" class="page-break target-droppable">
+                                                <input type="text" class="form-control" id="text"
+                                                    [(ngModel)]="row[col.name]" name="website" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
 
-                                    </div>
-                                    <!-- <div *ngIf="col.inputType==='currency'" class="page-break target-droppable"
+                                            </div>
+                                            <div *ngIf="col.inputType==='payment'" style="pointer-events: none;"
+                                                class="page-break target-droppable">
+                                                <input type="text" class="form-control" id="text"
+                                                    [(ngModel)]="row[col.name]" name="website" #name="ngModel"
+                                                    [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                    [attr.placeholder]="col.placeholder" autocomplete="off">
+
+                                            </div>
+                                            <!-- <div *ngIf="col.inputType==='currency'" class="page-break target-droppable"
                                         >
                                         <input type="text" class="form-control" id="text"
                                             [(ngModel)]="row[col.name]" name="website" #name="ngModel"
@@ -486,57 +591,80 @@
                                             [attr.placeholder]="col.placeholder" autocomplete="off">
 
                                     </div> -->
-                                    </td>
-                                </ng-container>
-                    </tr>
+                                        </td>
+                                    </ng-container>
+                                </tr>
+                            </ng-container>
+                            <div *ngIf="form.columns?.length > 0" (click)="addRow(form)">
+                                Add Rows
+                            </div>
+
+
+
                         </ng-container>
-                        <div *ngIf="form.columns?.length > 0" (click)="addRow(form)">
-                            Add Rows
-                    </div>
-                        
-
-                       
-                    </ng-container>
 
 
-                </tbody>
-                
-            </table>
+                    </tbody>
+
+                </table>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'fileupload'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input type="file" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input type="file" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'date'">
-                <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                    <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
-                </div>
-                <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
-    
-            </ng-container>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
+            </div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
+
+        </ng-container>
         <ng-container *ngIf="form.inputType === 'radio'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <div *ngFor="let option of form.options" class="custom-control custom-radio">
-                    <div (click)="form.value = option.label; inputUpdateEvent.emit()" class="custom-control custom-radio">
-                        <input name="radio" [value]="form.value" [checked]="form.value === option.label" id="radio_0_ {{form.uiIndexId}}_publish_{{option.label}}" type="radio" class="custom-control-input">
-                        <label for="radio_0_ {{form.uiIndexId}}_publish_{{option.label}}" class="custom-control-label">{{option.label}}</label>
+                    <div (click)="form.value = option.label; inputUpdateEvent.emit()"
+                        class="custom-control custom-radio">
+                        <input name="radio" [value]="form.value" [checked]="form.value === option.label"
+                            id="radio_0_ {{form.uiIndexId}}_publish_{{option.label}}" type="radio"
+                            class="custom-control-input">
+                        <label for="radio_0_ {{form.uiIndexId}}_publish_{{option.label}}"
+                            class="custom-control-label">{{option.label}}</label>
                     </div>
                 </div>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'rating'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <!-- <div class="row" *ngFor="let item of form.ratingOptions | keyvalue">
                     <div class="col-2 dd">{{item.key}}</div>
                     <div class="custom-control custom-radio custom-control-inline" *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
@@ -561,75 +689,97 @@
                         class="custom-control custom-radio custom-control-inline col-2"
                         *ngFor="let option of form.ratingScale[form.selectedRatingScale]">
                         <div class="custom-control custom-radio">
-                            <input name="radio" [value]="item.value"
-                                [checked]="item.value === option"
-                                id="radio_0{{option}}" type="radio"
-                                class="custom-control-input">
+                            <input name="radio" [value]="item.value" [checked]="item.value === option"
+                                id="radio_0{{option}}" type="radio" class="custom-control-input">
                             <label class="custom-control-label"> </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'checkbox'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <div *ngFor="let option of form.options" class="custom-control custom-checkbox">
-                    <input type="checkbox" (change)="checkBox($event, form, option.label)" id="checkbox_publish{{option.label}}" [checked]="form.value.includes(option.label)" [value]="option.label" class="custom-control-input form-control">
+                    <input type="checkbox" (change)="checkBox($event, form, option.label)"
+                        id="checkbox_publish{{option.label}}" [checked]="form.value.includes(option.label)"
+                        [value]="option.label" class="custom-control-input form-control">
                     <label class="custom-control-label" for="checkbox_publish{{option.label}}">{{option.label}}</label>
                 </div>
                 <!-- <input type="{{form.inputType}}" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" /> -->
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'dropdown'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                 <label class="col-form-label">{{form.name}}</label>
-                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
-                        <option *ngFor="let option of form.options" [value]="option.label">
-                            {{option.label}}</option>
-                    </select>
+                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()"
+                    [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value"
+                    class="custom-select">
+                    <option *ngFor="let option of form.options" [value]="option.label">
+                        {{option.label}}</option>
+                </select>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'sign'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
                 <app-signature-field [model]="form"></app-signature-field>
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
         </ng-container>
         <ng-container *ngIf="form.inputType === 'addressSection'">
-            <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                 <div class="row p-2">
                     <ng-container *ngFor="let item of form.children; let i = index">
                         <div *ngIf="i <= 1 && !item.disabled" class="{{item.class}}">
-                            <input type="text" class="form-control"
-                            [(ngModel)]="form.children[i].value"
-                            [attr.placeholder]="item.placeholder" autocomplete="off">
+                            <input type="text" class="form-control" [(ngModel)]="form.children[i].value"
+                                [attr.placeholder]="item.placeholder" autocomplete="off">
                         </div>
                         <div *ngIf="i > 1 && !item.disabled" class="col-{{12/(form.children.length - 2)}} p-2">
-                            <input type="text" class="form-control"
-                            [(ngModel)]="form.children[i].value"
-                            [attr.placeholder]="item.placeholder" autocomplete="off">
+                            <input type="text" class="form-control" [(ngModel)]="form.children[i].value"
+                                [attr.placeholder]="item.placeholder" autocomplete="off">
                         </div>
-                    </ng-container> 
+                    </ng-container>
                 </div>
-                  
+
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'payment' && form.inputType !== 'string'">
-            <div style="pointer-events: none;" [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
-                <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
-                <input tabindex="-1" type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+            <div style="pointer-events: none;" [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <label [style.font-family]="styling?.labels?.font"
+                    [style.font-size.px]="styling?.labels?.size">{{form.name}}</label>
+                <input tabindex="-1" type="text" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
+                    placeholder="{{form.placeholder}}" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    class="form-control" />
             </div>
-            <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                Form field 1 is required</div>
 
         </ng-container>
     </ng-template>
@@ -647,12 +797,13 @@
         <div class="col-12 text-right"> <strong>Sub Total</strong><span class="pl-2">$ {{getSubTotal()}}</span></div>
     </div>
 
-    <div *ngIf="initial.extraBill.length > 0"  class="row lower">
-        <div *ngFor="let item of initial.extraBill" class="col-12 text-right">{{item.name}}{{item.type === 'perentage' ? '('+ item.value + '%)' : ''}}
+    <div *ngIf="initial.extraBill.length > 0" class="row lower">
+        <div *ngFor="let item of initial.extraBill" class="col-12 text-right">{{item.name}}{{item.type === 'perentage' ?
+            '('+ item.value + '%)' : ''}}
             <span class="pl-2" *ngIf="item.type === 'dollar'">$ {{item.calculated}}</span>
             <span class="pl-2" *ngIf="item.type === 'perentage'">$ {{item.calculated}}</span>
         </div>
-        
+
     </div>
     <hr class="mb-4">
     <div class="row lower">
@@ -661,12 +812,14 @@
     <div class="row lower">
         <div class="col-md-12 text-right">
             <div class="custom-control custom-radio" (click)="initial.selectedPaymentOption = 'Card'">
-                <input name="radio" [checked]="initial.selectedPaymentOption === 'Card'" [value]="'Card'" id="radio_card" type="radio" class="custom-control-input">
+                <input name="radio" [checked]="initial.selectedPaymentOption === 'Card'" [value]="'Card'"
+                    id="radio_card" type="radio" class="custom-control-input">
                 <label for="radio_card" class="custom-control-label">Card</label>
             </div>
 
             <div class="custom-control custom-radio" (click)="initial.selectedPaymentOption = 'Cash'">
-                <input name="radio" [checked]="initial.selectedPaymentOption === 'Cash'" [value]="'Cash'" id="radio_cash" type="radio" class="custom-control-input">
+                <input name="radio" [checked]="initial.selectedPaymentOption === 'Cash'" [value]="'Cash'"
+                    id="radio_cash" type="radio" class="custom-control-input">
                 <label for="radio_cash" class="custom-control-label">Cash</label>
             </div>
         </div>
@@ -676,10 +829,16 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-btn-group my-3" *ngIf="!noTabs">
-            <button *ngIf="active !== 0 && haveTabs" (click)="active = active - 1" class="btn btn-bf btn-md">back</button>
-            <button *ngIf="active !== allArr.length - 1 && haveTabs" (click)="active = active + 1" class="btn btn-bf btn-md">Next</button>
-            <button *ngIf="!initial || initial?.selectedPaymentOption === 'Cash' || getAmountDue() === 0" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="submitParentForm('parentForm')">Submit</button>
-            <button *ngIf="(initial && initial?.selectedPaymentOption === 'Card') && getAmountDue() > 0" [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="billPay()">Proceed to Payment</button>
+            <button *ngIf="active !== 0 && haveTabs" (click)="active = active - 1"
+                class="btn btn-bf btn-md">back</button>
+            <button *ngIf="active !== allArr.length - 1 && haveTabs" (click)="active = active + 1"
+                class="btn btn-bf btn-md">Next</button>
+            <button *ngIf="!initial || initial?.selectedPaymentOption === 'Cash' || getAmountDue() === 0"
+                [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md"
+                (click)="submitParentForm('parentForm')">Submit</button>
+            <button *ngIf="(initial && initial?.selectedPaymentOption === 'Card') && getAmountDue() > 0"
+                [ngClass]="{'p-right': haveTabs}" type="submit" class="btn btn-bf btn-md" (click)="billPay()">Proceed to
+                Payment</button>
         </div>
     </div>
 </div>
