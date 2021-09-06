@@ -6,30 +6,35 @@
             </div>
             <div class="col-md-9">
                 <input type="text" class="form-control" id="organization-name" formControlName="Name" placeholder="Organization Name">
-            </div>
-            <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
-                <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                <div class="bf-input-validation">
+                    <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                        <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                        </div>
+                    </ng-container>
+                    <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
                 </div>
-            </ng-container>
-            <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
+            </div>
         </div>
         <div class="row my-4 form-group">
             <div class="col-md-3">
                 <label for="organization-email">Default Reply Email</label><span class="text-danger"> *</span>
             </div>
             <div class="col-md-9">
-                <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Your Email Address">
-            </div>
-            <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
-                <div *ngIf="f.DefaultReplyEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                <input type="email" formControlName="DefaultReplyEmail" class="form-control" id="organization-email" placeholder="Your Email Address">            
+                <div class="bf-input-validation">
+                    <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
+                        <div *ngIf="f.DefaultReplyEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                        </div>
+                        <div *ngIf="f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                        <!-- <div *ngIf="f.DefaultReplyEmail.errors?.specialCharInDomain"
+                            class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
+                        <div *ngIf="f.DefaultReplyEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                    </ng-container>
+                    <div *ngIf="f.DefaultReplyEmail.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                        Email is already exist
+                    </div>
                 </div>
-                <div *ngIf="f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
-                <!-- <div *ngIf="f.DefaultReplyEmail.errors?.specialCharInDomain"
-                    class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
-                <div *ngIf="f.DefaultReplyEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
-            </ng-container>
-            <div *ngIf="f.DefaultReplyEmail.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
-                Email is already exist</div>
+            </div>
         </div>
         <div class="row my-4 form-group">
             <div class="col-md-3">
@@ -40,6 +45,7 @@
                     <option [ngValue]="null" disabled>Select Country</option>
                     <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
                 </select>
+                <div class="bf-input-validation"></div>
             </div>
         </div>
         <div class="row my-4 form-group">
@@ -51,6 +57,7 @@
                     <option [ngValue]="null" disabled>Select Timezone</option>
                     <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
                 </select>
+                <div class="bf-input-validation"></div>
             </div>
         </div>
         <div class="row my-4 form-group">
@@ -62,6 +69,7 @@
                     <option [ngValue]="null" disabled>Select Language</option>
                     <option *ngFor="let language of languageList" [ngValue]="language.value">{{language.label}}</option>
                 </select>
+                <div class="bf-input-validation"></div>
             </div>
         </div>
         <div class="row my-4 form-group">
@@ -73,6 +81,7 @@
                     <option [ngValue]="null" disabled>Select Currency</option>
                     <option *ngFor="let currency of currencyList" [ngValue]="currency.label">{{currency.label}}</option>
                 </select>
+                <div class="bf-input-validation"></div>
             </div>
         </div>
         <div class="row my-4 form-group">

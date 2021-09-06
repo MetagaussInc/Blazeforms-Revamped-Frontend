@@ -33,6 +33,8 @@ export class FormsHeaderComponent implements OnInit {
   private eventUrl$: any;
   public currentUrl: any;
   public notifications: any;
+  public hideStatus: boolean = false;
+
   constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router, private toastService: ToastService) {
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
@@ -134,6 +136,10 @@ export class FormsHeaderComponent implements OnInit {
       ToUserId: userInfo.Id}).subscribe(res => {
         this.notifications = res;
     })
+  }
+
+  toggleStatusBar(){
+    this.hideStatus = !this.hideStatus;
   }
 
 }
