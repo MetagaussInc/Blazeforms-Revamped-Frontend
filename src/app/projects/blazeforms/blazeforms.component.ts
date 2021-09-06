@@ -126,9 +126,9 @@ export class BlazeformsComponent implements OnInit {
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
-        if (element.inputType === 'radio') {
+        if (element.inputType === 'radio' || element.inputType === 'dropdown') {
           element.options?.forEach((option: any, i: any) => {
-            if (option?.label === element?.value) {
+            if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
               this.payments.push({name: element.name, value: element.options[i].payment});
             }
           });

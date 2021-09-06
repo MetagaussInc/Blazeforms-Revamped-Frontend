@@ -128,10 +128,10 @@
                                                         </div>
                                                         <div *ngIf="col.inputType ==='dropdown'"
                                                             class="page-break target-droppable">
-                                                            <select [(ngModel)]="col.value" class="custom-select">
+                                                            <select [(ngModel)]="col.value" (change)="inputUpdateEvent.emit()" class="custom-select">
                                                                 <option *ngFor="let option of col.options"
-                                                                    [value]="option">
-                                                                    {{option}}</option>
+                                                                    [value]="option.label">
+                                                                    {{option.label}}</option>
                                                             </select>
                                                         </div>
                                                         <div *ngIf="col.inputType ==='number'"
@@ -281,9 +281,9 @@
                         <ng-container *ngIf="form.inputType === 'dropdown'">
                             <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <label class="col-form-label">{{form.name}}</label>
-                                <select name="formFirld1_{{ form.uiIndexId }}" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
-                                        <option *ngFor="let option of form.options" [value]="option">
-                                            {{option}}</option>
+                                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
+                                        <option *ngFor="let option of form.options" [value]="option.label">
+                                            {{option.label}}</option>
                                     </select>
                             </div>
                             <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
@@ -404,10 +404,10 @@
                                     </div>
                                     <div *ngIf="col.inputType ==='dropdown'"
                                         class="page-break target-droppable">
-                                        <select [(ngModel)]="row[col.name]" class="custom-select">
+                                        <select [(ngModel)]="row[col.name]" (change)="inputUpdateEvent.emit()" class="custom-select">
                                             <option *ngFor="let option of col.options"
-                                                [value]="option">
-                                                {{option}}</option>
+                                                [value]="option.label">
+                                                {{option.label}}</option>
                                         </select>
                                     </div>
                                     <div *ngIf="col.inputType ==='number'"
@@ -588,9 +588,9 @@
         <ng-container *ngIf="form.inputType === 'dropdown'">
             <div [class]="form.size + ' ngx-dnd-item'" *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                 <label class="col-form-label">{{form.name}}</label>
-                <select name="formFirld1_{{ form.uiIndexId }}" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
-                        <option *ngFor="let option of form.options" [value]="option">
-                            {{option}}</option>
+                <select name="formFirld1_{{ form.uiIndexId }}" (change)="inputUpdateEvent.emit()" [required]="checkForRDependency(form, 'reqDependUpOn')" [(ngModel)]="form.value" class="custom-select">
+                        <option *ngFor="let option of form.options" [value]="option.label">
+                            {{option.label}}</option>
                     </select>
             </div>
             <div *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">Form field 1 is required</div>
