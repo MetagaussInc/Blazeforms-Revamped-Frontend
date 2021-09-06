@@ -379,6 +379,113 @@ export const config = [
         }
     },
     {
+        name: 'Toggle',
+        iconClass: 'material-icons',
+        iconName: 'person',
+        value: true,
+        inputType: 'toggle',
+        icon: 'fas fa-language',
+        class: 'full',
+        size: 'medium',
+        view: 'always',
+        helpText: '',
+        selectLabel: 'Yes/No',
+        collectAmount: 0,
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultToggleValue: {
+                dataRefKey: 'value'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            toggleDefaultOptions: {
+                'Yes/No': {
+                    true: 'Yes',
+                    false: 'No'
+                },
+                'True/False': {
+                    true: 'True',
+                    false: 'False'
+                },
+                'Open/Closed': {
+                    true: 'Open',
+                    false: 'Closed'
+                },
+                'Active/Inactive': {
+                    true: 'Active',
+                    false: 'Inactive'
+                },
+                'Read/Unread': {
+                    true: 'Read',
+                    false: 'Unread'
+                },
+                'Others': {
+                    true: '',
+                    false: ''
+                }
+            },
+            collectPayment: true
+        }
+    },
+    {
         name: 'Last Name',
         iconClass: 'material-icons',
         iconName: 'person',

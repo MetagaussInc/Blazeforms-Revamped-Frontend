@@ -520,6 +520,58 @@
                                                             </div>
                                                         </div>
 
+                                                        <div *ngIf="selectedElement.inputType === 'toggle' && selectedElement?.collectPayment" class="form-group">
+                                                                <div class="form-group">
+                                                                <label>Add Label</label>
+                                                                <div class="row">
+                                                                    <div class="form-group col">
+                                                                        <input name="true_label_setting" id="collect_true_label_setting" type="text"
+                                                                        placeholder="Price"
+                                                                            [(ngModel)]="selectedElement.collectAmount"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                
+                                                        </div>
+
+                                                        <div *ngIf="selectedElement?.validations?.toggleDefaultOptions"
+                                                            class="rating-properties-wrap">
+                                                            <div class="form-group">
+                                                                <label for="Default Value">Pre Defined Labels</label>
+
+                                                                <select
+                                                                    [(ngModel)]="selectedElement.selectLabel"
+                                                                    class="form-control">
+                                                                    <option
+                                                                        *ngFor="let key of selectedElement?.validations?.toggleDefaultOptions | keyvalue"
+                                                                        [value]="key.key">{{key.key}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <ng-container
+                                                                    *ngIf="selectedElement.selectLabel === 'Others'">
+                                                                    <div class="form-group">
+                                                                    <label>Add Label</label>
+                                                                    <div class="row">
+                                                                        <div class="form-group col">
+                                                                            <input name="true_label_setting" id="true_label_setting" type="text"
+                                                                            placeholder="False"
+                                                                                [(ngModel)]="selectedElement?.validations?.toggleDefaultOptions?.[selectedElement?.selectLabel].false"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                        <div class="form-group col">
+                                                                            <input id="true_label_setting_max" name="true_label_setting_max" type="text"
+                                                                            placeholder="True"
+                                                                                [(ngModel)]="selectedElement?.validations?.toggleDefaultOptions?.[selectedElement?.selectLabel].true"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                    
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
                                                         <ng-container
                                                             *ngIf="selectedElement?.selectedRatingScale === 'Custom'">
                                                             <div
@@ -564,8 +616,8 @@
 
 
 
-                                                        <div class="form-date-range-group"
-                                                            *ngIf="selectedElement?.validations?.dateRange">
+                                                        <div *ngIf="selectedElement?.validations?.dateRange" class="form-date-range-group"
+                                                            >
 
                                                             <label>Range</label>
                                                             <div class="form-group">
@@ -599,8 +651,7 @@
 
 
                                                         </div>
-                                                        <ng-container
-                                                            *ngIf="selectedElement?.validations?.pageBreakName">
+                                                        <ng-container *ngIf="selectedElement?.validations?.pageBreakName">
                                                             <div class="form-group">
                                                                 <label for="text">Page Name</label>
                                                                 <input id="text" name="text"
@@ -1002,6 +1053,17 @@
                                                                         [attr.placeholder]="item.placeholder" autocomplete="off">
                                                                 </div>
                                                             </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngSwitchCase="'toggle'"
+                                                        (click)="clicked($event, model, template); selectedElement.viewOptions = false;"
+                                                        class="mjui">
+                                                        <div class="row p-2">
+                                                            <span class="mr-2" >{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</span>
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" id="switchToggle{{model.uiIndexId}}_noncheckbox" class="custom-control-input" >
+                                                                <label class="custom-control-label" for="switchToggle{{model.uiIndexId}}_noncheckbox">{{model.validations?.toggleDefaultOptions?.[model.selectLabel].true}}</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'levelSection'"

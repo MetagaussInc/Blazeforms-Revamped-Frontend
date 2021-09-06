@@ -857,8 +857,20 @@
             <div
                 *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
                 {{form.name}} is required</div>
-
         </ng-container>
+        <ng-container *ngIf="form.inputType === 'toggle'">
+            <div [class]="form.size + ' ngx-dnd-item'"
+                *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
+                <span class="mr-2" >{{form.validations?.toggleDefaultOptions?.[form.selectLabel].false}}</span>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" (change)="inputUpdateEvent.emit();" [(ngModel)]="form.value" id="switchToggle{{form.uiIndexId}}_noncheckbox" class="custom-control-input" >
+                    <label class="custom-control-label" for="switchToggle{{form.uiIndexId}}_noncheckbox">{{form.validations?.toggleDefaultOptions?.[form.selectLabel].true}}</label>
+                </div>
+            </div>
+            <div
+                *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
+                {{form.name}} is required</div>
+</ng-container>
         <ng-container *ngIf="form.inputType === 'dropdown'">
             <div [class]="form.size + ' ngx-dnd-item'"
                 *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">

@@ -125,20 +125,26 @@ export class BlazeformsComponent implements OnInit {
           this.payments.push({name: element.name, value: element.value});
           }
         }
+        console.log(element)
+        if (element.inputType === 'toggle' && element.collectPayment) {
+          if ((element.value) && Number(element.collectAmount) > 0) {
+          this.payments.push({name: element.name, value: element.collectAmount});
+          }
+        }
         if (element.childSection) {
           this.extractAllLineItems(element.childSection);
         }
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
-        if (element.inputType === 'radio' || element.inputType === 'dropdown') {
+        if ((element.inputType === 'radio' || element.inputType === 'dropdown' )&&  element.collectPayment) {
           element.options?.forEach((option: any, i: any) => {
             if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
               this.payments.push({name: element.name, value: element.options[i].payment});
             }
           });
         }
-        if (element.inputType === 'checkbox') {
+        if (element.inputType === 'checkbox' && element.collectPayment) {
           let p = 0;
           element.options.forEach((option: any, i: any) => {
             if (element?.value?.includes(option.label)) {
