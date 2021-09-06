@@ -45,8 +45,8 @@ export class WorkSpacesComponent implements OnInit {
       this.userInfo = userInfo;
       if(this.userInfo && this.userInfo.IsSuperAdmin){
         this.IsSuperAdmin = true;
-        this.getUserOrganizationsList();
       }
+      this.getUserOrganizationsList();
     })
     this.permissions = this.dataSharingService.GetPermissions("Organizations");
     let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
