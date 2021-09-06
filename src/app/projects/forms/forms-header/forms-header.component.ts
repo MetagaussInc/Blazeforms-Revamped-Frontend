@@ -46,6 +46,7 @@ export class FormsHeaderComponent implements OnInit {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo){
+        console.log(this.userInfo);
         if(this.userInfo.ProfileImage){
           this.profileImageSrc = `data:image/JPEG;base64,${this.userInfo.ProfileImage}`;
         }
@@ -117,9 +118,7 @@ export class FormsHeaderComponent implements OnInit {
     });
   }
 
-  UpgradePlan(workspace: any){
-
-  }
+  UpgradePlan(workspace: any){}
 
   orgUserLogout(){
     this.store.dispatch(userLogout());

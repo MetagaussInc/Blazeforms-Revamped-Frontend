@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
+      this.doubleDotValidator.bind(this)
+    ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8)
@@ -60,9 +62,21 @@ export class LoginComponent implements OnInit {
     this.showHidePass = !this.showHidePass;
   }
 
-  @HostListener('paste', ['$event']) blockPaste(e: KeyboardEvent) {
-    e.preventDefault();
+  doubleDotValidator({ value }: AbstractControl): any {
+    if (value?.includes('@')) {
+      if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
+        return { specialCharInDomain: true };
+      }
+      if (value.split('@')[1]?.includes('..')) {
+        return {doubleDotInDomain: true};
+      }
+    }
+    return null;
   }
+
+  // @HostListener('paste', ['$event']) blockPaste(e: KeyboardEvent) {
+  //   e.preventDefault();
+  // }
 
   timer(minute: any) {
     // let minute = 1;
