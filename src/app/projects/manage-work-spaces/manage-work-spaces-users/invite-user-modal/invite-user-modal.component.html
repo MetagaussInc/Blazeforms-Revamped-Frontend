@@ -14,12 +14,14 @@
                             </div>
                             <div class="col-md-9">
                                 <input formControlName="Email" type="email" class="form-control" id="account-email" placeholder="Enter Email address to invite">
+                                <div class="bf-input-validation">
+                                    <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
+                                        <div *ngIf="f.Email.errors?.required || f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required.</div>
+                                    </ng-container>
+                                    <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain.</div>
+                                    <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">User is already exist.</div>
+                                </div>
                             </div>
-                            <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                <div *ngIf="f.Email.errors?.required || f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required.</div>
-                            </ng-container>
-                            <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain.</div>
-                            <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">User is already exist.</div>
                         </div>
                         <div class="row my-4 px-4 form-group">
                             <div class="col-md-3">
@@ -30,11 +32,13 @@
                                     <option [ngValue]="null" disabled>Select Role</option>
                                     <option *ngFor="let activeRole of activeRoles" [ngValue]="activeRole.id">{{activeRole.name}}</option>
                                 </select>
-                            </div>
-                            <ng-container *ngIf="f.RoleId.invalid && (f.RoleId.dirty || f.RoleId.touched)">
-                                <div *ngIf="f.RoleId.errors?.required || f.RoleId.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role is required
+                                <div class="bf-input-validation">
+                                    <ng-container *ngIf="f.RoleId.invalid && (f.RoleId.dirty || f.RoleId.touched)">
+                                        <div *ngIf="f.RoleId.errors?.required || f.RoleId.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role is required
+                                        </div>
+                                    </ng-container>
                                 </div>
-                            </ng-container>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer border-0">

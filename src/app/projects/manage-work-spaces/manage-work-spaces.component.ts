@@ -85,6 +85,8 @@ export class ManageWorkSpacesComponent implements OnInit {
     this.planPermissions = this.dataSharingService.GetPermissions("Plan");
     this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
     this.userId = this.dataSharingService.GetUserId();
+    this.activeTabId = this.dataSharingService.GetActiveTabId();
+    console.log(this.activeTabId)
   }
 
   ngOnInit(): void {
@@ -203,7 +205,13 @@ export class ManageWorkSpacesComponent implements OnInit {
   onUpgradePlan(plan: any) {
     this.showBillingPage = true;
     this.activeTabId = 8;
+    this.dataSharingService.SetActiveTabId(8);
     this.dataSharingService.SetBillingPageData(plan);
+  }
+
+  onUpdateSubscriptionPage(id: number){
+    this.showBillingPage = false;
+    this.activeTabId = id;
   }
 
   get FirstName() { return this.organizationSignupForm.get('FirstName'); }

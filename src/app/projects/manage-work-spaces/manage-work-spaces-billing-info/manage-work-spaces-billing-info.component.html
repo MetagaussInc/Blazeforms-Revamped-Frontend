@@ -142,3 +142,153 @@
         </form>
     </div>
 </div>
+
+<div id="contentToConvert" style="position: absolute; top: -9999px; left: -9999px; width: 100%" *ngIf="formValues">
+  <div class="container">
+    <div>
+      <div class="card border-0">
+        <div class="row invoice-contact">
+          <div class="col-md-8">
+            <div class="invoice-box row">
+              <div class="col-sm-12">
+                <table class="table table-responsive table-borderless">
+                  <tbody>
+                    <tr>
+                      <td class="pl-0 padding-bottom-3 padding-top-3">
+                        <img
+                          src="assets/images/logo.png"
+                          class="m-b-10"
+                          alt=""
+                        />
+                      </td>
+                      ><
+                    </tr>
+                    <tr>
+                      <td class="pl-0 padding-bottom-3 padding-top-3">
+                        Blazeforms.com
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="pl-0 padding-bottom-3 padding-top-3">
+                        admin@blazeforms.com
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row invoive-info">
+            <div class="col-md-4 col-xs-12 invoice-client-info">
+              <h6>Client Information :</h6>
+              ti da
+              <h6 class="m-0">
+                {{ formValues.firstName }} {{ formValues.lastName }}
+              </h6>
+              "m
+              <p class="m-0">{{ formValues.phoneNumber }}</p>
+              <p>{{ formValues.email }}</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h6>Order Information :</h6>
+              <table
+                class="table table-responsive invoice-table invoice-order table-borderless"
+              >
+                <tbody>
+                  <tr>
+                    <th>Date :</th>
+                    <td>
+                      <span>{{ date | date: "dd-MMM-yyyy" }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Status :</th>
+                    <td>
+                      <span class="label label-success">Paid</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5 col-sm-6">
+              <h6 class="m-b-20">
+                Transaction ID : <span>{{ chargeId }}</span>
+              </h6>
+              <!--Organiztion: {{selectedWorkSpaceToEdit.name}}-->
+              <h6 class="text-uppercase text-primary">
+                Total Due :<span>$ {{ billingpageData.price }}</span>
+              </h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table class="table invoice-detail-table">
+                  <thead>
+                    <tr class="thead-default">
+                      <th>Description</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h6>{{ billingpageData.name }}</h6>
+                        <p>
+                          {{ billingpageData.noOfUsers }} Users,{{
+                            billingpageData.noOfForms
+                          }}
+                          Forms,{{ billingpageData.noOfEntries }} Entries,
+                          {{ billingpageData.storageSize | storageCount }} Storage.
+                        </p>
+                      </td>
+                      <td>$ {{ billingpageData.price }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table table-responsive invoice-table invoice-total">
+                <tbody>
+                  <tr>
+                    <th>Sub Total :</th>
+                    <td>$ {{ billingpageData.price }}</td>
+                  </tr>
+                  <tr class="text-info">
+                    <td>
+                      <hr />
+                      <h5 class="text-primary mr-0">Total :</h5>
+                    </td>
+                    <td>
+                      <hr />
+                      <h5 class="text-primary mr-0">
+                        $ {{ billingpageData.price }}
+                      </h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                We don’t think of you as a client, we think of you as a partner.
+                That is why we offer unmatched service and support from the
+                moment you register with us.Whether you need assistance building
+                your forms or would like to learn more about integrations, the
+                BlazeForms team will always be right there to help you as
+                quickly as possible.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
