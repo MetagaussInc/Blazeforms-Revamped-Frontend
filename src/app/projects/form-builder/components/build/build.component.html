@@ -378,30 +378,38 @@
                                                                 </div>
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.collectPayment && !selectedElement.collectPayment"
-                                                            (click)="selectedElement.collectPayment =  true">
+                                                            (click)="selectedElement.collectPayment =  true" class="form-group">
+
+                                                            <div class="custom-control custom-checkbox custom-control-inline">
                                                             <input type="checkbox" id="collectPaymentCheckbox"
                                                                 [checked]="selectedElement?.collectPayment"
                                                                 class="custom-control-input">
                                                             <label class="custom-control-label"
                                                                 for="collectPaymentCheckbox">Collect Payments</label>
+                                                                </div>
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.collectPayment && selectedElement.collectPayment"
-                                                            (click)="selectedElement.collectPayment =  false">
+                                                            (click)="selectedElement.collectPayment =  false" class="form-group">
+                                                            <div class="custom-control custom-checkbox custom-control-inline">
                                                             <input type="checkbox" id="collectPaymentCheckbox"
                                                                 [checked]="selectedElement?.collectPayment"
                                                                 class="custom-control-input">
                                                             <label class="custom-control-label"
                                                                 for="collectPaymentCheckbox">Collect Payments</label>
-                                                        </div>
+                                                         </div>
+                                                    </div>
                                                         <div *ngIf="selectedElement?.validations?.options && !selectedElement?.collectPayment"
                                                             class="radio-opt">
 
                                                             <div class="col-12"><label
-                                                                    for="Default Value">Options</label></div>
+                                                                    for="Default Value">Options</label>
+                                                                </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row">
-                                                                <div class="form-group col-md-8">
-
+                                                                <div class="col-md-8">
+                                                                    <div class="row form-group ">
+                                                                        <div class="col-md-2">
+                                                                            <div class="custom-control custom-checkbox custom-control-inline">
                                                                     <input type="checkbox"
                                                                         id="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
                                                                         name="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
@@ -410,12 +418,16 @@
                                                                         [value]="selectedElement.options[i].label"
                                                                         class="custom-control-input">
                                                                     <label class="custom-control-label"
-                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}">a</label>
-
+                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <input type="text"
                                                                         [(ngModel)]="selectedElement.options[i].label"
                                                                         placeholder="Add Option Name"
                                                                         class="form-control">
+                                                                    </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <button (click)="remove(i)"
@@ -438,6 +450,9 @@
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row">
                                                                 <div class="form-group col-md-6">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                    <div class="custom-control custom-checkbox custom-control-inline">
                                                                     <input type="checkbox"
                                                                         id="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
                                                                         name="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
@@ -446,11 +461,15 @@
                                                                         [value]="selectedElement.options[i].label"
                                                                         class="custom-control-input">
                                                                     <label class="custom-control-label"
-                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}">a</label>
-
+                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <input type="text"
                                                                         [(ngModel)]="selectedElement.options[i].label"
                                                                         class="form-control">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group col-md-3">
                                                                     <input type="number"
@@ -685,8 +704,8 @@
                                                             <ng-container
                                                                 *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
                                                                 <div *ngIf="addElement.editable"
-                                                                    class="custom-control custom-checkbox row d-flex p-2">
-                                                                    <div class="col-12 form-group">
+                                                                    class="col-12 form-group">
+                                                                        <div class="custom-control custom-checkbox custom-control-inline">
                                                                         <input type="checkbox"
                                                                             id="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}"
                                                                             name="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}"
@@ -696,7 +715,8 @@
                                                                             class="custom-control-input">
                                                                         <label class="custom-control-label"
                                                                             for="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}">{{addElement.placeholder}} {{!addElement.disabled}}</label>
-                                                                    </div>
+                                                                        </div>
+                                                                 
                                                                 </div>
                                                             </ng-container>
                                                         </div>
@@ -882,7 +902,7 @@
                                 </div>
                                 <div class="col-md-9 col-lg main">
                                     <div
-                                        class="builder-target build-container bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
+                                        class="builder-target build-container build-droppable-tool bg-white m-3 p-3 border-top border-5 border-bf overflow-auto vh-100">
 
                                         <div class="form-build-head">
                                             <h4 class="text-center form-heading mb-1">{{builderObj.name}}</h4>

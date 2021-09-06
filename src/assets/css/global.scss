@@ -1030,3 +1030,26 @@
             bottom: 0px;
             width: 100%;
         }
+
+
+
+        /*--- Builder CSS---*/
+
+        .btn.btn-link { 
+            color: #f04564;
+        }
+
+        .build-droppable-tool input[type=text] {
+            background-color: #e9ecef;
+            opacity: 1;
+            cursor: default;
+        }
+
+        .build-droppable-tool input[type=radio], 
+        .build-droppable-tool input[type=checkbox] {
+            cursor: default;
+        }
+
+        .build-droppable-tool .custom-radio .custom-control-label::before {
+            background-color: #e9ecef;
+        }
