@@ -32,7 +32,7 @@ export class FormsHeaderComponent implements OnInit {
   public profileImageSrc: any;
   private eventUrl$: any;
   public currentUrl: any;
-  
+  public notifications: any;
   constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router, private toastService: ToastService) {
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
@@ -46,7 +46,7 @@ export class FormsHeaderComponent implements OnInit {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       if(this.userInfo){
-        console.log(this.userInfo);
+        this.getNotification(this.userInfo);
         if(this.userInfo.ProfileImage){
           this.profileImageSrc = `data:image/JPEG;base64,${this.userInfo.ProfileImage}`;
         }
@@ -124,6 +124,16 @@ export class FormsHeaderComponent implements OnInit {
     this.store.dispatch(userLogout());
     this.toastService.showSuccess('You Are Successfully Logged Out!');
     this.router.navigate(['/user/login']);
+  }
+  viewPublish(item: any) {
+    console.log(item.entryUrl.split('#')[1]);
+    this.router.navigate([item.entryUrl.split('#')[1].replace('BlazeForms', 'blazeforms')])
+  }
+  getNotification(userInfo: any) {
+    this.http.call('GetNotifications', 'POST', {
+      ToUserId: userInfo.Id}).subscribe(res => {
+        this.notifications = res;
+    })
   }
 
 }

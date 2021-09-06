@@ -43,43 +43,43 @@ export class FormsComponent implements OnInit {
   public formPermissions: any;
   public selectedWorkspaceId: any;
   public favs: any = []
-
+  public notifications: any;
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
-      if(userInfo){
-        this.userInfo = userInfo;
-        let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
-        this.selectedWorkspaceId = workSpaceListData.id;
-        this.getFormsList(userInfo);
-      }
+      console.log(userInfo)
+      this.userInfo = userInfo;
+      let workSpaceListData = this.dataSharingService.GetUserWorkspaceList();
+      this.selectedWorkspaceId = workSpaceListData.id;
+      // this.getNotification(userInfo);
+      this.getFormsList(userInfo);
     })
     this.formPermissions = this.dataSharingService.GetPermissions("Forms");
   }
 
   getFormsList(userInfo: any) {
     if(userInfo){
-      // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
-      //   this.formsList = _.groupBy(res.res, 'folderName');
-      //   console.log(this.formsList)
-      // })
-    
-      this.getFoldersWithList(userInfo)
+    // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
+    //   this.formsList = _.groupBy(res.res, 'folderName');
+    //   console.log(this.formsList)
+    // })
+   
+    this.getFoldersWithList(userInfo)
 
-      this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
-        WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-        this.allForms = res;
-        this.allForms.forEach((element: any) => {
-          if (element.isFavourite) {
-            this.favs.push(element.id);
-          }
-        });
-      })
+    this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
+      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
+      this.allForms = res;
+      this.allForms.forEach((element: any) => {
+        if (element.isFavourite) {
+          this.favs.push(element.id);
+        }
+      });
+    })
 
-      this.http.call('getFolders', 'POST', {
-        WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-        this.folderList = res;
-      })
-    }
+    this.http.call('getFolders', 'POST', {
+      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
+      this.folderList = res;
+    })
+  }
   }
 
   getFormId(form: any): string {
@@ -101,23 +101,30 @@ export class FormsComponent implements OnInit {
 
   }
 
+  getNotification(userInfo: any) {
+    this.http.call('GetNotifications', 'POST', {
+      ToUserId: userInfo.Id}).subscribe(res => {
+        this.notifications = res;
+    })
+  }
+
   getFoldersWithList(userInfo: any, ) {
     if(userInfo){
-      const obj = {
-        FilterAttribute: this.FilterAttribute,
-        SearchKeyword: this.searchedFormKeyword,
-        UserId: userInfo.Id,
-        WorkSpaceId: this.selectedWorkspaceId,
-        ...this.pageDetail,
-      }
-      this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
-        const arr: any = [];
-        this.getfolderNameWithForms(res, arr);
-        this.formsList = arr;
-        this.folderListWithForms = arr;;
-        
-      })
+    const obj = {
+      FilterAttribute: this.FilterAttribute,
+      SearchKeyword: this.searchedFormKeyword,
+      UserId: userInfo.Id,
+      WorkSpaceId: this.selectedWorkspaceId,
+      ...this.pageDetail,
     }
+    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
+      const arr: any = [];
+      this.getfolderNameWithForms(res, arr);
+      this.formsList = arr;
+      this.folderListWithForms = arr;;
+      
+    })
+  }
   }
 
   selectBulkForms(form: any) {
@@ -193,15 +200,15 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
       if (result?.message === 'added') {
-        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id}})
+        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: 1}})
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
     });
   }
 
-  openbuilder(form: any) {
-    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value}})
+  openbuilder(form: any, tabIndex: any) {
+    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: tabIndex}})
 
   }
 

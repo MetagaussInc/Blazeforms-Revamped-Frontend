@@ -1,5 +1,7 @@
 import { Component, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Component({
@@ -25,40 +27,96 @@ export class BlazeformsComponent implements OnInit {
   formDetail: any = {}
   payments: any = [];
   globalListenFunc: any;
-  constructor(private http: HttpService, private routec: ActivatedRoute, private renderer: Renderer2) {
+  needLogin = false;
+  userInfoSubscription$: any;
+  userInfo: any;
+
+  levelDetails: any = {};
+
+  constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
+    this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.userInfo = userInfo;
+    })
     this.routec.params.subscribe(res => {
       this.workSpaceName = res.workspaceName;
-      this.getForm(res.workspaceName, res.formName)
+      this.getForm(res.workspaceName, res.formName, res.entry)
     });
     this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
       this.payments = [];
       this.extractAllLineItems(this.elements)
     });
+    
   }
 
-  getForm(workspaceName: string, formName: string) {
+  getForm(workspaceName: string, formName: string, entry: any) {
+    console.log(this.userInfo, entry)
       const payload = {
-        // FormEntriesId: null, // to do
+        FormEntriesId: entry ? entry : null, // to do
         Id: null, // no user credentials
         Name: formName,
         WorkSpaceName: workspaceName,
-        userID: null // no user credentials
+        userID: this.userInfo?.Id ? this.userInfo?.Id : null // no user credentials
       }
       this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
         this.dataLoaded = true;
+        
+        const bForms: any = localStorage.getItem('bforms');
+          user: JSON.parse(bForms)?.user,
+        this.needLogin = res.formType === 'WorkFlow' && !this.userInfo ? true : false;
         this.formDetail = {
           ... res,
           workspaceName: this.workSpaceName
         };
-        this.elements = JSON.parse(res.miscellaneousJSON).targetBuilderTools;
+        this.elements = [...(JSON.parse(res.miscellaneousJSON).levels || []), ...JSON.parse(res.miscellaneousJSON).targetBuilderTools];
         this.paymentDetails = JSON.parse(res.miscellaneousJSON).paymentSetting;
         this.extractAllLineItems(this.elements)
+        this.getLevelDetails(this.formDetail);
         console.log(this.payments)
       })
     }
 
+    getLevelDetails(formDetail: any) {
+      console.log(formDetail)
+      this.levelDetails['toBeFilledById'] = this.userInfo?.Id;
+      this.levelDetails['toBeFilledByName'] = this.userInfo?.name;
+      if (!formDetail.formEntry) {
+        // When there is no entry and first level user jumps on this page.
+        // First section should be anabled always.
+        this.levelDetails['enabledLevelId'] = [formDetail?.workFlowLevels?.[0]?.id];
+        this.levelDetails['toBeFilled'] = formDetail?.workFlowLevels?.[0]?.id
+
+      } else {
+        console.log(JSON.parse(formDetail.formEntry))
+        this.elements = JSON.parse(formDetail.formEntry).savedElementsWithValue;
+        this.levelDetails['disabledLevel'] = JSON.parse(formDetail.formEntry).levelDetails.enabledLevelId;
+        this.levelDetails['enabledLevelId'] = JSON.parse(formDetail.formEntry).levelDetails.enabledLevelId;
+        formDetail.workFlowOwners.forEach((owns: any) => {
+
+          if (owns?.levelId?.length > 0) {
+            formDetail.workFlowLevels.forEach((level: any) => {
+                if (owns.levelId === level.id) {
+                this.levelDetails['toBeFilled'] = level.id;
+                this.levelDetails['enabledLevelId'].push(level.id)
+                }
+            });
+
+          }
+        });
+        // formDetail
+        // formDetail?.workFlowLevels?.[0]?.id
+      }
+
+      
+      
+     
+
+      // formDetail.
+      console.log(this.levelDetails)
+      console.log(this.elements)
+    }
+
     extractAllLineItems(elements: any) {
-      elements.forEach((element: any) => {
+      elements?.forEach((element: any) => {
         if ((element.inputType === 'payment' || element.inputType === 'currency') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
           this.payments.push({name: element.name, value: element.value});
         }
@@ -68,10 +126,38 @@ export class BlazeformsComponent implements OnInit {
         if (element.children) {
           this.extractAllLineItems(element.children);
         }
+        if (element.inputType === 'radio' || element.inputType === 'dropdown') {
+          element.options?.forEach((option: any, i: any) => {
+            if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
+              this.payments.push({name: element.name, value: element.options[i].payment});
+            }
+          });
+        }
+        if (element.inputType === 'checkbox') {
+          let p = 0;
+          element.options.forEach((option: any, i: any) => {
+            if (element?.value?.includes(option.label)) {
+              p = p + option.payment;
+            }
+          });
+          this.payments.push({name: element.name, value: p});
+
+        }
+        if (element.rows) {
+          console.log(element.columns)
+          element.columns.forEach((column: any) => {
+            if ((column.inputType === 'payment' || column.inputType === 'currency')) {
+              this.payments.push({name: column.name, value: column.value});
+            }
+          });
+        }
       });
     }
   
-    
+    inputUpdateEventHandler($event: any) {
+      this.payments = [];
+      this.extractAllLineItems(this.elements)
+    }
     ngOnInit(): void {
       return;
       console.log(this.elements)

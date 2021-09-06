@@ -65,20 +65,22 @@
         
         .btn-bf {
             color: $btn-text-color;
-            background-color: $base-color;
-            border-color: $base-color;
+            background-color: $base-color !important;
+            border-color: $base-color !important;
             &:hover {
-                color: $btn-text-color;
-                background-color: $base-hover-color;
-                border-color: $base-hover-color;
+                color: $btn-text-color !important;
+                background-color: $base-hover-color !important;
+                border-color: $base-hover-color !important;
             }
             &:active {
-                color: $btn-text-color;
-                background-color: $base-active-color;
-                border-color: $base-active-color;
+                color: $btn-text-color !important;
+                background-color: $base-active-color !important;
+                border-color: $base-active-color !important;
             }
             &:focus {
-                box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
+                box-shadow: 0 0 0 0.2rem rgba($base-color, .25) !important;
+                color: $btn-text-color !important;
+                background-color: $base-active-color !important;
             }
         }
         
@@ -774,6 +776,19 @@
             max-height: 400px;
         }
         
+        .forms-activity-dropdown {
+            max-height: 400px;
+            font-size: 0.8rem;
+        }
+        
+        .forms-activity-dropdown .version-time {
+            background-color: $base-color;
+        }
+        
+        #view-user-activity:after {
+            display: none;
+        }
+        
         @media screen and (max-height: 742px) {
             .login-area-container,
             .forgot-password-container {
@@ -853,6 +868,7 @@
         
         .org-switcher-btn #org-switcher {
             min-width: 200px;
+            max-width: 260px;
         }
         
         .org-switcher-btn #org-switcher::after {
@@ -864,6 +880,44 @@
             position: absolute;
             right: 4px;
             top: 0px;
+        }
+        /* // Notification */
+        
+        #notification-dropdown i {
+            color: #212529;
+        }
+        
+        ul.notification-dropdown {
+            min-width: 250px;
+        }
+        
+        ul.notification-dropdown li {
+            font-size: 0.8rem;
+        }
+        
+        ul.notification-dropdown li a {
+            text-decoration: underline;
+        }
+        
+        ul.notification-dropdown li a:hover {
+            text-decoration: none;
+            color: $base-color;
+        }
+        
+        ul.notification-dropdown li:last-child {
+            border: 0px !important;
+        }
+        
+        .notification-dropdown .drop-content {
+            max-height: 180px;
+            overflow-y: scroll;
+        }
+        
+        .notification-badge {
+            top: -13px;
+            position: relative;
+            left: -10px;
+            background-color: $base-color;
         }
         
         .header-dropdown-wrap .dropdown-toggle::after {
@@ -940,4 +994,20 @@
         .swiper-button-prev,
         .swiper-button-next {
             color: #f04563 !important;
+        }
+        /*--- Footer ---*/
+        
+        footer.footer {}
+        /* ---- WorkSpace Pagination ---*/
+        
+        .pagination .page-item.active .page-link {
+            background-color: #f04564 !important;
+            border-color: #f04564;
+            color: #fff;
+        }
+        
+        ul.pagination {}
+        
+        .pagination .page-item .page-link {
+            color: #f04564;
         }

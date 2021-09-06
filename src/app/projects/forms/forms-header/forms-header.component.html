@@ -10,7 +10,7 @@
                 <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>
             <div class="me-2 nav-item mr-5" [hidden]="!organizationPermission.canView">
-                <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}">Organization</a>
+                <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}">Organizations</a>
             </div>
 
             <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
@@ -36,6 +36,81 @@
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
+                </div>
+            </div>
+            <div class="notification-wrapper header-dropdown-wrap mr-4">
+                <div ngbDropdown class="">
+                    <div class="dropdown-toggle" id="notification-dropdown" role="button" ngbDropdownToggle>
+                        <i class="material-icons-outlined">notifications</i>
+                        <span class="badge badge-primary notification-badge">10</span>
+                    </div>
+
+                    <!-- <a *ngFor="let item of notifications" class="dropdown-item">{{item.formName}} filled by <br />{{item.userName}} <span (click)="viewPublish(item)">View</span></a> -->
+
+                    <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification-dropdown m-0 p-0" aria-labelledby="notification-dropdown">
+                        <div class="notify-drop-title col mb-2 bg-light py-2">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">Notifications</div>
+                            </div>
+                        </div>
+                        <div class="drop-content drop-content col">
+                            <li class="border-bottom py-2 mb-2">
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-3 pr-0">
+                                        <div class="notify-img"><img width="35" height="35" class="rounded-circle" src="assets/images/user.jpg" alt=""></div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-9 pl-0"> LevelsWF' filled <span>by <span class="user-profile-name font-weight-bold" >Mike J.</span></span>
+                                        <div class="date text-muted">30/08/2021, <span class="time">15:52:40</span> <span class="float-right"><a href="#">View</a></span></div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="border-bottom py-2 mb-2">
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-3 pr-0">
+                                        <div class="notify-img"><img width="35" height="35" class="rounded-circle" src="assets/images/user.jpg" alt=""></div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-9 pl-0"> LevelsWF' filled <span>by <span class="user-profile-name font-weight-bold" >Mike J.</span></span>
+                                        <div class="date text-muted">30/08/2021, <span class="time">15:52:40</span> <span class="float-right"><a href="#">View</a></span></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="border-bottom py-2 mb-2">
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-3 pr-0">
+                                        <div class="notify-img"><img width="35" height="35" class="rounded-circle" src="assets/images/user.jpg" alt=""></div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-9 pl-0"> LevelsWF' filled <span>by <span class="user-profile-name font-weight-bold" >Mike J.</span></span>
+                                        <div class="date text-muted">30/08/2021, <span class="time">15:52:40</span> <span class="float-right"><a href="#">View</a></span></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="border-bottom py-2 mb-2">
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-3 pr-0">
+                                        <div class="notify-img"><img width="35" height="35" class="rounded-circle" src="assets/images/user.jpg" alt=""></div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-9 pl-0"> LevelsWF' filled <span>by <span class="user-profile-name font-weight-bold" >Mike J.</span></span>
+                                        <div class="date text-muted">30/08/2021, <span class="time">15:52:40</span> <span class="float-right"><a href="#">View</a></span></div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+
+
+                        </div>
+                    </ul>
+
+
                 </div>
             </div>
             <div class="account-image-wrapper header-dropdown-wrap">
