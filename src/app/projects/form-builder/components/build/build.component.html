@@ -289,9 +289,9 @@
                                                                         class="custom-control custom-radio">
                                                                         <input name="radio" [value]="key.value"
                                                                             [checked]="selectedElement.size === key.value"
-                                                                            id="radio_0{{key.label}}" type="radio"
-                                                                            class="custom-control-input">
-                                                                        <label for="radio_0"
+                                                                            id="size_setting_radio{{key.label}}"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="size_setting_radio{{key.label}}"
                                                                             class="custom-control-label">{{key.label}}</label>
                                                                     </div>
                                                                 </div>
@@ -309,23 +309,43 @@
                                                         </div> -->
                                                             </div>
                                                         </div>
-                                                        <div *ngIf="selectedElement?.formValidation" class="form-group">
+                                                        <div *ngIf="selectedElement?.inputType === 'phoneNumber'"
+                                                            class="form-group">
+                                                            <div>
+                                                                <div class="custom-controls-stacked">
+                                                                    <div (click)="selectedElement.type = 'US'"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="'US'"
+                                                                            [checked]="selectedElement.type === 'US'"
+                                                                            id="Type_setting_radio"
+                                                                            name="Type_setting_radio"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="Type_setting_radio"
+                                                                            class="custom-control-label">US</label>
+                                                                    </div>
+                                                                    <div (click)="selectedElement.type = 'NONUS'"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="'NONUS'"
+                                                                            [checked]="selectedElement.type === 'NONUS'"
+                                                                            id="Type_setting_radio11"
+                                                                            name="Type_setting_radio11"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="Type_setting_radio11"
+                                                                            class="custom-control-label">International</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="selectedElement?.validations?.pattern?.length > 0" class="form-group">
                                                             <label for="form-validation">Form Validation</label>
                                                             <div>
-                                                                <select id="form-validation" name="form-validation"
+                                                                <select id="form-validation" name="form-validation" [(ngModel)]="selectedElement.pattern"
                                                                     class="custom-select">
-                                                                    <option value="Select">Select</option>
-                                                                    <option value="Alphabetic">Alphabetic</option>
-                                                                    <option value="Numeric">Numeric</option>
-                                                                    <option value="Alphanumeric">Alphanumeric</option>
-                                                                    <option value="SSN">SSN</option>
-                                                                    <option value="Zip Code">Zip Code</option>
-                                                                    <option value="IP Address">IP Address</option>
-                                                                    <option value="MAC Address">MAC Address</option>
+                                                                    <option *ngFor="let pattern of selectedElement?.validations?.pattern" [value]="pattern.pattern">{{pattern.label}}</option>
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div *ngIf="selectedElement?.validations?.defaultValue"
+                                                        <div *ngIf="selectedElement.inputType !== 'date' && selectedElement?.validations?.defaultValue"
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
                                                             <input id="Default Value" name="Default Value"
@@ -333,6 +353,29 @@
                                                                 [attr.type]="selectedElement.inputType"
                                                                 [(ngModel)]="selectedElement.value"
                                                                 class="form-control">
+                                                        </div>
+                                                        
+                                                        <div *ngIf="selectedElement?.validations?.defaultTimeValue"
+                                                            class="form-group">
+                                                            <label for="Default Value">Default Value</label>
+                                                            <div class="input-group">
+                                                                <ngb-timepicker [(ngModel)]="selectedElement.value" [seconds]="true"></ngb-timepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="selectedElement.inputType === 'date' && selectedElement?.validations?.defaultValue"
+                                                            class="form-group">
+                                                            <label for="Default Value">Default Value</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                        name="dp" [(ngModel)]="selectedElement.value"
+                                                                        ngbDatepicker #d271="ngbDatepicker">
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text calendar"
+                                                                            (click)="d271.toggle()"><i
+                                                                                class="material-icons">date_range</i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.collectPayment && !selectedElement.collectPayment"
                                                             (click)="selectedElement.collectPayment =  true">
@@ -358,6 +401,17 @@
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row">
                                                                 <div class="form-group col-md-8">
+
+                                                                    <input type="checkbox"
+                                                                        id="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
+                                                                        name="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
+                                                                        (click)="selectedElement.value = selectedElement.options[i].label"
+                                                                        [checked]="selectedElement?.value?.includes(selectedElement.options[i].label)"
+                                                                        [value]="selectedElement.options[i].label"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}">a</label>
+
                                                                     <input type="text"
                                                                         [(ngModel)]="selectedElement.options[i].label"
                                                                         placeholder="Add Option Name"
@@ -374,11 +428,6 @@
                                                                 </div>
 
                                                             </div>
-                                                            <!--   <div class="row">
-                                                                <div class="col-sm">
-                                                                    <button class="btn btn-success" (click)="selectedElement.options.push('')">Add</button>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
 
                                                         <div *ngIf="selectedElement?.validations?.options && selectedElement?.collectPayment"
@@ -389,6 +438,16 @@
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row">
                                                                 <div class="form-group col-md-6">
+                                                                    <input type="checkbox"
+                                                                        id="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
+                                                                        name="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"
+                                                                        (click)="selectDefault(selectedElement, i)"
+                                                                        [checked]="selectedElement?.value?.includes(selectedElement.options[i].label)"
+                                                                        [value]="selectedElement.options[i].label"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}">a</label>
+
                                                                     <input type="text"
                                                                         [(ngModel)]="selectedElement.options[i].label"
                                                                         class="form-control">
@@ -591,7 +650,8 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="mt-5">
+
+                                                            <div class="mt-5" *ngIf="selectedElement.inputType === 'addressSection'">
                                                                 <ng-container
                                                                     *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
                                                                     <div
@@ -619,6 +679,26 @@
 
                                                             </div>
 
+                                                        </div>
+                                                        
+                                                        <div class="mt-5" *ngIf="selectedElement.inputType === 'nameSection'">
+                                                            <ng-container
+                                                                *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
+                                                                <div *ngIf="addElement.editable"
+                                                                    class="custom-control custom-checkbox row d-flex p-2">
+                                                                    <div class="col-12 form-group">
+                                                                        <input type="checkbox"
+                                                                            id="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}"
+                                                                            name="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}"
+                                                                            [value]="addElement.disabled"
+                                                                            [checked]="!selectedElement.children[eleIndex].disabled"
+                                                                            (click)="addElement.disabled = !addElement.disabled"
+                                                                            class="custom-control-input">
+                                                                        <label class="custom-control-label"
+                                                                            for="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}">{{addElement.placeholder}} {{!addElement.disabled}}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.addColumns">
 
@@ -895,36 +975,35 @@
                                                             </ngx-dnd-container>
                                                         </div>
                                                     </div>
-                                                    <!-- <div *ngSwitchCase="'addressSection'"
+                                                    <div *ngSwitchCase="'addressSection'"
                                                         (click)="sectionClicked($event, model, template); selectedElement.viewOptions = false;"
                                                         class="mjui">
-                                                        <div class="shadow">
-                                                            {{model.name}}
-                                                            <div class="row">
-                                                                <div class="col-6 p-2 builder-dropped-field" *ngIf="model.children[0]">
-                                                                    <input type="text" class="form-control" id="email"
-                                                            [(ngModel)]="model.children[0].value" name="email" #name="ngModel"
-                                                            [attr.maxlength]="model.children[0].maxVal"
-                                                            [attr.minlength]="model.children[0].minVal"
-                                                            [attr.placeholder]="model.children[0].placeholder" autocomplete="off">
+                                                        <div class="row p-2">
+                                                            <ng-container *ngFor="let item of model.children; let i = index">
+                                                                <div *ngIf="i <= 1 && !item.disabled" class="{{item.class}}">
+                                                                    <input type="text" class="form-control" [(ngModel)]="model.children[i].value"
+                                                                        [attr.placeholder]="item.placeholder" autocomplete="off">
                                                                 </div>
-                                                                <div class="col-6 p-2 builder-dropped-field"  *ngIf="model.children[1]">
-                                                                    <input type="email" class="form-control" id="email"
-                                                            [(ngModel)]="model.children[1].value" name="email" #name="ngModel"
-                                                            [attr.maxlength]="model.children[1].maxVal"
-                                                            [attr.minlength]="model.children[1].minVal"
-                                                            [attr.placeholder]="model.children[1].placeholder" autocomplete="off">
+                                                                <div *ngIf="i > 1 && !item.disabled"
+                                                                    class="col-{{12/(model.children.length - 2)}} p-2">
+                                                                    <input type="text" class="form-control" [(ngModel)]="model.children[i].value"
+                                                                        [attr.placeholder]="item.placeholder" autocomplete="off">
                                                                 </div>
-                                                                <div class="col-12 p-2 builder-dropped-field"  *ngIf="model.children[2]">
-                                                                    <input type="email" class="form-control" id="email"
-                                                            [(ngModel)]="model.children[2].value" name="email" #name="ngModel"
-                                                            [attr.maxlength]="model.children[2].maxVal"
-                                                            [attr.minlength]="model.children[2].minVal"
-                                                            [attr.placeholder]="model.children[2].placeholder" autocomplete="off">
-                                                                </div>
-                                                            </div>
+                                                            </ng-container>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
+                                                    <div *ngSwitchCase="'nameSection'"
+                                                        (click)="clicked($event, model, template); selectedElement.viewOptions = false;"
+                                                        class="mjui">
+                                                        <div class="row p-2">
+                                                            <ng-container *ngFor="let item of model.children; let i = index">
+                                                                <div *ngIf="!item.disabled" class="{{item.class}}">
+                                                                    <input type="text" class="form-control" [(ngModel)]="model.children[i].value"
+                                                                        [attr.placeholder]="item.placeholder" autocomplete="off">
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
                                                     <div *ngSwitchCase="'levelSection'"
                                                         (click)="sectionClicked($event, model, template)" class="mjui">
                                                         <div class="shadow">
@@ -995,8 +1074,9 @@
                                                                                             class="custom-select">
                                                                                             <option
                                                                                                 *ngFor="let option of col.options"
-                                                                                                [value]="option">
-                                                                                                {{option}}</option>
+                                                                                                [value]="option.label">
+                                                                                                {{option.label}}
+                                                                                            </option>
                                                                                         </select>
                                                                                     </div>
                                                                                     <div *ngIf="col.inputType ==='number'"
@@ -1059,6 +1139,20 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div *ngIf="col.inputType==='string'"
+                                                                                        class="page-break target-droppable">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="text"
+                                                                                            [(ngModel)]="col.value"
+                                                                                            name="website"
+                                                                                            #name="ngModel"
+                                                                                            [attr.maxlength]="col.maxVal"
+                                                                                            [attr.minlength]="col.minVal"
+                                                                                            [attr.placeholder]="col.placeholder"
+                                                                                            autocomplete="off">
+
+                                                                                    </div>
+                                                                                    <div *ngIf="col.inputType==='text'"
                                                                                         class="page-break target-droppable">
                                                                                         <input type="text"
                                                                                             class="form-control"
@@ -1170,6 +1264,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div *ngSwitchCase="'time'"
+                                                        (click)="clicked($event, model, template)">
+                                                        <label>{{model.name}}</label>
+                                                        <div class="input-group">
+                                                            <ngb-timepicker [(ngModel)]="model.value" [seconds]="true"></ngb-timepicker>
+                                                        </div>
+                                                    </div>
                                                     <div *ngSwitchCase="'radio'"
                                                         (click)="clicked($event, model, template)"
                                                         class="form-group-rating">
@@ -1242,8 +1344,8 @@
                                                         <label class="col-form-label">{{model.name}}</label>
                                                         <select [(ngModel)]="model.value" class="custom-select">
                                                             <option *ngFor="let option of model.options"
-                                                                [value]="option">
-                                                                {{option}}</option>
+                                                                [value]="option.label">
+                                                                {{option.label}}</option>
                                                         </select>
 
                                                     </div>
@@ -1284,6 +1386,26 @@
                                                             [attr.minlength]="model.minVal"
                                                             [attr.placeholder]="model.placeholder"
                                                             [required]="checkForDependency(model)" autocomplete="off">
+
+                                                    </div>
+                                                    <div *ngSwitchCase="'text-box'"
+                                                        (click)="clicked($event, model, template)">
+                                                        <label>{{model?.name}}</label>
+                                                        <textarea [(ngModel)]="model.value" id="text_area"
+                                                            name="text area" cols="40" rows="5"
+                                                            [attr.maxlength]="model.maxVal"
+                                                            [attr.minlength]="model.minVal"
+                                                            class="form-control"></textarea>
+
+                                                    </div>
+                                                    <div *ngSwitchCase="'password'"
+                                                        (click)="clicked($event, model, template)">
+                                                        <label>{{model?.name}}</label>
+                                                        <input type="password" class="form-control" id="website"
+                                                            [(ngModel)]="model.value" name="website" #name="ngModel"
+                                                            [attr.maxlength]="model.maxVal"
+                                                            [attr.minlength]="model.minVal"
+                                                            [attr.placeholder]="model.placeholder">
 
                                                     </div>
                                                     <div *ngSwitchDefault (click)="clicked($event, model, template)">

@@ -117,8 +117,13 @@ export class BlazeformsComponent implements OnInit {
 
     extractAllLineItems(elements: any) {
       elements?.forEach((element: any) => {
-        if ((element.inputType === 'payment' || element.inputType === 'currency') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
+        if ((element.inputType === 'payment') && (!element?.dependUpon || this.checkForDependency(element, 'dependUpon')) ) {
           this.payments.push({name: element.name, value: element.value});
+        }
+        if (element.inputType === 'currency') {
+          if ((Number(element.value) > 0)) {
+          this.payments.push({name: element.name, value: element.value});
+          }
         }
         if (element.childSection) {
           this.extractAllLineItems(element.childSection);

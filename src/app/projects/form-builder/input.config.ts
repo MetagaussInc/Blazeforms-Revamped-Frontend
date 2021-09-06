@@ -3,13 +3,207 @@ import { FunctionDeclaration } from "estree";
 export const config = [
 
     {
-        name: 'Text',
+        name: 'Single line Text',
         iconClass: 'material-icons',
         iconName: 'text_fields',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
-        value: '', inputType: 'string',
+        value: '', inputType: 'text',
+        icon: 'fas fa-language',
+        class: 'full',
+        pattern: '/^[a-zA-Z ]*$/',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            placeholder: {
+                dataRefKey: 'placeholder'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            range: {
+                minDataRefKey: 'minVal',
+                maxDataRefKey: 'maxVal'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            pattern: [
+                {label: 'Alphabatic', pattern:"/^[a-zA-Z ]*$/"},
+                {label: 'Numeric', pattern:"/^[0-9]*$/"},
+                {label: 'Alphanumeric', pattern:"/^[a-z\d\-_\s]+$/i"},
+                {label: 'SSN', pattern:"/^\d{3}-\d{3}-\d{4}$/"},
+                {label: 'Zip Code', pattern:"/\d{5}\(\d{4}\)/"},
+                {label: 'IP Address', pattern:"/\d{3}\.\d{3}\.\d{3}.\d{3}$/"},
+                {label: 'MAC Address', pattern:"/\d{2}\:\d{2}\:\d{2}\:\d{2}\:\d{2}$/"},
+            ]
+        }
+    },
+    {
+        name: 'Multiple line Text',
+        iconClass: 'material-icons',
+        iconName: 'text_fields',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '',
+        inputType: 'text-box',
+        icon: 'fas fa-language',
+        class: 'full',
+        placeholder: '',
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            placeholder: {
+                dataRefKey: 'placeholder'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultValue: {
+                dataRefKey: 'value'
+            },
+            range: {
+                minDataRefKey: 'minVal',
+                maxDataRefKey: 'maxVal'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            }
+        }
+    },
+    {
+        name: 'Password',
+        iconClass: 'material-icons',
+        iconName: 'text_fields',
+        textValue: '',
+        minCharacter: 0,
+        maxCharacter: 100,
+        value: '',
+        inputType: 'password',
         icon: 'fas fa-language',
         class: 'full',
         placeholder: '',
@@ -557,18 +751,13 @@ export const config = [
         inputType: 'date',
         icon: 'fas fa-hashtag',
         class: 'half',
-        numericValue: 0,
-        value: undefined,
-        minCharacter: 9,
-        maxCharacter: 11,
+        value: null,
         size: 'medium',
         view: 'always',
         minVal: 0,
         maxVal: 50,
         helpText: '',
         isRequired: 'always',
-        collectPayment: false,
-        missing: ['Type for Date and time'],
         validations: {
             label: {
                 dataRefKey: 'name'
@@ -634,7 +823,91 @@ export const config = [
                     }
                 ],
                 dataRefKey: 'isRequired'
-            }
+            },
+            defaultValue: true
+        }
+    },
+    {
+        name: 'Time',
+        iconClass: 'material-icons',
+        iconName: 'date_range',
+        inputType: 'time',
+        icon: 'fas fa-hashtag',
+        class: 'half',
+        value: {
+            "hour": 1,
+            "minute": 1,
+            "second": 1
+          },
+        size: 'medium',
+        view: 'always',
+        minVal: 0,
+        maxVal: 50,
+        helpText: '',
+        isRequired: 'always',
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            defaultTimeValue: true
         }
     },
     {
@@ -836,9 +1109,9 @@ export const config = [
         collectPayment: false,
         missing: ['Type for Date and time'],
         options: [
-            'Option 1',
-            'Option 2',
-            'Option 3'
+            { label: 'Option 1', payment: 0 },
+            { label: 'Option 2', payment: 0 },
+            { label: 'Option 3', payment: 0 }
         ],
         validations: {
             label: {
@@ -1139,6 +1412,123 @@ export const config = [
         }
     },
     {
+        name: 'Name',
+        iconClass: 'material-icons',
+        iconName: 'place',
+        value: '',
+        children: [
+            {
+                name: 'Title',
+                value: '',
+                inputType: 'Name Field',
+                icon: 'fas fa-language',
+                class: 'col-12 p-2',
+                placeholder: 'Title',
+                disabled: true,
+                editable: true
+            },
+            {
+                name: 'First Name',
+                value: '',
+                inputType: 'NameField',
+                icon: 'fas fa-language',
+                class: 'col-12 p-2',
+                placeholder: 'First Name'
+            },
+            {
+                name: 'Middle Name',
+                value: '',
+                inputType: 'NameField',
+                icon: 'fas fa-language',
+                class: 'col-12 p-2',
+                placeholder: 'Middle Name',
+                disabled: true,
+                editable: true
+            },
+            {
+                name: 'Last Name',
+                value: '',
+                inputType: 'NameField',
+                icon: 'fas fa-language',
+                class: 'col-12 p-2',
+                placeholder: 'Last Name'
+            },
+            {
+                name: 'Suffix',
+                value: '',
+                inputType: 'NameField',
+                icon: 'fas fa-language',
+                class: 'col-12 p-2',
+                placeholder: 'Suffix',
+                disabled: true,
+                editable: true
+            }
+        ] as any[],
+        inputType: 'nameSection',
+        icon: 'far fa-square',
+        class: 'wide',
+        size: 'medium',
+        view: 'always',
+        validations: {
+            size: {
+                dataRefKey: 'size',
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ]
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            nameFields: true
+        }
+    },
+    {
         name: 'Table',
         value: '',
         columns: [] as any[],
@@ -1385,13 +1775,12 @@ export const config = [
                     class: 'half',
                     placeholder: '',
                     numericValue: 0,
-                    value: undefined,
-                    minCharacter: 9,
-                    maxCharacter: 11,
+                    value: '',
                     size: 'medium',
                     view: 'always',
                     minVal: 0,
                     maxVal: 50,
+                    type: 'US',
                     helpText: '',
                     isRequired: 'always',
                     missing: ['Type for us and international'],

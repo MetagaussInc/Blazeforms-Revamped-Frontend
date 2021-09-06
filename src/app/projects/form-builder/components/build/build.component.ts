@@ -934,6 +934,30 @@ export class BuildComponent implements OnDestroy {
     console.log($event, colId);
   }
 
+  selectDefault(selectedElement: any , i: any) {
+    /**
+     * Works for setting defaul value for RADIO | Checkbox | Dropdown.
+     */
+    if (selectedElement.inputType === 'radio' || selectedElement.inputType === 'dropdown') {
+      selectedElement.value = selectedElement.options[i].label
+    } else {
+      if (selectedElement.value.includes(selectedElement.options[i].label)) {
+        selectedElement.value = selectedElement.value.filter((x: any) => x !== selectedElement.options[i].label);
+      } else {
+        selectedElement.value.push(selectedElement.options[i].label)
+      }
+    }
+  }
+
+  // arrayAction(array: any[], value: any) {
+  //   if (array.includes(value)) {
+  //     array = array.filter(x => x !== value);
+  //   } else {
+  //     array.push(value)
+  //   }
+  //   console.log('setting-selection', array)
+  // }
+
   addCol(col: any) {
     this.selectedElement.columns.push(JSON.parse(JSON.stringify(this.selectedElement?.validations?.addColumns[col])))
   }
