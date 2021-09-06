@@ -14,6 +14,7 @@ import { RegisterConfirmComponent } from './register-confirm/register-confirm.co
 import { RegisterSuccessComponent } from './register-success/register-success.component';
 import { RegisterFailedComponent } from './register-failed/register-failed.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { BlockPasteDirective } from '../directives/block-paste.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterConfirmComponent,
     RegisterSuccessComponent,
     RegisterFailedComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    BlockPasteDirective
   ],
   imports: [
     CommonModule,

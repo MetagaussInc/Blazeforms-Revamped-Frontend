@@ -27,12 +27,11 @@
                                 <p class="text-muted">Use This URL To Create A Hyperlink To Your Form.!
                                 </p>
 
-                                <div class="form-publish-link mt-2">
+                                <div class="input-group form-publish-link mt-2">
                                     <input type="text" [value]="path" class="form-control">
-
-                                    <a href="{{path}}">
-
-                                    </a>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"> <a href="{{path}}"><i class="material-icons-outlined">share</i></a></span>
+                                    </div>
 
                                 </div>
                             </div>
@@ -79,21 +78,21 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <select id="text-font-selector" [(ngModel)]="styling.text.font"  name="select" class="custom-select">
+                                        <select id="text-font-selector" [(ngModel)]="styling.text.font" name="select" class="custom-select">
                                             <option value="Montserra">Montserra</option>
                                             <option value="Roboto">Roboto</option>
                                             <option value="Raleway">Raleway</option>
                                           </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="text-font-size-selector" [(ngModel)]="styling.text.size"  name="select" class="custom-select">
+                                        <select id="text-font-size-selector" [(ngModel)]="styling.text.size" name="select" class="custom-select">
                                             <option value="11">11px</option>
                                             <option value="12">12px</option>
                                             <option value="13">13px</option>
                                           </select>
 
                                     </div>
-                                    <div class="col-sm-2"><input type="color" [(ngModel)]="styling.text.color"  class="mt-2" id="text-color-selector" name="favcolor" value="#ff0000"></div>
+                                    <div class="col-sm-2"><input type="color" [(ngModel)]="styling.text.color" class="mt-2" id="text-color-selector" name="favcolor" value="#ff0000"></div>
                                 </div>
 
                             </div>
@@ -104,21 +103,21 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <select id="placeholders-font-selector"  [(ngModel)]="styling.placeholders.font" name="select" class="custom-select">
+                                        <select id="placeholders-font-selector" [(ngModel)]="styling.placeholders.font" name="select" class="custom-select">
                                             <option value="Montserra">Montserra</option>
                                             <option value="Roboto">Roboto</option>
                                             <option value="Raleway">Raleway</option>
                                           </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="placeholders-font-size-selector"  [(ngModel)]="styling.placeholders.size" name="select" class="custom-select">
+                                        <select id="placeholders-font-size-selector" [(ngModel)]="styling.placeholders.size" name="select" class="custom-select">
                                             <option value="11">11px</option>
                                             <option value="12">12px</option>
                                             <option value="13">13px</option>
                                           </select>
 
                                     </div>
-                                    <div class="col-sm-2"><input type="color"  [(ngModel)]="styling.placeholders.color" class="mt-2" id="placeholders-color-selector" name="favcolor" value="#ff0000"></div>
+                                    <div class="col-sm-2"><input type="color" [(ngModel)]="styling.placeholders.color" class="mt-2" id="placeholders-color-selector" name="favcolor" value="#ff0000"></div>
                                 </div>
 
                             </div>
@@ -129,21 +128,21 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <select id="buttons-font-selector" name="select" [(ngModel)]="styling.buttons.font"  class="custom-select">
+                                        <select id="buttons-font-selector" name="select" [(ngModel)]="styling.buttons.font" class="custom-select">
                                             <option value="Montserra">Montserra</option>
                                             <option value="Roboto">Roboto</option>
                                             <option value="Raleway">Raleway</option>
                                           </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="buttons-font-size-selector" name="select" [(ngModel)]="styling.buttons.size"  class="custom-select">
+                                        <select id="buttons-font-size-selector" name="select" [(ngModel)]="styling.buttons.size" class="custom-select">
                                             <option value="11">11px</option>
                                             <option value="12">12px</option>
                                             <option value="13">13px</option>
                                           </select>
 
                                     </div>
-                                    <div class="col-sm-2"><input type="color" class="mt-2" [(ngModel)]="styling.placeholders.color"  id="buttons-color-selector" name="favcolor" value="#ff0000"></div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2" [(ngModel)]="styling.placeholders.color" id="buttons-color-selector" name="favcolor" value="#ff0000"></div>
                                 </div>
 
                             </div>
@@ -197,7 +196,7 @@
                 <div class="form-build-head">
                     <h4 class="text-center form-heading mb-1">{{builderObj?.name}}</h4>
                     <p class="text-center text-muted"> {{builderObj?.description}}</p>
-            
+
                 </div>
 
                 <!-- -----Tabs End---- -->

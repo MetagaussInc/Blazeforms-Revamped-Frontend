@@ -43,7 +43,7 @@ export class WorkSpacesComponent implements OnInit {
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
-      if(this.userInfo.IsSuperAdmin){
+      if(this.userInfo && this.userInfo.IsSuperAdmin){
         this.IsSuperAdmin = true;
       }
       this.getUserOrganizationsList();

@@ -9,6 +9,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { userWorkspaceDetailSuccess } from 'src/app/+state/user/user.actions';
 import { ToastService } from '../../../shared/toast.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-organization-without-super-admin',
@@ -44,7 +45,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   public userId: any;
   public items: Array<any> = [];
 
-  constructor(private router: Router, private http: HttpService, private dataSharingService: DataSharingService, private store: Store, private toastService: ToastService) {
+  constructor(private router: Router, private http: HttpService, private dataSharingService: DataSharingService, private store: Store, private toastService: ToastService, private location: Location) {
     this.userId = this.dataSharingService.GetUserId();
   }
 
@@ -151,6 +152,10 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
     this.organizationSaveForm.patchValue({
       Currency: crru[0].label
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   get Name() { return this.organizationSaveForm.get('Name'); }
