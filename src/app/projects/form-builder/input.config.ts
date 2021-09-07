@@ -1,4 +1,5 @@
 import { FunctionDeclaration } from "estree";
+import { USA_STATES } from "./components/build/build.constant";
 
 export const config = [
 
@@ -590,7 +591,22 @@ export const config = [
         view: 'always',
         minVal: 0,
         maxVal: 50,
+        decimalUpto: 2,
         helpText: '',
+        selectedNumberType: 'Integter',
+        numberType: [
+            {
+                label : 'Integer',
+            },
+            {
+                label: 'Decimal',
+                isDecimal: true
+            },
+            {
+                label: 'Percentage',
+                isDecimal: true,
+            }
+        ],
         validations: {
             label: {
                 dataRefKey: 'name'
@@ -1292,7 +1308,7 @@ export const config = [
         value: '',
         children: [
             {
-                name: 'Text',
+                name: 'Address Line 1',
                 value: '',
                 inputType: 'AddressField',
                 icon: 'fas fa-language',
@@ -1302,7 +1318,7 @@ export const config = [
                 notCustomizable: true
             },
             {
-                name: 'Text',
+                name: 'Address Line 2',
                 value: '',
                 inputType: 'AddressField',
                 icon: 'fas fa-language',
@@ -1410,7 +1426,7 @@ export const config = [
                 dataRefKey: 'isRequired'
             },
             typeOfAddress: {
-                US: [
+                NONUS: [
                     {
                         name: 'Text',
                         value: '',
@@ -1467,7 +1483,7 @@ export const config = [
                         disabled: false
                     }
                 ],
-                NONUS: [
+                US: [
                     {
                         name: 'Text',
                         value: '',
@@ -1503,7 +1519,8 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-4 p-1',
                         placeholder: 'State',
-                        disabled: false
+                        disabled: false,
+                        list: USA_STATES
                     },
                     {
                         name: 'Zip',
@@ -3038,7 +3055,7 @@ export const layoutInputs = [
             inputType: 'section',
             icon: 'far fa-square',
             class: 'wide',
-            size: 'medium',
+            size: 'extra-large',
             view: 'always',
             get show() {
 

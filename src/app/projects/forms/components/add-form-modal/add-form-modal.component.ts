@@ -24,4 +24,11 @@ export class AddFormModalComponent implements OnInit, OnChanges {
     this.activeModal.close(type);
     // this.openEditEvent.emit(type);
   }
+
+  copy(form: any) {
+
+  }
+  viewForm(form: any) {
+
+  }
 }

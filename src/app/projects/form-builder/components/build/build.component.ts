@@ -64,6 +64,11 @@ export class BuildComponent implements OnDestroy {
       ['fontSize']
     ]
   };
+  extraBillModel = {
+      value: null,
+      type: 'dollar',
+      name: 'Additional'
+    };
   model: any = {
     name: '',
   };
@@ -772,13 +777,18 @@ export class BuildComponent implements OnDestroy {
     console.log(e.type, e);
   }
 
+ 
+
+  selectPayment() {
+    this.selectedElement = this.paymentSetting;
+    this.viewProperties = 1;
+  }
+
   clicked($event: any, model: any, i: any) {
     if (this.selectedElement?.viewOption) {
       this.selectedElement['viewOption'] = false;
     }
     this.selectedElement = model;
-    // this.selectedIndex = model.index;
-    // this.selectedDependency = null;
     console.log(model, i)
     this.viewProperties = 1;
 
@@ -786,15 +796,8 @@ export class BuildComponent implements OnDestroy {
     $event.stopPropagation()
   }
 
-  selectPayment() {
-    this.selectedElement = this.paymentSetting;
-    this.viewProperties = 1;
-  }
-
   sectionClicked($event: any, model: any, i: any) {
     this.selectedElement = model;
-    // this.selectedIndex = model.index;
-    // this.selectedDependency = null;
     this.viewProperties = 1;
     console.log(model, i)
     $event.preventDefault();
@@ -964,6 +967,12 @@ export class BuildComponent implements OnDestroy {
 
   FormUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
+  }
+
+  addSection(form: any) {
+    const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
+    formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
+    form.childSection.push(formInstance);
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
