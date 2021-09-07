@@ -336,6 +336,48 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div *ngIf="selectedElement?.numberType?.length > 0"
+                                                            class="form-group row">
+                                                                <div class="custom-controls-stacked col-6">
+                                                                    <div (click)="selectedElement.selectedNumberType = 'Integter'"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="'Integter'"
+                                                                            [checked]="selectedElement.selectedNumberType === 'Integter'"
+                                                                            id="Integter_Type_setting_radio"
+                                                                            name="Integter_Type_setting_radio"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="Integter_Type_setting_radio"
+                                                                            class="custom-control-label">Integter</label>
+                                                                    </div>
+                                                                    <div (click)="selectedElement.selectedNumberType = 'Decimal'"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="'Decimal'"
+                                                                            [checked]="selectedElement.selectedNumberType === 'Decimal'"
+                                                                            id="Decimal_Type_setting_radio"
+                                                                            name="Decimal_Type_setting_radio"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="Decimal_Type_setting_radio"
+                                                                            class="custom-control-label">Decimal</label>
+                                                                    </div>
+                                                                    <div (click)="selectedElement.selectedNumberType = 'Percentage'"
+                                                                        class="custom-control custom-radio">
+                                                                        <input name="radio" [value]="'Percentage'"
+                                                                            [checked]="selectedElement.selectedNumberType === 'Percentage'"
+                                                                            id="Percentage_Type_setting_radio"
+                                                                            name="Percentage_Type_setting_radio"
+                                                                            type="radio" class="custom-control-input">
+                                                                        <label for="Percentage_Type_setting_radio"
+                                                                            class="custom-control-label">Percentage</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div *ngIf="selectedElement.selectedNumberType !== 'Integter'" class="col-6 d-flex align-items-center">
+                                                                        <input name="decimal_Items_label_setting" id="decimal_Items_label_setting" type="text"
+                                                                        placeholder="Decimal"
+                                                                            [(ngModel)]="selectedElement.decimalUpto"
+                                                                            class="form-control">
+                                                                </div>
+                                                        </div>
                                                         <div *ngIf="selectedElement?.validations?.pattern?.length > 0" class="form-group">
                                                             <label for="form-validation">Form Validation</label>
                                                             <div>
@@ -782,12 +824,28 @@
                                                         <div
                                                             *ngIf="showPaymentFields() && (selectedElement?.inputType === 'payment' || selectedElement?.inputType ===  'paymentSection')">
                                                             <label>Payment Setting</label>
-                                                            <div class="p-1 mr-1">
-                                                                <button *ngIf="paymentSetting?.extraBill?.length === 0"
-                                                                    (click)="paymentSetting?.extraBill?.push({value: null, type: 'dollar', name: 'Additional'})"
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1">
-                                                                    <i class="material-icons">add</i>Add
-                                                                    Extra bill</button>
+                                                            <ng-container *ngIf="selectedElement?.inputType ===  'paymentSection'">
+                                                                <div class="p-1 mr-1">
+                                                        
+                                                                    <div class="d-flex form-group"  *ngIf="paymentSetting?.extraBill?.length === 0">
+                                                                <input class="form-control mr-1" type="text"
+                                                                    [(ngModel)]="extraBillModel.name">
+                                                                <input class="form-control mr-1" type="text"
+                                                                    [(ngModel)]="extraBillModel.value">
+                                                                <select class="form-control mr-2"
+                                                                    [(ngModel)]="extraBillModel.type">
+                                                                    <option [value]="'dollar'">Amount</option>
+                                                                    <option [value]="'perentage'">Percentage</option>
+                                                                </select>
+                                                                <button
+                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    (click)="paymentSetting?.extraBill.push({value: extraBillModel.value, type: extraBillModel.type, name: extraBillModel.name})"><i
+                                                                        class="material-icons">add</i></button>
+                                                                <!-- <button
+                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    (click)="paymentSetting?.extraBill.splice(i, 1)"><i
+                                                                        class="material-icons">remove</i></button> -->
+                                                            </div>
                                                             </div>
 
                                                             <div class="d-flex form-group"
@@ -810,6 +868,9 @@
                                                                     (click)="paymentSetting?.extraBill.splice(i, 1)"><i
                                                                         class="material-icons">remove</i></button>
                                                             </div>
+                                                        </ng-container>
+                                                            
+                                                            
                                                             <div *ngIf="selectedElement?.inputType ===  'paymentSection'"
                                                                 class="custom-control custom-checkbox">
                                                                 <input type="checkbox" id="showSubTotal"
@@ -1058,6 +1119,7 @@
                                                     <div *ngSwitchCase="'toggle'"
                                                         (click)="clicked($event, model, template); selectedElement.viewOptions = false;"
                                                         class="mjui">
+                                                        {{model.name}}
                                                         <div class="row p-2">
                                                             <span class="mr-2" >{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</span>
                                                             <div class="custom-control custom-switch">
@@ -1122,7 +1184,7 @@
                                                                                         class="page-break target-droppable">
                                                                                         <input type="tel"
                                                                                             class="form-control"
-                                                                                            id="email"
+                                                                                            id="table_phonenumber_{{colIndex}}_{{model.uiIndexId}}"
                                                                                             [(ngModel)]="col.value"
                                                                                             name="tel" #name="ngModel"
                                                                                             [attr.maxlength]="col.maxVal"
@@ -1145,7 +1207,7 @@
                                                                                         class="page-break target-droppable">
                                                                                         <input type="number"
                                                                                             class="form-control"
-                                                                                            id="email"
+                                                                                            id="table_number_{{colIndex}}"
                                                                                             [(ngModel)]="col.value"
                                                                                             name="tel" #name="ngModel"
                                                                                             [attr.maxlength]="col.maxVal"
@@ -1157,7 +1219,7 @@
                                                                                         class="page-break target-droppable">
                                                                                         <input type="email"
                                                                                             class="form-control"
-                                                                                            id="email"
+                                                                                            id="table_email"
                                                                                             [(ngModel)]="col.value"
                                                                                             name="email" #name="ngModel"
                                                                                             [attr.maxlength]="col.maxVal"
@@ -1169,7 +1231,7 @@
                                                                                         class="page-break target-droppable">
                                                                                         <input type="text"
                                                                                             class="form-control"
-                                                                                            id="website"
+                                                                                            id="table_website"
                                                                                             [(ngModel)]="col.value"
                                                                                             name="website"
                                                                                             #name="ngModel"
@@ -1282,10 +1344,8 @@
                                                         (click)="sectionClicked($event, model, template)">
                                                         <div class="shadow">
                                                             {{model.name}}
-                                                            <div
-                                                                (click)="model.childSection.push(model.childSection[model.childSection.length - 1])">
-                                                                Add</div>
-                                                            <div *ngFor="let rSection of model.childSection">
+                                                            
+                                                            <div class="shadow mt-2"  (click)="clicked($event, model, template)" *ngFor="let rSection of model.childSection">
                                                                 <ngx-dnd-container *ngIf="!viewExportedView"
                                                                     dropZone="builder-target"
                                                                     [model]="rSection.children" [removeOnSpill]="false"
@@ -1294,6 +1354,9 @@
                                                                     direction="mixed">
                                                                 </ngx-dnd-container>
                                                             </div>
+                                                            <button  class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                            (click)="addSection(model)">
+                                                                <i class="material-icons">add</i></button>
 
                                                         </div>
                                                     </div>
@@ -1422,7 +1485,7 @@
                                                         class="page-break target-droppable"
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <input type="tel" class="form-control" id="email"
+                                                        <input type="tel" class="form-control" id="phoneNumber_{{model.uiIndexId}}"
                                                             [(ngModel)]="model.value" name="tel" #name="ngModel"
                                                             [attr.maxlength]="model.maxVal"
                                                             [attr.minlength]="model.minVal"
@@ -1432,7 +1495,7 @@
                                                     <div *ngSwitchCase="'email'" class="page-break target-droppable"
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
-                                                        <input type="email" class="form-control" id="email"
+                                                        <input type="email" class="form-control" id="email_{{model.uiIndexId}}"
                                                             [(ngModel)]="model.value" name="email" #name="ngModel"
                                                             [attr.maxlength]="model.maxVal"
                                                             [attr.minlength]="model.minVal"
@@ -1463,7 +1526,7 @@
                                                     <div *ngSwitchCase="'password'"
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model?.name}}</label>
-                                                        <input type="password" class="form-control" id="website"
+                                                        <input type="password" class="form-control" id="input_password_{{model.uiIndexId}}"
                                                             [(ngModel)]="model.value" name="website" #name="ngModel"
                                                             [attr.maxlength]="model.maxVal"
                                                             [attr.minlength]="model.minVal"

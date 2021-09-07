@@ -1,4 +1,4 @@
-import { Component, Input, OnInit , ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit , Output, ViewChild } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad';
 // import { SignaturePad } from 'angular2-signaturepad/angular2-signaturepad';
 
@@ -10,6 +10,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 export class SignatureFieldComponent implements OnInit {
   @Input() public model: any
   @ViewChild(SignaturePad) signaturePad: any;
+  @Output() signData: EventEmitter<any> = new EventEmitter()
 
   signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
@@ -34,8 +35,9 @@ export class SignatureFieldComponent implements OnInit {
 
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad);
+    // console.log(this.signaturePad.toDataURL());
     this.model.value = this.signaturePad.toDataURL();
+    this.signData.emit(this.signaturePad.toDataURL());
   }
 
   drawStart() {

@@ -20,6 +20,7 @@ export const api: any = {
     DeleteLevelInWorkFlowLevels: "Forms/DeleteLevelInWorkFlowLevels",
     GetNotifications: "Forms/GetNotifications",
     DeleteFormEntries: "Forms/DeleteFormEntries",
+    CopyFormAttributes: "Forms/CopyFormAttributes",
     archive: 'Forms/BulkAction',
     deleteForm: 'Forms/BulkAction',
     bulkAction: 'Forms/BulkAction',
