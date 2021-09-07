@@ -80,6 +80,14 @@ export class FormsHeaderComponent implements OnInit {
     this.eventUrl$ = this.router.events.subscribe((event: NavigationEvent) => {
       if(event instanceof NavigationStart) {
         this.currentUrl = event.url;
+        // check for Manage work space pages
+        if(event.url.search('/manage-work-spaces') > -1){
+          this.currentUrl = '/manage-work-spaces';
+        }
+        // check for Manage role pages
+        if(event.url.search('/manage-roles') > -1){
+          this.currentUrl = '/manage-roles';
+        }
       }
     });
             
