@@ -43,7 +43,7 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
-                                                                                <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
+                                                                                <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right pr-2 small">First Name is required
                                                                                 </div>
                                                                             </ng-container>
                                                                         </div>
@@ -59,7 +59,7 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
-                                                                                <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
+                                                                                <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right pr-2 small">Last Name is required
                                                                                 </div>
                                                                             </ng-container>
                                                                         </div>
@@ -77,14 +77,14 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                                                                <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                                                                                <div *ngIf="f.Email.errors?.required" class="field-error text-right pr-2 small">Email is required
                                                                                 </div>
-                                                                                <div *ngIf="f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                                                                                <div *ngIf="f.Email.errors?.pattern" class="field-error text-right pr-2 small">Please add a valid email id</div>
                                                                                 <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
                                                                                     class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
-                                                                                <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                                                                                <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right pr-2 small">Double Dot is not required in domain</div>
                                                                             </ng-container>
-                                                                            <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
+                                                                            <div *ngIf="f.Email.errors?.isExists" class="field-error text-right pr-2 small">
                                                                                 Email is already exist
                                                                             </div>
                                                                         </div>
@@ -100,9 +100,9 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
-                                                                                <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right mt-1 pr-2 small">Phone Number is required
+                                                                                <div *ngIf="f.PhoneNumber.errors?.required" class="field-error text-right pr-2 small">Phone Number is required
                                                                                 </div>
-                                                                                <div *ngIf="f.PhoneNumber.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add valid mobile number.
+                                                                                <div *ngIf="f.PhoneNumber.errors?.pattern" class="field-error text-right pr-2 small">Please add valid mobile number.
                                                                                 </div>
                                                                                 <!-- <div *ngIf="f.PhoneNumber.hasError('minlength')" class="field-error text-right mt-1 pr-2 small">Please add a valid mobile number</div> -->
                                                                             </ng-container>
@@ -121,9 +121,9 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
-                                                                                <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
+                                                                                <div *ngIf="f.Password.errors?.required" class="field-error text-right  pr-2 small">Password is required
                                                                                 </div>
-                                                                                <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
+                                                                                <div *ngIf="f.Password.errors?.pattern" class="field-error text-right pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
                                                                             </ng-container>
                                                                         </div>
                                                                     </div>
@@ -136,12 +136,12 @@
                                                                             </div>
                                                                             <input type="password" #cpassword formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
                                                                         </div>
-                                                                        <div class="bf-input-validation">
+                                                                        <div class="bf-input-validation mt-1">
                                                                             <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
-                                                                                <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Confirm Password is required
+                                                                                <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right pr-2 small">Confirm Password is required
                                                                                 </div>
                                                                             </ng-container>
-                                                                            <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched && matchPass()">
+                                                                            <div class="field-error text-right pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched && matchPass()">
                                                                                 Confirm Password is not matched
                                                                             </div>
                                                                         </div>
@@ -159,10 +159,10 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
-                                                                                <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Work Space Name is required
+                                                                                <div *ngIf="f.WorkSpaceName.errors?.required || f.WorkSpaceName.errors?.pattern" class="field-error text-right pr-2 small">Work Space Name is required
                                                                                 </div>
                                                                             </ng-container>
-                                                                            <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Work Space Name is already exist</div>
+                                                                            <div *ngIf="f.WorkSpaceName.errors?.isExists" class="field-error text-right pr-2 small">Work Space Name is already exist</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -178,7 +178,7 @@
                                                                         </div>
                                                                         <div class="bf-input-validation">
                                                                             <ng-container *ngIf="f.acceptAgreement.invalid && (f.acceptAgreement.dirty || f.acceptAgreement.touched)">
-                                                                                <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right mt-1 pr-2 small">Please accept the agreement</div>
+                                                                                <div *ngIf="f.acceptAgreement.errors?.isRefused" class="field-error text-right pr-2 small">Please accept the agreement</div>
                                                                             </ng-container>
                                                                         </div>
                                                                     </div>

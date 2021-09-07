@@ -16,9 +16,9 @@
                         </div>
                         <div class="col-md-9">
                             <input formControlName="Name" type="text" class="form-control" id="role-name">
-                            <div class="bf-input-validation">
+                            <div class="bf-input-validation mt-1">
                                 <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
-                                    <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role Name is required
+                                    <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right  pr-2 small">Role Name is required
                                     </div>
                                 </ng-container>
                                 <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Role Name is already exist</div>

@@ -20,6 +20,7 @@
             flex-direction: column;
             min-height: 100vh;
             height: auto !important;
+            position: relative;
         }
         
         a {
@@ -64,7 +65,10 @@
             font-family: $seconderyFont;
         }
 
-        .bf-input-validation { height: 16px;}
+        .bf-input-validation { 
+            height: 16px;   
+             margin-top: 0.25rem !important;
+            }
         
         .btn-bf {
             color: $btn-text-color;
@@ -1020,7 +1024,6 @@
         }
         
         app-root {
-            position: relative;
             height: 100%;
         }
         
