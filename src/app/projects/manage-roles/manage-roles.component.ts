@@ -162,6 +162,7 @@ export class ManageRolesComponent implements OnInit {
         else{
           this.toastService.showSuccess('Saved Successfully!');
         }
+        this.dataSharingService.SetActiveTabId(5);
         this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: this.organizationId, orgUserId: this.organizationUserId, orgName: this.organizationName}});
       }
     });
@@ -169,6 +170,7 @@ export class ManageRolesComponent implements OnInit {
   }
 
   goBack() {
+    this.dataSharingService.SetActiveTabId(5);
     this.location.back();
   }
 

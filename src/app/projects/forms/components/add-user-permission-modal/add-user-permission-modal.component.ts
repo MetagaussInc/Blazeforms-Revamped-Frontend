@@ -75,6 +75,8 @@ export class AddUserPermissionModalComponent implements OnInit {
         return;
       }
     });
+    selectedPermission.push(3);
+    selectedPermission.sort();
     let saveUserData = {
       'FormId': this.formId,
       'Id': null,

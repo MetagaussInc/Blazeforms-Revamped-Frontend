@@ -67,6 +67,8 @@ export class RegisterComponent implements OnInit {
     ModifiedBy: '',
     StripePlanId: ''
   };
+
+  isFormSubmitted: boolean = false;
   
   constructor(private http: HttpService, private router: Router, private toastService: ToastService) { }
 
@@ -149,6 +151,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
+    this.isFormSubmitted = true;
     const obj = {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
@@ -190,7 +193,8 @@ export class RegisterComponent implements OnInit {
     delete obj.confirmPassword;
     delete obj.acceptAgreement;
     this.http.call('signup', 'POST', obj).subscribe(res => {
-      //this.toastService.showSuccess('Logged In Successfully!');
+      this.toastService.showSuccess('Account Saved Successfully!');
+      this.isFormSubmitted = false;
       this.router.navigate(['user/register-confirm'])
     })
   }

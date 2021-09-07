@@ -62,7 +62,7 @@
                                 <td *ngFor="let modulepermission of module.modulePermissionList">
                                     <ng-container *ngIf="module.moduleName != 'Forms'">
                                         <div *ngIf="modulepermission.isAvailable">
-                                            <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive"> 
+                                            <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive" [disabled]="!roleDetailsData.isEditable"> 
                                             <label for="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}"></label>
                                         </div>
                                     </ng-container>
@@ -70,7 +70,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="form-group mt-5 row role-btn-container">
+                    <div class="form-group mt-5 row role-btn-container" *ngIf="rolePermissionData">
                         <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf" title="Back">Back</button>
                         <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3" *ngIf="roleDetailsData.isEditable" title="Save">
                             Save
