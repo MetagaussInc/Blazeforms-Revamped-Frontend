@@ -398,7 +398,7 @@ export class BuildComponent implements OnDestroy {
       this.entries.entries = res.formEntries;
       res.formEntries?.forEach((element: any, index: any) => {
         const entry = JSON.parse(element.formEntryJSON)
-        data.push(`ID=${index + 1}||Status=${entry.status}||Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
+        data.push(`-3=ID=${index + 1}||-2=Status=${entry.status}||-1=Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
       });
       this.createColums(data)
     })
@@ -419,12 +419,12 @@ export class BuildComponent implements OnDestroy {
         if (elementWithValue && elementWithValue?.length > 0) {
           if (entryIndex === 0) {
             Columns.push({
-              headerName: elementWithValue?.split("=")?.[0],
-              field: colIndex,
+              headerName: elementWithValue?.split("=")?.[1],
+              field: elementWithValue?.split("=")?.[0],
               view: true
             })
           }
-          rowObj[colIndex] = elementWithValue?.split("=")?.[1];
+          rowObj[elementWithValue?.split("=")?.[0]] = elementWithValue?.split("=")?.[2];
         }
 
       });
