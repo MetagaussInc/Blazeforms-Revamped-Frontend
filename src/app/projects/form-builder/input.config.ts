@@ -107,7 +107,7 @@ export const config = [
     {
         name: 'Multiple line Text',
         iconClass: 'material-icons',
-        iconName: 'text_fields',
+        iconName: 'notes',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
