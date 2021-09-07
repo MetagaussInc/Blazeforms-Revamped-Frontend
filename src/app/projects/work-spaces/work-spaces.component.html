@@ -48,13 +48,19 @@
                 </div>
             </ng-container>
         </div>
+
+       
+
         <div class="has-text-centered w-100 my-5 d-flex justify-content-center bd-highlight mb-3">
-            <div class="text-center" *ngIf="isLoading">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+         
             <ngb-pagination [collectionSize]="totalOrgCount" [(page)]="p" aria-label="Default pagination" [disabled]="isLoading" (pageChange)="getPage($event)" [hidden]="!showPagination"></ngb-pagination>
         </div>
+        <div class="text-center w-100 mb-5" *ngIf="isLoading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        
     </div>
 </div>
+

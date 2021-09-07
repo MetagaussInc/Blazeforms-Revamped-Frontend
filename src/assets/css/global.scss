@@ -20,6 +20,7 @@
             flex-direction: column;
             min-height: 100vh;
             height: auto !important;
+            position: relative;
         }
         
         a {
@@ -64,7 +65,10 @@
             font-family: $seconderyFont;
         }
 
-        .bf-input-validation { height: 16px;}
+        .bf-input-validation { 
+            height: 16px;   
+             margin-top: 0.25rem !important;
+            }
         
         .btn-bf {
             color: $btn-text-color;
@@ -1020,7 +1024,6 @@
         }
         
         app-root {
-            position: relative;
             height: 100%;
         }
         
@@ -1111,5 +1114,18 @@
 
      .modal-content .modal-header button {
          outline: 0px !important;
+     }
+
+     .table-responsive-main .table .thead-light th,
+     .table-responsive-main .table td{
+        white-space: nowrap;
+     }
+
+     .form-list-item .form-checkbox-wrap {
+        cursor: pointer;
+     }
+
+     .social-icon-wrap .c-referral-twShare svg {
+         margin-top: -8px;
      }
      
