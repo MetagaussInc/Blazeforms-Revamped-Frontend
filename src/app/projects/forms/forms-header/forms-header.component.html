@@ -11,7 +11,7 @@
                 <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>
             <div class="me-2 nav-item mr-5" [hidden]="!organizationPermission.canView">
-                <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces'}">Organizations</a>
+                <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces' || currentUrl == '/manage-work-spaces' || currentUrl == '/manage-roles'}">Organizations</a>
             </div>
 
             <div class="ml-auto d-none d-lg-block me-4" *ngIf="userWorkspaceList && !hideDropdown">
