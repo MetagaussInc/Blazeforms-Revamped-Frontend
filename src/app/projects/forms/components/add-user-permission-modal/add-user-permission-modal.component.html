@@ -24,7 +24,12 @@
                     <div class="permissions-container d-flex">
                         <div class="d-flex align-items-center mr-5" *ngFor="let permissions of userPermissions">
                             <label for="user-permission-{{ permissions.short }}">{{ permissions.name }}</label>
-                            <input type="checkbox" value="{{ permissions.value }}" id="user-permission-{{ permissions.short }}" (change)="onCheckboxChange($event)"> 
+                            <input type="checkbox" 
+                                value="{{ permissions.value }}" 
+                                id="user-permission-{{ permissions.short }}" 
+                                (change)="onCheckboxChange($event)" 
+                                [checked]="permissions.value == 3"
+                                [disabled]="permissions.value == 3"> 
                             <label for="user-permission-{{ permissions.short }}"></label>
                         </div>
                     </div>

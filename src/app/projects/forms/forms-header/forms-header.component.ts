@@ -88,6 +88,10 @@ export class FormsHeaderComponent implements OnInit {
         if(event.url.search('/manage-roles') > -1){
           this.currentUrl = '/manage-roles';
         }
+        // check for form builder
+        if(event.url.search('/form-builder') > -1){
+          this.currentUrl = '/form-builder';
+        }
       }
     });
             

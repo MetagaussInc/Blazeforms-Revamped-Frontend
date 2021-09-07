@@ -33,12 +33,13 @@ export class UserPermissionModalComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() =>{
       this.http.call('getRolePermission', 'POST', {FormId: this.formId}).subscribe(res => {
-        console.log(res);
-        this.userLists = res;
-        res.forEach((item: any) => {
-          let itemPer = {id: item.id, permissions: item.permissions};
-          this.assignedUserPermission.push(itemPer);
-        });
+        if(res && res.length > 0){
+          this.userLists = res;
+          res.forEach((item: any) => {
+            let itemPer = {id: item.id, permissions: item.permissions};
+            this.assignedUserPermission.push(itemPer);
+          });
+        }
       });
     }, 1000);
   }
@@ -78,17 +79,18 @@ export class UserPermissionModalComponent implements OnInit {
   }
 
   updateFormUser(userList: any){
-    console.log(this.assignedUserPermission);
-    let selectedUserPermission;
+    let selectedUserPermission = '';;
     this.assignedUserPermission.forEach((element:any) => {
       if(element.id == userList.id){
         selectedUserPermission = element.permissions;
       }
     });
+    let newper = selectedUserPermission.split(',');
+    newper.sort();
     const userData = {
       'FormId': userList.formId,
       'Id': userList.id,
-      'Permissions': selectedUserPermission,
+      'Permissions': newper.join(','),
       'UserId': userList.userId,
       'UserEmail': userList.userEmail,
       'UserName': userList.userName
@@ -97,6 +99,11 @@ export class UserPermissionModalComponent implements OnInit {
       this.userLists.forEach((item:any, index:number) => {
         if(item.id === res.id){
           this.userLists[index] = res;
+          let resuserid = res.userId;
+          let resformid = res.formId;
+          this.userLists[index].formId = resuserid;
+          this.userLists[index].userId = resformid;
+          console.log(this.userLists);
           this.isEditMode = '';
           this.toastService.showSuccess('Permission Updated Successfully!');
         }

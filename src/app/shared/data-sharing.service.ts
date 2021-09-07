@@ -147,4 +147,9 @@ export class DataSharingService {
     return this.activeTabId;
   }
 
+  GetPageLoader(){
+    let loader = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
+    return loader;
+  }
+
 }

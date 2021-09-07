@@ -44,10 +44,13 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public logo: any;
   public currentOrgname: any;
   public userId: any;
+  public pageLoader: any
+  public showPageLoader: boolean = false;
 
   constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
     this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
     this.userId = this.dataSharingService.GetUserId();
+    this.pageLoader = this.dataSharingService.GetPageLoader();
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -68,6 +71,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   }
 
   getCurrentWorkspaceData(){
+    this.showPageLoader = true;
     let obj = {
       Id: this.organizationId,
       IsOrganizationSettings: true,
@@ -91,6 +95,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
           Currency: dataRes.workspaceDetail.currency,
           isActive: dataRes.workspaceDetail.isActive,
         });
+        this.showPageLoader = false;
       });
     }
     else{
@@ -110,6 +115,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
           Currency: dataRes.workspaceDetail.currency,
           isActive: dataRes.workspaceDetail.isActive,
         });
+        this.showPageLoader = false;
       });
     }
   }

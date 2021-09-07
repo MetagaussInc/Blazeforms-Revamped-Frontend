@@ -25,30 +25,32 @@
             <tr *ngIf="!userLists">
               <td colspan="5">No user data found</td>
             </tr>
-            <tr *ngFor="let userList of userLists">
-              <td *ngIf="userList" class="text-left">{{ userList.userEmail }}</td>
-              <ng-container *ngIf="userList">
-                <td *ngFor="let permissions of userPermissions">
-                  <input type="checkbox" id="user-form-{{ permissions.short }}" 
-                  [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
-                  [disabled]="(!isEditMode || isEditMode != userList.id)"
-                  (change)="onCheckboxChange($event, userList)"
-                  value="{{ permissions.value }}"> 
-                  <label for="user-form-{{ permissions.short }}"></label>
+            <ng-container *ngIf="userLists">
+              <tr *ngFor="let userList of userLists">
+                <td *ngIf="userList" class="text-left">{{ userList.userEmail }}</td>
+                <ng-container *ngIf="userList">
+                  <td *ngFor="let permissions of userPermissions">
+                    <input type="checkbox" id="user-form-{{ permissions.short }}" 
+                    [checked]="userList.permissions.indexOf(permissions.value) > -1 ? true : null" 
+                    [disabled]="(!isEditMode || isEditMode != userList.id || permissions.value == 3)"
+                    (change)="onCheckboxChange($event, userList)"
+                    value="{{ permissions.value }}"> 
+                    <label for="user-form-{{ permissions.short }}"></label>
+                  </td>
+                </ng-container>
+                <td *ngIf="userList">
+                  <span *ngIf="isEditMode != userList.id" (click)="editFormUser(userList)">
+                    <i class="material-icons text-dark mr-2" title="Edit">edit</i>
+                  </span>
+                  <span *ngIf="(isEditMode && isEditMode == userList.id)" (click)="updateFormUser(userList)">
+                    <i class="material-icons text-dark mr-2" title="Update">update</i>
+                  </span>
+                  <span (click)="deleteFormUser(userList)">
+                    <i class="material-icons text-dark" title="Delete">delete</i>
+                  </span>
                 </td>
-              </ng-container>
-              <td *ngIf="userList">
-                <span *ngIf="isEditMode != userList.id" (click)="editFormUser(userList)">
-                  <i class="material-icons text-dark mr-2" title="Edit">edit</i>
-                </span>
-                <span *ngIf="(isEditMode && isEditMode == userList.id)" (click)="updateFormUser(userList)">
-                  <i class="material-icons text-dark mr-2" title="Update">update</i>
-                </span>
-                <span (click)="deleteFormUser(userList)">
-                  <i class="material-icons text-dark" title="Delete">delete</i>
-                </span>
-              </td>
-            </tr>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>

@@ -209,7 +209,10 @@
                         </div>
                         <div class="register-fields-wrapper row mb-3">
                             <div class="signup-button-wrapper col-md-12 mb-3 text-center">
-                                <button [disabled]="signupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">Sign Up Now </button>
+                                <button [disabled]="signupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">
+                                    Sign Up Now
+                                    <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
+                                </button>
                             </div>
                         </div>
                     </form>
