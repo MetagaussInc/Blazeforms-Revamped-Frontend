@@ -140,11 +140,11 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
       if(res){
         this.savedWorkspacesId = res.id;
         this.toastService.showSuccess('Organization Saved Successfully!');
+        this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
+          const props = response;
+          this.store.dispatch(userWorkspaceDetailSuccess({props}));
+        });
         this.planChange();
-        // this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
-        //   const props = response;
-        //   this.store.dispatch(userWorkspaceDetailSuccess({props}));
-        // });
       }
       //this.router.navigate(['user/register-confirm'])
       
