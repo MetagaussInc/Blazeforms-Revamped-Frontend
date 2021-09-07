@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
-import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BASE_URL, HttpService } from 'src/app/config/rest-config/http.service';
 import { advancedLayout, config, layoutInputs, Level, paymentModel } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
@@ -11,6 +11,7 @@ import { ExcelService } from '../../excelservice.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as lodash from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-build',
@@ -164,7 +165,8 @@ export class BuildComponent implements OnDestroy {
   userSerach: any = null;
   listPayments: any = [];
   selectColElement: any;
-  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  formActivities = [];
+  constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
@@ -173,6 +175,7 @@ export class BuildComponent implements OnDestroy {
           this.formId = res.ID;
           this.mainTab = Number(res.seletedTab);
           this.getForm(res?.ID, true)
+          this.getFormActivities(res?.ID);
         })
       }
     })
@@ -187,6 +190,18 @@ export class BuildComponent implements OnDestroy {
     this.router.navigate([`/blazeforms/${this.userInfo.WorkspaceDetail.Name.split(" ").join("_")}/${this.builderObj.name.split(" ").join("_")}`])
   }
 
+  getFormActivities(ID: any) {
+    // this.http.call('GetFormActivityLogsByFormId', 'POST', payload).subscribe(res => {
+    //   this.builderObj = Object.assign(this.builderObj, res);
+    //   console.log(this.builderObj)
+    //   this.formLoaded = true;
+ 
+    // })
+
+    this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
+      console.log(res)
+    })
+  }
   getForm(ID: any, initial: boolean) {
     console.log(ID)
     const payload = {

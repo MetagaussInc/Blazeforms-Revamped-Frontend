@@ -21,6 +21,7 @@ export const api: any = {
     GetNotifications: "Forms/GetNotifications",
     DeleteFormEntries: "Forms/DeleteFormEntries",
     CopyFormAttributes: "Forms/CopyFormAttributes",
+    GetFormActivityLogsByFormId: "Forms/GetFormActivityLogsByFormId",
     archive: 'Forms/BulkAction',
     deleteForm: 'Forms/BulkAction',
     bulkAction: 'Forms/BulkAction',
@@ -78,6 +79,5 @@ export const api: any = {
     checkUserByPassword: "Account/CheckUserByPassword",
     changePassword: "Account/ChangePassword",
     uploadFilesForWorkspace: "WorkSpace/UploadFilesForWorkspace",
-    savePayment: "Payment/SavePayment",
-    resetAccessFailedCount: "Account/ResetAccessFailedCount"
+    savePayment: "Payment/SavePayment"
 }   

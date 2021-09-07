@@ -1714,11 +1714,15 @@
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)"
                                                                 type="checkbox"></td>
                                                         <ng-container *ngFor="let col of entries.columns">
-                                                            <td *ngIf="col.view && row?.[col?.field] !== 'No_value'">
+
+                                                            <td *ngIf="col.view && row?.[col?.field] !== 'No_value' && col.headerName !== 'Signature'">
                                                                 {{row?.[col?.field]}}
                                                             </td>
                                                             <td *ngIf="col.view && row?.[col?.field] === 'No_value'">
                                                                 <!-- <span class="empty-field">{{"<No Entry>"}}</span> -->
+                                                            </td>
+                                                            <td *ngIf="col.headerName === 'Signature'">
+                                                                <img [src]="row?.[col?.field]" height="100px" width="100px" />
                                                             </td>
                                                         </ng-container>
 
