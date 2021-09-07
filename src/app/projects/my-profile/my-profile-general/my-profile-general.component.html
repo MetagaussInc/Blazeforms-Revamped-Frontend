@@ -137,19 +137,23 @@
                                 <div class="col-md-6">
                                     <label class="mb-1" for="inputFirstName">First name</label>
                                     <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" formControlName="FirstName">
-                                    <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
-                                        <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
-                                        </div>
-                                    </ng-container>
+                                    <div class="bf-input-validation">
+                                        <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
+                                            <div *ngIf="f.FirstName.errors?.required || f.FirstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
+                                            </div>
+                                        </ng-container>
+                                    </div>
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
                                     <input class="form-control" id="inputLastName" type="tex" placeholder="Enter your last name" formControlName="LastName">
-                                    <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
-                                        <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
-                                        </div>
-                                    </ng-container>
+                                    <div class="bf-input-validation">
+                                        <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
+                                            <div *ngIf="f.LastName.errors?.required || f.LastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
+                                            </div>
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Form Group (email address)-->
@@ -158,7 +162,7 @@
                                 <input class="form-control" type="email" readonly placeholder="Enter your Email" formControlName="Email">
                             </div>
                             <!-- Save changes button-->
-                            <button [disabled]="updateProfileForm.invalid" class="btn btn-primary btn-bf" type="button" (click)="updateProfile()">
+                            <button [disabled]="updateProfileForm.invalid" class="btn btn-primary btn-bf" type="button" (click)="updateProfile()" title="Save changes">
                                 Save changes
                                 <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
                             </button>

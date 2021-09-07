@@ -2,7 +2,8 @@
     <nav class="px-4 py-0 navbar navbar-expand-lg bg-white">
         <a href="/" class="navbar-brand">
             <div class="colored-logo">
-                <img src="assets/images/logo.png" height="41">
+                <img src="assets/images/logo.png" height="41" *ngIf="!organizationLogo">
+                <img [src]="organizationLogo" height="41" *ngIf="organizationLogo">
             </div>
         </a>
         <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="(!userId || currentUrl == '/user/login')" [ngClass]="{'d-flex': userId}">

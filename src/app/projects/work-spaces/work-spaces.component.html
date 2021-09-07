@@ -23,7 +23,8 @@
                 <div *ngIf="permissions.canView" [style.display]="searchedString.length === 0 ? 'block' : !organization.name?.toLowerCase()?.includes(searchedString?.trim()?.toLowerCase()) ? 'none' : 'block'">
                     <div class="organization-list-item row p-3 border-bottom justify-content-end align-items-center">
                         <div class="organization-img-wrapper col-md-1">
-                            <img src="assets/images/pepsi.png" class="workspace-img" alt="" title="" width="30" height="30">
+                            <img src="assets/images/pepsi.png" class="workspace-img" alt="" title="" width="30" height="30" *ngIf="!organization.logo">
+                            <img src="data:image/{{organization.logoExt}};base64,{{organization.logo}}" class="workspace-img" alt="" title="" width="30" height="30" *ngIf="organization.logo">
                         </div>
                         <div class="organization-title-wrapper col-md-8">
                             <span clss="organization-name" (click)="goToManageWorkSpaces('edit', organization.id)" role="link">{{ organization.name }}</span>

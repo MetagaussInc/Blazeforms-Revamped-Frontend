@@ -41,9 +41,12 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   public currencyList: any;
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
-  planDetails: any = {};
+  public planDetails: any = {};
   public userId: any;
   public items: Array<any> = [];
+  public savedWorkspacesId: any;
+
+  @Output() updatePlan = new EventEmitter<any>();
 
   constructor(private router: Router, private http: HttpService, private dataSharingService: DataSharingService, private store: Store, private toastService: ToastService, private location: Location) {
     this.userId = this.dataSharingService.GetUserId();
@@ -122,7 +125,10 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.planDetails = plan;
-    //this.planDetails.storageSize = ((plan.storageSize) / (1024 * 1024));
+    plan.bfWorkspaceName = this.organizationSaveForm.value.Name;
+    plan.bfFromPage = 'login';
+    plan.savedWorkspacesId = this.savedWorkspacesId;
+    this.updatePlan.emit(JSON.stringify(plan));
   }
 
   submit(){
@@ -132,14 +138,16 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
     };
     this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
       if(res){
+        this.savedWorkspacesId = res.id;
         this.toastService.showSuccess('Organization Saved Successfully!');
-        // this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
-        //   const props = response;
-        //   this.store.dispatch(userWorkspaceDetailSuccess({props}));
-        // });
+        this.http.call('getUserWorkSpacesWithoutPagination', 'POST', {Id: this.userId}).subscribe(response => {
+          const props = response;
+          this.store.dispatch(userWorkspaceDetailSuccess({props}));
+        });
+        this.planChange();
       }
       //this.router.navigate(['user/register-confirm'])
-      this.planChange();
+      
     });
   }
 

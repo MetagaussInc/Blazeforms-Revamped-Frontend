@@ -16,11 +16,13 @@
                         </div>
                         <div class="col-md-7">
                             <input type="email" readonly formControlName="DefaultReplyEmail" class="form-control" id="default-email" placeholder="Default Email">
-                        </div>
-                        <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
-                            <div *ngIf="f.DefaultReplyEmail.errors?.required || f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Eamil is required
+                            <div class="bf-input-validation">
+                                <ng-container *ngIf="f.DefaultReplyEmail.invalid && (f.DefaultReplyEmail.dirty || f.DefaultReplyEmail.touched)">
+                                    <div *ngIf="f.DefaultReplyEmail.errors?.required || f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Eamil is required
+                                    </div>
+                                </ng-container>
                             </div>
-                        </ng-container>
+                        </div>
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
@@ -28,11 +30,15 @@
                         </div>
                         <div class="col-md-7">
                             <input type="email" formControlName="ToEmail" class="form-control" id="to-email" placeholder="To Email">
-                        </div>
-                        <ng-container *ngIf="f.ToEmail.invalid && (f.ToEmail.dirty || f.ToEmail.touched)">
-                            <div *ngIf="f.ToEmail.errors?.required || f.ToEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">To Eamil is required
+                            <div class="bf-input-validation">
+                                <ng-container *ngIf="f.ToEmail.invalid && (f.ToEmail.dirty || f.ToEmail.touched)">
+                                    <div *ngIf="f.ToEmail.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
+                                    </div>
+                                    <div *ngIf="f.ToEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
+                                    <div *ngIf="f.ToEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
+                                </ng-container>
                             </div>
-                        </ng-container>
+                        </div>
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
@@ -40,11 +46,13 @@
                         </div>
                         <div class="col-md-7">
                             <input type="text" formControlName="Subject" class="form-control" id="subject" placeholder="Subject">
-                        </div>
-                        <ng-container *ngIf="f.Subject.invalid && (f.Subject.dirty || f.Subject.touched)">
-                            <div *ngIf="f.Subject.errors?.required || f.Subject.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Subject is required
+                            <div class="bf-input-validation">
+                                <ng-container *ngIf="f.Subject.invalid && (f.Subject.dirty || f.Subject.touched)">
+                                    <div *ngIf="f.Subject.errors?.required || f.Subject.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Subject is required
+                                    </div>
+                                </ng-container>
                             </div>
-                        </ng-container>
+                        </div>
                     </div>
                     <div class="row my-4 px-4 form-group">
                         <div class="col-md-3">
@@ -52,11 +60,13 @@
                         </div>
                         <div class="col-md-7">
                             <input type="text" formControlName="Message" class="form-control" id="message" placeholder="Message">
-                        </div>
-                        <ng-container *ngIf="f.Message.invalid && (f.Message.dirty || f.Message.touched)">
-                            <div *ngIf="f.Message.errors?.required || f.Message.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Message is required
+                            <div class="bf-input-validation">
+                                <ng-container *ngIf="f.Message.invalid && (f.Message.dirty || f.Message.touched)">
+                                    <div *ngIf="f.Message.errors?.required || f.Message.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Message is required
+                                    </div>
+                                </ng-container>
                             </div>
-                        </ng-container>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">

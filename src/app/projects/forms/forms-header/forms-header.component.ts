@@ -34,6 +34,7 @@ export class FormsHeaderComponent implements OnInit {
   public currentUrl: any;
   public notifications: any;
   public hideStatus: boolean = false;
+  public organizationLogo: any;
 
   constructor(private route: ActivatedRoute ,private dataSharingService: DataSharingService, private store: Store, private http: HttpService, private router: Router, private toastService: ToastService) {
     this.router.events.pipe(
@@ -52,6 +53,9 @@ export class FormsHeaderComponent implements OnInit {
         if(this.userInfo.ProfileImage){
           this.profileImageSrc = `data:image/JPEG;base64,${this.userInfo.ProfileImage}`;
         }
+        if(this.userInfo.Logo){
+          this.organizationLogo = `data:image/${this.userInfo.LogoExt};base64,${this.userInfo.Logo}`;
+        }        
         this.dataSharingService.SetUserInfoData(this.userInfo);
         this.selectedWorkspaceId    = this.userInfo.WorkspaceDetail.Id;
         this.formPermission         = this.dataSharingService.GetPermissions('Forms');

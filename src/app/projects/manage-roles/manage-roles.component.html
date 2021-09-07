@@ -16,12 +16,14 @@
                         </div>
                         <div class="col-md-9">
                             <input formControlName="Name" type="text" class="form-control" id="role-name">
-                        </div>
-                        <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
-                            <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role Name is required
+                            <div class="bf-input-validation">
+                                <ng-container *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                                    <div *ngIf="f.Name.errors?.required || f.Name.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Role Name is required
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Role Name is already exist</div>
                             </div>
-                        </ng-container>
-                        <div *ngIf="f.Name.errors?.isExists" class="field-error text-right mt-1 pr-2 small">Role Name is already exist</div>
+                        </div>
                     </div>
                     <div class="row my-4 form-group">
                         <div class="col-md-3">
@@ -29,6 +31,7 @@
                         </div>
                         <div class="col-md-9">
                             <textarea formControlName="Description" class="form-control" rows="5" maxlength="200" cols="5" id="role-description"></textarea>
+                            <div class="bf-input-validation"></div>
                         </div>
                     </div>
                     <div class="row my-4 form-group ">
@@ -40,6 +43,7 @@
                                 <input formControlName="IsActive" type="checkbox" class="custom-control-input" id="bf_active_role">
                                 <label class="custom-control-label" for="bf_active_role"></label>
                             </div>
+                            <div class="bf-input-validation"></div>
                         </div>
                     </div>
                 </form>
@@ -67,8 +71,8 @@
                         </tbody>
                     </table>
                     <div class="form-group mt-5 row role-btn-container">
-                        <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf">Back</button>
-                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3" *ngIf="roleDetailsData.isEditable">
+                        <button (click)="goBack()" type="button" class="btn btn-link btn-md text-bf" title="Back">Back</button>
+                        <button type="button" [disabled]="roleAddForm.invalid" (click)="submit()" class="btn btn-bf btn-md ml-3" *ngIf="roleDetailsData.isEditable" title="Save">
                             Save
                             <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
                         </button>
