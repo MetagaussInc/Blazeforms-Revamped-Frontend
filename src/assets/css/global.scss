@@ -1102,4 +1102,14 @@
         from {-webkit-transform: rotate(0deg);}
         to {-webkit-transform: rotate(360deg);}
      }
+
+
+
+
+
+     /**--- Global Fixes---**/
+
+     .modal-content .modal-header button {
+         outline: 0px !important;
+     }
      

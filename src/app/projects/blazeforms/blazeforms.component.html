@@ -1,6 +1,7 @@
 <ng-container *ngIf="dataLoaded && !needLogin; else notLoaded">
-    <div class="container-fluid">
-        <h2 class="text-center form-heading my-1">{{formDetail.name}}</h2>
+    <div class="container px-5 my-5 shadow bg-white">
+        <h2 class="text-center form-heading py-3">{{formDetail.name}}</h2>
+        test
         <app-exported-form [levelDetails]="levelDetails" (inputUpdateEvent)="inputUpdateEventHandler($event)" [isPublishPage]="true" [elements]="elements" [initial]="paymentDetails" [payments]="payments" [config]="formDetail">
         </app-exported-form>
     </div>
