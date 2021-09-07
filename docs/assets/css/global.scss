@@ -20,6 +20,7 @@
             flex-direction: column;
             min-height: 100vh;
             height: auto !important;
+            position: relative;
         }
         
         a {
@@ -63,6 +64,11 @@
         h6 {
             font-family: $seconderyFont;
         }
+
+        .bf-input-validation { 
+            height: 16px;   
+             margin-top: 0.25rem !important;
+            }
         
         .btn-bf {
             color: $btn-text-color;
@@ -745,13 +751,15 @@
         }
         
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
-            border-top: 2px dashed #cecece;
             padding: 0px;
             margin: 20px 0px;
+            height: 2px;
+            border: 0px;
+            background-color: #efefef;
         }
         
         .target-droppable .page-break-head {
-            top: -14px;
+            top: -18px;
             left: 50%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -950,7 +958,7 @@
             text-decoration: none;
         }
         
-        .popover-controller {
+        .popover-controller .popover-controller-icon{
             position: absolute;
             right: -26px;
             top: -1px;
@@ -972,6 +980,8 @@
         
         .popover-controller .popover-controller-icon {
             font-size: 20px;
+            height: 24px;
+            line-height: 20px;
         }
         /*--Scroller---*/
         
@@ -1014,7 +1024,6 @@
         }
         
         app-root {
-            position: relative;
             height: 100%;
         }
         
@@ -1030,3 +1039,93 @@
             bottom: 0px;
             width: 100%;
         }
+
+
+
+        /*--- Builder CSS---*/
+
+        .btn.btn-link { 
+            color: #f04564;
+        }
+
+        .build-droppable-tool input[type=text],
+        .build-droppable-tool input[type=email],
+        .build-droppable-tool input[type=number],
+        .build-droppable-tool input[type=tel],
+        .build-droppable-tool input[type=date],
+        .build-droppable-tool input[type=file]
+        .build-droppable-tool input.form-control,
+        .build-droppable-tool select,
+        .build-droppable-tool textarea    {
+            background-color: #e9ecef;
+            opacity: 1;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .build-droppable-tool input[type=radio], 
+        .build-droppable-tool input[type=checkbox] {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .build-droppable-tool .custom-radio .custom-control-label::before {
+            background-color: #e9ecef;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .repeatSection-wrap .popover-controller{
+            display: none !important;
+        }
+
+
+
+      /*----  Loader CSS----*/
+
+      .loader4 {
+        width:45px;
+        height:45px;
+        display:inline-block;
+        padding:0px;
+        border-radius:100%;
+        border:5px solid;
+        border-top-color:rgba(246, 36, 89, 1);
+        border-bottom-color:rgba(255,255,255, 0.3);
+        border-left-color:rgba(246, 36, 89, 1);
+        border-right-color:rgba(255,255,255, 0.3);
+        -webkit-animation: loader4 1s ease-in-out infinite;
+        animation: loader4 1s ease-in-out infinite;
+     }
+     @keyframes loader4 {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+     }
+     @-webkit-keyframes loader4 {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+     }
+
+
+
+
+
+     /**--- Global Fixes---**/
+
+     .modal-content .modal-header button {
+         outline: 0px !important;
+     }
+
+     .table-responsive-main .table .thead-light th,
+     .table-responsive-main .table td{
+        white-space: nowrap;
+     }
+
+     .form-list-item .form-checkbox-wrap {
+        cursor: pointer;
+     }
+
+     .social-icon-wrap .c-referral-twShare svg {
+         margin-top: -8px;
+     }
+     
