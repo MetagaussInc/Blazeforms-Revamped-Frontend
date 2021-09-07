@@ -122,7 +122,7 @@
                                     placeholder="{{form.placeholder}}" [attr.maxlength]="form.maxVal" [attr.minlength]="form.minVal" 
                                     [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                             </div>
-                            <div *ngIf="checkMobileNumber(form)">
+                            <div *ngIf="form.value && checkMobileNumber(form)">
                                 Please add valid Mobile number
                             </div>
                             <div
@@ -652,7 +652,7 @@
                     [attr.maxlength]="form.maxVal" [attr.minlength]="form.minVal" [required]="checkForRDependency(form, 'reqDependUpOn')"
                     class="form-control" />
             </div>
-            <div *ngIf="checkMobileNumber(form)">
+            <div *ngIf="form.value && checkMobileNumber(form)">
                 Please add valid Mobile number
             </div>
             <div
