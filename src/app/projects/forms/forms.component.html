@@ -59,7 +59,7 @@
                     <div class="forms-list col-md-12 border rounded">
                         <ng-container *ngFor="let form of folder?.forms; let folderIndex = index">
                             <ng-container *ngIf="folder?.expanded || (!folder?.expanded && folderIndex < 3)">
-                                <div *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.trim()?.toLowerCase())" class="form-list-item row p-3 border-bottom">
+                                <div *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.trim()?.toLowerCase())" [ngClass]="{'bg-bf-light': selectedForms?.includes(form.value)}" class="form-list-item row p-3 border-bottom">
                                     <div class="form-checkbox-wrapper col-md-1">
                                         <label class="p-0 m-0 align-bottom">
                                     <input  type="checkbox">

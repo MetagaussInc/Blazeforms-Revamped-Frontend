@@ -199,7 +199,7 @@ export const config = [
     {
         name: 'Password',
         iconClass: 'material-icons',
-        iconName: 'text_fields',
+        iconName: 'password',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -382,7 +382,7 @@ export const config = [
     {
         name: 'Toggle',
         iconClass: 'material-icons',
-        iconName: 'person',
+        iconName: 'toggle_on',
         value: true,
         inputType: 'toggle',
         icon: 'fas fa-language',
@@ -1654,6 +1654,8 @@ export const config = [
     },
     {
         name: 'Table',
+        iconClass: 'material-icons-outlined',
+        iconName: 'table_chart',
         value: '',
         columns: [] as any[],
         inputType: 'table',
@@ -3047,6 +3049,8 @@ export const layoutInputs = [
     },
     {
         name: 'Repeat Section',
+        iconClass: 'material-icons',
+        iconName: 'repeat',
         value: '',
         childSection: [{
             name: 'Section',
@@ -3184,6 +3188,8 @@ export const layoutInputs = [
     },
     {
         name: 'Page Break',
+        iconClass: 'material-icons',
+        iconName: 'insert_page_break',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -3199,6 +3205,8 @@ export const layoutInputs = [
     },
     {
         name: 'Content',
+        iconClass: 'material-icons',
+        iconName: 'article',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
@@ -3217,6 +3225,8 @@ export const layoutInputs = [
 export const advancedLayout = [
     {
         name: 'File Upload',
+        iconClass: 'material-icons',
+        iconName: 'file_upload',
         inputType: 'fileupload',
         icon: 'far fa-square',
         class: 'wide',
@@ -3283,6 +3293,8 @@ export const advancedLayout = [
     },
     {
         name: 'Signature',
+        iconClass: 'material-icons',
+        iconName: 'edit',
         value: '',
         inputType: 'sign',
         icon: 'far fa-square',
@@ -3348,6 +3360,8 @@ export const advancedLayout = [
 
 export const Level = {
     name: 'Section',
+    iconClass: 'material-icons',
+    iconName: 'web',
     value: '',
     children: [] as any[],
     inputType: 'levelSection',

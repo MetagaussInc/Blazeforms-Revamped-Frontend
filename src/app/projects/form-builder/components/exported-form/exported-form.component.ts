@@ -185,7 +185,7 @@ export class ExportedFormComponent implements OnInit {
     return true;
   }
 
-  billPay() {
+  billPay(formEntryId: any) {
     // const modalRef: any = this.modalService.open(BillPayComponent, { size: 'lg' })
     // modalRef.componentInstance.config = {
     //   initial: this.initial
@@ -195,22 +195,24 @@ export class ExportedFormComponent implements OnInit {
     // }, (reason: any) => {
     //   console.log(`Dismissed `);
     // });
-    this.checkout(this.getAmountDue())
+    this.checkout(this.getAmountDue(), formEntryId)
   }
-  checkout(amount: any) {
+  checkout(amount: any, formEntryId: any) {
+    const thisInstance = this;
     console.log(amount);
     const strikeCheckout = (<any>window).StripeCheckout.configure({
       key: this.initial?.accountDetail?.publishableKey,
       locale: 'auto',
       token: function (stripeToken: any) {
         console.log(stripeToken)
-        alert('Stripe token generated!');
+        // alert('Stripe token generated!');
+        thisInstance.updateEntry(stripeToken.email, stripeToken.id,formEntryId)
       }
     });
 
     strikeCheckout.open({
-      name: 'Dummy Payment Rohit',
-      description: 'Dummy Payment Rohit Desc',
+      name: 'Blazeforms',
+      description: 'Blazeforms Payment Gateway',
       amount: amount * 100
     });
   }
@@ -237,48 +239,87 @@ export class ExportedFormComponent implements OnInit {
       window.document.body.appendChild(scr);
     }
   }
+
+  updateEntry(email: any, token: any, formEntryId: any) {
+    const payload  = {
+      Amount: this.getAmountDue(),
+Description: "BlazeForms Payment Gateway",
+FormEntriesId: formEntryId,
+SecretKey: this.initial?.accountDetail?.secretKey,
+StripeEmail: email,
+StripeToken: token
+    }
+    this.http.call('SaveWorkspacePayment', 'POST', payload).subscribe(res => {
+
+     this.router.navigate(['blazeforms/form-submitted'], {queryParams: {
+      amount: res.amount,
+      chargeId: res.chargeId,
+     }})
+
+    })
+  }
   submitParentForm(parentForm: any) {
     let data = '';
     if (this.haveTabs) {
       this.allArr.forEach((arr: any) => {
         arr.forEach((element: any) => {
-          if (element.children && element.inputType !== 'addressSection') {
+          if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
             element.children.forEach((child: any) => {
               data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
             });
-          } else if (element.inputType === 'addressSection') {
-            data = data + element.name + '='
+          } else if (element.inputType === 'addressSection'|| element.inputType === 'nameSection') {
+            data = data + element.uiIndexId + '=' + element.name + '='
             element.children.forEach((child: any) => {
               data = data + (child.value || '') + ', '
             });
             data = data + '||'
+          }else if (element.ratingOptions) {
+            data = data + element.uiIndexId + '=' + element.name + '=';
+            element.ratingOptions.forEach((child: any) => {
+              data = data + child.value + ', '
+            });
+            data = data + '||';
+          }else if (element.childSection) {
+            data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
           } else if (element.columns) {
-            data = data + element.name + '=' + element.rows.length + '||';
+            data = data + element.uiIndexId + '=' + element.name + '=' + element.rows.length + '||';
           } else {
-            data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+            data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
           }
         });
       });
     } else {
       this.elements.forEach((element: any) => {
-        if (element.children && element.inputType !== 'addressSection') {
+        if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
           element.children.forEach((child: any) => {
             data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
           });
-        } else if (element.inputType === 'addressSection') {
-          data = data + element.name + '='
+        } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
+          data = data + element.uiIndexId + '=' + element.name + '='
           element.children.forEach((child: any) => {
             data = data + child.value + ', '
           });
           data = data + '||';
-        } else if (element.columns) {
-          data = data + element.name + '=' + element?.rows?.length + '||';
+        } else if (element.ratingOptions) {
+          data = data + element.uiIndexId + '=' + element.name + '=';
+          element.ratingOptions.forEach((child: any) => {
+            data = data + child.value + ', '
+          });
+          data = data + '||';
+        }else if (element.childSection) {
+          data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
+        }else if (element.columns) {
+          data = data + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
         } else {
-          data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+          data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }
       });
     }
-
+    if (this.getAmountDue() > 0) {
+      let string = '';
+        string = `${'Total Payment'}=${'Total Payment'}=${this.getAmountDue()} || ${'Payment Mode'}=${'Payment Mode'}=${this.initial?.selectedPaymentOption === 'Card' ? 'Card' : 'Cash'} ||`;
+        data = data + string;
+    }
 
     console.log(data);
     const payload = {
@@ -287,7 +328,7 @@ export class ExportedFormComponent implements OnInit {
       Id: this.config.id, //"2dz77r3bzZJ6UaCmrfOSeg==",
       IsValidNotification: false,
       Name: this.config.name, //"R2",
-      PaymentMode: "Cash",
+      PaymentMode: this.initial?.selectedPaymentOption === 'Card' ? 'Card' : 'Cash',
       SubmissionSettings: "NOVALUE",
       SubmittedWhenStatus: false,
       TotalEntries: 1000000000,
@@ -306,7 +347,11 @@ export class ExportedFormComponent implements OnInit {
       userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
     }
     this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
-      this.router.navigate(['blazeforms/form-submitted'])
+      if (this.initial?.selectedPaymentOption === 'Card') {
+        this.billPay(res.formEntryId)
+      } else {
+        this.router.navigate(['blazeforms/form-submitted'])
+      }
     })
   }
 
