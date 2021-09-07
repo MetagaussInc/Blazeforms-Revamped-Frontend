@@ -24,6 +24,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public userId: any;
   public isSuperAdmin: boolean = false;
   public isFormSubmitted: boolean = false;
+  public selectedFileName = 'Select file';
 
   constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService, private toastService: ToastService) {
     this.userId = this.dataSharingService.GetUserId();
@@ -71,6 +72,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
     const reader = new FileReader();    
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
+      this.selectedFileName = file.name;
       if (file.type == 'image/jpg' || file.type == 'image/png' || file.type == 'image/jpeg') {
         let fileSize = ((file.size) / (1024 * 1024));
         if(fileSize < 5){

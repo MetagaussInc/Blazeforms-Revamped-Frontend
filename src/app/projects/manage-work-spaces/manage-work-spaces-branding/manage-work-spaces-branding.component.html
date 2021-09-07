@@ -7,7 +7,7 @@
                     <div class="form-group mb-3">
                         <div class="custom-file">
                             <input type="file" [formControl]="Image" class="custom-file-input" name="Image" id="file_input" (change)="onFileChange($event)" accept="image/*">
-                            <label id="file_input_label" class="custom-file-label" for="image">Select file</label>
+                            <label id="file_input_label" class="custom-file-label" for="image">{{ selectedFileName }}</label>
                         </div>
                     </div>
                     <button id="upload_btn" [disabled]="Image.invalid" class="btn btn-primary btn-bf" (click)="submit()" [hidden]="isFormSubmitted">Upload</button>

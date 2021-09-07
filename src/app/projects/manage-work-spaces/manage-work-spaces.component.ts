@@ -86,7 +86,6 @@ export class ManageWorkSpacesComponent implements OnInit {
     this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
     this.userId = this.dataSharingService.GetUserId();
     this.activeTabId = this.dataSharingService.GetActiveTabId();
-    console.log(this.activeTabId)
   }
 
   ngOnInit(): void {

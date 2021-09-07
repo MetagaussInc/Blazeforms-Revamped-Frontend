@@ -120,6 +120,15 @@ export class WorkSpacesComponent implements OnInit {
               const props = response;
               this.store.dispatch(userWorkspaceDetailSuccess({props}));
             });
+            this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+              if(workspacesList){
+                this.userWorkspaceLists = [];
+                let workSpaceListData = Array.from(Object.values(workspacesList));
+                workSpaceListData.forEach((item: any) => {
+                  this.userWorkspaceLists.push({id: item.id, name: item.name});
+                });
+              }
+            });
           }
         })
       }
