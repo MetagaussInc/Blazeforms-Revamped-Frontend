@@ -254,6 +254,7 @@ export class BuildComponent implements OnDestroy {
       };
       if (resp?.styling) {
         this.styling = resp.styling
+        this.placeholderStyling();
       }
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
@@ -280,6 +281,37 @@ export class BuildComponent implements OnDestroy {
     })
 
   }
+
+  placeholderStyling($event?: any) {
+    console.log('picker Called', $event)
+    if (document.getElementById("bclr")) {
+      const a: any = document.getElementById("bclr");
+      a.remove();
+    }
+
+    const color = this.styling.placeholders.color;
+    const size = this.styling.placeholders.size;
+    const font = this.styling.placeholders.font;
+    const string = `
+    <style id="bclr">
+    app-exported-form input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color:    ${color}!important;
+      font-size: ${size}!important;
+      font-family: ${font}!important;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    ${color}!important;
+    font-size: ${size}!important;
+    font-family: ${font}!important;
+     opacity:  1;
+  }
+
+  }</style>
+    
+    `
+    document.head.insertAdjacentHTML("beforeend", string)
+  }
+
 
   setLevels(levels: any[]) {
     const groupByLevelId = lodash.groupBy(levels, 'levelId');
@@ -1023,6 +1055,11 @@ export class BuildComponent implements OnDestroy {
     const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
     formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
     form.childSection.push(formInstance);
+  }
+
+  closeIframes() {
+    this.viewSpecificEntry = null;
+    this.viewEntryPanel = false;
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

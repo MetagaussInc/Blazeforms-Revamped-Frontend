@@ -73,7 +73,9 @@
                 <div class="forms-list col-md-12 border rounded form-list">
                     <div class="form-list-item row p-3 border-bottom" *ngFor="let form of formsList">
                         {{form.name}}
-                        <span style="position: absolute; right: 100px;" (click)="copy(form)">copy</span>
+                        <span style="position: absolute; right: 100px;" (click)="copy(form)">
+                            <i class="material-icons">content_copy</i>
+                        </span>
                         <span style="position: absolute; right: 50px;"(click)="viewForm(form)">view</span>
                     </div>
                 </div>

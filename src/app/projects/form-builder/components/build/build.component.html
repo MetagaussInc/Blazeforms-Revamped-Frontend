@@ -1668,7 +1668,7 @@
 
                                     <div *ngIf="viewEntryPanel" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
-                                        <button type="button" class="close">
+                                        <button type="button"  (click)="closeIframes()"class="close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         <iframe [src]="FormUrl()" width="1220px" height="500px"
@@ -1676,7 +1676,7 @@
                                     </div>
                                     <div *ngIf="viewSpecificEntry" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
-                                        <button type="button" class="close">
+                                        <button type="button" (click)="closeIframes()" class="close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         <iframe [src]="viewSpecificEntry" width="1220px" height="500px"
