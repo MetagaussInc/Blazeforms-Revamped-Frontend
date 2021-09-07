@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { userLogin } from 'src/app/+state/user/user.actions';
 import { selectUserState, getUserLoginAttempts } from 'src/app/+state/user/user.selectors';
 import { ToastService } from '../../shared/toast.service';
+import { HttpService } from 'src/app/config/rest-config/http.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8)
     ])
   });
-  constructor(private store: Store, private router: Router, private toastService: ToastService) {
+  constructor(private store: Store, private router: Router, private toastService: ToastService, private http: HttpService) {
     this.store.select(selectUserState).subscribe((res: any) => {
       if (res.apiCompleted) {
         this.isFormSubmitted = false;
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
       }
     });
     this.store.select(getUserLoginAttempts).subscribe((res: any) => {
-      if(res == 5){
+      if(res >= 3){
         this.isBlockUser = true;
         this.timer(1);
       }
@@ -79,7 +80,6 @@ export class LoginComponent implements OnInit {
   // }
 
   timer(minute: any) {
-    // let minute = 1;
     let seconds: number = minute * 30;
     let textSec: any = "0";
     let statSec: number = 30;
@@ -93,8 +93,10 @@ export class LoginComponent implements OnInit {
       } else textSec = statSec;
       this.timerDisplay = `${textSec}`;
       if (seconds == 0) {
-        this.isBlockUser = false;
-        clearInterval(timer);
+        this.http.call('resetAccessFailedCount', 'POST', {email: this.loginForm.value.email}).subscribe(res => {
+          this.isBlockUser = false;
+          clearInterval(timer);
+        });
       }
     }, 1000);
   }
