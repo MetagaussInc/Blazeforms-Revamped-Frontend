@@ -34,7 +34,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   levelDetails: any = {};
 
   constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
-
+    
     document.body.className = 'bg-light';
 
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -52,13 +52,15 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   }
 
   getForm(workspaceName: string, formName: string, entry: any) {
+    const bForms: any = localStorage.getItem('bforms');
+    
     console.log(this.userInfo, entry)
       const payload = {
         FormEntriesId: entry ? entry : null, // to do
         Id: null, // no user credentials
         Name: formName,
         WorkSpaceName: workspaceName,
-        userID: this.userInfo?.Id ? this.userInfo?.Id : null // no user credentials
+        userID: JSON.parse(bForms)?.user?.Id ? JSON.parse(bForms)?.user?.Id : null // no user credentials
       }
       this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
         this.dataLoaded = true;

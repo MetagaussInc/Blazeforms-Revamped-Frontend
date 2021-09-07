@@ -97,30 +97,30 @@
 
                             </div>
 
-                            <div class="font-editor">
+                             <div class="font-editor">
                                 <div class="col-md-12">
                                     <label _ngcontent-c25="" class="col-form-label" translate="" ng-reflect-translate="">PlaceHolders</label>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <select id="placeholders-font-selector" [(ngModel)]="styling.placeholders.font" name="select" class="custom-select">
+                                        <select id="placeholders-font-selector" (change)="placeholderStyling()"  [(ngModel)]="styling.placeholders.font" name="select" class="custom-select">
                                             <option value="Montserra">Montserra</option>
                                             <option value="Roboto">Roboto</option>
                                             <option value="Raleway">Raleway</option>
                                           </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <select id="placeholders-font-size-selector" [(ngModel)]="styling.placeholders.size" name="select" class="custom-select">
+                                        <select id="placeholders-font-size-selector" (change)="placeholderStyling()"  [(ngModel)]="styling.placeholders.size" name="select" class="custom-select">
                                             <option value="11">11px</option>
                                             <option value="12">12px</option>
                                             <option value="13">13px</option>
                                           </select>
 
                                     </div>
-                                    <div class="col-sm-2"><input type="color" [(ngModel)]="styling.placeholders.color" class="mt-2" id="placeholders-color-selector" name="favcolor" value="#ff0000"></div>
+                                    <div class="col-sm-2"><input type="color" (change)="placeholderStyling()" (click)="placeholderStyling()" [(ngModel)]="styling.placeholders.color" [value]="styling.placeholders.color" class="mt-2" id="placeholders-color-selector" name="favcolor" ></div>
                                 </div>
 
-                            </div>
+                            </div> 
 
                             <div class="font-editor">
                                 <div class="col-md-12">
@@ -142,7 +142,7 @@
                                           </select>
 
                                     </div>
-                                    <div class="col-sm-2"><input type="color" class="mt-2" [(ngModel)]="styling.placeholders.color" id="buttons-color-selector" name="favcolor" value="#ff0000"></div>
+                                    <div class="col-sm-2"><input type="color" class="mt-2"  [(ngModel)]="styling.buttons.color" id="buttons-color-selector" name="favcolor" value="#ff0000"></div>
                                 </div>
 
                             </div>

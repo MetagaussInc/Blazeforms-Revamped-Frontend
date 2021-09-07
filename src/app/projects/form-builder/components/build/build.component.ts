@@ -65,6 +65,30 @@ export class BuildComponent implements OnDestroy {
       ['fontSize']
     ]
   };
+  styling = {
+    labels: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    text: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    placeholders: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    buttons: {
+      font: 'Roboto',
+      size: 16,
+      color: 'red'
+    },
+    pagebackgroundColor: 'white',
+    pagebackgroundImage: ''
+  }
   extraBillModel = {
       value: null,
       type: 'dollar',
@@ -73,6 +97,7 @@ export class BuildComponent implements OnDestroy {
   model: any = {
     name: '',
   };
+  viewSpecificEntry: any;
   active = 1;
   viewProperties = 0;
   selectedIndex: any;
@@ -227,6 +252,9 @@ export class BuildComponent implements OnDestroy {
         ...(resp?.paymentSetting || this.paymentSetting),
         inputType: 'paymentSection'
       };
+      if (resp?.styling) {
+        this.styling = resp.styling
+      }
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -471,7 +499,7 @@ export class BuildComponent implements OnDestroy {
     });
     this.addStripeAccount()
 
-    console.log(this.paymentSetting)
+    console.log(this.styling)
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
@@ -494,6 +522,7 @@ export class BuildComponent implements OnDestroy {
         targetBuilderTools: elements,
         levels: levels,
         count: this.count,
+        styling: this.styling,
         paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(this.paymentSetting) : null)
       })
     }
@@ -982,6 +1011,12 @@ export class BuildComponent implements OnDestroy {
 
   FormUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
+  }
+
+  viewEntry(rowIndex: any) {
+    console.log(this.entries.entries[rowIndex]?.id)
+    this.viewSpecificEntry = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}/${this.entries.entries[rowIndex]?.entryId}`);
+
   }
 
   addSection(form: any) {
