@@ -25,7 +25,7 @@ export class AddOrganizationWithoutSuperAdminComponent implements OnInit {
     DefaultReplyEmail: new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
-      //this.doubleDotValidator.bind(this)
+      this.doubleDotValidator.bind(this)
     ],
       this.validateEmailViaServer.bind(this)
     ),
