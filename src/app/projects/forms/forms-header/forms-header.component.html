@@ -136,13 +136,13 @@
             Your current usage : {{workSpacePlanDetail.noOfUsers}}/{{workSpacePlanDetail.plandetails.noOfUsers}} USERS | {{workSpacePlanDetail.noOfForms}}/{{workSpacePlanDetail.plandetails.noOfForms}} Forms | {{workSpacePlanDetail.noOfEntries}}/{{workSpacePlanDetail.plandetails.noOfEntries}}
             ENTRIES | {{workSpacePlanDetail.storageSize }}/{{workSpacePlanDetail.plandetails.storageSize}} Storage
             <a class="plan-detail" [routerLink]="" [hidden]="!planPermission.canView">View Details</a>
-            <i class="material-icons float-right" (click)="toggleStatusBar()">close</i>
+            <i class="material-icons float-right" (click)="toggleStatusBar()" role="button">close</i>
         </div>
     </div>
     <div class="row my-2" [hidden]="!hideStatus">
         <div class="text-center col-md-12 py-2 workspace-plan-notice" [hidden]="!planPermission.canView && isSuperAdmin">
             <span class="status-button" (click)="toggleStatusBar()" translate>Subscription Status 
-                <i class="material-icons">expand_more</i>
+                <i class="material-icons" role="button">expand_more</i>
             </span>
         </div>
     </div>

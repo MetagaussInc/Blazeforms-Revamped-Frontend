@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, Input, OnInit,OnDestroy, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
   templateUrl: './blazeforms.component.html',
   styleUrls: ['./blazeforms.component.scss']
 })
-export class BlazeformsComponent implements OnInit {
+export class BlazeformsComponent implements OnInit, OnDestroy {
 
   dataLoaded = false;
   public elements: any;
@@ -34,6 +34,9 @@ export class BlazeformsComponent implements OnInit {
   levelDetails: any = {};
 
   constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
+
+    document.body.className = 'bg-light';
+
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
     })
@@ -329,5 +332,9 @@ userID: "TXYu0NjodAYzBODQlLqdmg==",
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
         console.log(res)
       })
+    }
+
+    ngOnDestroy(): void {
+      document.body.className = '';
     }
   }
