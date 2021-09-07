@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
-import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BASE_URL, HttpService } from 'src/app/config/rest-config/http.service';
 import { advancedLayout, config, layoutInputs, Level, paymentModel } from '../../input.config';
 import { AddStripeAccountComponent } from '../add-stripe-account/add-stripe-account.component';
 import { ConditionalRendereringModalComponent } from '../conditional-renderering-modal/conditional-renderering-modal.component';
@@ -11,6 +11,7 @@ import { ExcelService } from '../../excelservice.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as lodash from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-build',
@@ -64,6 +65,11 @@ export class BuildComponent implements OnDestroy {
       ['fontSize']
     ]
   };
+  extraBillModel = {
+      value: null,
+      type: 'dollar',
+      name: 'Additional'
+    };
   model: any = {
     name: '',
   };
@@ -159,7 +165,8 @@ export class BuildComponent implements OnDestroy {
   userSerach: any = null;
   listPayments: any = [];
   selectColElement: any;
-  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  formActivities = [];
+  constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
@@ -168,6 +175,7 @@ export class BuildComponent implements OnDestroy {
           this.formId = res.ID;
           this.mainTab = Number(res.seletedTab);
           this.getForm(res?.ID, true)
+          this.getFormActivities(res?.ID);
         })
       }
     })
@@ -182,6 +190,18 @@ export class BuildComponent implements OnDestroy {
     this.router.navigate([`/blazeforms/${this.userInfo.WorkspaceDetail.Name.split(" ").join("_")}/${this.builderObj.name.split(" ").join("_")}`])
   }
 
+  getFormActivities(ID: any) {
+    // this.http.call('GetFormActivityLogsByFormId', 'POST', payload).subscribe(res => {
+    //   this.builderObj = Object.assign(this.builderObj, res);
+    //   console.log(this.builderObj)
+    //   this.formLoaded = true;
+ 
+    // })
+
+    this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
+      console.log(res)
+    })
+  }
   getForm(ID: any, initial: boolean) {
     console.log(ID)
     const payload = {
@@ -772,13 +792,18 @@ export class BuildComponent implements OnDestroy {
     console.log(e.type, e);
   }
 
+ 
+
+  selectPayment() {
+    this.selectedElement = this.paymentSetting;
+    this.viewProperties = 1;
+  }
+
   clicked($event: any, model: any, i: any) {
     if (this.selectedElement?.viewOption) {
       this.selectedElement['viewOption'] = false;
     }
     this.selectedElement = model;
-    // this.selectedIndex = model.index;
-    // this.selectedDependency = null;
     console.log(model, i)
     this.viewProperties = 1;
 
@@ -786,15 +811,8 @@ export class BuildComponent implements OnDestroy {
     $event.stopPropagation()
   }
 
-  selectPayment() {
-    this.selectedElement = this.paymentSetting;
-    this.viewProperties = 1;
-  }
-
   sectionClicked($event: any, model: any, i: any) {
     this.selectedElement = model;
-    // this.selectedIndex = model.index;
-    // this.selectedDependency = null;
     this.viewProperties = 1;
     console.log(model, i)
     $event.preventDefault();
@@ -964,6 +982,12 @@ export class BuildComponent implements OnDestroy {
 
   FormUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
+  }
+
+  addSection(form: any) {
+    const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
+    formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
+    form.childSection.push(formInstance);
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

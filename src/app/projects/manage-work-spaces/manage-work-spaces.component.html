@@ -275,7 +275,7 @@
                                             </div>
                                         </div>
                                         <div class="login-area-container container align-items-center justify-content-center" *ngIf="!isSuperAdmin">
-                                            <app-add-organization-without-super-admin></app-add-organization-without-super-admin>
+                                            <app-add-organization-without-super-admin (updatePlan)="onUpgradePlan($event)"></app-add-organization-without-super-admin>
                                         </div>
                                     </div>
                                 </div>
@@ -325,7 +325,7 @@
                 <li [ngbNavItem]="8" [hidden]="!showBillingPage">
                     <a ngbNavLink>Billing Informaton</a>
                     <ng-template ngbNavContent>
-                        <app-manage-work-spaces-billing-info></app-manage-work-spaces-billing-info>
+                        <app-manage-work-spaces-billing-info (updateSubscriptionPage)="onUpdateSubscriptionPage($event)"></app-manage-work-spaces-billing-info>
                     </ng-template>
                 </li>
             </ul>

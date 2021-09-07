@@ -272,7 +272,7 @@ export class ExportedFormComponent implements OnInit {
           });
           data = data + '||';
         } else if (element.columns) {
-          data = data + element.name + '=' + element.rows.length + '||';
+          data = data + element.name + '=' + element?.rows?.length + '||';
         } else {
           data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }
@@ -319,6 +319,19 @@ export class ExportedFormComponent implements OnInit {
     this.inputUpdateEvent.emit();
   }
 
+  validateNumber(event: any, decimal: number) {    
+    if (event.target.value?.split('.')?.[1]?.length > decimal) {
+      const v = (event.target?.value)?.toString()?.split('');
+      v.pop();
+      event.target.value = Number(v?.join(''));
+    }
+    // const reg = /^-?\d*(\.\d{0,2})?$/;
+    // let input = event.target.value + String.fromCharCode(event.charCode);
+    // if (!reg.test(input)) {
+    //     event.preventDefault();
+    // }
+}
+
   checkMobileNumber(form: any) {
     if (/[~`!#$%\^&*+=\-a-z\[\]\\';,/{}()|\\":<>\?]/g.test(form.value) && form.type === 'US') {
       return true;
@@ -327,6 +340,18 @@ export class ExportedFormComponent implements OnInit {
     }
     return false;
 
+  }
+
+  addSection(form: any) {
+    const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
+    formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
+    form.childSection.push(formInstance);
+  }
+
+  onFileChange(event: any, form: any) {
+    for  (var i =  0; i <  event.target.files.length; i++)  {  
+      form.value.push(event.target.files[i]);
+  }
   }
 
   viewLevelSection(form: any): boolean {
@@ -348,5 +373,18 @@ export class ExportedFormComponent implements OnInit {
     });
     form.rows.push(obj)
   }
+
+  validateEmail(elementValue: any){      
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(elementValue); 
+  } 
+
+  isUrlValid(userInput: any) {
+    var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    if(res == null)
+        return false;
+    else
+        return true;
+}
 
 }

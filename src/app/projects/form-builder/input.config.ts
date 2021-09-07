@@ -1,4 +1,5 @@
 import { FunctionDeclaration } from "estree";
+import { USA_STATES } from "./components/build/build.constant";
 
 export const config = [
 
@@ -379,6 +380,113 @@ export const config = [
         }
     },
     {
+        name: 'Toggle',
+        iconClass: 'material-icons',
+        iconName: 'person',
+        value: true,
+        inputType: 'toggle',
+        icon: 'fas fa-language',
+        class: 'full',
+        size: 'medium',
+        view: 'always',
+        helpText: '',
+        selectLabel: 'Yes/No',
+        collectAmount: 0,
+        validations: {
+            label: {
+                dataRefKey: 'name'
+            },
+            size: {
+                options: [
+                    {
+                        label: 'Small',
+                        value: 'small'
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium'
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large'
+                    },
+                    {
+                        label: 'Extra Large',
+                        value: 'extra-large'
+                    }
+                ],
+                dataRefKey: 'size'
+            },
+            defaultToggleValue: {
+                dataRefKey: 'value'
+            },
+            help: {
+                dataRefKey: 'helpText'
+            },
+            view: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'view'
+            },
+            required: {
+                options: [
+                    {
+                        label: 'Always',
+                        value: 'always'
+                    },
+                    {
+                        label: 'When',
+                        value: 'when'
+                    },
+                    {
+                        label: 'Never',
+                        value: 'never'
+                    }
+                ],
+                dataRefKey: 'isRequired'
+            },
+            toggleDefaultOptions: {
+                'Yes/No': {
+                    true: 'Yes',
+                    false: 'No'
+                },
+                'True/False': {
+                    true: 'True',
+                    false: 'False'
+                },
+                'Open/Closed': {
+                    true: 'Open',
+                    false: 'Closed'
+                },
+                'Active/Inactive': {
+                    true: 'Active',
+                    false: 'Inactive'
+                },
+                'Read/Unread': {
+                    true: 'Read',
+                    false: 'Unread'
+                },
+                'Others': {
+                    true: '',
+                    false: ''
+                }
+            },
+            collectPayment: true
+        }
+    },
+    {
         name: 'Last Name',
         iconClass: 'material-icons',
         iconName: 'person',
@@ -483,7 +591,22 @@ export const config = [
         view: 'always',
         minVal: 0,
         maxVal: 50,
+        decimalUpto: 2,
         helpText: '',
+        selectedNumberType: 'Integter',
+        numberType: [
+            {
+                label : 'Integer',
+            },
+            {
+                label: 'Decimal',
+                isDecimal: true
+            },
+            {
+                label: 'Percentage',
+                isDecimal: true,
+            }
+        ],
         validations: {
             label: {
                 dataRefKey: 'name'
@@ -1185,7 +1308,7 @@ export const config = [
         value: '',
         children: [
             {
-                name: 'Text',
+                name: 'Address Line 1',
                 value: '',
                 inputType: 'AddressField',
                 icon: 'fas fa-language',
@@ -1195,7 +1318,7 @@ export const config = [
                 notCustomizable: true
             },
             {
-                name: 'Text',
+                name: 'Address Line 2',
                 value: '',
                 inputType: 'AddressField',
                 icon: 'fas fa-language',
@@ -1303,7 +1426,7 @@ export const config = [
                 dataRefKey: 'isRequired'
             },
             typeOfAddress: {
-                US: [
+                NONUS: [
                     {
                         name: 'Text',
                         value: '',
@@ -1360,7 +1483,7 @@ export const config = [
                         disabled: false
                     }
                 ],
-                NONUS: [
+                US: [
                     {
                         name: 'Text',
                         value: '',
@@ -1396,7 +1519,8 @@ export const config = [
                         icon: 'fas fa-language',
                         class: 'col-4 p-1',
                         placeholder: 'State',
-                        disabled: false
+                        disabled: false,
+                        list: USA_STATES
                     },
                     {
                         name: 'Zip',
@@ -2931,7 +3055,7 @@ export const layoutInputs = [
             inputType: 'section',
             icon: 'far fa-square',
             class: 'wide',
-            size: 'medium',
+            size: 'extra-large',
             view: 'always',
             get show() {
 
@@ -3093,12 +3217,12 @@ export const layoutInputs = [
 export const advancedLayout = [
     {
         name: 'File Upload',
-        value: '',
         inputType: 'fileupload',
         icon: 'far fa-square',
         class: 'wide',
         size: 'medium',
         view: 'always',
+        value: [],
         validations: {
             size: {
                 dataRefKey: 'size',

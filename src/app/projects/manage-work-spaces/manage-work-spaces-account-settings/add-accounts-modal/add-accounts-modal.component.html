@@ -11,10 +11,12 @@
                 </div>
                 <div class="col-md-7">
                     <input type="text" formControlName="accountName" class="form-control" id="account-name" placeholder="Account Name">
-                    <ng-container *ngIf="f.accountName.invalid && (f.accountName.dirty || f.accountName.touched)">
-                        <div *ngIf="f.accountName.errors?.required || f.accountName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Account Name is required
-                        </div>
-                    </ng-container>
+                    <div class="bf-input-validation">
+                        <ng-container *ngIf="f.accountName.invalid && (f.accountName.dirty || f.accountName.touched)">
+                            <div *ngIf="f.accountName.errors?.required || f.accountName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Account Name is required
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
 
             </div>
@@ -24,10 +26,12 @@
                 </div>
                 <div class="col-md-7">
                     <input type="text" formControlName="publishableKey" class="form-control" id="publishable-key" placeholder="Publishable Key">
-                    <ng-container *ngIf="f.publishableKey.invalid && (f.publishableKey.dirty || f.publishableKey.touched)">
-                        <div *ngIf="f.publishableKey.errors?.required || f.publishableKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Publishable Key is required
-                        </div>
-                    </ng-container>
+                    <div class="bf-input-validation">
+                        <ng-container *ngIf="f.publishableKey.invalid && (f.publishableKey.dirty || f.publishableKey.touched)">
+                            <div *ngIf="f.publishableKey.errors?.required || f.publishableKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Publishable Key is required
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
 
             </div>
@@ -37,12 +41,13 @@
                 </div>
                 <div class="col-md-7">
                     <input type="text" formControlName="secretKey" class="form-control" id="secret-key" placeholder="Secret Key">
-                    <ng-container *ngIf="f.secretKey.invalid && (f.secretKey.dirty || f.secretKey.touched)">
-                        <div *ngIf="f.secretKey.errors?.required || f.secretKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Secret Key is required
-                        </div>
-                    </ng-container>
+                    <div class="bf-input-validation">
+                        <ng-container *ngIf="f.secretKey.invalid && (f.secretKey.dirty || f.secretKey.touched)">
+                            <div *ngIf="f.secretKey.errors?.required || f.secretKey.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Secret Key is required
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
-
             </div>
         </div>
         <div class="modal-footer border-0">

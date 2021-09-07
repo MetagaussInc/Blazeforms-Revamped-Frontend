@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,7 +18,11 @@ export class ReferFriendModalComponent implements OnInit {
   
   referFriendForm = new FormGroup({
     DefaultReplyEmail: new FormControl('', [Validators.required]),
-    ToEmail: new FormControl('', [Validators.required]),
+    ToEmail: new FormControl('', [
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
+      this.doubleDotValidator.bind(this)
+    ]),
     Subject: new FormControl('', [Validators.required]),
     Message: new FormControl('', [Validators.required]),
   });
@@ -68,6 +72,18 @@ export class ReferFriendModalComponent implements OnInit {
 
   closePopup(){
     this.activeModal.close();
+  }
+
+  doubleDotValidator({ value }: AbstractControl): any {
+    if (value?.includes('@')) {
+      if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
+        return { specialCharInDomain: true };
+      }
+      if (value.split('@')[1]?.includes('..')) {
+        return {doubleDotInDomain: true};
+      }
+    }
+    return null;
   }
 
   get DefaultReplyEmail() { return this.referFriendForm.get('DefaultReplyEmail'); }

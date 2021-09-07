@@ -176,7 +176,9 @@ export class FormsComponent implements OnInit {
 }
   open() {
     const modalRef: any = this.modalService.open(AddFormModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.formsList = this.allForms;      
+    modalRef.componentInstance.formsList = this.allForms;   
+    modalRef.componentInstance.userId = this.userInfo.Id;
+
     // modalRef.componentInstance.openEditEvent.subscribe((arg: string) => {
     // });
     

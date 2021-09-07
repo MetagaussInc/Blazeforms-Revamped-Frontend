@@ -24,6 +24,7 @@ export class DataSharingService {
   public userId: any;
   public userWorkspaceList: any;
   public billingPageData: any;
+  public activeTabId = 1;
 
   constructor(private store: Store, private http: HttpService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -136,6 +137,14 @@ export class DataSharingService {
 
   GetBillingpageData(){
     return this.billingPageData;
+  }
+
+  SetActiveTabId(id: number){
+    this.activeTabId = id;
+  }
+
+  GetActiveTabId(){
+    return this.activeTabId;
   }
 
 }
