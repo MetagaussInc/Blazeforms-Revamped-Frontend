@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class HttpService {
-    baseURL: string = 'https://staging.blazeforms.com:8094/api/';
+    baseURL: string = BASE_URL;
     constructor(
         private http: HttpClient
     ) {
@@ -102,3 +102,5 @@ export class HttpService {
     //     return newPath;
     //   }
 }
+
+export const BASE_URL = 'https://staging.blazeforms.com:8094/api/';

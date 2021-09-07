@@ -111,8 +111,8 @@ export class BlazeformsComponent implements OnInit {
      
 
       // formDetail.
-      console.log(this.levelDetails)
-      console.log(this.elements)
+      // console.log(this.levelDetails)
+      // console.log(this.elements)
     }
 
     extractAllLineItems(elements: any) {
@@ -125,7 +125,7 @@ export class BlazeformsComponent implements OnInit {
           this.payments.push({name: element.name, value: element.value});
           }
         }
-        console.log(element)
+        // console.log(element)
         if (element.inputType === 'toggle' && element.collectPayment) {
           if ((element.value) && Number(element.collectAmount) > 0) {
           this.payments.push({name: element.name, value: element.collectAmount});
@@ -155,7 +155,7 @@ export class BlazeformsComponent implements OnInit {
 
         }
         if (element.rows) {
-          console.log(element.columns)
+          // console.log(element.columns)
           element.columns.forEach((column: any) => {
             if ((column.inputType === 'payment' || column.inputType === 'currency')) {
               this.payments.push({name: column.name, value: column.value});

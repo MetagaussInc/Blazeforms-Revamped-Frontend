@@ -3217,12 +3217,12 @@ export const layoutInputs = [
 export const advancedLayout = [
     {
         name: 'File Upload',
-        value: '',
         inputType: 'fileupload',
         icon: 'far fa-square',
         class: 'wide',
         size: 'medium',
         view: 'always',
+        value: [],
         validations: {
             size: {
                 dataRefKey: 'size',

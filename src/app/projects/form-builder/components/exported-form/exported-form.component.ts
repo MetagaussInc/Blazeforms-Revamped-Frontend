@@ -272,7 +272,7 @@ export class ExportedFormComponent implements OnInit {
           });
           data = data + '||';
         } else if (element.columns) {
-          data = data + element.name + '=' + element.rows.length + '||';
+          data = data + element.name + '=' + element?.rows?.length + '||';
         } else {
           data = data + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }
@@ -346,6 +346,12 @@ export class ExportedFormComponent implements OnInit {
     const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
     formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
     form.childSection.push(formInstance);
+  }
+
+  onFileChange(event: any, form: any) {
+    for  (var i =  0; i <  event.target.files.length; i++)  {  
+      form.value.push(event.target.files[i]);
+  }
   }
 
   viewLevelSection(form: any): boolean {
