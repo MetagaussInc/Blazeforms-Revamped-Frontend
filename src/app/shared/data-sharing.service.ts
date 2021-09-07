@@ -105,7 +105,7 @@ export class DataSharingService {
     }
     if(this.userInfo){
       let workspaceDetails = this.userInfo.WorkspaceDetail;
-      this.userWorkspaceList = {id: workspaceDetails.Id, name: workspaceDetails.Name};
+      this.userWorkspaceList = {id: workspaceDetails.Id, name: workspaceDetails.Name, userId: this.userInfo.Id};
       return this.userWorkspaceList;
     }
     return null;
@@ -128,7 +128,7 @@ export class DataSharingService {
   }
 
   SetUserWorkspace(workspace: any){
-    this.userWorkspaceList = {id: workspace.id, name: workspace.name};
+    this.userWorkspaceList = {id: workspace.id, name: workspace.name, userId: workspace.userId};
   }
 
   SetBillingPageData(data: any){

@@ -111,7 +111,7 @@ export class FormsHeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   changeWorkSpace(workspace: any){
-    this.userWorkspaceList = {id: workspace.id, name: workspace.name};
+    this.userWorkspaceList = {id: workspace.id, name: workspace.name, userId: workspace.userId};
     this.dataSharingService.SetUserWorkspace(workspace);
     const obj = {
       UserId: this.userId,
@@ -130,7 +130,7 @@ export class FormsHeaderComponent implements OnInit {
         let orgName = workspace.name;
         let orgUserId = workspace.userId;
         if (this.redirectToWorkSpace) {
-        this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
+          this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(orgId), orgUserId: encodeURIComponent(orgUserId), orgName: encodeURIComponent(orgName)}});
         }
       }
     });
@@ -156,6 +156,14 @@ export class FormsHeaderComponent implements OnInit {
 
   toggleStatusBar(){
     this.hideStatus = !this.hideStatus;
+  }
+
+  goToSubscribtion(){
+    let wsp = this.dataSharingService.GetUserWorkspaceList();
+    if(wsp){
+      this.dataSharingService.SetActiveTabId(6);
+      this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'edit', id: encodeURIComponent(wsp.id), orgUserId: encodeURIComponent(wsp.userId), orgName: encodeURIComponent(wsp.name)}});
+    }
   }
 
 }
