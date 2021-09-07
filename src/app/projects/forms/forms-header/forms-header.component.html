@@ -8,7 +8,7 @@
         </a>
         <div class="ml-auto flex-nowrap align-items-center justify-content-end" [hidden]="(!userId || currentUrl == '/user/login')" [ngClass]="{'d-flex': userId}">
             <div class="me-2 nav-item" [hidden]="!formPermission.canView">
-                <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms'}" role="button" [routerLink]="['/forms']">Forms</a>
+                <a id="form-builder-page" class="text-gray-link nav-link p-4" [ngClass]="{'active': currentUrl == '/forms' || currentUrl == '/form-builder'}" role="button" [routerLink]="['/forms']">Forms</a>
             </div>
             <div class="me-2 nav-item mr-5" [hidden]="!organizationPermission.canView">
                 <a aria-haspopup="true" aria-expanded="false" id="Organization" class="text-gray-link p-4 nav-link" [routerLink]="['/work-spaces']" [ngClass]="{'active': currentUrl == '/work-spaces' || currentUrl == '/manage-work-spaces' || currentUrl == '/manage-roles'}">Organizations</a>
