@@ -1782,37 +1782,11 @@
                         </i></button>
                     <div ngbDropdownMenu aria-labelledby="view-user-activity"
                         class="forms-activity-dropdown overflow-auto scroller w-100 py-0">
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
+                        <a *ngFor="let activity of formActivities; let i = index" (click)="getFormDataByActivities(activity.id)" class="border-bottom py-2" ngbDropdownItem>
+                            <span class="version-number font-weight-bold">Version {{i + 1}}</span>
+                            <div>by <i>{{activity.userName}}</i> <span
+                                    class="float-right version-time badge badge-primary">{{activity.createdOn}}</span></div>
                         </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-
                     </div>
                 </div>
             </div>

@@ -190,7 +190,7 @@ export class BuildComponent implements OnDestroy {
   userSerach: any = null;
   listPayments: any = [];
   selectColElement: any;
-  formActivities = [];
+  formActivities:any = [];
   constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -216,17 +216,58 @@ export class BuildComponent implements OnDestroy {
   }
 
   getFormActivities(ID: any) {
-    // this.http.call('GetFormActivityLogsByFormId', 'POST', payload).subscribe(res => {
-    //   this.builderObj = Object.assign(this.builderObj, res);
-    //   console.log(this.builderObj)
-    //   this.formLoaded = true;
- 
-    // })
-
-    this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
-      console.log(res)
+       this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
+        this.formActivities = res;
     })
   }
+
+  getFormDataByActivities(ID: any) {
+    this.https.post(BASE_URL + `Forms/GetFormDataByFormLogId?formlogId=${ID}`, null).subscribe((res: any) => {
+     this.formActivities = res;
+     this.builderObj = Object.assign(this.builderObj, res);
+      console.log(this.builderObj)
+      this.formLoaded = true;
+      this.url = res.url;
+      const resp = JSON.parse(this.builderObj.miscellaneousJSON)
+      console.log(resp)
+      this.targetBuilderTools = resp?.targetBuilderTools || [];
+      if (!this.targetBuilderTools?.length) {
+        this.targetBuilderTools = [];
+        // this.targetBuilderTools.push(config[0])
+      }
+      this.paymentSetting = {
+        ...(resp?.paymentSetting || this.paymentSetting),
+        inputType: 'paymentSection'
+      };
+      if (resp?.styling) {
+        this.styling = resp.styling
+        this.placeholderStyling();
+      }
+      // this.createColums(this.targetBuilderTools)
+      this.count = resp?.count || 0;
+      this.targetBuilderTools?.forEach((element: any) => {
+        if (element.uiIndexId >= this.count) {
+          this.count = element.uiIndexId + 1;
+        }
+      });
+
+      this.setLevels(resp?.levels);
+
+      // Excecute function initially only
+      if (true) {
+        if (this.builderObj?.formType === 'WorkFlow') {
+          this.mainTab = 0
+          this.getWorkFlowDetails(ID);
+        }
+        this.getWorkSpaceAccounts();
+        this.getFoldersWithList(this.userInfo)
+        this.getNewEntries();
+
+      }
+
+ })
+}
+
   getForm(ID: any, initial: boolean) {
     console.log(ID)
     const payload = {
@@ -531,13 +572,24 @@ export class BuildComponent implements OnDestroy {
     });
     this.addStripeAccount()
 
-    console.log(this.styling)
+    let formInstances:any = [];
+    if (this.builderObj?.formNewJSON?.length > 5) {
+      formInstances = [...JSON.parse(this.builderObj?.formNewJSON)]
+    }
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
       Description: this.builderObj.description, // to do
       FormChanges: true, // to do
-      FormNewJSON: "", // to do
+      FormNewJSON: JSON.stringify([
+        {
+          targetBuilderTools: elements,
+          levels: levels,
+          count: this.count,
+          styling: this.styling,
+          paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(this.paymentSetting) : null)
+        }, ...formInstances
+      ]), // to do
       FormSettings: "", // to do
       FormStyleJson: "", // to do
       Id: this.builderObj.id,

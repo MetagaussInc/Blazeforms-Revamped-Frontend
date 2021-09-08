@@ -23,6 +23,7 @@ export const api: any = {
     CopyFormAttributes: "Forms/CopyFormAttributes",
     GetFormActivityLogsByFormId: "Forms/GetFormActivityLogsByFormId",
     SaveWorkspacePayment: "Payment/SaveWorkspacePayment",
+    GetFormDataByFormLogId: "Forms/GetFormDataByFormLogId",
     archive: 'Forms/BulkAction',
     deleteForm: 'Forms/BulkAction',
     bulkAction: 'Forms/BulkAction',
