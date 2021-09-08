@@ -166,7 +166,7 @@
                                     <div class="col-sm-12">
                                         <div id="msg"></div>
                                         <div class="custom-file mt-3 mb-3">
-                                            <input type="file" class="custom-file-input" [(ngModel)]="styling.pagebackgroundImage" id="customFile">
+                                            <input type="file" class="custom-file-input" (change)="onFileChanged($event)"  id="customFile">
                                             <label class="custom-file-label selected" for="customFile"></label>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-lg main">
+    <div class="col-md-9 col-lg main"  [ngStyle]="{'background-image': getUrl(styling.pagebackgroundImage)}" >
         <div class="bg-white m-3 p-3 border-top border-5 border-bf">
             <div class="publish-container">
                 <!-- -----Tabs---- -->
