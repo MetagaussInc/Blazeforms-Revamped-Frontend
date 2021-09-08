@@ -57,17 +57,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let module of rolePermissionData.roleModuleList">
-                                <td class="text-left" *ngIf="module.moduleName != 'Forms'">{{ module.moduleName }}</td>
-                                <td *ngFor="let modulepermission of module.modulePermissionList">
-                                    <ng-container *ngIf="module.moduleName != 'Forms'">
+                            <ng-container *ngFor="let module of rolePermissionData.roleModuleList">
+                                <tr *ngIf="module.moduleName != 'Forms'">
+                                    <td class="text-left" >{{ module.moduleName }}</td>
+                                    <td *ngFor="let modulepermission of module.modulePermissionList">
                                         <div *ngIf="modulepermission.isAvailable" class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" id="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" [(ngModel)]="modulepermission.isActive" class="custom-control-input" [disabled]="!roleDetailsData.isEditable"> 
                                             <label for="module-permission-{{ module.moduleId }}-{{ modulepermission.permissionId }}" class="custom-control-label"></label>
                                         </div>
-                                    </ng-container>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </ng-container>
                         </tbody>
                     </table>
                     <div class="form-group mt-5 row role-btn-container" *ngIf="rolePermissionData">
