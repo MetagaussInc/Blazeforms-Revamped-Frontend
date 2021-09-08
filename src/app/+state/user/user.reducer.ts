@@ -157,5 +157,16 @@ export const reducer = createReducer(
       ));
     return updatedState;
   }),
+  on(UserActions.userWorkspaceLogoUpdate, (state, action) => {
+    const updatedState = JSON.parse(JSON.stringify(state));
+    console.log(action);
+    console.log(updatedState);
+    updatedState.user.Logo = action.props.logo;
+    updatedState.user.LogoExt = action.props.ext;
+    updatedState.user.WorkspaceDetail.Logo = action.props.logo;
+    updatedState.user.WorkspaceDetail.LogoExt = action.props.ext;
+    localStorage.setItem('bforms', JSON.stringify(updatedState));
+    return updatedState;
+  }),
 );
 

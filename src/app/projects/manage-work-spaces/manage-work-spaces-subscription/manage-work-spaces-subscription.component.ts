@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
-import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BASE_URL, HttpService } from 'src/app/config/rest-config/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataSharingService } from '../../../shared/data-sharing.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-work-spaces-subscription',
@@ -27,7 +28,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
 
   @Output() updatePlan = new EventEmitter<any>();
 
-  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
+  constructor(private http: HttpService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private https: HttpClient) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.SuperWorkSpaceId = userInfo.Id;
     });
@@ -62,13 +63,13 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   }
 
   getUserPlanHistoryData(){
-    this.http.call('getWorkspacePlanHistory', 'POST', {workspaceId: this.organizationId}).subscribe(response => {
-      this.paymentHistory = response;
-    });
+    this.https.post(BASE_URL + `Plan/GetWorkspacePlanHistory?workspaceId=${this.organizationId}`, null).subscribe(res => {
+      this.paymentHistory = res;
+    })
   }
 
   download(paymentData: any,index: number) {
-
+    console.log(paymentData);
   }
 
   planChange(){
