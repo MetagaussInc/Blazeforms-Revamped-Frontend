@@ -1172,9 +1172,9 @@
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'table'"
-                                                        (click)="clicked($event, model, template)">
+                                                        (click)="clicked($event, model, template)" class="border">
                                                         <div class="col-md-12">
-                                                            Add columns
+                                                            <div class="text-center d-flex flex-column align-items-center pt-3"><span class="material-icons"> add </span>Add columns </div>
                                                             <table class="table mt-3  text-center border" id="table-id"
                                                                 data-toggle="table" data-search="true"
                                                                 data-filter-control="true" data-show-export="true"

@@ -27,6 +27,10 @@
             color: $base-color;
             cursor: pointer;
         }
+        a:hover {
+            color: $base-color;
+            cursor: pointer;
+        }
         
         .nav-item-active {
             border-bottom: 3px solid $base-color;
