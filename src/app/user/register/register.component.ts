@@ -5,6 +5,9 @@ import { EMPTY, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { ToastService } from '../../shared/toast.service';
+import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+
+SwiperCore.use([Navigation, Autoplay]);
 
 @Component({
   selector: 'app-register',
@@ -69,6 +72,8 @@ export class RegisterComponent implements OnInit {
   };
 
   isFormSubmitted: boolean = false;
+  showPlanPage: boolean = false;
+  public masterPlans: any[] = [];
   
   constructor(private http: HttpService, private router: Router, private toastService: ToastService) { }
 
@@ -148,6 +153,18 @@ export class RegisterComponent implements OnInit {
 
   onScriptError() {
     console.log('Something went long when loading the Google reCAPTCHA')
+  }
+
+  planChange(){
+    this.showPlanPage = true;
+    this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
+      this.masterPlans = res;
+    })
+  }
+
+  updateSelectedPlan(plan: any){
+    this.showPlanPage = false;
+    this.planDetails = plan;
   }
 
   submit() {
