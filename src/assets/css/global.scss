@@ -805,8 +805,9 @@
             display: none;
         }
         
-        .forms-listing-dropdown {
-            max-height: 400px;
+        .forms-listing-dropdown,
+        .org-switch-dropdown {
+            max-height: 330px;
         }
         
         .forms-activity-dropdown {
