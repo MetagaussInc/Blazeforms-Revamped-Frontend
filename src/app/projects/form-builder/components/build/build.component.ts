@@ -65,6 +65,30 @@ export class BuildComponent implements OnDestroy {
       ['fontSize']
     ]
   };
+  styling = {
+    labels: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    text: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    placeholders: {
+      font: 'Roboto',
+      size: 16,
+      color: '#212519'
+    },
+    buttons: {
+      font: 'Roboto',
+      size: 16,
+      color: 'red'
+    },
+    pagebackgroundColor: 'white',
+    pagebackgroundImage: ''
+  }
   extraBillModel = {
       value: null,
       type: 'dollar',
@@ -73,6 +97,7 @@ export class BuildComponent implements OnDestroy {
   model: any = {
     name: '',
   };
+  viewSpecificEntry: any;
   active = 1;
   viewProperties = 0;
   selectedIndex: any;
@@ -227,6 +252,10 @@ export class BuildComponent implements OnDestroy {
         ...(resp?.paymentSetting || this.paymentSetting),
         inputType: 'paymentSection'
       };
+      if (resp?.styling) {
+        this.styling = resp.styling
+        this.placeholderStyling();
+      }
       // this.createColums(this.targetBuilderTools)
       this.count = resp?.count || 0;
       this.targetBuilderTools?.forEach((element: any) => {
@@ -252,6 +281,37 @@ export class BuildComponent implements OnDestroy {
     })
 
   }
+
+  placeholderStyling($event?: any) {
+    console.log('picker Called', $event)
+    if (document.getElementById("bclr")) {
+      const a: any = document.getElementById("bclr");
+      a.remove();
+    }
+
+    const color = this.styling.placeholders.color;
+    const size = this.styling.placeholders.size;
+    const font = this.styling.placeholders.font;
+    const string = `
+    <style id="bclr">
+    app-exported-form input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color:    ${color}!important;
+      font-size: ${size}!important;
+      font-family: ${font}!important;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    ${color}!important;
+    font-size: ${size}!important;
+    font-family: ${font}!important;
+     opacity:  1;
+  }
+
+  }</style>
+    
+    `
+    document.head.insertAdjacentHTML("beforeend", string)
+  }
+
 
   setLevels(levels: any[]) {
     const groupByLevelId = lodash.groupBy(levels, 'levelId');
@@ -471,7 +531,7 @@ export class BuildComponent implements OnDestroy {
     });
     this.addStripeAccount()
 
-    console.log(this.paymentSetting)
+    console.log(this.styling)
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
@@ -494,6 +554,7 @@ export class BuildComponent implements OnDestroy {
         targetBuilderTools: elements,
         levels: levels,
         count: this.count,
+        styling: this.styling,
         paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(this.paymentSetting) : null)
       })
     }
@@ -984,10 +1045,21 @@ export class BuildComponent implements OnDestroy {
     return this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`);
   }
 
+  viewEntry(rowIndex: any) {
+    console.log(this.entries.entries[rowIndex]?.id)
+    this.viewSpecificEntry = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.href?.split('#')?.[0] + `#/${this.url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}/${this.entries.entries[rowIndex]?.entryId}`);
+
+  }
+
   addSection(form: any) {
     const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
     formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
     form.childSection.push(formInstance);
+  }
+
+  closeIframes() {
+    this.viewSpecificEntry = null;
+    this.viewEntryPanel = false;
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

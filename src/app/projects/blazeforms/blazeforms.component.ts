@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit,OnDestroy, Renderer2 } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
@@ -30,13 +30,11 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   needLogin = false;
   userInfoSubscription$: any;
   userInfo: any;
-
+  styling: any;
   levelDetails: any = {};
 
   constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
-
     document.body.className = 'bg-light';
-
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
     })
@@ -52,13 +50,15 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   }
 
   getForm(workspaceName: string, formName: string, entry: any) {
+    const bForms: any = localStorage.getItem('bforms');
+    
     console.log(this.userInfo, entry)
       const payload = {
         FormEntriesId: entry ? entry : null, // to do
         Id: null, // no user credentials
         Name: formName,
         WorkSpaceName: workspaceName,
-        userID: this.userInfo?.Id ? this.userInfo?.Id : null // no user credentials
+        userID: JSON.parse(bForms)?.user?.Id ? JSON.parse(bForms)?.user?.Id : null // no user credentials
       }
       this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
         this.dataLoaded = true;
@@ -72,10 +72,41 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
         };
         this.elements = [...(JSON.parse(res.miscellaneousJSON).levels || []), ...JSON.parse(res.miscellaneousJSON).targetBuilderTools];
         this.paymentDetails = JSON.parse(res.miscellaneousJSON).paymentSetting;
+        this.styling = JSON.parse(res.miscellaneousJSON).styling;
+        this.placeholderStyling(JSON.parse(res.miscellaneousJSON).styling)
         this.extractAllLineItems(this.elements)
         this.getLevelDetails(this.formDetail);
         console.log(this.payments)
       })
+    }
+
+    placeholderStyling(styling: any) {
+      if (document.getElementById("bclr")) {
+        const a: any = document.getElementById("bclr");
+        a.remove();
+      }
+  
+      const color = styling.placeholders.color;
+      const size = styling.placeholders.size;
+      const font = styling.placeholders.font;
+      const string = `
+      <style id="bclr">
+      app-exported-form input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color:    ${color}!important;
+        font-size: ${size}!important;
+        font-family: ${font}!important;
+    }
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color:    ${color}!important;
+      font-size: ${size}!important;
+      font-family: ${font}!important;
+       opacity:  1;
+    }
+  
+    }</style>
+      
+      `
+      document.head.insertAdjacentHTML("beforeend", string)
     }
 
     getLevelDetails(formDetail: any) {

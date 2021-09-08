@@ -10,7 +10,7 @@
                     <label for="form-name">User Name</label>
                 </div>
                 <div class="col-md-7">
-                    <input list="emails" name="email" id="email" formControlName="email" autocomplete="off">
+                    <input list="emails" name="email" id="email" formControlName="email" autocomplete="off" class="form-control">
                     <datalist id="emails">
                         <option *ngFor="let c of userListData" [value]="c.name" >
                     </datalist>
@@ -20,19 +20,22 @@
                 <div class="col-md-3">
                     <label for="form-name">Permissions</label>
                 </div>
-                <div class="col-md-7">
-                    <div class="permissions-container d-flex">
-                        <div class="d-flex align-items-center mr-5" *ngFor="let permissions of userPermissions">
-                            <label for="user-permission-{{ permissions.short }}">{{ permissions.name }}</label>
-                            <input type="checkbox" 
+                <div class="col-md-7 permissions-container">
+
+                        <div class="custom-control custom-checkbox custom-control-inline" *ngFor="let permissions of userPermissions">
+                           
+                            
+                           
+                            <input name="checkbox"  type="checkbox" 
                                 value="{{ permissions.value }}" 
                                 id="user-permission-{{ permissions.short }}" 
                                 (change)="onCheckboxChange($event)" 
                                 [checked]="permissions.value == 3"
-                                [disabled]="permissions.value == 3"> 
-                            <label for="user-permission-{{ permissions.short }}"></label>
-                        </div>
-                    </div>
+                                [disabled]="permissions.value == 3" class="custom-control-input"> 
+                                <label for="user-permission-{{ permissions.short }}" class="custom-control-label">{{ permissions.name }}</label>
+                            </div>
+                      
+               
                 </div>
             </div>
         </div>
