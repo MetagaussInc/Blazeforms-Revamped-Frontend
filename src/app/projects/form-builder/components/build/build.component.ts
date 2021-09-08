@@ -222,15 +222,20 @@ export class BuildComponent implements OnDestroy {
   }
 
   getFormDataByActivities(ID: any) {
+    this.formLoaded = false;
+    this.targetBuilderTools = [];
     this.https.post(BASE_URL + `Forms/GetFormDataByFormLogId?formlogId=${ID}`, null).subscribe((res: any) => {
-     this.formActivities = res;
+    //  this.formActivities = res;
+    this.formLoaded = true;
      this.builderObj = Object.assign(this.builderObj, res);
-      console.log(this.builderObj)
+      // console.log(this.builderObj)
+      // console.log(JSON.parse(this.builderObj.formNewJSON))
+
       this.formLoaded = true;
       this.url = res.url;
       const resp = JSON.parse(this.builderObj.miscellaneousJSON)
       console.log(resp)
-      this.targetBuilderTools = resp?.targetBuilderTools || [];
+      this.targetBuilderTools = JSON.parse(this.builderObj.formNewJSON)?.targetBuilderTools || [];
       if (!this.targetBuilderTools?.length) {
         this.targetBuilderTools = [];
         // this.targetBuilderTools.push(config[0])
@@ -284,6 +289,7 @@ export class BuildComponent implements OnDestroy {
       this.url = res.url;
       const resp = JSON.parse(this.builderObj.miscellaneousJSON)
       console.log(resp)
+      console.log(JSON.parse(this.builderObj.formNewJSON))
       this.targetBuilderTools = resp?.targetBuilderTools || [];
       if (!this.targetBuilderTools?.length) {
         this.targetBuilderTools = [];
@@ -574,21 +580,23 @@ export class BuildComponent implements OnDestroy {
 
     let formInstances:any = [];
     if (this.builderObj?.formNewJSON?.length > 5) {
-      formInstances = [...JSON.parse(this.builderObj?.formNewJSON)]
+      formInstances = JSON.parse(this.builderObj?.formNewJSON) || []
     }
+    console.log(formInstances)
     const payload = {
       CreatedBy: this.builderObj.createdBy,
       DependenciesJSON: "", //to do
       Description: this.builderObj.description, // to do
       FormChanges: true, // to do
       FormNewJSON: JSON.stringify([
+        ...formInstances,
         {
           targetBuilderTools: elements,
           levels: levels,
           count: this.count,
           styling: this.styling,
           paymentSetting: (this.showPaymentFields() ? lodash.cloneDeep(this.paymentSetting) : null)
-        }, ...formInstances
+        }
       ]), // to do
       FormSettings: "", // to do
       FormStyleJson: "", // to do

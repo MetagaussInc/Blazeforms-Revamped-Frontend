@@ -148,6 +148,22 @@ path: string = '';
     console.log(parentForm)
   }
 
+  getUrl(url: any)
+{
+  return `url(${url})`;
+}
+
+onFileChanged(event: any) {
+  let reader = new FileReader();
+  if(event.target.files && event.target.files.length > 0) {
+    let file = event.target.files[0];
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.styling.pagebackgroundImage = reader.result; 
+    };
+  }
+}
+
 }
 
 
