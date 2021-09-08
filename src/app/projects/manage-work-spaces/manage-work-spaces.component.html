@@ -141,7 +141,7 @@
                                                                                 <div *ngIf="f.confirmPassword.errors?.required || f.confirmPassword.errors?.pattern" class="field-error text-right pr-2 small">Confirm Password is required
                                                                                 </div>
                                                                             </ng-container>
-                                                                            <div class="field-error text-right pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched && matchPass()">
+                                                                            <div class="field-error text-right mt-1 pr-2 small" *ngIf="f.confirmPassword.errors?.passwordNotMatched || matchPass()">
                                                                                 Confirm Password is not matched
                                                                             </div>
                                                                         </div>
@@ -185,7 +185,10 @@
                                                                 </div>
                                                                 <div class="register-fields-wrapper row mb-3">
                                                                     <div class="terms-conditions-wrapper col-md-12 mb-3 text-center">
-                                                                        <button [disabled]="organizationSignupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">Add Organization</button>
+                                                                        <button [disabled]="organizationSignupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">
+                                                                            Add Organization
+                                                                            <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </form>

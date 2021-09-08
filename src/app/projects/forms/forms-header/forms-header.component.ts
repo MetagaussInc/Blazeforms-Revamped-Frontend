@@ -74,6 +74,7 @@ export class FormsHeaderComponent implements OnInit {
         this.formPermission = {canView: false, canEdit: false, canDelete: false};
         this.organizationPermission = {canView: false, canEdit: false, canDelete: false};
         this.planPermission = {canView: false, canEdit: false, canDelete: false};
+        this.organizationLogo = '';
       }
     });
 
