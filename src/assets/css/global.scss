@@ -1217,8 +1217,20 @@
         resize: vertical;
     }
 
-    .popover-item-limit {
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.extra-large .popover-controller .disbaled {
         opacity: 0.4;
         cursor: default;
         object-fit: none;
     }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .disbaled{
+        opacity: 0.4;
+        cursor: default;
+        object-fit: none;
+    }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .field-popover-wrap {
+        right: -108px;
+        min-width: 295px;
+    }
+
