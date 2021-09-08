@@ -153,6 +153,7 @@ export class WorkSpacesComponent implements OnInit {
   }
 
   goToManageWorkSpaces(action: any, orgId: string){
+    this.dataSharingService.SetActiveTabId(1);
     if(action == 'add'){
       this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'add'}});
     }

@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import SwiperCore, { Navigation, Autoplay } from "swiper/core";
 import { DataSharingService } from '../../shared/data-sharing.service';
+import { ToastService } from '../../shared/toast.service';
 
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -35,11 +36,11 @@ export class ManageWorkSpacesComponent implements OnInit {
     Password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
     ]),
     confirmPassword: new FormControl('', [
       Validators.required,
-      this.matchPassword.bind(this)
+      //this.matchPassword.bind(this)
     ]),
     WorkSpaceName: new FormControl('', [Validators.required],
       this.validateNameViaServer.bind(this)),
@@ -60,8 +61,9 @@ export class ManageWorkSpacesComponent implements OnInit {
   public userId: any;
   public activeTabId = 1;
   public showBillingPage: boolean = false;
+  public isFormSubmitted: boolean = false;
 
-  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService) {
+  constructor(private http: HttpService, private router: Router, private modalService: NgbModal, private Activatedroute: ActivatedRoute, private dataSharingService: DataSharingService, private toastService: ToastService) {
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(!params.has('action')){
         this.router.navigate(['/work-spaces']);
@@ -116,7 +118,6 @@ export class ManageWorkSpacesComponent implements OnInit {
     if ((this.confirmPassword?.dirty || this.confirmPassword?.touched)) {
       if (this.confirmPassword?.value !== this.Password?.value) {
         return true;
-
       }
     }
     return false
@@ -138,7 +139,7 @@ export class ManageWorkSpacesComponent implements OnInit {
   }
 
   matchPassword({ value }: AbstractControl): any {
-    return this.Password?.value === value ? null : { passwordNotMatched: true };
+    return this.Password?.value === this.confirmPassword?.value ? null : { passwordNotMatched: true };
   }
 
   validateNameViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
@@ -157,6 +158,7 @@ export class ManageWorkSpacesComponent implements OnInit {
   }
 
   submit(){
+    this.isFormSubmitted = true;
     if(this.isSuperAdmin){
       const obj = {
         ...JSON.parse(JSON.stringify(this.organizationSignupForm.value)),
@@ -168,6 +170,8 @@ export class ManageWorkSpacesComponent implements OnInit {
       delete obj.confirmPassword;
       delete obj.acceptAgreement;
       this.http.call('signup', 'POST', obj).subscribe(res => {
+        this.isFormSubmitted = false;
+        this.toastService.showSuccess('Organization Saved Successfully!');
         this.router.navigate(['user/register-confirm'])
       });
     }
@@ -178,6 +182,8 @@ export class ManageWorkSpacesComponent implements OnInit {
       };
       this.http.call('saveWorkSpace', 'POST', obj).subscribe(res => {
         //this.router.navigate(['user/register-confirm'])
+        this.isFormSubmitted = false;
+        this.toastService.showSuccess('Organization Saved Successfully!');
         this.planChange();
       });
     }
