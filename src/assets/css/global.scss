@@ -159,6 +159,22 @@
             background-color: #f04564;
             border-color: #f04564;
         }
+
+
+        .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before{
+            background-color: $base-color;
+        }
+
+        .custom-control-input:focus ~ .custom-control-label::before {
+            box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
+        }
+
+        .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+            color: #fff;
+            background-color: #ffc4ce;
+            border-color: #f04563;
+        }
+
         /*--- Common CSS--*/
         
         .height-fix {
@@ -1108,6 +1124,43 @@
 
 
 
+     /* LOADER 4 */
+
+#loader-4 span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color:$base-color;
+    margin: 35px 5px;
+    opacity: 0;
+  }
+  
+  #loader-4 span:nth-child(1){
+    animation: opacitychange 1s ease-in-out infinite;
+  }
+  
+  #loader-4 span:nth-child(2){
+    animation: opacitychange 1s ease-in-out 0.33s infinite;
+  }
+  
+  #loader-4 span:nth-child(3){
+    animation: opacitychange 1s ease-in-out 0.66s infinite;
+  }
+  
+  @keyframes opacitychange{
+    0%, 100%{
+      opacity: 0;
+    }
+  
+    60%{
+      opacity: 1;
+    }
+  }
+  
+
+
+
 
 
      /**--- Global Fixes---**/
@@ -1128,4 +1181,18 @@
      .social-icon-wrap .c-referral-twShare svg {
          margin-top: -8px;
      }
+
+     .organizations-container .search-wrapper .dropdown-menu button.dropdown-item.active {
+         background-color: $base-color;
+     }
+
+     /*--- Publish Page Style Editor----*/
+
+    app-root app-build .publish-container .ngx-dnd-container {
+        background-color: transparent !important;
+    }
+
+    app-root app-build .publish-container .ngx-dnd-container .ngx-dnd-item {
+        background-color: transparent !important;
+    }
      
