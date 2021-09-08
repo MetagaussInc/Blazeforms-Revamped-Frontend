@@ -18,7 +18,7 @@
                 <div class="org-switch-wrapper mx-4">
                     <div ngbDropdown class="d-inline-block org-switcher-btn">
                         <div class="border rounded bg-light py-2 px-3" id="org-switcher" role="button" ngbDropdownToggle>{{userWorkspaceList.name}}</div>
-                        <div ngbDropdownMenu aria-labelledby="org-switcher" [hidden]="isSuperAdmin">
+                        <div ngbDropdownMenu aria-labelledby="org-switcher" [hidden]="isSuperAdmin" class="org-switch-dropdown overflow-auto scroller w-100 py-2">
                             <ng-container *ngFor="let userWorkspace of userWorkspaceLists; let i = index">
                                 <button ngbDropdownItem *ngIf="userWorkspaceList.id != userWorkspace.id" (click)="changeWorkSpace(userWorkspace)">{{ userWorkspace.name }}</button>
                             </ng-container>
