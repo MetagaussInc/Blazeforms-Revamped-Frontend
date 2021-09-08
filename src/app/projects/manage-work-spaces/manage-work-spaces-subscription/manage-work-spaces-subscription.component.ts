@@ -116,6 +116,10 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   download(paymentData: any,index: number) {
     this.activeIndex = index;
     this.selectedInvoiceData = paymentData;
+    let invoiceNo = '';
+    if(this.selectedInvoiceData.transactionId){
+      invoiceNo = this.selectedInvoiceData.transactionId.substring(0, 8);
+    }
     let DATA = document.getElementById('generateInvoice')!;
     setTimeout( () => {      
       html2canvas(DATA).then(canvas => {
@@ -125,7 +129,7 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
         let PDF = new jsPDF('p', 'mm', 'a4');
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        PDF.save('invoice.pdf');
+        PDF.save('invoice_' + invoiceNo + '.pdf');
       });
       this.activeIndex = '';
     }, 2500);
