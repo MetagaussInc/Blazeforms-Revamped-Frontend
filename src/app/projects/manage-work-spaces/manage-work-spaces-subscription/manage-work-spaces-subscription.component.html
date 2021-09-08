@@ -89,12 +89,12 @@
                       <td>{{payment.planEndDate | date : 'dd-MMM-yyyy'}}</td>
                       <td>{{payment.paymentStatus}}</td>
                       <td>
-                        <button class="btn btn-primary" (click)="download(payment,i)" translate>Invoice</button>
+                        <button class="btn btn-primary" (click)="download(payment,i)">Invoice</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <span class="noRecord" *ngIf="paymentHistory == undefined || paymentHistory.length == 0" translate>No Payment History Found.....</span>
+        <span class="noRecord" *ngIf="paymentHistory == undefined || paymentHistory.length == 0">No Payment History Found.....</span>
     </div>
 </div>
 
