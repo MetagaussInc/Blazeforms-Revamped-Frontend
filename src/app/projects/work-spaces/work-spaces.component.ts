@@ -120,6 +120,15 @@ export class WorkSpacesComponent implements OnInit {
               const props = response;
               this.store.dispatch(userWorkspaceDetailSuccess({props}));
             });
+            this.store.select(userWorkspaceLists).subscribe(workspacesList => {
+              if(workspacesList){
+                this.userWorkspaceLists = [];
+                let workSpaceListData = Array.from(Object.values(workspacesList));
+                workSpaceListData.forEach((item: any) => {
+                  this.userWorkspaceLists.push({id: item.id, name: item.name});
+                });
+              }
+            });
           }
         })
       }
@@ -144,6 +153,7 @@ export class WorkSpacesComponent implements OnInit {
   }
 
   goToManageWorkSpaces(action: any, orgId: string){
+    this.dataSharingService.SetActiveTabId(1);
     if(action == 'add'){
       this.router.navigate(['/manage-work-spaces'], {queryParams: {action: 'add'}});
     }

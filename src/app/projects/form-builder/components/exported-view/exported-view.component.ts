@@ -9,33 +9,11 @@ export class ExportedViewComponent implements OnInit {
 @Input() public elements: any;
 @Input() public url: any;
 @Input() public builderObj: any;
+@Input() public styling: any;
 model = {
   name: ''
 }
-styling = {
-  labels: {
-    font: 'Roboto',
-    size: 16,
-    color: 'red'
-  },
-  text: {
-    font: 'Roboto',
-    size: 16,
-    color: 'red'
-  },
-  placeholders: {
-    font: 'Roboto',
-    size: 16,
-    color: 'red'
-  },
-  buttons: {
-    font: 'Roboto',
-    size: 16,
-    color: 'red'
-  },
-  pagebackgroundColor: 'white',
-  pagebackgroundImage: ''
-}
+
 
 active = 1;
 path: string = '';
@@ -45,6 +23,36 @@ path: string = '';
     // Remove this when code is deploy to stage.
     console.log(this.url)
    this.path = window.location.origin +'/#'+ this.url.split('#')[1].replace('BlazeForms', 'blazeforms')
+  }
+
+  placeholderStyling($event?: any) {
+    console.log('picker Called', $event)
+    if (document.getElementById("bclr")) {
+      const a: any = document.getElementById("bclr");
+      a.remove();
+    }
+
+    const color = this.styling.placeholders.color;
+    const size = this.styling.placeholders.size;
+    const font = this.styling.placeholders.font;
+    const string = `
+    <style id="bclr">
+    app-exported-form input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color:    ${color}!important;
+      font-size: ${size}!important;
+      font-family: ${font}!important;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    ${color}!important;
+    font-size: ${size}!important;
+    font-family: ${font}!important;
+     opacity:  1;
+  }
+
+  }</style>
+    
+    `
+    document.head.insertAdjacentHTML("beforeend", string)
   }
 
   checkForDependency(model: any, T: any): boolean {
@@ -141,3 +149,19 @@ path: string = '';
   }
 
 }
+
+
+// for ref
+//  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+// color:    #909;
+// opacity:  1;
+// }
+// :-ms-input-placeholder { /* Internet Explorer 10-11 */
+// color:    #909;
+// }
+// ::-ms-input-placeholder { /* Microsoft Edge */
+// color:    #909;
+// }
+
+// ::placeholder { /* Most modern browsers support this now. */
+// color:    #909;

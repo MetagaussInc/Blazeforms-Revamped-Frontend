@@ -1610,7 +1610,7 @@
                         <a ngbNavLink (click)="saveForm()"><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 
-                            <app-exported-view [url]="url" [elements]="targetBuilderTools"></app-exported-view>
+                            <app-exported-view [url]="url" [styling]="styling" [elements]="targetBuilderTools"></app-exported-view>
 
                         </ng-template>
                     </li>
@@ -1668,7 +1668,18 @@
 
                                     <div *ngIf="viewEntryPanel" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
+                                        <button type="button"  (click)="closeIframes()"class="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                         <iframe [src]="FormUrl()" width="1220px" height="500px"
+                                            frameborder="0"></iframe>
+                                    </div>
+                                    <div *ngIf="viewSpecificEntry" class="entry-panel shadow py-2 bg-white"
+                                        style="right: 0%;">
+                                        <button type="button" (click)="closeIframes()" class="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <iframe [src]="viewSpecificEntry" width="1220px" height="500px"
                                             frameborder="0"></iframe>
                                     </div>
                                     <div class="col-md-6">
@@ -1730,7 +1741,7 @@
                                             </thead>
                                             <tbody>
                                                 <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
-                                                    <tr *ngIf="!filter || (filter && filter === row[1])">
+                                                    <tr (click)="viewEntry(rowIndex)" *ngIf="!filter || (filter && filter === row[1])">
                                                         <td class="bs-checkbox "><input data-index="0"
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)"
                                                                 type="checkbox"></td>
@@ -1771,37 +1782,11 @@
                         </i></button>
                     <div ngbDropdownMenu aria-labelledby="view-user-activity"
                         class="forms-activity-dropdown overflow-auto scroller w-100 py-0">
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
+                        <a *ngFor="let activity of formActivities; let i = index" (click)="getFormDataByActivities(activity.id)" class="border-bottom py-2" ngbDropdownItem>
+                            <span class="version-number font-weight-bold">Version {{i + 1}}</span>
+                            <div>by <i>{{activity.userName}}</i> <span
+                                    class="float-right version-time badge badge-primary">{{activity.createdOn}}</span></div>
                         </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-                        <a class="border-bottom py-2" ngbDropdownItem>
-                            <span class="version-number font-weight-bold">Version 1</span>
-                            <div>by <i>admin12 blazeforms</i> <span
-                                    class="float-right version-time badge badge-primary">9/4/2021</span></div>
-                        </a>
-
-
                     </div>
                 </div>
             </div>
