@@ -796,7 +796,7 @@ export class BuildComponent implements OnDestroy {
   }
   showPaymentFields(): boolean {
     return this.targetBuilderTools?.some((x: any) => x.inputType === 'payment' || 
-     (x.collectPayment && (x.inputType === 'currency' || x.inputType === 'radio'|| x.inputType === 'checkbox'|| x.inputType === 'dropdwon')));
+     (x.collectPayment && (x.inputType === 'currency' || x.inputType === 'radio'|| x.inputType === 'checkbox'|| x.inputType === 'dropdown')));
   }
   removeObj(key: any, selectedElement: any, props: any) {
     delete selectedElement[props][key];
