@@ -58,7 +58,7 @@
                     </div>
                     <div class="forms-list col-md-12 border rounded">
                         <ng-container *ngFor="let form of folder?.forms; let folderIndex = index">
-                            <ng-container *ngIf="folder?.expanded || (!folder?.expanded && folderIndex < 3)">
+                            <ng-container *ngIf="searchedString.length > 0 || (folder?.expanded || (!folder?.expanded && folderIndex < 3))">
                                 <div *ngIf=" searchedString.length === 0 || form?.text?.toLowerCase().includes(searchedString?.trim()?.toLowerCase())" [ngClass]="{'bg-bf-light': selectedForms?.includes(form.value)}" class="form-list-item row p-3 border-bottom">
                                     <div class="form-checkbox-wrapper col-md-1">
                                         <label class="p-0 m-0 align-bottom">
@@ -99,7 +99,7 @@
                             </ng-container>
                         </ng-container>
                     </div>
-                    <div class="folder-more col-md-12 py-3" *ngIf="folder?.forms?.length > 3">
+                    <div class="folder-more col-md-12 py-3" *ngIf="searchedString.length === 0 && folder?.forms?.length > 3">
                         <div class="text-right text-bf">
                             <span class="align-top" *ngIf="!folder.expanded" (click)="folder.expanded = !folder.expanded" role="button">Browse all {{folder?.forms?.length}} forms in this folder</span>
                             <span class="align-top" *ngIf="folder.expanded" (click)="folder.expanded = !folder.expanded" role="button">Hide all forms in this folder</span>
