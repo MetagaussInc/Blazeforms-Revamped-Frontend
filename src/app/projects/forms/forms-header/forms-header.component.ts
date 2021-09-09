@@ -167,4 +167,12 @@ export class FormsHeaderComponent implements OnInit {
     }
   }
 
+  getDate(date: any) {
+    return new Date(date);
+  }
+
+  getFormID(url: any, id: any) {
+    return window.location.href?.split('#')?.[0] + `#/${url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`
+  }
+
 }

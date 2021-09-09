@@ -175,3 +175,10 @@ input {
     display: flex;
     justify-content: space-between;
 }
+
+.disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: default;
+    pointer-events: none;
+}

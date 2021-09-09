@@ -52,7 +52,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   getForm(workspaceName: string, formName: string, entry: any) {
     const bForms: any = localStorage.getItem('bforms');
     
-    console.log(this.userInfo, entry)
+    console.log(this.userInfo, entry, JSON.parse(bForms)?.user?.Id)
       const payload = {
         FormEntriesId: entry ? entry : null, // to do
         Id: null, // no user credentials
@@ -64,8 +64,8 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
         this.dataLoaded = true;
         
         const bForms: any = localStorage.getItem('bforms');
-          user: JSON.parse(bForms)?.user,
-        this.needLogin = res.formType === 'WorkFlow' && !this.userInfo ? true : false;
+          // user: JSON.parse(bForms)?.user,
+        this.needLogin = res.formType === 'WorkFlow' && !JSON.parse(bForms)?.user?.Id ? true : false;
         this.formDetail = {
           ... res,
           workspaceName: this.workSpaceName
