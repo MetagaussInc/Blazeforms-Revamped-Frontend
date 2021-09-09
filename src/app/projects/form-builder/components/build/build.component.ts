@@ -193,6 +193,7 @@ export class BuildComponent implements OnDestroy {
   selectColElement: any;
   formActivities:any = [];
   globalListenFunc: any;
+  globalListenFunc1: any;
   constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -206,6 +207,10 @@ export class BuildComponent implements OnDestroy {
         })
       }
       this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
+        this.payments = [];
+        this.extractAllLineItems(this.targetBuilderTools)
+      });
+      this.globalListenFunc1 = this.renderer.listen('document', 'click', e => {
         this.payments = [];
         this.extractAllLineItems(this.targetBuilderTools)
       });
