@@ -20,7 +20,7 @@ export class EditFormModalComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),
     folder: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    active: new FormControl(false)
+    active: new FormControl(true)
   });
 
   checkforAgreements({ value }: AbstractControl): any {
