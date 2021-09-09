@@ -129,7 +129,7 @@
                                                     You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
                             
-                                                <div class="text-center" > <a href="#" [ngClass]="{'disabled': builderObj.hasEntries}" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
+                                                <div class="text-center" > <a [ngClass]="{'disabled': builderObj.hasEntries}" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
                             
                                             </div>
                                         </div>
@@ -1110,7 +1110,7 @@
 
                                         </div>
                                         <ngx-dnd-container class="root-container" [model]="targetBuilderTools"
-                                            dropZone="builder-target" [removeOnSpill]="true"
+                                            dropZone="builder-target" [removeOnSpill]="false"
                                             [droppableItemClass]="droppableItemClass" (drop)="drop($event)"
                                             direction="mixed" [moves]="abc" (over)="log1($event)">
 
@@ -1486,8 +1486,8 @@
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
                                                         <div class="input-group">
-                                                            <input class="form-control" [minDate]="model.minVal"
-                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd"
+                                                            <input class="form-control non-clickable" [minDate]="model.minVal"
+                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" (click)="d.toggle()" 
                                                                 name="dp" [(ngModel)]="model.value" ngbDatepicker
                                                                 #d="ngbDatepicker">
                                                             <div class="input-group-append">
@@ -1668,16 +1668,15 @@
                                                 <span>Sub Total</span>
                                                 <span>Amount Due</span>
                                             </div> -->
-                                            <div class="row lower">
+                                            <div class="row lower" *ngIf="paymentSetting.showLineItems">
 
-                                                <div *ngIf="paymentSetting.showLineItems" class="col-12 text-right">Line
-                                                    Items <span class="pl-2">$
-                                                        46.98</span></div>
+                                                <div  *ngFor="let payment of payments" class="col-12 text-right">{{payment.name}} <span class="pl-2">$
+                                                        {{payment.value}}</span></div>
 
                                             </div>
                                             <div class="row lower">
                                                 <div *ngIf="paymentSetting.showSubTotal" class="col-12 text-right">
-                                                    <strong>Sub Total</strong><span class="pl-2">$ 46.98</span>
+                                                    <strong>Sub Total</strong><span class="pl-2">$ {{getSubTotal()}}</span>
                                                 </div>
                                             </div>
                                             <hr  *ngIf="paymentSetting.extraBill?.length > 0" class="mb-4">
@@ -1689,7 +1688,7 @@
                                             <hr class="mb-4">
                                             <div class="row lower">
                                                 <div class="col-12 text-right"><strong>Amount Due</strong> <span
-                                                        class="pl-2">$ 46.98</span></div>
+                                                        class="pl-2">$ {{getAmountDue()}}</span></div>
 
                                             </div>
                                         </div>

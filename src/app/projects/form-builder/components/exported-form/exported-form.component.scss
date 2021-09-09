@@ -182,3 +182,7 @@ input {
     cursor: default;
     pointer-events: none;
 }
+
+.non-clickable {
+    pointer-events: none;
+}

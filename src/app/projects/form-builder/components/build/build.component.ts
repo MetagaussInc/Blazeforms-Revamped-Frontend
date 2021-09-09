@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -180,7 +180,7 @@ export class BuildComponent implements OnDestroy {
     rows: [],
     selected: []
   }
-
+  payments: any = [];
   viewEntryPanel = false;
 
   mainTab = 1;
@@ -192,7 +192,8 @@ export class BuildComponent implements OnDestroy {
   listPayments: any = [];
   selectColElement: any;
   formActivities:any = [];
-  constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router) {
+  globalListenFunc: any;
+  constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
@@ -204,6 +205,10 @@ export class BuildComponent implements OnDestroy {
           this.getFormActivities(res?.ID);
         })
       }
+      this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
+        this.payments = [];
+        this.extractAllLineItems(this.targetBuilderTools)
+      });
     })
 
   }
@@ -329,6 +334,8 @@ export class BuildComponent implements OnDestroy {
         this.getNewEntries();
 
       }
+      this.extractAllLineItems(this.targetBuilderTools);
+
 
     })
 
@@ -653,6 +660,7 @@ export class BuildComponent implements OnDestroy {
     }
     this.http.call('saveFormDesign', 'POST', payload).subscribe(res => {
       console.log(res)
+      this.extractAllLineItems(this.targetBuilderTools);
     })
   }
 
@@ -1162,6 +1170,84 @@ export class BuildComponent implements OnDestroy {
   // viewAdditionnalField() {
   //   return this.targetBuilderTools?.some((x: any) => x.inputType === 'currency');
   // }
+
+  extractAllLineItems(elements: any) {
+    elements?.forEach((element: any) => {
+      if ((element.inputType === 'payment')) {
+        this.payments.push({name: element.name, value: element.value});
+      }
+      if (element.inputType === 'currency') {
+        if ((Number(element.value) > 0)) {
+        this.payments.push({name: element.name, value: element.value});
+        }
+      }
+      // console.log(element)
+      if (element.inputType === 'toggle' && element.collectPayment) {
+        if ((element.value) && Number(element.collectAmount) > 0) {
+        this.payments.push({name: element.name, value: element.collectAmount});
+        }
+      }
+      if (element.childSection) {
+        this.extractAllLineItems(element.childSection);
+      }
+      if (element.children) {
+        this.extractAllLineItems(element.children);
+      }
+      if ((element.inputType === 'radio' || element.inputType === 'dropdown' )&&  element.collectPayment) {
+        element.options?.forEach((option: any, i: any) => {
+          if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
+            this.payments.push({name: element.name, value: element.options[i].payment});
+          }
+        });
+      }
+      if (element.inputType === 'checkbox' && element.collectPayment) {
+        let p = 0;
+        element.options.forEach((option: any, i: any) => {
+          if (element?.value?.includes(option.label)) {
+            p = p + option.payment;
+          }
+        });
+        this.payments.push({name: element.name, value: p});
+
+      }
+      if (element.rows) {
+        // console.log(element.columns)
+        element.columns.forEach((column: any) => {
+          if ((column.inputType === 'payment' || column.inputType === 'currency')) {
+            this.payments.push({name: column.name, value: column.value});
+          }
+        });
+      }
+    });
+  }
+
+  getSubTotal() {
+    let total = 0;
+    this.payments?.forEach((element: any) => {
+      total = total + Number(element.value);
+    });
+    return total;
+  }
+
+  getAmountDue() {
+    let total = 0;
+    let subTotal = this.getSubTotal();
+    if (subTotal == 0) {
+      return 0;
+    }
+    this.paymentSetting?.extraBill?.forEach((additional: any) => {
+      if (additional.type === "dollar") {
+        total = total + Number(additional.value);
+        additional.calculated = Number(additional.value);
+      } else {
+        additional.calculated = (subTotal * (Number(additional.value) / 100));
+
+        total = total + (subTotal * (Number(additional.value) / 100))
+      }
+    });
+    total = total + subTotal;
+    return total;
+  }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
