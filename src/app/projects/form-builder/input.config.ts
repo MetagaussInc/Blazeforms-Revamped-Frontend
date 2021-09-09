@@ -1240,6 +1240,7 @@ export const config = [
             label: {
                 dataRefKey: 'name'
             },
+            collectPayment: true,
             size: {
                 options: [
                     {
