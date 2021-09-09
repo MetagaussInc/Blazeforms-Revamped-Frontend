@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ItemComponent } from '@swimlane/ngx-dnd';
 import { HttpService } from 'src/app/config/rest-config/http.service';
-import { BillPayComponent } from 'src/app/projects/blazeforms/bill-pay/bill-pay.component';
-
 @Component({
   selector: 'app-exported-form',
   templateUrl: './exported-form.component.html',
@@ -22,6 +19,7 @@ export class ExportedFormComponent implements OnInit {
   @Input() public levelDetails: any;
   @Output() inputUpdateEvent: EventEmitter<any> = new EventEmitter()
 
+  string: any;
   strikeCheckout: any = null;
   model = {
     name: ''
@@ -36,7 +34,6 @@ export class ExportedFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.elements)
     let count = 0;
     if (this.elements?.length > 0) {
       for (const iterator of this.elements) {
@@ -60,7 +57,6 @@ export class ExportedFormComponent implements OnInit {
       }
       this.allArr.push(arr);
     }
-    console.log(this.allArr)
 
     if (this.initial) {
       this.stripePaymentGateway()
@@ -186,20 +182,10 @@ export class ExportedFormComponent implements OnInit {
   }
 
   billPay(formEntryId: any) {
-    // const modalRef: any = this.modalService.open(BillPayComponent, { size: 'lg' })
-    // modalRef.componentInstance.config = {
-    //   initial: this.initial
-    // }
-    // modalRef.result.then((result: any) => {
-    //   console.log(`Closed with: ${result}`);
-    // }, (reason: any) => {
-    //   console.log(`Dismissed `);
-    // });
     this.checkout(this.getAmountDue(), formEntryId)
   }
   checkout(amount: any, formEntryId: any) {
     const thisInstance = this;
-    console.log(amount);
     const strikeCheckout = (<any>window).StripeCheckout.configure({
       key: this.initial?.accountDetail?.publishableKey,
       locale: 'auto',
@@ -218,7 +204,6 @@ export class ExportedFormComponent implements OnInit {
   }
 
   stripePaymentGateway() {
-    console.log(this.initial)
     if (!window.document.getElementById('stripe-script')) {
       const scr = window.document.createElement("script");
       scr.id = "stripe-script";
@@ -258,70 +243,115 @@ StripeToken: token
 
     })
   }
-  submitParentForm(parentForm: any) {
-    let data = '';
-    if (this.haveTabs) {
-      this.allArr.forEach((arr: any) => {
-        arr.forEach((element: any) => {
-          if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
-            element.children.forEach((child: any) => {
-              data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
-            });
-          } else if (element.inputType === 'addressSection'|| element.inputType === 'nameSection') {
-            data = data + element.uiIndexId + '=' + element.name + '='
-            element.children.forEach((child: any) => {
-              data = data + (child.value || '') + ', '
-            });
-            data = data + '||'
-          }else if (element.ratingOptions) {
-            data = data + element.uiIndexId + '=' + element.name + '=';
-            element.ratingOptions.forEach((child: any) => {
-              data = data + child.value + ', '
-            });
-            data = data + '||';
-          }else if (element.childSection) {
-            data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
-          } else if (element.columns) {
-            data = data + element.uiIndexId + '=' + element.name + '=' + element.rows.length + '||';
-          } else {
-            data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
-          }
-        });
-      });
-    } else {
-      this.elements.forEach((element: any) => {
-        if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
+
+  getDataString(array: any, dataRef: string) {
+    // let data = dataRef;
+      array.forEach((element: any) => {
+        if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'levelSection' && element.inputType !== 'nameSection') {
           element.children.forEach((child: any) => {
-            data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+            this.string = this.string + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
           });
         } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
-          data = data + element.uiIndexId + '=' + element.name + '='
+          this.string = this.string + element.uiIndexId + '=' + element.name + '='
           element.children.forEach((child: any) => {
-            data = data + child.value + ', '
+            this.string = this.string + child.value + ', '
           });
-          data = data + '||';
+          this.string = this.string + '||';
+
         } else if (element.ratingOptions) {
-          data = data + element.uiIndexId + '=' + element.name + '=';
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=';
           element.ratingOptions.forEach((child: any) => {
-            data = data + child.value + ', '
+            this.string = this.string + child.value + ', '
           });
-          data = data + '||';
+          this.string = this.string + '||';
         }else if (element.childSection) {
-          data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
         }else if (element.columns) {
-          data = data + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
+        }else if (element.children && element.inputType === "levelSection") {
+          this.getDataString(element.children, this.string)
         } else {
-          data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }
       });
+    return this.string;
+  }
+  submitParentForm(parentForm: any) {
+    let ddata = '';
+
+    // if (this.haveTabs) {
+    //   this.allArr.forEach((arr: any) => {
+    //     arr.forEach((element: any) => {
+    //       if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
+    //         element.children.forEach((child: any) => {
+    //           data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+    //         });
+    //       } else if (element.inputType === 'addressSection'|| element.inputType === 'nameSection') {
+    //         data = data + element.uiIndexId + '=' + element.name + '='
+    //         element.children.forEach((child: any) => {
+    //           data = data + (child.value || '') + ', '
+    //         });
+    //         data = data + '||'
+    //       }else if (element.ratingOptions) {
+    //         data = data + element.uiIndexId + '=' + element.name + '=';
+    //         element.ratingOptions.forEach((child: any) => {
+    //           data = data + child.value + ', '
+    //         });
+    //         data = data + '||';
+    //       }else if (element.childSection) {
+    //         data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
+    //       } else if (element.columns) {
+    //         data = data + element.uiIndexId + '=' + element.name + '=' + element.rows.length + '||';
+    //       } else {
+    //         data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+    //       }
+    //     });
+    //   });
+    // } else {
+    //   this.elements.forEach((element: any) => {
+    //     if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'nameSection') {
+    //       element.children.forEach((child: any) => {
+    //         data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+    //       });
+    //     } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
+    //       data = data + element.uiIndexId + '=' + element.name + '='
+    //       element.children.forEach((child: any) => {
+    //         data = data + child.value + ', '
+    //       });
+    //       data = data + '||';
+    //     } else if (element.ratingOptions) {
+    //       data = data + element.uiIndexId + '=' + element.name + '=';
+    //       element.ratingOptions.forEach((child: any) => {
+    //         data = data + child.value + ', '
+    //       });
+    //       data = data + '||';
+    //     }else if (element.childSection) {
+    //       data = data + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
+    //     }else if (element.columns) {
+    //       data = data + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
+    //     }else if (element.children && element.inputType === "levelSection") {
+    //        element.children.forEach((child: any) => {
+    //         data = data + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+    //       });
+    //     } else {
+    //       data = data + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+    //     }
+    //   });
+    // }
+
+    if (this.haveTabs) {
+      ddata = this.getDataString(this.allArr, ddata)
+    } else {
+      ddata = this.getDataString(this.elements, ddata)
     }
+
+    // return;
     if (this.getAmountDue() > 0) {
       let string = '';
         string = `${'Total Payment'}=${'Total Payment'}=${this.getAmountDue()} || ${'Payment Mode'}=${'Payment Mode'}=${this.initial?.selectedPaymentOption === 'Card' ? 'Card' : 'Cash'} ||`;
-        data = data + string;
+        ddata = ddata + string;
     }
 
-    console.log(data);
     const payload = {
       EncryptEntryData: false,
       FormType: this.levelDetails ? 'WorkFlow' : "Form",
@@ -337,7 +367,7 @@ StripeToken: token
       WorkSpaceId: this.config.workSpaceId, // "TXYu0NjodAYzBODQlLqdmg==",
       WorkSpaceName: this.config.workspaceName, //"Super_Admin_WorkSpace1",
       formEntry: JSON.stringify({
-        entry: data,
+        entry: ddata,
         status: 'Submitted',
         SubmittedDate: new Date(),
         submittedBy: '',

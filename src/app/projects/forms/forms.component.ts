@@ -13,6 +13,7 @@ import { UserPermissionModalComponent } from './components/user-permission-modal
 import { DataSharingService } from '../../shared/data-sharing.service';
 import { Router } from '@angular/router';
 import { AddNewFolderComponent } from './components/add-new-folder/add-new-folder.component';
+import * as lodash from 'lodash';
 
 @Component({
   selector: 'app-forms',
@@ -44,6 +45,7 @@ export class FormsComponent implements OnInit {
   public selectedWorkspaceId: any;
   public favs: any = []
   public notifications: any;
+  formsbyId: any;
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       console.log(userInfo)
@@ -68,6 +70,7 @@ export class FormsComponent implements OnInit {
     this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
       WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
       this.allForms = res;
+      this.formsbyId = lodash.groupBy(this.allForms, 'id')
       this.allForms.forEach((element: any) => {
         if (element.isFavourite) {
           this.favs.push(element.id);
@@ -198,6 +201,9 @@ export class FormsComponent implements OnInit {
     modalRef.componentInstance.modalType = 'Add';      
     modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
+    modalRef.componentInstance.config = {
+      
+    };
     
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
@@ -357,6 +363,24 @@ export class FormsComponent implements OnInit {
       console.log(res)
     })
   }
+
+  enableBuildPublishTab(form: any,formsbyId?: any) {
+    if (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow') {
+      if (this.formsbyId?.[form.value]?.[0]?.formEntries?.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true
+  }
+
+  enableUrl() {
+
+  }
+
+
+
   ngOnDestroy() {
     this.userInfoSubscription$.unsubscribe();
   }

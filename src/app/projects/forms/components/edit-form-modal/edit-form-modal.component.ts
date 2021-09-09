@@ -15,6 +15,7 @@ export class EditFormModalComponent implements OnInit {
   @Input() public modalType: any;
   @Input() public workSpaceId: any;
   @Input() public userId: any;
+  @Input() public config: any;
   addForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),

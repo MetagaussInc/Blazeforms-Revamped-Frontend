@@ -58,6 +58,11 @@ export const updateUserLoginAttempts = createAction(
   props<{ props: any }>()
 );
 
+export const userWorkspaceLogoUpdate = createAction(
+  '[User] Workspace Logo Update',
+  props<{ props: any }>()
+);
+
 
 // export const userRegister = createAction(
 //   '[User] Register',

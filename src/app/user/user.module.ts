@@ -15,6 +15,7 @@ import { RegisterSuccessComponent } from './register-success/register-success.co
 import { RegisterFailedComponent } from './register-failed/register-failed.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { BlockPasteDirective } from '../directives/block-paste.directive';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { BlockPasteDirective } from '../directives/block-paste.directive';
     //  /**Localhost */ siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
       /**Localhost */ // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
     }),
+    SwiperModule
   ]
 })
 export class UserModule { }

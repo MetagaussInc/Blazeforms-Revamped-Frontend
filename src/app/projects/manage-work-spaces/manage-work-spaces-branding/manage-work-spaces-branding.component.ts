@@ -5,6 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl, SafeStyle } from '@angular/platform-browser';
 import { DataSharingService } from '../../../shared/data-sharing.service';
 import { ToastService } from '../../../shared/toast.service';
+import { Store } from '@ngrx/store';
+import { userWorkspaceLogoUpdate } from 'src/app/+state/user/user.actions';
+import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 
 @Component({
   selector: 'app-manage-work-spaces-branding',
@@ -25,10 +28,18 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public isSuperAdmin: boolean = false;
   public isFormSubmitted: boolean = false;
   public selectedFileName = 'Select file';
+  public userInfo: any;
+  public logoType: any;
 
-  constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService, private toastService: ToastService) {
-    this.userId = this.dataSharingService.GetUserId();
-    this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
+  constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService, private toastService: ToastService, private store: Store) {
+    this.store.select(selectUserInfo).subscribe(userInfo => {
+      if(userInfo){
+        this.userInfo = userInfo;
+        this.userId = this.userInfo.Id;
+        this.isSuperAdmin = this.userInfo.IsSuperAdmin;
+      }      
+      console.log(this.userInfo);
+    });
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
         let orgId: any = params.get('id');
@@ -79,6 +90,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
           reader.readAsDataURL(file);    
           reader.onload = () => {   
             this.fileSource = reader.result;
+            this.logoType = file.type;
           };
         }
         else{
@@ -93,11 +105,22 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
 
   submit(){
     this.isFormSubmitted = true;
-    let model = {'LogoWorkSpaceId': this.organizationId,  'ImageBase64': this.loadBase64Image(this.fileSource) };
+    let encodedImage = this.loadBase64Image(this.fileSource);
+    let model = {'LogoWorkSpaceId': this.organizationId,  'ImageBase64': encodedImage};
     this.http.call('uploadFilesForWorkspace', 'POST', model).subscribe(res => {
       this.isFormSubmitted = false;
       if(res){
         this.imageSrc = this.fileSource as string;
+        this.selectedFileName = '';
+        if(this.organizationId == this.userInfo.WorkspaceId){
+          let encodedUrl = encodedImage.split('base64,')[1];
+          let encodedExt = this.logoType.split('image/')[1];
+          const props = {
+            logo: encodedUrl,
+            ext: encodedExt
+          }
+          this.store.dispatch(userWorkspaceLogoUpdate({props}));
+        }
         this.toastService.showSuccess('Logo Updated Successfully!');
       }
       else{

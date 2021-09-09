@@ -89,62 +89,147 @@
                       <td>{{payment.planEndDate | date : 'dd-MMM-yyyy'}}</td>
                       <td>{{payment.paymentStatus}}</td>
                       <td>
-                        <button class="btn btn-primary" (click)="download(payment,i)" translate>Invoice</button>
+                        <button class="btn btn-primary btn-bf" (click)="download(payment,i)">
+                            Invoice
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="activeIndex == i"></span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <span class="noRecord" *ngIf="paymentHistory == undefined || paymentHistory.length == 0" translate>No Payment History Found.....</span>
+        <span class="noRecord" *ngIf="paymentHistory == undefined || paymentHistory.length == 0">No Payment History Found.....</span>
+        <div id="generateInvoice" style="position: absolute;top: -9999px;left: -9999px;">
+            <div class="container">
+              <div>
+                <div class="card border-0">
+                  <div class="row invoice-contact">
+                    <div class="col-md-8">
+                      <div class="invoice-box row">
+                        <div class="col-sm-12">
+                          <table class="table table-responsive table-borderless">
+                            <tbody>
+                              <tr>
+                                <td class="pl-0 padding-bottom-3 padding-top-3">
+                                    <img src="assets/images/logo.png" class="m-b-10" alt="Blaze Form" width="300"><br/>
+                                </td>
+                              </tr>
+                              <tr>
+                                Blazeforms.com
+                              </tr>
+                              <tr>
+                                <td class="pl-0 padding-bottom-3 padding-top-3">
+                                  admin@blazeforms.com
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row invoive-info">
+                      <div class="col-md-4 col-xs-12 invoice-client-info">
+                        <h6>Client Information :</h6>
+                        <h6 class="m-0">{{userInfo.FirstName}} {{userInfo.LastName}} </h6>
+                        <p class="m-0 m-t-10">{{selectedInvoiceData.address1}} {{selectedInvoiceData.address2}}
+                          {{selectedInvoiceData.cityName}}</p>
+                        <p class="m-0">{{userInfo.PhoneNumber}}</p>
+                        <p>{{userInfo.Email}}</p>
+                      </div>
+                      <div class="col-md-3 col-sm-6">
+                        <h6>Order Information :</h6>
+                        <table class="table table-responsive invoice-table invoice-order table-borderless">
+                          <tbody>
+                            <tr>
+                              <th>Date :</th>
+                              <td>
+                                <span>{{selectedInvoiceData.paymentDate | date : 'dd-MMM-yyyy'}}</span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Status :</th>
+                              <td>
+                                <span class="label label-success">{{selectedInvoiceData.paymentStatus}}</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-md-5 col-sm-6">
+                        <h6 class="m-b-20">
+                          Transaction ID : <span>{{selectedInvoiceData.transactionId}}</span>
+                        </h6>
+                        <h6 class="text-uppercase text-primary">
+                          Total Due :<span>$ {{selectedInvoiceData.amount}}</span>
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="table-responsive">
+                          <table class="table  invoice-detail-table">
+                            <thead>
+                              <tr class="thead-default">
+                                <th translate>Description</th>
+                                <th translate>Price</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <h6>{{selectedInvoiceData.name}}</h6>
+                                  <p>{{selectedInvoiceData.noOfUsers}}
+                                    USERS, {{selectedInvoiceData.noOfForms}}
+                                    Forms, {{selectedInvoiceData.noOfEntries}}
+                                    ENTRIES, {{selectedInvoiceData.storageSize}}
+                                    Storage. </p>
+                                </td>
+                                <td>$ {{selectedInvoiceData.price}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table class="table table-responsive invoice-table invoice-total">
+                          <tbody>
+                            <tr>
+                              <th translate>Sub Total</th>
+                              <td>$ {{selectedInvoiceData.amount}}</td>
+                            </tr>
+                            <tr class="text-info">
+                              <td>
+                                <hr />
+                                <h5 class="text-primary mr-0">Total :</h5>
+                              </td>
+                              <td>
+                                <hr />
+                                <h5 class="text-primary mr-0">$ {{selectedInvoiceData.amount}}</h5>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <p>We don’t think of you as a client, we think of you as a partner. That is why we offer
+                          unmatched service and support from the moment you register with us.Whether you need
+                          assistance building your forms or would like to learn more about integrations, the
+                          BlazeForms team will always be right there to help you as quickly as possible.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 </div>
 
-
-<!-- <div class="my-5 px-5 subscription-wrap" *ngIf="showPlanPage">
-    <div class="login-box border rounded-lg" *ngIf="showPlanPage">
-        <div class="container py-3">
-            <div class="p-3 m-n3 overflow-hidden">
-                <ngb-carousel>
-                    <ng-template ngbSlide *ngFor="let plan of masterPlans">
-                        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
-                            <div class="selected-plan-wrapper shadow-sm row no-gutters rounded border text-center">
-                                <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
-                                    <div class="plan-name">
-                                        <h4 class="mb-n2"><strong>{{ plan.name }}</strong></h4>
-                                    </div>
-                                </div>
-                                <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
-                                    <div class="plan-price">
-                                        <h4><strong>US$</strong> {{ plan.price }}</h4>
-                                    </div>
-                                    <div class="plan-period mt-n2 text-secondary">amount / month</div>
-                                </div>
-                                <div class="col-md-12 p-2">
-                                    <div class="plan-attributes-wrapper row px-2 py-4">
-                                        <div class="plan-attribute col-md-12 py-1">
-                                            <span>{{ plan.noOfUsers }}</span><span class="text-secondary"> Users</span>
-                                        </div>
-                                        <div class="plan-attribute col-md-12 py-1">
-                                            <span>{{ plan.noOfForms }}</span><span class="text-secondary"> Forms</span>
-                                        </div>
-                                        <div class="plan-attribute col-md-12 py-1">
-                                            <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
-                                        </div>
-                                        <div class="plan-attribute col-md-12 py-1">
-                                            <span>{{ plan.storageSize }} {{ plan.storageUnit }}</span><span class="text-secondary"> Storage</span>
-                                        </div>
-                                        <div class="plan-price-button col-md-12 mt-3">
-                                            <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ngb-carousel>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class="login-box border rounded-lg" *ngIf="showPlanPage">
     <div class="container py-3">

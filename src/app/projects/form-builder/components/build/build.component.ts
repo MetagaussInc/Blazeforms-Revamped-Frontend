@@ -84,7 +84,7 @@ export class BuildComponent implements OnDestroy {
     buttons: {
       font: 'Roboto',
       size: 16,
-      color: 'red'
+      color: 'white'
     },
     pagebackgroundColor: 'white',
     pagebackgroundImage: ''
@@ -188,6 +188,7 @@ export class BuildComponent implements OnDestroy {
   addedUserId: any = [];
   formId: any = null;
   userSerach: any = null;
+  userSerachForLevel: any = null;
   listPayments: any = [];
   selectColElement: any;
   formActivities:any = [];
@@ -261,7 +262,9 @@ export class BuildComponent implements OnDestroy {
       // Excecute function initially only
       if (true) {
         if (this.builderObj?.formType === 'WorkFlow') {
-          this.mainTab = 0
+          if (!this.builderObj?.hasEntries) {
+            this.mainTab = 0
+          }
           this.getWorkFlowDetails(ID);
         }
         this.getWorkSpaceAccounts();
@@ -316,7 +319,9 @@ export class BuildComponent implements OnDestroy {
       // Excecute function initially only
       if (initial) {
         if (this.builderObj?.formType === 'WorkFlow') {
-          this.mainTab = 0
+          if (!this.builderObj?.hasEntries) {
+            this.mainTab = 0
+          }
           this.getWorkFlowDetails(ID);
         }
         this.getWorkSpaceAccounts();
@@ -408,6 +413,32 @@ export class BuildComponent implements OnDestroy {
     })
   }
 
+  deleteFormLevel(id: any) {
+    this.http.call('DeleteLevelInWorkFlowLevels', 'POST', {
+      Id: id
+    }).subscribe(res => {
+      this.getWorkFlowDetails(this.formId);
+    })
+  }
+
+  addUserToWorkFlowLevel(id: any, formId: any) {
+    this.userSerach = null;
+    const payload = {
+      CreatedBy: this.userInfo.Id,
+      FormId: this.formId,
+      LevelId: formId, /// 
+      UserId: id,
+      UserType: "Participant", // As per production : Always participant for this.  
+      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+    }
+
+    this.http.call('AddUserToWorkFlow', 'POST', payload).subscribe(res => {
+      // console.log(res)
+      this.getWorkFlowDetails(this.formId);
+
+    })
+  }
+
   deleteUser(id: any) {
 
     let ID = ''
@@ -429,7 +460,7 @@ export class BuildComponent implements OnDestroy {
 
   }
 
-  addLevels(id?: any, level?: any) {
+  addLevels(id?: any, level?: any, updateWorkFlowDeatils?: boolean) {
     const payload = {
       CreatedBy: this.userInfo.id,
       FormId: this.formId,
@@ -441,14 +472,16 @@ export class BuildComponent implements OnDestroy {
 
     this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
       console.log(res)
-      this.getWorkFlowDetails(this.formId);
+      if (updateWorkFlowDeatils) {
+        this.getWorkFlowDetails(this.formId);
+      }
 
     })
   }
 
   changeLevel($event: any, item: any) {
     // console.log($event.target.value, item.id)
-    this.addLevels(item.id, $event.target.value)
+    this.addLevels(item.id, $event.target.value, false)
   }
   getWorkFlowDetails(ID: any) {
     const payload = {
@@ -458,7 +491,7 @@ export class BuildComponent implements OnDestroy {
       WorkSpaceId: this.userInfo.WorkspaceDetail.Id
     }
     this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
-      console.log(res)
+      console.log('GetDetailsOfWorkflow -- response ', res)
       this.workFLowDetails = res;
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
@@ -512,7 +545,6 @@ export class BuildComponent implements OnDestroy {
   }
 
   createColums(Elements: any) {
-    console.log
     const Columns: any = []
     const dataArr: any = Elements;
     const rows: any = [];
@@ -521,6 +553,7 @@ export class BuildComponent implements OnDestroy {
       const data: any = separatedData[0].split('||');
       const formData: any = separatedData[1];
 
+      // console.log(data)
       const rowObj: any = {};
       data.forEach((elementWithValue: any, colIndex: any) => {
         if (elementWithValue && elementWithValue?.length > 0) {
@@ -540,7 +573,7 @@ export class BuildComponent implements OnDestroy {
       rows.push(rowObj)
     });
 
-    console.log(Columns, rows)
+    // console.log(Columns, rows)
     this.entries.columns = Columns;
     this.entries.rows = rows;
   }
@@ -1120,6 +1153,10 @@ export class BuildComponent implements OnDestroy {
   closeIframes() {
     this.viewSpecificEntry = null;
     this.viewEntryPanel = false;
+  }
+
+  userNameChange($event: any, item: any) {
+    item.userSerachForLevel = $event?.target?.value;
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

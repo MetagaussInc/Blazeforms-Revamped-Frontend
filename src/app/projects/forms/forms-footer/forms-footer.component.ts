@@ -20,6 +20,9 @@ export class FormsFooterComponent implements OnInit {
       if(this.userInfo){
         this.userId = this.userInfo.Id;
       }
+      else{
+        this.userId = '';
+      }
     });
   }
 
