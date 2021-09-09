@@ -284,7 +284,7 @@ export class FormsComponent implements OnInit {
 
   archive(form: any) {
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to archive ${form.text} forms ?`;      
+    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be archived. Are you sure you wish to proceed?' : `Are you sure you want to archive ${form.text} forms ?`;      
     modalRef.componentInstance.modalName = 'Archive'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
@@ -300,18 +300,18 @@ export class FormsComponent implements OnInit {
   }
 
   bulkDelete() {
-    this.deleteForm({text: this.selectedFormName.join(','), value: this.bulkId});
+    this.deleteForm({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true} );
   }
   bulkMove() {
     this.move({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true});
   }
   bulkArchive() {
-    this.archive({text: this.selectedFormName.join(','), value: this.bulkId});
+    this.archive({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true});
   }
 
   deleteForm(form: any) {
     const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = `Are you sure you want to delete <strong>${form.text}</strong> ?`;      
+    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be deleted. Are you sure you wish to proceed?' : `Are you sure you want to delete <strong>${form.text}</strong> ?`;      
     modalRef.componentInstance.modalName = 'Delete'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {

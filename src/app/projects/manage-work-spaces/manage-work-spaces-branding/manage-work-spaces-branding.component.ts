@@ -86,7 +86,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
       this.selectedFileName = file.name;
       if (file.type == 'image/jpg' || file.type == 'image/png' || file.type == 'image/jpeg') {
         let fileSize = ((file.size) / (1024 * 1024));
-        if(fileSize < 5){
+        if(fileSize < 0.5){
           reader.readAsDataURL(file);    
           reader.onload = () => {   
             this.fileSource = reader.result;
@@ -94,7 +94,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
           };
         }
         else{
-          this.toastService.showError('Image size should not be more then 5 MB!');
+          this.toastService.showError('Image size should not be more then 500 KB !');
         }
       }
       else{
