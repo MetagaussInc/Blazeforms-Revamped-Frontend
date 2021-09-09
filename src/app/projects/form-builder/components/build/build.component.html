@@ -55,9 +55,9 @@
                                             <h5 class="card-header">Define owners for this workflow</h5>
                                             <div class="card-body">
                             
-                                                <div class="form-group">
+                                                <div  class="form-group">
                                                     <label></label>
-                                                    <input id="text1" name="text1" type="text" [(ngModel)]="userSerach" placeholder="Enter name or email of users to add as owner" class="form-control">
+                                                    <input [ngClass]="{'disabled': builderObj.hasEntries}" id="text1" name="text1" type="text" [(ngModel)]="userSerach" placeholder="Enter name or email of users to add as owner" class="form-control">
                                                     <div *ngIf="userSerach?.length > 0">
                                                         <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
                                                             <div *ngIf="user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)" class="added-user-item row p-3 border-bottom">
@@ -129,7 +129,7 @@
                                                     You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
                             
-                                                <div class="text-center"> <a href="#" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
+                                                <div class="text-center" > <a href="#" [ngClass]="{'disabled': builderObj.hasEntries}" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
                             
                                             </div>
                                         </div>
@@ -145,17 +145,17 @@
                                                 <div class="ngx-dnd-container" [ngxDroppable]="'example-two'">
                                                     <div class="ngx-dnd-item" [ngxDraggable]="['example-two']" *ngFor="let item of workFLowDetails?.workFlowLevels" class="row">
                                                         <div class="col-md-8">
-                                                            <div class="form-group">
+                                                            <div class="form-group"  >
                                 
-                                                                <input name="text1" [value]="item.level" (keyup)="changeLevel($event, item)" type="text" class="form-control">
+                                                                <input [ngClass]="{'disabled': builderObj.hasEntries}" name="text1" [value]="item.level" (keyup)="changeLevel($event, item)" type="text" class="form-control">
                                                             </div>
                                                         </div>
                                 
                                                         <div class="col-md-4 text-right">
-                                                            <span class="material-icons animate-mat collapsed mr-1" title="Add Participants">person_add</span>
+                                                            <span class="material-icons animate-mat collapsed mr-1" title="Add Participants" (click)="item.expanded = !item.expanded">person_add</span>
                                                             <span class="material-icons animate-mat mr-1" title="Drag n Drop">open_with</span>
-                                                            <span class="material-icons animate-mat mr-1" title="Edit">edit</span>
-                                                            <span class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
+                                                            <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
+                                                            <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
                                                             <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded"> expand_more </span>
                                                         </div>
                                                         <div class="col-12">
@@ -232,7 +232,8 @@
                                                     You may add any under within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate theirselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
                             
-                                                <div class="text-center"> <a  class="btn btn-primary btn-bf" (click)="mainTab = 1">Build</a></div>
+                                                <div *ngIf="!builderObj.hasEntries" class="text-center"> <a  class="btn btn-primary btn-bf" (click)="mainTab = 1">Build</a></div>
+                                                <div *ngIf="builderObj.hasEntries" class="text-center"> <a  class="btn btn-primary btn-bf" (click)="mainTab = 3">Build</a></div>
                             
                                             </div>
                                         </div>
@@ -242,7 +243,7 @@
                             </div>
                         </ng-template>
                     </li>
-                    <li [ngbNavItem]="1" ng-container ngbNavItem>
+                    <li *ngIf="builderObj?.formType !== 'WorkFlow' || (!builderObj.hasEntries && builderObj?.formType === 'WorkFlow')" [ngbNavItem]="1" ng-container ngbNavItem>
                         <a ngbNavLink (click)="switchToBuild()"><i class="material-icons"> construction </i>Build</a>
                         <ng-template ngbNavContent>
                             <div id="main" class="row row-offcanvas row-offcanvas-left bg-light">
@@ -1655,7 +1656,7 @@
                             </div>
                         </ng-template>
                     </li>
-                    <li [ngbNavItem]="2" ngbNavItem>
+                    <li *ngIf="builderObj?.formType !== 'WorkFlow' || (!builderObj.hasEntries && builderObj?.formType === 'WorkFlow')" [ngbNavItem]="2" ngbNavItem>
                         <a ngbNavLink (click)="saveForm()"><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 

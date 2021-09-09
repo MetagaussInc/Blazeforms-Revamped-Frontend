@@ -71,11 +71,12 @@
                                         <i class="material-icons-round start-style" (click)="enableStarred(form)">{{favs.includes(form.value ? form.value : form.id) ? 'start' : 'star_outline'}}</i>
                                     </div>
                                     <div class="form-title-wrapper col-md-4">
-                                        <span class="form-name" (click)="openbuilder(form, 1)">{{form.text ? form.text : form.name}}</span>
+                                        <span class="form-name" *ngIf="formsbyId && !enableBuildPublishTab(form,formsbyId)" >{{form.text ? form.text : form.name}}</span>
+                                        <span class="form-name" *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId)" (click)="openbuilder(form, 1)">{{form.text ? form.text : form.name}}</span>
                                     </div>
                                     <div class="form-badges-wrapper col-md-4">
-                                        <span class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 1)">Build</span>
-                                        <span class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 2)">Publish</span>
+                                        <span *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId)" class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 1)">Build</span>
+                                        <span *ngIf="enableBuildPublishTab(form)" class="publish-badge px-2 py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 2)">Publish</span>
                                         <span class="entries-badge py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 3)">
                                     <span class="pl-2 pr-1">Entries</span>
                                         <!-- <span class="pl-2 pr-1 font-weight-bold text-bf">25</span>-->

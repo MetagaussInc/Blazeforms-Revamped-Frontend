@@ -262,7 +262,9 @@ export class BuildComponent implements OnDestroy {
       // Excecute function initially only
       if (true) {
         if (this.builderObj?.formType === 'WorkFlow') {
-          this.mainTab = 0
+          if (!this.builderObj?.hasEntries) {
+            this.mainTab = 0
+          }
           this.getWorkFlowDetails(ID);
         }
         this.getWorkSpaceAccounts();
@@ -317,7 +319,9 @@ export class BuildComponent implements OnDestroy {
       // Excecute function initially only
       if (initial) {
         if (this.builderObj?.formType === 'WorkFlow') {
-          this.mainTab = 0
+          if (!this.builderObj?.hasEntries) {
+            this.mainTab = 0
+          }
           this.getWorkFlowDetails(ID);
         }
         this.getWorkSpaceAccounts();
@@ -549,7 +553,7 @@ export class BuildComponent implements OnDestroy {
       const data: any = separatedData[0].split('||');
       const formData: any = separatedData[1];
 
-      console.log(data)
+      // console.log(data)
       const rowObj: any = {};
       data.forEach((elementWithValue: any, colIndex: any) => {
         if (elementWithValue && elementWithValue?.length > 0) {
@@ -569,7 +573,7 @@ export class BuildComponent implements OnDestroy {
       rows.push(rowObj)
     });
 
-    console.log(Columns, rows)
+    // console.log(Columns, rows)
     this.entries.columns = Columns;
     this.entries.rows = rows;
   }
