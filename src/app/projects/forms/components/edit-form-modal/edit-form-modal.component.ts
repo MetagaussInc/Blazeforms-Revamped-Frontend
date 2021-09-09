@@ -39,11 +39,42 @@ export class EditFormModalComponent implements OnInit {
   constructor(private http: HttpService, public activeModal: NgbActiveModal, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.folderList, this.type);
+    if (this.modalType === 'Edit') {
+      this.addForm.setValue({
+        name: this.config.name, 
+        desc: this.config.description,
+        folder: this.config.folderID,
+        active: this.config.isActive
+      });
+    }
+    console.log(this.folderList, this.modalType);
   }
 
   closeModal() {
     this.activeModal.close('close');
+  }
+
+  editForm() {
+    const p = {
+      Description: this.addForm.value.desc,
+DocumentTemplatesJson: "NO_VALUE",
+FormSettings: "NO_VALUE",
+FormType: this.type,
+Id: this.config.id,
+IsActive: this.addForm.value.isActive,
+Name: this.addForm.value.name,
+SessionUser: this.userId,
+SubmissionButtonName: "NO_USAGE",
+SubmissionSettings: "NO_USAGE",
+WorkSpaceId: this.workSpaceId
+    }
+
+    this.http.call('SaveFormAttributes', 'POST', p).subscribe(res => {
+      if (res.id) {
+        this.activeModal.close({message: 'added', res: res});
+      }
+      console.log(res)
+    })
   }
 
   submit() {

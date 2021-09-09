@@ -131,11 +131,12 @@ export class FormsComponent implements OnInit {
   }
 
   selectBulkForms(form: any) {
-    if (this.selectedForms.includes(form.value)) {
-      this.selectedForms = this.selectedForms.filter((x: any) => form.value !== x);
-      this.selectedFormName = this.selectedForms.filter((x: any) => form.value !== x && form?.name !== x);
+    const value = form.value ? form.value : form.id;
+    if (this.selectedForms.includes(value)) {
+      this.selectedForms = this.selectedForms.filter((x: any) => value !== x);
+      this.selectedFormName = this.selectedForms.filter((x: any) => value !== x && form?.name !== x && form?.text !== x);
     } else {
-      this.selectedForms.push(form.value);
+      this.selectedForms.push(value);
       this.selectedFormName.push(form.text ? form.text : form.name);
     }
   }
@@ -189,6 +190,28 @@ export class FormsComponent implements OnInit {
       if (result !== 'close') {
         this.openEdit(result);
       }
+    }, (reason: any) => {
+      console.log(`Dismissed `);
+    });
+  }
+
+  editForm(form: any) {
+    const id = form.value ? form.value : form.id;
+    const formDetail = this.formsbyId?.[id]?.[0];
+    console.log(formDetail)
+
+    const modalRef: any = this.modalService.open(EditFormModalComponent,{ size: 'lg' })
+    modalRef.componentInstance.folderList = this.folderList;      
+    modalRef.componentInstance.type = formDetail.formType;      
+    modalRef.componentInstance.modalType = 'Edit';      
+    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
+    modalRef.componentInstance.userId = this.userInfo.Id;
+    modalRef.componentInstance.config = {
+      ...formDetail
+    };
+    modalRef.result.then((result: any) => {
+      console.log(`Closed with: ${result}`);
+      this.getFormsList(this.userInfo);
     }, (reason: any) => {
       console.log(`Dismissed `);
     });

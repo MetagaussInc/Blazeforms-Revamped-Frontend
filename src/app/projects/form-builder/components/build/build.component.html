@@ -633,7 +633,7 @@
 
                                                         <div *ngIf="selectedElement.inputType === 'toggle' && selectedElement?.collectPayment" class="form-group">
                                                                 <div class="form-group">
-                                                                <label>Add Label</label>
+                                                                <label>Add Price</label>
                                                                 <div class="row">
                                                                     <div class="form-group col">
                                                                         <input name="true_label_setting" id="collect_true_label_setting" type="text"
@@ -966,6 +966,44 @@
                                                                 <label class="custom-control-label"
                                                                     for="mapBillingFields"> Map Billing
                                                                     fields</label>
+                                                            </div>
+                                                            <div *ngIf="paymentSetting.mapBillingFields">
+                                                                <div class="form-group">
+
+
+
+                                                                    <label>Name</label>
+                                                                    <select class="form-control"
+                                                                        [(ngModel)]="paymentSetting.selectedName">
+                                                                        <option *ngFor="let field of nameField"
+                                                                            [value]="field.name">
+                                                                            {{field.name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+
+
+
+                                                                    <label>Address</label>
+                                                                    <select class="form-control"
+                                                                        [(ngModel)]="paymentSetting.selectedAddress">
+                                                                        <option *ngFor="let field of addressField"
+                                                                            [value]="field.name">
+                                                                            {{field.name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+
+
+
+                                                                    <label>Email</label>
+                                                                    <select class="form-control"
+                                                                        [(ngModel)]="paymentSetting.selectedEmail">
+                                                                        <option *ngFor="let field of emailField"
+                                                                            [value]="field.name">
+                                                                            {{field.name}}</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                             <div class="p-1 mr-1">
                                                                 <button
@@ -1640,6 +1678,12 @@
                                             <div class="row lower">
                                                 <div *ngIf="paymentSetting.showSubTotal" class="col-12 text-right">
                                                     <strong>Sub Total</strong><span class="pl-2">$ 46.98</span>
+                                                </div>
+                                            </div>
+                                            <hr  *ngIf="paymentSetting.extraBill?.length > 0" class="mb-4">
+                                            <div *ngIf="paymentSetting.extraBill?.length > 0"  class="row lower">
+                                                <div class="col-12 text-right" *ngFor="let item of paymentSetting.extraBill">
+                                                    <strong>{{item.name}}</strong><span class="pl-2">$ {{item.value ? item.value : 0}}</span>
                                                 </div>
                                             </div>
                                             <hr class="mb-4">

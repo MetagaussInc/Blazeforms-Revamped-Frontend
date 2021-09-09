@@ -1217,7 +1217,7 @@
         </ng-container>
     </ng-template>
 </div>
-<div *ngIf="initial" class="item-payment-wrap">
+<div *ngIf="initial && ((haveTabs && active === allArr?.length - 1) || !haveTabs)" class="item-payment-wrap">
     <ng-container *ngIf="initial.showLineItems">
         <div *ngFor="let item of payments" class="row lower">
             <div class="col-12 text-right">{{item.name}} <span class="pl-2">$ {{item.value}}</span></div>

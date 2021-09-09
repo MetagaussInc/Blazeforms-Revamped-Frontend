@@ -1056,7 +1056,7 @@ export class BuildComponent implements OnDestroy {
   }
 
   get addressField() {
-    return this.targetBuilderTools.filter((x: any) => x.inputType === 'address');
+    return this.targetBuilderTools.filter((x: any) => x.inputType === 'addressSection');
   }
 
   selectEntry(rowIndex: any) {
@@ -1158,6 +1158,10 @@ export class BuildComponent implements OnDestroy {
   userNameChange($event: any, item: any) {
     item.userSerachForLevel = $event?.target?.value;
   }
+
+  // viewAdditionnalField() {
+  //   return this.targetBuilderTools?.some((x: any) => x.inputType === 'currency');
+  // }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

@@ -71,8 +71,13 @@
                                         <i class="material-icons-round start-style" (click)="enableStarred(form)">{{favs.includes(form.value ? form.value : form.id) ? 'start' : 'star_outline'}}</i>
                                     </div>
                                     <div class="form-title-wrapper col-md-4">
-                                        <span class="form-name" *ngIf="formsbyId && !enableBuildPublishTab(form,formsbyId)" >{{form.text ? form.text : form.name}}</span>
-                                        <span class="form-name" *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId)" (click)="openbuilder(form, 1)">{{form.text ? form.text : form.name}}</span>
+                                        <ng-container *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId); else clickAble">
+                                        <span class="form-name" (click)="openbuilder(form, 1)" >{{form.text ? form.text : form.name}}</span>
+                                        </ng-container>
+                                        <ng-template #clickAble>
+                                        <span class="form-name" >{{form.text ? form.text : form.name}}</span>
+                                        </ng-template>
+                                        
                                     </div>
                                     <div class="form-badges-wrapper col-md-4">
                                         <span *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId)" class="build-badge px-2 py-1 mr-1 rounded-pill small border border-2" role="button" (click)="openbuilder(form, 1)">Build</span>
@@ -87,7 +92,7 @@
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="openModal(form.value)">people</i>
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="move(form)">drive_file_move</i>
                                         <i class="material-icons-round mr-3 text-dark" role="button" (click)="archive(form)">archive</i>
-                                        <i *ngIf="formPermissions.canEdit" role="button" (click)="openEdit('Form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
+                                        <i *ngIf="formPermissions.canEdit" role="button" (click)="editForm(form)" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
                                         <i *ngIf="formPermissions.canDelete" role="button" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                                     </div>
                                 </div>
