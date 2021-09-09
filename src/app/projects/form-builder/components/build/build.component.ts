@@ -84,7 +84,7 @@ export class BuildComponent implements OnDestroy {
     buttons: {
       font: 'Roboto',
       size: 16,
-      color: 'red'
+      color: 'white'
     },
     pagebackgroundColor: 'white',
     pagebackgroundImage: ''

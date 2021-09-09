@@ -162,7 +162,7 @@
                                 {{form.name}} is required</div>
 
                         </ng-container>
-                        <ng-container *ngIf="form.inputType === 'levelSection' && !isPublishPage || (isPublishPage && viewLevelSection(form))">
+                        <ng-container *ngIf="form.inputType === 'levelSection' && (!isPublishPage || (isPublishPage && viewLevelSection(form)))">
                             <div [class]="form.size + ' ngx-dnd-item'" [ngClass]="{'disabled': enableLevelSection(form)}"
                                 *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <label [style.font-family]="styling?.labels?.font"
