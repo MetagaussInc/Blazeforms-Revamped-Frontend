@@ -1105,10 +1105,10 @@ export class BuildComponent implements OnDestroy {
       })
   }
 
-  @HostListener('document:keydown.delete', ['$event'])
-  onDeleteComponent(event: KeyboardEvent) {
-    this.delete(this.selectedElement)
-  }
+  // @HostListener('document:keydown.delete', ['$event'])
+  // onDeleteComponent(event: KeyboardEvent) {
+  //   // this.delete(this.selectedElement)
+  // }
 
   selectColumn($event: any, colId: any) {
     console.log($event, colId);

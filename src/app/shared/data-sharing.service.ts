@@ -32,6 +32,9 @@ export class DataSharingService {
       if(this.userInfo){
         this.userId = this.userInfo.Id;
         this.selectedWorkspaceId = this.userInfo.WorkspaceDetail.Id;
+      } else {
+        // Set default state if user data is removed.
+        this.userWorkspaceList = null;
       }
     });
   }

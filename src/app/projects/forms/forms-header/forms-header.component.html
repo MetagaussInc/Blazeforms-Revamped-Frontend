@@ -79,8 +79,8 @@
                     </div>
                     <div ngbDropdownMenu class="dropdown-menu header-dropdown shadow border-0" aria-labelledby="UserProfile" x-placement="bottom-left">
                         <div class="dropdown-header" role="heading">
-                            <h6 class="font-weight-bold">User Name</h6>
-                            <small>Admin</small>
+                            <h6 class="font-weight-bold">{{userInfo.FirstName}}</h6>
+                            <small>{{userInfo.LastName}}</small>
                         </div>
                         <hr class="dropdown-divider" role="separator">
                         <a [routerLink]="['/my-profile']" ngbDropdownItem role="button">My Account</a>
