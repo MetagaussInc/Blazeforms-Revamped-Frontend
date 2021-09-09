@@ -38,7 +38,7 @@
                         <label for="form-folder">Folder</label>
                     </div>
                     <div class="col-md-7">
-                        <app-t-select [data]="folderList" [currentFormId]="null" (selectFolderEvent)="selectFolderEventHandler($event)"></app-t-select>
+                        <app-t-select [data]="folderList" [currentFormId]="config?.folderID" (selectFolderEvent)="selectFolderEventHandler($event)"></app-t-select>
 
                     </div>
                     <div class="col-md-2 p-2">
