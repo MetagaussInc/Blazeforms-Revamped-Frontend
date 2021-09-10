@@ -1,5 +1,5 @@
 <ng-container *ngIf="dataLoaded && !needLogin; else notLoaded">
-    <div class="container exported-form-container px-5 my-5 shadow" [style.background-color]="styling?.pagebackgroundColor" [ngStyle]="{'background-image': getUrl(styling.pagebackgroundImage)}">
+    <div class="container exported-form-container px-5 my-5 shadow" [style.background-color]="styling?.pagebackgroundColor" [ngStyle]="{'background-image': getUrl(styling?.pagebackgroundImage)}">
         <h2 class="text-center form-heading py-3">{{formDetail.name}}</h2>
         <app-exported-form [levelDetails]="levelDetails" [styling]="styling" (inputUpdateEvent)="inputUpdateEventHandler($event)" [isPublishPage]="true" [elements]="elements" [initial]="paymentDetails" [payments]="payments" [config]="formDetail">
         </app-exported-form>

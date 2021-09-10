@@ -44,7 +44,6 @@ export class AddFormModalComponent implements OnInit, OnChanges {
     this.url = form.url;
     this.selectedForm = form;
     this.viewFormDesign = true;
-    this.viewFormsList = null
   }
 
   copyFromDesign() {

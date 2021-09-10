@@ -3,7 +3,9 @@
 
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">New Form</h5>
+            <h5 class="modal-title" *ngIf="viewMainSection">New Form</h5>
+            <h5 class="modal-title" *ngIf="!viewMainSection && viewFormsList === 'Form'">Copy Existing Form</h5>
+            <h5 class="modal-title" *ngIf="!viewMainSection && viewFormsList === 'WorkFlow'">Copy Existing Workflow</h5>
             <button type="button" class="close" data-bs-dismiss="modal" (click)="activeModal.close('close')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,15 +71,15 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container  *ngIf="viewFormsList">
+            <ng-container  *ngIf="viewFormsList && !viewFormDesign">
                 <div class="forms-list col-md-12 border rounded form-list">
                     <ng-container *ngFor="let form of formsList">
                         <div *ngIf="viewFormsList === form.formType" class="form-list-item row p-3 border-bottom" >
                             <span (click)="viewForm(form)" role="button">{{form.name}}</span>
-                            <span ngbTooltip="Tooltip on top" style="position: absolute; right: 100px;" (click)="copy(form)" role="button">
+                            <span data-toggle="tooltip" title="Copy"  style="position: absolute; right: 100px;" (click)="copy(form)" role="button">
                                 <i class="material-icons">content_copy</i>
                             </span>
-                            <span style="position: absolute; right: 50px;"(click)="viewForm(form)" role="button"> <i class="material-icons">visibility</i></span>
+                            <span style="position: absolute; right: 50px;"(click)="viewForm(form)" role="button" data-toggle="tooltip" title="View" > <i class="material-icons">visibility</i></span>
                         </div>
                     </ng-container>
                     
@@ -94,7 +96,7 @@
                 </div>
                 
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-link btn-sm text-bf" (click)="viewFormsList = true;viewFormDesign = false">Back</button>
+                    <button type="button" class="btn btn-link btn-sm text-bf" (click)="viewFormDesign = false">Back</button>
                     <button type="button" class="btn btn-bf btn-sm" (click)="copyFromDesign()">Copy</button>
                 </div>
             </ng-container>
