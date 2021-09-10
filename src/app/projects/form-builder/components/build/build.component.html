@@ -58,27 +58,44 @@
                                                 <div  class="form-group">
                                                     <label></label>
                                                     <input [ngClass]="{'disabled': builderObj.hasEntries}" id="text1" name="text1" type="text" [(ngModel)]="userSerach" placeholder="Enter name or email of users to add as owner" class="form-control">
-                                                    <div *ngIf="userSerach?.length > 0">
+                                                    <div *ngIf="userSerach?.length > 0" class="autocomplete-users-list  border shadow">
                                                         <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
-                                                            <div *ngIf="user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)" class="added-user-item row p-3 border-bottom">
-                                        
-                                                                <div class="added-user-title-wrapper col-md-1">
-                                                                    <img [src]="" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                            <div *ngIf="user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)" class="workflow-list col-md-12  rounded">
+                                                                <div class="workflow-list-item row p-3 border-bottom">
+                                                                <div class="workflow-img-wrapper col-md-1">
+                                                                    <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                                 </div>
-                                                                <div class="added-user-title-wrapper col-md-3">
-                                                                    <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
-                                                                    <span class="text-muted"><i>{{user.email}}</i></span>
+                                                                <div class="workflow-user-email-wrapper col-md-9">
+                                                                    <div clss="workflow-user-name">{{user.firstName}} {{user.lastName}}</div>
+                                                                    <span class="workflow-user-email text-muted"><i>{{user.email}}</i></span>
                                                                 </div>
                                             
-                                                                <div class="added-user-title-wrapper col-md-3">
-                                                                    <button class="btn btn-success" (click)="addUserToWorkFlow(user.id)">Add</button>
+                                                                <div class="added-user-title-wrapper col-md-2">
+                                                                    <button class="btn btn-primary btn-bf" (click)="addUserToWorkFlow(user.id)">Add</button>
                                                                 </div>
-                                                                <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                            
+ 
                                                                 </div>
                                                             </div>
                                                         </ng-container>
                                                     </div>
+
+                                                    <div class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3" >
+                                                        <div class="autocomplete-not-found my-3">
+                                                            <strong>Typetext</strong> Search not found in the organization. want to invite?
+                                                        </div>
+                                                        <div clss="user-selector form-group">
+                                                            <label for="select" class=" col-form-label"></label> 
+                                                         
+                                                              <select id="select" name="select" class="custom-select" disabled>
+                                                                <option value="rabbit">Rabbit</option>
+                                                                <option value="duck">Duck</option>
+                                                                <option value="fish">Fish</option>
+                                                              </select>
+                                                            </div>
+                                                              <div clss="user-invit-button form-group row"> <button name="invite" type="button" class="btn btn-primary btn-bf mt-3" disabled>Invite</button></div>
+                                                        
+                                                    </div> 
+
                                                 </div>
                             
                                             </div>
@@ -92,10 +109,10 @@
                                         <h4>Added Users</h4>
                                         <div class="added-users-list col-md-12 border rounded">
                                             <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
-                                                <div *ngIf="addedUserId?.includes(user.id)" class="added-user-item row p-3 border-bottom">
+                                                <div *ngIf="addedUserId?.includes(user.id)" class="added-user-item row p-3 border-bottom border rounded">
                             
                                                     <div class="added-user-title-wrapper col-md-1">
-                                                        <img [src]="" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                        <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                     </div>
                                                     <div class="added-user-title-wrapper col-md-6">
                                                         <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
@@ -141,9 +158,10 @@
                                     <div class="col">
                                         <div class=" multi-collapse card">
                                             <h5 class="card-header">Added Levels</h5>
-                                            <div class="card-body">
+                                            <div class="card-body workflow-levels">
                                                 <div class="ngx-dnd-container" [ngxDroppable]="'example-two'">
-                                                    <div class="ngx-dnd-item" [ngxDraggable]="['example-two']" *ngFor="let item of workFLowDetails?.workFlowLevels" class="row">
+                                                    <div class="ngx-dnd-item" [ngxDraggable]="['example-two']" *ngFor="let item of workFLowDetails?.workFlowLevels" class="">
+                                                        <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="form-group"  >
                                 
@@ -158,12 +176,14 @@
                                                             <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
                                                             <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded"> expand_more </span>
                                                         </div>
+                                                        </div>
+                                                        <div class="row my-3">
                                                         <div class="col-12">
                                                             <ng-container *ngFor="let flowUsers of workFLowDetails?.workFlowUsers">
                                                                 <div *ngIf="item .id === flowUsers.levelId"  class="added-user-item row p-3 border-bottom">
                                 
                                                                     <div class="added-user-title-wrapper col-md-1">
-                                                                        <img [src]="" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                                        <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                                     </div>
                                                                     <div class="added-user-title-wrapper col-md-6">
                                                                         <div clss="added-user-name">{{flowUsers.firstName}} {{flowUsers.lastName}}</div>
@@ -183,25 +203,26 @@
                                                             
                                                             
                                                         </div>
-                                                        <div *ngIf="item.expanded" class="col-md-12">
-                                                            <div class="col-md-8">
+                                                        </div>
+                                                        <div *ngIf="item.expanded" class="row">
+                                                            <div class="col-md-12">
                                                                 <div class="form-group">
                                     
                                                                     <input name="text2" (keyup)="userNameChange($event, item)" placeholder="Add user"  type="text" class="form-control">
-                                                                    <div *ngIf="item.userSerachForLevel?.length > 0">
-                                                                        <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
-                                                                            <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)" class="added-user-item row p-3 border-bottom">
+                                                                    <div *ngIf="item.userSerachForLevel?.length > 0" class="border shadow">
+                                                                        <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers"  class="rounded">
+                                                                            <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)" class="workflow-list-item row p-3 border-bottom">
                                                         
                                                                                 <div class="added-user-title-wrapper col-md-1">
-                                                                                    <img [src]="" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                                                    <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                                                 </div>
-                                                                                <div class="added-user-title-wrapper col-md-3">
+                                                                                <div class="added-user-title-wrapper col-md-9">
                                                                                     <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
                                                                                     <span class="text-muted"><i>{{user.email}}</i></span>
                                                                                 </div>
                                                             
-                                                                                <div class="added-user-title-wrapper col-md-3">
-                                                                                    <button class="btn btn-success" (click)="addUserToWorkFlowLevel(user.id, item.id)">Add</button>
+                                                                                <div class="added-user-title-wrapper col-md-2">
+                                                                                    <button class="btn btn-primary btn-bf" (click)="addUserToWorkFlowLevel(user.id, item.id)">Add</button>
                                                                                 </div>
                                                                                 <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
                                                             
@@ -211,6 +232,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -222,7 +244,7 @@
                                 </div>
                             
                             
-                                <div class="row">
+                                <div class="row my-3">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Build your form</h5>
