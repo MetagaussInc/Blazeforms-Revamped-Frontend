@@ -39,6 +39,9 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="viewFilterDropdown" class="filter-dropdown-overlay-wrap">
+               <div class="filter-dropdown-overlay position-fixed w-100 h-100" (click)="viewFilterDropdown = !viewFilterDropdown"></div> 
+            </div>
         </div>
     </div>
     <div class="folder-list-with-forms">
