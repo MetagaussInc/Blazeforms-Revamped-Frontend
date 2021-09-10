@@ -27,6 +27,10 @@
             color: $base-color;
             cursor: pointer;
         }
+        a:hover {
+            color: $base-color;
+            cursor: pointer;
+        }
         
         .nav-item-active {
             border-bottom: 3px solid $base-color;
@@ -232,6 +236,8 @@
         .form-control {
             height: 2.5rem !important;
         }
+
+      
         
         .field-error {
             color: #f04564;
@@ -773,6 +779,8 @@
             border: 0px;
             background-color: #efefef;
         }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller { display: none !important;}
         
         .target-droppable .page-break-head {
             top: -18px;
@@ -797,8 +805,9 @@
             display: none;
         }
         
-        .forms-listing-dropdown {
-            max-height: 400px;
+        .forms-listing-dropdown,
+        .org-switch-dropdown {
+            max-height: 330px;
         }
         
         .forms-activity-dropdown {
@@ -1201,3 +1210,32 @@
         background-size: cover;
     }
      
+
+    .form-publish-link textarea.form-control {
+        height: auto !important;
+        min-height: 92px;
+        resize: vertical;
+    }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.extra-large .popover-controller .disbaled {
+        opacity: 0.4;
+        cursor: default;
+        object-fit: none;
+    }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .disbaled{
+        opacity: 0.4;
+        cursor: default;
+        object-fit: none;
+    }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .field-popover-wrap {
+        right: -108px;
+        min-width: 295px;
+    }
+
+    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.half .ngb-tp-input-container {
+        width: auto;
+        max-width: 4em;
+    }
+
