@@ -160,3 +160,16 @@
         border-width: 2px;
         color: #495057;
     }
+
+    .exported-form-container {
+        background-color: #fff;
+    }
+    
+    
+    .exported-form-container .ngx-dnd-container {
+        background-color: transparent !important;
+    }
+    
+    .exported-form-container .ngx-dnd-containe .ngx-dnd-item {
+        background-color: transparent !important;
+    }

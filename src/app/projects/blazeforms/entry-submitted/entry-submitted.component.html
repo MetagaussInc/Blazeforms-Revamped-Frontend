@@ -12,8 +12,8 @@
                 <p class="lead"></p>
                 <a class="btn btn-bf  py-2 px-4 mt-5" href="#" role="button" (click)="back()"> Submit New Entry</a>
                 <hr class="my-4">
-                <p class="lead">Transaction Id: {{params.chargeId}}</p>
-                <p class="lead">Amount: ${{params.amount}}</p>
+                <p class="lead" *ngIf="params.chargeId" >Transaction Id: {{params.chargeId}}</p>
+                <p class="lead" *ngIf="params.chargeId">Amount: ${{params.amount}}</p>
             </div>
         </div>
 
