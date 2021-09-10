@@ -233,7 +233,7 @@
             }
         }
         
-        .form-control {
+        input.form-control {
             height: 2.5rem !important;
         }
 
@@ -1221,7 +1221,6 @@
      
 
     .form-publish-link textarea.form-control {
-        height: auto !important;
         min-height: 92px;
         resize: vertical;
     }
