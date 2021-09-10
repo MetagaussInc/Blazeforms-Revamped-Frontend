@@ -18,10 +18,10 @@
             </button>
         </div>
         <div class="forms-filters-wrapper">
-            <i class="material-icons mr-3" role="button" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkDelete()">delete</i>
-            <i class="material-icons mr-3" role="button" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkMove()">archive</i>
-            <i class="material-icons mr-3" role="button" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkArchive()">drive_file_move</i>
-            <i class="material-icons" role="button" (click)="viewFilterDropdown = !viewFilterDropdown">filter_alt</i>
+            <i class="material-icons mr-3" role="button" data-toggle="tooltip" title="Delete" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkDelete()">delete</i>
+            <i class="material-icons mr-3" role="button" data-toggle="tooltip" title="Archive" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkMove()">archive</i>
+            <i class="material-icons mr-3" role="button" data-toggle="tooltip" title="Move Form" [ngClass]="{'disabled': selectedForms?.length === 0}" (click)="bulkArchive()">drive_file_move</i>
+            <i class="material-icons" role="button" data-toggle="tooltip" title="Filter" (click)="viewFilterDropdown = !viewFilterDropdown">filter_alt</i>
             <div class="filter-dropdown bg-white rounded shadow filter-down" *ngIf="viewFilterDropdown">
                 <div class="filter-dropdown-top border-bottom mb-2">
                     <div class="filter-dropdown-item py-2 px-5 border-bottom" (click)="selectedFolder = null; viewBy = null; viewFilterDropdown = false;getFormsList(userInfo)">Clear Filter</div>
@@ -84,11 +84,11 @@
                                         <span class="url-badge px-2 py-1 rounded-pill small border border-2" role="button" (click)="openFormURL(form)">URL</span>
                                     </div>
                                     <div class="form-actions-wrapper col-md-3 d-flex d-wrap justify-content-end">
-                                        <i class="material-icons-round mr-3 text-dark" role="button" (click)="openModal(form.value)">people</i>
-                                        <i class="material-icons-round mr-3 text-dark" role="button" (click)="move(form)">drive_file_move</i>
-                                        <i class="material-icons-round mr-3 text-dark" role="button" (click)="archive(form)">archive</i>
-                                        <i *ngIf="formPermissions.canEdit" role="button" (click)="openEdit('Form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
-                                        <i *ngIf="formPermissions.canDelete" role="button" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
+                                        <i class="material-icons-round mr-3 text-dark" role="button" data-toggle="tooltip" title="Premissions" (click)="openModal(form.value)">people</i>
+                                        <i class="material-icons-round mr-3 text-dark" role="button" data-toggle="tooltip" title="Move Form"  (click)="move(form)">drive_file_move</i>
+                                        <i class="material-icons-round mr-3 text-dark" role="button" data-toggle="tooltip" title="Archive" (click)="archive(form)">archive</i>
+                                        <i *ngIf="formPermissions.canEdit" role="button" data-toggle="tooltip" title="Edit" (click)="openEdit('Form')" class="material-icons-round mr-3 text-dark" data-bs-toggle="modal" data-bs-target="#edit-form-modal">edit</i>
+                                        <i *ngIf="formPermissions.canDelete" role="button"  data-toggle="tooltip" title="Delete" (click)="deleteForm(form)" class="material-icons-round text-dark">delete</i>
                                     </div>
                                 </div>
                             </ng-container>
