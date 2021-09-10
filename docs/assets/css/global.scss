@@ -233,7 +233,7 @@
             }
         }
         
-        .form-control {
+        input.form-control {
             height: 2.5rem !important;
         }
 
@@ -1206,11 +1206,13 @@
 
      /*--- Publish Page Style Editor----*/
 
-    app-root app-build .publish-container .ngx-dnd-container {
+    app-root app-build .publish-container .ngx-dnd-container,
+    .exported-form-container .ngx-dnd-container {
         background-color: transparent !important;
     }
 
-    app-root app-build .publish-container .ngx-dnd-container .ngx-dnd-item {
+    app-root app-build .publish-container .ngx-dnd-container .ngx-dnd-item,
+    .exported-form-container .ngx-dnd-container .ngx-dnd-item {
         background-color: transparent !important;
     }
 
@@ -1221,7 +1223,6 @@
      
 
     .form-publish-link textarea.form-control {
-        height: auto !important;
         min-height: 92px;
         resize: vertical;
     }
