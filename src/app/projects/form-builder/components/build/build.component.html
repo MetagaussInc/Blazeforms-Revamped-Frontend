@@ -548,10 +548,10 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <button (click)="remove(i)"
-                                                                        class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                        class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
-                                                                        class="btn option-btn border btn-sm rounded p-0"
+                                                                        class="btn option-btn border btn-sm rounded bg-white p-0"
                                                                         (click)="selectedElement.options.push({label: '', payment: 0})"><i
                                                                             class="material-icons">add</i></button>
                                                                 </div>
@@ -595,10 +595,10 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <button (click)="remove(i)"
-                                                                        class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                        class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
-                                                                        class="btn option-btn border btn-sm rounded p-0"
+                                                                        class="btn option-btn border btn-sm rounded bg-white p-0"
                                                                         (click)="selectedElement.options.push({label: 'Option 1', payment: 0})"><i
                                                                             class="material-icons">add</i></button>
                                                                 </div>
@@ -645,11 +645,11 @@
                                                                     <div class="col-4">
                                                                         <button
                                                                             (click)="removeObj(key.key, selectedElement, 'ratingOptions')"
-                                                                            class="btn option-btn border btn-sm rounded p-0 mr-1"><i
+                                                                            class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                                 class="material-icons">remove</i></button>
                                                                         <button
                                                                             (click)="selectedElement.ratingOptions.push({label :'Option 1',value: ''})"
-                                                                            class="btn option-btn border btn-sm rounded p-0"><i
+                                                                            class="btn option-btn border btn-sm rounded bg-white p-0"><i
                                                                                 class="material-icons">add</i></button>
                                                                     </div>
                                                                 </div>
@@ -929,7 +929,7 @@
                                                                     </option>
                                                                 </select>
                                                                 <button [disabled]="ssss.value === ''"
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    class="btn option-btn border btn-sm rounded bg-white p-1 mr-1"
                                                                     (click)="addCol(ssss.value); ssss.value = ''"><i
                                                                         class="material-icons">add</i></button>
                                                             </div>
@@ -939,7 +939,7 @@
                                                                 <input class="form-control mr-1" type="text"
                                                                     [(ngModel)]="selectedElement.columns[colId].name">
                                                                 <button
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    class="btn option-btn border btn-sm rounded bg-white p-1 mr-1"
                                                                     (click)="selectedElement.columns.splice(colId, 1)"><i
                                                                         class="material-icons">remove</i></button>
 
@@ -962,7 +962,7 @@
                                                                     <option [value]="'perentage'">Percentage</option>
                                                                 </select>
                                                                 <button
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    class="btn option-btn border btn-sm rounded bg-white p-1 mr-1"
                                                                     (click)="paymentSetting?.extraBill.push({value: extraBillModel.value, type: extraBillModel.type, name: extraBillModel.name})"><i
                                                                         class="material-icons">add</i></button>
                                                                 <!-- <button
@@ -984,11 +984,11 @@
                                                                     <option [value]="'perentage'">Percentage</option>
                                                                 </select>
                                                                 <button
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    class="btn option-btn border btn-sm rounded bg-white p-1 mr-1"
                                                                     (click)="paymentSetting?.extraBill.push({value: null, type: 'dollar', name: 'Additional'})"><i
                                                                         class="material-icons">add</i></button>
                                                                 <button
-                                                                    class="btn option-btn border btn-sm rounded p-1 mr-1"
+                                                                    class="btn option-btn border btn-sm rounded bg-white p-1 mr-1"
                                                                     (click)="paymentSetting?.extraBill.splice(i, 1)"><i
                                                                         class="material-icons">remove</i></button>
                                                             </div>
@@ -1283,7 +1283,7 @@
                                                         class="mjui">
                                                         {{model.name}}
                                                         <div class="row p-2">
-                                                            <span class="mr-2" >{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</span>
+                                                            <label class="mr-2" >{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</label>
                                                             <div class="custom-control custom-switch">
                                                                 <input type="checkbox" id="switchToggle{{model.uiIndexId}}_noncheckbox" class="custom-control-input" >
                                                                 <label class="custom-control-label" for="switchToggle{{model.uiIndexId}}_noncheckbox">{{model.validations?.toggleDefaultOptions?.[model.selectLabel].true}}</label>

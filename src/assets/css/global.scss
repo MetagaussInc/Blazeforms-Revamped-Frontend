@@ -1104,6 +1104,11 @@
             display: none !important;
         }
 
+        input[type="date"]::-webkit-inner-spin-button,
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+}
 
 
       /*----  Loader CSS----*/
@@ -1195,6 +1200,10 @@
          background-color: $base-color;
      }
 
+     .folder-list-with-forms {
+        min-height: 400px;
+    }
+
      /*--- Publish Page Style Editor----*/
 
     app-root app-build .publish-container .ngx-dnd-container {
@@ -1242,5 +1251,59 @@
     .workflow-levels .ngx-dnd-container{
         display: inline-block !important;
         width: 100%;
+    }
+
+    .filter-dropdown-overlay-wrap .filter-dropdown-overlay{
+        background-color: transparent;
+        top:0px;
+        left: 0px;
+    }
+
+
+    /*--- Form component CSS Need to remove from here----*/
+
+    .disabled {
+        opacity: 0.65;
+        pointer-events: none;
+    }
+    
+    .filter-down {
+        z-index: 99999;
+        position: absolute;
+        background: white;
+    }
+    
+    .filter-dropdown-top .filter-dropdown-item {
+        cursor: pointer;
+    }
+    
+    .filter-dropdown-top .filter-dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #f04564;
+    }
+    
+    .filter-dropdown-folder-list {
+        max-height: 100px;
+    }
+    
+    .start-style {
+        width: 42%;
+        cursor: pointer;
+    }
+    
+    .form-list-item .form-title-wrapper .form-name {
+        cursor: pointer;
+    }
+    
+    .filter-dropdown-folder-list .filter-dropdown-folder-item {
+        cursor: pointer;
+    }
+    
+    .filter-dropdown-bottom .filter-dropdown-item {
+        cursor: pointer;
+    }
+    
+    .filter-dropdown-bottom .filter-dropdown-item .selected-item-tick {
+        margin-left: -24px;
     }
 
