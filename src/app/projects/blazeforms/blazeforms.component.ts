@@ -322,6 +322,13 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
       }
       return true;
     }
+
+
+    getUrl(url: any)
+    {
+      return `url(${url})`;
+    }
+
     submitParentForm(parentForm: any){
       let data = '';
       if (this.haveTabs) {

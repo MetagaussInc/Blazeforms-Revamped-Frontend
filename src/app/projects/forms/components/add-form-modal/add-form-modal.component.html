@@ -17,14 +17,14 @@
                             <button type="button" class="btn btn-bf btn-sm mb-2" data-bs-dismiss="modal" (click)="openEdit('Form')">Add
                                     Form</button>
                             <div>Or</div>
-                            <div ><a (click)="viewFormsList = true;viewMainSection = false" class="">Copy Existing Form </a></div>
+                            <div ><a href="#" (click)="viewFormsList = true;viewMainSection = false" class="">Copy Existing Form </a></div>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex d-wrap justify-content-center align-content-center py-5">
                         <div class="add-form-area text-center">
                             <button type="button" class="btn btn-bf btn-sm mb-2" (click)="openEdit('WorkFlow')">Add Workflow</button>
                             <div>Or</div>
-                            <div><a  (click)="viewFormsList = true;viewMainSection = false">Copy Existing Workflow</a></div>
+                            <div><a  href="#" (click)="viewFormsList = true;viewMainSection = false">Copy Existing Workflow</a></div>
                         </div>
                     </div>
                 </div>
@@ -72,11 +72,11 @@
             <ng-container  *ngIf="viewFormsList">
                 <div class="forms-list col-md-12 border rounded form-list">
                     <div class="form-list-item row p-3 border-bottom" *ngFor="let form of formsList">
-                        {{form.name}}
-                        <span style="position: absolute; right: 100px;" (click)="copy(form)">
+                        <span (click)="viewForm(form)" role="button">{{form.name}}</span>
+                        <span style="position: absolute; right: 100px;" (click)="copy(form)" role="button">
                             <i class="material-icons">content_copy</i>
                         </span>
-                        <span style="position: absolute; right: 50px;"(click)="viewForm(form)">view</span>
+                        <span style="position: absolute; right: 50px;"(click)="viewForm(form)" role="button"> <i class="material-icons">visibility</i></span>
                     </div>
                 </div>
                 
@@ -88,7 +88,7 @@
                 </div>
                 
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-link btn-sm text-bf" (click)="activeModal.close('close')">Cancel</button>
+                    <button type="button" class="btn btn-link btn-sm text-bf" (click)="viewFormsList = true;viewFormDesign = false">Back</button>
                     <button type="button" class="btn btn-bf btn-sm" (click)="copyFromDesign()">Copy</button>
                 </div>
             </ng-container>

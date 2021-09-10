@@ -8,7 +8,7 @@
                     <a ngbNavLink>Publish Code</a>
                     <ng-template ngbNavContent>
                         <div class="publish-code-container col-md-12 mt-2 text-center">
-                            <div class="form-embeded-wrap mt-2">
+                            <div class="form-embeded-wrap mt-4">
                                 <h4>Embed In Your Site
                                 </h4>
                                 <p class="text-muted">Simply copy & paste the code below into your html!
@@ -187,7 +187,7 @@
     </div>
 
     <div class="col-md-9 col-lg main" >
-        <div class="m-3 p-3 border-top border-5 border-bf bf-custom-styling" [style.background-color]="styling?.pagebackgroundColor" [ngStyle]="{'background-image': getUrl(styling.pagebackgroundImage)}" >
+        <div class="m-3 p-3 border-top border-5 border-bf bf-custom-styling overflow-auto vh-100" [style.background-color]="styling?.pagebackgroundColor" [ngStyle]="{'background-image': getUrl(styling.pagebackgroundImage)}" >
             <div class="publish-container">
                 <!-- -----Tabs---- -->
                 <div class="form-build-head border-bottom mb-3">
