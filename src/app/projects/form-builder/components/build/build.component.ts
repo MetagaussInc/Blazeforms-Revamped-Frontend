@@ -1015,8 +1015,8 @@ export class BuildComponent implements OnDestroy {
 
   }
   addStripeAccount() {
-    this.stripeAccounts.forEach((account: any) => {
-      if (account.accountName === this.paymentSetting.stripeAccount) {
+    this.stripeAccounts?.forEach((account: any) => {
+      if (account.accountName === this.paymentSetting?.stripeAccount) {
         this.paymentSetting.accountDetail = account;
       }
     });
