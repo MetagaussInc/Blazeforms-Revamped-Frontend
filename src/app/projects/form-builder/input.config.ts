@@ -1539,7 +1539,7 @@ export const config = [
     {
         name: 'Name',
         iconClass: 'material-icons',
-        iconName: 'place',
+        iconName: 'person',
         value: '',
         children: [
             {
@@ -3233,6 +3233,8 @@ export const advancedLayout = [
         class: 'wide',
         size: 'medium',
         view: 'always',
+        fileSize: 0.5,
+        numberOfFile: 2,
         value: [],
         validations: {
             size: {
@@ -3289,7 +3291,9 @@ export const advancedLayout = [
                     }
                 ],
                 dataRefKey: 'isRequired'
-            }
+            },
+            fileSize: true,
+            numberOfFiles: true
         }
     },
     {

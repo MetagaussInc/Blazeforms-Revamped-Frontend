@@ -43,7 +43,7 @@
                 <div ngbDropdown class="">
                     <div class="dropdown-toggle" id="notification-dropdown" role="button" ngbDropdownToggle>
                         <i class="material-icons-outlined">notifications</i>
-                        <span class="badge badge-primary notification-badge">10</span>
+                        <span *ngIf="getNotificationsCount(notifications) > 0" class="badge badge-primary notification-badge">{{getNotificationsCount(notifications)}}</span>
                     </div>
 
                     <!-- <a *ngFor="let item of notifications" class="dropdown-item">{{item.formName}} filled by <br />{{item.userName}} <span (click)="viewPublish(item)">View</span></a> -->

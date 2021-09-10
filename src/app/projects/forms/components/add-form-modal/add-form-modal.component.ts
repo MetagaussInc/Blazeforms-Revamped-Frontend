@@ -14,7 +14,7 @@ export class AddFormModalComponent implements OnInit, OnChanges {
 @Input() public formsList: any;
 @Input() public userId: any;
 @Output() openEditEvent: EventEmitter<any> = new EventEmitter()
- viewFormsList = false;
+ viewFormsList: any = null;
  viewFormDesign = false;
  viewMainSection = true;
  url = '';
@@ -44,7 +44,7 @@ export class AddFormModalComponent implements OnInit, OnChanges {
     this.url = form.url;
     this.selectedForm = form;
     this.viewFormDesign = true;
-    this.viewFormsList = false
+    this.viewFormsList = null
   }
 
   copyFromDesign() {

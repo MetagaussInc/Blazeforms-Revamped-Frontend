@@ -12,6 +12,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as lodash from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-build',
@@ -1100,7 +1101,7 @@ export class BuildComponent implements OnDestroy {
   deleteEntry() {
     let string = '';
     this.entries.selected.forEach((index: any) => {
-      string = ',' + this.entries.entries[index]?.id;
+      string =  string + ',' + this.entries.entries[index]?.id;
     });
     this.http.call('DeleteFormEntries', 'POST',
       {
@@ -1253,6 +1254,32 @@ export class BuildComponent implements OnDestroy {
     });
     total = total + subTotal;
     return total;
+  }
+
+
+  onFileChange(event: any, form: any) {
+    const reader = new FileReader();    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      if (file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type == 'application/vnd.ms-excel' || file.type == '.xlsx' || file.type == '.xls' || file.type == 'image/jpeg') {
+      let fileReader = new FileReader();    
+      fileReader.readAsArrayBuffer(file);     
+      fileReader.onload = (e) => {    
+          const arrayBuffer: any = fileReader.result;    
+          let data = new Uint8Array(arrayBuffer);    
+          let arr = [];    
+          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
+          let bstr = arr.join(""); 
+          let workbook = XLSX.read(bstr, {type:"binary"});    
+          let first_sheet_name = workbook.SheetNames[0];    
+          let worksheet = workbook.Sheets[first_sheet_name];    
+            let arraylist: any = XLSX.utils.sheet_to_json(worksheet,{raw:true});  
+            for (let index = 0; index < arraylist.length; index++) {
+              form.options.push( { label: arraylist[index].name, payment: 0 },) 
+            }   
+      }   
+      }
+    }
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

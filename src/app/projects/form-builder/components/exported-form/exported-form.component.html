@@ -204,6 +204,9 @@
                                     type="file" name="formFirld1_{{ form.uiIndexId }}" multiple
                                     placeholder="{{form.placeholder}}" (change)="onFileChange($event, form)"
                                     [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                                    <div *ngIf="form.message" class="file-list m-2" >
+                                        {{form.message}}
+                                    </div>
                                 <div class="file-list m-2" *ngFor="let file of form?.value; let fileIndex = index">
                                     {{file.name}}
                                     <button [style.font-family]="styling?.buttons?.font"
@@ -982,6 +985,9 @@
                     [style.color]="styling?.text?.color" type="file" name="formFirld1_{{ form.uiIndexId }}" multiple
                     placeholder="{{form.placeholder}}" (change)="onFileChange($event, form)"
                     [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
+                    <div *ngIf="form.message" class="file-list m-2" >
+                        {{form.message}}
+                    </div>
                 <div class="file-list m-2" *ngFor="let file of form?.value; let fileIndex = index">
                     {{file.name}}
                     <button [style.font-family]="styling?.buttons?.font" [style.font-size.px]="styling?.buttons?.size"

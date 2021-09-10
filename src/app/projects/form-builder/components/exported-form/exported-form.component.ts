@@ -424,9 +424,32 @@ StripeToken: token
   }
 
   onFileChange(event: any, form: any) {
-    for  (var i =  0; i <  event.target.files.length; i++)  {  
-      form.value.push(event.target.files[i]);
-  }
+    const reader = new FileReader();    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      // if (file.type == 'image/jpg' || file.type == 'image/png' || file.type == 'image/jpeg') {
+        let fileSize = ((file.size) / (1024 * 1024));
+        if(fileSize < form.fileSize && form.value?.length < form.numberOfFile){
+          form.message = null;
+          reader.readAsDataURL(file);    
+          reader.onload = () => {   
+            console.log('yes')
+            form.value.push({
+              name: file.name,
+              file: reader.result,
+              type: file.type
+            })
+            // this.fileSource = reader.result;
+            // this.logoType = file.type;
+          };
+        } else
+        if (fileSize > form.fileSize) {
+          form.message = 'File size should not more than ' + form.fileSize + ' MB';
+        } else if (form.value.length >= form.numberOfFile) {
+          form.message = 'You can upload upto ' + form.numberOfFile + ' files';
+        }
+      // }
+    }
   }
 
   viewLevelSection(form: any): boolean {

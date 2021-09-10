@@ -174,5 +174,14 @@ export class FormsHeaderComponent implements OnInit {
   getFormID(url: any, id: any) {
     return window.location.href?.split('#')?.[0] + `#/${url?.split('#')?.[1]?.replace('BlazeForms', 'blazeforms')}`
   }
+  getNotificationsCount(notifications: any) {
+    let count = 0;
+    notifications.map((x: any) => {
+      if (!x.isRead) {
+        count = count + 1;
+      }
+    })
+    return count;
+  }
 
 }

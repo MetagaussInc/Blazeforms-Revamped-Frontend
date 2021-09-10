@@ -17,14 +17,14 @@
                             <button type="button" class="btn btn-bf btn-sm mb-2" data-bs-dismiss="modal" (click)="openEdit('Form')">Add
                                     Form</button>
                             <div>Or</div>
-                            <div ><a href="#" (click)="viewFormsList = true;viewMainSection = false" class="">Copy Existing Form </a></div>
+                            <div ><a href="#" (click)="viewFormsList = 'Form';viewMainSection = false" class="">Copy Existing Form </a></div>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex d-wrap justify-content-center align-content-center py-5">
                         <div class="add-form-area text-center">
                             <button type="button" class="btn btn-bf btn-sm mb-2" (click)="openEdit('WorkFlow')">Add Workflow</button>
                             <div>Or</div>
-                            <div><a  href="#" (click)="viewFormsList = true;viewMainSection = false">Copy Existing Workflow</a></div>
+                            <div><a  href="#" (click)="viewFormsList = 'WorkFlow';viewMainSection = false">Copy Existing Workflow</a></div>
                         </div>
                     </div>
                 </div>
@@ -71,15 +71,21 @@
             </ng-container>
             <ng-container  *ngIf="viewFormsList">
                 <div class="forms-list col-md-12 border rounded form-list">
-                    <div class="form-list-item row p-3 border-bottom" *ngFor="let form of formsList">
-                        <span (click)="viewForm(form)" role="button">{{form.name}}</span>
-                        <span style="position: absolute; right: 100px;" (click)="copy(form)" role="button">
-                            <i class="material-icons">content_copy</i>
-                        </span>
-                        <span style="position: absolute; right: 50px;"(click)="viewForm(form)" role="button"> <i class="material-icons">visibility</i></span>
-                    </div>
+                    <ng-container *ngFor="let form of formsList">
+                        <div *ngIf="viewFormsList === form.formType" class="form-list-item row p-3 border-bottom" >
+                            <span (click)="viewForm(form)" role="button">{{form.name}}</span>
+                            <span ngbTooltip="Tooltip on top" style="position: absolute; right: 100px;" (click)="copy(form)" role="button">
+                                <i class="material-icons">content_copy</i>
+                            </span>
+                            <span style="position: absolute; right: 50px;"(click)="viewForm(form)" role="button"> <i class="material-icons">visibility</i></span>
+                        </div>
+                    </ng-container>
+                    
+                    
                 </div>
-                
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-link btn-sm text-bf" (click)="viewFormsList = null;viewMainSection = true">Back</button>
+                </div>
             </ng-container>
             <ng-container  *ngIf="viewFormDesign">
                 <div class="forms-list col-md-12 border rounded form-list">
