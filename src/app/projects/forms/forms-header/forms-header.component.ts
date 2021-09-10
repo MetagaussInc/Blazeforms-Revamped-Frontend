@@ -176,7 +176,7 @@ export class FormsHeaderComponent implements OnInit {
   }
   getNotificationsCount(notifications: any) {
     let count = 0;
-    notifications.map((x: any) => {
+    notifications?.map((x: any) => {
       if (!x.isRead) {
         count = count + 1;
       }
