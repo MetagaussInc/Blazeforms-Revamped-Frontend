@@ -1195,6 +1195,10 @@
          background-color: $base-color;
      }
 
+     .folder-list-with-forms {
+        min-height: 400px;
+    }
+
      /*--- Publish Page Style Editor----*/
 
     app-root app-build .publish-container .ngx-dnd-container {
