@@ -579,7 +579,7 @@ export const config = [
     },
     {
         name: 'Number',
-        iconClass: 'material-icons',
+        iconClass: 'material-icons-outlined',
         iconName: 'numbers',
         inputType: 'number',
         icon: 'fas fa-hashtag',
