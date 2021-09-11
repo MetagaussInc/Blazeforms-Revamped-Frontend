@@ -1866,8 +1866,8 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="table-responsive-main">
-                                        <table class="table mt-3  text-center border table-responsive" id="table-id" data-toggle="table"
+                                        <div class="table-responsive-main table-responsive">
+                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
                                             data-search="true" data-filter-control="true" data-show-export="true"
                                             data-show-refresh="true" data-show-toggle="true" data-pagination="true"
                                             data-toolbar="#toolbar">
@@ -1889,9 +1889,11 @@
                                             <tbody>
                                                 <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
                                                     <tr *ngIf="!filter || (filter && filter === row[1])">
-                                                        <td class="bs-checkbox "><input data-index="0"
+                                                        <td class="bs-checkbox ">
+                                                            <input data-index="0"
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)"
-                                                                type="checkbox"></td>
+                                                                type="checkbox">
+                                                            </td>
                                                         <ng-container (click)="viewEntry(rowIndex)"  *ngFor="let col of entries.columns">
 
                                                             <td *ngIf="col.view && row?.[col?.field] !== 'No_value' && col.headerName !== 'Signature'">
