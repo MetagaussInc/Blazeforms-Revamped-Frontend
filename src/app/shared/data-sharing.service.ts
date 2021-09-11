@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo, userPlanDetail, userWorkspaceLists } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -153,6 +154,23 @@ export class DataSharingService {
   GetPageLoader(){
     let loader = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
     return loader;
+  }
+
+  UpdateHeaderUserPlanDetail(userid: any, workspaceid: any){
+    const obj = {
+      UserId: userid,
+      WorkspaceId: workspaceid,
+    }
+    this.http.call('getUserPlanDetailByWorkspace', 'POST', obj).subscribe(res => {
+      if(res){
+        console.log(res);
+        const props = {
+          mappingKey: 'getUserPlanDetailByWorkspace',
+          payload: res
+        }
+        this.store.dispatch(updateUserPlanDetail({props}));
+      }
+    });
   }
 
 }

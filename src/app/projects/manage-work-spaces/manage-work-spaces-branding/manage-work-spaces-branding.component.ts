@@ -38,7 +38,6 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
         this.userId = this.userInfo.Id;
         this.isSuperAdmin = this.userInfo.IsSuperAdmin;
       }      
-      console.log(this.userInfo);
     });
     const queryParamsAction = this.Activatedroute.queryParamMap.subscribe(params => {
       if(params.get('action') == 'edit'){
@@ -94,10 +93,12 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
           };
         }
         else{
+          this.Image.setErrors({'invalid': true});
           this.toastService.showError('Image size should not be more then 500 KB !');
         }
       }
       else{
+        this.Image.setErrors({'invalid': true});
         this.toastService.showError('Only JPG or PNG allowed!');
       }
     }
@@ -121,6 +122,8 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
           }
           this.store.dispatch(userWorkspaceLogoUpdate({props}));
         }
+        // update header uses
+        this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.organizationId);
         this.toastService.showSuccess('Logo Updated Successfully!');
       }
       else{

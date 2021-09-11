@@ -8,6 +8,7 @@ import { InviteUserModalComponent } from './invite-user-modal/invite-user-modal.
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
 import { DataSharingService } from '../../../shared/data-sharing.service';
 import { ToastService } from '../../../shared/toast.service';
+import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 
 @Component({
   selector: 'app-manage-work-spaces-users',
@@ -83,6 +84,8 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
       if(result == 'getAccountUsersData'){
         this.accountUsersLists = [];
         this.getAccountUsersData();
+        // update header uses
+        this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.organizationId);
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
@@ -122,8 +125,10 @@ export class ManageWorkSpacesUsersComponent implements OnInit {
             this.toastService.showSuccess('Deleted Successfully!');
             this.accountUsersLists = [];
             this.getAccountUsersData();
+            // update header uses
+            this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.organizationId);
           }
-        })
+        });
       }
     }, (reason: any) => {
       console.log(`Dismissed `);

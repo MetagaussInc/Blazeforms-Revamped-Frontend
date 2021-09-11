@@ -36,6 +36,7 @@ export class EditFormModalComponent implements OnInit {
     console.log($event)
     this.folder?.setValue($event);
   }
+   
   constructor(private http: HttpService, public activeModal: NgbActiveModal, private modalService: NgbModal) { }
 
   ngOnInit(): void {
