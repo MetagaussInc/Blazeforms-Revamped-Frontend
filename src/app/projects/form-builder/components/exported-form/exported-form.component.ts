@@ -254,7 +254,9 @@ StripeToken: token
         } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
           this.string = this.string + element.uiIndexId + '=' + element.name + '='
           element.children.forEach((child: any) => {
-            this.string = this.string + child.value + ', '
+            if (child.value?.length > 1) {
+              this.string = this.string + child.value + ', '
+            }
           });
           this.string = this.string + '||';
 

@@ -6,7 +6,7 @@
         <div class="filter-dropdown-folder-area-title">
             <span class="text-bf font-weight-bold small">Filter By Folders</span>
         </div>
-        <div class="filter-dropdown-folder-list overflow-auto pt-2 pr-3">
+        <div class="filter-dropdown-folder-list overflow-auto scroller pt-2 pr-3">
             <ng-container *ngFor="let item of childData">
                 <app-tree-select [data]="item" [searchedString]="searchedString" [selectedFolder]="selectedFolder" (selectFolderEvent)="selectionChange($event)"></app-tree-select>
             </ng-container>

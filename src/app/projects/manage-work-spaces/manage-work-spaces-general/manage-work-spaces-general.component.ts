@@ -177,7 +177,8 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    // this.location.back();
+    this.router.navigate(['/work-spaces']);
   }
 
   get Name() { return this.organizationGeneralForm.get('Name'); }

@@ -47,6 +47,7 @@ export class FormsComponent implements OnInit {
   public favs: any = []
   public notifications: any;
   formsbyId: any;
+  dataLoaded = false;
   constructor(private http: HttpService, private store: Store, private modalService: NgbModal, private router: Router, private dataSharingService: DataSharingService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       console.log(userInfo)
@@ -77,6 +78,7 @@ export class FormsComponent implements OnInit {
           this.favs.push(element.id);
         }
       });
+      this.dataLoaded = true
     })
 
     this.http.call('getFolders', 'POST', {

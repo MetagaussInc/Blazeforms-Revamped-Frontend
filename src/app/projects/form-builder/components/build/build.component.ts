@@ -95,6 +95,7 @@ export class BuildComponent implements OnDestroy {
       type: 'dollar',
       name: 'Additional'
     };
+  selectedPlan: any = '';
   model: any = {
     name: '',
   };
@@ -460,6 +461,27 @@ export class BuildComponent implements OnDestroy {
         ID = element.id;
       }
     });
+    const payload = {
+      Id: ID,
+      UserId: id,
+      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+    }
+
+    this.http.call('DeleteUserFromWorkFlow', 'POST', payload).subscribe(res => {
+      this.getWorkFlowDetails(this.formId);
+
+    })
+
+  }
+
+  deleteUserFromLevel(id: any) {
+    let ID = ''
+    this.workFLowDetails.workFlowUsers.forEach((element: any) => {
+      if (element.userId === id) {
+        ID = element.id;
+      }
+    });
+
     const payload = {
       Id: ID,
       UserId: id,
@@ -973,7 +995,7 @@ export class BuildComponent implements OnDestroy {
       this.selectedElement['viewOption'] = false;
     }
     this.selectedElement = model;
-    console.log(model, i)
+    console.log(model.name, 'Selected')
     this.viewProperties = 1;
 
     $event.preventDefault();
@@ -983,7 +1005,7 @@ export class BuildComponent implements OnDestroy {
   sectionClicked($event: any, model: any, i: any) {
     this.selectedElement = model;
     this.viewProperties = 1;
-    console.log(model, i)
+    console.log(model.name, 'Selected')
     $event.preventDefault();
     $event.stopPropagation()
 
@@ -993,8 +1015,8 @@ export class BuildComponent implements OnDestroy {
 
   }
   addStripeAccount() {
-    this.stripeAccounts.forEach((account: any) => {
-      if (account.accountName === this.paymentSetting.stripeAccount) {
+    this.stripeAccounts?.forEach((account: any) => {
+      if (account.accountName === this.paymentSetting?.stripeAccount) {
         this.paymentSetting.accountDetail = account;
       }
     });
@@ -1280,6 +1302,28 @@ export class BuildComponent implements OnDestroy {
       }   
       }
     }
+  }
+
+  selectRole($event: any) {
+    this.selectedPlan = $event.target.value;
+    console.log(this.selectedPlan)
+  }
+
+  inviteUser() {
+    const p = {
+      CreatedBy: this.userInfo.Id,
+      FormId: this.builderObj.id,
+      LevelId: null,
+      RoleId: this.selectedPlan,
+      SessionUser: this.userInfo.Id,
+      UserEmail: this.userSerach,
+      UserType: "Owner",
+      WorkspaceId: this.userInfo.WorkspaceDetail.Id,
+    }
+    this.http.call('InviteUserForWorkFlow', 'POST', p).subscribe(res => {
+      this.userSerach = '';
+      this.getWorkFlowDetails(this.formId);
+    })
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

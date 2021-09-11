@@ -579,7 +579,7 @@ export const config = [
     },
     {
         name: 'Number',
-        iconClass: 'material-icons',
+        iconClass: 'material-icons-outlined',
         iconName: 'numbers',
         inputType: 'number',
         icon: 'fas fa-hashtag',
@@ -3374,6 +3374,29 @@ export const Level = {
     class: 'wide',
     size: 'extra-large',
     view: 'always',
+    validations: {
+        size: {
+            dataRefKey: 'size',
+            options: [
+                {
+                    label: 'Small',
+                    value: 'small'
+                },
+                {
+                    label: 'Medium',
+                    value: 'medium'
+                },
+                {
+                    label: 'Large',
+                    value: 'large'
+                },
+                {
+                    label: 'Extra Large',
+                    value: 'extra-large'
+                }
+            ]
+        }
+    }
 }
 
 export const paymentModel = {

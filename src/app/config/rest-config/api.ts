@@ -34,6 +34,7 @@ export const api: any = {
     getRolePermission: 'Forms/GetRolePermission',
     getFormUserRoleWorkSpaces: 'Forms/GetFormUserRoleWorkSpaces',
     deleteRolePermission: 'Forms/DeleteRolePermission',
+    InviteUserForWorkFlow: "Forms/InviteUserForWorkFlow",
     moveFolder: "Forms/MoveForm",
     SaveFolderAttributes: "Folders/SaveFolderAttributes",
     ValidateFolderName: "Folders/ValidateFolderName",
