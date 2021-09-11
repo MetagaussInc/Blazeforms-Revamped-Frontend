@@ -31,9 +31,7 @@ export class InviteUserModalComponent implements OnInit {
       this.validateUserEmail.bind(this),
       Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
       this.doubleDotValidator.bind(this)
-    ],
-      this.validateEmailViaServer.bind(this)
-    ),
+    ]),
     RoleId: new FormControl(null, [Validators.required]),
   });
 
@@ -74,24 +72,7 @@ export class InviteUserModalComponent implements OnInit {
     }
     return null;
   }
-
-  validateEmailViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
-    return this.http.call('checkEmail', 'POST', { Email: value })
-      .pipe(debounceTime(1000),
-        map((response: any) => {
-          if(this.currentUserEmail != value){
-            if (response.data) {
-              return {
-                isExists: true
-              };
-            }
-          }
-          return null;
-        }
-      )
-    )
-  }
-
+  
   submit(){
     const obj = {
       ...JSON.parse(JSON.stringify(this.accountInviteForm.value)),

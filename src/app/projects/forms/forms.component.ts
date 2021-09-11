@@ -14,6 +14,7 @@ import { DataSharingService } from '../../shared/data-sharing.service';
 import { Router } from '@angular/router';
 import { AddNewFolderComponent } from './components/add-new-folder/add-new-folder.component';
 import * as lodash from 'lodash';
+import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
 
 @Component({
   selector: 'app-forms',
@@ -231,6 +232,8 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
       if (result?.message === 'added') {
+        // update header uses
+        this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.selectedWorkspaceId);
         this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: 1}})
       }
     }, (reason: any) => {
@@ -319,6 +322,8 @@ export class FormsComponent implements OnInit {
           this.getFormsList(this.userInfo);
           this.selectedForms = [];
           this.selectedFormName = [];
+          // update header uses
+          this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.selectedWorkspaceId);
         })
       }
     }, (reason: any) => {

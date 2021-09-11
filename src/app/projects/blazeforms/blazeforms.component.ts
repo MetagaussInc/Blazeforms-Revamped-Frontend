@@ -348,24 +348,24 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
       return;
       const payload = {
         EncryptEntryData: false,
-FormType: "Form",
-Id: "k-jbgwzGUcCIANdi0eXaZQ==",
-IsValidNotification: false,
-Name: "OLD APP Form",
-PaymentMode: "Cash",
-SubmissionSettings: "NOVALUE",
-SubmittedWhenStatus: false,
-TotalEntries: 1000000000,
-UpdatedWhenStatus: false,
-UserName: "admin1223489   blazeforms",
-WorkSpaceId: "TXYu0NjodAYzBODQlLqdmg==",
-WorkSpaceName: "Super_Admin_WorkSpace1",
-formEntry: JSON.stringify({
-  entry: data,
-  status: 'Submitted',
-  SubmittedDate: new Date()
-}),
-userID: "TXYu0NjodAYzBODQlLqdmg==",
+        FormType: "Form",
+        Id: "k-jbgwzGUcCIANdi0eXaZQ==",
+        IsValidNotification: false,
+        Name: "OLD APP Form",
+        PaymentMode: "Cash",
+        SubmissionSettings: "NOVALUE",
+        SubmittedWhenStatus: false,
+        TotalEntries: 1000000000,
+        UpdatedWhenStatus: false,
+        UserName: "admin1223489   blazeforms",
+        WorkSpaceId: "TXYu0NjodAYzBODQlLqdmg==",
+        WorkSpaceName: "Super_Admin_WorkSpace1",
+        formEntry: JSON.stringify({
+          entry: data,
+          status: 'Submitted',
+          SubmittedDate: new Date()
+        }),
+        userID: "TXYu0NjodAYzBODQlLqdmg==",
       }
       this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
         console.log(res)
