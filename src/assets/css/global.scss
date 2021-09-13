@@ -780,6 +780,10 @@
             background-color: #efefef;
         }
 
+        app-build .builder-target .ngx-dnd-container .levelSection .builder-section-wrap .ngx-dnd-container .popover-controller {
+            display: none !important;
+        }
+
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller { display: none !important;}
         
         .target-droppable .page-break-head {
@@ -1078,7 +1082,7 @@
         .build-droppable-tool input[type=number],
         .build-droppable-tool input[type=tel],
         .build-droppable-tool input[type=date],
-        .build-droppable-tool input[type=file]
+        .build-droppable-tool input[type=file],
         .build-droppable-tool input.form-control,
         .build-droppable-tool select,
         .build-droppable-tool textarea    {
@@ -1092,6 +1096,17 @@
         .build-droppable-tool input[type=checkbox] {
             cursor: default;
             pointer-events: none;
+        }
+
+        .build-droppable-tool .custom-checkbox .custom-control-label::before {
+            background-color: #e9ecef;
+            opacity: 1;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .build-droppable-tool .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #f04564;
         }
 
         .build-droppable-tool .custom-radio .custom-control-label::before {
@@ -1186,8 +1201,10 @@
      .table-responsive-main .table .thead-light th,
      .table-responsive-main .table td{
         white-space: nowrap;
+        width:1px;
      }
 
+  
      .form-list-item .form-checkbox-wrap {
         cursor: pointer;
      }

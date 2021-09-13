@@ -1298,7 +1298,7 @@
         <div class="form-btn-group my-3" *ngIf="!noTabs">
             <button [style.font-family]="styling?.buttons?.font" [style.font-size.px]="styling?.buttons?.size"
                 [style.color]="styling?.buttons?.color" *ngIf="active !== 0 && haveTabs" (click)="active = active - 1"
-                class="btn btn-bf btn-md">back</button>
+                class="btn btn-bf btn-md mr-2">back</button>
             <button [style.font-family]="styling?.buttons?.font" [style.font-size.px]="styling?.buttons?.size"
                 [style.color]="styling?.buttons?.color" *ngIf="active !== allArr.length - 1 && haveTabs"
                 (click)="active = active + 1" class="btn btn-bf btn-md">Next</button>
