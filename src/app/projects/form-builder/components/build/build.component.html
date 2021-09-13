@@ -28,33 +28,33 @@
                                     <h2>Workflow</h2>
                                 </div>
                             </div>
-                            
+
                             <div class="Workflow-container container">
-                            
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Invite Users</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text  d-flex h6 info-box-text">
                                                     <span class="material-icons-outlined mr-2">
                                             info
                                         </span> You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners
                                                     has full rights to edit workflow, modify levels, assign participants and design workflow forms.</p>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                            
+
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Define owners for this workflow</h5>
                                             <div class="card-body">
-                            
+
                                                 <div  class="form-group">
                                                     <label></label>
                                                     <input [ngClass]="{'disabled': builderObj.hasEntries}" id="text1" name="text1" type="text" [(ngModel)]="userSerach" placeholder="Enter name or email of users to add as owner" class="form-control">
@@ -69,11 +69,11 @@
                                                                     <div clss="workflow-user-name">{{user.firstName}} {{user.lastName}}</div>
                                                                     <span class="workflow-user-email text-muted"><i>{{user.email}}</i></span>
                                                                 </div>
-                                            
+
                                                                 <div class="added-user-title-wrapper col-md-2">
                                                                     <button class="btn btn-primary btn-bf" (click)="addUserToWorkFlow(user.id)">Add</button>
                                                                 </div>
- 
+
                                                                 </div>
                                                             </div>
                                                         </ng-container>
@@ -83,37 +83,37 @@
                                                                     <strong>{{userSerach}}</strong> Search not found in the organization. want to invite?
                                                                 </div>
                                                                 <div clss="user-selector form-group">
-                                                                    <label for="select" class=" col-form-label"></label> 
-                                                                 
+                                                                    <label for="select" class=" col-form-label"></label>
+
                                                                       <select [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com')" id="select" name="select" class="custom-select" (change)="selectRole($event)" >
                                                                         <option *ngFor="let role of workFLowDetails?.roles" [value]="role.id">{{role.name}}</option>
                                                                       </select>
                                                                     </div>
                                                                       <div clss="user-invit-button form-group row"> <button name="invite" type="button" (click)="inviteUser()" class="btn btn-primary btn-bf mt-3" [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com')">Invite</button></div>
-                                                                
-                                                            </div> 
+
+                                                            </div>
                                                         </ng-container>
-                                                        
-                                                        
+
+
                                                     </div>
 
-                                                    
+
 
                                                 </div>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
+
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <h4>Added Users</h4>
                                         <div class="added-users-list col-md-12 border rounded">
                                             <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers" >
                                                 <div *ngIf="addedUserId?.includes(user.id)" class="added-user-item row p-3 border-bottom border rounded">
-                            
+
                                                     <div class="added-user-title-wrapper col-md-1">
                                                         <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
                                                     </div>
@@ -121,150 +121,165 @@
                                                         <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
                                                         <span class="text-muted"><i>{{user.email}}</i></span>
                                                     </div>
-                                
+
                                                     <div class="added-user-title-wrapper col-md-3">
                                                         <span *ngIf="user.isLinkActivated" class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
                                                         <span *ngIf="!user.isLinkActivated" class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
                                                     </div>
                                                     <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                
+
                                                         <i class="material-icons-round text-dark" (click)="deleteUser(user.id)">delete</i>
                                                     </div>
                                                 </div>
                                             </ng-container>
-                                            
-                                          
-                                                    
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Define various levels to this workflow</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text">
                                                     You may add any user within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate themselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
-                            
-                                                <div class="text-center" > <a [ngClass]="{'disabled': builderObj.hasEntries}" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
-                            
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <div class=" multi-collapse card">
-                                            <h5 class="card-header">Added Levels</h5>
-                                            <div class="card-body workflow-levels">
-                                                <div class="ngx-dnd-container" [ngxDroppable]="'example-two'">
-                                                    <div class="ngx-dnd-item" [ngxDraggable]="['example-two']" *ngFor="let item of workFLowDetails?.workFlowLevels" class="">
-                                                        <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="form-group"  >
-                                
-                                                                <input [ngClass]="{'disabled': builderObj.hasEntries}" name="text1" [value]="item.level" (keyup)="changeLevel($event, item)" type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                
-                                                        <div class="col-md-4 text-right">
-                                                            <span class="material-icons animate-mat collapsed mr-1" title="Add Participants" (click)="item.expanded = !item.expanded">person_add</span>
-                                                            <span class="material-icons animate-mat mr-1" title="Drag n Drop">open_with</span>
-                                                            <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
-                                                            <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
-                                                            <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded"> expand_more </span>
-                                                        </div>
-                                                        </div>
-                                                        <div class="row my-3">
-                                                        <div class="col-12">
-                                                            <ng-container *ngFor="let flowUsers of workFLowDetails?.workFlowUsers">
-                                                                <div *ngIf="item .id === flowUsers.levelId"  class="added-user-item row p-3 border-bottom">
-                                
-                                                                    <div class="added-user-title-wrapper col-md-1">
-                                                                        <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
-                                                                    </div>
-                                                                    <div class="added-user-title-wrapper col-md-6">
-                                                                        <div clss="added-user-name">{{flowUsers.userName}}</div>
-                                                                        <span class="text-muted"><i>{{flowUsers.email}}</i></span>
-                                                                    </div>
-                                                
-                                                                    <div class="added-user-title-wrapper col-md-3">
-                                                                        <span *ngIf="flowUsers.isLinkActivated" class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
-                                                                        <span *ngIf="!flowUsers.isLinkActivated" class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
-                                                                    </div>
-                                                                    <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                                
-                                                                        <i class="material-icons-round text-dark" (click)="deleteUserFromLevel(flowUsers.userId)">delete</i>
-                                                                    </div>
-                                                                </div>
-                                                            </ng-container>
-                                                            
-                                                            
-                                                        </div>
-                                                        </div>
-                                                        <div *ngIf="item.expanded" class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                    
-                                                                    <input name="text2" (keyup)="userNameChange($event, item)" placeholder="Add user to {{item.level}}"  type="text" class="form-control">
-                                                                    <div *ngIf="item.userSerachForLevel?.length > 0" class="border shadow">
-                                                                        <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers"  class="rounded">
-                                                                            <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)" class="workflow-list-item row p-3 border-bottom">
-                                                        
-                                                                                <div class="added-user-title-wrapper col-md-1">
-                                                                                    <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
-                                                                                </div>
-                                                                                <div class="added-user-title-wrapper col-md-9">
-                                                                                    <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
-                                                                                    <span class="text-muted"><i>{{user.email}}</i></span>
-                                                                                </div>
-                                                            
-                                                                                <div class="added-user-title-wrapper col-md-2">
-                                                                                    <button class="btn btn-primary btn-bf" (click)="addUserToWorkFlowLevel(user.id, item.id)">Add</button>
-                                                                                </div>
-                                                                                <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                                                            
-                                                                                </div>
-                                                                            </div>
-                                                                        </ng-container>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
-                                                        </div>
-                                                    </div>
+                                                    <div class="row mt-3" *ngIf="workFLowDetails?.workFlowLevels.length > 0">
+                                                      <div class="col">
+                                                          <div class=" multi-collapse card">
+                                                              <h5 class="card-header">Added Levels</h5>
+                                                              <div class="card-body workflow-levels">
+                                                                  <div class="ngx-dnd-container" [ngxDroppable]="'example-two'">
+                                                                      <div class="ngx-dnd-item" [ngxDraggable]="['example-two']" *ngFor="let item of workFLowDetails?.workFlowLevels" class="">
+                                                                          <div class="row">
+                                                                          <div class="col-md-8">
+                                                                              <div class="form-group"  >
+
+                                                                                  <input [ngClass]="{'disabled': builderObj.hasEntries}" name="text1" [value]="item.level" (keyup)="changeLevel($event, item)" type="text" class="form-control">
+                                                                              </div>
+                                                                          </div>
+
+                                                                          <div class="col-md-4 text-right">
+                                                                              <span class="material-icons animate-mat collapsed mr-1" title="Add Participants" (click)="item.expanded = !item.expanded">person_add</span>
+                                                                              <span class="material-icons animate-mat mr-1" title="Drag n Drop">open_with</span>
+                                                                              <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
+                                                                              <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
+                                                                              <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded"> expand_more </span>
+                                                                          </div>
+                                                                          </div>
+                                                                          <div class="row my-3">
+                                                                          <div class="col-12">
+                                                                              <ng-container *ngFor="let flowUsers of workFLowDetails?.workFlowUsers">
+                                                                                  <div *ngIf="item .id === flowUsers.levelId"  class="added-user-item row p-3 border-bottom">
+
+                                                                                      <div class="added-user-title-wrapper col-md-1">
+                                                                                          <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                                                      </div>
+                                                                                      <div class="added-user-title-wrapper col-md-6">
+                                                                                          <div clss="added-user-name">{{flowUsers.userName}}</div>
+                                                                                          <span class="text-muted"><i>{{flowUsers.email}}</i></span>
+                                                                                      </div>
+
+                                                                                      <div class="added-user-title-wrapper col-md-3">
+                                                                                          <span *ngIf="flowUsers.isLinkActivated" class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
+                                                                                          <span *ngIf="!flowUsers.isLinkActivated" class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
+                                                                                      </div>
+                                                                                      <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
+
+                                                                                          <i class="material-icons-round text-dark" (click)="deleteUserFromLevel(flowUsers.userId)">delete</i>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </ng-container>
+
+
+                                                                          </div>
+                                                                          </div>
+                                                                          <div *ngIf="item.expanded" class="row">
+                                                                              <div class="col-md-12">
+                                                                                  <div class="form-group">
+
+                                                                                      <input name="text2" (keyup)="userNameChange($event, item)" placeholder="Add user to {{item.level}}"  type="text" class="form-control">
+                                                                                      <div *ngIf="item.userSerachForLevel?.length > 0" class="border shadow">
+                                                                                          <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers; let wIndex = index"  class="rounded">
+                                                                                              <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)" class="workflow-list-item row p-3 border-bottom">
+
+                                                                                                  <div class="added-user-title-wrapper col-md-1">
+                                                                                                      <img src="assets/images/user.jpg" class="user-profile-img rounded-circle" alt="" title="" width="40" height="40">
+                                                                                                  </div>
+                                                                                                  <div class="added-user-title-wrapper col-md-9">
+                                                                                                      <div clss="added-user-name">{{user.firstName}} {{user.lastName}}</div>
+                                                                                                      <span class="text-muted"><i>{{user.email}}</i></span>
+                                                                                                  </div>
+
+                                                                                                  <div class="added-user-title-wrapper col-md-2">
+                                                                                                      <button class="btn btn-primary btn-bf" (click)="addUserToWorkFlowLevel(user.id, item.id)">Add</button>
+                                                                                                  </div>
+                                                                                                  <div class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
+
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <div *ngIf=" wIndex === 0 && !user.email?.includes(item.userSerachForLevel) && !user.firstName?.includes(item.userSerachForLevel) && !user.lastName?.includes(item.userSerachForLevel)" class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3" >
+                                                                                                <div class="autocomplete-not-found my-3">
+                                                                                                    <strong>{{item.userSerachForLevel}}</strong> Search not found in the organization. want to invite?
+                                                                                                </div>
+                                                                                                <div clss="user-selector form-group">
+                                                                                                    <label for="select" class=" col-form-label"></label>
+
+                                                                                                      <select [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')" id="select" name="select" class="custom-select" (change)="selectRole($event)" >
+                                                                                                        <option *ngFor="let role of workFLowDetails?.roles" [value]="role.id">{{role.name}}</option>
+                                                                                                      </select>
+                                                                                                    </div>
+                                                                                                      <div clss="user-invit-button form-group row"> <button name="invite" type="button" (click)="inviteUserforLevel(item.id, item.userSerachForLevel)" class="btn btn-primary btn-bf mt-3" [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')">Invite</button></div>
+
+                                                                                            </div>
+                                                                                          </ng-container>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+
+                                                                          </div>
+                                                                      </div>
+                                                                    </div>
+
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
                                                   </div>
-                                                
+                                                <div class="text-center" > <a [ngClass]="{'disabled': builderObj.hasEntries}" class="btn btn-primary btn-bf" (click)="addLevels(null, null, true)">Add Levels</a></div>
+
                                             </div>
                                         </div>
                                     </div>
-                            
                                 </div>
-                            
-                            
-                                <div class="row my-3">
+
+
+
+
+
+                                <div class="row my-3" *ngIf="workFLowDetails?.workFlowLevels.length > 0">
                                     <div class="col-md-12">
                                         <div class="card workflow-box">
                                             <h5 class="card-header">Build your form</h5>
                                             <div class="card-body">
-                            
+
                                                 <p class="card-text">
                                                     You may add any under within the organization or invite user outside the organization by entering their emails below. Invited users will get email notification to activate theirselves. Users added as owners has full rights to edit workflow, modify levels,
                                                     assign participants and design workflow forms.</p>
-                            
+
                                                 <div *ngIf="!builderObj.hasEntries" class="text-center"> <a  class="btn btn-primary btn-bf" (click)="mainTab = 1">Build</a></div>
                                                 <div *ngIf="builderObj.hasEntries" class="text-center"> <a  class="btn btn-primary btn-bf" (click)="mainTab = 3">Entries</a></div>
-                            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             </div>
                         </ng-template>
                     </li>
@@ -346,7 +361,7 @@
                                                             <label for="text">Label</label>
                                                             <input id="text" name="text"
                                                                 [(ngModel)]="selectedElement.name"
-                                                                placeholder="Untitled" type="text" class="form-control">
+                                                                placeholder="Level Name Here" type="text" class="form-control">
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.placeholder"
                                                             class="form-group">
@@ -471,7 +486,7 @@
                                                                 [(ngModel)]="selectedElement.value"
                                                                 class="form-control">
                                                         </div>
-                                                        
+
                                                         <div *ngIf="selectedElement?.validations?.defaultTimeValue"
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
@@ -668,7 +683,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                
+
                                                         </div>
 
                                                         <div *ngIf="selectedElement?.validations?.toggleDefaultOptions"
@@ -704,7 +719,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                    
+
                                                                 </ng-container>
                                                             </div>
                                                         </div>
@@ -810,13 +825,13 @@
                                                         <ng-container *ngIf="selectedElement?.inputType === 'dropdown'">
                                                             <div class="form-group">
                                                                 <label for="text">File Size Limit</label>
-                                                                <input 
+                                                                <input
                                                                 (change)="onFileChange($event, selectedElement)"
                                                                     placeholder="Untitled" type="file"
                                                                     class="form-control">
                                                             </div>
                                                         </ng-container>
-                                                        
+
                                                         <div *ngIf="selectedElement?.validations?.help"
                                                             class="form-group">
                                                             <label for="Help Text">Help Text</label>
@@ -895,8 +910,8 @@
                                                                     class="form-control">
                                                             </div>
                                                         </ng-container>
-                                                        
-                                                        
+
+
                                                         <div class="mt-5" *ngIf="selectedElement.inputType === 'nameSection'">
                                                             <ng-container
                                                                 *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
@@ -913,7 +928,7 @@
                                                                         <label class="custom-control-label"
                                                                             for="name_eleIndex_{{eleIndex}}_{{eleIndex*3}}">{{addElement.placeholder}} {{!addElement.disabled}}</label>
                                                                         </div>
-                                                                 
+
                                                                 </div>
                                                             </ng-container>
                                                         </div>
@@ -950,7 +965,7 @@
                                                             <label>Payment Setting</label>
                                                             <ng-container *ngIf="selectedElement?.inputType ===  'paymentSection'">
                                                                 <div class="p-1 mr-1">
-                                                        
+
                                                                     <div class="d-flex form-group"  *ngIf="paymentSetting?.extraBill?.length === 0">
                                                                 <input class="form-control mr-1" type="text"
                                                                     [(ngModel)]="extraBillModel.name">
@@ -993,8 +1008,8 @@
                                                                         class="material-icons">remove</i></button>
                                                             </div>
                                                         </ng-container>
-                                                            
-                                                            
+
+
                                                             <div *ngIf="selectedElement?.inputType ===  'paymentSection'"
                                                                 class="custom-control custom-checkbox">
                                                                 <input type="checkbox" id="showSubTotal"
@@ -1173,11 +1188,11 @@
 
 
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
-                                               
+
                                                     <div class="popover-controller">
                                                         <span class="material-icons popover-controller-icon"
                                                             role="button" (click)="selectedElement = model; selectedElement.viewOptions = selectedElement?.viewOptions ? false : true;">
-                                                            more_vert 
+                                                            more_vert
                                                         </span>
 
                                                         <div class="popover bs-popover-bottom field-popover-wrap"
@@ -1231,8 +1246,8 @@
                                                         </div>
                                                     </div>
                                                     </div>
- 
-                                               
+
+
                                                     <div *ngSwitchCase="'section'"
                                                         (click)="sectionClicked($event, model, template); selectedElement.viewOptions = false;"
                                                         class="mjui">
@@ -1487,7 +1502,7 @@
                                                                                                 [targetBuilderTools]="targetBuilderTools"
                                                                                                 *ngIf="!model?.dependUpon || checkForDependency(model) ">
                                                                                             </app-ui-input>
-                                    
+
                                                                                         </div> -->
                                                                                 </td>
                                                                             </ng-container>
@@ -1506,7 +1521,7 @@
                                                         (click)="sectionClicked($event, model, template)">
                                                         <div class="form-group repeatSection-wrap">
                                                             <label>{{model.name}}</label>
-                                                            
+
                                                             <div class="mt-2"  (click)="clicked($event, model, template)" *ngFor="let rSection of model.childSection">
                                                                 <ngx-dnd-container *ngIf="!viewExportedView"
                                                                     dropZone="builder-target"
@@ -1541,7 +1556,7 @@
                                                         <label>{{model.name}}</label>
                                                         <div class="input-group">
                                                             <input class="form-control non-clickable" [minDate]="model.minVal"
-                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" (click)="d.toggle()" 
+                                                                [maxDate]="model.maxVal" placeholder="yyyy-mm-dd" (click)="d.toggle()"
                                                                 name="dp" [(ngModel)]="model.value" ngbDatepicker
                                                                 #d="ngbDatepicker">
                                                             <div class="input-group-append">

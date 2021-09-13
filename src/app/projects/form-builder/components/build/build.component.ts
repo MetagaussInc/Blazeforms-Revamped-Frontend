@@ -373,7 +373,7 @@ export class BuildComponent implements OnDestroy {
   }
 
   }</style>
-    
+
     `
     document.head.insertAdjacentHTML("beforeend", string)
   }
@@ -440,9 +440,9 @@ export class BuildComponent implements OnDestroy {
     const payload = {
       CreatedBy: this.userInfo.Id,
       FormId: this.formId,
-      LevelId: formId, /// 
+      LevelId: formId, ///
       UserId: id,
-      UserType: "Participant", // As per production : Always participant for this.  
+      UserType: "Participant", // As per production : Always participant for this.
       WorkspaceId: this.userInfo.WorkspaceDetail.Id
     }
 
@@ -528,6 +528,7 @@ export class BuildComponent implements OnDestroy {
     this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
       console.log('GetDetailsOfWorkflow -- response ', res)
       this.workFLowDetails = res;
+      this.addedUserId = [];
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
 
@@ -818,7 +819,7 @@ export class BuildComponent implements OnDestroy {
   updateObj(key: any, selectedElement: any, props: any) {
   }
   showPaymentFields(): boolean {
-    return this.targetBuilderTools?.some((x: any) => x.inputType === 'payment' || 
+    return this.targetBuilderTools?.some((x: any) => x.inputType === 'payment' ||
      (x.collectPayment && (x.inputType === 'currency' || x.inputType === 'radio'|| x.inputType === 'checkbox'|| x.inputType === 'dropdown')));
   }
   removeObj(key: any, selectedElement: any, props: any) {
@@ -895,7 +896,7 @@ export class BuildComponent implements OnDestroy {
     const ThirdLast = this.targetBuilderTools[this.targetBuilderTools.length - 3]
 
     if (lastElement.rowId !== secondLastElement.rowId && lastElement.name === 'Dnd') {
-      // remove if only one dnd is there in last row 
+      // remove if only one dnd is there in last row
       console.log(`Element removed on dnd ${lastElement.name}||  ${lastElement.rowId}/${secondLastElement.rowId} `)
       this.targetBuilderTools.pop();
     }
@@ -983,7 +984,7 @@ export class BuildComponent implements OnDestroy {
     console.log(e.type, e);
   }
 
- 
+
 
   selectPayment() {
     this.selectedElement = this.paymentSetting;
@@ -1280,26 +1281,26 @@ export class BuildComponent implements OnDestroy {
 
 
   onFileChange(event: any, form: any) {
-    const reader = new FileReader();    
+    const reader = new FileReader();
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       if (file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type == 'application/vnd.ms-excel' || file.type == '.xlsx' || file.type == '.xls' || file.type == 'image/jpeg') {
-      let fileReader = new FileReader();    
-      fileReader.readAsArrayBuffer(file);     
-      fileReader.onload = (e) => {    
-          const arrayBuffer: any = fileReader.result;    
-          let data = new Uint8Array(arrayBuffer);    
-          let arr = [];    
-          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
-          let bstr = arr.join(""); 
-          let workbook = XLSX.read(bstr, {type:"binary"});    
-          let first_sheet_name = workbook.SheetNames[0];    
-          let worksheet = workbook.Sheets[first_sheet_name];    
-            let arraylist: any = XLSX.utils.sheet_to_json(worksheet,{raw:true});  
+      let fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
+      fileReader.onload = (e) => {
+          const arrayBuffer: any = fileReader.result;
+          let data = new Uint8Array(arrayBuffer);
+          let arr = [];
+          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+          let bstr = arr.join("");
+          let workbook = XLSX.read(bstr, {type:"binary"});
+          let first_sheet_name = workbook.SheetNames[0];
+          let worksheet = workbook.Sheets[first_sheet_name];
+            let arraylist: any = XLSX.utils.sheet_to_json(worksheet,{raw:true});
             for (let index = 0; index < arraylist.length; index++) {
-              form.options.push( { label: arraylist[index].name, payment: 0 },) 
-            }   
-      }   
+              form.options.push( { label: arraylist[index].name, payment: 0 },)
+            }
+      }
       }
     }
   }
@@ -1325,6 +1326,24 @@ export class BuildComponent implements OnDestroy {
       this.getWorkFlowDetails(this.formId);
     })
   }
+
+  inviteUserforLevel(id: any, userSerachForLevel: any) {
+    const p = {
+      CreatedBy: this.userInfo.Id,
+      FormId: this.builderObj.id,
+      LevelId: id,
+      RoleId: this.selectedPlan,
+      SessionUser: this.userInfo.Id,
+      UserEmail: userSerachForLevel,
+      UserType: "Participant",
+      WorkspaceId: this.userInfo.WorkspaceDetail.Id,
+    }
+    this.http.call('InviteUserForWorkFlow', 'POST', p).subscribe(res => {
+      this.userSerach = '';
+      this.getWorkFlowDetails(this.formId);
+    })
+  }
+
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
