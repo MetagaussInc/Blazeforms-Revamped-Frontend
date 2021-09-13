@@ -173,11 +173,11 @@
                                                         </div>
                                 
                                                         <div class="col-md-4 text-right">
-                                                            <span class="material-icons animate-mat collapsed mr-1" title="Add Participants" (click)="item.expanded = !item.expanded">person_add</span>
-                                                            <span class="material-icons animate-mat mr-1" title="Drag n Drop">open_with</span>
+                                                            <span class="material-icons animate-mat collapsed mr-2" title="Add Participants" (click)="item.expanded = !item.expanded" role="button">person_add</span>
+                                                            <span class="material-icons animate-mat mr-2" title="Drag n Drop" role="button">open_with</span>
                                                             <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
-                                                            <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-1" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
-                                                            <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded"> expand_more </span>
+                                                            <span [ngClass]="{'disabled': builderObj.hasEntries}" class="material-icons animate-mat mr-2 " role="button" title="Delete" (click)="deleteFormLevel(item.id)">delete</span>
+                                                            <span class="material-icons-outlined mr-1" (click)="item.expanded = !item.expanded" role="button"> expand_more </span>
                                                         </div>
                                                         </div>
                                                         <div class="row my-3">
@@ -522,9 +522,9 @@
                                                                     for="Default Value">Options</label>
                                                                 </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
-                                                                class="row">
+                                                                class="row form-group justify-content-center align-items-center">
                                                                 <div class="col-md-8">
-                                                                    <div class="row form-group ">
+                                                                    <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div class="custom-control custom-checkbox custom-control-inline">
                                                                     <input type="checkbox"
@@ -565,8 +565,8 @@
                                                             <div class="col-12"><label
                                                                     for="Default Value">Options</label></div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
-                                                                class="row">
-                                                                <div class="form-group col-md-6">
+                                                                class="row form-group justify-content-center align-items-center">
+                                                                <div class="col-md-6">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                     <div class="custom-control custom-checkbox custom-control-inline">
@@ -588,7 +588,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group col-md-3">
+                                                                <div class="col-md-3">
                                                                     <input type="number"
                                                                         [(ngModel)]="selectedElement.options[i].payment"
                                                                         placeholder="$" class="form-control">
@@ -1280,7 +1280,7 @@
                                                     </div>
                                                     <div *ngSwitchCase="'toggle'"
                                                         (click)="clicked($event, model, template); selectedElement.viewOptions = false;"
-                                                        class="mjui">
+                                                        class="builder-section-wrap">
                                                         {{model.name}}
                                                         <div class="row p-2">
                                                             <label class="mr-2" >{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</label>
@@ -1292,8 +1292,8 @@
                                                     </div>
                                                     <div *ngSwitchCase="'levelSection'"
                                                         (click)="sectionClicked($event, model, template)" class="mjui">
-                                                        <div class="shadow">
-                                                            {{model.name}}
+                                                        <div class="border">
+                                                            <h5 class="section-title p-3 mb-2">{{model.name}}</h5>
                                                             <ngx-dnd-container *ngIf="!viewExportedView"
                                                                 dropZone="builder-target" [model]="model.children"
                                                                 [removeOnSpill]="false" [template]="template"
@@ -1867,14 +1867,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive-main table-responsive">
-                                        <table class="table mt-3  text-center border" id="table-id" data-toggle="table"
+                                        <table class="table mt-3 border table-fit" id="table-id" data-toggle="table"
                                             data-search="true" data-filter-control="true" data-show-export="true"
                                             data-show-refresh="true" data-show-toggle="true" data-pagination="true"
                                             data-toolbar="#toolbar">
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th *ngIf="entries.columns.length > 0" data-field="state"
-                                                        data-checkbox="true"><input data-index="0"
+                                                        data-checkbox="true" scope="row"><input data-index="0"
                                                             name="btnAllSelectItem" type="checkbox"></th>
 
                                                     <ng-container *ngFor="let item of entries.columns">
@@ -1889,7 +1889,7 @@
                                             <tbody>
                                                 <ng-container *ngFor="let row of entries.rows; let rowIndex = index">
                                                     <tr *ngIf="!filter || (filter && filter === row[1])">
-                                                        <td class="bs-checkbox ">
+                                                        <td class="bs-checkbox " scope="row">
                                                             <input data-index="0"
                                                                 name="btSelectItem" (click)="selectEntry(rowIndex)"
                                                                 type="checkbox">
