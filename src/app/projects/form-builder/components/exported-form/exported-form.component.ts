@@ -27,6 +27,7 @@ export class ExportedFormComponent implements OnInit {
   haveTabs: boolean = false;
   active = 0;
   allArr: any = [];
+  tabName: any = [];
   obj: any = {};
   submitted: boolean = false;
   constructor(private http: HttpService, private modalService: NgbModal, private router: Router) {
@@ -45,6 +46,11 @@ export class ExportedFormComponent implements OnInit {
     }
     let arr = [];
     if (this.haveTabs) {
+      this.elements.forEach((element: any) => {
+        if (element.inputType === 'break') {
+          this.tabName.push(element.value);
+        }
+      });
       for (const iterator of this.elements) {
         if (iterator.inputType === 'break' && arr.length > 0) {
           this.allArr.push(arr);

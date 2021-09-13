@@ -10,6 +10,7 @@ export class ExportedViewComponent implements OnInit {
 @Input() public url: any;
 @Input() public builderObj: any;
 @Input() public styling: any;
+file: any;
 model = {
   name: ''
 }
@@ -159,9 +160,19 @@ onFileChanged(event: any) {
     let file = event.target.files[0];
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.styling.pagebackgroundImage = reader.result; 
+      this.file = reader.result;
+      // this.styling.pagebackgroundImage = reader.result; 
     };
   }
+}
+
+applyImage() {
+      this.styling.pagebackgroundImage = this.file; 
+
+}
+
+clearImage() {
+  this.styling.pagebackgroundImage = ''; 
 }
 
 }

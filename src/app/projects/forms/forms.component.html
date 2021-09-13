@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="form-title-wrapper col-md-4">
                                             <ng-container *ngIf="formsbyId && enableBuildPublishTab(form,formsbyId); else clickAble">
-                                            <span class="form-name" (click)="openbuilder(form, 1)" >{{form.text ? form.text : form.name}}</span>
+                                            <span class="form-name" (click)="openBuilderByName(form, 1)" >{{form.text ? form.text : form.name}}</span>
                                             </ng-container>
                                             <ng-template #clickAble>
                                             <span class="form-name" >{{form.text ? form.text : form.name}}</span>

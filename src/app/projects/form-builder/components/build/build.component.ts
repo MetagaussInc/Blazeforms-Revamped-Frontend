@@ -13,6 +13,7 @@ import * as lodash from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
+import { DataSharingService } from 'src/app/shared/data-sharing.service';
 
 @Component({
   selector: 'app-build',
@@ -196,7 +197,7 @@ export class BuildComponent implements OnDestroy {
   formActivities:any = [];
   globalListenFunc: any;
   globalListenFunc1: any;
-  constructor( private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
+  constructor(private dataService: DataSharingService, private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
       this.targetBuilderTools = [];
@@ -275,7 +276,7 @@ export class BuildComponent implements OnDestroy {
       if (true) {
         if (this.builderObj?.formType === 'WorkFlow') {
           if (!this.builderObj?.hasEntries) {
-            this.mainTab = 0
+            // this.mainTab = 0
           }
           this.getWorkFlowDetails(ID);
         }
@@ -332,7 +333,7 @@ export class BuildComponent implements OnDestroy {
       if (initial) {
         if (this.builderObj?.formType === 'WorkFlow') {
           if (!this.builderObj?.hasEntries) {
-            this.mainTab = 0
+            // this.mainTab = 0
           }
           this.getWorkFlowDetails(ID);
         }
@@ -385,7 +386,7 @@ export class BuildComponent implements OnDestroy {
       console.log(this.builderObj?.workFlowLevels)
       this.builderObj?.workFlowLevels.forEach((level: any) => {
         if (groupByLevelId[level.id]) {
-          this.targetBuilderTools.unshift(groupByLevelId[level.id][0])
+          this.targetBuilderTools.push(groupByLevelId[level.id][0])
         } else {
           this.count = this.count + 2;
           const levelConfig: any = JSON.parse(JSON.stringify(Level));
@@ -394,7 +395,7 @@ export class BuildComponent implements OnDestroy {
           levelConfig.levelOrder = level.levelOrder;
           levelConfig.levelOrder = level.levelOrder;
           levelConfig.uiIndexId = this.count;
-          this.targetBuilderTools.unshift(levelConfig);
+          this.targetBuilderTools.push(levelConfig);
         }
       });
 
@@ -407,6 +408,16 @@ export class BuildComponent implements OnDestroy {
     if (this.builderObj?.formType === 'WorkFlow') {
       this.getForm(this.formId, false);
     }
+  }
+
+  getSelectedColumns(entries: any) {
+    let count = 0;
+    entries.columns.map((x: any) => {
+      if (x.view) {
+        count = count + 1;
+      }
+    })
+    return count > 1;
   }
 
   addUserToWorkFlow(id: any) {
@@ -576,7 +587,8 @@ export class BuildComponent implements OnDestroy {
         const entry = JSON.parse(element.formEntryJSON)
         data.push(`-3=ID=${index + 1}||-2=Status=${entry.status}||-1=Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
       });
-      this.createColums(data)
+      this.createColums(data);
+      // this.dataService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.builderObj.workSpaceId)
     })
   }
 
@@ -842,7 +854,7 @@ export class BuildComponent implements OnDestroy {
     this.dummyContainer = [];
     if (e.value.inputType === 'break') {
       if (this.isFirstPageBreak()) {
-        this.targetBuilderTools.unshift(e.value)
+        this.targetBuilderTools.unshift(JSON.parse(JSON.stringify(e.value)))
       }
     }
     this.viewProperties = 1;
@@ -1342,6 +1354,17 @@ export class BuildComponent implements OnDestroy {
       this.userSerach = '';
       this.getWorkFlowDetails(this.formId);
     })
+  }
+
+  openTab(tabId: any) {
+    // this.getForm(form.id, true);
+    this.router.navigate(['/form-builder'], {
+      queryParams: {
+        ID: this.formId,
+        seletedTab: tabId
+      }
+    })
+
   }
 
   ngOnDestroy(): void {

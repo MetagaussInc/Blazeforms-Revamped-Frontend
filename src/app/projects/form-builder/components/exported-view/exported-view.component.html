@@ -169,6 +169,13 @@
                                             <input type="file" class="custom-file-input" (change)="onFileChanged($event)"  id="customFile">
                                             <label class="custom-file-label selected" for="customFile"></label>
                                         </div>
+                                        <div>
+                                            <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="clearImage()"> Clear</button>
+                                            <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="applyImage()"> Apply</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="clearImage()"> Save</button>
+                                        </div>
                                     </div>
                                 </div>
 

@@ -236,7 +236,7 @@ export class FormsComponent implements OnInit {
       if (result?.message === 'added') {
         // update header uses
         this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.selectedWorkspaceId);
-        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: 1}})
+        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: type === 'WorkFlow' ? 0 : 1}})
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
@@ -245,6 +245,17 @@ export class FormsComponent implements OnInit {
 
   openbuilder(form: any, tabIndex: any) {
     this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: tabIndex}})
+
+  }
+
+  openBuilderByName(form: any, tabIndex: any) {
+    let openWorkFLow = false;
+    this.allForms.forEach((element: any) => {
+      if(element.id === form.value && element.formType === 'WorkFlow') {
+        openWorkFLow = true;
+      }
+    });
+    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: openWorkFLow ? 0 : tabIndex}})
 
   }
 
@@ -294,7 +305,9 @@ export class FormsComponent implements OnInit {
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
-          console.log(res)
+          // console.log(res)
+          this.dataLoaded = false
+          this.getFormsList(this.userInfo)
           this.selectedForms = [];
           this.selectedFormName = [];
         })
