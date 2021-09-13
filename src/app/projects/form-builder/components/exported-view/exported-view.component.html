@@ -21,7 +21,7 @@
                             </div>
 
 
-                            <div class="form-embeded-wrap mt-2">
+                            <div class="form-embeded-wrap mt-4">
                                 <h4>Share Form Url
                                 </h4>
                                 <p class="text-muted">Use This URL To Create A Hyperlink To Your Form.!
@@ -30,7 +30,7 @@
                                 <div class="input-group form-publish-link mt-2">
                                     <input type="text" [value]="path" class="form-control"  name="textarea" cols="40" rows="5"> 
                                     <div class="input-group-append">
-                                        <span class="input-group-text"> <a href="{{path}}" target="_blank"><i class="material-icons-outlined">share</i></a></span>
+                                        <span class="input-group-text"> <a href="{{path}}" target="_blank"><i class="material-icons-outlined">ios_share</i></a></span>
                                     </div>
 
                                 </div>
@@ -169,13 +169,15 @@
                                             <input type="file" class="custom-file-input" (change)="onFileChanged($event)"  id="customFile">
                                             <label class="custom-file-label selected" for="customFile"></label>
                                         </div>
-                                        <div>
-                                            <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="clearImage()"> Clear</button>
-                                            <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="applyImage()"> Apply</button>
+                                        <div class="border-top pt-3">
+                                            <button class="btn option-btn border btn-sm rounded btn-bf mr-1" (click)="clearImage()"> Clear</button>
+                                            <button class="btn option-btn border btn-sm rounded btn-bf mr-1" (click)="applyImage()"> Apply</button>
+                                            <button class="btn option-btn border btn-sm rounded btn-bf mr-1 float-right" (click)="clearImage()"> Save</button>
+
                                         </div>
-                                        <div>
+                                       <!--  <div>
                                             <button class="btn option-btn border btn-sm rounded bg-white p-1 mr-1" (click)="clearImage()"> Save</button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 

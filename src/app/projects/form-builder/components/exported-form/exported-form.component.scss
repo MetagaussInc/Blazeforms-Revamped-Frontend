@@ -186,3 +186,7 @@ input {
 .non-clickable {
     pointer-events: none;
 }
+
+.ngx-dnd-container .ngx-dnd-item .field-error {
+    max-width: 100%;
+}

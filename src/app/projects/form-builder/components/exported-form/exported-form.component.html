@@ -140,10 +140,12 @@
                                     placeholder="{{form.placeholder}}" [attr.maxlength]="form.maxVal"
                                     [attr.minlength]="form.minVal"
                                     [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
-                            </div>
-                            <div *ngIf="form.value && checkMobileNumber(form)">
-                                Please add valid Mobile number
-                            </div>
+                                    <div *ngIf="form.value && checkMobileNumber(form)" class="field-error text-left mt-1 pr-2 small">
+                                        Please add valid Mobile number
+                                    </div>
+                            
+                                </div>
+                            
                             <div
                                 *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
                                 {{form.name}} is required</div>

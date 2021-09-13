@@ -142,7 +142,7 @@
                                         <div class="added-users-list col-md-12 border rounded">
                                             <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers">
                                                 <div *ngIf="addedUserId?.includes(user.id)"
-                                                    class="added-user-item row p-3 border-bottom border rounded">
+                                                    class="added-user-item row p-3 border-bottom rounded">
 
                                                     <div class="added-user-title-wrapper col-md-1">
                                                         <img src="assets/images/user.jpg"
@@ -165,7 +165,7 @@
                                                         class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
 
                                                         <i class="material-icons-round text-dark"
-                                                            (click)="deleteUser(user.id)">delete</i>
+                                                            (click)="deleteUser(user.id)" title="Delete" role="button">delete</i>
                                                     </div>
                                                 </div>
                                             </ng-container>
@@ -235,7 +235,7 @@
                                                                                 <span
                                                                                     class="material-icons-outlined mr-1"
                                                                                     (click)="item.expanded = !item.expanded"
-                                                                                    role="button"> expand_more </span>
+                                                                                    title="collapse" role="button"> expand_more </span>
                                                                             </div>
                                                                         </div>
 
@@ -276,7 +276,7 @@
                                                                                             class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
 
                                                                                             <i class="material-icons-round text-dark"
-                                                                                                (click)="deleteUserFromLevel(flowUsers.userId)">delete</i>
+                                                                                                (click)="deleteUserFromLevel(flowUsers.userId)" title="Delete" role="button">delete</i>
                                                                                         </div>
                                                                                     </div>
                                                                                 </ng-container>
