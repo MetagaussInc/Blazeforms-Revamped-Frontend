@@ -1,6 +1,6 @@
 <div class="my-5 px-5 branding-organization-wrap">
     <div class="organization-branding row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="workspacePermissions.canEdit">
             <div class="mb-3 mt-3">
                 <form autocomplete="off">
                     <h2 class="mb-3" style="font-weight: 300">Upload </h2>

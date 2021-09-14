@@ -30,6 +30,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
   public selectedFileName = 'Select file';
   public userInfo: any;
   public logoType: any;
+  public workspacePermissions: any;
 
   constructor(private http: HttpService, private router: Router, private Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private dataSharingService: DataSharingService, private toastService: ToastService, private store: Store) {
     this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -47,6 +48,7 @@ export class ManageWorkSpacesBrandingComponent implements OnInit {
         this.organizationUserId = decodeURIComponent(orgUserId);
       }
     });
+    this.workspacePermissions = this.dataSharingService.GetPermissions("Organizations");
     let obj = {
       Id: this.organizationId,
       IsOrganizationSettings: true,

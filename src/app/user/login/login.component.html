@@ -62,8 +62,9 @@
                                         </form>
                                         <div class="login-button-wrapper col-md-12 mt-3">
                                             <button (click)="submit()" [disabled]="loginForm.invalid" type="button" class="login-button btn btn-bf btn-block py-2">
+                                                Log In
                                                 <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
-                                                Log In</button>
+                                            </button>
                                         </div>
                                         <div class="forgot-password-wrapper col-md-12 text-center mt-3">
                                             <a [routerLink]="['../forgot-password']">
