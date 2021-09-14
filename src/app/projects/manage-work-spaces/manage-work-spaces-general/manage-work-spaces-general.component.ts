@@ -46,6 +46,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
   public userId: any;
   public pageLoader: any
   public showPageLoader: boolean = false;
+  public workspacePermissions: any;
 
   constructor(private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private dataSharingService: DataSharingService, private location: Location, private toastService: ToastService) {
     this.isSuperAdmin = this.dataSharingService.IsSuperAdmin();
@@ -60,6 +61,7 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
         this.getCurrentWorkspaceData();
       }
     });
+    this.workspacePermissions = this.dataSharingService.GetPermissions("Organizations");
   }
 
   ngOnInit(): void {

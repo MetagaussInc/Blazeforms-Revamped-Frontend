@@ -84,7 +84,10 @@ export class ManageWorkSpacesRolesComponent implements OnInit {
           ModifiedBy: this.SuperUserId,
         }
         this.http.call('deleteRole', 'POST', workdata).subscribe(res => {
-          if(res){
+          if(res.isRoleAssigned){
+            this.toastService.showSuccess('Role will not be deleted as this is already assigned to the user');
+          }
+          else{
             this.toastService.showSuccess('Deleted Successfully!');
             this.accountRolesLists = [];
             this.getAccountRolesData();
