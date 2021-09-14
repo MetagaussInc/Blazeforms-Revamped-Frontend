@@ -112,44 +112,6 @@ export class BuildComponent implements OnDestroy {
   count: number = 0;
   dummyContainer: any = [];
   formLoaded = false;
-  PaymentModel = {
-    name: 'Calculations',
-    textValue: '',
-    minCharacter: 0,
-    maxCharacter: 100,
-    value: '',
-    inputType: 'calculations',
-    icon: 'fas fa-language',
-    class: 'full',
-    placeholder: '',
-    size: 'medium',
-    view: 'always',
-    minVal: 0,
-    maxVal: 50,
-    helpText: '',
-    isRequired: 'always',
-    showSubTotal: true,
-    showLineItems: true,
-    mapBillingFields: true,
-    stripeAccount: 'Dummy',
-    stripeAccounts: [
-      {
-        name: 'Dummy',
-        secretKey: '',
-        sKey: ''
-      }
-    ],
-    extraBill: [
-      {
-        value: null,
-        type: 'dollar',
-        name: 'Additional'
-      }
-    ],
-    validations: {
-      billing: true
-    }
-  }
   url = '';
   filter: any = null;
   userInfoSubscription$: any;
@@ -197,6 +159,7 @@ export class BuildComponent implements OnDestroy {
   formActivities:any = [];
   globalListenFunc: any;
   globalListenFunc1: any;
+  userIdwWithStatus: any = {};
   constructor(private dataService: DataSharingService, private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -542,7 +505,9 @@ export class BuildComponent implements OnDestroy {
       this.addedUserId = [];
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
-
+      });
+      this.workFLowDetails?.workSpaceUsers?.forEach((element: any) => {
+        this.userIdwWithStatus[element.id] = element?.isLinkActivated ? 'Activated' : 'Pending';
       });
     })
   }

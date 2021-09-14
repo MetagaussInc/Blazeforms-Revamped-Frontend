@@ -267,10 +267,10 @@
                                                                                         <div
                                                                                             class="added-user-title-wrapper col-md-3">
                                                                                             <span
-                                                                                                *ngIf="flowUsers.isLinkActivated"
+                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Activated'"
                                                                                                 class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
                                                                                             <span
-                                                                                                *ngIf="!flowUsers.isLinkActivated"
+                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Pending'"
                                                                                                 class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
                                                                                         </div>
                                                                                         <div
@@ -1985,7 +1985,7 @@
                                                 (click)="getNewEntries()"> Refresh </button>
 
 
-                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="filterDropdown"
                                                     ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
                                                 <div ngbDropdownMenu aria-labelledby="filterDropdown">
@@ -1997,7 +1997,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
                                                     ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
                                                 <div ngbDropdownMenu aria-labelledby="actionsDropdown">
@@ -2005,7 +2005,7 @@
                                                     <button ngbDropdownItem (click)="export()">Export</button>
                                                 </div>
                                             </div>
-                                            <div class="d-inline-block">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block">
                                                 <button class="btn btn-primary btn-bf mr-2" id="newEntry"
                                                     (click)="viewEntryPanel = !viewEntryPanel">New Entry</button>
                                                 <!-- <div ngbDropdownMenu aria-labelledby="newEntry">

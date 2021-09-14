@@ -17,6 +17,7 @@ export class ExportedFormComponent implements OnInit {
   @Input() public noTabs: any
   @Input() public isPublishPage: any
   @Input() public levelDetails: any;
+  @Input() public entryId: any;
   @Output() inputUpdateEvent: EventEmitter<any> = new EventEmitter()
 
   string: any;
@@ -383,6 +384,7 @@ StripeToken: token
         levelDetails: this.levelDetails,
         savedElementsWithValue: this.elements
       }),
+      ...(this.entryId && {FormEntryId : this.entryId}),
       userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
     }
     this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
