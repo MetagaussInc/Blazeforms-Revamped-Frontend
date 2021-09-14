@@ -1812,7 +1812,11 @@ export const config = [
                     icon: 'fas fa-hashtag',
                     class: 'half',
                     numericValue: 0,
-                    value: undefined,
+                    value: {
+                        "year": 2021,
+                        "month": 9,
+                        "day": 14
+                      },
                     minCharacter: 9,
                     maxCharacter: 11,
                     size: 'medium',
@@ -3233,6 +3237,9 @@ export const advancedLayout = [
         numberOfFile: 2,
         value: [],
         validations: {
+            label: {
+                dataRefKey: 'name'
+            },
             size: {
                 dataRefKey: 'size',
                 options: [
