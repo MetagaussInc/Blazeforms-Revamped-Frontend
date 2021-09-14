@@ -731,10 +731,6 @@ export const config = [
             defaultValue: {
                 dataRefKey: 'value'
             },
-            range: {
-                minDataRefKey: 'minVal',
-                maxDataRefKey: 'maxVal'
-            },
             help: {
                 dataRefKey: 'helpText'
             },

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-exported-view',
@@ -10,6 +10,8 @@ export class ExportedViewComponent implements OnInit {
 @Input() public url: any;
 @Input() public builderObj: any;
 @Input() public styling: any;
+@Output() saveForm: EventEmitter<any> = new EventEmitter()
+
 file: any;
 model = {
   name: ''
@@ -169,6 +171,10 @@ onFileChanged(event: any) {
 applyImage() {
       this.styling.pagebackgroundImage = this.file; 
 
+}
+
+save() {
+  this.saveForm.emit();
 }
 
 clearImage() {

@@ -20,7 +20,7 @@
             <div class="col-md-8">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="mainTab"
                     class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
-                    <li [ngbNavItem]="0" ngbNavItem *ngIf="builderObj?.formType === 'WorkFlow'">
+                    <li [ngbNavItem]="0" ngbNavItem *ngIf="builderObj?.formType === 'WorkFlow' && enableDefine()">
                         <a ngbNavLink (click)="openTab(0)"> <i class="material-icons" > construction </i>Define</a>
                         <ng-template ngbNavContent>
                             <div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
@@ -634,7 +634,7 @@
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
                                                             <div class="input-group">
-                                                                <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                <input class="form-control" placeholder="dd-mm-yyyy"
                                                                     name="dp" [(ngModel)]="selectedElement.value"
                                                                     ngbDatepicker #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
@@ -921,7 +921,7 @@
                                                             <div class="form-group">
                                                                 <label for="min">Min</label>
                                                                 <div class="input-group">
-                                                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                    <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
                                                                         ngbDatepicker #d1="ngbDatepicker">
                                                                     <div class="input-group-append">
@@ -935,7 +935,7 @@
                                                             <div class="form-group">
                                                                 <label for="min">Max</label>
                                                                 <div class="input-group">
-                                                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                                                    <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.maxVal"
                                                                         ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
@@ -991,7 +991,7 @@
                                                             <div>
                                                                 <div class="custom-control custom-radio"
                                                                     (click)="selectedElement.selectedType = 'US'; selectedElement.children = selectedElement.validations.typeOfAddress.US;">
-                                                                    <input name="radio"
+                                                                    <input name="radio" (click)="selectedElement.selectedType = 'US';"
                                                                         [checked]="selectedElement.selectedType === 'US'"
                                                                         [value]="'US'" id="radio_US" type="radio"
                                                                         class="custom-control-input">
@@ -1002,6 +1002,7 @@
                                                                 <div class="custom-control custom-radio"
                                                                     (click)="selectedElement.selectedType = 'NONUS'; selectedElement.children = selectedElement.validations.typeOfAddress.NONUS;">
                                                                     <input name="radio"
+                                                                    (click)="selectedElement.selectedType = 'NONUS';"
                                                                         [checked]="selectedElement.selectedType === 'NONUS'"
                                                                         [value]="'NONUS'" id="radio_NONUS" type="radio"
                                                                         class="custom-control-input">
@@ -1597,7 +1598,7 @@
                                                                                             <input class="form-control"
                                                                                                 [minDate]="col.minVal"
                                                                                                 [maxDate]="col.maxVal"
-                                                                                                placeholder="yyyy-mm-dd"
+                                                                                                placeholder="dd-mm-yyyy"
                                                                                                 name="dp"
                                                                                                 [(ngModel)]="col.value"
                                                                                                 ngbDatepicker
@@ -1732,7 +1733,7 @@
                                                         <div class="input-group">
                                                             <input class="form-control non-clickable"
                                                                 [minDate]="model.minVal" [maxDate]="model.maxVal"
-                                                                placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp"
+                                                                placeholder="dd-mm-yyyy" (click)="d.toggle()" name="dp"
                                                                 [(ngModel)]="model.value" ngbDatepicker
                                                                 #d="ngbDatepicker">
                                                             <div class="input-group-append">
@@ -1956,7 +1957,7 @@
                         <a ngbNavLink (click)="saveForm()"><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 
-                            <app-exported-view [url]="url" [styling]="styling" [elements]="targetBuilderTools">
+                            <app-exported-view [url]="url" (saveForm)="saveForm()" [styling]="styling" [elements]="targetBuilderTools">
                             </app-exported-view>
 
                         </ng-template>

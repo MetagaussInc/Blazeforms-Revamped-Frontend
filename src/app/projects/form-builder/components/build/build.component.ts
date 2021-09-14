@@ -705,6 +705,10 @@ export class BuildComponent implements OnDestroy {
     })
   }
 
+  enableDefine() {
+    return (this.builderObj.formType === 'WorkFlow' && this.userInfo.Id === this.builderObj?.createdBy);
+  }
+
   addDependency(event: any) {
     console.log(event.target.value);
     this.targetBuilderTools[this.selectedIndex].dependUpon = event.target.value ? { elementId: event.target.value } : null;

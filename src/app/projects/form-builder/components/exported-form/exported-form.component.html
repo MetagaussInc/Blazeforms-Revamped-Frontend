@@ -137,8 +137,8 @@
                                 <input [style.font-family]="styling?.text?.font"
                                     [style.font-size.px]="styling?.text?.size" [style.color]="styling?.text?.color"
                                     type="tel" name="formFirld1_{{ form.uiIndexId }}" [(ngModel)]="form.value"
-                                    placeholder="{{form.placeholder}}" [attr.maxlength]="form.maxVal"
-                                    [attr.minlength]="form.minVal"
+                                    placeholder="{{form.placeholder}}" [attr.maxlength]="form.type === 'NONUS' ? 13 : 10"
+                                    
                                     [required]="checkForRDependency(form, 'reqDependUpOn')" class="form-control" />
                                     <div *ngIf="form.value && checkMobileNumber(form)" class="field-error text-left mt-1 pr-2 small">
                                         Please add valid Mobile number
@@ -772,8 +772,8 @@
                     [style.color]="styling?.labels?.color">{{form.name}}</label>
                 <input [style.font-family]="styling?.text?.font" [style.font-size.px]="styling?.text?.size"
                     [style.color]="styling?.text?.color" type="tel" name="formFirld1_{{ form.uiIndexId }}"
-                    [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [attr.maxlength]="form.maxVal"
-                    [attr.minlength]="form.minVal" [required]="checkForRDependency(form, 'reqDependUpOn')"
+                    [(ngModel)]="form.value" placeholder="{{form.placeholder}}" [attr.maxlength]="form.type === 'NONUS' ? 13 : 10"
+                     [required]="checkForRDependency(form, 'reqDependUpOn')"
                     class="form-control" />
             </div>
             <div *ngIf="form.value && checkMobileNumber(form)">
@@ -1295,7 +1295,7 @@
 
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="getActiveLevels()">
     <div class="col-md-12">
         <div class="form-btn-group my-3" *ngIf="!noTabs">
             <button [style.font-family]="styling?.buttons?.font" [style.font-size.px]="styling?.buttons?.size"

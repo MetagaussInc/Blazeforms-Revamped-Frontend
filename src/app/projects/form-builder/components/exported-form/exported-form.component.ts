@@ -464,6 +464,16 @@ StripeToken: token
     return this.levelDetails?.enabledLevelId?.includes(form.levelId);
   }
 
+  getActiveLevels() {
+    let hasLevel = false;
+    this.levelDetails?.enabledLevelId?.forEach((level: any) => {
+      if (!this.levelDetails?.disabledLevel.includes(level)) {
+        hasLevel = true;
+      }
+    });
+    return (this.levelDetails && hasLevel) || !this.levelDetails;
+  }
+
   enableLevelSection(form: any): boolean {
     return this.levelDetails?.disabledLevel?.includes(form.levelId);
 
