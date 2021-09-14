@@ -683,7 +683,7 @@
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div class="col-md-8">
+                                                                <div class="col-md-9 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2 payment-checbox">
                                                                             <div
@@ -699,7 +699,7 @@
                                                                                     for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-10 pl-0">
                                                                             <input type="text"
                                                                                 [(ngModel)]="selectedElement.options[i].label"
                                                                                 placeholder="Add Option Name"
@@ -707,7 +707,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <button (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
@@ -722,12 +722,14 @@
 
                                                         <div *ngIf="selectedElement?.validations?.options && selectedElement?.collectPayment"
                                                             class="radio-opt">
-
+                                                            <div class="row">
                                                             <div class="col-12"><label
-                                                                    for="Default Value">Options</label></div>
+                                                                    for="Default Value">Options</label>
+                                                                </div>
+                                                            </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-6 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div
@@ -743,14 +745,14 @@
                                                                                     for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-9">
+                                                                        <div class="col-md-9 pr-0">
                                                                             <input type="text"
                                                                                 [(ngModel)]="selectedElement.options[i].label"
                                                                                 class="form-control">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-3 pr-0">
                                                                     <input type="number"
                                                                         [(ngModel)]="selectedElement.options[i].payment"
                                                                         placeholder="$" class="form-control">
