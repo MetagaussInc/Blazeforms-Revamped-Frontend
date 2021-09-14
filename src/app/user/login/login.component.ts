@@ -59,6 +59,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     this.isFormSubmitted = true;
     this.store.dispatch(userLogin({props}))
+    setTimeout(() => {
+      this.isFormSubmitted = false;
+    }, 1500);
   }
 
   showHidePassword(){

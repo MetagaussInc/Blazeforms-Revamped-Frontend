@@ -58,7 +58,7 @@
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let module of rolePermissionData.roleModuleList">
-                                <tr *ngIf="module.moduleName != 'Forms'">
+                                <tr>
                                     <td class="text-left" >{{ module.moduleName }}</td>
                                     <td *ngFor="let modulepermission of module.modulePermissionList">
                                         <div *ngIf="modulepermission.isAvailable" class="custom-control custom-checkbox custom-control-inline">
