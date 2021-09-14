@@ -85,15 +85,20 @@
     border: 1px solid #dee2e6;
 }
 
-.entry-panel {
+.fixed-table-toolbar .entry-panel {
     position: fixed;
-    width: 50%;
+    width: 80%;
     right: -52%;
     -webkit-transition: all ease-in-out 0.5s;
     transition: all ease-in-out 0.5s;
     bottom: 20px;
     top: 15%;
     z-index: 999;
+}
+
+.fixed-table-toolbar .entry-panel .close span{
+    right: 6px;
+    top: 15px;
 }
 
 .disabled {
