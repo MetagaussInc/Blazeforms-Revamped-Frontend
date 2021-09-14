@@ -1721,9 +1721,9 @@
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'fileupload'" (click)="clicked($event, model, template)">
-                                                        <div class="">
+                                                        <div class="form-group">
                                                             <label>{{model.name}}</label>
-                                                            <input type="file">
+                                                            <input type="file" class="form-control file-upload-field">
                                                         </div>
 
                                                     </div>
@@ -2037,10 +2037,10 @@
                                         <div *ngIf="entries?.rows?.length > 0" class="tool-filter text-right">
                                             <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="column"
-                                                    ngbDropdownAnchor (focus)="column.open()">Columns</button>
-                                                <div ngbDropdownMenu aria-labelledby="column" class="">
-                                                    <div ngbDropdownItem *ngFor="let item of entries.columns"
-                                                        (click)="item.view = !item.view" class="">
+                                                ngbDropdownToggle >Columns</button>
+                                                <div ngbDropdownMenu aria-labelledby="column" class="column-dropdown">
+                                                    <div *ngFor="let item of entries.columns"
+                                                        (click)="item.view = !item.view" class="px-3 py-1">
                                                         <!-- <label> <input data-index="0" [checked]="item.view" name="btSelectItem" type="checkbox">&nbsp;{{item.headerName}}</label> -->
                                                         <div *ngIf="item.headerName?.length > 1" class="custom-control custom-checkbox">
                                                             <input data-index="0" [checked]="item.view"
