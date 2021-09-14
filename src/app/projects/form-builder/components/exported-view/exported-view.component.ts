@@ -25,7 +25,7 @@ path: string = '';
   ngOnInit(): void {
     // Remove this when code is deploy to stage.
     console.log(this.url)
-   this.path = window.location.origin +'/#'+ this.url.split('#')[1].replace('BlazeForms', 'blazeforms')
+   this.path = window.location.href?.split('#')?.[0] +'#'+ this.url.split('#')[1].replace('BlazeForms', 'blazeforms')
   }
 
   placeholderStyling($event?: any) {

@@ -35,6 +35,7 @@ export class ExportedFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.levelDetails)
     let count = 0;
     if (this.elements?.length > 0) {
       for (const iterator of this.elements) {
@@ -467,7 +468,7 @@ StripeToken: token
   getActiveLevels() {
     let hasLevel = false;
     this.levelDetails?.enabledLevelId?.forEach((level: any) => {
-      if (!this.levelDetails?.disabledLevel.includes(level)) {
+      if (!this.levelDetails?.disabledLevel?.includes(level)) {
         hasLevel = true;
       }
     });

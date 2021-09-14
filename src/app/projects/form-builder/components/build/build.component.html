@@ -617,6 +617,7 @@
                                                             <label for="Default Value">Default Value</label>
                                                             <input id="Default Value" name="Default Value"
                                                                 placeholder="Default Value"
+                                                                type="date"
                                                                 [attr.type]="selectedElement.inputType"
                                                                 [(ngModel)]="selectedElement.value"
                                                                 class="form-control">
@@ -634,7 +635,7 @@
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
                                                             <div class="input-group date-field">
-                                                                <input class="form-control" placeholder="dd-mm-yyyy"
+                                                                <input class="form-control" type="date" placeholder="dd-mm-yyyy"
                                                                     name="dp" [(ngModel)]="selectedElement.value"
                                                                     ngbDatepicker #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
@@ -926,6 +927,7 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
+                                                                        type="date"
                                                                         ngbDatepicker #d1="ngbDatepicker">
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
@@ -940,6 +942,7 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.maxVal"
+                                                                        type="date"
                                                                         ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
@@ -1716,9 +1719,9 @@
 
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'fileupload'">
+                                                    <div *ngSwitchCase="'fileupload'" (click)="clicked($event, model, template)">
                                                         <div class="">
-                                                            <label>File Upload</label>
+                                                            <label>{{model.name}}</label>
                                                             <input type="file">
                                                         </div>
 
@@ -1735,8 +1738,9 @@
                                                         <label>{{model.name}}</label>
                                                         <div class="input-group">
                                                             <input class="form-control non-clickable"
+                                                            type="date"
                                                                 [minDate]="model.minVal" [maxDate]="model.maxVal"
-                                                                placeholder="dd-mm-yyyy" (click)="d.toggle()" name="dp"
+                                                                placeholder="{{model.placeholder}}" (click)="d.toggle()" name="dp"
                                                                 [(ngModel)]="model.value" ngbDatepicker
                                                                 #d="ngbDatepicker">
                                                             <div class="input-group-append">
