@@ -1333,3 +1333,11 @@
         margin-left: -24px;
     }
 
+.payment-checbox .custom-checkbox input{
+    margin-right: 0px;
+}
+
+
+#form-builder-sidebar .input-group.date-field input{
+    pointer-events: none;
+}

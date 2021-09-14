@@ -634,14 +634,14 @@
                                                         <div *ngIf="selectedElement.inputType === 'date' && selectedElement?.validations?.defaultValue"
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
-                                                            <div class="input-group">
-                                                                <input class="form-control" type="date" placeholder="dd-mm-yyy"
+                                                            <div class="input-group date-field">
+                                                                <input class="form-control" type="date" placeholder="dd-mm-yyyy"
                                                                     name="dp" [(ngModel)]="selectedElement.value"
                                                                     ngbDatepicker #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text calendar"
                                                                         (click)="d271.toggle()"><i
-                                                                            class="material-icons">date_range</i>
+                                                                            class="material-icons" role="button">date_range</i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -675,15 +675,16 @@
                                                         </div>
                                                         <div *ngIf="selectedElement?.validations?.options && !selectedElement?.collectPayment"
                                                             class="radio-opt">
-
-                                                            <div class="col-12"><label
+                                                            <div class="row">
+                                                                <div class="col-12"><label
                                                                     for="Default Value">Options</label>
+                                                            </div>
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
                                                                 <div class="col-md-8">
                                                                     <div class="row">
-                                                                        <div class="col-md-2">
+                                                                        <div class="col-md-2 payment-checbox">
                                                                             <div
                                                                                 class="custom-control custom-checkbox custom-control-inline">
                                                                                 <input type="checkbox"
@@ -741,7 +742,7 @@
                                                                                     for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-9">
                                                                             <input type="text"
                                                                                 [(ngModel)]="selectedElement.options[i].label"
                                                                                 class="form-control">
@@ -921,7 +922,7 @@
                                                             <label>Range</label>
                                                             <div class="form-group">
                                                                 <label for="min">Min</label>
-                                                                <div class="input-group">
+                                                                <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
                                                                         type="date"
@@ -929,14 +930,14 @@
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d1.toggle()"><i
-                                                                                class="material-icons">date_range</i>
+                                                                                class="material-icons" role="button">date_range</i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="min">Max</label>
-                                                                <div class="input-group">
+                                                                <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.maxVal"
                                                                         type="date"
@@ -944,7 +945,7 @@
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d.toggle()" type="button"><i
-                                                                                class="material-icons">date_range</i>
+                                                                                class="material-icons" role="button">date_range</i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1611,7 +1612,7 @@
                                                                                                 <div class="input-group-text calendar"
                                                                                                     (click)="d.toggle()"
                                                                                                     type="button"><i
-                                                                                                        class="material-icons">date_range</i>
+                                                                                                        class="material-icons" role="button">date_range</i>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1743,7 +1744,7 @@
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text calendar"
                                                                     (click)="d.toggle()" type="button"><i
-                                                                        class="material-icons">date_range</i></div>
+                                                                        class="material-icons" role="button">date_range</i></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2014,15 +2015,17 @@
                                     </div>
                                     <div *ngIf="viewEntryPanel" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
-                                        <button type="button" (click)="closeIframes()" class="close">
-                                            <span aria-hidden="true">&times;</span>
+                                        <button type="button" (click)="closeIframes()" class="close" >
+                                            <!-- <span aria-hidden="true">&times;</span> -->
+                                            <span class="material-icons position-absolute"> close </span>
                                         </button>
                                         <iframe [src]="FormUrl()" width="100%" height="100%" frameborder="0"></iframe>
                                     </div>
                                     <div *ngIf="viewSpecificEntry" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
                                         <button type="button" (click)="closeIframes()" class="close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <!-- <span aria-hidden="true">&times;</span> -->
+                                            <span class="material-icons position-absolute"> close </span>
                                         </button>
                                         <iframe [src]="viewSpecificEntry" width="100%" height="100%"
                                             frameborder="0"></iframe>

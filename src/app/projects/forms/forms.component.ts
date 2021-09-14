@@ -419,7 +419,7 @@ export class FormsComponent implements OnInit {
   }
 
   enableDefine(form: any,formsbyId?: any) {
-    return (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow' && this.userInfo.Id === this.formsbyId?.[form.value]?.[0]?.createdBy);
+    return (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow' && this.userInfo?.Id === this.formsbyId?.[form.value]?.[0]?.createdBy);
   }
 
   enableUrl() {
