@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { HttpService } from 'src/app/config/rest-config/http.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   isFormSubmitted: boolean = false;
   showHidePass = false;
@@ -30,8 +30,10 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8)
     ])
   });
+  userSubscription$: any;
+  loginAttempts$: any;
   constructor(private store: Store, private router: Router, private toastService: ToastService, private http: HttpService) {
-    this.store.select(selectUserState).subscribe((res: any) => {
+    this.userSubscription$ = this.store.select(selectUserState).subscribe((res: any) => {
       if (res.apiCompleted) {
         this.isFormSubmitted = false;
         if (res.user) {
@@ -39,7 +41,7 @@ export class LoginComponent implements OnInit {
         }
       }
     });
-    this.store.select(getUserLoginAttempts).subscribe((res: any) => {
+    this.loginAttempts$ = this.store.select(getUserLoginAttempts).subscribe((res: any) => {
       if(res >= 3){
         this.isBlockUser = true;
         this.timer(1);
@@ -104,4 +106,11 @@ export class LoginComponent implements OnInit {
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
   get f() { return this.loginForm.controls;}
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.userSubscription$.unsubscribe()
+    this.loginAttempts$.unsubscribe()
+  }
 }
