@@ -297,7 +297,7 @@
                                                                                         <ng-container
                                                                                             *ngFor="let user of workFLowDetails?.workSpaceUsers; let wIndex = index"
                                                                                             class="rounded">
-                                                                                            <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)"
+                                                                                            <div *ngIf="!addedUserId?.includes(user.id) &&( user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel))"
                                                                                                 class="workflow-list-item row p-3 border-bottom">
 
                                                                                                 <div
@@ -330,7 +330,7 @@
 
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div *ngIf=" wIndex === 0 && !user.email?.includes(item.userSerachForLevel) && !user.firstName?.includes(item.userSerachForLevel) && !user.lastName?.includes(item.userSerachForLevel)"
+                                                                                            <div *ngIf="!addedUserId?.includes(user.id) && wIndex === 0 && (!user.email?.includes(item.userSerachForLevel) && !user.firstName?.includes(item.userSerachForLevel) && !user.lastName?.includes(item.userSerachForLevel))"
                                                                 class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3">
                                                                 <div class="autocomplete-not-found my-3">
                                                                     <strong>{{item.userSerachForLevel}}</strong> Search not found in
@@ -340,7 +340,7 @@
                                                                     <label for="select" class=" col-form-label"></label>
 
                                                                     <select
-                                                                        [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')"
+                                                                        [disabled]="checkForEmail(item.userSerachForLevel) || !item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')"
                                                                         id="select" name="select" class="custom-select"
                                                                         (change)="selectRole($event)">
                                                                         <option
@@ -352,8 +352,9 @@
                                                                         name="invite" type="button"
                                                                         (click)="inviteUserforLevel(item.id, item.userSerachForLevel); item.userSerachForLevel = ''"
                                                                         class="btn btn-primary btn-bf mt-3"
-                                                                        [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')">Invite</button>
-                                                                </div>
+                                                                        [disabled]="checkForEmail(item.userSerachForLevel) || !item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')">Invite </button>
+                                                                    <p *ngIf="checkForEmail(item.userSerachForLevel)">This user is already added workflow level.</p>
+                                                                    </div>
 
                                                             </div>
                                                                                         </ng-container>
@@ -365,10 +366,14 @@
 
                                                                     </div>
                                                                     <div class="text-center"> <a
-                                                                            [ngClass]="{'disabled': builderObj.hasEntries}"
+                                                                            [ngClass]="{'disabled': builderObj.hasEntries || workFLowDetails?.workFlowLevels?.length > 9}"
                                                                             class="btn btn-primary btn-bf"
                                                                             (click)="addLevels(null, null, true)">Add
-                                                                            Levels</a></div>
+                                                                            Levels</a>
+                                                                            <div *ngIf="workFLowDetails?.workFlowLevels?.length > 9">
+                                                                                As of now we are supporting upto 10 Levels
+                                                                            </div></div>
+                                                                            
 
                                                                 </div>
                                                             </div>
