@@ -949,7 +949,7 @@ export const config = [
     {
         name: 'Time',
         iconClass: 'material-icons',
-        iconName: 'date_range',
+        iconName: 'schedule',
         inputType: 'time',
         icon: 'fas fa-hashtag',
         class: 'half',

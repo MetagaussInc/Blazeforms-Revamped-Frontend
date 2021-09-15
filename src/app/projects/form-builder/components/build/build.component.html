@@ -938,9 +938,9 @@
                                                                          [maxDate]="selectedElement.maxVal"
                                                                          (ngModelChange)="selectedElement.value = null"
                                                                         type="date"
-                                                                        ngbDatepicker #d1="ngbDatepicker">
+                                                                        ngbDatepicker #d1="ngbDatepicker" required>
                                                                     <div  class="input-group-append">
-                                                                        <div class="input-group-text calendar"
+                                                                        <div class="input-group-text calendar "
                                                                             (click)="d1.toggle()"><i
                                                                                 class="material-icons" role="button">date_range</i>
                                                                         </div>
@@ -956,7 +956,7 @@
                                                                         (ngModelChange)="selectedElement.value = null"
                                                                         (change)="selectedElement.value = null"
                                                                         type="date"
-                                                                        ngbDatepicker #d="ngbDatepicker">
+                                                                        ngbDatepicker #d="ngbDatepicker" required>
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d.toggle()" type="button"><i
@@ -1755,9 +1755,10 @@
                                                                 [minDate]="model.minVal" [maxDate]="model.maxVal"
                                                                 placeholder="{{model.placeholder}}" (click)="d.toggle()" name="dp"
                                                                 [(ngModel)]="model.value" ngbDatepicker
-                                                                #d="ngbDatepicker">
+                                                                #d="ngbDatepicker" required>
+                                                                <i class="moz-cover-clear"></i>
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text calendar"
+                                                                <div class="input-group-text calendar no-click"
                                                                     (click)="d.toggle()" type="button"><i
                                                                         class="material-icons" role="button">date_range</i></div>
                                                             </div>
@@ -2105,7 +2106,7 @@
                                                                 </td>
                                                                 <td
                                                                     *ngIf="col.view && row?.[col?.field] === 'No_value'">
-                                                                    <!-- <span class="empty-field">{{"<No Entry>"}}</span> -->
+                                                                 <span class="empty-field small"><i>{{"No Entry"}}</i></span> 
                                                                 </td>
                                                                 <td *ngIf="col.headerName === 'Signature'">
                                                                     <img [src]="row?.[col?.field]" height="100px"
