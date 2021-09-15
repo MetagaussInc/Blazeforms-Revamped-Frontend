@@ -78,39 +78,39 @@ export class ExportedFormComponent implements OnInit {
     if (!dependUpon) {
       return true;
     }
-    const dependencyElementIndex = this.elements.findIndex((x: any) => x.uiIndexId == dependUpon.elementId);
-    const data = this.elements[dependencyElementIndex].value;
-    if (dependUpon.type === 'boolean') {
-      if (dependUpon.isFilledOut) {
-        return (typeof data === 'number') ? data > -1 : data.length > 0;
+    const dependencyElementIndex = this.elements.findIndex((x: any) => x.uiIndexId == dependUpon?.elementId);
+    const data = this.elements[dependencyElementIndex]?.value;
+    if (dependUpon?.type === 'boolean') {
+      if (dependUpon?.isFilledOut) {
+        return (typeof data === 'number') ? data > -1 : data?.length > 0;
       }
-      if (dependUpon.isNotFilledOut) {
-        return data === 0 || data.length === 0;
+      if (dependUpon?.isNotFilledOut) {
+        return data === 0 || data?.length === 0;
       }
     } else {
-      if (dependUpon.is) {
-        return data === dependUpon.value;
+      if (dependUpon?.is) {
+        return data === dependUpon?.value;
       }
-      if (dependUpon.isNot) {
-        return data !== dependUpon.value;
+      if (dependUpon?.isNot) {
+        return data !== dependUpon?.value;
       }
-      if (dependUpon.contains) {
-        return data?.toLowerCase().includes(dependUpon.value);
+      if (dependUpon?.contains) {
+        return data?.toLowerCase().includes(dependUpon?.value);
       }
-      if (dependUpon.doesNotContains) {
-        return !data?.toLowerCase().includes(dependUpon.value);
+      if (dependUpon?.doesNotContains) {
+        return !data?.toLowerCase().includes(dependUpon?.value);
       }
-      if (dependUpon.endWith) {
-        return data.endsWith(dependUpon.value);
+      if (dependUpon?.endWith) {
+        return data.endsWith(dependUpon?.value);
       }
-      if (dependUpon.doesNotEndWith) {
-        return data.endsWith(dependUpon.value);
+      if (dependUpon?.doesNotEndWith) {
+        return data?.endsWith(dependUpon?.value);
       }
       if (dependUpon.startWith) {
-        return data.startsWith(dependUpon.value);
+        return data?.startsWith(dependUpon?.value);
       }
       if (dependUpon.doesNotStartWith) {
-        return !data.startsWith(dependUpon.value);
+        return !data?.startsWith(dependUpon?.value);
       }
     }
     return false;
@@ -162,28 +162,28 @@ export class ExportedFormComponent implements OnInit {
       }
     } else {
       if (dependUpon.is) {
-        return data === dependUpon.value;
+        return (data === dependUpon.value);
       }
       if (dependUpon.isNot) {
-        return data !== dependUpon.value;
+        return (data !== dependUpon.value);
       }
       if (dependUpon.contains) {
-        return data?.toLowerCase().includes(dependUpon.value);
+        return (data?.toLowerCase().includes(dependUpon.value));
       }
       if (dependUpon.doesNotContains) {
-        return !data?.toLowerCase().includes(dependUpon.value);
+        return (!data?.toLowerCase().includes(dependUpon.value));
       }
       if (dependUpon.endWith) {
-        return data.endsWith(dependUpon.value);
+        return (data.endsWith(dependUpon.value));
       }
       if (dependUpon.doesNotEndWith) {
-        return data.endsWith(dependUpon.value);
+        return (data.endsWith(dependUpon.value));
       }
       if (dependUpon.startWith) {
-        return data.startsWith(dependUpon.value);
+        return (data.startsWith(dependUpon.value));
       }
       if (dependUpon.doesNotStartWith) {
-        return !data.startsWith(dependUpon.value);
+        return (!data.startsWith(dependUpon.value));
       }
     }
     return true;
@@ -280,13 +280,34 @@ StripeToken: token
           this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
         }else if (element.children && element.inputType === "levelSection") {
           this.getDataString(element.children, this.string)
+        } if (element.inputType === 'date') {
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : (element.value.day +'/'+ element.value.month +'/'+ element.value.year)) + '||'
         } else {
           this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }
       });
     return this.string;
   }
+
+  checkForRequired(): boolean {
+    let yes = false;
+    for (const element of this.elements) {
+      if (this.checkForRDependency(element, 'reqDependUpOn') ) {
+        element.isRequired = true
+        yes = true;
+      } else {
+        element.isRequired = false
+      }
+    }
+    return yes;
+  }
   submitParentForm(parentForm: any) {
+
+    if (this.checkForRequired()) {
+      this.submitted = true
+      return;
+    }
+    
     let ddata = '';
 
     // if (this.haveTabs) {

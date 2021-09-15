@@ -2,10 +2,10 @@
     <h4 class="modal-title">Show Visible When</h4>
     <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close('close')">&times;</button>
 </div>
-<div class="modal-body">
+<div class="modal-body" *ngIf="config?.selectedElement?.[config.type]">
     <div class="row">
         <div class="col-sm-4">
-            <select (change)="addDependency($event)" class="form-control">
+            <select (change)="addDependency($event)" [(ngModel)]="config.selectedElement[config.type].elementId" class="form-control">
                 <option value="{{null}}">Select Input</option>
                 <option *ngFor="let item of config?.targetBuilderTools"
                     [ngClass]="{'d-none': item.uiIndexId === config?.selectedElement.uiIndexId}"
@@ -14,7 +14,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <select *ngIf="config?.selectedElement?.[config.type]" (change)="addDependencyProperty($event)" class="form-control">
+            <select *ngIf="config?.selectedElement?.[config.type]?.elementId" [(ngModel)]="config.selectedElement[config.type].selectedCondition" (change)="addDependencyProperty($event)" class="form-control">
                 <option>Select Dependency Type</option>
                 <option value="isFilledOut">is filled out</option>
                 <option value="isNotFilledOut">is not filled out</option>
@@ -38,5 +38,5 @@
 </div>
 <div class="modal-footer border-0">
     <button type="button" class="btn btn-link btn-sm text-bf" (click)="activeModal.close('close')">Cancel</button>
-    <button type="button" class="btn btn-bf btn-sm">Save</button>
+    <button type="button" class="btn btn-bf btn-sm" (click)="save()">Save</button>
 </div>

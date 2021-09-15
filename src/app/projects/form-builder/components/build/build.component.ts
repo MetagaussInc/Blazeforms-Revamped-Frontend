@@ -160,6 +160,7 @@ export class BuildComponent implements OnDestroy {
   globalListenFunc: any;
   globalListenFunc1: any;
   userIdwWithStatus: any = {};
+  usersInWorkFlow: any = {}; 
   constructor(private dataService: DataSharingService, private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -512,6 +513,18 @@ export class BuildComponent implements OnDestroy {
     })
   }
 
+  checkForEmail(userSerachForLevel: any): boolean {
+    let exist = false;
+    let selectedID = '';
+    this.workFLowDetails?.workSpaceUsers?.forEach((user: any) => {
+      if (user.email === userSerachForLevel) {
+        selectedID = user.id;
+      }
+    });
+    
+    return this.addedUserId?.includes(selectedID);
+  }
+
   makeLarger(model: any) {
     switch (model.size) {
       case 'small':
@@ -693,6 +706,8 @@ export class BuildComponent implements OnDestroy {
   }
 
   checkForDependency(model: any): boolean {
+    // As Build page dont show this 
+    return true;
     const dependUpon = model?.dependUpon;
 
     // if there is no dependency the show element always
@@ -1015,7 +1030,7 @@ export class BuildComponent implements OnDestroy {
       return;
     }
     const modalRef: any = this.modalService.open(ConditionalRendereringModalComponent, { size: 'lg' })
-    modalRef.componentInstance.config = {
+    modalRef.componentInstance.configs = {
       headerName: '',
       selectedElement,
       targetBuilderTools: this.targetBuilderTools,

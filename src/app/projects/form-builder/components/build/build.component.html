@@ -375,10 +375,14 @@
 
                                                                     </div>
                                                                     <div class="text-center"> <a
-                                                                            [ngClass]="{'disabled': builderObj.hasEntries}"
+                                                                            [ngClass]="{'disabled': builderObj.hasEntries || workFLowDetails?.workFlowLevels?.length > 9}"
                                                                             class="btn btn-primary btn-bf"
                                                                             (click)="addLevels(null, null, true)">Add
-                                                                            Levels</a></div>
+                                                                            Levels</a>
+                                                                            <div *ngIf="workFLowDetails?.workFlowLevels?.length > 9">
+                                                                                As of now we are supporting upto 10 Levels
+                                                                            </div></div>
+                                                                            
 
                                                                 </div>
                                                             </div>
@@ -2110,7 +2114,7 @@
                                                                     {{row?.[col?.field]}}
                                                                 </td>
                                                                 <td
-                                                                    *ngIf="col.view && row?.[col?.field] === 'No_value'">
+                                                                    *ngIf="col.view && row?.[col?.field] === 'No_value' || col.view && row?.[col?.field] === ''">
                                                                  <span class="empty-field small"><i>{{"No Entry"}}</i></span> 
                                                                 </td>
                                                                 <td *ngIf="col.headerName === 'Signature'">

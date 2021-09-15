@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as lodash from 'lodash';
 
 @Component({
   selector: 'app-conditional-renderering-modal',
@@ -8,10 +9,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ConditionalRendereringModalComponent implements OnInit {
 
-  @Input() public config: any;
+  @Input() public configs: any;
+  public config: any;
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    console.log(this.configs)
+
+    this.config = JSON.parse(JSON.stringify(this.configs));
+    if (!this.config?.selectedElement?.[this.config.type]) {
+      this.config.selectedElement[this.config.type] = {}
+    }
   }
 
   addDependency(event: any) {
@@ -28,10 +36,16 @@ export class ConditionalRendereringModalComponent implements OnInit {
     this.config.selectedElement[this.config.type] = {
       elementId: ref,
       // [val]: condition ? true : '',
+      selectedCondition: val,
       [val]: true,
       type: condition ? 'boolean' : 'text'
     }
       // this.targetBuilderTools[this.selectedIndex].dependUpon[val] = condition ? true : '';
       // this.targetBuilderTools[this.selectedIndex].dependUpon['type'] = condition ? 'boolean' : 'text'
+  }
+
+  save() {
+    this.configs.selectedElement[this.config.type] = lodash.cloneDeep(this.config.selectedElement[this.config.type]);
+    this.activeModal.close('close')
   }
 }

@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
@@ -33,7 +33,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   styling: any;
   levelDetails: any = {};
   entryId: any = null;
-  constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
+  constructor(private router: Router, private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
     document.body.className = 'bg-light';
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -67,6 +67,10 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
         const bForms: any = localStorage.getItem('bforms');
           // user: JSON.parse(bForms)?.user,
         this.needLogin = res.formType === 'WorkFlow' && !JSON.parse(bForms)?.user?.Id ? true : false;
+        if (res.formType === 'WorkFlow' && !JSON.parse(bForms)?.user?.Id !== this.userInfo?.Id) {
+          this.router.navigate(['/user/login'])
+          return;
+        }
         this.formDetail = {
           ... res,
           workspaceName: this.workSpaceName
