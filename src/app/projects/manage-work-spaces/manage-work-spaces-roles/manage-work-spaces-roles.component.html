@@ -31,7 +31,7 @@
                     <a (click)="manageRoleData(role)" *ngIf="rolePermissions.canEdit" title="Edit">
                         <i class="material-icons-round mr-3 text-dark">edit</i>
                     </a>
-                    <i *ngIf="rolePermissions.canDelete" class="material-icons-round text-dark" (click)="deleteRole(role)" data-toggle="modal" data-target="#" title="Delete">delete</i>
+                    <i *ngIf="rolePermissions.canDelete" class="material-icons-round text-dark" (click)="deleteRole(role)" data-toggle="modal" data-target="#" title="Delete" role="button">delete</i>
                 </div>
             </div>
         </ng-container>

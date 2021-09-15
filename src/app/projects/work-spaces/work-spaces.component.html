@@ -35,13 +35,13 @@
                                 <i class="material-icons"> domain_disabled </i>
                             </button>
                             <button *ngIf="IsSuperAdmin" class="btn animate-mat" title="Redirect">
-                                <i class="material-icons-round mr-3 text-dark"> open_in_browser </i>
+                                <i class="material-icons-round mr-3 text-dark" role="button"> open_in_browser </i>
                             </button>
                             <a *ngIf="permissions.canEdit" (click)="goToManageWorkSpaces('edit', organization.id)" title="Edit">
-                                <i class="material-icons-round mr-3 text-dark">edit</i>
+                                <i class="material-icons-round mr-3 text-dark" role="button">edit</i>
                             </a>
                             <a *ngIf="(organization.id != userInfo.WorkspaceId && permissions.canDelete) || IsSuperAdmin" (click)="deleteUserOrganization(organization)" title="Delete">
-                                <i class="material-icons-round text-dark">delete</i>
+                                <i class="material-icons-round text-dark" role="button">delete</i>
                             </a>
                         </div>
                     </div>
