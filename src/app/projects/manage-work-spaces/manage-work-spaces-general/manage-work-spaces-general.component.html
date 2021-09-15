@@ -42,7 +42,7 @@
                 <label for="country-select">Country</label>
             </div>
             <div class="col-9">
-                <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control" [attr.disabled]="!workspacePermissions.canEdit">
+                <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
                     <option [ngValue]="null" disabled>Select Country</option>
                     <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
                 </select>
@@ -54,7 +54,7 @@
                 <label for="time-zone-select">Time Zone</label>
             </div>
             <div class="col-9">
-                <select formControlName="TimeZoneId" id="time-zone-select" name="TimeZoneId" class="zone-selector form-control" [attr.disabled]="!workspacePermissions.canEdit">
+                <select formControlName="TimeZoneId" id="time-zone-select" name="TimeZoneId" class="zone-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
                     <option [ngValue]="null" disabled>Select Timezone</option>
                     <option *ngFor="let timezone of timeZoneList" [ngValue]="timezone.value">{{timezone.label}}</option>
                 </select>
@@ -66,7 +66,7 @@
                 <label for="language-select">Language</label>
             </div>
             <div class="col-9">
-                <select formControlName="Language" id="language-select" name="Language" class="language-selector form-control" [attr.disabled]="!workspacePermissions.canEdit">
+                <select formControlName="Language" id="language-select" name="Language" class="language-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
                     <option [ngValue]="null" disabled>Select Language</option>
                     <option *ngFor="let language of languageList" [ngValue]="language.value">{{language.label}}</option>
                 </select>
@@ -78,7 +78,7 @@
                 <label for="currency-select">Currency</label>
             </div>
             <div class="col-9">
-                <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control" [attr.disabled]="!workspacePermissions.canEdit">
+                <select formControlName="Currency" id="currency-select" name="Currency" class="currency-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
                     <option [ngValue]="null" disabled>Select Currency</option>
                     <option *ngFor="let currency of currencyList" [ngValue]="currency.label">{{currency.label}}</option>
                 </select>
@@ -91,7 +91,7 @@
             </div>
             <div class="col-md-9">
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" formControlName="isActive" class="custom-control-input" id="bf_active_organization" [attr.disabled]="!workspacePermissions.canEdit">
+                    <input type="checkbox" formControlName="isActive" class="custom-control-input" id="bf_active_organization" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
                     <label class="custom-control-label" for="bf_active_organization"></label>
                 </div>
             </div>
