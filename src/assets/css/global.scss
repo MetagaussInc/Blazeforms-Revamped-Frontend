@@ -1341,3 +1341,11 @@
 #form-builder-sidebar .input-group.date-field input{
     pointer-events: none;
 }
+
+.column-dropdown{min-width: 200px;}
+
+// Date Picker
+
+.ngb-dp-weekday {
+    color: #040404 !important;
+}

@@ -80,7 +80,7 @@
                                             <span class="form-name" (click)="openBuilderByName(form, 1)" >{{form.text ? form.text : form.name}}</span>
                                             </ng-container>
                                             <ng-template #clickAble>
-                                            <span class="form-name" >{{form.text ? form.text : form.name}}</span>
+                                            <span class="form-name" (click)="openbuilder(form, enableDefine(form,formsbyId) ? 0 : 3)" >{{form.text ? form.text : form.name}}</span>
                                             </ng-template>
                                             
                                         </div>

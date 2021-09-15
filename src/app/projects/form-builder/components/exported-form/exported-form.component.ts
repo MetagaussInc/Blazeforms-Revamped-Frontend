@@ -17,6 +17,7 @@ export class ExportedFormComponent implements OnInit {
   @Input() public noTabs: any
   @Input() public isPublishPage: any
   @Input() public levelDetails: any;
+  @Input() public entryId: any;
   @Output() inputUpdateEvent: EventEmitter<any> = new EventEmitter()
 
   string: any;
@@ -383,6 +384,7 @@ StripeToken: token
         levelDetails: this.levelDetails,
         savedElementsWithValue: this.elements
       }),
+      ...(this.entryId && {FormEntryId : this.entryId}),
       userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
     }
     this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
@@ -495,6 +497,21 @@ StripeToken: token
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(elementValue); 
   } 
+  checkForFieldDependencies(elements: any) {
+    let disable = false;
+    elements?.map((element: any) => {
+      if (element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box') {
+        if (element.value?.length < element.minVal || element.value?.length > element.maxVal) {
+          disable = true
+        }
+      } else if (element.inputType === 'number') {
+        if (element.value < element.minVal || element.value > element.maxVal) {
+          disable = true
+        }
+      }
+    })
+    return disable;
+  }
 
   isUrlValid(userInput: any) {
     var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);

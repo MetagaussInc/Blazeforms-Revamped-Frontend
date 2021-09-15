@@ -32,7 +32,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
   userInfo: any;
   styling: any;
   levelDetails: any = {};
-
+  entryId: any = null;
   constructor(private http: HttpService,private store: Store, private routec: ActivatedRoute, private renderer: Renderer2) {
     document.body.className = 'bg-light';
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -40,6 +40,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
     })
     this.routec.params.subscribe(res => {
       this.workSpaceName = res.workspaceName;
+      this.entryId = res.entry
       this.getForm(res.workspaceName, res.formName, res.entry)
     });
     this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
@@ -70,7 +71,7 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
           ... res,
           workspaceName: this.workSpaceName
         };
-        this.elements = [...(JSON.parse(res.miscellaneousJSON).levels || []), ...JSON.parse(res.miscellaneousJSON).targetBuilderTools];
+        this.elements = [...(JSON.parse(res.miscellaneousJSON)?.levels || []), ...JSON.parse(res.miscellaneousJSON)?.targetBuilderTools];
         this.paymentDetails = JSON.parse(res.miscellaneousJSON).paymentSetting;
         this.styling = JSON.parse(res.miscellaneousJSON).styling;
         this.placeholderStyling(JSON.parse(res.miscellaneousJSON).styling)
@@ -86,9 +87,9 @@ export class BlazeformsComponent implements OnInit, OnDestroy {
         a.remove();
       }
   
-      const color = styling.placeholders.color;
-      const size = styling.placeholders.size;
-      const font = styling.placeholders.font;
+      const color = styling?.placeholders.color;
+      const size = styling?.placeholders.size;
+      const font = styling?.placeholders.font;
       const string = `
       <style id="bclr">
       app-exported-form input::-webkit-input-placeholder { /* WebKit, Blink, Edge */

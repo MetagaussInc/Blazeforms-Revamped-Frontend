@@ -112,44 +112,6 @@ export class BuildComponent implements OnDestroy {
   count: number = 0;
   dummyContainer: any = [];
   formLoaded = false;
-  PaymentModel = {
-    name: 'Calculations',
-    textValue: '',
-    minCharacter: 0,
-    maxCharacter: 100,
-    value: '',
-    inputType: 'calculations',
-    icon: 'fas fa-language',
-    class: 'full',
-    placeholder: '',
-    size: 'medium',
-    view: 'always',
-    minVal: 0,
-    maxVal: 50,
-    helpText: '',
-    isRequired: 'always',
-    showSubTotal: true,
-    showLineItems: true,
-    mapBillingFields: true,
-    stripeAccount: 'Dummy',
-    stripeAccounts: [
-      {
-        name: 'Dummy',
-        secretKey: '',
-        sKey: ''
-      }
-    ],
-    extraBill: [
-      {
-        value: null,
-        type: 'dollar',
-        name: 'Additional'
-      }
-    ],
-    validations: {
-      billing: true
-    }
-  }
   url = '';
   filter: any = null;
   userInfoSubscription$: any;
@@ -197,6 +159,7 @@ export class BuildComponent implements OnDestroy {
   formActivities:any = [];
   globalListenFunc: any;
   globalListenFunc1: any;
+  userIdwWithStatus: any = {};
   constructor(private dataService: DataSharingService, private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -428,7 +391,7 @@ export class BuildComponent implements OnDestroy {
       LevelId: null,
       UserId: id,
       UserType: "Owner",// to do
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      WorkspaceId: this.builderObj.workSpaceId
     }
 
     this.http.call('AddUserToWorkFlow', 'POST', payload).subscribe(res => {
@@ -454,7 +417,7 @@ export class BuildComponent implements OnDestroy {
       LevelId: formId, ///
       UserId: id,
       UserType: "Participant", // As per production : Always participant for this.
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      WorkspaceId: this.builderObj.workSpaceId
     }
 
     this.http.call('AddUserToWorkFlow', 'POST', payload).subscribe(res => {
@@ -475,7 +438,7 @@ export class BuildComponent implements OnDestroy {
     const payload = {
       Id: ID,
       UserId: id,
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      WorkspaceId: this.builderObj.workSpaceId
     }
 
     this.http.call('DeleteUserFromWorkFlow', 'POST', payload).subscribe(res => {
@@ -496,7 +459,7 @@ export class BuildComponent implements OnDestroy {
     const payload = {
       Id: ID,
       UserId: id,
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      WorkspaceId: this.builderObj.workSpaceId
     }
 
     this.http.call('DeleteUserFromWorkFlow', 'POST', payload).subscribe(res => {
@@ -513,7 +476,7 @@ export class BuildComponent implements OnDestroy {
       Id: id ? id : null,
       Level: level ? level : null,
       LevelOrder: this.workFLowDetails.workFlowLevels.length,
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id
+      WorkspaceId: this.builderObj.workSpaceId
     }
 
     this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
@@ -534,7 +497,7 @@ export class BuildComponent implements OnDestroy {
       FormId: ID,
       SearchKeyword: '',
       UserId: this.userInfo.Id,
-      WorkSpaceId: this.userInfo.WorkspaceDetail.Id
+      WorkSpaceId: this.builderObj.workSpaceId
     }
     this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
       console.log('GetDetailsOfWorkflow -- response ', res)
@@ -542,7 +505,9 @@ export class BuildComponent implements OnDestroy {
       this.addedUserId = [];
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
-
+      });
+      this.workFLowDetails?.workSpaceUsers?.forEach((element: any) => {
+        this.userIdwWithStatus[element.id] = element?.isLinkActivated ? 'Activated' : 'Pending';
       });
     })
   }
@@ -629,7 +594,7 @@ export class BuildComponent implements OnDestroy {
   getFoldersWithList(userInfo: any) {
     this.http.call('getAllActiveForms', 'POST', {
       UserId: userInfo.Id,
-      WorkSpaceId: userInfo.WorkspaceDetail.Id,
+      WorkSpaceId: this.builderObj.workSpaceId,
     }).subscribe(res => {
       this.formsList = res;
       console.log(this.formsList);
@@ -689,7 +654,7 @@ export class BuildComponent implements OnDestroy {
       SubmissionSettings: "",
       URL: this.builderObj.url,
       WorkFlowLevels: null,
-      WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
+      WorkSpaceId: this.builderObj.workSpaceId,
       formLabels: "",
       MiscellaneousJSON: JSON.stringify({
         targetBuilderTools: elements,
@@ -1094,7 +1059,7 @@ export class BuildComponent implements OnDestroy {
   getWorkSpaceAccounts() {
     this.http.call('GetWorkspaceAccountSettingsByWorkspaceId', 'POST',
       {
-        WorkspaceId: this.userInfo.WorkspaceDetail.Id
+        WorkspaceId: this.builderObj.workSpaceId
       }).subscribe(res => {
         this.stripeAccounts = res;
         console.log(res)
@@ -1335,7 +1300,7 @@ export class BuildComponent implements OnDestroy {
       SessionUser: this.userInfo.Id,
       UserEmail: this.userSerach,
       UserType: "Owner",
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id,
+      WorkspaceId: this.builderObj.workSpaceId,
     }
     this.http.call('InviteUserForWorkFlow', 'POST', p).subscribe(res => {
       this.userSerach = '';
@@ -1352,7 +1317,7 @@ export class BuildComponent implements OnDestroy {
       SessionUser: this.userInfo.Id,
       UserEmail: userSerachForLevel,
       UserType: "Participant",
-      WorkspaceId: this.userInfo.WorkspaceDetail.Id,
+      WorkspaceId: this.builderObj.workSpaceId,
     }
     this.http.call('InviteUserForWorkFlow', 'POST', p).subscribe(res => {
       this.userSerach = '';

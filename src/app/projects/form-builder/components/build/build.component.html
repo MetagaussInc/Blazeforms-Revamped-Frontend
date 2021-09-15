@@ -258,6 +258,7 @@
                                                                                             class="added-user-title-wrapper col-md-6">
                                                                                             <div clss="added-user-name">
                                                                                                 {{flowUsers.userName}}
+                                                                                                {{flowUsers.email}}
                                                                                             </div>
                                                                                             <span
                                                                                                 class="text-muted"><i>{{flowUsers.email}}</i></span>
@@ -266,10 +267,10 @@
                                                                                         <div
                                                                                             class="added-user-title-wrapper col-md-3">
                                                                                             <span
-                                                                                                *ngIf="flowUsers.isLinkActivated"
+                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Activated'"
                                                                                                 class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
                                                                                             <span
-                                                                                                *ngIf="!flowUsers.isLinkActivated"
+                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Pending'"
                                                                                                 class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
                                                                                         </div>
                                                                                         <div
@@ -637,6 +638,8 @@
                                                             <div class="input-group date-field">
                                                                 <input class="form-control" type="date" placeholder="dd-mm-yyyy"
                                                                     name="dp" [(ngModel)]="selectedElement.value"
+                                                                    [minDate]="selectedElement.minVal"
+                                                                    [maxDate]="selectedElement.maxVal"
                                                                     ngbDatepicker #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text calendar"
@@ -682,7 +685,7 @@
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div class="col-md-8">
+                                                                <div class="col-md-9 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2 payment-checbox">
                                                                             <div
@@ -698,7 +701,7 @@
                                                                                     for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-10 pl-0">
                                                                             <input type="text"
                                                                                 [(ngModel)]="selectedElement.options[i].label"
                                                                                 placeholder="Add Option Name"
@@ -706,8 +709,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <button (click)="remove(i)"
+                                                                <div  class="col-md-3">
+                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -721,12 +724,14 @@
 
                                                         <div *ngIf="selectedElement?.validations?.options && selectedElement?.collectPayment"
                                                             class="radio-opt">
-
+                                                            <div class="row">
                                                             <div class="col-12"><label
-                                                                    for="Default Value">Options</label></div>
+                                                                    for="Default Value">Options</label>
+                                                                </div>
+                                                            </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div class="col-md-6">
+                                                                <div  class="col-md-6 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div
@@ -742,20 +747,20 @@
                                                                                     for="default_radio_selection_{{selectedElement.uiIndexId}}_{{i*i}}"></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-9">
+                                                                        <div class="col-md-9 pr-0">
                                                                             <input type="text"
                                                                                 [(ngModel)]="selectedElement.options[i].label"
                                                                                 class="form-control">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-3 pr-0">
                                                                     <input type="number"
                                                                         [(ngModel)]="selectedElement.options[i].payment"
                                                                         placeholder="$" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <button (click)="remove(i)"
+                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -925,9 +930,11 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
+                                                                         [maxDate]="selectedElement.maxVal"
+                                                                         (ngModelChange)="selectedElement.value = null"
                                                                         type="date"
                                                                         ngbDatepicker #d1="ngbDatepicker">
-                                                                    <div class="input-group-append">
+                                                                    <div  class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d1.toggle()"><i
                                                                                 class="material-icons" role="button">date_range</i>
@@ -940,6 +947,9 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.maxVal"
+                                                                        [minDate]="selectedElement.minVal"
+                                                                        (ngModelChange)="selectedElement.value = null"
+                                                                        (change)="selectedElement.value = null"
                                                                         type="date"
                                                                         ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
@@ -1468,7 +1478,7 @@
                                                         (click)="clicked($event, model, template); selectedElement.viewOptions = false;"
                                                         class="builder-section-wrap">
                                                         {{model.name}}
-                                                        <div class="row p-2">
+                                                        <div class="row p-2 pl-3">
                                                             <label
                                                                 class="mr-2">{{model.validations?.toggleDefaultOptions?.[model.selectLabel].false}}</label>
                                                             <div class="custom-control custom-switch">
@@ -1718,9 +1728,9 @@
                                                         </div>
                                                     </div>
                                                     <div *ngSwitchCase="'fileupload'" (click)="clicked($event, model, template)">
-                                                        <div class="">
+                                                        <div class="form-group">
                                                             <label>{{model.name}}</label>
-                                                            <input type="file">
+                                                            <input type="file" class="form-control file-upload-field">
                                                         </div>
 
                                                     </div>
@@ -1982,7 +1992,7 @@
                                                 (click)="getNewEntries()"> Refresh </button>
 
 
-                                            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="filterDropdown"
                                                     ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
                                                 <div ngbDropdownMenu aria-labelledby="filterDropdown">
@@ -1994,7 +2004,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
                                                     ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
                                                 <div ngbDropdownMenu aria-labelledby="actionsDropdown">
@@ -2002,7 +2012,7 @@
                                                     <button ngbDropdownItem (click)="export()">Export</button>
                                                 </div>
                                             </div>
-                                            <div class="d-inline-block">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block">
                                                 <button class="btn btn-primary btn-bf mr-2" id="newEntry"
                                                     (click)="viewEntryPanel = !viewEntryPanel">New Entry</button>
                                                 <!-- <div ngbDropdownMenu aria-labelledby="newEntry">
@@ -2034,10 +2044,10 @@
                                         <div *ngIf="entries?.rows?.length > 0" class="tool-filter text-right">
                                             <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="column"
-                                                    ngbDropdownAnchor (focus)="column.open()">Columns</button>
-                                                <div ngbDropdownMenu aria-labelledby="column" class="">
-                                                    <div ngbDropdownItem *ngFor="let item of entries.columns"
-                                                        (click)="item.view = !item.view" class="">
+                                                ngbDropdownToggle >Columns</button>
+                                                <div ngbDropdownMenu aria-labelledby="column" class="column-dropdown">
+                                                    <div *ngFor="let item of entries.columns"
+                                                        (click)="item.view = !item.view" class="px-3 py-1">
                                                         <!-- <label> <input data-index="0" [checked]="item.view" name="btSelectItem" type="checkbox">&nbsp;{{item.headerName}}</label> -->
                                                         <div *ngIf="item.headerName?.length > 1" class="custom-control custom-checkbox">
                                                             <input data-index="0" [checked]="item.view"
