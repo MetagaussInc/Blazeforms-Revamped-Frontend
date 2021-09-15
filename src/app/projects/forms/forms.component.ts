@@ -409,7 +409,7 @@ export class FormsComponent implements OnInit {
 
   enableBuildPublishTab(form: any,formsbyId?: any) {
     if (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow') {
-      if (this.formsbyId?.[form.value]?.[0]?.formEntries?.length > 0) {
+      if (this.formsbyId?.[form.value]?.[0]?.formEntries?.length > 0 || this.formsbyId?.[form.value]?.[0]?.createdBy !== this.userInfo?.Id) {
         return false;
       } else {
         return true;

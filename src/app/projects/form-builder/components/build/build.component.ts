@@ -706,6 +706,8 @@ export class BuildComponent implements OnDestroy {
   }
 
   checkForDependency(model: any): boolean {
+    // As Build page dont show this 
+    return true;
     const dependUpon = model?.dependUpon;
 
     // if there is no dependency the show element always
@@ -1028,7 +1030,7 @@ export class BuildComponent implements OnDestroy {
       return;
     }
     const modalRef: any = this.modalService.open(ConditionalRendereringModalComponent, { size: 'lg' })
-    modalRef.componentInstance.config = {
+    modalRef.componentInstance.configs = {
       headerName: '',
       selectedElement,
       targetBuilderTools: this.targetBuilderTools,
