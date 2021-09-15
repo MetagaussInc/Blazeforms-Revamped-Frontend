@@ -280,6 +280,8 @@ StripeToken: token
           this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
         }else if (element.children && element.inputType === "levelSection") {
           this.getDataString(element.children, this.string)
+        } if (element.inputType === 'date') {
+          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : (element.value.day +'/'+ element.value.month +'/'+ element.value.year)) + '||'
         } else {
           this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
         }

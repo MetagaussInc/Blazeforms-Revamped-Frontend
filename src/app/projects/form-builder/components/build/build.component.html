@@ -2105,7 +2105,7 @@
                                                                     {{row?.[col?.field]}}
                                                                 </td>
                                                                 <td
-                                                                    *ngIf="col.view && row?.[col?.field] === 'No_value'">
+                                                                    *ngIf="col.view && row?.[col?.field] === 'No_value' || col.view && row?.[col?.field] === ''">
                                                                  <span class="empty-field small"><i>{{"No Entry"}}</i></span> 
                                                                 </td>
                                                                 <td *ngIf="col.headerName === 'Signature'">
