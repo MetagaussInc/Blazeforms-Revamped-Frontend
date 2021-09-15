@@ -638,6 +638,8 @@
                                                             <div class="input-group date-field">
                                                                 <input class="form-control" type="date" placeholder="dd-mm-yyyy"
                                                                     name="dp" [(ngModel)]="selectedElement.value"
+                                                                    [minDate]="selectedElement.minVal"
+                                                                    [maxDate]="selectedElement.maxVal"
                                                                     ngbDatepicker #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text calendar"
@@ -707,8 +709,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
-                                                                    <button (click)="remove(i)"
+                                                                <div  class="col-md-3">
+                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -729,7 +731,7 @@
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div class="col-md-6 pr-0">
+                                                                <div  class="col-md-6 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div
@@ -758,7 +760,7 @@
                                                                         placeholder="$" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <button (click)="remove(i)"
+                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -928,9 +930,11 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
+                                                                         [maxDate]="selectedElement.maxVal"
+                                                                         (ngModelChange)="selectedElement.value = null"
                                                                         type="date"
                                                                         ngbDatepicker #d1="ngbDatepicker">
-                                                                    <div class="input-group-append">
+                                                                    <div  class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d1.toggle()"><i
                                                                                 class="material-icons" role="button">date_range</i>
@@ -943,6 +947,9 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.maxVal"
+                                                                        [minDate]="selectedElement.minVal"
+                                                                        (ngModelChange)="selectedElement.value = null"
+                                                                        (change)="selectedElement.value = null"
                                                                         type="date"
                                                                         ngbDatepicker #d="ngbDatepicker">
                                                                     <div class="input-group-append">
