@@ -103,7 +103,13 @@ export class ManageWorkSpacesSubscriptionComponent implements OnInit {
   planChange(){
     this.showPlanPage = true;
     this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
-      this.masterPlans = res;
+      let i = 0;
+      res.forEach((element: any) => {
+        if(element.price > this.planDetail.price){
+          this.masterPlans[i] = element;
+          i++;
+        }
+      });
     })
   }
 
