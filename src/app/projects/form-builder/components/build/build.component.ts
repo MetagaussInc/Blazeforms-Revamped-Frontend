@@ -91,6 +91,9 @@ export class BuildComponent implements OnDestroy {
     pagebackgroundColor: 'white',
     pagebackgroundImage: ''
   }
+  addLevelSpinner: boolean = false;
+  availableWorkFlowUsers: any = [];
+  availableWorkFlowUsersEmail: any = [];
   extraBillModel = {
       value: null,
       type: 'dollar',
@@ -481,7 +484,7 @@ export class BuildComponent implements OnDestroy {
     }
 
     this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
-      console.log(res)
+      console.log(res) 
       if (updateWorkFlowDeatils) {
         this.getWorkFlowDetails(this.formId);
       }
@@ -502,14 +505,23 @@ export class BuildComponent implements OnDestroy {
     }
     this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
       console.log('GetDetailsOfWorkflow -- response ', res)
+      this.addLevelSpinner = false;
       this.workFLowDetails = res;
       this.addedUserId = [];
+      this.availableWorkFlowUsers = [];
+      this.availableWorkFlowUsersEmail = [];
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
       });
       this.workFLowDetails?.workSpaceUsers?.forEach((element: any) => {
+        this.availableWorkFlowUsersEmail.push(element.email);
+
         this.userIdwWithStatus[element.id] = element?.isLinkActivated ? 'Activated' : 'Pending';
+        if (!this.addedUserId.includes(element.id) && this.userInfo.Id !== element.id) {
+          this.availableWorkFlowUsers.push(element);
+        }
       });
+      console.log('Available User for workflow', this.availableWorkFlowUsers)
     })
   }
 
@@ -524,6 +536,38 @@ export class BuildComponent implements OnDestroy {
     
     return this.addedUserId?.includes(selectedID);
   }
+
+  checkForAvailableuser(userSerach: any, availableWorkFlowUsers: any) {
+    let isNotAvailable = 0;
+    availableWorkFlowUsers.map((user: any) => {
+      if (user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)) {
+        isNotAvailable = isNotAvailable + 1;
+      }
+    })
+    return isNotAvailable === 0;
+  }
+
+  checkIfUserIsAddedToWorkflow(userSerach: any) {
+    let available = false;
+    this.workFLowDetails.workSpaceUsers.map((user: any) => {
+      if (user.email === userSerach) {
+        available = true;
+      }
+    })
+    return available;
+  }
+
+  checkIfUserIsAlreadyAddedToWorkflow(id: any) {
+    let isNotMatched = true;
+    this.workFLowDetails.workFlowUsers.map((user: any) => {
+      if (user.userId === id) {
+        isNotMatched = false;
+      }
+    })
+    return isNotMatched;
+  }
+
+
 
   makeLarger(model: any) {
     switch (model.size) {
@@ -1019,14 +1063,30 @@ export class BuildComponent implements OnDestroy {
     });
   }
 
+  setDefaultValueforProperties(selectedElement: any) {
+    if (selectedElement.maxVal > selectedElement.maxHigh || selectedElement.minVal >= selectedElement.maxVal) {
+      setTimeout(() => {
+        selectedElement.maxVal = selectedElement.maxHigh;
+      });
+    }
+  }
+
+  setDefaultValueforMinProperties(selectedElement: any) {
+    if (!selectedElement?.minVal || selectedElement.minVal >= selectedElement.maxVal) {
+      setTimeout(() => {
+        selectedElement.minVal = 0;
+      });
+    }
+  }
+
   openModal(selectedElement: any, value: string, type: string) {
 
     if (value === 'always') {
-      selectedElement[type] = null;
+      selectedElement[type] = (type === 'reqDependUpOn') ? true : null;
       return;
     }
     if (value === 'never') {
-      selectedElement[type] = {};
+      selectedElement[type] = (type === 'reqDependUpOn') ? null : {};
       return;
     }
     const modalRef: any = this.modalService.open(ConditionalRendereringModalComponent, { size: 'lg' })

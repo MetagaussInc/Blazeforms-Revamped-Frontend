@@ -18,7 +18,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 9999,
+        maxHigh: 9999,
         helpText: '',
         isRequired: 'always',
         validations: {
@@ -119,7 +120,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 9999,
+        maxHigh: 9999,
         helpText: '',
         isRequired: 'always',
         validations: {
@@ -211,7 +213,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 499,
+        maxHigh: 499,
         helpText: '',
         isRequired: 'always',
         validations: {
@@ -303,7 +306,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 499,
+        maxHigh: 499,
         helpText: '',
         validations: {
             label: {
@@ -501,7 +505,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 499,
+        maxHigh: 499,
         helpText: '',
         validations: {
             label: {
@@ -784,7 +789,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 999999999,
+        maxHigh: 999999999,
         helpText: '',
         isRequired: 'always',
         collectPayment: false,
@@ -2089,7 +2095,8 @@ export const config = [
                     size: 'medium',
                     view: 'always',
                     minVal: 0,
-                    maxVal: 50,
+                    maxVal: 9999,
+                    maxHigh: 9999,
                     helpText: '',
                     isRequired: 'always',
                     validations: {
@@ -2626,7 +2633,8 @@ export const config = [
         size: 'medium',
         view: 'always',
         minVal: 0,
-        maxVal: 50,
+        maxVal: 9999,
+        maxHigh: 9999,
         helpText: '',
         isRequired: 'always',
         validations: {
