@@ -679,11 +679,14 @@ export class BuildComponent implements OnDestroy {
         levels.push(element)
       }
 
-      if (element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box'|| element.inputType === 'password') {
-        if (element.minVal > element.maxVal || element.minVal < 0) {
+      if (element.inputType === 'email' || element.inputType === 'website' || element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box'|| element.inputType === 'password') {
+        if (element.minVal >= element.maxVal || element.minVal < 0) {
           element.minVal = 0;
         }
         if (element.maxVal > element.maxHigh) {
+          element.maxVal = element.maxHigh;
+        }
+        if (element.minVal >= element.maxVal || !element.maxVal) {
           element.maxVal = element.maxHigh;
         }
 
