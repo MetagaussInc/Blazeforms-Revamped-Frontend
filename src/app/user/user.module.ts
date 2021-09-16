@@ -38,7 +38,8 @@ import { SwiperModule } from 'swiper/angular';
     ReactiveFormsModule,
     RecaptchaModule.forRoot({
       
-      /**github */ siteKey: '6LdR_KkbAAAAAPgIpLDII97yNaE05-Ayu35OGblf'
+      // /**github */ siteKey: '6LdR_KkbAAAAAPgIpLDII97yNaE05-Ayu35OGblf'
+      /**stage */siteKey: '6LcsWboaAAAAAIp2o2Ofi_jqqYJgz1QWL6bioP4v'
       /**github */ // secretKey: '6LdR_KkbAAAAAEZkStGEFDPeqYEPjw-uwnKGGuVP'
     //  /**Localhost */ siteKey: '6LeKjH4bAAAAAHs1enkoqyola0dT5VQTxTQftCi2',
       /**Localhost */ // secretKey: '6LeKjH4bAAAAAMo6XoLdUmbCPOaP61BKEXQJv2QF'
