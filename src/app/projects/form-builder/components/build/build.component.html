@@ -652,6 +652,7 @@
                                                                     <input name="radio" [value]="'Decimal'"
                                                                         [checked]="selectedElement.selectedNumberType === 'Decimal'"
                                                                         id="Decimal_Type_setting_radio"
+                                                                        
                                                                         name="Decimal_Type_setting_radio" type="radio"
                                                                         class="custom-control-input">
                                                                     <label for="Decimal_Type_setting_radio"
@@ -673,6 +674,7 @@
                                                                 <input name="decimal_Items_label_setting"
                                                                     id="decimal_Items_label_setting" type="text"
                                                                     placeholder="Decimal"
+                                                                    [attr.maxlength]="1"
                                                                     [(ngModel)]="selectedElement.decimalUpto"
                                                                     class="form-control">
                                                             </div>
@@ -979,22 +981,21 @@
                                                                     <label for="min">Min</label>
                                                                     <input name="min" id="min" type="number"
                                                                         [(ngModel)]="selectedElement.minVal"
-                                                                        (keyup)="setDefaultValueforMinProperties(selectedElement)"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="form-group col">
                                                                     <label for="max">Max</label>
                                                                     <input id="max" name="max" type="number"
-                                                                        [(ngModel)]="selectedElement.maxVal" (keyup)="setDefaultValueforProperties(selectedElement)"
+                                                                        [(ngModel)]="selectedElement.maxVal"
                                                                         class="form-control">
                                                                 </div>
                                                                 
                                                             </div>
                                                             <div class="field-error text-left mt-1 pr-2 small" *ngIf="selectedElement?.minVal >= selectedElement?.maxVal">
-                                                                <!-- Max value should be greater than Min value. -->
+                                                                Max value should be greater than Min value.
                                                             </div>
                                                             <div class="field-error text-left mt-1 pr-2 small" *ngIf="selectedElement?.maxVal > selectedElement?.maxHigh">
-                                                                <!-- Max value should not greater than {{selectedElement?.maxHigh}}. -->
+                                                                Max value should not greater than {{selectedElement?.maxHigh}}.
                                                             </div>
                                                         </div>
 

@@ -678,6 +678,24 @@ export class BuildComponent implements OnDestroy {
       } else {
         levels.push(element)
       }
+
+      if (element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box'|| element.inputType === 'password') {
+        if (element.minVal > element.maxVal || element.minVal < 0) {
+          element.minVal = 0;
+        }
+        if (element.maxVal > element.maxHigh) {
+          element.maxVal = element.maxHigh;
+        }
+
+      }
+      if (element.inputType === 'number') {
+        if (element.minVal < -999999999) {
+          element.minVal = -999999999
+        } else if (element.minVal > element.minVal) {
+          element.minVal = 0;
+          element.maxVal = element.maxHigh;
+        }
+      }
     });
     this.addStripeAccount()
 
@@ -1063,19 +1081,23 @@ export class BuildComponent implements OnDestroy {
     });
   }
 
-  setDefaultValueforProperties(selectedElement: any) {
-    if (selectedElement.maxVal > selectedElement.maxHigh || selectedElement.minVal >= selectedElement.maxVal) {
-      setTimeout(() => {
-        selectedElement.maxVal = selectedElement.maxHigh;
-      });
+  setDefaultValueforProperties($event: any, selectedElement: any) {
+    console.log(!$event.target.value , Number($event.target.value) , this.selectedElement.maxHigh , Number(selectedElement.minVal) ,Number($event.target.value))
+    if (!$event.target.value || Number($event.target.value) > selectedElement.maxHigh || Number(selectedElement.minVal) > Number($event.target.value)) {
+
+        $event.target.value = (this.selectedElement.maxHigh);
+        this.selectedElement.maxVal = this.selectedElement.maxHigh;
+      console.log('changed',this.selectedElement.minVal)
+
     }
   }
 
-  setDefaultValueforMinProperties(selectedElement: any) {
-    if (!selectedElement?.minVal || selectedElement.minVal >= selectedElement.maxVal) {
-      setTimeout(() => {
-        selectedElement.minVal = 0;
-      });
+  setDefaultValueforMinProperties($event: any, selectedElement: any) {
+    console.log('changed',$event.target.value, Number($event.target.value), selectedElement.maxVal)
+
+    if (!$event.target.value || Number($event.target.value) >= selectedElement.maxVal) {
+        $event.target.value = 0;
+        this.selectedElement.minVal = 0;
     }
   }
 
