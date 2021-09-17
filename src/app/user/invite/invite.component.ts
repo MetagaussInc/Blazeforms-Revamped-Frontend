@@ -37,7 +37,7 @@ export class InviteComponent implements OnInit {
     let model = { 'ActivationKey': key };
     this.http.call('GetExpireInvitedLink', 'POST', model).subscribe(
       data => {
-        if (!data.isExpired) {
+        if (!data?.isExpired) {
           this.http.call('GetInvitedUserDetailsForActivation', 'POST', { 'ActivationKey': key }).subscribe(
             data => {
 
@@ -84,8 +84,8 @@ export class InviteComponent implements OnInit {
     LastName: new FormControl('', [Validators.required]),
     PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10),
     Validators.pattern('^[+0-9]{10,14}$')]),
-    WorkSpaceName: new FormControl('', [Validators.required],
-      this.validateNameViaServer.bind(this)),
+    // WorkSpaceName: new FormControl('', [Validators.required],
+    //   this.validateNameViaServer.bind(this)),
     // Email: new FormControl('', [
     //   Validators.required,
     //   Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
@@ -208,7 +208,7 @@ IsLinkActivated: false,
 LastName: this.signupForm.value.LastName,
 Password: this.signupForm.value.Password,
 UserMappingKey: this.mappingKey,
-WorkspaceId: null,
+WorkspaceId: this.workSpaceId,
 
 
 

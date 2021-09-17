@@ -50,7 +50,7 @@
                                                 <div class="input-group form-group">
                                                     <label for="password" class="ml-1 w-100">Password</label>
                                                     <input appBlockPaste type="{{ showHidePass ? 'text' : 'password' }}" formControlName="password" autocomplete="off" class="form-control rounded-sm" id="password" placeholder="Enter your password">
-                                                    <div class="input-group-append"><span class="input-group-text"><i (click)="showHidePassword()" class="material-icons">{{ showHidePass ? 'visibility_off' : 'visibility' }}</i></span></div>
+                                                    <div class="input-group-append"><span class="input-group-text"><i (click)="showHidePassword()" class="material-icons" role="button">{{ showHidePass ? 'visibility_off' : 'visibility' }}</i></span></div>
                                                     <div class="bf-input-validation w-100">
                                                         <ng-container *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
                                                             <div *ngIf="f.password?.errors?.minLength" class="field-error text-right mt-1 pr-2 small w-100">Please add minimum 8 charactor for password</div>

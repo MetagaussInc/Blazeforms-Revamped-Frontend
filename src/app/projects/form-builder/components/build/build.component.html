@@ -1127,8 +1127,8 @@
                                                                 <ng-container
                                                                     *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
                                                                     <div
-                                                                        class="custom-control custom-checkbox row d-flex p-2">
-                                                                        <div class="col-3">
+                                                                        class="custom-control custom-checkbox row d-flex mb-2">
+                                                                        <div class="col-4 pr-0">
                                                                             <input type="checkbox"
                                                                                 id="eleIndex_{{eleIndex}}__12"
                                                                                 name="eleIndex_{{eleIndex}}__12"
@@ -1140,7 +1140,7 @@
                                                                             <label class="custom-control-label"
                                                                                 for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}}</label>
                                                                         </div>
-                                                                        <div class="col-9">
+                                                                        <div class="col-8">
                                                                             <input class="form-control mr-1"
                                                                                 placeholder="{{addElement.name}}"
                                                                                 [(ngModel)]="selectedElement.children[eleIndex].value"
@@ -2182,7 +2182,7 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th *ngIf="entries.columns.length > 0" data-field="state"
-                                                            data-checkbox="true" scope="row"><input data-index="0"
+                                                            data-checkbox="true" scope="row"><input data-index="0" (click)="selectAllEntries()"
                                                                 name="btnAllSelectItem" type="checkbox"></th>
 
                                                         <ng-container *ngFor="let item of entries.columns">
@@ -2198,6 +2198,7 @@
                                                         <tr *ngIf="!filter || (filter && filter === row[1])">
                                                             <td class="bs-checkbox " scope="row">
                                                                 <input data-index="0" name="btSelectItem"
+                                                                [checked]="entries?.selected?.includes(rowIndex)"
                                                                     (click)="selectEntry(rowIndex)" type="checkbox">
                                                             </td>
                                                             <ng-container (click)="viewEntry(rowIndex)"
