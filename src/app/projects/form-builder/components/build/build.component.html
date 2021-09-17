@@ -1127,12 +1127,12 @@
                                                                 <ng-container
                                                                     *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
                                                                     <div
-                                                                        class="custom-control custom-checkbox row d-flex p-2">
-                                                                        <div class="col-3">
+                                                                        class="custom-control custom-checkbox row d-flex mb-2">
+                                                                        <div *ngIf="addElement.disabled" class="col-4 pr-0">
                                                                             <input type="checkbox"
                                                                                 id="eleIndex_{{eleIndex}}__12"
                                                                                 name="eleIndex_{{eleIndex}}__12"
-                                                                                [checked]="!addElement.disabled"
+                                                                                [checked]="false"
                                                                                 (click)="addElement.disabled = !addElement.disabled"
                                                                                 class="custom-control-input"
                                                                                 [value]="addElement.disabled"
@@ -1140,7 +1140,19 @@
                                                                             <label class="custom-control-label"
                                                                                 for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}}</label>
                                                                         </div>
-                                                                        <div class="col-9">
+                                                                        <div *ngIf="!addElement.disabled" class="col-4 pr-0">
+                                                                            <input type="checkbox"
+                                                                                id="eleIndex_{{eleIndex}}__12"
+                                                                                name="eleIndex_{{eleIndex}}__12"
+                                                                                [checked]="true"
+                                                                                (click)="addElement.disabled = !addElement.disabled"
+                                                                                class="custom-control-input"
+                                                                                [value]="addElement.disabled"
+                                                                                >
+                                                                            <label class="custom-control-label"
+                                                                                for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}}</label>
+                                                                        </div>
+                                                                        <div class="col-8">
                                                                             <input class="form-control mr-1"
                                                                                 placeholder="{{addElement.name}}"
                                                                                 [(ngModel)]="selectedElement.children[eleIndex].value"
@@ -2098,7 +2110,7 @@
 
                                             <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)"
                                                 class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="filterDropdown"
+                                                <button [disabled]="entries?.rows?.length === 0" class="btn btn-primary btn-bf mr-2" id="filterDropdown"
                                                     ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
                                                 <div ngbDropdownMenu aria-labelledby="filterDropdown">
                                                     <button ngbDropdownItem (click)="filter = null">All</button>
@@ -2111,7 +2123,7 @@
 
                                             <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)"
                                                 class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
-                                                <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
+                                                <button [disabled]="entries?.rows?.length === 0" class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
                                                     ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
                                                 <div ngbDropdownMenu aria-labelledby="actionsDropdown">
                                                     <button ngbDropdownItem (click)="deleteEntry()">Delete</button>
@@ -2182,7 +2194,7 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th *ngIf="entries.columns.length > 0" data-field="state"
-                                                            data-checkbox="true" scope="row"><input data-index="0"
+                                                            data-checkbox="true" scope="row"><input data-index="0" (click)="selectAllEntries()"
                                                                 name="btnAllSelectItem" type="checkbox"></th>
 
                                                         <ng-container *ngFor="let item of entries.columns">
@@ -2195,9 +2207,10 @@
                                                 <tbody>
                                                     <ng-container
                                                         *ngFor="let row of entries.rows; let rowIndex = index">
-                                                        <tr *ngIf="!filter || (filter && filter === row[1])">
+                                                        <tr *ngIf="!filter || (filter && filter === row[-2])">
                                                             <td class="bs-checkbox " scope="row">
                                                                 <input data-index="0" name="btSelectItem"
+                                                                [checked]="entries?.selected?.includes(rowIndex)"
                                                                     (click)="selectEntry(rowIndex)" type="checkbox">
                                                             </td>
                                                             <ng-container (click)="viewEntry(rowIndex)"
