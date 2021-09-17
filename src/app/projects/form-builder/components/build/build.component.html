@@ -1127,8 +1127,8 @@
                                                                 <ng-container
                                                                     *ngFor="let addElement of selectedElement.children; let eleIndex = index; trackBy:trackByFn">
                                                                     <div
-                                                                        class="custom-control custom-checkbox row d-flex p-2">
-                                                                        <div class="col-3">
+                                                                        class="custom-control custom-checkbox row d-flex mb-2">
+                                                                        <div class="col-4 pr-0">
                                                                             <input type="checkbox"
                                                                                 id="eleIndex_{{eleIndex}}__12"
                                                                                 name="eleIndex_{{eleIndex}}__12"
@@ -1140,7 +1140,7 @@
                                                                             <label class="custom-control-label"
                                                                                 for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}}</label>
                                                                         </div>
-                                                                        <div class="col-9">
+                                                                        <div class="col-8">
                                                                             <input class="form-control mr-1"
                                                                                 placeholder="{{addElement.name}}"
                                                                                 [(ngModel)]="selectedElement.children[eleIndex].value"
