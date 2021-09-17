@@ -47,6 +47,8 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
   chargeId: any;
   formValues: any;
   fromPage: string = 'subscription';
+  public showPlanPage: boolean = false;
+  public masterPlans: any[] = [];
 
   @Output() updateSubscriptionPage = new EventEmitter<any>();
 
@@ -105,6 +107,24 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  updatePlan(){
+    this.showPlanPage = true;
+    this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
+      let i = 0;
+      res.forEach((element: any) => {
+        if(element.price > this.billingpageData.price){
+          this.masterPlans[i] = element;
+          i++;
+        }
+      });
+    })
+  }
+
+  updateSelectedPlan(plan: any){
+    this.showPlanPage = false;
+    this.billingpageData = plan;
   }
 
   submit() {

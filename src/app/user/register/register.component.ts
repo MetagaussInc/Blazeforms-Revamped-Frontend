@@ -6,6 +6,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { ToastService } from '../../shared/toast.service';
 import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
 
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -39,41 +40,47 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       // this.matchPassword.bind(this)
     ]),
-    myRecaptcha: new FormControl(false, [
-      this.checkforAgreements.bind(this)
-    ]),
+    // myRecaptcha: new FormControl(false, [
+    //   this.checkforAgreements.bind(this)
+    // ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
 
   planDetails = {
-    id: 1,
-    name: 'The Starter Plan',
-    description: 'The Starter Plan',
+    concretePlanId: null,
+    createdBy: null,
+    createdDate: "0001-01-01T00:00:00",
+    description: "100% Free Plan",
+    id: "TZW3ou4hevmgAh6EEJ9-dw==",
+    isActive: false,
+    isDefault: true,
+    isDeleted: false,
+    isExpired: false,
+    isRecommended: false,
+    modifiedBy: null,
+    modifiedDate: "0001-01-01T00:00:00",
+    name: "The Starter Plan",
+    noOfEntries: 50,
     noOfForms: 10,
     noOfUsers: 1,
-    noOfEntries: 50,
-    paymentPercentage: 0,
-    storageSize: <any>'2 GB',
-    IsActive: 1,
-    IsDeleted: 0,
-    createdBy: '',
-    modifiedBy: '',
-    CreatedDate: '',
-    price: '0',
-    userId: '',
-    isDefault: 1,
-    isRecommended: 1,
-    ShowOnHome: 1,
-    StorageUnit: '',
-    WorkspaceId: '',
-    concretePlanId: '',
-    ModifiedBy: '',
-    StripePlanId: ''
+    paymentPercentage: null,
+    planType: null,
+    plandetails: null,
+    price: 0,
+    returnPlanList: null,
+    returnStatus: false,
+    showOnHome: false,
+    storageSize: "2097152",
+    storageUnit: null,
+    stripePlanId: null,
+    type: null,
+    workSpaceId: null,
   };
 
   isFormSubmitted: boolean = false;
   showPlanPage: boolean = false;
   public masterPlans: any[] = [];
+  public calulateUites = storageCountFormatter;
   
   constructor(private http: HttpService, private router: Router, private toastService: ToastService) { }
 
@@ -143,7 +150,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.http.call('getMasterPlanDetailById', 'POST', { 'ID': '' }).subscribe(res => {
       this.planDetails = res;
-      this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
+      //this.planDetails.storageSize = ((res.storageSize) / (1024 * 1024));
     })
   }
 
@@ -173,39 +180,8 @@ export class RegisterComponent implements OnInit {
       ...JSON.parse(JSON.stringify(this.signupForm.value)),
       IsLinkActivated: false,
       IsSuperAdmin: false,
-      PlanId: "TZW3ou4hevmgAh6EEJ9-dw==",
-      planDetails: {
-        concretePlanId: null,
-        createdBy: null,
-        createdDate: "0001-01-01T00:00:00",
-        description: "100% Free Plan",
-        id: "TZW3ou4hevmgAh6EEJ9-dw==",
-        isActive: false,
-        isDefault: true,
-        isDeleted: false,
-        isExpired: false,
-        isRecommended: false,
-        modifiedBy: null,
-        modifiedDate: "0001-01-01T00:00:00",
-        name: "The Starter Plan",
-        noOfEntries: 50,
-        noOfForms: 10,
-        noOfUsers: 1,
-        paymentPercentage: null,
-        planType: null,
-        plandetails: null,
-        price: 0,
-        returnPlanList: null,
-        returnStatus: false,
-        showOnHome: false,
-        storageSize: "2097152",
-        storageUnit: null,
-        stripePlanId: null,
-        type: null,
-        workSpaceId: null,
-      }
-
-
+      PlanId: this.planDetails.id,
+      planDetails: this.planDetails
     };
     delete obj.confirmPassword;
     delete obj.acceptAgreement;

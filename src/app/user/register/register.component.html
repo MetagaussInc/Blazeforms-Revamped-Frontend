@@ -26,7 +26,7 @@
                             <span>{{ planDetails.noOfEntries }}</span><span class="text-secondary"> Entries</span>
                         </div>
                         <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetails.storageSize }} GB</span><span class="text-secondary"> Storage</span>
+                            <span>{{ calulateUites(planDetails.storageSize) }}</span><span class="text-secondary"> Storage</span>
                         </div>
                         <div class="plan-price-button col-md-12 mt-3">
                             <button type="button" class="btn btn-bf btn-sm" (click)="planChange()">Change Plan</button>
@@ -204,7 +204,7 @@
                         </div>
                         <div class="register-fields-wrapper row mb-3">
                             <div class="signup-recaptcha-wrapper col-md-12 mb-3 text-center">
-                                <recaptcha formControlName="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha>
+                                <!-- <recaptcha formControlName="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()"></recaptcha> -->
                             </div>
                         </div>
                         <div class="register-fields-wrapper row mb-3">
@@ -260,7 +260,7 @@
                                         <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
                                     </div>
                                     <div class="plan-attribute col-md-12 py-1">
-                                        <span>{{ plan.storageSize }}</span><span class="text-secondary"> Storage</span>
+                                        <span>{{ calulateUites(plan.storageSize) }}</span><span class="text-secondary"> Storage</span>
                                     </div>
                                     <div class="plan-price-button col-md-12 mt-3">
                                         <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>

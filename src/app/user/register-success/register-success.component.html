@@ -1,19 +1,14 @@
 <div *ngIf="!progressLoader" class="signup-success-container container d-flex align-items-center justify-content-center">
     <div class="signup-success row p-3">
-
-                <div class="signup-success-you-heading-wrapper col-md-12 py-3 text-center">
-                    <div class="jumbotron jumbotron-fluid text-center bg-transparent">
-                        <span class="material-icons md-36 text-success" style="font-size: 60px;">check_circle</span>
-                        <h1 class="display-3">Success!</h1>
-                        <p class="lead"> Account Successfully Activated</p>
-
-                        <hr class="my-4">
-                        <p class="lead">Your account successfully activated with free plan, you can upgrade your plan anytime. Click on the login button to start building form, the way you want it</p>
-                        <a class="btn btn-bf  py-2 px-4 mt-5" href="#" role="button">Click to login</a>
-                 
-                      </div>
+        <div class="signup-success-you-heading-wrapper col-md-12 py-3 text-center">
+            <div class="jumbotron jumbotron-fluid text-center bg-transparent">
+                <span class="material-icons md-36 text-success" style="font-size: 60px;">check_circle</span>
+                <h1 class="display-3">Success!</h1>
+                <p class="lead"> Account Successfully Activated</p>
+                <hr class="my-4">
+                <p class="lead">Your account successfully activated with {{ planName }}, you can upgrade your plan anytime. Click on the login button to start building form, the way you want it</p>
+                <a class="btn btn-bf  py-2 px-4 mt-5" (click)="next()" role="button">Click to login</a>
+            </div>
         </div>
-
     </div>
-
 </div>
