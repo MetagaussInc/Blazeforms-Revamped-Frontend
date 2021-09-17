@@ -1130,12 +1130,15 @@
                                                                         class="custom-control custom-checkbox row d-flex p-2">
                                                                         <div class="col-3">
                                                                             <input type="checkbox"
-                                                                                id="eleIndex_{{eleIndex}}"
+                                                                                id="eleIndex_{{eleIndex}}__12"
+                                                                                name="eleIndex_{{eleIndex}}__12"
                                                                                 [checked]="!addElement.disabled"
                                                                                 (click)="addElement.disabled = !addElement.disabled"
-                                                                                class="custom-control-input">
+                                                                                class="custom-control-input"
+                                                                                [value]="addElement.disabled"
+                                                                                >
                                                                             <label class="custom-control-label"
-                                                                                for="eleIndex_{{eleIndex}}">{{addElement.placeholder}}</label>
+                                                                                for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}} {{addElement.disabled}}</label>
                                                                         </div>
                                                                         <div class="col-9">
                                                                             <input class="form-control mr-1"
