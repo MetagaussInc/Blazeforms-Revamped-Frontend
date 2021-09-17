@@ -183,6 +183,18 @@ export class ManageWorkSpacesGeneralComponent implements OnInit {
     this.router.navigate(['/work-spaces']);
   }
 
+  countryOnChange(e: any) {
+    let coun = e.target.value.split(': ')[1];
+    let crru = this.currencyList.filter((item: { [x: string]: { toString: () => string; }; }) =>
+      Object.keys(item).some(k => item[k] != null && k != "label" &&
+        item[k].toString().toLowerCase()
+          .includes(coun.toLowerCase()))
+    );
+    this.organizationGeneralForm.patchValue({
+      Currency: crru[0].label
+    });
+  }
+
   get Name() { return this.organizationGeneralForm.get('Name'); }
   get DefaultReplyEmail() { return this.organizationGeneralForm.get('DefaultReplyEmail'); }
   get Country() { return this.organizationGeneralForm.get('Country'); }

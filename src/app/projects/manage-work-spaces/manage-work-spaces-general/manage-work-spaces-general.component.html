@@ -42,7 +42,7 @@
                 <label for="country-select">Country</label>
             </div>
             <div class="col-9">
-                <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null">
+                <select formControlName="Country" id="country-select" name="Country" class="country-selector form-control" [attr.disabled]="!workspacePermissions.canEdit ? 'disabled' : null" (change)="countryOnChange($event)">
                     <option [ngValue]="null" disabled>Select Country</option>
                     <option *ngFor="let country of countryList" [ngValue]="country.value">{{country.label}}</option>
                 </select>
