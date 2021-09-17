@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { InviteComponent } from './invite/invite.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
 import { RegisterFailedComponent } from './register-failed/register-failed.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordComponent
+      },
+      {
+        path: 'invite',
+        component: InviteComponent
       }
     ]
   },

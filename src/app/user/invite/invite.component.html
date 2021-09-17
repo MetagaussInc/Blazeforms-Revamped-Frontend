@@ -1,45 +1,10 @@
-<div class="registration-area-container box-container container  align-items-center justify-content-center my-5" [ngClass]="{'d-none': showPlanPage, 'd-flex': !showPlanPage }" >
+<div *ngIf="!formSubmitted" class="registration-area-container box-container container  align-items-center justify-content-center my-5" [ngClass]="{'d-none': showPlanPage, 'd-flex': !showPlanPage }" >
     <div class="login-box row border rounded-lg">
-        <!--Login Area Left Column-->
-        <div class="left-column col-md-4 p-5 border-right d-flex justify-content-center flex-wrap align-content-center">
-            <div class="selected-plan-wrapper shadow-sm row rounded border text-center">
-                <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
-                    <div class="plan-name">
-                        <h4 class="mb-n2"><strong>{{ planDetails.name }}</strong></h4>
-                    </div>
-                </div>
-                <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
-                    <div class="plan-price">
-                        <h4><strong>US$</strong> {{ planDetails.price }}</h4>
-                    </div>
-                    <div class="plan-period mt-n2 text-secondary">amount / month</div>
-                </div>
-                <div class="col-md-12 p-2">
-                    <div class="plan-attributes-wrapper row px-2 py-4">
-                        <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetails.noOfUsers }}</span><span class="text-secondary"> Users</span>
-                        </div>
-                        <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetails.noOfForms }}</span><span class="text-secondary"> Forms</span>
-                        </div>
-                        <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetails.noOfEntries }}</span><span class="text-secondary"> Entries</span>
-                        </div>
-                        <div class="plan-attribute col-md-12 py-1">
-                            <span>{{ planDetails.storageSize }} GB</span><span class="text-secondary"> Storage</span>
-                        </div>
-                        <div class="plan-price-button col-md-12 mt-3">
-                            <button type="button" class="btn btn-bf btn-sm" (click)="planChange()">Change Plan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Login Area Right Column-->
-        <div class="right-column col-md-8">
+        
+        <div class="right-column col-md-12">
             <div class="right-column-top row px-3 pt-3">
                 <div class="register-heading-wrapper col-md-12 py-3 text-left">
-                    <h4 class="register-heading">Start Building Your Forms Now</h4>
+                    <h4 class="register-heading">Sign up</h4>
                 </div>
                 <div class="register-description-wrapper col-md-12 mb-5 mt-n2">
                     <span>
@@ -91,21 +56,9 @@
                                             <i class="material-icons">email</i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" formControlName="Email" placeholder="Your Email">
+                                    <input disabled type="email" class="form-control" [value]="email" placeholder="Your Email">
                                 </div>
-                                <div class="bf-input-validation">
-                                    <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
-                                        <div *ngIf="f.Email.errors?.required" class="field-error text-right mt-1 pr-2 small">Email is required
-                                        </div>
-                                        <div *ngIf="f.Email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
-                                        <!-- <div *ngIf="f.Email.errors?.specialCharInDomain"
-                                            class="field-error text-right mt-1 pr-2 small">Special character is not allowed in domain</div> -->
-                                        <div *ngIf="f.Email.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
-                                    </ng-container>
-                                    <div *ngIf="f.Email.errors?.isExists" class="field-error text-right mt-1 pr-2 small">
-                                        Email is already exist
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="field-wrapper col-md-6">
                                 <div class="input-group">
@@ -230,47 +183,19 @@
     </div>
 </div>
 
-<div class="login-box border rounded-lg" [ngClass]="{'d-none': !showPlanPage}" >
-    <div class="container py-3">
-        <div class="p-3 m-n3 overflow-hidden">
-            <swiper [slidesPerView]="3" [spaceBetween]="30" [navigation]="true" class="mySwiper">
-                <ng-container *ngFor="let plan of masterPlans; let i = index;">
-                    <ng-template swiperSlide>
-                        <div class="selected-plan-wrapper shadow-sm row no-gutters rounded border text-center">
-                            <div class="plan-name-wrapper col-md-12 py-5 text-white-50 rounded-top">
-                                <div class="plan-name">
-                                    <h4 class="mb-n2"><strong>{{ plan.name }}</strong></h4>
-                                </div>
-                            </div>
-                            <div class="plan-price-wrapper col-md-12 py-4 border-bottom">
-                                <div class="plan-price">
-                                    <h4><strong>US$</strong> {{ plan.price }}</h4>
-                                </div>
-                                <div class="plan-period mt-n2 text-secondary">amount / month</div>
-                            </div>
-                            <div class="col-md-12 p-2">
-                                <div class="plan-attributes-wrapper row px-2 py-4">
-                                    <div class="plan-attribute col-md-12 py-1">
-                                        <span>{{ plan.noOfUsers }}</span><span class="text-secondary"> Users</span>
-                                    </div>
-                                    <div class="plan-attribute col-md-12 py-1">
-                                        <span>{{ plan.noOfForms }}</span><span class="text-secondary"> Forms</span>
-                                    </div>
-                                    <div class="plan-attribute col-md-12 py-1">
-                                        <span>{{ plan.noOfEntries }}</span><span class="text-secondary"> Entries</span>
-                                    </div>
-                                    <div class="plan-attribute col-md-12 py-1">
-                                        <span>{{ plan.storageSize }}</span><span class="text-secondary"> Storage</span>
-                                    </div>
-                                    <div class="plan-price-button col-md-12 mt-3">
-                                        <button type="button" (click)="updateSelectedPlan(plan)" class="btn btn-bf btn-sm">Change Plan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-            </swiper>
-        </div>
-    </div>
+<div *ngIf="formSubmitted" class="signup-success row p-3">
+
+    <div class="signup-success-you-heading-wrapper col-md-12 py-3 text-center">
+        <div class="jumbotron jumbotron-fluid text-center bg-transparent">
+            <span class="material-icons md-36 text-success" style="font-size: 60px;">check_circle</span>
+            <h1 class="display-3">Success!</h1>
+            <p class="lead"> Account Successfully Activated</p>
+
+            <hr class="my-4">
+            <p class="lead">Your account successfully activated with free plan, you can upgrade your plan anytime. Click on the login button to start building form, the way you want it</p>
+            <a class="btn btn-bf  py-2 px-4 mt-5" href="#" role="button">Click to login</a>
+     
+          </div>
+</div>
+
 </div>
