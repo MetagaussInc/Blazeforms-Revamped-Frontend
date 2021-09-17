@@ -584,8 +584,8 @@ export const config = [
     },
     {
         name: 'Number',
-        iconClass: 'material-icons-outlined',
-        iconName: 'numbers',
+        iconClass: 'material-icons-css input-number-icon',
+        iconName: '',
         inputType: 'number',
         icon: 'fas fa-hashtag',
         class: 'half',
@@ -3195,8 +3195,8 @@ export const layoutInputs = [
     },
     {
         name: 'Page Break',
-        iconClass: 'material-icons',
-        iconName: 'insert_page_break',
+        iconClass: 'material-icons-css page-break-icon',
+        iconName: '',
         textValue: '',
         minCharacter: 0,
         maxCharacter: 100,
