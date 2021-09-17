@@ -28,6 +28,9 @@ export class RegisterSuccessComponent implements OnInit {
           if (data.isLinkActivated) {
             this.progressLoader = false;
 
+            // if (data.isInvited) {
+            //   this.router.navigate(['user/register']);
+            // }
             // TO DO: THis code is not required as of now , we will check it if some thing comes up in testing.
             // data.password != null ? localStorage.setItem("ActivatedUserData", JSON.stringify(data)) : '';
             // let userType: string;
@@ -39,6 +42,8 @@ export class RegisterSuccessComponent implements OnInit {
             // this.router.navigate(['/confirmation']);
           }
           else {
+              this.router.navigate(['user/invite'], {queryParams: {key: data.activationKey, mappingKey: activationKey}});
+
             // window.location.href = this.appConfig.invitationLink + data.activationKey;
             // localStorage.setItem('activateUserMapping', activationKey )
           }

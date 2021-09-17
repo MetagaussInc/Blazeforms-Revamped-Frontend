@@ -144,6 +144,10 @@ export class ExportedFormComponent implements OnInit {
     return total;
   }
 
+  updateParent($event: any, form: any) {
+    form.value = $event?.target?.value;
+  }
+
   checkForRDependency(model: any, T: any): boolean {
     const dependUpon = model?.[T];
 
@@ -151,42 +155,45 @@ export class ExportedFormComponent implements OnInit {
     if (!dependUpon) {
       return false;
     }
-    const dependencyElementIndex = this.elements.findIndex((x: any) => x.uiIndexId == dependUpon.elementId);
-    const data = this.elements[dependencyElementIndex].value;
-    if (dependUpon.type === 'boolean') {
-      if (dependUpon.isFilledOut) {
-        return (typeof data === 'number') ? data > -1 : data.length > 0;
+    if (!dependUpon?.elementId) {
+      return (typeof model?.value === 'number') ? model?.value < -100 : (!model?.value || model?.value?.length === 0) ;
+    }
+    const dependencyElementIndex = this.elements.findIndex((x: any) => x.uiIndexId == dependUpon?.elementId);
+    const data = this.elements?.[dependencyElementIndex]?.value;
+    if (dependUpon?.type === 'boolean') {
+      if (dependUpon?.isFilledOut) {
+        return (typeof data === 'number') ? data > -1 : data?.length > 0;
       }
-      if (dependUpon.isNotFilledOut) {
-        return data === 0 || data.length === 0;
+      if (dependUpon?.isNotFilledOut) {
+        return data === 0 || data?.length === 0;
       }
     } else {
-      if (dependUpon.is) {
-        return (data === dependUpon.value);
+      if (dependUpon?.is) {
+        return (data === dependUpon?.value);
       }
-      if (dependUpon.isNot) {
-        return (data !== dependUpon.value);
+      if (dependUpon?.isNot) {
+        return (data !== dependUpon?.value);
       }
-      if (dependUpon.contains) {
-        return (data?.toLowerCase().includes(dependUpon.value));
+      if (dependUpon?.contains) {
+        return (data?.toLowerCase()?.includes(dependUpon?.value));
       }
-      if (dependUpon.doesNotContains) {
-        return (!data?.toLowerCase().includes(dependUpon.value));
+      if (dependUpon?.doesNotContains) {
+        return (!data?.toLowerCase()?.includes(dependUpon?.value));
       }
-      if (dependUpon.endWith) {
+      if (dependUpon?.endWith) {
         return (data.endsWith(dependUpon.value));
       }
-      if (dependUpon.doesNotEndWith) {
-        return (data.endsWith(dependUpon.value));
+      if (dependUpon?.doesNotEndWith) {
+        return (data.endsWith(dependUpon?.value));
       }
-      if (dependUpon.startWith) {
-        return (data.startsWith(dependUpon.value));
+      if (dependUpon?.startWith) {
+        return (data?.startsWith(dependUpon?.value));
       }
       if (dependUpon.doesNotStartWith) {
-        return (!data.startsWith(dependUpon.value));
+        return (!data?.startsWith(dependUpon?.value));
       }
     }
-    return true;
+    return (typeof data === 'number') ? data < -100 : (!data || data?.length === 0) ;
   }
 
   billPay(formEntryId: any) {
@@ -292,7 +299,7 @@ StripeToken: token
   checkForRequired(): boolean {
     let yes = false;
     for (const element of this.elements) {
-      if (this.checkForRDependency(element, 'reqDependUpOn') ) {
+      if (this.checkForRDependency(element, 'reqDependUpOn') && (element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'number' || element.inputType === 'phoneNumber' ||  element.inputType === 'text-box' ) ) {
         element.isRequired = true
         yes = true;
       } else {
@@ -302,7 +309,7 @@ StripeToken: token
     return yes;
   }
   submitParentForm(parentForm: any) {
-
+    console.log(this.elements)
     if (this.checkForRequired()) {
       this.submitted = true
       return;
@@ -522,7 +529,7 @@ StripeToken: token
     let disable = false;
     elements?.map((element: any) => {
       if (element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box') {
-        if (element.value?.length < element.minVal || element.value?.length > element.maxVal) {
+        if (element.value && (element.value?.length < element.minVal || element.value?.length > element.maxVal)) {
           disable = true
         }
       } else if (element.inputType === 'number') {

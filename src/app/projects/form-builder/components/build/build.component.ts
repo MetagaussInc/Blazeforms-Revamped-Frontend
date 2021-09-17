@@ -91,6 +91,9 @@ export class BuildComponent implements OnDestroy {
     pagebackgroundColor: 'white',
     pagebackgroundImage: ''
   }
+  addLevelSpinner: boolean = false;
+  availableWorkFlowUsers: any = [];
+  availableWorkFlowUsersEmail: any = [];
   extraBillModel = {
       value: null,
       type: 'dollar',
@@ -481,7 +484,7 @@ export class BuildComponent implements OnDestroy {
     }
 
     this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
-      console.log(res)
+      console.log(res) 
       if (updateWorkFlowDeatils) {
         this.getWorkFlowDetails(this.formId);
       }
@@ -502,14 +505,23 @@ export class BuildComponent implements OnDestroy {
     }
     this.http.call('GetDetailsOfWorkflow', 'POST', payload).subscribe(res => {
       console.log('GetDetailsOfWorkflow -- response ', res)
+      this.addLevelSpinner = false;
       this.workFLowDetails = res;
       this.addedUserId = [];
+      this.availableWorkFlowUsers = [];
+      this.availableWorkFlowUsersEmail = [];
       this.workFLowDetails?.workFlowUsers?.forEach((element: any) => {
         this.addedUserId.push(element.userId)
       });
       this.workFLowDetails?.workSpaceUsers?.forEach((element: any) => {
+        this.availableWorkFlowUsersEmail.push(element.email);
+
         this.userIdwWithStatus[element.id] = element?.isLinkActivated ? 'Activated' : 'Pending';
+        if (!this.addedUserId.includes(element.id) && this.userInfo.Id !== element.id) {
+          this.availableWorkFlowUsers.push(element);
+        }
       });
+      console.log('Available User for workflow', this.availableWorkFlowUsers)
     })
   }
 
@@ -524,6 +536,38 @@ export class BuildComponent implements OnDestroy {
     
     return this.addedUserId?.includes(selectedID);
   }
+
+  checkForAvailableuser(userSerach: any, availableWorkFlowUsers: any) {
+    let isNotAvailable = 0;
+    availableWorkFlowUsers.map((user: any) => {
+      if (user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)) {
+        isNotAvailable = isNotAvailable + 1;
+      }
+    })
+    return isNotAvailable === 0;
+  }
+
+  checkIfUserIsAddedToWorkflow(userSerach: any) {
+    let available = false;
+    this.workFLowDetails.workSpaceUsers.map((user: any) => {
+      if (user.email === userSerach) {
+        available = true;
+      }
+    })
+    return available;
+  }
+
+  checkIfUserIsAlreadyAddedToWorkflow(id: any) {
+    let isNotMatched = true;
+    this.workFLowDetails.workFlowUsers.map((user: any) => {
+      if (user.userId === id) {
+        isNotMatched = false;
+      }
+    })
+    return isNotMatched;
+  }
+
+
 
   makeLarger(model: any) {
     switch (model.size) {
@@ -633,6 +677,27 @@ export class BuildComponent implements OnDestroy {
         elements.push(element);
       } else {
         levels.push(element)
+      }
+
+      if (element.inputType === 'email' || element.inputType === 'website' || element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box'|| element.inputType === 'password') {
+        if (element.minVal >= element.maxVal || element.minVal < 0) {
+          element.minVal = 0;
+        }
+        if (element.maxVal > element.maxHigh) {
+          element.maxVal = element.maxHigh;
+        }
+        if (element.minVal >= element.maxVal || !element.maxVal) {
+          element.maxVal = element.maxHigh;
+        }
+
+      }
+      if (element.inputType === 'number') {
+        if (element.minVal < -999999999) {
+          element.minVal = -999999999
+        } else if (element.minVal > element.minVal) {
+          element.minVal = 0;
+          element.maxVal = element.maxHigh;
+        }
       }
     });
     this.addStripeAccount()
@@ -1019,14 +1084,34 @@ export class BuildComponent implements OnDestroy {
     });
   }
 
+  setDefaultValueforProperties($event: any, selectedElement: any) {
+    console.log(!$event.target.value , Number($event.target.value) , this.selectedElement.maxHigh , Number(selectedElement.minVal) ,Number($event.target.value))
+    if (!$event.target.value || Number($event.target.value) > selectedElement.maxHigh || Number(selectedElement.minVal) > Number($event.target.value)) {
+
+        $event.target.value = (this.selectedElement.maxHigh);
+        this.selectedElement.maxVal = this.selectedElement.maxHigh;
+      console.log('changed',this.selectedElement.minVal)
+
+    }
+  }
+
+  setDefaultValueforMinProperties($event: any, selectedElement: any) {
+    console.log('changed',$event.target.value, Number($event.target.value), selectedElement.maxVal)
+
+    if (!$event.target.value || Number($event.target.value) >= selectedElement.maxVal) {
+        $event.target.value = 0;
+        this.selectedElement.minVal = 0;
+    }
+  }
+
   openModal(selectedElement: any, value: string, type: string) {
 
     if (value === 'always') {
-      selectedElement[type] = null;
+      selectedElement[type] = (type === 'reqDependUpOn') ? true : null;
       return;
     }
     if (value === 'never') {
-      selectedElement[type] = {};
+      selectedElement[type] = (type === 'reqDependUpOn') ? null : {};
       return;
     }
     const modalRef: any = this.modalService.open(ConditionalRendereringModalComponent, { size: 'lg' })

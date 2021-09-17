@@ -1353,3 +1353,7 @@
 .no-click {
     pointer-events: none;
 }
+
+.workflow-user-added .added-user-item:first-child{
+    margin-top: 2.5rem;
+}

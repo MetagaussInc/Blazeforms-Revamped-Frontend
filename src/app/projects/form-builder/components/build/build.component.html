@@ -21,7 +21,7 @@
                 <ul ngbNav #nav="ngbNav" [(activeId)]="mainTab"
                     class="nav nav-tabs justify-content-center border-0 bg-white" id="form-builder-topbar">
                     <li [ngbNavItem]="0" ngbNavItem *ngIf="builderObj?.formType === 'WorkFlow' && enableDefine()">
-                        <a ngbNavLink (click)="openTab(0)"> <i class="material-icons" > construction </i>Define</a>
+                        <a ngbNavLink (click)="openTab(0)"> <i class="material-icons"> construction </i>Define</a>
                         <ng-template ngbNavContent>
                             <div class="hero-banner container-fluid py-4 bg-light mb-4 border-bottom">
                                 <div class="container py-4">
@@ -34,11 +34,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="workflow-box mb-2">
-                                            <h2 >Invite Users</h2>
-                                            <div >
+                                            <h2>Invite Users</h2>
+                                            <div>
 
                                                 <p class=" info-box-text">
-                                                  You may add any user within the organization or invite user
+                                                    You may add any user within the organization or invite user
                                                     outside the organization by entering their emails below. Invited
                                                     users will get email notification to activate themselves. Users
                                                     added as owners
@@ -67,10 +67,11 @@
                                                     <div *ngIf="userSerach?.length > 0"
                                                         class="autocomplete-users-list  border shadow">
                                                         <ng-container
-                                                            *ngFor="let user of workFLowDetails?.workSpaceUsers">
+                                                            *ngFor="let user of availableWorkFlowUsers">
                                                             <div *ngIf="user.email?.includes(userSerach) || user.firstName?.includes(userSerach) || user.lastName?.includes(userSerach)"
                                                                 class="workflow-list col-md-12  rounded">
-                                                                <div class="workflow-list-item row py-3 mx-0 border-bottom bg-white">
+                                                                <div
+                                                                    class="workflow-list-item row py-3 mx-0 border-bottom bg-white">
                                                                     <div class="workflow-img-wrapper col-md-1">
                                                                         <img src="assets/images/user.jpg"
                                                                             class="user-profile-img rounded-circle"
@@ -91,9 +92,8 @@
                                                                 </div>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                            *ngFor="let user of workFLowDetails?.workSpaceUsers; let i = index">
-                                                            <div *ngIf=" i === 0 && !user.email?.includes(userSerach) && !user.firstName?.includes(userSerach) && !user.lastName?.includes(userSerach)"
+                                                        <ng-container >
+                                                            <div *ngIf="checkForAvailableuser(userSerach, availableWorkFlowUsers)"
                                                                 class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3">
                                                                 <div class="autocomplete-not-found my-3">
                                                                     <strong>{{userSerach}}</strong> Search not found in
@@ -103,7 +103,7 @@
                                                                     <label for="select" class=" col-form-label"></label>
 
                                                                     <select
-                                                                        [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com')"
+                                                                        [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com') || checkIfUserIsAddedToWorkflow(userSerach)"
                                                                         id="select" name="select" class="custom-select"
                                                                         (change)="selectRole($event)">
                                                                         <option
@@ -115,7 +115,8 @@
                                                                         name="invite" type="button"
                                                                         (click)="inviteUser()"
                                                                         class="btn btn-primary btn-bf mt-3"
-                                                                        [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com')">Invite</button>
+                                                                        [disabled]="!userSerach?.includes('@') || !userSerach?.includes('.com') || checkIfUserIsAddedToWorkflow(userSerach)">Invite</button>
+                                                                        <p *ngIf="checkIfUserIsAddedToWorkflow(userSerach)">User is already added</p>
                                                                 </div>
 
                                                             </div>
@@ -132,21 +133,46 @@
                                                     <div class="col-md-12">
                                                         <h4>Added Users</h4>
                                                         <div class="added-users-list col-md-12 border rounded">
-                                                            <ng-container *ngFor="let user of workFLowDetails?.workSpaceUsers">
+                                                            <div class="added-user-item row p-3 border-bottom rounded">
+                                                                <div class="added-user-title-wrapper col-md-1">
+                                                                    <img src="assets/images/user.jpg"
+                                                                        class="user-profile-img rounded-circle" alt=""
+                                                                        title="" width="40" height="40">
+                                                                </div>
+                                                                <div class="added-user-title-wrapper col-md-6">
+                                                                    <div clss="added-user-name">{{userInfo.FirstName}}
+                                                                        {{userInfo.LastName}}
+                                                                    </div>
+                                                                    <span
+                                                                        class="text-muted"><i>{{userInfo.Email}}</i></span>
+                                                                </div>
+
+                                                                <div class="added-user-title-wrapper col-md-3">
+                                                                    <span
+                                                                        class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
+                                                                </div>
+                                                                <div
+                                                                    class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
+                                                                </div>
+                                                            </div>
+                                                            <ng-container
+                                                                *ngFor="let user of workFLowDetails?.workSpaceUsers">
                                                                 <div *ngIf="addedUserId?.includes(user.id)"
                                                                     class="added-user-item row p-3 border-bottom rounded">
-                
+
                                                                     <div class="added-user-title-wrapper col-md-1">
                                                                         <img src="assets/images/user.jpg"
-                                                                            class="user-profile-img rounded-circle" alt="" title=""
-                                                                            width="40" height="40">
+                                                                            class="user-profile-img rounded-circle"
+                                                                            alt="" title="" width="40" height="40">
                                                                     </div>
                                                                     <div class="added-user-title-wrapper col-md-6">
-                                                                        <div clss="added-user-name">{{user.firstName}} {{user.lastName}}
+                                                                        <div clss="added-user-name">{{user.firstName}}
+                                                                            {{user.lastName}}
                                                                         </div>
-                                                                        <span class="text-muted"><i>{{user.email}}</i></span>
+                                                                        <span
+                                                                            class="text-muted"><i>{{user.email}}</i></span>
                                                                     </div>
-                
+
                                                                     <div class="added-user-title-wrapper col-md-3">
                                                                         <span *ngIf="user.isLinkActivated"
                                                                             class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
@@ -155,15 +181,16 @@
                                                                     </div>
                                                                     <div
                                                                         class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-                
+
                                                                         <i class="material-icons-round text-dark"
-                                                                            (click)="deleteUser(user.id)" title="Delete" role="button">delete</i>
+                                                                            (click)="deleteUser(user.id)" title="Delete"
+                                                                            role="button">delete</i>
                                                                     </div>
                                                                 </div>
                                                             </ng-container>
-                
-                
-                
+
+
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,7 +201,7 @@
                                 </div>
 
 
-                             
+
 
                                 <div class="row mt-3">
                                     <div class="col-md-12">
@@ -201,11 +228,14 @@
                                                                         *ngFor="let item of workFLowDetails?.workFlowLevels"
                                                                         class="workFlowLevels-item mb-3">
                                                                         <!-- Levels -->
-                                                                        <div class="bg-light border rounded p-3 workflow-user-level">
-                                                                        <div class="row ">
-                                                                            <!-- Level Names -->
-                                                                            <label class="col-md-2 col-form-label">Level Name</label>
-                                                                            <div class="col-md-8">                                                   
+                                                                        <div
+                                                                            class="bg-light border rounded p-3 workflow-user-level">
+                                                                            <div class="row ">
+                                                                                <!-- Level Names -->
+                                                                                <label
+                                                                                    class="col-md-2 col-form-label">Level
+                                                                                    Name</label>
+                                                                                <div class="col-md-8">
                                                                                     <input
                                                                                         [ngClass]="{'disabled': builderObj.hasEntries}"
                                                                                         name="text1"
@@ -213,34 +243,41 @@
                                                                                         (keyup)="changeLevel($event, item)"
                                                                                         type="text"
                                                                                         class="form-control">
-                                                                              
+
+                                                                                </div>
+                                                                                <!-- Level Actions -->
+                                                                                <div class="col-md-2 text-right">
+                                                                                    <span
+                                                                                        class="material-icons animate-mat collapsed mr-2"
+                                                                                        title="Add Participants"
+                                                                                        (click)="item.expanded = !item.expanded"
+                                                                                        role="button">person_add</span>
+                                                                                    <span
+                                                                                        class="material-icons animate-mat mr-2"
+                                                                                        title="Drag n Drop"
+                                                                                        role="button">open_with</span>
+                                                                                    <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
+                                                                                    <span
+                                                                                        [ngClass]="{'disabled': builderObj.hasEntries}"
+                                                                                        class="material-icons animate-mat mr-2 "
+                                                                                        role="button" title="Delete"
+                                                                                        (click)="deleteFormLevel(item.id)">delete</span>
+                                                                                    <span
+                                                                                        class="material-icons-outlined mr-1"
+                                                                                        (click)="item.expanded = !item.expanded"
+                                                                                        title="collapse" role="button">
+                                                                                        expand_more </span>
+                                                                                </div>
                                                                             </div>
-                                                                            <!-- Level Actions -->
-                                                                            <div class="col-md-2 text-right">
-                                                                                <span
-                                                                                    class="material-icons animate-mat collapsed mr-2"
-                                                                                    title="Add Participants"
-                                                                                    (click)="item.expanded = !item.expanded"
-                                                                                    role="button">person_add</span>
-                                                                                <span
-                                                                                    class="material-icons animate-mat mr-2"
-                                                                                    title="Drag n Drop"
-                                                                                    role="button">open_with</span>
-                                                                                <!-- <span class="material-icons animate-mat mr-1" title="Edit">edit</span> -->
-                                                                                <span
-                                                                                    [ngClass]="{'disabled': builderObj.hasEntries}"
-                                                                                    class="material-icons animate-mat mr-2 "
-                                                                                    role="button" title="Delete"
-                                                                                    (click)="deleteFormLevel(item.id)">delete</span>
-                                                                                <span
-                                                                                    class="material-icons-outlined mr-1"
-                                                                                    (click)="item.expanded = !item.expanded"
-                                                                                    title="collapse" role="button"> expand_more </span>
-                                                                            </div>
-                                                                        </div>
                                                                             <div *ngIf="item.expanded" class="row mt-2">
                                                                                 <div class="col-md-10">
-                                                                                    <label class="label-text p-2">Define participants by entering their names or emails below, who can work on this level. Participants can be invited outside organization or can be added from the organization.</label>
+                                                                                    <label class="label-text p-2">Define
+                                                                                        participants by entering their
+                                                                                        names or emails below, who can
+                                                                                        work on this level. Participants
+                                                                                        can be invited outside
+                                                                                        organization or can be added
+                                                                                        from the organization.</label>
                                                                                     <div class="">
                                                                                         <input name="text2"
                                                                                             (keyup)="userNameChange($event, item)"
@@ -252,14 +289,15 @@
                                                                                             <ng-container
                                                                                                 *ngFor="let user of workFLowDetails?.workSpaceUsers; let wIndex = index"
                                                                                                 class="rounded">
-                                                                                                <div *ngIf="user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel)"
+                                                                                                <div *ngIf="checkIfUserIsAlreadyAddedToWorkflow(user.id) && (user.email?.includes(item.userSerachForLevel) || user.firstName?.includes(item.userSerachForLevel) || user.lastName?.includes(item.userSerachForLevel))"
                                                                                                     class="workflow-list-item row p-3 border-bottom">
-    
+
                                                                                                     <div
                                                                                                         class="added-user-title-wrapper col-md-1">
                                                                                                         <img src="assets/images/user.jpg"
                                                                                                             class="user-profile-img rounded-circle"
-                                                                                                            alt="" title=""
+                                                                                                            alt=""
+                                                                                                            title=""
                                                                                                             width="40"
                                                                                                             height="40">
                                                                                                     </div>
@@ -273,7 +311,7 @@
                                                                                                         <span
                                                                                                             class="text-muted"><i>{{user.email}}</i></span>
                                                                                                     </div>
-    
+
                                                                                                     <div
                                                                                                         class="added-user-title-wrapper col-md-2">
                                                                                                         <button
@@ -282,107 +320,133 @@
                                                                                                     </div>
                                                                                                     <div
                                                                                                         class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
-    
+
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div *ngIf=" wIndex === 0 && !user.email?.includes(item.userSerachForLevel) && !user.firstName?.includes(item.userSerachForLevel) && !user.lastName?.includes(item.userSerachForLevel)"
-                                                                    class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3">
-                                                                    <div class="autocomplete-not-found my-3">
-                                                                        <strong>{{item.userSerachForLevel}}</strong> Search not found in
-                                                                        the organization. want to invite?
-                                                                    </div>
-                                                                    <div clss="user-selector form-group">
-                                                                        <label for="select" class=" col-form-label"></label>
-    
-                                                                        <select
-                                                                            [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')"
-                                                                            id="select" name="select" class="custom-select"
-                                                                            (change)="selectRole($event)">
-                                                                            <option
-                                                                                *ngFor="let role of workFLowDetails?.roles"
-                                                                                [value]="role.id">{{role.name}}</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div clss="user-invit-button form-group row"> <button
-                                                                            name="invite" type="button"
-                                                                            (click)="inviteUserforLevel(item.id, item.userSerachForLevel); item.userSerachForLevel = ''"
-                                                                            class="btn btn-primary btn-bf mt-3"
-                                                                            [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')">Invite</button>
-                                                                    </div>
-    
-                                                                </div>
+                                                                                                
                                                                                             </ng-container>
+                                                                                            <div *ngIf="checkForAvailableuser(item.userSerachForLevel, availableWorkFlowUsers)"
+                                                                                                    class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3">
+                                                                                                    <div
+                                                                                                        class="autocomplete-not-found my-3">
+                                                                                                        <strong>{{item.userSerachForLevel}}</strong>
+                                                                                                        Search not found
+                                                                                                        in
+                                                                                                        the
+                                                                                                        organization.
+                                                                                                        want to invite?
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        clss="user-selector form-group">
+                                                                                                        <label
+                                                                                                            for="select"
+                                                                                                            class=" col-form-label"></label>
+
+                                                                                                        <select
+                                                                                                            [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')"
+                                                                                                            id="select"
+                                                                                                            name="select"
+                                                                                                            class="custom-select"
+                                                                                                            (change)="selectRole($event)">
+                                                                                                            <option
+                                                                                                                *ngFor="let role of workFLowDetails?.roles"
+                                                                                                                [value]="role.id">
+                                                                                                                {{role.name}}
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        clss="user-invit-button form-group row">
+                                                                                                        <button
+                                                                                                            name="invite"
+                                                                                                            type="button"
+                                                                                                            (click)="inviteUserforLevel(item.id, item.userSerachForLevel); item.userSerachForLevel = ''"
+                                                                                                            class="btn btn-primary btn-bf mt-3"
+                                                                                                            [disabled]="!item.userSerachForLevel?.includes('@') || !item.userSerachForLevel?.includes('.com')">Invite</button>
+                                                                                                    </div>
+
+                                                                                                </div>
                                                                                         </div>
-    
+
                                                                                     </div>
                                                                                 </div>
-                                                                        <div class="col-md-2 text-right"></div>
+                                                                                <div class="col-md-2 text-right"></div>
 
                                                                             </div>
 
-                                                                               <!-- WorkFlow User Added / Level users -->
+                                                                            <!-- WorkFlow User Added / Level users -->
 
-                                                                        <div class="row workflow-user-added">
-                                                                            <div class="col-12">
-                                                                                <ng-container
-                                                                                    *ngFor="let flowUsers of workFLowDetails?.workFlowUsers">
-                                                                                    <div *ngIf="item .id === flowUsers.levelId"
-                                                                                        class="added-user-item row p-3 border mb-1 mx-3 rounded bg-white">
+                                                                            <div class="row workflow-user-added">
+                                                                                <div class="col-12">
+                                                                                    <ng-container
+                                                                                        *ngFor="let flowUsers of workFLowDetails?.workFlowUsers">
+                                                                                        <div *ngIf="item .id === flowUsers.levelId"
+                                                                                            class="added-user-item row p-3 border mb-1 mx-3 rounded bg-white">
 
-                                                                                        <div
-                                                                                            class="added-user-title-wrapper col-md-1">
-                                                                                            <img src="assets/images/user.jpg"
-                                                                                                class="user-profile-img rounded-circle"
-                                                                                                alt="" title=""
-                                                                                                width="40" height="40">
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="added-user-title-wrapper col-md-6">
-                                                                                            <div clss="added-user-name">
-                                                                                                {{flowUsers.userName}}
-                                                                                                {{flowUsers.email}}
+                                                                                            <div
+                                                                                                class="added-user-title-wrapper col-md-1">
+                                                                                                <img src="assets/images/user.jpg"
+                                                                                                    class="user-profile-img rounded-circle"
+                                                                                                    alt="" title=""
+                                                                                                    width="40"
+                                                                                                    height="40">
                                                                                             </div>
-                                                                                            <span
-                                                                                                class="text-muted"><i>{{flowUsers.email}}</i></span>
-                                                                                        </div>
+                                                                                            <div
+                                                                                                class="added-user-title-wrapper col-md-6">
+                                                                                                <div
+                                                                                                    clss="added-user-name">
+                                                                                                    {{flowUsers.userName}}
+                                                                                                    {{flowUsers.email}}
+                                                                                                </div>
+                                                                                                <span
+                                                                                                    class="text-muted"><i>{{flowUsers.email}}</i></span>
+                                                                                            </div>
 
-                                                                                        <div
-                                                                                            class="added-user-title-wrapper col-md-3">
-                                                                                            <span
-                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Activated'"
-                                                                                                class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
-                                                                                            <span
-                                                                                                *ngIf="userIdwWithStatus[flowUsers.userId] === 'Pending'"
-                                                                                                class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
+                                                                                            <div
+                                                                                                class="added-user-title-wrapper col-md-3">
+                                                                                                <span
+                                                                                                    *ngIf="userIdwWithStatus[flowUsers.userId] === 'Activated'"
+                                                                                                    class="badge badge-pill badge-success py-2 px-3 mt-2">Activated</span>
+                                                                                                <span
+                                                                                                    *ngIf="userIdwWithStatus[flowUsers.userId] === 'Pending'"
+                                                                                                    class="badge badge-pill badge-warning py-2 px-3 mt-2">Pending</span>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="added-user-actions-wrapper col-md-2 d-flex d-wrap justify-content-end">
 
-                                                                                            <i class="material-icons-round text-dark"
-                                                                                                (click)="deleteUserFromLevel(flowUsers.userId)" title="Delete" role="button">delete</i>
+                                                                                                <i class="material-icons-round text-dark"
+                                                                                                    (click)="deleteUserFromLevel(flowUsers.userId)"
+                                                                                                    title="Delete"
+                                                                                                    role="button">delete</i>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                </ng-container>
+                                                                                    </ng-container>
+                                                                                </div>
                                                                             </div>
+
+
                                                                         </div>
 
-                                                                        
-                                                                    </div>
-                                                                     
 
 
-                                                                       
+
 
                                                                     </div>
                                                                     <div class="text-center"> <a
                                                                             [ngClass]="{'disabled': builderObj.hasEntries || workFLowDetails?.workFlowLevels?.length > 9}"
                                                                             class="btn btn-primary btn-bf"
-                                                                            (click)="addLevels(null, null, true)">Add
-                                                                            Levels</a>
-                                                                            <div *ngIf="workFLowDetails?.workFlowLevels?.length > 9">
-                                                                                As of now we are supporting upto 10 Levels
-                                                                            </div></div>
-                                                                            
+                                                                            (click)="addLevels(null, null, true); addLevelSpinner = true">Add
+                                                                            Levels
+                                                                            <span *ngIf="addLevelSpinner"
+                                                                                class="spinner-border spinner-border-sm mr-2"></span>
+                                                                        </a>
+
+                                                                        <div
+                                                                            *ngIf="workFLowDetails?.workFlowLevels?.length > 9">
+                                                                            As of now we are supporting upto 10 Levels
+                                                                        </div>
+                                                                    </div>
+
 
                                                                 </div>
                                                             </div>
@@ -588,6 +652,7 @@
                                                                     <input name="radio" [value]="'Decimal'"
                                                                         [checked]="selectedElement.selectedNumberType === 'Decimal'"
                                                                         id="Decimal_Type_setting_radio"
+                                                                        
                                                                         name="Decimal_Type_setting_radio" type="radio"
                                                                         class="custom-control-input">
                                                                     <label for="Decimal_Type_setting_radio"
@@ -609,6 +674,7 @@
                                                                 <input name="decimal_Items_label_setting"
                                                                     id="decimal_Items_label_setting" type="text"
                                                                     placeholder="Decimal"
+                                                                    [attr.maxlength]="1"
                                                                     [(ngModel)]="selectedElement.decimalUpto"
                                                                     class="form-control">
                                                             </div>
@@ -631,9 +697,9 @@
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
                                                             <input id="Default Value" name="Default Value"
-                                                                placeholder="Default Value"
-                                                                type="date"
+                                                                placeholder="Default Value" type="date"
                                                                 [attr.type]="selectedElement.inputType"
+                                                                [attr.maxlength]="selectedElement.maxVal"
                                                                 [(ngModel)]="selectedElement.value"
                                                                 class="form-control">
                                                         </div>
@@ -650,15 +716,17 @@
                                                             class="form-group">
                                                             <label for="Default Value">Default Value</label>
                                                             <div class="input-group date-field">
-                                                                <input class="form-control" type="date" placeholder="dd-mm-yyyy"
-                                                                    name="dp" [(ngModel)]="selectedElement.value"
+                                                                <input class="form-control" type="date"
+                                                                    placeholder="dd-mm-yyyy" name="dp"
+                                                                    [(ngModel)]="selectedElement.value"
                                                                     [minDate]="selectedElement.minVal"
-                                                                    [maxDate]="selectedElement.maxVal"
-                                                                    ngbDatepicker #d271="ngbDatepicker">
+                                                                    [maxDate]="selectedElement.maxVal" ngbDatepicker
+                                                                    #d271="ngbDatepicker">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text calendar"
                                                                         (click)="d271.toggle()"><i
-                                                                            class="material-icons" role="button">date_range</i>
+                                                                            class="material-icons"
+                                                                            role="button">date_range</i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -694,8 +762,8 @@
                                                             class="radio-opt">
                                                             <div class="row">
                                                                 <div class="col-12"><label
-                                                                    for="Default Value">Options</label>
-                                                            </div>
+                                                                        for="Default Value">Options</label>
+                                                                </div>
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
@@ -723,8 +791,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div  class="col-md-3">
-                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
+                                                                <div class="col-md-3">
+                                                                    <button
+                                                                        [ngClass]="{'disabled': selectedElement?.options.length < 2}"
+                                                                        (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -739,13 +809,13 @@
                                                         <div *ngIf="selectedElement?.validations?.options && selectedElement?.collectPayment"
                                                             class="radio-opt">
                                                             <div class="row">
-                                                            <div class="col-12"><label
-                                                                    for="Default Value">Options</label>
+                                                                <div class="col-12"><label
+                                                                        for="Default Value">Options</label>
                                                                 </div>
                                                             </div>
                                                             <div *ngFor="let val of selectedElement?.options; let i =index; trackBy:trackByFn"
                                                                 class="row form-group justify-content-center align-items-center">
-                                                                <div  class="col-md-6 pr-0">
+                                                                <div class="col-md-6 pr-0">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <div
@@ -774,7 +844,9 @@
                                                                         placeholder="$" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <button [ngClass]="{'disabled': selectedElement?.options.length < 2}" (click)="remove(i)"
+                                                                    <button
+                                                                        [ngClass]="{'disabled': selectedElement?.options.length < 2}"
+                                                                        (click)="remove(i)"
                                                                         class="btn option-btn border btn-sm rounded bg-white p-0 mr-1"><i
                                                                             class="material-icons">remove</i></button>
                                                                     <button
@@ -917,6 +989,13 @@
                                                                         [(ngModel)]="selectedElement.maxVal"
                                                                         class="form-control">
                                                                 </div>
+                                                                
+                                                            </div>
+                                                            <div class="field-error text-left mt-1 pr-2 small" *ngIf="selectedElement?.minVal >= selectedElement?.maxVal">
+                                                                Max value should be greater than Min value.
+                                                            </div>
+                                                            <div class="field-error text-left mt-1 pr-2 small" *ngIf="selectedElement?.maxVal > selectedElement?.maxHigh">
+                                                                Max value should not greater than {{selectedElement?.maxHigh}}.
                                                             </div>
                                                         </div>
 
@@ -944,14 +1023,15 @@
                                                                 <div class="input-group date-field">
                                                                     <input class="form-control" placeholder="dd-mm-yyyy"
                                                                         name="dp" [(ngModel)]="selectedElement.minVal"
-                                                                         [maxDate]="selectedElement.maxVal"
-                                                                         (ngModelChange)="selectedElement.value = null"
-                                                                        type="date"
-                                                                        ngbDatepicker #d1="ngbDatepicker" required>
-                                                                    <div  class="input-group-append">
+                                                                        [maxDate]="selectedElement.maxVal"
+                                                                        (ngModelChange)="selectedElement.value = null"
+                                                                        type="date" ngbDatepicker #d1="ngbDatepicker"
+                                                                        required>
+                                                                    <div class="input-group-append">
                                                                         <div class="input-group-text calendar "
                                                                             (click)="d1.toggle()"><i
-                                                                                class="material-icons" role="button">date_range</i>
+                                                                                class="material-icons"
+                                                                                role="button">date_range</i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -964,12 +1044,13 @@
                                                                         [minDate]="selectedElement.minVal"
                                                                         (ngModelChange)="selectedElement.value = null"
                                                                         (change)="selectedElement.value = null"
-                                                                        type="date"
-                                                                        ngbDatepicker #d="ngbDatepicker" required>
+                                                                        type="date" ngbDatepicker #d="ngbDatepicker"
+                                                                        required>
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text calendar"
                                                                             (click)="d.toggle()" type="button"><i
-                                                                                class="material-icons" role="button">date_range</i>
+                                                                                class="material-icons"
+                                                                                role="button">date_range</i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1019,7 +1100,8 @@
                                                             <div>
                                                                 <div class="custom-control custom-radio"
                                                                     (click)="selectedElement.selectedType = 'US'; selectedElement.children = selectedElement.validations.typeOfAddress.US;">
-                                                                    <input name="radio" (click)="selectedElement.selectedType = 'US';"
+                                                                    <input name="radio"
+                                                                        (click)="selectedElement.selectedType = 'US';"
                                                                         [checked]="selectedElement.selectedType === 'US'"
                                                                         [value]="'US'" id="radio_US" type="radio"
                                                                         class="custom-control-input">
@@ -1030,7 +1112,7 @@
                                                                 <div class="custom-control custom-radio"
                                                                     (click)="selectedElement.selectedType = 'NONUS'; selectedElement.children = selectedElement.validations.typeOfAddress.NONUS;">
                                                                     <input name="radio"
-                                                                    (click)="selectedElement.selectedType = 'NONUS';"
+                                                                        (click)="selectedElement.selectedType = 'NONUS';"
                                                                         [checked]="selectedElement.selectedType === 'NONUS'"
                                                                         [value]="'NONUS'" id="radio_NONUS" type="radio"
                                                                         class="custom-control-input">
@@ -1048,12 +1130,15 @@
                                                                         class="custom-control custom-checkbox row d-flex p-2">
                                                                         <div class="col-3">
                                                                             <input type="checkbox"
-                                                                                id="eleIndex_{{eleIndex}}"
+                                                                                id="eleIndex_{{eleIndex}}__12"
+                                                                                name="eleIndex_{{eleIndex}}__12"
                                                                                 [checked]="!addElement.disabled"
                                                                                 (click)="addElement.disabled = !addElement.disabled"
-                                                                                class="custom-control-input">
+                                                                                class="custom-control-input"
+                                                                                [value]="addElement.disabled"
+                                                                                >
                                                                             <label class="custom-control-label"
-                                                                                for="eleIndex_{{eleIndex}}">{{addElement.placeholder}}</label>
+                                                                                for="eleIndex_{{eleIndex}}__12">{{addElement.placeholder}}</label>
                                                                         </div>
                                                                         <div class="col-9">
                                                                             <input class="form-control mr-1"
@@ -1636,7 +1721,8 @@
                                                                                                 <div class="input-group-text calendar"
                                                                                                     (click)="d.toggle()"
                                                                                                     type="button"><i
-                                                                                                        class="material-icons" role="button">date_range</i>
+                                                                                                        class="material-icons"
+                                                                                                        role="button">date_range</i>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1741,14 +1827,16 @@
 
                                                         </div>
                                                     </div>
-                                                    <div *ngSwitchCase="'fileupload'" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'fileupload'"
+                                                        (click)="clicked($event, model, template)">
                                                         <div class="form-group">
                                                             <label>{{model.name}}</label>
                                                             <input type="file" class="form-control file-upload-field">
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'break'" class="page-break target-droppable" (click)="clicked($event, model, template)">
+                                                    <div *ngSwitchCase="'break'" class="page-break target-droppable"
+                                                        (click)="clicked($event, model, template)">
                                                         <div class="text-center position-relative">
                                                             <span
                                                                 class="position-absolute page-break-head text-center bg-white px-3">{{model.value}}</span>
@@ -1759,17 +1847,17 @@
                                                         (click)="clicked($event, model, template)">
                                                         <label>{{model.name}}</label>
                                                         <div class="input-group">
-                                                            <input class="form-control non-clickable"
-                                                            type="date"
+                                                            <input class="form-control non-clickable" type="date"
                                                                 [minDate]="model.minVal" [maxDate]="model.maxVal"
-                                                                placeholder="{{model.placeholder}}" (click)="d.toggle()" name="dp"
-                                                                [(ngModel)]="model.value" ngbDatepicker
+                                                                placeholder="{{model.placeholder}}" (click)="d.toggle()"
+                                                                name="dp" [(ngModel)]="model.value" ngbDatepicker
                                                                 #d="ngbDatepicker" required>
-                                                                <i class="moz-cover-clear"></i>
+                                                            <i class="moz-cover-clear"></i>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text calendar no-click"
                                                                     (click)="d.toggle()" type="button"><i
-                                                                        class="material-icons" role="button">date_range</i></div>
+                                                                        class="material-icons"
+                                                                        role="button">date_range</i></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1987,7 +2075,8 @@
                         <a ngbNavLink (click)="saveForm()"><i class="material-icons"> publish </i>Publish</a>
                         <ng-template ngbNavContent>
 
-                            <app-exported-view [url]="url" (saveForm)="saveForm()" [styling]="styling" [elements]="targetBuilderTools">
+                            <app-exported-view [url]="url" (saveForm)="saveForm()" [styling]="styling"
+                                [elements]="targetBuilderTools">
                             </app-exported-view>
 
                         </ng-template>
@@ -2007,7 +2096,8 @@
                                                 (click)="getNewEntries()"> Refresh </button>
 
 
-                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)"
+                                                class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="filterDropdown"
                                                     ngbDropdownAnchor (focus)="myDrop.open()">Filters</button>
                                                 <div ngbDropdownMenu aria-labelledby="filterDropdown">
@@ -2019,7 +2109,8 @@
                                                 </div>
                                             </div>
 
-                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)"
+                                                class="d-inline-block" ngbDropdown #actionsDropdown="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="actionsDropdown"
                                                     ngbDropdownAnchor (focus)="actionsDropdown.open()">Actions</button>
                                                 <div ngbDropdownMenu aria-labelledby="actionsDropdown">
@@ -2027,7 +2118,8 @@
                                                     <button ngbDropdownItem (click)="export()">Export</button>
                                                 </div>
                                             </div>
-                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)" class="d-inline-block">
+                                            <div *ngIf="builderObj.formType === 'Form' || (builderObj.formType === 'WorkFlow' && builderObj?.createdBy === userInfo?.Id)"
+                                                class="d-inline-block">
                                                 <button class="btn btn-primary btn-bf mr-2" id="newEntry"
                                                     (click)="viewEntryPanel = !viewEntryPanel">New Entry</button>
                                                 <!-- <div ngbDropdownMenu aria-labelledby="newEntry">
@@ -2040,7 +2132,7 @@
                                     </div>
                                     <div *ngIf="viewEntryPanel" class="entry-panel shadow py-2 bg-white"
                                         style="right: 0%;">
-                                        <button type="button" (click)="closeIframes()" class="close" >
+                                        <button type="button" (click)="closeIframes()" class="close">
                                             <!-- <span aria-hidden="true">&times;</span> -->
                                             <span class="material-icons position-absolute"> close </span>
                                         </button>
@@ -2059,12 +2151,13 @@
                                         <div *ngIf="entries?.rows?.length > 0" class="tool-filter text-right">
                                             <div class="d-inline-block" ngbDropdown #column="ngbDropdown">
                                                 <button class="btn btn-primary btn-bf mr-2" id="column"
-                                                ngbDropdownToggle >Columns</button>
+                                                    ngbDropdownToggle>Columns</button>
                                                 <div ngbDropdownMenu aria-labelledby="column" class="column-dropdown">
                                                     <div *ngFor="let item of entries.columns"
                                                         (click)="item.view = !item.view" class="px-3 py-1">
                                                         <!-- <label> <input data-index="0" [checked]="item.view" name="btSelectItem" type="checkbox">&nbsp;{{item.headerName}}</label> -->
-                                                        <div *ngIf="item.headerName?.length > 1" class="custom-control custom-checkbox">
+                                                        <div *ngIf="item.headerName?.length > 1"
+                                                            class="custom-control custom-checkbox">
                                                             <input data-index="0" [checked]="item.view"
                                                                 name="btSelectItem" type="checkbox"
                                                                 class="custom-control-input">
@@ -2081,7 +2174,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive-main table-responsive">
-                                            <table *ngIf="entries.rows.length !== 0 && getSelectedColumns(entries)" class="table mt-3 border table-fit" id="table-id" data-toggle="table"
+                                            <table *ngIf="entries.rows.length !== 0 && getSelectedColumns(entries)"
+                                                class="table mt-3 border table-fit" id="table-id" data-toggle="table"
                                                 data-search="true" data-filter-control="true" data-show-export="true"
                                                 data-show-refresh="true" data-show-toggle="true" data-pagination="true"
                                                 data-toolbar="#toolbar">
@@ -2115,7 +2209,8 @@
                                                                 </td>
                                                                 <td
                                                                     *ngIf="col.view && row?.[col?.field] === 'No_value' || col.view && row?.[col?.field] === ''">
-                                                                 <span class="empty-field small"><i>{{"No Entry"}}</i></span> 
+                                                                    <span class="empty-field small"><i>{{"No
+                                                                            Entry"}}</i></span>
                                                                 </td>
                                                                 <td *ngIf="col.headerName === 'Signature'">
                                                                     <img [src]="row?.[col?.field]" height="100px"
@@ -2126,8 +2221,11 @@
                                                     </ng-container>
                                                 </tbody>
                                             </table>
-                                            <div *ngIf="entries.rows.length === 0" class="alert alert-warning my-5" role="alert"> No Records found !</div>
-                                            <div *ngIf="entries.rows.length !== 0 && !getSelectedColumns(entries)" class="alert alert-warning my-5" role="alert"> Please select atleast one column!</div>
+                                            <div *ngIf="entries.rows.length === 0" class="alert alert-warning my-5"
+                                                role="alert"> No Records found !</div>
+                                            <div *ngIf="entries.rows.length !== 0 && !getSelectedColumns(entries)"
+                                                class="alert alert-warning my-5" role="alert"> Please select atleast one
+                                                column!</div>
                                         </div>
 
                                     </div>
