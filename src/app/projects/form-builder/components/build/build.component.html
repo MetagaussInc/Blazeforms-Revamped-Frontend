@@ -2182,7 +2182,7 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th *ngIf="entries.columns.length > 0" data-field="state"
-                                                            data-checkbox="true" scope="row"><input data-index="0"
+                                                            data-checkbox="true" scope="row"><input data-index="0" (click)="selectAllEntries()"
                                                                 name="btnAllSelectItem" type="checkbox"></th>
 
                                                         <ng-container *ngFor="let item of entries.columns">
@@ -2198,6 +2198,7 @@
                                                         <tr *ngIf="!filter || (filter && filter === row[1])">
                                                             <td class="bs-checkbox " scope="row">
                                                                 <input data-index="0" name="btSelectItem"
+                                                                [checked]="entries?.selected?.includes(rowIndex)"
                                                                     (click)="selectEntry(rowIndex)" type="checkbox">
                                                             </td>
                                                             <ng-container (click)="viewEntry(rowIndex)"
