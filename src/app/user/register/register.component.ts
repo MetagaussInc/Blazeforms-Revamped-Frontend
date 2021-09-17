@@ -40,9 +40,9 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       // this.matchPassword.bind(this)
     ]),
-    // myRecaptcha: new FormControl(false, [
-    //   this.checkforAgreements.bind(this)
-    // ]),
+    myRecaptcha: new FormControl(false, [
+      this.checkforAgreements.bind(this)
+    ]),
     acceptAgreement: new FormControl(false, this.checkforAgreements.bind(this))
   });
 
