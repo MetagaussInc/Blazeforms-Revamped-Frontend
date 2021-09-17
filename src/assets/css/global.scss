@@ -1365,7 +1365,7 @@
     
    .form-field-control a i.page-break-icon::before {
     font-family: 'Material Icons';
-    content:"\eaca";
+    //content: "\eaca";
     color: #f04564;
    }
     
@@ -1375,6 +1375,24 @@
     
    .form-field-control a i.input-number-icon::before {
     font-family: 'Material Icons';
-    content:"\eac7";
+    //content:"\eac7";
     color: #f04564;
    }
+
+   .form-field-control a i.input-number-icon::before { 
+    content: "";
+    background-image: url(/assets/svg/number-icon.svg);
+    width: 18px;
+    height: 18px;
+    display: block;
+    background-size: contain;
+    }
+
+    .form-field-control a i.page-break-icon::before {
+        content: "";
+        background-image: url(/assets/svg/page-break.svg);
+        width: 18px;
+        height: 18px;
+        display: block;
+        background-size: contain;
+    }
