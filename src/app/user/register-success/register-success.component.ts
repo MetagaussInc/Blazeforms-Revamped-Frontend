@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from 'src/app/config/rest-config/http.service';
+import { DataSharingService } from 'src/app/shared/data-sharing.service';
 
 @Component({
   selector: 'app-register-success',
@@ -11,7 +12,9 @@ export class RegisterSuccessComponent implements OnInit {
 
   queryParamsSubscription$: any;
   progressLoader = true;
-  constructor(private route: ActivatedRoute, private http: HttpService, private router: Router) { }
+  planName: any;
+  userPlanData = {user: '', plan: ''};
+  constructor(private route: ActivatedRoute, private http: HttpService, private router: Router, private dataSharingService: DataSharingService) { }
 
   ngOnInit() {
     this.queryParamsSubscription$ = this.route.queryParams.subscribe((params: any) => {
@@ -27,6 +30,18 @@ export class RegisterSuccessComponent implements OnInit {
         if (data != null && data.id != '') {
           if (data.isLinkActivated) {
             this.progressLoader = false;
+            if(data.userType == 'PaidPlan'){
+              this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
+                this.userPlanData.user = data;
+                res.forEach((element: any) => {
+                  if(element.id == data.temporaryPlanId){
+                    this.planName = element.name;
+                    this.userPlanData.plan = element;
+                  }
+                });
+                this.dataSharingService.SetPaidUserRegistrationData(this.userPlanData);
+              })
+            }
 
             // if (data.isInvited) {
             //   this.router.navigate(['user/register']);
@@ -54,5 +69,14 @@ export class RegisterSuccessComponent implements OnInit {
       },
       error => {
       });
+  }
+
+  next(){
+    if(this.userPlanData){
+      this.router.navigate(['user/register-confirm'])
+    }
+    else{
+      this.router.navigate(['user/login']);
+    }
   }
 }

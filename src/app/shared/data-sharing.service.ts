@@ -26,6 +26,7 @@ export class DataSharingService {
   public userWorkspaceList: any;
   public billingPageData: any;
   public activeTabId = 1;
+  public paidUserRegistration: any;
 
   constructor(private store: Store, private http: HttpService) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
@@ -171,6 +172,14 @@ export class DataSharingService {
         this.store.dispatch(updateUserPlanDetail({props}));
       }
     });
+  }
+
+  SetPaidUserRegistrationData(userData: any){
+    this.paidUserRegistration = userData;
+  }
+
+  GetPaidUserRegistrationData(){
+    return this.paidUserRegistration;
   }
 
 }

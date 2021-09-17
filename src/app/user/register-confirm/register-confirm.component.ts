@@ -6,6 +6,10 @@ import { selectUserInfo } from 'src/app/+state/user/user.selectors';
 import { HttpService } from 'src/app/config/rest-config/http.service';
 import { DataSharingService } from 'src/app/shared/data-sharing.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
+import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+
+SwiperCore.use([Navigation, Autoplay]);
 
 @Component({
   selector: 'app-register-confirm',
@@ -47,48 +51,31 @@ export class RegisterConfirmComponent implements OnInit {
   chargeId: any;
   formValues: any;
   fromPage: string = 'subscription';
-
-  @Output() updateSubscriptionPage = new EventEmitter<any>();
+  paidUserData: any;
+  showBillingSection: boolean = false;
+  public calulateUites = storageCountFormatter;
+  public showPlanPage: boolean = false;
+  public masterPlans: any[] = [];
 
   constructor(private dataSharingService: DataSharingService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private toastService: ToastService) {
-    this.Activatedroute.queryParamMap.subscribe((params: any) => {
-      let userOrgName = '';
-      if(params.get('action') == 'edit'){
-        let orgId: any = params.get('id');
-        let orgUserId: any = params.get('orgUserId');
-        let orgName: any = params.get('orgName');
-        this.organizationId = decodeURIComponent(orgId);
-        this.organizationUserId = decodeURIComponent(orgUserId);
-        this.organizationName = decodeURIComponent(orgName);
-        userOrgName = this.organizationName;
-      }
-      let billData = this.dataSharingService.GetBillingpageData();
-      if(billData){
-        this.billingpageData = JSON.parse(billData);
-        if(this.billingpageData.bfWorkspaceName){
-          userOrgName = this.billingpageData.bfWorkspaceName;
-          this.fromPage = this.billingpageData.bfFromPage;
-          this.organizationId = this.billingpageData.savedWorkspacesId;
-        }
-      }
-      this.store.select(selectUserInfo).subscribe(userInfo => {
-        this.userInfo = userInfo;
-        if(this.userInfo){
-          this.organizationBillingForm.patchValue({
-            firstName: this.userInfo.FirstName,
-            lastName: this.userInfo.LastName,
-            organization: userOrgName,
-            billingAddress1: this.userInfo.Address1,
-            billingAddress2: this.userInfo.Address2,
-            billingCityName: this.userInfo.CityName,
-            billingStateName: this.userInfo.StateName,
-            billingPostalCode: this.userInfo.PostalCode,
-            phoneNumber: this.userInfo.PhoneNumber,
-            email: this.userInfo.Email,
-          });
-        }
+    this.paidUserData = this.dataSharingService.GetPaidUserRegistrationData();
+    if(this.paidUserData){
+      this.showBillingSection = true;
+      this.billingpageData = this.paidUserData.plan; 
+      this.organizationId = this.paidUserData.user.workspaceId;
+      this.organizationBillingForm.patchValue({
+        firstName: this.paidUserData.user.firstName,
+        lastName: this.paidUserData.user.lastName,
+        organization: this.paidUserData.user.workSpaceName,
+        billingAddress1: this.paidUserData.user.address1,
+        billingAddress2: this.paidUserData.user.address2,
+        billingCityName: this.paidUserData.user.cityName,
+        billingStateName: this.paidUserData.user.stateName,
+        billingPostalCode: this.paidUserData.user.postalCode,
+        phoneNumber: this.paidUserData.user.phoneNumber,
+        email: this.paidUserData.user.email,
       });
-    });
+    }
   }
 
   ngOnInit(): void {
@@ -170,7 +157,7 @@ export class RegisterConfirmComponent implements OnInit {
       'CityName': thisInstance.organizationBillingForm.value.billingCityName,
       'StateName': thisInstance.organizationBillingForm.value.billingStateName,
       'PostalCode': thisInstance.organizationBillingForm.value.billingPostalCode,
-      'CountryId': thisInstance.userInfo.CountryId,
+      'CountryId': 0,
       'IsActivate': false,
       'PlanId': thisInstance.billingpageData.id,
       'Amount': thisInstance.billingpageData.price,
@@ -178,7 +165,7 @@ export class RegisterConfirmComponent implements OnInit {
       'StripeToken': thisInstance.stripeToken,
       'Currency': "$",
       'Description': thisInstance.billingpageData.name,
-      'UserId': thisInstance.userInfo.Id,
+      'UserId': thisInstance.paidUserData.user.id,
       'OverWriteExistingPlan': false,
       'IsPlanUpgrade': planUpgrade,
       'RecurringPayment': recurringEnable,
@@ -186,15 +173,22 @@ export class RegisterConfirmComponent implements OnInit {
     };
     thisInstance.http.call('savePayment', 'POST', model).subscribe((res: any) => {
       thisInstance.toastService.showSuccess('Payment Made Successfully!');
-      if(this.fromPage == 'subscription'){
-        this.dataSharingService.SetActiveTabId(6);
-        this.updateSubscriptionPage.emit(6);
-      }
-      else{
-        this.dataSharingService.SetActiveTabId(1);
-        this.router.navigate(['/work-spaces']);
-      }
+      let userPlanData = {user: '', plan: ''};
+      this.dataSharingService.SetPaidUserRegistrationData(userPlanData);
+      thisInstance.router.navigate(['user/login']);
     });
+  }
+
+  updatePlan(){
+    this.showPlanPage = true;
+    this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
+      this.masterPlans = res;
+    })
+  }
+
+  updateSelectedPlan(plan: any){
+    this.showPlanPage = false;
+    this.billingpageData = plan;
   }
 
   get firstName() { return this.organizationBillingForm.get('firstName'); }
@@ -209,6 +203,4 @@ export class RegisterConfirmComponent implements OnInit {
   get email() { return this.organizationBillingForm?.get('email'); }
   get recuring() { return this.organizationBillingForm?.get('recuring'); }
   get f() { return this.organizationBillingForm.controls; }
-
-
 }
