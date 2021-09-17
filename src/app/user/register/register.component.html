@@ -139,9 +139,9 @@
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
-                                        <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small">Password is required
+                                        <div *ngIf="f.Password.errors?.required" class="field-error text-right mt-1 pr-2 small w-100">Password is required
                                         </div>
-                                        <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
+                                        <div *ngIf="f.Password.errors?.pattern" class="field-error text-right mt-1 pr-2 small w-100">Password must contain at least one [A-Z], [a-z], [0-1] and Special character</div>
                                     </ng-container>
                                 </div>
                             </div>
@@ -186,8 +186,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="register-fields-wrapper row mb-3">
-                            <div class="terms-conditions-wrapper col-md-12 my-3 text-center">
+                        <div class="register-fields-wrapper row">
+                            <div class="terms-conditions-wrapper col-md-12 text-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" formControlName="acceptAgreement" class="custom-control-input" id="SignUpTermsConditions" name="example1">
                                     <label class="custom-control-label" for="SignUpTermsConditions">I have read and accepted <a
