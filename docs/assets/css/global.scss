@@ -1357,3 +1357,24 @@
 .workflow-user-added .added-user-item:first-child{
     margin-top: 2.5rem;
 }
+
+
+.form-field-control a i.page-break-icon { 
+    font-style: normal;
+   }
+    
+   .form-field-control a i.page-break-icon::before {
+    font-family: 'Material Icons';
+    content:"\eaca";
+    color: #f04564;
+   }
+    
+   .form-field-control a i.input-number-icon {
+    font-style: normal;
+   }
+    
+   .form-field-control a i.input-number-icon::before {
+    font-family: 'Material Icons';
+    content:"\eac7";
+    color: #f04564;
+   }
