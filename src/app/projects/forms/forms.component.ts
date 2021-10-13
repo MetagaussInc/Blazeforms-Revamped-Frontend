@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserInfo } from 'src/app/+state/user/user.selectors';
-import { HttpService } from 'src/app/config/rest-config/http.service';
+import { BASE_URL, HttpService } from 'src/app/config/rest-config/http.service';
 import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFormModalComponent } from './components/add-form-modal/add-form-modal.component';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { AddNewFolderComponent } from './components/add-new-folder/add-new-folder.component';
 import * as lodash from 'lodash';
 import { updateUserPlanDetail } from 'src/app/+state/user/user.actions';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-forms',
@@ -58,6 +59,55 @@ export class FormsComponent implements OnInit {
       this.getFormsList(userInfo);
     })
     this.formPermissions = this.dataSharingService.GetPermissions("Forms");
+  }
+
+  stripePromise = loadStripe('pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW');
+  
+  
+  async checkOut() {
+    const stripe: any = await this.stripePromise;
+    return stripe;
+  }
+   session() {
+
+    this.checkOut().then(res => {
+      this.http.call('StripeSession','POST', {
+        userInfo: this.userInfo,
+        plan: 'plan-a',
+        url: window.location.href
+      }).subscribe(session => {
+      return res.redirectToCheckout({ sessionId: session.id });
+
+      })
+    })
+
+    // this.http.call('StripeSession', 'POST', {} ).subscribe(x => {
+    //   console.log(x)
+    // })
+
+    // fetch(BASE_URL+'Payment/StripeSession', {
+    //   method: 'POST',
+    //   body: {
+    //     planID: 'planA'
+    //   }
+    // })
+    // .then(function(response) {
+    //   console.log(response)
+    //   return response.json();
+    // })
+    // .then(function(session) {
+    //   console.log(session)
+    //   return stripe.redirectToCheckout({ sessionId: session.id });
+    // })
+    // .then(function(result) {
+    //   console.log(result)
+    //   // If `redirectToCheckout` fails due to a browser or network
+    //   // error, you should display the localized error message to your
+    //   // customer using `error.message`.
+    //   if (result.error) {
+    //     alert(result.error.message);
+    //   }
+    // });
   }
 
   getFormsList(userInfo: any) {
