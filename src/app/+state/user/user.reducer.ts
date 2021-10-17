@@ -94,8 +94,10 @@ export const reducer = createReducer(
     return updatedState;
   }),
   on(UserActions.userLoginError, (state, action) => {
-    let loginAtt = action.props.multipleData.AccessFailedCount;
+    let loginAtt = action.props?.multipleData?.AccessFailedCount;
     return {
+      isFailed: true,
+      redirectToPlans: true,
       user: null,
       isUserLoggedin: false,
       apiCompleted: true,

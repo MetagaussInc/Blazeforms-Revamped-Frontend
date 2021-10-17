@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { BlockPasteDirective } from '../directives/block-paste.directive';
 import { SwiperModule } from 'swiper/angular';
 import { InviteComponent } from './invite/invite.component';
+import { BuyPlanComponent } from './buy-plan/buy-plan.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { InviteComponent } from './invite/invite.component';
     RegisterFailedComponent,
     ResetPasswordComponent,
     BlockPasteDirective,
-    InviteComponent
+    InviteComponent,
+    BuyPlanComponent
   ],
   imports: [
     CommonModule,

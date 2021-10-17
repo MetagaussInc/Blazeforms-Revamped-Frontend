@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private router: Router, private toastService: ToastService, private http: HttpService) {
     this.userSubscription$ = this.store.select(selectUserState).subscribe((res: any) => {
       if (res.apiCompleted) {
+        if (res.isFailed) {
+          console.log('Login error')
+          this.router.navigate(['/user/upgrade-plan'], {queryParams: {email:this.loginForm.value.email}})
+        }
         this.isFormSubmitted = false;
         if (res.user) {
           this.router.navigate(['/forms'])

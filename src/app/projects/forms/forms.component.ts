@@ -73,7 +73,7 @@ export class FormsComponent implements OnInit {
     this.checkOut().then(res => {
       this.http.call('StripeSession','POST', {
         userInfo: this.userInfo,
-        plan: 'plan-a',
+        plan: 'MG Super Test',
         url: window.location.href
       }).subscribe(session => {
       return res.redirectToCheckout({ sessionId: session.id });
