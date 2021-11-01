@@ -76,7 +76,7 @@ export class FormsComponent implements OnInit {
         plan: 'MG Super Test',
         url: window.location.href
       }).subscribe(session => {
-      return res.redirectToCheckout({ sessionId: session.id });
+      return res.redirectToCheckout({ sessionId: session.id, customerEmail:this.userInfo.Email||"rohitsuthar2015@gmail.com" });
 
       })
     })
