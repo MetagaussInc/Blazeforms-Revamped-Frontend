@@ -253,6 +253,8 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
           },
           plan: this.billingpageData?.name,
           url: window.location.href,
+          workspaceId: this.organizationId,
+          workspaceName: this.organizationName
         })
         .subscribe((session) => {
           console.log(res, session);
