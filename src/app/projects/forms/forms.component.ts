@@ -39,7 +39,7 @@ export class FormsComponent implements OnInit {
   private searchedFormKeyword: string = '';
   private FilterAttribute: string = 'null';
   public formsList: any;
-  public allForms :any;
+  public allForms: any;
   public folderList: any;
   folderListWithForms: any;
   userInfo: any;
@@ -62,21 +62,21 @@ export class FormsComponent implements OnInit {
   }
 
   stripePromise = loadStripe('pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW');
-  
-  
+
+
   async checkOut() {
     const stripe: any = await this.stripePromise;
     return stripe;
   }
-   session() {
+  session() {
 
     this.checkOut().then(res => {
-      this.http.call('StripeSession','POST', {
+      this.http.call('StripeSession', 'POST', {
         userInfo: this.userInfo,
         plan: 'MG Super Test',
         url: window.location.href
       }).subscribe(session => {
-      return res.redirectToCheckout({ sessionId: session.id, customerEmail:this.userInfo.Email||"rohitsuthar2015@gmail.com" });
+        return res.redirectToCheckout({ sessionId: session.id });
 
       })
     })
@@ -111,31 +111,34 @@ export class FormsComponent implements OnInit {
   }
 
   getFormsList(userInfo: any) {
-    if(userInfo){
-    // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
-    //   this.formsList = _.groupBy(res.res, 'folderName');
-    //   console.log(this.formsList)
-    // })
-   
-    this.getFoldersWithList(userInfo)
+    if (userInfo) {
+      // this.http.call('getFormsList', 'POST', obj).subscribe(res => {
+      //   this.formsList = _.groupBy(res.res, 'folderName');
+      //   console.log(this.formsList)
+      // })
 
-    this.http.call('getAllActiveForms', 'POST', {UserId: userInfo.Id,
-      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-      this.allForms = res;
-      this.formsbyId = lodash.groupBy(this.allForms, 'id')
-      this.allForms.forEach((element: any) => {
-        if (element.isFavourite) {
-          this.favs.push(element.id);
-        }
-      });
-      this.dataLoaded = true
-    })
+      this.getFoldersWithList(userInfo)
 
-    this.http.call('getFolders', 'POST', {
-      WorkSpaceId: this.selectedWorkspaceId,}).subscribe(res => {
-      this.folderList = res;
-    })
-  }
+      this.http.call('getAllActiveForms', 'POST', {
+        UserId: userInfo.Id,
+        WorkSpaceId: this.selectedWorkspaceId,
+      }).subscribe(res => {
+        this.allForms = res;
+        this.formsbyId = lodash.groupBy(this.allForms, 'id')
+        this.allForms.forEach((element: any) => {
+          if (element.isFavourite) {
+            this.favs.push(element.id);
+          }
+        });
+        this.dataLoaded = true
+      })
+
+      this.http.call('getFolders', 'POST', {
+        WorkSpaceId: this.selectedWorkspaceId,
+      }).subscribe(res => {
+        this.folderList = res;
+      })
+    }
   }
 
   getFormId(form: any): string {
@@ -150,37 +153,39 @@ export class FormsComponent implements OnInit {
     }
     this.http.call('UpdateFormAttributes', 'POST', {
       FormUpdateAction: "IsFavourite",
-      Id: value,}).subscribe(res => {
-        // this.getFormsList(this.userInfo)
-        // this.favs= [];
+      Id: value,
+    }).subscribe(res => {
+      // this.getFormsList(this.userInfo)
+      // this.favs= [];
     })
 
   }
 
   getNotification(userInfo: any) {
     this.http.call('GetNotifications', 'POST', {
-      ToUserId: userInfo.Id}).subscribe(res => {
-        this.notifications = res;
+      ToUserId: userInfo.Id
+    }).subscribe(res => {
+      this.notifications = res;
     })
   }
 
-  getFoldersWithList(userInfo: any, ) {
-    if(userInfo){
-    const obj = {
-      FilterAttribute: this.FilterAttribute,
-      SearchKeyword: this.searchedFormKeyword,
-      UserId: userInfo.Id,
-      WorkSpaceId: this.selectedWorkspaceId,
-      ...this.pageDetail,
+  getFoldersWithList(userInfo: any,) {
+    if (userInfo) {
+      const obj = {
+        FilterAttribute: this.FilterAttribute,
+        SearchKeyword: this.searchedFormKeyword,
+        UserId: userInfo.Id,
+        WorkSpaceId: this.selectedWorkspaceId,
+        ...this.pageDetail,
+      }
+      this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
+        const arr: any = [];
+        this.getfolderNameWithForms(res, arr);
+        this.formsList = arr;
+        this.folderListWithForms = arr;;
+
+      })
     }
-    this.http.call('GetFoldersListWithForms', 'POST', obj).subscribe(res => {
-      const arr: any = [];
-      this.getfolderNameWithForms(res, arr);
-      this.formsList = arr;
-      this.folderListWithForms = arr;;
-      
-    })
-  }
   }
 
   selectBulkForms(form: any) {
@@ -196,7 +201,7 @@ export class FormsComponent implements OnInit {
 
   get bulkId() {
     return this.selectedForms.join(',');
-  } 
+  }
   getfolderNameWithForms(res: any[], arr: any[]) {
     res.forEach((obj: any) => {
       if (obj?.childrenForms?.length > 0) {
@@ -207,10 +212,10 @@ export class FormsComponent implements OnInit {
           forms: obj.childrenForms.map((x: any) => {
             x.folderId = obj.value;
             return x;
-          } ),
-          childNameList: function(){
+          }),
+          childNameList: function () {
             let list = '';
-            obj?.childrenForms.forEach((x: any) => { list += '/'+ x.text} );
+            obj?.childrenForms.forEach((x: any) => { list += '/' + x.text });
             return list;
           }()
         })
@@ -226,19 +231,19 @@ export class FormsComponent implements OnInit {
 
   selectionChange($event: any) {
     if (this.viewBy === 'StarredForms' || this.viewBy === 'ArchievedForms') {
-      this.formsList =  JSON.parse(JSON.stringify(this.folderListWithForms));
+      this.formsList = JSON.parse(JSON.stringify(this.folderListWithForms));
     }
     this.viewBy = null;
     this.selectedFolder = $event;
-}
+  }
   open() {
-    const modalRef: any = this.modalService.open(AddFormModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.formsList = this.allForms;   
+    const modalRef: any = this.modalService.open(AddFormModalComponent, { size: 'lg' })
+    modalRef.componentInstance.formsList = this.allForms;
     modalRef.componentInstance.userId = this.userInfo.Id;
 
     // modalRef.componentInstance.openEditEvent.subscribe((arg: string) => {
     // });
-    
+
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         this.openEdit(result);
@@ -253,10 +258,10 @@ export class FormsComponent implements OnInit {
     const formDetail = this.formsbyId?.[id]?.[0];
     console.log(formDetail)
 
-    const modalRef: any = this.modalService.open(EditFormModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.folderList = this.folderList;      
-    modalRef.componentInstance.type = formDetail.formType;      
-    modalRef.componentInstance.modalType = 'Edit';      
+    const modalRef: any = this.modalService.open(EditFormModalComponent, { size: 'lg' })
+    modalRef.componentInstance.folderList = this.folderList;
+    modalRef.componentInstance.type = formDetail.formType;
+    modalRef.componentInstance.modalType = 'Edit';
     modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
     modalRef.componentInstance.config = {
@@ -271,22 +276,22 @@ export class FormsComponent implements OnInit {
   }
 
   openEdit(type: string) {
-    const modalRef: any = this.modalService.open(EditFormModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.folderList = this.folderList;      
-    modalRef.componentInstance.type = type;      
-    modalRef.componentInstance.modalType = 'Add';      
+    const modalRef: any = this.modalService.open(EditFormModalComponent, { size: 'lg' })
+    modalRef.componentInstance.folderList = this.folderList;
+    modalRef.componentInstance.type = type;
+    modalRef.componentInstance.modalType = 'Add';
     modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
     modalRef.componentInstance.config = {
-      
+
     };
-    
+
     modalRef.result.then((result: any) => {
       console.log(`Closed with: ${result}`);
       if (result?.message === 'added') {
         // update header uses
         this.dataSharingService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.selectedWorkspaceId);
-        this.router.navigate(['/form-builder'], {queryParams: {ID: result.res.id, seletedTab: type === 'WorkFlow' ? 0 : 1}})
+        this.router.navigate(['/form-builder'], { queryParams: { ID: result.res.id, seletedTab: type === 'WorkFlow' ? 0 : 1 } })
       }
     }, (reason: any) => {
       console.log(`Dismissed `);
@@ -294,18 +299,18 @@ export class FormsComponent implements OnInit {
   }
 
   openbuilder(form: any, tabIndex: any) {
-    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: tabIndex}})
+    this.router.navigate(['/form-builder'], { queryParams: { ID: form.value, seletedTab: tabIndex } })
 
   }
 
   openBuilderByName(form: any, tabIndex: any) {
     let openWorkFLow = false;
     this.allForms.forEach((element: any) => {
-      if(element.id === form.value && element.formType === 'WorkFlow') {
+      if (element.id === form.value && element.formType === 'WorkFlow') {
         openWorkFLow = true;
       }
     });
-    this.router.navigate(['/form-builder'], {queryParams: {ID: form.value, seletedTab: openWorkFLow ? 0 : tabIndex}})
+    this.router.navigate(['/form-builder'], { queryParams: { ID: form.value, seletedTab: openWorkFLow ? 0 : tabIndex } })
 
   }
 
@@ -315,13 +320,13 @@ export class FormsComponent implements OnInit {
   }
   openPermissions(form: any) {
     console.log('openPermissions', form)
-    const modalRef: any = this.modalService.open(RestrictFormEntriesComponent,{ size: 'lg' })
-    modalRef.componentInstance.form = form;      
+    const modalRef: any = this.modalService.open(RestrictFormEntriesComponent, { size: 'lg' })
+    modalRef.componentInstance.form = form;
     // modalRef.componentInstance.modalName = 'Archive'; 
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: ''}).subscribe(res => {
-          
+
         // })
       }
     }, (reason: any) => {
@@ -330,15 +335,15 @@ export class FormsComponent implements OnInit {
   }
 
   move(form: any) {
-    console.log('move', form,  this.folderList)
-    const modalRef: any = this.modalService.open(MoveModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.folderList =  this.folderList; 
-    modalRef.componentInstance.form =  form; 
+    console.log('move', form, this.folderList)
+    const modalRef: any = this.modalService.open(MoveModalComponent, { size: 'lg' })
+    modalRef.componentInstance.folderList = this.folderList;
+    modalRef.componentInstance.form = form;
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         this.getFoldersWithList(this.userInfo)
         this.selectedForms = [];
-          this.selectedFormName = [];
+        this.selectedFormName = [];
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
         //   console.log(res)
         // })
@@ -349,12 +354,12 @@ export class FormsComponent implements OnInit {
   }
 
   archive(form: any) {
-    const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be archived. Are you sure you wish to proceed?' : `Are you sure you want to archive ${form.text} forms ?`;      
-    modalRef.componentInstance.modalName = 'Archive'; 
+    const modalRef: any = this.modalService.open(ConfirmModalComponent, { size: 'lg' })
+    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be archived. Are you sure you wish to proceed?' : `Are you sure you want to archive ${form.text} forms ?`;
+    modalRef.componentInstance.modalName = 'Archive';
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
-        this.http.call('archive', 'POST', {Action: 'Archive', FormIds: form.value }).subscribe(res => {
+        this.http.call('archive', 'POST', { Action: 'Archive', FormIds: form.value }).subscribe(res => {
           // console.log(res)
           this.dataLoaded = false
           this.getFormsList(this.userInfo)
@@ -368,22 +373,22 @@ export class FormsComponent implements OnInit {
   }
 
   bulkDelete() {
-    this.deleteForm({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true} );
+    this.deleteForm({ text: this.selectedFormName.join(','), value: this.bulkId, bulk: true });
   }
   bulkMove() {
-    this.move({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true});
+    this.move({ text: this.selectedFormName.join(','), value: this.bulkId, bulk: true });
   }
   bulkArchive() {
-    this.archive({text: this.selectedFormName.join(','), value: this.bulkId, bulk: true});
+    this.archive({ text: this.selectedFormName.join(','), value: this.bulkId, bulk: true });
   }
 
   deleteForm(form: any) {
-    const modalRef: any = this.modalService.open(ConfirmModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be deleted. Are you sure you wish to proceed?' : `Are you sure you want to delete <strong>${form.text}</strong> ?`;      
-    modalRef.componentInstance.modalName = 'Delete'; 
+    const modalRef: any = this.modalService.open(ConfirmModalComponent, { size: 'lg' })
+    modalRef.componentInstance.message = form.bulk ? 'All Selected forms will be deleted. Are you sure you wish to proceed?' : `Are you sure you want to delete <strong>${form.text}</strong> ?`;
+    modalRef.componentInstance.modalName = 'Delete';
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
-        this.http.call('archive', 'POST', {Action: 'Delete', FormIds: form.value }).subscribe(res => {
+        this.http.call('archive', 'POST', { Action: 'Delete', FormIds: form.value }).subscribe(res => {
           this.getFormsList(this.userInfo);
           this.selectedForms = [];
           this.selectedFormName = [];
@@ -395,10 +400,10 @@ export class FormsComponent implements OnInit {
       console.log(`Dismissed `);
     });
   }
-  
+
   openModal(formId: any) {
-    const modalRef: any = this.modalService.open(UserPermissionModalComponent,{ size: 'lg' })
-    modalRef.componentInstance.formId = formId;      
+    const modalRef: any = this.modalService.open(UserPermissionModalComponent, { size: 'lg' })
+    modalRef.componentInstance.formId = formId;
     modalRef.componentInstance.modalType = 'permission';
     modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.result.then((result: any) => { }, (reason: any) => {
@@ -406,8 +411,8 @@ export class FormsComponent implements OnInit {
     });
   }
   openAddNewFolderModal() {
-    const modalRef: any = this.modalService.open(AddNewFolderComponent,{ size: 'lg' })
-    modalRef.componentInstance.folderList =  this.folderList; 
+    const modalRef: any = this.modalService.open(AddNewFolderComponent, { size: 'lg' })
+    modalRef.componentInstance.folderList = this.folderList;
     // modalRef.componentInstance.workSpaceId = this.userInfo.WorkspaceDetail.Id;
     modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
     modalRef.componentInstance.userId = this.userInfo.Id;
@@ -433,7 +438,7 @@ export class FormsComponent implements OnInit {
   }
 
   getFilteredForm() {
-     this.http.call('getFormsList', 'POST', {
+    this.http.call('getFormsList', 'POST', {
       FilterAttribute: this.viewBy,
       SearchKeyword: "",
       UserId: this.userInfo.Id,
@@ -441,23 +446,23 @@ export class FormsComponent implements OnInit {
       // WorkSpaceId: this.userInfo.WorkspaceDetail.Id,
       pageNumber: 1,
       pageSize: 14
-     }).subscribe(res => {
-       if (this.viewBy === 'StarredForms') {
+    }).subscribe(res => {
+      if (this.viewBy === 'StarredForms') {
         res?.res?.forEach((element: any) => {
           this.favs.push(element.id);
         });
-       } else {
+      } else {
         this.favs = [];
-       }
-       this.formsList = [{
-         folderPath: this.viewBy === 'StarredForms' ? 'All Starred Forms' : 'All Archived Forms',
-         forms: res.res
-       }]
+      }
+      this.formsList = [{
+        folderPath: this.viewBy === 'StarredForms' ? 'All Starred Forms' : 'All Archived Forms',
+        forms: res.res
+      }]
       console.log(res)
     })
   }
 
-  enableBuildPublishTab(form: any,formsbyId?: any) {
+  enableBuildPublishTab(form: any, formsbyId?: any) {
     if (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow') {
       if (this.formsbyId?.[form.value]?.[0]?.formEntries?.length > 0 || this.formsbyId?.[form.value]?.[0]?.createdBy !== this.userInfo?.Id) {
         return false;
@@ -468,7 +473,7 @@ export class FormsComponent implements OnInit {
     return true
   }
 
-  enableDefine(form: any,formsbyId?: any) {
+  enableDefine(form: any, formsbyId?: any) {
     return (this.formsbyId?.[form.value]?.[0]?.formType === 'WorkFlow' && this.userInfo?.Id === this.formsbyId?.[form.value]?.[0]?.createdBy);
   }
 
