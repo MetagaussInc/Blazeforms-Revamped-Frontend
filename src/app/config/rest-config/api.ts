@@ -2,6 +2,7 @@
 const ACCOUNT = 'Account';
 const FORMS = 'Forms';
 export const api: any = {
+    StripeSession: 'Payment/StripeSession',
     login: `${ACCOUNT}/ValidateUser`,
     signup: `${ACCOUNT}/Signup`,
     checkEmail: 'User/CheckExisting',

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BuyPlanComponent } from './buy-plan/buy-plan.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { InviteComponent } from './invite/invite.component';
 import { LoginComponent } from './login/login.component';
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'invite',
         component: InviteComponent
+      },
+      {
+        path: 'upgrade-plan',
+        component: BuyPlanComponent
       }
     ]
   },

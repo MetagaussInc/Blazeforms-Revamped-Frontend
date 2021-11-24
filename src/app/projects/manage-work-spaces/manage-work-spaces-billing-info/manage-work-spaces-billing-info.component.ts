@@ -1,44 +1,53 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DataSharingService } from '../../../shared/data-sharing.service';
-import { Store } from '@ngrx/store';
-import { selectUserInfo } from 'src/app/+state/user/user.selectors';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { HttpService } from 'src/app/config/rest-config/http.service';
-import { ToastService } from '../../../shared/toast.service';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { DataSharingService } from "../../../shared/data-sharing.service";
+import { Store } from "@ngrx/store";
+import { selectUserInfo } from "src/app/+state/user/user.selectors";
+import { Router, ActivatedRoute } from "@angular/router";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from "@angular/forms";
+import { HttpService } from "src/app/config/rest-config/http.service";
+import { ToastService } from "../../../shared/toast.service";
+import { loadStripe } from "@stripe/stripe-js";
 
 @Component({
-  selector: 'app-manage-work-spaces-billing-info',
-  templateUrl: './manage-work-spaces-billing-info.component.html',
-  styleUrls: ['./manage-work-spaces-billing-info.component.scss']
+  selector: "app-manage-work-spaces-billing-info",
+  templateUrl: "./manage-work-spaces-billing-info.component.html",
+  styleUrls: ["./manage-work-spaces-billing-info.component.scss"],
 })
 export class ManageWorkSpacesBillingInfoComponent implements OnInit {
-
   public billingpageData: any;
   public userInfo: any;
   public organizationId: any;
   public organizationUserId: any;
   public organizationName: any;
+  stripePromise = loadStripe(
+    "pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW"
+  );
 
   organizationBillingForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required] ),
-    lastName: new FormControl('', [Validators.required] ),
-    organization: new FormControl('', [Validators.required] ),
-    billingAddress1: new FormControl('', [Validators.required] ),
-    billingAddress2: new FormControl('', [Validators.required] ),
-    billingCityName: new FormControl('', [Validators.required] ),
-    billingStateName: new FormControl('', [Validators.required] ),
-    billingPostalCode: new FormControl('', [Validators.required] ),
-    phoneNumber: new FormControl('', [Validators.required] ),
-    email: new FormControl('', [
+    firstName: new FormControl("", [Validators.required]),
+    lastName: new FormControl("", [Validators.required]),
+    organization: new FormControl("", [Validators.required]),
+    billingAddress1: new FormControl("", [Validators.required]),
+    billingAddress2: new FormControl("", [Validators.required]),
+    billingCityName: new FormControl("", [Validators.required]),
+    billingStateName: new FormControl("", [Validators.required]),
+    billingPostalCode: new FormControl("", [Validators.required]),
+    phoneNumber: new FormControl("", [Validators.required]),
+    email: new FormControl("", [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
-      this.doubleDotValidator.bind(this)
+      this.doubleDotValidator.bind(this),
     ]),
-    recuring: new FormControl()
+    recuring: new FormControl(),
   });
 
-  strikeCheckout:any = null;
+  strikeCheckout: any = null;
   stripeEmail: any;
   stripeToken: any;
   globalListener: any;
@@ -46,36 +55,43 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
   type: any;
   chargeId: any;
   formValues: any;
-  fromPage: string = 'subscription';
+  fromPage: string = "subscription";
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
 
   @Output() updateSubscriptionPage = new EventEmitter<any>();
 
-  constructor(private dataSharingService: DataSharingService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private toastService: ToastService) {
-    this.Activatedroute.queryParamMap.subscribe(params => {
-      let userOrgName = '';
-      if(params.get('action') == 'edit'){
-        let orgId: any = params.get('id');
-        let orgUserId: any = params.get('orgUserId');
-        let orgName: any = params.get('orgName');
+  constructor(
+    private dataSharingService: DataSharingService,
+    private store: Store,
+    private router: Router,
+    private Activatedroute: ActivatedRoute,
+    private http: HttpService,
+    private toastService: ToastService
+  ) {
+    this.Activatedroute.queryParamMap.subscribe((params) => {
+      let userOrgName = "";
+      if (params.get("action") == "edit") {
+        let orgId: any = params.get("id");
+        let orgUserId: any = params.get("orgUserId");
+        let orgName: any = params.get("orgName");
         this.organizationId = decodeURIComponent(orgId);
         this.organizationUserId = decodeURIComponent(orgUserId);
         this.organizationName = decodeURIComponent(orgName);
         userOrgName = this.organizationName;
       }
       let billData = this.dataSharingService.GetBillingpageData();
-      if(billData){
+      if (billData) {
         this.billingpageData = JSON.parse(billData);
-        if(this.billingpageData.bfWorkspaceName){
+        if (this.billingpageData.bfWorkspaceName) {
           userOrgName = this.billingpageData.bfWorkspaceName;
           this.fromPage = this.billingpageData.bfFromPage;
           this.organizationId = this.billingpageData.savedWorkspacesId;
         }
       }
-      this.store.select(selectUserInfo).subscribe(userInfo => {
+      this.store.select(selectUserInfo).subscribe((userInfo) => {
         this.userInfo = userInfo;
-        if(this.userInfo){
+        if (this.userInfo) {
           this.organizationBillingForm.patchValue({
             firstName: this.userInfo.FirstName,
             lastName: this.userInfo.LastName,
@@ -98,31 +114,33 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
   }
 
   doubleDotValidator({ value }: AbstractControl): any {
-    if (value?.includes('@')) {
+    if (value?.includes("@")) {
       if (/[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?]/g.test(value)) {
         return { specialCharInDomain: true };
       }
-      if (value.split('@')[1]?.includes('..')) {
-        return {doubleDotInDomain: true};
+      if (value.split("@")[1]?.includes("..")) {
+        return { doubleDotInDomain: true };
       }
     }
     return null;
   }
 
-  updatePlan(){
+  updatePlan() {
     this.showPlanPage = true;
-    this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
-      let i = 0;
-      res.forEach((element: any) => {
-        if(element.price > this.billingpageData.price){
-          this.masterPlans[i] = element;
-          i++;
-        }
+    this.http
+      .call("getMasterPlansWithoutPagination", "GET", "")
+      .subscribe((res) => {
+        let i = 0;
+        res.forEach((element: any) => {
+          if (element.price > this.billingpageData.price) {
+            this.masterPlans[i] = element;
+            i++;
+          }
+        });
       });
-    })
   }
 
-  updateSelectedPlan(plan: any){
+  updateSelectedPlan(plan: any) {
     this.showPlanPage = false;
     this.billingpageData = plan;
   }
@@ -131,20 +149,23 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
     this.formValues = this.organizationBillingForm.value;
     const thisInstance = this;
     const strikeCheckout = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_6M6dPCZWn6kColOQcLy2LB1e',
-      locale: 'auto',
+      key: "pk_test_6M6dPCZWn6kColOQcLy2LB1e",
+      locale: "auto",
       token: function (stripeToken: any) {
         thisInstance.stripeToken = stripeToken.id;
         thisInstance.stripeEmail = stripeToken.email;
         thisInstance.type = stripeToken.card.type;
-        if (thisInstance.stripeToken != null && thisInstance.stripeToken != undefined) {
+        if (
+          thisInstance.stripeToken != null &&
+          thisInstance.stripeToken != undefined
+        ) {
           thisInstance.savePayment(thisInstance);
         }
-      }
+      },
     });
 
     strikeCheckout.open({
-      name: 'Blaze Forms payment',
+      name: "Blaze Forms payment",
       email: this.organizationBillingForm.value.email,
       description: this.billingpageData.name,
       amount: parseFloat(this.billingpageData.price) * parseFloat("100"),
@@ -152,82 +173,130 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
   }
 
   stripePaymentGateway() {
-    if(!window.document.getElementById('stripe-script')) {
+    if (!window.document.getElementById("stripe-script")) {
       const scr = window.document.createElement("script");
       scr.id = "stripe-script";
       scr.type = "text/javascript";
       scr.src = "https://checkout.stripe.com/checkout.js";
       scr.onload = () => {
         this.strikeCheckout = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_6M6dPCZWn6kColOQcLy2LB1e',
-          locale: 'auto',
+          key: "pk_test_6M6dPCZWn6kColOQcLy2LB1e",
+          locale: "auto",
           token: function (token: any) {
-            console.log(token)
-            alert('Payment via stripe successfull!');
-          }
+            console.log(token);
+            alert("Payment via stripe successfull!");
+          },
         });
-      }
+      };
       window.document.body.appendChild(scr);
     }
   }
 
-  savePayment(thisInstance: any){
+  savePayment(thisInstance: any) {
     let recurringEnable = false;
     let planUpgrade = true;
-    if(this.fromPage != 'subscription'){
+    if (this.fromPage != "subscription") {
       planUpgrade = false;
     }
-    if(thisInstance.organizationBillingForm.value.recuring){
+    if (thisInstance.organizationBillingForm.value.recuring) {
       recurringEnable = true;
     }
     let model = {
-      'UserFirstName': thisInstance.organizationBillingForm.value.firstName,
-      'UserLastName': thisInstance.organizationBillingForm.value.lastName,
-      'Email': thisInstance.organizationBillingForm.value.email,
-      'WorkspaceId': thisInstance.organizationId,
-      'Address1': thisInstance.organizationBillingForm.value.billingAddress1,
-      'Address2': thisInstance.organizationBillingForm.value.billingAddress2,
-      'CityName': thisInstance.organizationBillingForm.value.billingCityName,
-      'StateName': thisInstance.organizationBillingForm.value.billingStateName,
-      'PostalCode': thisInstance.organizationBillingForm.value.billingPostalCode,
-      'CountryId': thisInstance.userInfo.CountryId,
-      'IsActivate': false,
-      'PlanId': thisInstance.billingpageData.id,
-      'Amount': thisInstance.billingpageData.price,
-      'StripeEmail': thisInstance.stripeEmail,
-      'StripeToken': thisInstance.stripeToken,
-      'Currency': "$",
-      'Description': thisInstance.billingpageData.name,
-      'UserId': thisInstance.userInfo.Id,
-      'OverWriteExistingPlan': false,
-      'IsPlanUpgrade': planUpgrade,
-      'RecurringPayment': recurringEnable,
-      'StripePlanid': thisInstance.billingpageData.stripePlanId
+      UserFirstName: thisInstance.organizationBillingForm.value.firstName,
+      UserLastName: thisInstance.organizationBillingForm.value.lastName,
+      Email: thisInstance.organizationBillingForm.value.email,
+      WorkspaceId: thisInstance.organizationId,
+      Address1: thisInstance.organizationBillingForm.value.billingAddress1,
+      Address2: thisInstance.organizationBillingForm.value.billingAddress2,
+      CityName: thisInstance.organizationBillingForm.value.billingCityName,
+      StateName: thisInstance.organizationBillingForm.value.billingStateName,
+      PostalCode: thisInstance.organizationBillingForm.value.billingPostalCode,
+      CountryId: thisInstance.userInfo.CountryId,
+      IsActivate: false,
+      PlanId: thisInstance.billingpageData.id,
+      Amount: thisInstance.billingpageData.price,
+      StripeEmail: thisInstance.stripeEmail,
+      StripeToken: thisInstance.stripeToken,
+      Currency: "$",
+      Description: thisInstance.billingpageData.name,
+      UserId: thisInstance.userInfo.Id,
+      OverWriteExistingPlan: false,
+      IsPlanUpgrade: planUpgrade,
+      RecurringPayment: recurringEnable,
+      StripePlanid: thisInstance.billingpageData.stripePlanId,
     };
-    thisInstance.http.call('savePayment', 'POST', model).subscribe((res: any) => {
-      thisInstance.toastService.showSuccess('Payment Made Successfully!');
-      if(this.fromPage == 'subscription'){
-        this.dataSharingService.SetActiveTabId(6);
-        this.updateSubscriptionPage.emit(6);
-      }
-      else{
-        this.dataSharingService.SetActiveTabId(1);
-        this.router.navigate(['/work-spaces']);
-      }
+    thisInstance.http
+      .call("savePayment", "POST", model)
+      .subscribe((res: any) => {
+        thisInstance.toastService.showSuccess("Payment Made Successfully!");
+        if (this.fromPage == "subscription") {
+          this.dataSharingService.SetActiveTabId(6);
+          this.updateSubscriptionPage.emit(6);
+        } else {
+          this.dataSharingService.SetActiveTabId(1);
+          this.router.navigate(["/work-spaces"]);
+        }
+      });
+  }
+
+  async checkOut() {
+    const stripe: any = await this.stripePromise;
+    return stripe;
+  }
+  buyPlan() {
+    this.checkOut().then((res) => {
+      console.log(res);
+      this.http
+        .call("StripeSession", "POST", {
+          userInfo: {
+            Email: this.userInfo.Email,
+          },
+          plan: this.billingpageData?.name,
+          url: window.location.href,
+          workspaceId: this.organizationId,
+          workspaceName: this.organizationName
+        })
+        .subscribe((session) => {
+          console.log(res, session);
+          return res.redirectToCheckout({ sessionId: session.id });
+        });
     });
   }
 
-  get firstName() { return this.organizationBillingForm.get('firstName'); }
-  get lastName() { return this.organizationBillingForm.get('lastName'); }
-  get organization() { return this.organizationBillingForm.get('organization'); }
-  get billingAddress1() { return this.organizationBillingForm.get('billingAddress1'); }
-  get billingAddress2() { return this.organizationBillingForm.get('billingAddress2'); }
-  get billingCityName() { return this.organizationBillingForm?.get('billingCityName'); }
-  get billingStateName() { return this.organizationBillingForm?.get('billingStateName'); }
-  get billingPostalCode() { return this.organizationBillingForm?.get('billingPostalCode'); }
-  get phoneNumber() { return this.organizationBillingForm?.get('phoneNumber'); }
-  get email() { return this.organizationBillingForm?.get('email'); }
-  get recuring() { return this.organizationBillingForm?.get('recuring'); }
-  get f() { return this.organizationBillingForm.controls; }
-
+  get firstName() {
+    return this.organizationBillingForm.get("firstName");
+  }
+  get lastName() {
+    return this.organizationBillingForm.get("lastName");
+  }
+  get organization() {
+    return this.organizationBillingForm.get("organization");
+  }
+  get billingAddress1() {
+    return this.organizationBillingForm.get("billingAddress1");
+  }
+  get billingAddress2() {
+    return this.organizationBillingForm.get("billingAddress2");
+  }
+  get billingCityName() {
+    return this.organizationBillingForm?.get("billingCityName");
+  }
+  get billingStateName() {
+    return this.organizationBillingForm?.get("billingStateName");
+  }
+  get billingPostalCode() {
+    return this.organizationBillingForm?.get("billingPostalCode");
+  }
+  get phoneNumber() {
+    return this.organizationBillingForm?.get("phoneNumber");
+  }
+  get email() {
+    return this.organizationBillingForm?.get("email");
+  }
+  get recuring() {
+    return this.organizationBillingForm?.get("recuring");
+  }
+  get f() {
+    return this.organizationBillingForm.controls;
+  }
 }
