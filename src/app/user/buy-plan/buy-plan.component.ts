@@ -62,7 +62,7 @@ export class BuyPlanComponent implements OnInit {
             Email: this.userEmail,
           },
           plan: this.planDetails?.name,
-          url: `${window.location.origin}/#/user/login`,
+          url: `${window.location.origin}${window.location.pathname}/#/user/login`,
         })
         .subscribe((session) => {
           return res.redirectToCheckout({ sessionId: session.id });
