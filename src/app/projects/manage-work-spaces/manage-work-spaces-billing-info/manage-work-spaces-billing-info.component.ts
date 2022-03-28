@@ -25,9 +25,10 @@ export class ManageWorkSpacesBillingInfoComponent implements OnInit {
   public organizationId: any;
   public organizationUserId: any;
   public organizationName: any;
-  stripePromise = loadStripe(
-    "pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW"
-  );
+  // stripePromise = loadStripe(
+  //   "pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW"
+  // );
+  stripePromise = loadStripe('pk_live_kgALEKxShS6il7bwDjsg6X1x00MZPQc0de'); // Live
 
   organizationBillingForm = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
