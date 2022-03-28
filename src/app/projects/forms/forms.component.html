@@ -151,7 +151,7 @@
                                                 data-toggle="tooltip" title="Archive"
                                                 (click)="archive(form)">archive</i>
                                             <i *ngIf="formPermissions.canEdit" role="button" data-toggle="tooltip"
-                                                title="Edit" (click)="openEdit(form)"
+                                                title="Edit" (click)="editForm(form)"
                                                 class="material-icons-round mr-3 text-dark" data-bs-toggle="modal"
                                                 data-bs-target="#edit-form-modal">edit</i>
                                             <i *ngIf="formPermissions.canDelete" role="button" data-toggle="tooltip"

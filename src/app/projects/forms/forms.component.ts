@@ -257,22 +257,37 @@ export class FormsComponent implements OnInit {
     const id = form.value ? form.value : form.id;
     const formDetail = this.formsbyId?.[id]?.[0];
     console.log(formDetail)
+    const payload = {
+      FormEntriesId: null, // to do
+      Id: id, // no user credentials
+      Name: null,
+      WorkSpaceName: null,
+      userID: this.userInfo.Id // no user credentials
+    }
+    this.http.call('GetFormDesign', 'POST', payload).subscribe(res => {
+      const modalRef: any = this.modalService.open(EditFormModalComponent,{ size: 'lg' })
+      modalRef.componentInstance.folderList = this.folderList;
+      modalRef.componentInstance.type = formDetail.formType;
+      modalRef.componentInstance.modalType = 'Edit';
+      modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
+      modalRef.componentInstance.userId = this.userInfo.Id;
+      modalRef.componentInstance.config = {
+        name: res.name,
+        description:res.description,
+        folderID:res.folderID,
+        isActive:res.isActive,
+        formType: res.formType,
+        id: res.id
+      };
+      modalRef.result.then((result: any) => {
+        console.log(`Closed with: ${result}`);
+        this.getFormsList(this.userInfo);
+      }, (reason: any) => {
+        console.log(`Dismissed `);
+      });
+    })
 
-    const modalRef: any = this.modalService.open(EditFormModalComponent, { size: 'lg' })
-    modalRef.componentInstance.folderList = this.folderList;
-    modalRef.componentInstance.type = formDetail.formType;
-    modalRef.componentInstance.modalType = 'Edit';
-    modalRef.componentInstance.workSpaceId = this.selectedWorkspaceId;
-    modalRef.componentInstance.userId = this.userInfo.Id;
-    modalRef.componentInstance.config = {
-      ...formDetail
-    };
-    modalRef.result.then((result: any) => {
-      console.log(`Closed with: ${result}`);
-      this.getFormsList(this.userInfo);
-    }, (reason: any) => {
-      console.log(`Dismissed `);
-    });
+
   }
 
   openEdit(type: string) {
@@ -322,7 +337,7 @@ export class FormsComponent implements OnInit {
     console.log('openPermissions', form)
     const modalRef: any = this.modalService.open(RestrictFormEntriesComponent, { size: 'lg' })
     modalRef.componentInstance.form = form;
-    // modalRef.componentInstance.modalName = 'Archive'; 
+    // modalRef.componentInstance.modalName = 'Archive';
     modalRef.result.then((result: any) => {
       if (result !== 'close') {
         // this.http.call('archive', 'POST', {Action: 'Archive', FormIds: ''}).subscribe(res => {
