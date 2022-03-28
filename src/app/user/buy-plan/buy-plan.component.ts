@@ -15,10 +15,9 @@ export class BuyPlanComponent implements OnInit {
   public calulateUites = storageCountFormatter;
   planDetails: any;
   userEmail: any;
-  // stripePromise = loadStripe(
-  //   "pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW"
-  // );
-  stripePromise = loadStripe('pk_live_kgALEKxShS6il7bwDjsg6X1x00MZPQc0de'); // Live
+
+  stripeKey = window.location.host === "app.blazeforms.com" ? 'pk_live_kgALEKxShS6il7bwDjsg6X1x00MZPQc0de' : 'pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW';
+  stripePromise = loadStripe(this.stripeKey);
 
   constructor(public http: HttpService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((res) => {

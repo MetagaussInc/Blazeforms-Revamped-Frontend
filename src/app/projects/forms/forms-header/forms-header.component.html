@@ -1,6 +1,6 @@
 <header class="header border-bottom">
     <nav class="px-4 py-0 navbar navbar-expand-lg bg-white">
-        <a href="/" class="navbar-brand">
+        <a href="#/forms" class="navbar-brand">
             <div class="colored-logo">
                 <img src="assets/images/logo.png" height="41" *ngIf="!organizationLogo">
                 <img [src]="organizationLogo" height="41" *ngIf="organizationLogo">
@@ -105,7 +105,7 @@
     </div>
     <div class="row my-2" [hidden]="!hideStatus">
         <div class="text-center col-md-12 py-2 workspace-plan-notice" [hidden]="!planPermission.canView && isSuperAdmin">
-            <span class="status-button" (click)="toggleStatusBar()" translate>Subscription Status 
+            <span class="status-button" (click)="toggleStatusBar()" translate>Subscription Status
                 <i class="material-icons" role="button">expand_more</i>
             </span>
         </div>
