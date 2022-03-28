@@ -5,6 +5,7 @@
         <li *ngFor="let items of allArr; let i = index" [ngbNavItem]="i" [destroyOnHide]="false" class="mr-1">
             <a ngbNavLink>{{tabName?.[i]}}</a>
             <ng-template ngbNavContent>
+
                 <div class="ngx-dnd-container">
                     <ng-template ngFor let-form [ngForOf]="items" let-index="index" let-isLast="last">
                         <ng-container *ngIf="form.inputType === 'string'">
