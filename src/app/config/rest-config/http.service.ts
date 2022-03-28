@@ -20,7 +20,7 @@ export class HttpService {
         console.log('call  :', mappingKey, httpType, payload)
         const apiPath = api[mappingKey];
         switch (httpType) {
-            case 'GET':   
+            case 'GET':
                 return this.http.get(this.baseURL + apiPath).pipe(map(res => res))
                 break;
             case 'POST':
@@ -103,4 +103,4 @@ export class HttpService {
     //   }
 }
 
-export const BASE_URL = 'https://staging.blazeforms.com:8094/api/';
+export const BASE_URL = window.location.host === "app.blazeforms.com" ? 'https://app.blazeforms.com:8094/api/' : 'https://staging.blazeforms.com:8094/api/';
