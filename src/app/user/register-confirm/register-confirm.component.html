@@ -7,11 +7,11 @@
                 <p class="lead"> for registering with the blazeform!</p>
                 <hr class="my-4">
                 <p class="lead">A confirmation e-mail has been sent to your registered email address. In order to complete the signup process, please click on the activation link in the e-mail.</p>
-                <a class="btn btn-bf  py-2 px-4 mt-5" [routerLink]="['../../home']" role="button">Go to home</a>                       
+                <a class="btn btn-bf  py-2 px-4 mt-5" [routerLink]="['../../home']" role="button">Go to home</a>
             </div>
         </div>
     </div>
-</div>  
+</div>
 
 <div *ngIf="showBillingSection && !showPlanPage" class="container">
     <div class="row row mt-5">
@@ -49,113 +49,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <form class="organization-setting" [formGroup]="organizationBillingForm" autocomplete="off">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Name</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="First Name" readonly>
-                            <ng-container *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)">
-                                <div *ngIf="f.firstName.errors?.required || f.firstName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">First Name is required
-                                </div>
-                            </ng-container>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name" readonly>
-                            <ng-container *ngIf="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)">
-                                <div *ngIf="f.lastName.errors?.required || f.lastName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Last Name is required
-                                </div>
-                            </ng-container>
-                        </div>
-                        <hr>
-                        <label>Organization</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="organization" formControlName="organization" placeholder="Organization" readonly>
-                            <ng-container *ngIf="f.organization.invalid && (f.organization.dirty || f.organization.touched)">
-                                <div *ngIf="f.organization.errors?.required || f.organization.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Organization is required
-                                </div>
-                            </ng-container>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="billingAddress1" formControlName="billingAddress1" placeholder="Address1">
-                            <ng-container *ngIf="f.billingAddress1.invalid && (f.billingAddress1.dirty || f.billingAddress1.touched)">
-                                <div *ngIf="f.billingAddress1.errors?.required || f.billingAddress1.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Billing Address is required
-                                </div>
-                            </ng-container>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="billingAddress2" formControlName="billingAddress2" placeholder="Address2">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="billingCityName" formControlName="billingCityName" placeholder="City">
-                                <ng-container *ngIf="f.billingCityName.invalid && (f.billingCityName.dirty || f.billingCityName.touched)">
-                                    <div *ngIf="f.billingCityName.errors?.required || f.billingCityName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">City is required
-                                    </div>
-                                </ng-container>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="billingStateName" formControlName="billingStateName" placeholder="State / Province / Region">
-                                <ng-container *ngIf="f.billingStateName.invalid && (f.billingStateName.dirty || f.billingStateName.touched)">
-                                    <div *ngIf="f.billingStateName.errors?.required || f.billingStateName.errors?.pattern" class="field-error text-right mt-1 pr-2 small">State is required
-                                    </div>
-                                </ng-container>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="billingPostalCode" formControlName="billingPostalCode" placeholder="Postal / Zip Code">
-                                <ng-container *ngIf="f.billingPostalCode.invalid && (f.billingPostalCode.dirty || f.billingPostalCode.touched)">
-                                    <div *ngIf="f.billingPostalCode.errors?.required || f.billingPostalCode.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Postal Code is required
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" placeholder="Phone Number" readonly>
-                            <ng-container *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
-                                <div *ngIf="f.phoneNumber.errors?.required || f.phoneNumber.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Phone Number is required
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Email Address</label>
-                        <div class="form-group">
-                            <input id="email" formControlName="email" placeholder="Email Address" type="email" class="form-control" readonly>
-                            <ng-container *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
-                                <div *ngIf="f.email.errors?.required || f.email.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Email is required
-                                </div>
-                                <div *ngIf="f.DefaultReplyEmail.errors?.pattern" class="field-error text-right mt-1 pr-2 small">Please add a valid email id</div>
-                                <div *ngIf="f.DefaultReplyEmail.errors?.doubleDotInDomain" class="field-error text-right mt-1 pr-2 small">Double Dot is not required in domain</div>
-                            </ng-container>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="newPlan text-right">
-                                    <strong>{{ billingpageData?.name }}</strong> (${{ billingpageData?.price }}/Month)
-                                </div>
-                                <div class="text-right"><strong>Subtotal: </strong><span><strong>${{ billingpageData?.price }}</strong></span></div>
-                                <div class="text-right"><strong>Amount Due </strong><span><strong>${{ billingpageData?.price }}</strong></span></div>
-                                <div class="form-group">
-                                    <div class="text-right">
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input name="checkbox" id="checkbox_0" type="checkbox" class="custom-control-input" formControlName="recuring">
-                                            <label for="checkbox_0" class="custom-control-label">Recurring Payment</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <button [disabled]="organizationBillingForm.invalid" (click)="submit()" name="submit" type="submit" class="btn btn-primary btn-block btn-bf">Pay Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+        <div class="col-6 offset-2 d-flex align-items-center">
+          <button type="button" (click)="buyPlan()" class="btn btn-bf btn-sm">Proceed with Plan</button>
+
         </div>
     </div>
 </div>

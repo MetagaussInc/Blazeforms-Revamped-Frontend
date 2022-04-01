@@ -27,6 +27,7 @@ export class RegisterSuccessComponent implements OnInit {
     let model = { 'ActivationKey': activationKey };
     this.http.call('activateUser', 'POST', model).subscribe(
       data => {
+        console.log("data", data);
         if (data != null && data.id != '') {
           if (data.isLinkActivated) {
             this.progressLoader = false;
@@ -34,11 +35,13 @@ export class RegisterSuccessComponent implements OnInit {
               this.http.call('getMasterPlansWithoutPagination', 'GET', '').subscribe(res => {
                 this.userPlanData.user = data;
                 res.forEach((element: any) => {
+                  console.log(element.id, data.temporaryPlanId)
                   if(element.id == data.temporaryPlanId){
                     this.planName = element.name;
                     this.userPlanData.plan = element;
                   }
                 });
+                console.log("this.userPlanData", this.userPlanData)
                 this.dataSharingService.SetPaidUserRegistrationData(this.userPlanData);
               })
             }
@@ -62,7 +65,7 @@ export class RegisterSuccessComponent implements OnInit {
             // window.location.href = this.appConfig.invitationLink + data.activationKey;
             // localStorage.setItem('activateUserMapping', activationKey )
           }
-          
+
         } else {
           this.router.navigate(['user/register-error']);
         }
@@ -72,6 +75,7 @@ export class RegisterSuccessComponent implements OnInit {
   }
 
   next(){
+    console.log(this.userPlanData)
     if(this.userPlanData){
       this.router.navigate(['user/register-confirm'])
     }

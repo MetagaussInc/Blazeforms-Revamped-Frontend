@@ -8,6 +8,7 @@ import { DataSharingService } from 'src/app/shared/data-sharing.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { storageCountFormatter } from 'src/app/shared/storage-count.pipe';
 import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+import { loadStripe } from '@stripe/stripe-js';
 
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -57,11 +58,16 @@ export class RegisterConfirmComponent implements OnInit {
   public showPlanPage: boolean = false;
   public masterPlans: any[] = [];
 
+  stripeKey = window.location.host === "app.blazeforms.com" ? 'pk_live_kgALEKxShS6il7bwDjsg6X1x00MZPQc0de' : 'pk_test_51IclahSHmdevWCqrjzhp4868a8lTtKZ8a4meW7CVlQstDeu7GIPW9ChZEWYvGlBGSiOFIyWLr7N4O43Rrc7IJzUP00Bo6EZPFW';
+  stripePromise = loadStripe(this.stripeKey);
+
+
   constructor(private dataSharingService: DataSharingService, private store: Store, private router: Router, private Activatedroute: ActivatedRoute, private http: HttpService, private toastService: ToastService) {
+    console.log("GetPaidUserRegistrationData", this.dataSharingService.GetPaidUserRegistrationData());
     this.paidUserData = this.dataSharingService.GetPaidUserRegistrationData();
-    if(this.paidUserData){
+      if(this.paidUserData){
       this.showBillingSection = true;
-      this.billingpageData = this.paidUserData.plan; 
+      this.billingpageData = this.paidUserData.plan;
       this.organizationId = this.paidUserData.user.workspaceId;
       this.organizationBillingForm.patchValue({
         firstName: this.paidUserData.user.firstName,
@@ -189,6 +195,27 @@ export class RegisterConfirmComponent implements OnInit {
   updateSelectedPlan(plan: any){
     this.showPlanPage = false;
     this.billingpageData = plan;
+  }
+
+  async checkOut() {
+    const stripe: any = await this.stripePromise;
+    return stripe;
+  }
+  buyPlan() {
+    this.checkOut().then((res) => {
+      console.log(res);
+      this.http
+        .call("StripeSession", "POST", {
+          userInfo: {
+            Email: this.paidUserData?.user?.email || "",
+          },
+          plan: this.billingpageData?.name,
+          url: `${window.location.origin}${window.location.pathname}/#/user/login`,
+        })
+        .subscribe((session) => {
+          return res.redirectToCheckout({ sessionId: session.id });
+        });
+    });
   }
 
   get firstName() { return this.organizationBillingForm.get('firstName'); }

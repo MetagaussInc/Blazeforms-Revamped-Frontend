@@ -41,7 +41,7 @@ import { BuyPlanComponent } from './buy-plan/buy-plan.component';
     UserRoutingModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot({
-      
+
       // /**github */ siteKey: '6LdR_KkbAAAAAPgIpLDII97yNaE05-Ayu35OGblf'
       /**stage */siteKey: '6LcsWboaAAAAAIp2o2Ofi_jqqYJgz1QWL6bioP4v'
       /**github */ // secretKey: '6LdR_KkbAAAAAEZkStGEFDPeqYEPjw-uwnKGGuVP'

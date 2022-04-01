@@ -1,18 +1,18 @@
         /* You can add global styles to this file, and also import other style files */
-        
+
         @import '~swiper/swiper-bundle';
         /* Importing Bootstrap SCSS file. */
-        
+
         @import "~@ng-select/ng-select/themes/default.theme.css";
         @import '~bootstrap/scss/bootstrap';
         @import '~bootstrap/dist/css/bootstrap.min.css';
         /*--- Import variables ---*/
-        
+
         @import "core/variables";
         html {
             min-height: 100vh;
         }
-        
+
         body {
             font-family: $baseFont;
             font-size: 0.875rem;
@@ -22,7 +22,7 @@
             height: auto !important;
             position: relative;
         }
-        
+
         a {
             color: $base-color;
             cursor: pointer;
@@ -31,11 +31,11 @@
             color: $base-color;
             cursor: pointer;
         }
-        
+
         .nav-item-active {
             border-bottom: 3px solid $base-color;
         }
-        
+
         i.material-icons,
         i.material-icons-round,
         i.material-icons-outlined {
@@ -43,23 +43,23 @@
             color: $base-color;
             font-size: 1.5rem;
         }
-        
+
         .form-check-input:checked {
             background-color: $base-color;
             border-color: $base-color;
         }
-        
+
         .input-group-text {
             i.material-icons {
                 color: $input-icon-color;
                 font-size: 1.25rem;
             }
         }
-        
+
         input {
             font-size: 0.875rem !important;
         }
-        
+
         h1,
         h2,
         h3,
@@ -69,11 +69,11 @@
             font-family: $seconderyFont;
         }
 
-        .bf-input-validation { 
-            height: 16px;   
+        .bf-input-validation {
+            height: 16px;
              margin-top: 0.25rem !important;
             }
-        
+
         .btn-bf {
             color: $btn-text-color;
             background-color: $base-color !important;
@@ -94,7 +94,7 @@
                 background-color: $base-active-color !important;
             }
         }
-        
+
         .dropdown-item:active {
             background-color: $base-color;
         }
@@ -107,7 +107,7 @@
                 }
             }
         } */
-        
+
         .custom-radio .custom-control-input {
             &:checked~.custom-control-label {
                 &::before {
@@ -120,7 +120,7 @@
         /* .custom-control.custom-checkbox input[type=checkbox] {
             display: none;
         }
-        
+
         .custom-control.custom-checkbox input[type=checkbox] {
             // display: none;
             &:checked+label::before {
@@ -148,7 +148,7 @@
             }
         }
          */
-        
+
         .form-control {
             &:focus {
                 border-color: rgba($base-color, 0.50);
@@ -156,7 +156,7 @@
             }
         }
         /*--- CheckBox----*/
-        
+
         .btn-bf,
         .custom-control-input:checked~.custom-control-label::before {
             color: #FFF;
@@ -180,34 +180,34 @@
         }
 
         /*--- Common CSS--*/
-        
+
         .height-fix {
             overflow-x: hidden;
             max-height: 500px;
         }
-        
+
         .organization-list {
             max-width: 99%;
         }
         /* ----  Login Page CSS ---*/
-        
+
         .login-area-container {
             //height: calc(100% - 80px);
             height: calc(100vh - 142px);
         }
-        
+
         .forgot-password-container {
             height: calc(100vh - 142px);
         }
-        
+
         .signup-success-container {
             height: calc(100% - 80px);
         }
-        
+
         .thank-you-container {
             height: calc(100% - 80px);
         }
-        
+
         .login-box {
             max-width: 100%;
             background-color: #fff;
@@ -217,11 +217,11 @@
                 max-height: 415px;
             }
         }
-        
+
         .header-wrapper {
             background-color: #fff;
         }
-        
+
         .nav-pills {
             .nav-link {
                 border-radius: 0;
@@ -232,52 +232,52 @@
                 }
             }
         }
-        
+
         input.form-control {
             height: 2.5rem !important;
         }
 
-      
-        
+
+
         .field-error {
             color: #f04564;
         }
-        
+
         img {
             &.fingerprint-icon-svg {
                 height: 100px;
             }
         }
-        
+
         .btn {
             .spinner-border {
                 vertical-align: middle;
             }
         }
-        
+
         .monochrome-logo {
             height: 1.75rem;
             width: 1.75rem;
         }
-        
+
         .footer-copyright-text {
             line-height: 1.95rem;
         }
-        
+
         .plan-name-wrapper {
             background: linear-gradient(90deg, #FE2172, #FF5447), #FE2172;
         }
         /*--- SignUp Form ---*/
-        
+
         .signup-recaptcha-wrapper .angular-google-recaptcha-container {
             display: inline-block;
         }
         /*-- Form CSS -- */
-        
+
         .form-badges-wrapper {
             visibility: hidden;
         }
-        
+
         .form-list-item {
             &:hover .form-badges-wrapper {
                 visibility: visible;
@@ -286,48 +286,48 @@
                 font-size: 1.3rem;
             }
         }
-        
+
         .border-2 {
             border-width: 2px !important;
         }
-        
+
         .border-5 {
             border-width: 5px !important;
         }
-        
+
         .bg-bf-light {
             background-color: $base-color-light;
         }
-        
+
         .border-bf {
             border-color: $base-color !important;
         }
-        
+
         .text-bf {
             color: $base-color;
         }
-        
+
         .form-control,
         .form-select {
             font-size: 0.875rem;
         }
-        
+
         .form-list-item .form-checkbox-wrapper label .form-checkbox-wrap .form-checkbox-active {
             display: none;
         }
-        
+
         .form-list-item .form-checkbox-wrapper input[type="checkbox"] {
             display: none;
         }
-        
+
         .form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-active {
             display: block;
         }
-        
+
         .form-list-item .form-checkbox-wrapper label input[type="checkbox"]:checked+.form-checkbox-wrap .form-checkbox-deactive {
             display: none;
         }
-        
+
         app-form-builder {
             .builder-container {
                 display: flex;
@@ -446,7 +446,7 @@
                 }
             }
         }
-        
+
         app-build {
             .builder-container {
                 display: flex;
@@ -572,17 +572,17 @@
                 }
             }
         }
-        
+
         app-build .builder-target .droppableContainer .ngx-dnd-container.gu-empty {
             border: 2px dashed rgb(206, 206, 206);
         }
         /*-- user Module Common CSS--*/
-        
+
         .email-sent-image-wrap img {
             width: 130px;
         }
         /* Slider */
-        
+
         @media (min-width: 768px) and (max-width: 991px) {
             /* Show 4th slide on md  if col-md-4*/
             .carousel-inner .active.col-md-4.carousel-item+.carousel-item+.carousel-item+.carousel-item {
@@ -595,7 +595,7 @@
                 visibility: visible;
             }
         }
-        
+
         @media (min-width: 576px) and (max-width: 768px) {
             /* Show 3rd slide on sm  if col-sm-6*/
             .carousel-inner .active.col-sm-6.carousel-item+.carousel-item+.carousel-item {
@@ -608,7 +608,7 @@
                 visibility: visible;
             }
         }
-        
+
         @media (min-width: 576px) {
             .carousel-item {
                 margin-right: 0;
@@ -654,7 +654,7 @@
             }
         }
         /*MD*/
-        
+
         @media (min-width: 768px) {
             /* show 3rd of 3 item slide */
             .carousel-inner .active+.carousel-item+.carousel-item {
@@ -683,7 +683,7 @@
             }
         }
         /*LG */
-        
+
         @media (min-width: 991px) {
             /* show 4th item */
             .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
@@ -718,60 +718,60 @@
             }
         }
         /*---- Form Publish----*/
-        
+
         .formtabs-wrap ul.nav-tabs li.nav-item a {
             background-color: $tabs-bg;
             color: $tab-color;
             border: 0px;
         }
-        
+
         .formtabs-wrap ul.nav-tabs li.nav-item a.active {
             background-color: $base-color;
             color: $btn-text-color;
         }
-        
+
         // Form Builder
         .form-builder-sidebar {
             min-width: 24rem;
             height: 100%;
         }
-        
+
         .form-builder-sidebar .nav-tabs .nav-item a.nav-link {
             border-width: 2px;
             color: #495057
         }
-        
+
         .form-builder-sidebar .nav-tabs .nav-item a.nav-link.active {
             color: #f04564;
             border-color: #fff #fff #f04564 #fff;
         }
-        
+
         .build-container {
             //height: 600px;
         }
-        
+
         .draggable-fields-wrap {
             scroll-behavior: smooth;
         }
-        
+
         .draggable-fields-wrap::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .draggable-fields-wrap::-webkit-scrollbar-thumb {
             background: #D9D9D9;
         }
-        
+
         .draggable-fields-wrap::-webkit-scrollbar-track {
             background: #999999;
         }
-        
+
         .sidebar-container {
             overflow-y: auto!important;
             overflow-x: hidden;
             height: 100vh;
         }
-        
+
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break {
             padding: 0px;
             margin: 20px 0px;
@@ -785,90 +785,90 @@
         }
 
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller { display: none !important;}
-        
+
         .target-droppable .page-break-head {
             top: -18px;
             left: 50%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
         }
-        
+
         .form-conditional-properties .field-visibility-radio .btn-outline-secondary.active {
             background-color: rgba($base-color, 1);
             border-color: #bf314b;
         }
-        
+
         .bf-radio-group-btn.active {
             background-color: $base-color;
             color: $btn-text-color;
         }
-        
+
         #forms-listing-selector {}
-        
+
         #forms-listing-selector:after {
             display: none;
         }
-        
+
         .forms-listing-dropdown,
         .org-switch-dropdown {
             max-height: 330px;
         }
-        
+
         .forms-activity-dropdown {
             max-height: 400px;
             font-size: 0.8rem;
         }
-        
+
         .forms-activity-dropdown .version-time {
             background-color: $base-color;
         }
-        
+
         #view-user-activity:after {
             display: none;
         }
-        
+
         @media screen and (max-height: 742px) {
             .login-area-container,
             .forgot-password-container {
                 height: calc(100% - 94px);
             }
         }
-        
+
         @media screen and (max-width: 1350px) {
             .login-area-container,
             .forgot-password-container {
                 height: 100vh;
             }
         }
-        
+
         @media screen and (max-width: 768px) {
             .login-area-container,
             .forgot-password-container {
                 height: 100%;
             }
         }
-        
+
         // Organization //
         .organization-wrapper .nav-tabs .nav-link.active {
             color: #f04564;
             border-color: #fff #fff #f04564 #fff;
             border-width: 2px;
         }
-        
+
         // Header Menu
         header .nav-item .nav-link {
             position: relative;
             font-family: $baseFont;
         }
-        
+
         header .nav-item .nav-link:hover {
             color: $base-color;
         }
-        
+
         header .nav-item .nav-link.active::after {
             width: 80%;
         }
-        
+
         header .nav-item .nav-link:after {
             content: "";
             height: 3px;
@@ -882,33 +882,33 @@
             -webkit-transition: all ease-in-out 0.3s;
             transition: all ease-in-out 0.3s;
         }
-        
+
         .text-gray-link {
             color: #212529;
         }
-        
+
         .header-dropdown {
             top: 0px;
             left: 0px;
             will-change: transform;
             transform: translate(-113px, 35px);
         }
-        
+
         .org-switcher-btn button#org-switcher {
             font-family: $baseFont;
             font-size: 0.875rem;
             color: #212529;
         }
-        
+
         #UserProfile img {
             object-fit: cover;
         }
-        
+
         .org-switcher-btn #org-switcher {
             min-width: 200px;
             max-width: 260px;
         }
-        
+
         .org-switcher-btn #org-switcher::after {
             font-family: 'Material Icons';
             content: "\e5cf";
@@ -920,73 +920,73 @@
             top: 0px;
         }
         /* // Notification */
-        
+
         #notification-dropdown i {
             color: #212529;
         }
-        
+
         ul.notification-dropdown {
             min-width: 250px;
         }
-        
+
         ul.notification-dropdown li {
             font-size: 0.8rem;
         }
-        
+
         ul.notification-dropdown li a {
             text-decoration: underline;
         }
-        
+
         ul.notification-dropdown li a:hover {
             text-decoration: none;
             color: $base-color;
         }
-        
+
         ul.notification-dropdown li:last-child {
             border: 0px !important;
         }
-        
+
         .notification-dropdown .drop-content {
             max-height: 180px;
             overflow-y: scroll;
         }
-        
+
         .notification-badge {
             top: -13px;
             position: relative;
             left: -10px;
             background-color: $base-color;
         }
-        
+
         .header-dropdown-wrap .dropdown-toggle::after {
             display: none;
         }
-        
+
         .header-dropdown-wrap .dropdown:hover .dropdown-menu {
             display: block;
         }
-        
+
         .workspace-plan-details a {
             color: #fff;
         }
-        
+
         .workspace-plan-details .workspace-plan-notice {
             background-color: #f04563;
             color: #ffffff;
         }
-        
+
         .workspace-plan-details .workspace-plan-notice i {
             color: #fff;
         }
-        
+
         .workspace-plan-details .workspace-plan-notice .plan-detail {
             text-decoration: underline;
         }
-        
+
         .workspace-plan-details .workspace-plan-notice .plan-detail:hover {
             text-decoration: none;
         }
-        
+
         .popover-controller .popover-controller-icon{
             position: absolute;
             right: -26px;
@@ -998,70 +998,70 @@
             border-style: dashed;
             border-width: 1px 1px 1px 0;
         }
-        
+
         .popover-controller {
             display: none;
         }
-        
+
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item:hover .popover-controller {
             display: block;
         }
-        
+
         .popover-controller .popover-controller-icon {
             font-size: 20px;
             height: 24px;
             line-height: 20px;
         }
         /*--Scroller---*/
-        
+
         .scroller {
             scroll-behavior: smooth;
         }
-        
+
         .scroller::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .scroller::-webkit-scrollbar-thumb {
             background: #999999;
         }
-        
+
         .scroller::-webkit-scrollbar-track {
             background: #D9D9D9;
         }
         /*--- Slider CSS----*/
-        
+
         .swiper-button-prev,
         .swiper-button-next {
             color: #f04563 !important;
         }
         /*--- Footer ---*/
-        
+
         footer.footer {}
         /* ---- WorkSpace Pagination ---*/
-        
+
         .pagination .page-item.active .page-link {
             background-color: #f04564 !important;
             border-color: #f04564;
             color: #fff;
         }
-        
+
         ul.pagination {}
-        
+
         .pagination .page-item .page-link {
             color: #f04564;
         }
-        
+
         app-root {
             height: 100%;
         }
-        
+
         app-forms-footer {
             height: 68px;
             width: 100%;
             float: left;
         }
-        
+
         footer.footer {
             clear: both;
             position: absolute;
@@ -1073,7 +1073,7 @@
 
         /*--- Builder CSS---*/
 
-        .btn.btn-link { 
+        .btn.btn-link {
             color: #f04564;
         }
 
@@ -1092,7 +1092,7 @@
             pointer-events: none;
         }
 
-        .build-droppable-tool input[type=radio], 
+        .build-droppable-tool input[type=radio],
         .build-droppable-tool input[type=checkbox] {
             cursor: default;
             pointer-events: none;
@@ -1164,29 +1164,29 @@
     margin: 35px 5px;
     opacity: 0;
   }
-  
+
   #loader-4 span:nth-child(1){
     animation: opacitychange 1s ease-in-out infinite;
   }
-  
+
   #loader-4 span:nth-child(2){
     animation: opacitychange 1s ease-in-out 0.33s infinite;
   }
-  
+
   #loader-4 span:nth-child(3){
     animation: opacitychange 1s ease-in-out 0.66s infinite;
   }
-  
+
   @keyframes opacitychange{
     0%, 100%{
       opacity: 0;
     }
-  
+
     60%{
       opacity: 1;
     }
   }
-  
+
 
 
 
@@ -1204,7 +1204,7 @@
         width:1px;
      }
 
-  
+
      .form-list-item .form-checkbox-wrap {
         cursor: pointer;
      }
@@ -1237,7 +1237,7 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
-     
+
 
     .form-publish-link textarea.form-control {
         min-height: 92px;
@@ -1292,43 +1292,43 @@
         opacity: 0.65;
         pointer-events: none;
     }
-    
+
     .filter-down {
         z-index: 99999;
         position: absolute;
         background: white;
     }
-    
+
     .filter-dropdown-top .filter-dropdown-item {
         cursor: pointer;
     }
-    
+
     .filter-dropdown-top .filter-dropdown-item:hover {
         background-color: #f8f9fa;
         color: #f04564;
     }
-    
+
     .filter-dropdown-folder-list {
         max-height: 100px;
     }
-    
+
     .start-style {
         width: 42%;
         cursor: pointer;
     }
-    
+
     .form-list-item .form-title-wrapper .form-name {
         cursor: pointer;
     }
-    
+
     .filter-dropdown-folder-list .filter-dropdown-folder-item {
         cursor: pointer;
     }
-    
+
     .filter-dropdown-bottom .filter-dropdown-item {
         cursor: pointer;
     }
-    
+
     .filter-dropdown-bottom .filter-dropdown-item .selected-item-tick {
         margin-left: -24px;
     }
@@ -1359,27 +1359,27 @@
 }
 
 
-.form-field-control a i.page-break-icon { 
+.form-field-control a i.page-break-icon {
     font-style: normal;
    }
-    
+
    .form-field-control a i.page-break-icon::before {
     font-family: 'Material Icons';
     //content: "\eaca";
     color: #f04564;
    }
-    
+
    .form-field-control a i.input-number-icon {
     font-style: normal;
    }
-    
+
    .form-field-control a i.input-number-icon::before {
     font-family: 'Material Icons';
     //content:"\eac7";
     color: #f04564;
    }
 
-   .form-field-control a i.input-number-icon::before { 
+   .form-field-control a i.input-number-icon::before {
     content: "";
     background-image: url(/assets/svg/number-icon.svg);
     width: 18px;
@@ -1395,4 +1395,8 @@
         height: 18px;
         display: block;
         background-size: contain;
+    }
+
+    signature-pad > canvas {
+      box-shadow: 0 0.15rem 1rem rgb(0 0 0 / 15%) !important;
     }

@@ -651,7 +651,7 @@
 
                         </ng-container>
                         <ng-container *ngIf="form.inputType === 'sign'">
-                            <div [class]="form.size + ' ngx-dnd-item shadow'"
+                            <div [class]="form.size + ' ngx-dnd-item '"
                                 *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                                 <label [style.font-family]="styling?.labels?.font"
                                     [style.font-size.px]="styling?.labels?.size"
@@ -1297,7 +1297,7 @@
 
         </ng-container>
         <ng-container *ngIf="form.inputType === 'sign'">
-            <div [class]="form.size + ' ngx-dnd-item  shadow'"
+            <div [class]="form.size + ' ngx-dnd-item '"
                 *ngIf="!form?.dependUpon || checkForDependency(form, 'dependUpon') ">
                 <label [style.font-family]="styling?.labels?.font" [style.font-size.px]="styling?.labels?.size"
                     [style.color]="styling?.labels?.color">{{form.name}}</label>

@@ -3319,11 +3319,15 @@ export const advancedLayout = [
             size: {
                 dataRefKey: 'size',
                 options: [
+                    // {
+                    //     label: 'Small',
+                    //     value: 'small'
+                    // },
                     {
-                        label: 'Small',
-                        value: 'small'
+                      label: 'Medium',
+                      value: 'medium'
                     },
-                    // {  
+                    // {
                     // {
                     //     label: 'Large',
                     //     value: 'large'

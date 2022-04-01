@@ -14,22 +14,22 @@ export class SignatureFieldComponent implements OnInit {
 
   signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
-    'canvasWidth': 300,
+    'canvasWidth': 625,
     'canvasHeight': 300
   };
   constructor() { }
 
   ngOnInit(): void {
   }
-  
-  
+
+
 
   ngAfterViewInit() {
     // this.signaturePad is now available
     setTimeout(() => {
       this.signaturePad.set('minWidth', 5); // set szimek/signature_pad options at runtime
       this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
-      
+
     });
   }
 

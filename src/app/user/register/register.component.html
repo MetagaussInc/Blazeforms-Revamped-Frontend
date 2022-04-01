@@ -48,7 +48,7 @@
                     </span>
                 </div>
                 <div class="=register-form col-md-12 mb-3">
-                    <form [formGroup]="signupForm" (keyup.enter)="!signupForm.invalid && !matchPass() && submit()">
+                    <form [formGroup]="signupForm" (keyup.enter)="(!signupForm.invalid && !passwordvalidation() && !apiGoingOn) && submit()">
                         <div class="register-fields-wrapper row mb-3">
                             <div class="field-wrapper col-md-6">
                                 <div class="input-group">
@@ -57,7 +57,7 @@
                                             <i class="material-icons">person</i>
                                         </span>
                                     </div>
-                                    <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
+                                    <input autocomplete="off" type="text" formControlName="FirstName" class="form-control" placeholder="First Name">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
@@ -73,7 +73,7 @@
                                             <i class="material-icons">person</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="LastName" placeholder="Last Name">
+                                    <input autocomplete="off" type="text" class="form-control" formControlName="LastName" placeholder="Last Name">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
@@ -91,7 +91,7 @@
                                             <i class="material-icons">email</i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" formControlName="Email" placeholder="Your Email">
+                                    <input autocomplete="off" type="email" class="form-control" formControlName="Email" placeholder="Your Email">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
@@ -114,7 +114,7 @@
                                             <i class="material-icons">smartphone</i>
                                         </span>
                                     </div>
-                                    <input type="tel" maxlength="14" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
+                                    <input autocomplete="off" type="tel" maxlength="14" class="form-control" formControlName="PhoneNumber" placeholder="Your Phone">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)">
@@ -135,7 +135,7 @@
                                             <i class="material-icons">password</i>
                                         </span>
                                     </div>
-                                    <input type="password" class="form-control" formControlName="Password" placeholder="Choose Password">
+                                    <input type="password" autocomplete="off" class="form-control" formControlName="Password" placeholder="Choose Password">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
@@ -152,7 +152,7 @@
                                             <i class="material-icons">password</i>
                                         </span>
                                     </div>
-                                    <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+                                    <input type="password" autocomplete="off" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
@@ -173,7 +173,7 @@
                                             <i class="material-icons">apartment</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="WorkSpaceName" placeholder="Your Organization Name">
+                                    <input autocomplete="off" type="text" class="form-control" formControlName="WorkSpaceName" placeholder="Your Organization Name">
                                 </div>
                                 <div class="bf-input-validation">
                                     <ng-container *ngIf="f.WorkSpaceName.invalid && (f.WorkSpaceName.dirty || f.WorkSpaceName.touched)">
@@ -209,7 +209,7 @@
                         </div>
                         <div class="register-fields-wrapper row mb-3">
                             <div class="signup-button-wrapper col-md-12 mb-3 text-center">
-                                <button [disabled]="signupForm.invalid || matchPass()" (click)="submit()" type="button" class="btn btn-bf">
+                                <button [disabled]="signupForm.invalid || passwordvalidation() || apiGoingOn" (click)="submit()" type="button" class="btn btn-bf">
                                     Sign Up Now
                                     <span *ngIf="isFormSubmitted" class="spinner-border spinner-border-sm mr-2"></span>
                                 </button>

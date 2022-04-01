@@ -17,16 +17,17 @@ SwiperCore.use([Navigation, Autoplay]);
 })
 export class RegisterComponent implements OnInit {
 
+  apiGoingOn = false;
   signupForm = new FormGroup({
     FirstName: new FormControl('', [Validators.required]),
     LastName: new FormControl('', [Validators.required]),
-    PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10),
+    PhoneNumber: new FormControl('', [Validators.minLength(10),
     Validators.pattern('^[+0-9]{10,14}$')]),
     WorkSpaceName: new FormControl('', [Validators.required],
       this.validateNameViaServer.bind(this)),
     Email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
+      Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$"),
       this.doubleDotValidator.bind(this)
     ],
       this.validateEmailViaServer.bind(this)
@@ -81,7 +82,7 @@ export class RegisterComponent implements OnInit {
   showPlanPage: boolean = false;
   public masterPlans: any[] = [];
   public calulateUites = storageCountFormatter;
-  
+
   constructor(private http: HttpService, private router: Router, private toastService: ToastService) { }
 
   checkforAgreements({ value }: AbstractControl): any {
@@ -94,9 +95,11 @@ export class RegisterComponent implements OnInit {
   }
 
   validateNameViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    this.apiGoingOn = true;
     return this.http.call('checkEmail', 'POST', { WorkSpaceName: value })
       .pipe(debounceTime(1000),
         map((response: any) => {
+        this.apiGoingOn = false;
           if (response.data) {
             return {
               isExists: true
@@ -107,16 +110,26 @@ export class RegisterComponent implements OnInit {
   }
 
   validateEmailViaServer({ value }: AbstractControl): Observable<ValidationErrors | null> {
+    this.apiGoingOn = true;
     return this.http.call('checkEmail', 'POST', { Email: value })
       .pipe(debounceTime(1000),
         map((response: any) => {
-          if (response.data) {
+        this.apiGoingOn = false;
+        if (response.data) {
             return {
               isExists: true
             };
           }
           return null;;
         }))
+  }
+
+  passwordvalidation(): boolean {
+    if  (!this.confirmPassword?.value || this.confirmPassword?.value === "" || !this.Password?.value || this.Password?.value === "") {
+      return true;
+    }
+
+    return this.matchPass();
   }
 
   matchPass(): boolean {
@@ -127,7 +140,7 @@ export class RegisterComponent implements OnInit {
 
       }
     }
-    
+
     return false
   }
 

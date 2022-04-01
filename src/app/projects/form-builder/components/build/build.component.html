@@ -323,7 +323,7 @@
 
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                
+
                                                                                             </ng-container>
                                                                                             <div *ngIf="checkForAvailableuser(item.userSerachForLevel, availableWorkFlowUsers)"
                                                                                                     class="autocomplete-not-found-wrapper autocomplete-users-list border shadow p-3">
@@ -652,7 +652,7 @@
                                                                     <input name="radio" [value]="'Decimal'"
                                                                         [checked]="selectedElement.selectedNumberType === 'Decimal'"
                                                                         id="Decimal_Type_setting_radio"
-                                                                        
+
                                                                         name="Decimal_Type_setting_radio" type="radio"
                                                                         class="custom-control-input">
                                                                     <label for="Decimal_Type_setting_radio"
@@ -989,7 +989,7 @@
                                                                         [(ngModel)]="selectedElement.maxVal"
                                                                         class="form-control">
                                                                 </div>
-                                                                
+
                                                             </div>
                                                             <div class="field-error text-left mt-1 pr-2 small" *ngIf="selectedElement?.minVal >= selectedElement?.maxVal">
                                                                 Max value should be greater than Min value.
@@ -1505,7 +1505,7 @@
 
                                                                 <div class="row my-2">
                                                                     <div class="col-md-6"
-                                                                        [ngClass]="{'disbaled': model.size === 'small'}"
+                                                                        [ngClass]="{'disabled': model.size === 'small' || model.inputType === 'sign'}"
                                                                         (click)="makeSmaller(model)">
                                                                         <div class="field-action d-flex align-items-center rounded py-2"
                                                                             role="button">
@@ -1515,7 +1515,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-6"
-                                                                        [ngClass]="{'disbaled': model.size === 'extra-large'}"
+                                                                        [ngClass]="{'disabled': model.size === 'extra-large'|| model.inputType === 'sign'}"
                                                                         (click)="makeLarger(model)">
                                                                         <div class="field-action d-flex align-items-center rounded py-2"
                                                                             role="button">
