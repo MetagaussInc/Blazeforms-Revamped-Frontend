@@ -27,6 +27,7 @@
             color: $base-color;
             cursor: pointer;
         }
+
         a:hover {
             color: $base-color;
             cursor: pointer;
@@ -71,8 +72,8 @@
 
         .bf-input-validation {
             height: 16px;
-             margin-top: 0.25rem !important;
-            }
+            margin-top: 0.25rem !important;
+        }
 
         .btn-bf {
             color: $btn-text-color;
@@ -164,21 +165,19 @@
             border-color: #f04564;
         }
 
-
-        .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before{
+        .custom-checkbox .custom-control-input:disabled:checked~.custom-control-label::before {
             background-color: $base-color;
         }
 
-        .custom-control-input:focus ~ .custom-control-label::before {
+        .custom-control-input:focus~.custom-control-label::before {
             box-shadow: 0 0 0 0.2rem rgba($base-color, .25);
         }
 
-        .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+        .custom-control-input:not(:disabled):active~.custom-control-label::before {
             color: #fff;
             background-color: #ffc4ce;
             border-color: #f04563;
         }
-
         /*--- Common CSS--*/
 
         .height-fix {
@@ -236,8 +235,6 @@
         input.form-control {
             height: 2.5rem !important;
         }
-
-
 
         .field-error {
             color: #f04564;
@@ -784,7 +781,9 @@
             display: none !important;
         }
 
-        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller { display: none !important;}
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller {
+            display: none !important;
+        }
 
         .target-droppable .page-break-head {
             top: -18px;
@@ -987,7 +986,7 @@
             text-decoration: none;
         }
 
-        .popover-controller .popover-controller-icon{
+        .popover-controller .popover-controller-icon {
             position: absolute;
             right: -26px;
             top: -1px;
@@ -1068,9 +1067,6 @@
             bottom: 0px;
             width: 100%;
         }
-
-
-
         /*--- Builder CSS---*/
 
         .btn.btn-link {
@@ -1085,7 +1081,7 @@
         .build-droppable-tool input[type=file],
         .build-droppable-tool input.form-control,
         .build-droppable-tool select,
-        .build-droppable-tool textarea    {
+        .build-droppable-tool textarea {
             background-color: #e9ecef;
             opacity: 1;
             cursor: default;
@@ -1105,7 +1101,7 @@
             pointer-events: none;
         }
 
-        .build-droppable-tool .custom-control-input:checked ~ .custom-control-label::before {
+        .build-droppable-tool .custom-control-input:checked~.custom-control-label::before {
             background-color: #f04564;
         }
 
@@ -1115,7 +1111,7 @@
             cursor: default;
         }
 
-        .repeatSection-wrap .popover-controller{
+        .repeatSection-wrap .popover-controller {
             display: none !important;
         }
 
@@ -1123,280 +1119,284 @@
         input[type="date"]::-webkit-calendar-picker-indicator {
             display: none;
             -webkit-appearance: none;
-}
-
-
-      /*----  Loader CSS----*/
-
-      .loader4 {
-        width:45px;
-        height:45px;
-        display:inline-block;
-        padding:0px;
-        border-radius:100%;
-        border:5px solid;
-        border-top-color:rgba(246, 36, 89, 1);
-        border-bottom-color:rgba(255,255,255, 0.3);
-        border-left-color:rgba(246, 36, 89, 1);
-        border-right-color:rgba(255,255,255, 0.3);
-        -webkit-animation: loader4 1s ease-in-out infinite;
-        animation: loader4 1s ease-in-out infinite;
-     }
-     @keyframes loader4 {
-        from {transform: rotate(0deg);}
-        to {transform: rotate(360deg);}
-     }
-     @-webkit-keyframes loader4 {
-        from {-webkit-transform: rotate(0deg);}
-        to {-webkit-transform: rotate(360deg);}
-     }
-
-
-
-     /* LOADER 4 */
-
-#loader-4 span{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    background-color:$base-color;
-    margin: 35px 5px;
-    opacity: 0;
-  }
-
-  #loader-4 span:nth-child(1){
-    animation: opacitychange 1s ease-in-out infinite;
-  }
-
-  #loader-4 span:nth-child(2){
-    animation: opacitychange 1s ease-in-out 0.33s infinite;
-  }
-
-  #loader-4 span:nth-child(3){
-    animation: opacitychange 1s ease-in-out 0.66s infinite;
-  }
-
-  @keyframes opacitychange{
-    0%, 100%{
-      opacity: 0;
-    }
-
-    60%{
-      opacity: 1;
-    }
-  }
-
-
-
-
-
-
-     /**--- Global Fixes---**/
-
-     .modal-content .modal-header button {
-         outline: 0px !important;
-     }
-
-     .table-responsive-main .table .thead-light th,
-     .table-responsive-main .table td{
-        white-space: nowrap;
-        width:1px;
-     }
-
-
-     .form-list-item .form-checkbox-wrap {
-        cursor: pointer;
-     }
-
-     .social-icon-wrap .c-referral-twShare svg {
-         margin-top: -8px;
-     }
-
-     .organizations-container .search-wrapper .dropdown-menu button.dropdown-item.active {
-         background-color: $base-color;
-     }
-
-     .folder-list-with-forms {
-        min-height: 400px;
-    }
-
-     /*--- Publish Page Style Editor----*/
-
-    app-root app-build .publish-container .ngx-dnd-container,
-    .exported-form-container .ngx-dnd-container {
-        background-color: transparent !important;
-    }
-
-    app-root app-build .publish-container .ngx-dnd-container .ngx-dnd-item,
-    .exported-form-container .ngx-dnd-container .ngx-dnd-item {
-        background-color: transparent !important;
-    }
-
-    .bf-custom-styling{
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-
-    .form-publish-link textarea.form-control {
-        min-height: 92px;
-        resize: vertical;
-    }
-
-    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.extra-large .popover-controller .disbaled {
-        opacity: 0.4;
-        cursor: default;
-        object-fit: none;
-    }
-
-    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .disbaled{
-        opacity: 0.4;
-        cursor: default;
-        object-fit: none;
-    }
-
-    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .field-popover-wrap {
-        right: -108px;
-        min-width: 295px;
-    }
-
-    app-build .builder-target .ngx-dnd-container .ngx-dnd-item.half .ngb-tp-input-container {
-        width: auto;
-        max-width: 4em;
-    }
-
-    .workflow-levels .ngx-dnd-container{
-        display: inline-block !important;
-        width: 100%;
-    }
-
-    .filter-dropdown-overlay-wrap .filter-dropdown-overlay{
-        background-color: transparent;
-        top:0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .filter-dropdown-overlay-wrap {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0px;
-        left: 0px;
-    }
-    /*--- Form component CSS Need to remove from here----*/
-
-    .disabled {
-        opacity: 0.65;
-        pointer-events: none;
-    }
-
-    .filter-down {
-        z-index: 99999;
-        position: absolute;
-        background: white;
-    }
-
-    .filter-dropdown-top .filter-dropdown-item {
-        cursor: pointer;
-    }
-
-    .filter-dropdown-top .filter-dropdown-item:hover {
-        background-color: #f8f9fa;
-        color: #f04564;
-    }
-
-    .filter-dropdown-folder-list {
-        max-height: 100px;
-    }
-
-    .start-style {
-        width: 42%;
-        cursor: pointer;
-    }
-
-    .form-list-item .form-title-wrapper .form-name {
-        cursor: pointer;
-    }
-
-    .filter-dropdown-folder-list .filter-dropdown-folder-item {
-        cursor: pointer;
-    }
-
-    .filter-dropdown-bottom .filter-dropdown-item {
-        cursor: pointer;
-    }
-
-    .filter-dropdown-bottom .filter-dropdown-item .selected-item-tick {
-        margin-left: -24px;
-    }
-
-.payment-checbox .custom-checkbox input{
-    margin-right: 0px;
-}
-
-
-#form-builder-sidebar .input-group.date-field input{
-    pointer-events: none;
-}
-
-.column-dropdown{min-width: 200px;}
-
-// Date Picker
-
-.ngb-dp-weekday {
-    color: #040404 !important;
-}
-
-.no-click {
-    pointer-events: none;
-}
-
-.workflow-user-added .added-user-item:first-child{
-    margin-top: 2.5rem;
-}
-
-
-.form-field-control a i.page-break-icon {
-    font-style: normal;
-   }
-
-   .form-field-control a i.page-break-icon::before {
-    font-family: 'Material Icons';
-    //content: "\eaca";
-    color: #f04564;
-   }
-
-   .form-field-control a i.input-number-icon {
-    font-style: normal;
-   }
-
-   .form-field-control a i.input-number-icon::before {
-    font-family: 'Material Icons';
-    //content:"\eac7";
-    color: #f04564;
-   }
-
-   .form-field-control a i.input-number-icon::before {
-    content: "";
-    background-image: url(/assets/svg/number-icon.svg);
-    width: 18px;
-    height: 18px;
-    display: block;
-    background-size: contain;
-    }
-
-    .form-field-control a i.page-break-icon::before {
-        content: "";
-        background-image: url(/assets/svg/page-break.svg);
-        width: 18px;
-        height: 18px;
-        display: block;
-        background-size: contain;
-    }
-
-    signature-pad > canvas {
-      box-shadow: 0 0.15rem 1rem rgb(0 0 0 / 15%) !important;
-    }
+        }
+        /*----  Loader CSS----*/
+
+        .loader4 {
+            width: 45px;
+            height: 45px;
+            display: inline-block;
+            padding: 0px;
+            border-radius: 100%;
+            border: 5px solid;
+            border-top-color: rgba(246, 36, 89, 1);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+            border-left-color: rgba(246, 36, 89, 1);
+            border-right-color: rgba(255, 255, 255, 0.3);
+            -webkit-animation: loader4 1s ease-in-out infinite;
+            animation: loader4 1s ease-in-out infinite;
+        }
+
+        @keyframes loader4 {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes loader4 {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        /* LOADER 4 */
+
+        #loader-4 span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            background-color: $base-color;
+            margin: 35px 5px;
+            opacity: 0;
+        }
+
+        #loader-4 span:nth-child(1) {
+            animation: opacitychange 1s ease-in-out infinite;
+        }
+
+        #loader-4 span:nth-child(2) {
+            animation: opacitychange 1s ease-in-out 0.33s infinite;
+        }
+
+        #loader-4 span:nth-child(3) {
+            animation: opacitychange 1s ease-in-out 0.66s infinite;
+        }
+
+        @keyframes opacitychange {
+            0%,
+            100% {
+                opacity: 0;
+            }
+            60% {
+                opacity: 1;
+            }
+        }
+        /**--- Global Fixes---**/
+
+        .modal-content .modal-header button {
+            outline: 0px !important;
+        }
+
+        .table-responsive-main .table .thead-light th,
+        .table-responsive-main .table td {
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        .form-list-item .form-checkbox-wrap {
+            cursor: pointer;
+        }
+
+        .social-icon-wrap .c-referral-twShare svg {
+            margin-top: -8px;
+        }
+
+        .organizations-container .search-wrapper .dropdown-menu button.dropdown-item.active {
+            background-color: $base-color;
+        }
+
+        .folder-list-with-forms {
+            min-height: 400px;
+        }
+        /*--- Publish Page Style Editor----*/
+
+        app-root app-build .publish-container .ngx-dnd-container,
+        .exported-form-container .ngx-dnd-container {
+            background-color: transparent !important;
+        }
+
+        app-root app-build .publish-container .ngx-dnd-container .ngx-dnd-item,
+        .exported-form-container .ngx-dnd-container .ngx-dnd-item {
+            background-color: transparent !important;
+        }
+
+        .bf-custom-styling {
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-publish-link textarea.form-control {
+            min-height: 92px;
+            resize: vertical;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.extra-large .popover-controller .disbaled {
+            opacity: 0.4;
+            cursor: default;
+            object-fit: none;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .disbaled {
+            opacity: 0.4;
+            cursor: default;
+            object-fit: none;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.small .popover-controller .field-popover-wrap {
+            right: -108px;
+            min-width: 295px;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.half .ngb-tp-input-container {
+            width: auto;
+            max-width: 4em;
+        }
+
+        .workflow-levels .ngx-dnd-container {
+            display: inline-block !important;
+            width: 100%;
+        }
+
+        .filter-dropdown-overlay-wrap .filter-dropdown-overlay {
+            background-color: transparent;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .filter-dropdown-overlay-wrap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+        /*--- Form component CSS Need to remove from here----*/
+
+        .disabled {
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        .filter-down {
+            z-index: 99999;
+            position: absolute;
+            background: white;
+        }
+
+        .filter-dropdown-top .filter-dropdown-item {
+            cursor: pointer;
+        }
+
+        .filter-dropdown-top .filter-dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #f04564;
+        }
+
+        .filter-dropdown-folder-list {
+            max-height: 100px;
+        }
+
+        .start-style {
+            width: 42%;
+            cursor: pointer;
+        }
+
+        .form-list-item .form-title-wrapper .form-name {
+            cursor: pointer;
+        }
+
+        .filter-dropdown-folder-list .filter-dropdown-folder-item {
+            cursor: pointer;
+        }
+
+        .filter-dropdown-bottom .filter-dropdown-item {
+            cursor: pointer;
+        }
+
+        .filter-dropdown-bottom .filter-dropdown-item .selected-item-tick {
+            margin-left: -24px;
+        }
+
+        .payment-checbox .custom-checkbox input {
+            margin-right: 0px;
+        }
+
+        #form-builder-sidebar .input-group.date-field input {
+            pointer-events: none;
+        }
+
+        .column-dropdown {
+            min-width: 200px;
+        }
+
+        // Date Picker
+        .ngb-dp-weekday {
+            color: #040404 !important;
+        }
+
+        .no-click {
+            pointer-events: none;
+        }
+
+        .workflow-user-added .added-user-item:first-child {
+            margin-top: 2.5rem;
+        }
+
+        .form-field-control a i.page-break-icon {
+            font-style: normal;
+        }
+
+        .form-field-control a i.page-break-icon::before {
+            font-family: 'Material Icons';
+            //content: "\eaca";
+            color: #f04564;
+        }
+
+        .form-field-control a i.input-number-icon {
+            font-style: normal;
+        }
+
+        .form-field-control a i.input-number-icon::before {
+            font-family: 'Material Icons';
+            //content:"\eac7";
+            color: #f04564;
+        }
+
+        .form-field-control a i.input-number-icon::before {
+            content: "";
+            background-image: url(/assets/svg/number-icon.svg);
+            width: 18px;
+            height: 18px;
+            display: block;
+            background-size: contain;
+        }
+
+        .form-field-control a i.page-break-icon::before {
+            content: "";
+            background-image: url(/assets/svg/page-break.svg);
+            width: 18px;
+            height: 18px;
+            display: block;
+            background-size: contain;
+        }
+
+        .form-list-item:hover .form-badges-wrapper .build-badge:hover,
+        .form-list-item:hover .form-badges-wrapper .publish-badge:hover,
+        .form-list-item:hover .form-badges-wrapper .entries-badge:hover,
+        .form-list-item:hover .form-badges-wrapper .url-badge:hover {
+            color: #FFF;
+            background-color: $base-color;
+            border-color: $base-color !important;
+        }
+
+        signature-pad > canvas {
+          box-shadow: 0 0.15rem 1rem rgb(0 0 0 / 15%) !important;
+        }
