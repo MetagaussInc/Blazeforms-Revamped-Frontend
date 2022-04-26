@@ -1,0 +1,65 @@
+<!-- <div *ngIf="model.inputType !== 'break'" class="popover-controller">
+  <span class="material-icons popover-controller-icon"
+      role="button"
+      (click)="trigger('click')">
+      more_vert
+  </span>
+
+  <div class="popover bs-popover-bottom field-popover-wrap"
+      *ngIf="selectedElement?.viewOptions && selectedElement?.uiIndexId === model.uiIndexId">
+      <div class="arrow"></div>
+      <div class="popover-body">
+          <div class="row my-2">
+              <div class="col-md-6"
+                  (click)="duplicate(model.uiIndexId)">
+                  <div class="field-action d-flex align-items-center rounded py-2"
+                      role="button">
+                      <i class="material-icons">content_copy</i>
+                      <span>Duplicate</span>
+                  </div>
+              </div>
+              <div class="col-md-6" (click)="delete(model)">
+
+                  <div class="field-action d-flex align-items-center rounded py-2"
+                      role="button">
+                      <i class="material-icons">delete</i>
+                      <span>Delete</span>
+                  </div>
+
+              </div>
+          </div>
+
+
+          <div class="row my-2">
+              <div class="col-md-6"
+                  [ngClass]="{'disabled': model.size === 'small' || model.inputType === 'sign'}"
+                  (click)="makeSmaller(model)">
+                  <div class="field-action d-flex align-items-center rounded py-2"
+                      role="button">
+                      <i class="material-icons">arrow_back</i>
+                      <span>Make Smaller</span>
+                  </div>
+              </div>
+
+              <div class="col-md-6"
+                  [ngClass]="{'disabled': model.size === 'extra-large'|| model.inputType === 'sign'}"
+                  (click)="makeLarger(model)">
+                  <div class="field-action d-flex align-items-center rounded py-2"
+                      role="button">
+                      <i class="material-icons">arrow_forward</i>
+                      <span>Make Bigger</span>
+                  </div>
+              </div>
+          </div>
+
+
+      </div>
+  </div>
+</div>
+
+<div *ngIf="model.inputType === 'break'" class="popover-controller">
+<span class="material-icons popover-controller-icon"
+    role="button"
+    (click)="selectedElement = model; selectedElement.viewOptions = selectedElement?.viewOptions ? false : true;">
+    more_vert
+</span> -->

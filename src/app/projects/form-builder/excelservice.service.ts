@@ -13,9 +13,10 @@ export class ExcelService {
 
   constructor() { }
 
-  public exportAsExcelFile(json: any[], excelFileName: string): void {
-    
-    const myworksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+  public exportAsExcelFile(json: any[], excelFileName: string, columns: any): void {
+
+    let myworksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    myworksheet['!cols'] = columns;
     const myworkbook: XLSX.WorkBook = { Sheets: { 'data': myworksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(myworkbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, excelFileName);

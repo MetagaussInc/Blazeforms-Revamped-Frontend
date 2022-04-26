@@ -2997,6 +2997,9 @@ export const layoutInputs = [
             return true;
         },
         validations: {
+          label: {
+            dataRefKey: 'name'
+        },
             size: {
                 dataRefKey: 'size',
                 options: [
@@ -3073,6 +3076,7 @@ export const layoutInputs = [
                 return true;
             },
             validations: {
+
                 size: {
                     dataRefKey: 'size',
                     options: [
@@ -3136,6 +3140,9 @@ export const layoutInputs = [
         size: 'medium',
         view: 'always',
         validations: {
+          label: {
+            dataRefKey: 'name'
+        },
             size: {
                 dataRefKey: 'size',
                 options: [

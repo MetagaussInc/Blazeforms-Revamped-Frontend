@@ -191,7 +191,7 @@
                                 <label *ngIf="!noTabs" [style.font-family]="styling?.labels?.font"
                                     [style.font-size.px]="styling?.labels?.size"
                                     [style.color]="styling?.labels?.color">{{form.name}}</label>
-                                <app-exported-form [elements]="form.childSection" [styling]="styling" [styling]="styling" [noTabs]="true"></app-exported-form>
+                                <app-exported-form [elements]="form.children" [styling]="styling" [styling]="styling" [noTabs]="true"></app-exported-form>
                             </div>
                             <!-- <div
                                 *ngIf="submitted && (!form.value || form.value?.length === 0) && checkForRDependency(form, 'reqDependUpOn')">
@@ -331,139 +331,136 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ng-container>
-                                            <tr *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
-                                                <ng-container *ngFor="let col of form.columns; let colIndex = index">
-                                                    <td>
-                                                        <div *ngIf="col.inputType ==='phoneNumber'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="tel"
-                                                                class="form-control" id="table_phonenumber_{{colIndex}}"
-                                                                [(ngModel)]="col.value" name="tel" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
-                                                        </div>
-                                                        <div *ngIf="col.inputType ==='dropdown'"
-                                                            class="page-break target-droppable">
-                                                            <select [(ngModel)]="col.value"
-                                                                (change)="inputUpdateEvent.emit()"
-                                                                class="custom-select">
-                                                                <option *ngFor="let option of col.options"
-                                                                    [value]="option.label">
-                                                                    {{option.label}}</option>
-                                                            </select>
-                                                        </div>
-                                                        <div *ngIf="col.inputType ==='number'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="number"
-                                                                class="form-control" id="table_number_{{colIndex}}"
-                                                                [(ngModel)]="col.value" name="tel" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                (keyup)="(form.selectedNumberType !== 'Integter') && validateNumber($event, form.decimalUpto)"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
-                                                        </div>
-                                                        <div *ngIf="col.inputType ==='email'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="email"
-                                                                class="form-control" id="table_email_{{colIndex}}"
-                                                                [(ngModel)]="col.value" name="email" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='website'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="text"
-                                                                class="form-control" id="website"
-                                                                [(ngModel)]="col.value" name="website" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                      <ng-container>
 
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='date'"
-                                                            class="page-break target-droppable">
-                                                            <div class="input-group">
-                                                                <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                    [style.font-size.px]="styling?.text?.size"
-                                                                    [style.color]="styling?.text?.color"
-                                                                    class="form-control non-clickable" [minDate]="col.minVal"
-                                                                    [maxDate]="col.maxVal" placeholder="yyyy-mm-dd"
-                                                                    name="dp" [(ngModel)]="col.value" ngbDatepicker
-                                                                    #d="ngbDatepicker">
-                                                                <div class="input-group-append">
-                                                                    <div class="input-group-text calendar"
-                                                                        (click)="d.toggle()" type="button"><i
-                                                                            class="material-icons" role="button">date_range</i></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='string'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="text"
-                                                                class="form-control" id="text" [(ngModel)]="col.value"
-                                                                name="website" #name="ngModel"
-                                                                [attr.maxlength]="col?.maxVal"
-                                                                [attr.minlength]="col?.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                          <ng-container *ngIf="form.columns?.length > 0 && form.rows?.length > 0">
+                                              <tr *ngFor="let row of form.rows">
+                                                  <ng-container *ngFor="let col of form.columns; let colIndex = index">
+                                                      <td>
+                                                          <div *ngIf="col.inputType ==='phoneNumber'"
+                                                              class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="tel" class="form-control"
+                                                                  id="table_phonenumber_{{colIndex}}" [(ngModel)]="row[col.name]"
+                                                                  name="tel" #name="ngModel" [attr.maxlength]="col.maxVal"
+                                                                  [attr.minlength]="col.minVal" [attr.placeholder]="col.placeholder"
+                                                                  autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType ==='dropdown'"
+                                                              class="page-break target-droppable">
+                                                              <select [(ngModel)]="row[col.name]" (change)="inputUpdateEvent.emit()"
+                                                                  class="custom-select">
+                                                                  <option *ngFor="let option of col.options" [value]="option.label">
+                                                                      {{option.label}}</option>
+                                                              </select>
+                                                          </div>
+                                                          <div *ngIf="col.inputType ==='number'" class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="number"
+                                                                  class="form-control" id="table_number_{{colIndex}}"
+                                                                  [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
+                                                                  [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                                  (keyup)="(form.selectedNumberType !== 'Integter') && validateNumber($event, form.decimalUpto)"
+                                                                  [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType ==='currency'"
+                                                              class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="number"
+                                                                  class="form-control" id="table_currency_{{colIndex}}"
+                                                                  [(ngModel)]="row[col.name]" name="tel" #name="ngModel"
+                                                                  [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                                  [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType ==='email'" class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="email"
+                                                                  class="form-control" id="table_email_{{colIndex}}"
+                                                                  [(ngModel)]="row[col.name]" name="email" #name="ngModel"
+                                                                  [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                                  [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType==='website'" class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="text"
+                                                                  class="form-control" id="website" [(ngModel)]="row[col.name]"
+                                                                  name="website" #name="ngModel" [attr.maxlength]="col.maxVal"
+                                                                  [attr.minlength]="col.minVal" [attr.placeholder]="col.placeholder"
+                                                                  autocomplete="off">
 
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='text'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="text"
-                                                                class="form-control" id="text" [(ngModel)]="col.value"
-                                                                name="website" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal" [pattern]="form.pattern"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType==='date'" class="page-break target-droppable">
+                                                              <div class="input-group">
+                                                                  <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                      [style.font-size.px]="styling?.text?.size"
+                                                                      [style.color]="styling?.text?.color" class="form-control  non-clickable"
+                                                                      [minDate]="col.minVal" [maxDate]="col.maxVal"
+                                                                      placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="row[col.name]"
+                                                                      ngbDatepicker #d="ngbDatepicker" required>
+                                                                  <div class="input-group-append">
+                                                                      <div class="input-group-text calendar" (click)="d.toggle()"
+                                                                          type="button"><i class="material-icons" role="button">date_range</i></div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <div *ngIf="col.inputType==='string'" class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="text"
+                                                                  class="form-control" id="text" [(ngModel)]="row[col.name]"
+                                                                  name="website" #name="ngModel" [attr.maxlength]="col.maxVal"
+                                                                  [attr.minlength]="col.minVal" [attr.placeholder]="col.placeholder"
+                                                                  autocomplete="off">
 
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='payment'"
-                                                            style="pointer-events: none;"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="text"
-                                                                class="form-control" id="text" [(ngModel)]="col.value"
-                                                                name="website" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType==='text'" class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="text"
+                                                                  class="form-control" id="text" [(ngModel)]="row[col.name]"
+                                                                  name="website" #name="ngModel" [pattern]="form.pattern"
+                                                                  [attr.maxlength]="col.maxVal" [attr.minlength]="col.minVal"
+                                                                  [attr.placeholder]="col.placeholder" autocomplete="off">
 
-                                                        </div>
-                                                        <div *ngIf="col.inputType==='currency'"
-                                                            class="page-break target-droppable">
-                                                            <input autocomplete="off" [style.font-family]="styling?.text?.font"
-                                                                [style.font-size.px]="styling?.text?.size"
-                                                                [style.color]="styling?.text?.color" type="text"
-                                                                class="form-control" id="text" [(ngModel)]="col.value"
-                                                                name="website" #name="ngModel"
-                                                                [attr.maxlength]="col.maxVal"
-                                                                [attr.minlength]="col.minVal"
-                                                                [attr.placeholder]="col.placeholder" autocomplete="off">
+                                                          </div>
+                                                          <div *ngIf="col.inputType==='payment'" style="pointer-events: none;"
+                                                              class="page-break target-droppable">
+                                                              <input autocomplete="off" [style.font-family]="styling?.text?.font"
+                                                                  [style.font-size.px]="styling?.text?.size"
+                                                                  [style.color]="styling?.text?.color" type="text"
+                                                                  class="form-control" id="text" [(ngModel)]="row[col.name]"
+                                                                  name="website" #name="ngModel" [attr.maxlength]="col.maxVal"
+                                                                  [attr.minlength]="col.minVal" [attr.placeholder]="col.placeholder"
+                                                                  autocomplete="off">
 
-                                                        </div>
-                                                    </td>
-                                                </ng-container>
-                                            </tr>
-                                        </ng-container>
+                                                          </div>
+                                                          <!-- <div *ngIf="col.inputType==='currency'" class="page-break target-droppable"
+                                                      >
+                                                      <input autocomplete="off"
+                              [style.font-family]="styling?.text?.font"
+                                  [style.font-size.px]="styling?.text?.size"
+                                  [style.color]="styling?.text?.color"type="text" class="form-control" id="text"
+                                                          [(ngModel)]="row[col.name]" name="website" #name="ngModel"
+                                                          [attr.maxlength]="col.maxVal"
+                                                          [attr.minlength]="col.minVal"
+                                                          [attr.placeholder]="col.placeholder" autocomplete="off">
 
+                                                  </div> -->
+                                                      </td>
+                                                  </ng-container>
+                                              </tr>
+                                          </ng-container>
+                                          <div *ngIf="form.columns?.length > 0" (click)="addRow(form)">
+                                              Add Rows
+                                          </div>
+                                      </ng-container>
+                                  </tbody>
 
-                                    </tbody>
 
                                 </table>
                             </div>

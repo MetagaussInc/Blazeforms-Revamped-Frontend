@@ -103,4 +103,4 @@ export class HttpService {
     //   }
 }
 
-export const BASE_URL = window.location.host === "app.blazeforms.com" ? 'https://app.blazeforms.com:8094/api/' : 'https://staging.blazeforms.com:8094/api/';
+export const BASE_URL = (window.location.host) === "app.blazeforms.com" ? 'https://app.blazeforms.com:8094/api/' : 'https://app.blazeforms.com:8094/api/';

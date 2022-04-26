@@ -20,7 +20,7 @@ export class ExportedFormComponent implements OnInit {
   @Input() public entryId: any;
   @Output() inputUpdateEvent: EventEmitter<any> = new EventEmitter()
 
-  string: any;
+  string: string = "";
   strikeCheckout: any = null;
   model = {
     name: ''
@@ -156,7 +156,7 @@ export class ExportedFormComponent implements OnInit {
       return false;
     }
     if (!dependUpon?.elementId) {
-      return (typeof model?.value === 'number') ? model?.value < -100 : (!model?.value || model?.value?.length === 0) ;
+      return (typeof model?.value === 'number') ? model?.value < -100 : (!model?.value || model?.value?.length === 0);
     }
     const dependencyElementIndex = this.elements.findIndex((x: any) => x.uiIndexId == dependUpon?.elementId);
     const data = this.elements?.[dependencyElementIndex]?.value;
@@ -193,7 +193,7 @@ export class ExportedFormComponent implements OnInit {
         return (!data?.startsWith(dependUpon?.value));
       }
     }
-    return (typeof data === 'number') ? data < -100 : (!data || data?.length === 0) ;
+    return (typeof data === 'number') ? data < -100 : (!data || data?.length === 0);
   }
 
   billPay(formEntryId: any) {
@@ -207,7 +207,7 @@ export class ExportedFormComponent implements OnInit {
       token: function (stripeToken: any) {
         console.log(stripeToken)
         // alert('Stripe token generated!');
-        thisInstance.updateEntry(stripeToken.email, stripeToken.id,formEntryId)
+        thisInstance.updateEntry(stripeToken.email, stripeToken.id, formEntryId)
       }
     });
 
@@ -241,65 +241,70 @@ export class ExportedFormComponent implements OnInit {
   }
 
   updateEntry(email: any, token: any, formEntryId: any) {
-    const payload  = {
+    const payload = {
       Amount: this.getAmountDue(),
-Description: "BlazeForms Payment Gateway",
-FormEntriesId: formEntryId,
-SecretKey: this.initial?.accountDetail?.secretKey,
-StripeEmail: email,
-StripeToken: token
+      Description: "BlazeForms Payment Gateway",
+      FormEntriesId: formEntryId,
+      SecretKey: this.initial?.accountDetail?.secretKey,
+      StripeEmail: email,
+      StripeToken: token
     }
     this.http.call('SaveWorkspacePayment', 'POST', payload).subscribe(res => {
 
-     this.router.navigate(['blazeforms/form-submitted'], {queryParams: {
-      amount: res.amount,
-      chargeId: res.chargeId,
-     }})
+      this.router.navigate(['blazeforms/form-submitted'], {
+        queryParams: {
+          amount: res.amount,
+          chargeId: res.chargeId,
+        }
+      })
 
     })
   }
 
-  getDataString(array: any, dataRef: string) {
+  getDataString(array: any[], dataRef: string) {
     // let data = dataRef;
-      array.forEach((element: any) => {
-        if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'levelSection' && element.inputType !== 'nameSection') {
-          element.children.forEach((child: any) => {
-            this.string = this.string + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
-          });
-        } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '='
-          element.children.forEach((child: any) => {
-            if (child.value?.length > 1) {
-              this.string = this.string + child.value + ', '
-            }
-          });
-          this.string = this.string + '||';
-
-        } else if (element.ratingOptions) {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '=';
-          element.ratingOptions.forEach((child: any) => {
+    array.forEach((element: any, eleIndex: number) => {
+      if (element.children && element.inputType !== 'addressSection' && element.inputType !== 'levelSection' && element.inputType !== 'nameSection') {
+        element.children.forEach((child: any) => {
+          this.string = this.string + child.name + '=' + ((!child.value || child.value.length === 0) ? 'No_value' : child.value) + '||'
+        });
+      } else if (element.inputType === 'addressSection' || element.inputType === 'nameSection') {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '='
+        element.children.forEach((child: any) => {
+          if (child.value?.length > 1) {
             this.string = this.string + child.value + ', '
-          });
-          this.string = this.string + '||';
-        }else if (element.childSection) {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
-        }else if (element.columns) {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
-        }else if (element.children && element.inputType === "levelSection") {
-          this.getDataString(element.children, this.string)
-        } if (element.inputType === 'date') {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : (element.value.day +'/'+ element.value.month +'/'+ element.value.year)) + '||'
-        } else {
-          this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
-        }
-      });
+          }
+        });
+        this.string = this.string + '||';
+
+      } else if (element.ratingOptions) {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=';
+        element.ratingOptions.forEach((child: any) => {
+          this.string = this.string + child.value + ', '
+        });
+        this.string = this.string + '||';
+      } else if (element.childSection) {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.childSection?.length + '||';
+      } else if (element.columns) {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element?.rows?.length + '||';
+      } else if (element.children && element.inputType === "levelSection") {
+        this.getDataString(element.children, this.string)
+      } else if (element.inputType === 'date') {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : (element.value.day + '/' + element.value.month + '/' + element.value.year)) + '||'
+      } else if (element.inputType === 'sign') {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=' + element.value + '||'
+      } else {
+        this.string = this.string + element.uiIndexId + '=' + element.name + '=' + ((!element.value || element.value.length === 0) ? 'No_value' : element.value) + '||'
+      }
+    });
+
     return this.string;
   }
 
   checkForRequired(): boolean {
     let yes = false;
     for (const element of this.elements) {
-      if (this.checkForRDependency(element, 'reqDependUpOn') && (element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'number' || element.inputType === 'phoneNumber' ||  element.inputType === 'text-box' ) ) {
+      if (this.checkForRDependency(element, 'reqDependUpOn') && (element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'number' || element.inputType === 'phoneNumber' || element.inputType === 'text-box')) {
         element.isRequired = true
         yes = true;
       } else {
@@ -314,7 +319,7 @@ StripeToken: token
       this.submitted = true
       return;
     }
-    
+
     let ddata = '';
 
     // if (this.haveTabs) {
@@ -378,7 +383,9 @@ StripeToken: token
     // }
 
     if (this.haveTabs) {
-      ddata = this.getDataString(this.allArr, ddata)
+      this.allArr.forEach((tabArr: any[]) => {
+        ddata = ddata + this.getDataString(tabArr, ddata)
+      });
     } else {
       ddata = this.getDataString(this.elements, ddata)
     }
@@ -386,8 +393,8 @@ StripeToken: token
     // return;
     if (this.getAmountDue() > 0) {
       let string = '';
-        string = `${'Total Payment'}=${'Total Payment'}=${this.getAmountDue()} || ${'Payment Mode'}=${'Payment Mode'}=${this.initial?.selectedPaymentOption === 'Card' ? 'Card' : 'Cash'} ||`;
-        ddata = ddata + string;
+      string = `${'Total Payment'}=${'Total Payment'}=${this.getAmountDue()} || ${'Payment Mode'}=${'Payment Mode'}=${this.initial?.selectedPaymentOption === 'Card' ? 'Card' : 'Cash'} ||`;
+      ddata = ddata + string;
     }
 
     const payload = {
@@ -412,7 +419,7 @@ StripeToken: token
         levelDetails: this.levelDetails,
         savedElementsWithValue: this.elements
       }),
-      ...(this.entryId && {FormEntryId : this.entryId}),
+      ...(this.entryId && { FormEntryId: this.entryId }),
       userID: this.config.createdBy, //this.config.userId //"TXYu0NjodAYzBODQlLqdmg==",
     }
     this.http.call('SaveFormEntry', 'POST', payload).subscribe(res => {
@@ -433,7 +440,7 @@ StripeToken: token
     this.inputUpdateEvent.emit();
   }
 
-  validateNumber(event: any, decimal: number) {    
+  validateNumber(event: any, decimal: number) {
     if (event.target.value?.split('.')?.[1]?.length > decimal) {
       const v = (event.target?.value)?.toString()?.split('');
       v.pop();
@@ -444,7 +451,7 @@ StripeToken: token
     // if (!reg.test(input)) {
     //     event.preventDefault();
     // }
-}
+  }
 
   checkMobileNumber(form: any) {
     if (/[~`!#$%\^&*+=\-a-z\[\]\\';,/{}()|\\":<>\?]/g.test(form.value) && form.type === 'US') {
@@ -458,30 +465,30 @@ StripeToken: token
 
   addSection(form: any) {
     const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
-    formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
+    formInstance.uiIndexId = formInstance.uiIndexId + 'section' + form.childSection.length + 1
     form.childSection.push(formInstance);
   }
 
   onFileChange(event: any, form: any) {
-    const reader = new FileReader();    
-    if(event.target.files && event.target.files.length) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       // if (file.type == 'image/jpg' || file.type == 'image/png' || file.type == 'image/jpeg') {
-        let fileSize = ((file.size) / (1024 * 1024));
-        if(fileSize < form.fileSize && form.value?.length < form.numberOfFile){
-          form.message = null;
-          reader.readAsDataURL(file);    
-          reader.onload = () => {   
-            console.log('yes')
-            form.value.push({
-              name: file.name,
-              file: reader.result,
-              type: file.type
-            })
-            // this.fileSource = reader.result;
-            // this.logoType = file.type;
-          };
-        } else
+      let fileSize = ((file.size) / (1024 * 1024));
+      if (fileSize < form.fileSize && form.value?.length < form.numberOfFile) {
+        form.message = null;
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          console.log('yes')
+          form.value.push({
+            name: file.name,
+            file: reader.result,
+            type: file.type
+          })
+          // this.fileSource = reader.result;
+          // this.logoType = file.type;
+        };
+      } else
         if (fileSize > form.fileSize) {
           form.message = 'File size should not more than ' + form.fileSize + ' MB';
         } else if (form.value.length >= form.numberOfFile) {
@@ -521,10 +528,10 @@ StripeToken: token
     form.rows.push(obj)
   }
 
-  validateEmail(elementValue: any){      
+  validateEmail(elementValue: any) {
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(elementValue); 
-  } 
+    return emailPattern.test(elementValue);
+  }
   checkForFieldDependencies(elements: any) {
     let disable = false;
     elements?.map((element: any) => {
@@ -543,10 +550,10 @@ StripeToken: token
 
   isUrlValid(userInput: any) {
     var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    if(res == null)
-        return false;
+    if (res == null)
+      return false;
     else
-        return true;
-}
+      return true;
+  }
 
 }

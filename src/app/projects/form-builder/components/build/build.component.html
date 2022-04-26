@@ -1471,7 +1471,7 @@
 
                                                 <div [ngSwitch]="model.inputType" class="p-2 builder-dropped-field">
 
-                                                    <div class="popover-controller">
+                                                    <div *ngIf="model.inputType !== 'break'" class="popover-controller">
                                                         <span class="material-icons popover-controller-icon"
                                                             role="button"
                                                             (click)="selectedElement = model; selectedElement.viewOptions = selectedElement?.viewOptions ? false : true;">
@@ -1530,6 +1530,33 @@
                                                         </div>
                                                     </div>
 
+                                                    <div *ngIf="model.inputType === 'break'" class="popover-controller">
+                                                      <span class="material-icons popover-controller-icon"
+                                                          role="button"
+                                                          (click)="selectedElement = model; selectedElement.viewOptions = selectedElement?.viewOptions ? false : true;">
+                                                          more_vert
+                                                      </span>
+
+                                                      <div class="popover bs-popover-bottom field-popover-wrap"
+                                                          *ngIf="selectedElement?.viewOptions && selectedElement?.uiIndexId === model.uiIndexId">
+                                                          <div class="arrow"></div>
+                                                          <div class="popover-body">
+                                                              <div class="row my-2">
+                                                                  <div class="col-md-6" (click)="delete(model)">
+
+                                                                      <div class="field-action d-flex align-items-center rounded py-2"
+                                                                          role="button">
+                                                                          <i class="material-icons">delete</i>
+                                                                          <span>Delete</span>
+                                                                      </div>
+
+                                                                  </div>
+                                                              </div>
+
+
+                                                          </div>
+                                                      </div>
+                                                  </div>
 
                                                     <div *ngSwitchCase="'section'"
                                                         (click)="sectionClicked($event, model, template); selectedElement.viewOptions = false;"
@@ -1847,11 +1874,11 @@
                                                         </div>
 
                                                     </div>
-                                                    <div *ngSwitchCase="'break'" class="page-break target-droppable"
+                                                    <div *ngSwitchCase="'break'" class="page-break target-droppable form-group"
                                                         (click)="clicked($event, model, template)">
                                                         <div class="text-center position-relative">
                                                             <span
-                                                                class="position-absolute page-break-head text-center bg-white px-3">{{model.value}}</span>
+                                                                class="position-absolute page-break-head text-center bg-white px-3">{{model.value}}p</span>
                                                         </div>
 
                                                     </div>
@@ -2186,7 +2213,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive-main table-responsive">
-                                            <table *ngIf="entries.rows.length !== 0 && getSelectedColumns(entries)"
+                                            <table  *ngIf="entries.rows.length !== 0 && getSelectedColumns(entries)"
                                                 class="table mt-3 border table-fit" id="table-id" data-toggle="table"
                                                 data-search="true" data-filter-control="true" data-show-export="true"
                                                 data-show-refresh="true" data-show-toggle="true" data-pagination="true"
@@ -2194,7 +2221,7 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th *ngIf="entries.columns.length > 0" data-field="state"
-                                                            data-checkbox="true" scope="row"><input data-index="0" (click)="selectAllEntries()"
+                                                            data-checkbox="true" scope="row"><input data-index="0" [ngModel]="isAllRowsSelected" (click)="selectAllEntries()"
                                                                 name="btnAllSelectItem" type="checkbox"></th>
 
                                                         <ng-container *ngFor="let item of entries.columns">
@@ -2221,7 +2248,7 @@
                                                                     {{row?.[col?.field]}}
                                                                 </td>
                                                                 <td
-                                                                    *ngIf="col.view && row?.[col?.field] === 'No_value' || col.view && row?.[col?.field] === ''">
+                                                                    *ngIf="(col.view && row?.[col?.field] === 'No_value' || col.view && row?.[col?.field] === '') && col.headerName !== 'Signature'">
                                                                     <span class="empty-field small"><i>{{"No
                                                                             Entry"}}</i></span>
                                                                 </td>

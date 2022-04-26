@@ -95,10 +95,10 @@ export class BuildComponent implements OnDestroy {
   availableWorkFlowUsers: any = [];
   availableWorkFlowUsersEmail: any = [];
   extraBillModel = {
-      value: null,
-      type: 'dollar',
-      name: 'Additional'
-    };
+    value: null,
+    type: 'dollar',
+    name: 'Additional'
+  };
   selectedPlan: any = '';
   model: any = {
     name: '',
@@ -159,11 +159,13 @@ export class BuildComponent implements OnDestroy {
   userSerachForLevel: any = null;
   listPayments: any = [];
   selectColElement: any;
-  formActivities:any = [];
+  formActivities: any = [];
   globalListenFunc: any;
   globalListenFunc1: any;
   userIdwWithStatus: any = {};
-  usersInWorkFlow: any = {}; 
+  usersInWorkFlow: any = {};
+  fileName = 'ExcelSheet.xlsx';
+  isAllRowsSelected = false;
   constructor(private dataService: DataSharingService, private https: HttpClient, private sanitizer: DomSanitizer, private modalService: NgbModal, private excelService: ExcelService, private route: ActivatedRoute, private http: HttpService, private store: Store, private router: Router, private renderer: Renderer2) {
     this.userInfoSubscription$ = this.store.select(selectUserInfo).subscribe(userInfo => {
       this.userInfo = userInfo;
@@ -188,8 +190,25 @@ export class BuildComponent implements OnDestroy {
 
   }
 
+
+  exportexcel(): void {
+    /* table id is passed over here */
+    let element = document.getElementById('table-id');
+    console.log(element)
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+
+  }
+
   export() {
-    this.excelService.exportAsExcelFile(this.entries.rows, 'Form entries');
+    this.exportexcel()
+    // this.excelService.exportAsExcelFile(this.entries.rows, 'Form entries', this.entries.columns);
   }
 
   newEntry() {
@@ -197,8 +216,8 @@ export class BuildComponent implements OnDestroy {
   }
 
   getFormActivities(ID: any) {
-       this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
-        this.formActivities = res;
+    this.https.post(BASE_URL + `Forms/GetFormActivityLogsByFormId?formId=${ID}`, null).subscribe(res => {
+      this.formActivities = res;
     })
   }
 
@@ -206,9 +225,9 @@ export class BuildComponent implements OnDestroy {
     this.formLoaded = false;
     this.targetBuilderTools = [];
     this.https.post(BASE_URL + `Forms/GetFormDataByFormLogId?formlogId=${ID}`, null).subscribe((res: any) => {
-    //  this.formActivities = res;
-    this.formLoaded = true;
-     this.builderObj = Object.assign(this.builderObj, res);
+      //  this.formActivities = res;
+      this.formLoaded = true;
+      this.builderObj = Object.assign(this.builderObj, res);
       // console.log(this.builderObj)
       // console.log(JSON.parse(this.builderObj.formNewJSON))
 
@@ -239,6 +258,7 @@ export class BuildComponent implements OnDestroy {
 
       this.setLevels(resp?.levels);
 
+      console.log(this.targetBuilderTools)
       // Excecute function initially only
       if (true) {
         if (this.builderObj?.formType === 'WorkFlow') {
@@ -253,8 +273,8 @@ export class BuildComponent implements OnDestroy {
 
       }
 
- })
-}
+    })
+  }
 
   getForm(ID: any, initial: boolean) {
     console.log(ID)
@@ -484,7 +504,7 @@ export class BuildComponent implements OnDestroy {
     }
 
     this.http.call('AddLevelInWorkFlowLevels', 'POST', payload).subscribe(res => {
-      console.log(res) 
+      console.log(res)
       if (updateWorkFlowDeatils) {
         this.getWorkFlowDetails(this.formId);
       }
@@ -533,7 +553,7 @@ export class BuildComponent implements OnDestroy {
         selectedID = user.id;
       }
     });
-    
+
     return this.addedUserId?.includes(selectedID);
   }
 
@@ -610,6 +630,7 @@ export class BuildComponent implements OnDestroy {
         data.push(`-3=ID=${index + 1}||-2=Status=${entry.status}||-1=Submitted=${entry.SubmittedDate}||${entry.entry} && response=${JSON.stringify(element)}`)
       });
       this.createColums(data);
+      console.log(res)
       // this.dataService.UpdateHeaderUserPlanDetail(this.userInfo.Id, this.builderObj.workSpaceId)
     })
   }
@@ -679,7 +700,7 @@ export class BuildComponent implements OnDestroy {
         levels.push(element)
       }
 
-      if (element.inputType === 'email' || element.inputType === 'website' || element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box'|| element.inputType === 'password') {
+      if (element.inputType === 'email' || element.inputType === 'website' || element.inputType === 'currency' || element.inputType === 'string' || element.inputType === 'text' || element.inputType === 'text-box' || element.inputType === 'password') {
         if (element.minVal >= element.maxVal || element.minVal < 0) {
           element.minVal = 0;
         }
@@ -702,7 +723,7 @@ export class BuildComponent implements OnDestroy {
     });
     this.addStripeAccount()
 
-    let formInstances:any = [];
+    let formInstances: any = [];
     if (this.builderObj?.formNewJSON?.length > 5) {
       formInstances = JSON.parse(this.builderObj?.formNewJSON) || []
     }
@@ -771,7 +792,7 @@ export class BuildComponent implements OnDestroy {
   }
 
   checkForDependency(model: any): boolean {
-    // As Build page dont show this 
+    // As Build page dont show this
     return true;
     const dependUpon = model?.dependUpon;
 
@@ -881,7 +902,7 @@ export class BuildComponent implements OnDestroy {
   }
   showPaymentFields(): boolean {
     return this.targetBuilderTools?.some((x: any) => x.inputType === 'payment' ||
-     (x.collectPayment && (x.inputType === 'currency' || x.inputType === 'radio'|| x.inputType === 'checkbox'|| x.inputType === 'dropdown')));
+      (x.collectPayment && (x.inputType === 'currency' || x.inputType === 'radio' || x.inputType === 'checkbox' || x.inputType === 'dropdown')));
   }
   removeObj(key: any, selectedElement: any, props: any) {
     delete selectedElement[props][key];
@@ -1085,22 +1106,22 @@ export class BuildComponent implements OnDestroy {
   }
 
   setDefaultValueforProperties($event: any, selectedElement: any) {
-    console.log(!$event.target.value , Number($event.target.value) , this.selectedElement.maxHigh , Number(selectedElement.minVal) ,Number($event.target.value))
+    console.log(!$event.target.value, Number($event.target.value), this.selectedElement.maxHigh, Number(selectedElement.minVal), Number($event.target.value))
     if (!$event.target.value || Number($event.target.value) > selectedElement.maxHigh || Number(selectedElement.minVal) > Number($event.target.value)) {
 
-        $event.target.value = (this.selectedElement.maxHigh);
-        this.selectedElement.maxVal = this.selectedElement.maxHigh;
-      console.log('changed',this.selectedElement.minVal)
+      $event.target.value = (this.selectedElement.maxHigh);
+      this.selectedElement.maxVal = this.selectedElement.maxHigh;
+      console.log('changed', this.selectedElement.minVal)
 
     }
   }
 
   setDefaultValueforMinProperties($event: any, selectedElement: any) {
-    console.log('changed',$event.target.value, Number($event.target.value), selectedElement.maxVal)
+    console.log('changed', $event.target.value, Number($event.target.value), selectedElement.maxVal)
 
     if (!$event.target.value || Number($event.target.value) >= selectedElement.maxVal) {
-        $event.target.value = 0;
-        this.selectedElement.minVal = 0;
+      $event.target.value = 0;
+      this.selectedElement.minVal = 0;
     }
   }
 
@@ -1129,12 +1150,10 @@ export class BuildComponent implements OnDestroy {
   }
 
   canMove(e: any): boolean {
-    console.log(e)
     return e.indexOf('Disabled') === -1;
   }
 
   log1($event: any) {
-    console.log($event)
     if ($event.value.name === 'Dnd') {
       $event.value.class = 'd-none'
 
@@ -1184,11 +1203,17 @@ export class BuildComponent implements OnDestroy {
     } else {
       this.entries.selected.push(rowIndex);
     }
-    console.log('selected entry', this.entries.selected)
+    if (this.entries.selected?.length === this.entries?.rows?.length) {
+      this.isAllRowsSelected = true;
+    } else {
+      this.isAllRowsSelected = false;
+
+    }
   }
 
   selectAllEntries() {
-    if (this.entries.selected.length !== this.entries.rows.length) {
+    this.isAllRowsSelected = !this.isAllRowsSelected;
+    if (this.isAllRowsSelected) {
       this.entries.selected = [];
       this.entries.rows.forEach((element: any, index: any) => {
         this.entries.selected.push(index)
@@ -1205,7 +1230,7 @@ export class BuildComponent implements OnDestroy {
   deleteEntry() {
     let string = '';
     this.entries.selected.forEach((index: any) => {
-      string =  string + ',' + this.entries.entries[index]?.id;
+      string = string + ',' + this.entries.entries[index]?.id;
     });
     this.http.call('DeleteFormEntries', 'POST',
       {
@@ -1225,7 +1250,7 @@ export class BuildComponent implements OnDestroy {
     console.log($event, colId);
   }
 
-  selectDefault(selectedElement: any , i: any) {
+  selectDefault(selectedElement: any, i: any) {
     /**
      * Works for setting defaul value for RADIO | Checkbox | Dropdown.
      */
@@ -1265,7 +1290,7 @@ export class BuildComponent implements OnDestroy {
 
   addSection(form: any) {
     const formInstance = JSON.parse(JSON.stringify(form.childSection[form.childSection.length - 1]));
-    formInstance.uiIndexId = formInstance.uiIndexId+ 'section' + form.childSection.length + 1
+    formInstance.uiIndexId = formInstance.uiIndexId + 'section' + form.childSection.length + 1
     form.childSection.push(formInstance);
   }
 
@@ -1285,17 +1310,17 @@ export class BuildComponent implements OnDestroy {
   extractAllLineItems(elements: any) {
     elements?.forEach((element: any) => {
       if ((element.inputType === 'payment')) {
-        this.payments.push({name: element.name, value: element.value});
+        this.payments.push({ name: element.name, value: element.value });
       }
       if (element.inputType === 'currency') {
         if ((Number(element.value) > 0)) {
-        this.payments.push({name: element.name, value: element.value});
+          this.payments.push({ name: element.name, value: element.value });
         }
       }
       // console.log(element)
       if (element.inputType === 'toggle' && element.collectPayment) {
         if ((element.value) && Number(element.collectAmount) > 0) {
-        this.payments.push({name: element.name, value: element.collectAmount});
+          this.payments.push({ name: element.name, value: element.collectAmount });
         }
       }
       if (element.childSection) {
@@ -1304,10 +1329,10 @@ export class BuildComponent implements OnDestroy {
       if (element.children) {
         this.extractAllLineItems(element.children);
       }
-      if ((element.inputType === 'radio' || element.inputType === 'dropdown' )&&  element.collectPayment) {
+      if ((element.inputType === 'radio' || element.inputType === 'dropdown') && element.collectPayment) {
         element.options?.forEach((option: any, i: any) => {
           if (option?.label === element?.value && (Number(element.options[i].payment) > 0)) {
-            this.payments.push({name: element.name, value: element.options[i].payment});
+            this.payments.push({ name: element.name, value: element.options[i].payment });
           }
         });
       }
@@ -1318,14 +1343,14 @@ export class BuildComponent implements OnDestroy {
             p = p + option.payment;
           }
         });
-        this.payments.push({name: element.name, value: p});
+        this.payments.push({ name: element.name, value: p });
 
       }
       if (element.rows) {
         // console.log(element.columns)
         element.columns.forEach((column: any) => {
           if ((column.inputType === 'payment' || column.inputType === 'currency')) {
-            this.payments.push({name: column.name, value: column.value});
+            this.payments.push({ name: column.name, value: column.value });
           }
         });
       }
@@ -1363,25 +1388,25 @@ export class BuildComponent implements OnDestroy {
 
   onFileChange(event: any, form: any) {
     const reader = new FileReader();
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       if (file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type == 'application/vnd.ms-excel' || file.type == '.xlsx' || file.type == '.xls' || file.type == 'image/jpeg') {
-      let fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(file);
-      fileReader.onload = (e) => {
+        let fileReader = new FileReader();
+        fileReader.readAsArrayBuffer(file);
+        fileReader.onload = (e) => {
           const arrayBuffer: any = fileReader.result;
           let data = new Uint8Array(arrayBuffer);
           let arr = [];
-          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+          for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
           let bstr = arr.join("");
-          let workbook = XLSX.read(bstr, {type:"binary"});
+          let workbook = XLSX.read(bstr, { type: "binary" });
           let first_sheet_name = workbook.SheetNames[0];
           let worksheet = workbook.Sheets[first_sheet_name];
-            let arraylist: any = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-            for (let index = 0; index < arraylist.length; index++) {
-              form.options.push( { label: arraylist[index].name, payment: 0 },)
-            }
-      }
+          let arraylist: any = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+          for (let index = 0; index < arraylist.length; index++) {
+            form.options.push({ label: arraylist[index].name, payment: 0 },)
+          }
+        }
       }
     }
   }

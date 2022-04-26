@@ -16,6 +16,7 @@ import { AddStripeAccountComponent } from './components/add-stripe-account/add-s
 import { ExportedFormComponent } from './components/exported-form/exported-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { PgeBreakComponent } from './components/build/pge-break/pge-break.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ConditionalRendereringModalComponent,
     // SignatureFieldComponent,
     AddStripeAccountComponent,
+    PgeBreakComponent,
     // ExportedFormComponent
   ],
   imports: [
