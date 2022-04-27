@@ -1877,8 +1877,9 @@
                                                     <div *ngSwitchCase="'break'" class="page-break target-droppable form-group"
                                                         (click)="clicked($event, model, template)">
                                                         <div class="text-center position-relative">
-                                                            <span
-                                                                class="position-absolute page-break-head text-center bg-white px-3">{{model.value}}p</span>
+                                                            <div class="page-break-head">
+                                                                <span class="page-break-head-item bg-white px-3 text-center position-absolute" >{{model.value}}</span>
+                                                            </div>
                                                         </div>
 
                                                     </div>

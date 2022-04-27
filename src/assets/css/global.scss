@@ -775,6 +775,7 @@
             height: 2px;
             border: 0px;
             background-color: #efefef;
+            max-width: 96%;
         }
 
         app-build .builder-target .ngx-dnd-container .levelSection .builder-section-wrap .ngx-dnd-container .popover-controller {
@@ -782,10 +783,35 @@
         }
 
         app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller {
-            display: none !important;
+            //display: none !important;
         }
 
-        .target-droppable .page-break-head {
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break:hover .builder-dropped-field,
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break.current-active .builder-dropped-field  {
+            border: 1px dashed #f04564;
+            background-color: #efefef00;
+            margin-top: -3px;
+            top: -13px;
+        }
+
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break:hover .builder-dropped-field .page-break .page-break-head .page-break-head-item,
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break.current-active .builder-dropped-field .page-break .page-break-head .page-break-head-item {
+            top: -3px;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .popover-controller .popover-controller-icon {
+            right: -21px;
+            background-color: #fff;
+        }
+
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .page-break .page-break-head {
+            height: 22px;
+            top: -20px;
+        }
+        app-build .builder-target .ngx-dnd-container .ngx-dnd-item.break .page-break { margin: 0px;}
+
+        .target-droppable .page-break-head span {
             top: -18px;
             left: 50%;
             -webkit-transform: translateX(-50%);
